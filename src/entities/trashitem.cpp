@@ -5,8 +5,9 @@
 
 #include <QDebug>
 #include <QDir>
-#include <QSettings>
 #include <QSqlError>
+
+#include "services/settingsservice.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 #include <QRandomGenerator>
@@ -299,7 +300,7 @@ QList<TrashItem> TrashItem::fetchAll(int limit) {
 QList<TrashItem> TrashItem::fetchAllExpired() {
     QSqlDatabase db = DatabaseService::getNoteFolderDatabase();
     QSqlQuery query(db);
-    QSettings settings;
+    SettingsService settings;
     QList<TrashItem> trashItemList;
     int days = settings.value(QStringLiteral("localTrash/autoCleanupDays"), 30).toInt();
     QDateTime dateTime = QDateTime::currentDateTime().addDays(-1 * days);
@@ -513,7 +514,7 @@ int TrashItem::countAll() {
 }
 
 bool TrashItem::isLocalTrashEnabled() {
-    QSettings settings;
+    SettingsService settings;
     return settings.value(QStringLiteral("localTrash/supportEnabled"), true).toBool();
 }
 
@@ -523,7 +524,7 @@ bool TrashItem::isLocalTrashEnabled() {
  * @return
  */
 bool TrashItem::expireItems() {
-    QSettings settings;
+    SettingsService settings;
 
     if (!TrashItem::isLocalTrashEnabled() ||
         !settings.value(QStringLiteral("localTrash/autoCleanupEnabled"), true).toBool()) {

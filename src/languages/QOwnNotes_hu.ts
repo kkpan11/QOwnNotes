@@ -82,6 +82,13 @@
 </message>
 </context>
 <context>
+<name>BacklinkWidget</name>
+<message>
+<source>Open note and find &lt;code&gt;%1&lt;/code&gt;</source>
+<translation type="unfinished">Open note and find &lt;code&gt;%1&lt;/code&gt;</translation>
+</message>
+</context>
+<context>
 <name>DictionaryManagerDialog</name>
 <message>
 <source>Dictionary manager</source>
@@ -1656,6 +1663,14 @@
 <message>
 <source>Find navigation item</source>
 <translation>Navigációs elem keresése</translation>
+</message>
+<message>
+<source>Headings</source>
+<translation type="unfinished">Headings</translation>
+</message>
+<message>
+<source>Backlinks</source>
+<translation type="unfinished">Backlinks</translation>
 </message>
 <message>
 <source>Add a tag to the current note</source>
@@ -3896,10 +3911,6 @@ Ha a kuka a ownCloud kiszolgálón engedélyezett, onnan visszaállítható.</nu
 <translation>Kattintson duplán a jegyzet fülre rögzitéséhez</translation>
 </message>
 <message>
-<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2</source>
-<translation>&lt;strong&gt;%1&lt;/strong&gt; &lt;br /&gt; utolsó módosítás: %2</translation>
-</message>
-<message>
 <source>&lt;br /&gt;path: %1</source>
 <translation>&lt;br /&gt;elérési út: %1</translation>
 </message>
@@ -3918,6 +3929,10 @@ Ha a kuka a ownCloud kiszolgálón engedélyezett, onnan visszaállítható.</nu
 <message>
 <source>Light mode detected</source>
 <translation>Fénymódot észlelt</translation>
+</message>
+<message>
+<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</source>
+<translation type="unfinished">&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</translation>
 </message>
 <message>
 <source>Your Linux system seems to use the dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
@@ -5587,6 +5602,14 @@ Tesztelje, ha szinkronizációs konfliktus lép fel és állítson be ilyen eset
 <translation>Automatikusan eltávolítja a jegyzetszövegből az egymást követő szóközöket</translation>
 </message>
 <message>
+<source>Notes larger than this will not be shown in the note list</source>
+<translation type="unfinished">Notes larger than this will not be shown in the note list</translation>
+</message>
+<message>
+<source>Maximum note file size:</source>
+<translation type="unfinished">Maximum note file size:</translation>
+</message>
+<message>
 <source>Search script repository for AI integration scripts</source>
 <translation type="unfinished">Search script repository for AI integration scripts</translation>
 </message>
@@ -6918,6 +6941,14 @@ A jegyzetek érintetlenül maradnak!</translation>
 <translation>Csak árva mellékleteket mutasson</translation>
 </message>
 <message>
+<source>Only show attachments that are used in the current note</source>
+<translation type="unfinished">Only show attachments that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
+</message>
+<message>
 <source>Add selected attachments to the current note</source>
 <translation>A kiválasztott mellékletek hozzáadása az aktuális jegyzethez</translation>
 </message>
@@ -7062,6 +7093,14 @@ A jegyzetek érintetlenül maradnak!</translation>
 <message>
 <source>Refresh</source>
 <translation>Frissítés</translation>
+</message>
+<message>
+<source>Only show images that are used in the current note</source>
+<translation type="unfinished">Only show images that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
 </message>
 <message>
 <source>Used in notes:</source>
@@ -7814,6 +7853,13 @@ Nem lehet visszavonni!</translation>
 <translation type="unfinished">
 <numerusform>Bookmark deleted from %n note(s)</numerusform>
 <numerusform>Bookmark deleted from %n note(s)</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Bookmark edited in %n note(s)</source>
+<translation type="unfinished">
+<numerusform>Bookmark edited in %n note(s)</numerusform>
+<numerusform>Bookmark edited in %n note(s)</numerusform>
 </translation>
 </message>
 <message>

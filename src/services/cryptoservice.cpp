@@ -2,14 +2,15 @@
 
 #include <QCoreApplication>
 #include <QDebug>
-#include <QSettings>
+
+#include "services/settingsservice.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 #include <QRandomGenerator>
 #endif
 
 CryptoService::CryptoService(QObject *parent) : QObject(parent) {
-    QSettings settings;
+    SettingsService settings;
     qint64 cryptoKey = settings.value(QStringLiteral("cryptoKey")).toUInt();
 
     // generate a key if we don't have one

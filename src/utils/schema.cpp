@@ -18,11 +18,12 @@
 #include <QDebug>
 #include <QFontDatabase>
 #include <QInputDialog>
-#include <QSettings>
 #include <QStringList>
 #include <QTextEdit>
 #include <QTreeWidgetItem>
 #include <cmath>
+
+#include "services/settingsservice.h"
 
 Utils::Schema::Settings* Utils::Schema::schemaSettings = nullptr;
 
@@ -75,7 +76,7 @@ const QSettings& Utils::Schema::Settings::defaultSchemaSettings() const {
  * @return
  */
 QString Utils::Schema::Settings::currentSchemaKey() const {
-    QSettings settings;
+    SettingsService settings;
     return settings
         .value(QStringLiteral("Editor/CurrentSchemaKey"), _defaultSchemaKeysList.length() > 0
                                                               ? _defaultSchemaKeysList[0]
@@ -103,7 +104,7 @@ QStringList Utils::Schema::Settings::getSchemaKeys(const QString& schema) const 
         return _defaultSchemaSubkeylists[_defaultSchemaSubkeys[schema]];
     } else {
         QStringList groupKeys;
-        QSettings s;
+        SettingsService s;
         s.beginGroup(schema);
         return s.allKeys();
     }
@@ -129,14 +130,14 @@ QVariant Utils::Schema::Settings::getSchemaValue(const QString& key, const QVari
     QVariant value =
         isDefaultSchema
             ? _defaultSchemaSettings.value(schemaKey + QStringLiteral("/") + key, defaultValue)
-            : QSettings().value(schemaKey + QStringLiteral("/") + key, defaultValue);
+            : SettingsService().value(schemaKey + QStringLiteral("/") + key, defaultValue);
 
     if (!value.isValid() && schemaNotSet) {
         QString fallbackSchemaKey =
             isDefaultSchema
                 ? _defaultSchemaSettings.value(schemaKey + QStringLiteral("/FallbackSchema"))
                       .toString()
-                : QSettings().value(schemaKey + QStringLiteral("/FallbackSchema")).toString();
+                : SettingsService().value(schemaKey + QStringLiteral("/FallbackSchema")).toString();
 
         if (!fallbackSchemaKey.isEmpty()) {
             value = getSchemaValue(key, defaultValue, fallbackSchemaKey);
@@ -324,7 +325,7 @@ QFont Utils::Schema::Settings::getEditorTextFont() const {
         _defaultTextEditFont = QTextEdit().font();
         _defaultFontSet = true;
     }
-    QSettings settings;
+    SettingsService settings;
     QString fontString = settings.value(QStringLiteral("MainWindow/noteTextEdit.font")).toString();
 
     QFont font(_defaultTextEditFont);
@@ -351,7 +352,7 @@ QFont Utils::Schema::Settings::getEditorFixedFont() const {
         _defaultFontSet = true;
     }
 
-    QSettings settings;
+    SettingsService settings;
     QString fontString =
         settings.value(QStringLiteral("MainWindow/noteTextEdit.code.font")).toString();
 
@@ -423,7 +424,7 @@ QString Utils::Schema::getSchemaStyles() {
 
     // enforce blockquotes styles (best effort, may not override all styles of other tags)
     // https://github.com/pbek/QOwnNotes/issues/2669
-    if (QSettings().value(QStringLiteral("fullyHighlightedBlockquotes")).toBool()) {
+    if (SettingsService().value(QStringLiteral("fullyHighlightedBlockquotes")).toBool()) {
         schemaStyles +=
             encodeCssStyleForState(MarkdownHighlighter::BlockQuote, QStringLiteral("blockquote"));
 

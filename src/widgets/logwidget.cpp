@@ -9,9 +9,9 @@
 #include <QMenu>
 #include <QPointer>
 #include <QScrollBar>
-#include <QSettings>
 
 #include "mainwindow.h"
+#include "services/settingsservice.h"
 
 #ifndef INTEGRATION_TESTS
 #include "ui_logwidget.h"
@@ -51,7 +51,7 @@ LogWidget::LogWidget(QWidget *parent)
             &LogWidget::on_logTextEdit_customContextMenuRequested);
 
     ui->buttonFrame->hide();
-    const QSettings settings;
+    const SettingsService settings;
 
     // init the log text edit search frame
     const bool darkMode = settings.value(QStringLiteral("darkMode")).toBool();
@@ -113,7 +113,7 @@ QString LogWidget::getLogText() const {
  */
 void LogWidget::storeSettings() const {
 #ifndef INTEGRATION_TESTS
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("LogWidget/debugLog"), ui->debugCheckBox->isChecked());
     settings.setValue(QStringLiteral("LogWidget/infoLog"), ui->infoCheckBox->isChecked());
     settings.setValue(QStringLiteral("LogWidget/warningLog"), ui->warningCheckBox->isChecked());
@@ -162,7 +162,7 @@ void LogWidget::log(LogWidget::LogType logType, const QString &text) {
 
     QString type = logTypeText(logType);
     QColor color = QColor(Qt::black);
-    const bool darkMode = QSettings().value(QStringLiteral("darkMode")).toBool();
+    const bool darkMode = SettingsService().value(QStringLiteral("darkMode")).toBool();
 
     switch (logType) {
         case DebugLogType:
@@ -362,7 +362,7 @@ void LogWidget::logMessageOutput(QtMsgType type, const QMessageLogContext &conte
  * @param msg
  */
 void LogWidget::logToFileIfAllowed(LogType logType, const QString &msg) {
-    QSettings settings;
+    SettingsService settings;
     if (settings.value(QStringLiteral("Debug/fileLogging")).toBool()) {
         QFile logFile(Utils::Misc::logFilePath());
         if (logFile.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) {

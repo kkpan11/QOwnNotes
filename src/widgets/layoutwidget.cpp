@@ -4,9 +4,9 @@
 #include <utils/misc.h>
 
 #include <QDebug>
-#include <QSettings>
 #include <QtWidgets/QMessageBox>
 
+#include "services/settingsservice.h"
 #include "ui_layoutwidget.h"
 
 LayoutWidget::LayoutWidget(QWidget *parent) : QWidget(parent), ui(new Ui::LayoutWidget) {
@@ -93,7 +93,7 @@ void LayoutWidget::storeSettings() {
 
     QString layoutIdentifier = ui->layoutComboBox->currentData().toString();
     QString layoutSettingsPrefix = "Layout-" + layoutIdentifier + "/";
-    QSettings settings;
+    SettingsService settings;
     QStringList workspaces = settings.value(QStringLiteral("workspaces")).toStringList();
     QString workspaceIdentifier =
         _manualSettingsStoring ? Utils::Misc::generateRandomString(12) : "initial";

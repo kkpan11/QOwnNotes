@@ -8,7 +8,6 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QObject>
-#include <QSettings>
 #include <QUrl>
 #include <QUrlQuery>
 
@@ -16,6 +15,7 @@
 #include "dialogs/updatedialog.h"
 #include "mainwindow.h"
 #include "release.h"
+#include "services/settingsservice.h"
 #include "version.h"
 
 UpdateService::UpdateService(QObject *parent) : QObject(parent) {}
@@ -23,7 +23,7 @@ UpdateService::UpdateService(QObject *parent) : QObject(parent) {}
 void UpdateService::checkForUpdates(UpdateMode updateMode) {
     this->updateMode = updateMode;
 
-    QSettings settings;
+    SettingsService settings;
     if (updateMode != Manual) {
         settings.setValue(QStringLiteral("LastUpdateCheck"), QDateTime::currentDateTime());
     }
@@ -168,7 +168,7 @@ void UpdateService::onResult(QNetworkReply *reply) {
 
         // do some more checks for non manual update requests
         if (updateMode != UpdateService::Manual) {
-            QSettings settings;
+            SettingsService settings;
             QString skipVersion = settings.value(QStringLiteral("skipVersion")).toString();
 
             // check if this version should be skipped

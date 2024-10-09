@@ -8,12 +8,13 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QRegularExpression>
-#include <QSettings>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QUuid>
+
+#include "services/settingsservice.h"
 
 CalendarItem::CalendarItem() {
     id = 0;
@@ -1092,7 +1093,7 @@ CalendarItem CalendarItem::createNewTodoItem(const QString &summary, const QStri
  * @return
  */
 int CalendarItem::getCurrentCalendarIndex() {
-    QSettings settings;
+    SettingsService settings;
 
     QString todoListSelectorSelectedItem =
         settings.value(QStringLiteral("TodoDialog/todoListSelectorSelectedItem")).toString();
@@ -1117,7 +1118,7 @@ int CalendarItem::getCurrentCalendarIndex() {
  * @return
  */
 QString CalendarItem::getCurrentCalendarUrl() {
-    QSettings settings;
+    SettingsService settings;
 
     int index = getCurrentCalendarIndex();
 

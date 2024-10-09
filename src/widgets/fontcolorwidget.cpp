@@ -25,11 +25,11 @@
 #include <QInputDialog>
 #include <QKeyEvent>
 #include <QMessageBox>
-#include <QSettings>
 #include <QTextEdit>
 #include <QTreeWidgetItem>
 #include <QUuid>
 
+#include "services/settingsservice.h"
 #include "ui_fontcolorwidget.h"
 #include "utils/schema.h"
 
@@ -108,7 +108,7 @@ void FontColorWidget::initSchemaSelector() {
         defaultSchemaNameKeys.insert(name, schemaKey);
     }
 
-    QSettings settings;
+    SettingsService settings;
     QString currentSchemaKey =
         settings
             .value(QStringLiteral("Editor/CurrentSchemaKey"),
@@ -405,7 +405,7 @@ void FontColorWidget::setSchemaValue(const QString& key, const QVariant& value, 
         schemaKey = _currentSchemaKey;
     }
 
-    QSettings settings;
+    SettingsService settings;
     settings.beginGroup(schemaKey);
     return settings.setValue(key, value);
 }
@@ -422,7 +422,7 @@ void FontColorWidget::on_colorSchemeComboBox_currentIndexChanged(int index) {
     ui->deleteSchemeButton->setEnabled(!_currentSchemaIsDefault);
     ui->schemeEditFrame->setEnabled(!_currentSchemaIsDefault);
 
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("Editor/CurrentSchemaKey"), _currentSchemaKey);
 
     updateSchemeEditFrame();
@@ -547,7 +547,7 @@ void FontColorWidget::on_copySchemeButton_clicked() {
     }
 
     // add the new color schema to the color schemes list in the settings
-    QSettings settings;
+    SettingsService settings;
     QStringList schemes = settings.value("Editor/ColorSchemes").toStringList();
     schemes << _currentSchemaKey;
     settings.setValue("Editor/ColorSchemes", schemes);
@@ -648,7 +648,7 @@ void FontColorWidget::on_deleteSchemeButton_clicked() {
         return;
     }
 
-    QSettings settings;
+    SettingsService settings;
     settings.beginGroup(_currentSchemaKey);
     // remove the group and all its keys
     settings.remove("");
@@ -739,31 +739,35 @@ void FontColorWidget::on_importSchemeButton_clicked() {
         QStringList fileNames = dialog.selectedFiles();
         if (fileNames.count() > 0) {
             Q_FOREACH (QString fileName, fileNames) {
-                auto* settings = new QSettings();
-                auto* importSettings = new QSettings(fileName, QSettings::IniFormat);
-                QString schemaKey = importSettings->value("Export/SchemaKey").toString();
+                SettingsService settings;
+                QSettings importSettings(fileName, QSettings::IniFormat);
+                QString schemaKey = importSettings.value("Export/SchemaKey").toString();
 
                 // create a new schema key for the import
                 QString uuid = Utils::Misc::createUuidString();
                 _currentSchemaKey = "EditorColorSchema-" + uuid;
 
-                QStringList schemes = settings->value("Editor/ColorSchemes").toStringList();
+                QStringList schemes = settings.value("Editor/ColorSchemes").toStringList();
                 schemes << _currentSchemaKey;
-                settings->setValue("Editor/ColorSchemes", schemes);
-                settings->setValue("Editor/CurrentSchemaKey", _currentSchemaKey);
+                settings.setValue("Editor/ColorSchemes", schemes);
+                settings.setValue("Editor/CurrentSchemaKey", _currentSchemaKey);
 
-                settings->beginGroup(_currentSchemaKey);
-                importSettings->beginGroup(schemaKey);
-                QStringList keys = importSettings->allKeys();
+                settings.beginGroup(_currentSchemaKey);
+                importSettings.beginGroup(schemaKey);
+                QStringList keys = importSettings.allKeys();
 
                 // store the color schema data to the settings
                 Q_FOREACH (QString key, keys) {
-                    QVariant value = importSettings->value(key);
-                    settings->setValue(key, value);
+                    QVariant value = importSettings.value(key);
+                    settings.setValue(key, value);
                 }
 
                 // select the last schema
                 selectLastSchema();
+
+                // just to make sure
+                settings.endGroup();
+                importSettings.endGroup();
             }
         }
     }
@@ -775,7 +779,7 @@ void FontColorWidget::on_importSchemeButton_clicked() {
 void FontColorWidget::initFontSelectors() {
     QTextEdit textEdit;
     QFont font = textEdit.font();
-    QSettings settings;
+    SettingsService settings;
     QString fontString = settings.value("MainWindow/noteTextEdit.font").toString();
 
     if (!fontString.isEmpty()) {

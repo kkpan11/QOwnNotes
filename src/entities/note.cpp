@@ -16,7 +16,6 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QRegularExpressionMatchIterator>
-#include <QSettings>
 #include <QSqlError>
 #include <QSqlRecord>
 #include <QTemporaryFile>
@@ -32,6 +31,7 @@
 #include "libraries/simplecrypt/simplecrypt.h"
 #include "notefolder.h"
 #include "notesubfolder.h"
+#include "services/settingsservice.h"
 #include "tag.h"
 #include "trashitem.h"
 
@@ -466,7 +466,7 @@ bool Note::moveToPath(const QString &destinationPath, const QString &noteFolderP
  * note
  * @return
  */
-QStringList Note::getMediaFileList() {
+QStringList Note::getMediaFileList() const {
     QStringList fileList;
 
     // match image links like ![media-qV920](file://media/608766373.gif)
@@ -958,7 +958,7 @@ QVector<int> Note::searchInNotes(QString search, bool ignoreNoteSubFolder, int n
 
     // we want to search for the text in the note text and the filename
     for (int i = 0; i < queryStrings.count(); i++) {
-        const QString queryString = queryStrings[i];
+        const QString &queryString = queryStrings[i];
 
         // if we just want to search in the name we use different columns
         // skip encrypted notes if search term is not found in (file) name of note
@@ -1187,7 +1187,7 @@ bool Note::storeNewDecryptedText(QString text) {
  * Returns the default note file extension (`md`, `txt` or custom extensions)
  */
 QString Note::defaultNoteFileExtension() {
-    return QSettings()
+    return SettingsService()
         .value(QStringLiteral("defaultNoteFileExtension"), QStringLiteral("md"))
         .toString();
 }
@@ -1196,7 +1196,7 @@ QString Note::defaultNoteFileExtension() {
  * Returns the a list of all note file extensions
  */
 QStringList Note::noteFileExtensionList(const QString &prefix) {
-    const QSettings settings;
+    const SettingsService settings;
     QStringList list = settings.value(QStringLiteral("noteFileExtensionList")).toStringList();
     list.removeDuplicates();
 
@@ -1363,7 +1363,7 @@ bool Note::storeNoteTextFileToDisk(bool &currentNoteTextChanged) {
 
     QFile file(fullNoteFilePath());
     QFile::OpenMode flags = QIODevice::WriteOnly;
-    const QSettings settings;
+    const SettingsService settings;
     const bool useUNIXNewline = settings.value(QStringLiteral("useUNIXNewline")).toBool();
 
     if (!useUNIXNewline) {
@@ -1723,7 +1723,7 @@ bool Note::updateNoteTextFromDisk() {
 }
 
 QString Note::getFullFilePathForFile(const QString &fileName) {
-    const QSettings settings;
+    const SettingsService settings;
 
     // prepend the portable data path if we are in portable mode
     const QString notesPath = Utils::Misc::prependPortableDataPathIfNeeded(
@@ -1771,7 +1771,7 @@ QString Note::getFilePathRelativeToNote(const Note &note) const {
 }
 
 QString Note::getNoteUrlForLinkingTo(const Note &note, bool forceLegacy) const {
-    const QSettings settings;
+    const SettingsService settings;
     QString noteUrl;
 
     if (forceLegacy || settings.value(QStringLiteral("legacyLinking")).toBool()) {
@@ -1798,7 +1798,17 @@ QString Note::getNoteUrlForLinkingTo(const Note &note, bool forceLegacy) const {
  * Example:
  * "Note with one bracket].md" will get "Note%20with%20one%20bracket%5D.md"
  */
-QString Note::urlEncodeNoteUrl(const QString &url) { return QUrl::toPercentEncoding(url); }
+QString Note::urlEncodeNoteUrl(const QString &url, bool escapeSlashes) {
+    auto encoded = QString(QUrl::toPercentEncoding(url));
+
+    // We don't really need to escape slashes in the note url
+    // https://github.com/pbek/QOwnNotes/issues/1717#issuecomment-2336767704
+    if (!escapeSlashes) {
+        encoded.replace(QStringLiteral("%2F"), QStringLiteral("/"));
+    }
+
+    return encoded;
+}
 
 /**
  * Returns the url decoded representation of a string to e.g. fetch a note from
@@ -2359,7 +2369,7 @@ QString Note::textToMarkdownHtml(QString str, const QString &notesPath, int maxI
     flags &= ~MD_FLAG_TASKLISTS;
 #endif
 
-    const QSettings settings;
+    const SettingsService settings;
     if (!settings.value(QStringLiteral("MainWindow/noteTextView.underline"), true).toBool()) {
         flags &= ~MD_FLAG_UNDERLINE;
     }
@@ -3086,7 +3096,7 @@ QVector<int> Note::findLinkedNoteIds() const {
     noteIdList << searchInNotes(QChar('<') + linkText + QChar('>'), true);
     noteIdList << searchInNotes(QStringLiteral("](") + linkText + QStringLiteral(")"), true);
 
-    // search vor legacy links ending with "@"
+    // search for legacy links ending with "@"
     const QString altLinkText = Utils::Misc::appendIfDoesNotEndWith(linkText, QStringLiteral("@"));
     if (altLinkText != linkText) {
         noteIdList << searchInNotes(QChar('<') + altLinkText + QChar('>'), true);
@@ -3105,16 +3115,20 @@ QVector<int> Note::findLinkedNoteIds() const {
             continue;
         }
 
-        const QString relativeFilePath =
-            Note::urlEncodeNoteUrl(note.getFilePathRelativeToNote(*this));
-        const QString noteText = note.getNoteText();
+        // We now don't escape slashes in the relative file path, but previously we did,
+        // so we need to search for both
+        for (bool escapeSlashes : {true, false}) {
+            const QString relativeFilePath =
+                Note::urlEncodeNoteUrl(note.getFilePathRelativeToNote(*this), escapeSlashes);
+            const QString noteText = note.getNoteText();
 
-        // search for links to the relative file path in note
-        // the "#" is for notes with a fragment (link to heading in note)
-        if (noteText.contains(QStringLiteral("<") + relativeFilePath + QStringLiteral(">")) ||
-            noteText.contains(QStringLiteral("](") + relativeFilePath + QStringLiteral(")")) ||
-            noteText.contains(QStringLiteral("](") + relativeFilePath + QStringLiteral("#"))) {
-            noteIdList.append(note.getId());
+            // Search for links to the relative file path in note
+            // The "#" is for notes with a fragment (link to heading in note)
+            if (noteText.contains(QStringLiteral("<") + relativeFilePath + QStringLiteral(">")) ||
+                noteText.contains(QStringLiteral("](") + relativeFilePath + QStringLiteral(")")) ||
+                noteText.contains(QStringLiteral("](") + relativeFilePath + QStringLiteral("#"))) {
+                noteIdList.append(note.getId());
+            }
         }
     }
 
@@ -3126,13 +3140,118 @@ QVector<int> Note::findLinkedNoteIds() const {
     return noteIdList;
 }
 
+BacklinkHit Note::findAndReturnBacklinkHit(const QString &text, const QString &pattern) {
+    return text.contains(pattern) ? BacklinkHit(pattern, pattern) : BacklinkHit("", "");
+}
+
+QSet<BacklinkHit> Note::findAndReturnBacklinkHit(const QString &text,
+                                                 const QRegularExpression &regex) {
+    QSet<BacklinkHit> backlinkHits;
+    QRegularExpressionMatchIterator iterator = regex.globalMatch(text);
+
+    while (iterator.hasNext()) {
+        QRegularExpressionMatch match = iterator.next();
+        QString linkText = match.captured(1);
+        QString linkUrl = match.captured(2);
+        // Do something with the link text and URL
+
+        backlinkHits.insert(BacklinkHit(match.captured(0), match.captured(1)));
+    }
+
+    return backlinkHits;
+}
+
+void Note::addTextToBacklinkNoteHashIfFound(const Note &note, const QString &pattern) {
+    const BacklinkHit backlinkHit = findAndReturnBacklinkHit(note.getNoteText(), pattern);
+
+    if (!backlinkHit.isEmpty()) {
+        if (!_backlinkNoteHash.contains(note)) {
+            _backlinkNoteHash.insert(note, {backlinkHit});
+        } else {
+            _backlinkNoteHash[note] << backlinkHit;
+        }
+    }
+}
+
+void Note::addTextToBacklinkNoteHashIfFound(const Note &note, const QRegularExpression &pattern) {
+    const auto backlinkHits = findAndReturnBacklinkHit(note.getNoteText(), pattern);
+
+    if (!backlinkHits.isEmpty()) {
+        if (!_backlinkNoteHash.contains(note)) {
+            _backlinkNoteHash.insert(note, backlinkHits);
+        } else {
+            _backlinkNoteHash[note] = backlinkHits;
+        }
+    }
+}
+
+QHash<Note, QSet<BacklinkHit>> Note::findReverseLinkNotes() {
+    const QVector<int> noteIdList = this->findLinkedNoteIds();
+    const int noteCount = noteIdList.count();
+
+    if (noteCount == 0) {
+        return {};
+    }
+
+    _backlinkNoteHash.clear();
+    const QString noteUrl = getNoteURL(this->getName());
+
+    for (const int noteId : noteIdList) {
+        Note note = Note::fetch(noteId);
+
+        if (!note.isFetched()) {
+            continue;
+        }
+
+        // search legacy links
+        addTextToBacklinkNoteHashIfFound(note, QStringLiteral("<") + noteUrl + QStringLiteral(">"));
+        addTextToBacklinkNoteHashIfFound(
+            note,
+            QRegularExpression(QStringLiteral(R"(\[([^\[\]]+?)\]\()") +
+                               QRegularExpression::escape(noteUrl) + QStringLiteral(R"(\))")));
+
+        // search for legacy links ending with "@"
+        const QString altLinkText =
+            Utils::Misc::appendIfDoesNotEndWith(noteUrl, QStringLiteral("@"));
+        if (altLinkText != noteUrl) {
+            addTextToBacklinkNoteHashIfFound(
+                note, QStringLiteral("<") + altLinkText + QStringLiteral(">"));
+            addTextToBacklinkNoteHashIfFound(
+                note, QStringLiteral("](") + altLinkText + QStringLiteral(")"));
+        }
+
+        // We now don't escape slashes in the relative file path, but previously we did,
+        // so we need to search for both
+        for (bool escapeSlashes : {true, false}) {
+            const QString relativeFilePath =
+                Note::urlEncodeNoteUrl(note.getFilePathRelativeToNote(*this), escapeSlashes);
+
+            // Search for links to the relative file path in note
+            // The "#" is for notes with a fragment (link to heading in note)
+            addTextToBacklinkNoteHashIfFound(
+                note, QStringLiteral("<") + relativeFilePath + QStringLiteral(">"));
+            addTextToBacklinkNoteHashIfFound(
+                note, QRegularExpression(QStringLiteral(R"(\[([^\[\]]+?)\]\()") +
+                                             QRegularExpression::escape(relativeFilePath) +
+                                             QStringLiteral(R"(\))"),
+                                         QRegularExpression::MultilineOption));
+            addTextToBacklinkNoteHashIfFound(
+                note, QRegularExpression(QStringLiteral(R"(\[([^\[\]]+?)\]\()") +
+                                         QRegularExpression::escape(relativeFilePath) +
+                                         QStringLiteral(R"(#.+\))")));
+        }
+    }
+
+    return _backlinkNoteHash;
+}
+
 /**
  * Returns a (legacy) url to a note
  *
  * @param baseName
  * @return
  */
-const QString Note::getNoteURL(const QString &baseName) {
+QString Note::getNoteURL(const QString &baseName) {
     return QStringLiteral("note://") + generateTextForLink(baseName);
 }
 
@@ -3382,6 +3501,29 @@ bool Note::handleNoteMoving(const Note &oldNote) {
     return noteIdList.contains(_id);
 }
 
+QSet<Note> Note::findBacklinks() const {
+    const QVector<int> noteIdList = this->findLinkedNoteIds();
+    const int noteCount = noteIdList.count();
+
+    if (noteCount == 0) {
+        return {};
+    }
+
+    QSet<Note> notes;
+
+    for (const int noteId : noteIdList) {
+        const Note linkedNote = Note::fetch(noteId);
+
+        if (!linkedNote.isFetched()) {
+            continue;
+        }
+
+        notes << linkedNote;
+    }
+
+    return notes;
+}
+
 /**
  * Creates a note headline from a name
  *
@@ -3480,7 +3622,7 @@ QString Note::getInsertMediaMarkdown(QFile *file, bool addNewLine, bool returnUr
 
 QString Note::mediaUrlStringForFileName(const QString &fileName) const {
     QString urlString = QLatin1String("");
-    const QSettings settings;
+    const SettingsService settings;
 
     if (settings.value(QStringLiteral("legacyLinking")).toBool()) {
         urlString = QStringLiteral("file://media/") + fileName;
@@ -3499,7 +3641,7 @@ QString Note::mediaUrlStringForFileName(const QString &fileName) const {
 
 QString Note::attachmentUrlStringForFileName(const QString &fileName) const {
     QString urlString = QLatin1String("");
-    const QSettings settings;
+    const SettingsService settings;
 
     if (settings.value(QStringLiteral("legacyLinking")).toBool()) {
         urlString = QStringLiteral("file://attachments/") + fileName;
@@ -3680,7 +3822,7 @@ QString Note::importMediaFromDataUrl(const QString &dataUrl) {
  * @return
  */
 bool Note::scaleDownImageFileIfNeeded(QFile &file) {
-    const QSettings settings;
+    const SettingsService settings;
 
     // load image scaling settings
     const bool scaleImageDown = settings.value(QStringLiteral("imageScaleDown"), false).toBool();
@@ -3865,7 +4007,7 @@ QString Note::getNotePreviewText(bool asHtml, int lines) const {
  * @return
  */
 QString Note::generateMultipleNotesPreviewText(const QVector<Note> &notes) {
-    const QSettings settings;
+    const SettingsService settings;
     const bool darkModeColors = settings.value(QStringLiteral("darkModeColors")).toBool();
     const QString oddBackgroundColor =
         darkModeColors ? QStringLiteral("#444444") : QStringLiteral("#f1f1f1");
@@ -3987,7 +4129,7 @@ QStringList Note::getHeadingList() {
 }
 
 bool Note::applyIgnoredNotesSetting(QStringList &fileNames) {
-    const QSettings settings;
+    const SettingsService settings;
     const QStringList ignoredFileRegExpList =
         settings.value(QStringLiteral("ignoredNoteFiles")).toString().split(QLatin1Char(';'));
 

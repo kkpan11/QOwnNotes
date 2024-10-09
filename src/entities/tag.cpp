@@ -4,7 +4,6 @@
 #include <utils/misc.h>
 
 #include <QDebug>
-#include <QSettings>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
@@ -15,6 +14,7 @@
 #include "note.h"
 #include "notefolder.h"
 #include "notesubfolder.h"
+#include "services/settingsservice.h"
 
 Tag::Tag() noexcept : _parentId(0), _priority(0) {}
 
@@ -370,7 +370,7 @@ QStringList Tag::getParentTagNames() {
  * Checks if taggingShowNotesRecursively is set
  */
 bool Tag::isTaggingShowNotesRecursively() {
-    return QSettings().value(QStringLiteral("taggingShowNotesRecursively")).toBool();
+    return SettingsService().value(QStringLiteral("taggingShowNotesRecursively")).toBool();
 }
 
 int Tag::countAllParentId(const int parentId) {
@@ -986,8 +986,9 @@ bool Tag::store() {
  * @return
  */
 QString Tag::colorFieldName() const {
-    return QSettings().value(QStringLiteral("darkMode")).toBool() ? QStringLiteral("dark_color")
-                                                                  : QStringLiteral("color");
+    return SettingsService().value(QStringLiteral("darkMode")).toBool()
+               ? QStringLiteral("dark_color")
+               : QStringLiteral("color");
 }
 
 /**
@@ -1350,7 +1351,7 @@ Tag Tag::activeTag() { return Tag::fetch(activeTagId()); }
  * Sets the non-darkMode colors as darkMode colors for all tags
  */
 void Tag::migrateDarkColors() {
-    QSettings settings;
+    SettingsService settings;
     const bool darkMode = settings.value(QStringLiteral("darkMode")).toBool();
 
     // disable dark mode to get the light color

@@ -13,7 +13,6 @@
 #include <QMenu>
 #include <QMimeData>
 #include <QRegularExpression>
-#include <QSettings>
 #include <QTextCursor>
 #include <QTextDocumentFragment>
 
@@ -22,6 +21,7 @@
 #include "libraries/qmarkdowntextedit/linenumberarea.h"
 #include "mainwindow.h"
 #include "services/scriptingservice.h"
+#include "services/settingsservice.h"
 #include "utils/urlhandler.h"
 
 QOwnNotesMarkdownTextEdit::QOwnNotesMarkdownTextEdit(QWidget *parent)
@@ -36,7 +36,7 @@ QOwnNotesMarkdownTextEdit::QOwnNotesMarkdownTextEdit(QWidget *parent)
         updateSettings();
     }
 
-    QSettings settings;
+    SettingsService settings;
     MarkdownHighlighter::HighlightingOptions options;
 
     if (settings.value(QStringLiteral("fullyHighlightedBlockquotes")).toBool()) {
@@ -134,7 +134,7 @@ void QOwnNotesMarkdownTextEdit::setFormatStyle(MarkdownHighlighter::HighlighterS
  */
 void QOwnNotesMarkdownTextEdit::overrideFontSizeStyle(int fontSize) {
     bool overrideInterfaceFontSize =
-        QSettings().value(QStringLiteral("overrideInterfaceFontSize"), false).toBool();
+        SettingsService().value(QStringLiteral("overrideInterfaceFontSize"), false).toBool();
 
     // remove old style
     QString stylesheet = styleSheet().remove(QRegularExpression(
@@ -209,7 +209,7 @@ void QOwnNotesMarkdownTextEdit::setStyles() {
 
 #ifdef Q_OS_WIN32
     // set the selection background color to a light blue if not in dark mode
-    if (!QSettings().value(QStringLiteral("darkMode")).toBool()) {
+    if (!SettingsService().value(QStringLiteral("darkMode")).toBool()) {
         // light green (#9be29b) could be another choice, but be aware that
         // this color will be used for mouse and keyboard selections too
         setStyleSheet(styleSheet() +
@@ -223,7 +223,7 @@ void QOwnNotesMarkdownTextEdit::setStyles() {
  * Modifies the font size of the text edit
  */
 int QOwnNotesMarkdownTextEdit::modifyFontSize(FontModificationMode mode) {
-    QSettings settings;
+    SettingsService settings;
     QFont font = this->font();
     int fontSize = font.pointSize();
     bool doSetStyles = false;
@@ -352,7 +352,7 @@ void QOwnNotesMarkdownTextEdit::openUrl(const QString &urlString) {
  * Sets the viewport margins for the distraction free mode
  */
 void QOwnNotesMarkdownTextEdit::setPaperMargins(int width) {
-    QSettings settings;
+    SettingsService settings;
     bool isInDistractionFreeMode =
         settings.value(QStringLiteral("DistractionFreeMode/isEnabled")).toBool();
     bool editorWidthInDFMOnly =
@@ -815,7 +815,7 @@ void QOwnNotesMarkdownTextEdit::updateSettings() {
     const QSignalBlocker blocker(this);
     Q_UNUSED(blocker)
 
-    QSettings settings;
+    SettingsService settings;
     QMarkdownTextEdit::AutoTextOptions options;
 
     if (settings.value(QStringLiteral("Editor/autoBracketClosing"), true).toBool()) {
@@ -1167,7 +1167,7 @@ bool QOwnNotesMarkdownTextEdit::eventFilter(QObject *obj, QEvent *event) {
                         // not if manually answered.
                         // You may see: https://github.com/pbek/QOwnNotes/issues/2421
                         // This check is partially copied from utils/gui.cpp showMessage()
-                        QSettings settings;
+                        SettingsService settings;
                         const QString settingsKey =
                             QStringLiteral("MessageBoxOverride/readonly-mode-allow");
                         auto overrideButton = static_cast<QMessageBox::StandardButton>(

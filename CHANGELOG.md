@@ -1,5 +1,113 @@
 # QOwnNotes Changelog
 
+## 24.10.1
+- In the *Stored image files* and the *Stored attachments* dialogs it's now possible
+  to only show files of the current note (for [2354](https://github.com/pbek/QOwnNotes/issues/2354))
+- Added more Dutch, Korean, German, Spanish, French translation (thank you,
+  stephanp, venusgirl, rakekniven, alejandromoc, jd-develop)
+
+## 24.10.0
+- [qc](https://github.com/qownnotes/qc) v0.6.1 was released
+  - Add support for storing commands in [Atuin](https://atuin.sh/) on execution
+    when using the `--atuin` flag (for [#15](https://github.com/qownnotes/qc/issues/15))
+  - The `--color` flag now shows the command description in a calmer green, instead of red
+    (for [#16](https://github.com/qownnotes/qc/issues/16))
+  - Update dependencies
+- Added more Chinese Simplified, Dutch, German, Swedish, Korean translation
+  (thank you, huishengli, stephanp, rakekniven, dzenan, venusgirl)
+
+## 24.9.8
+- You can now set the **maximum note file size** in the *Panels settings* to prevent
+  the loading of very large notes (for [3118](https://github.com/pbek/QOwnNotes/issues/3118))
+  - Default is 1 MB, files larger than that will not show up in the note list
+- The file size will now be shown in the note list tooltip
+  (for [3120](https://github.com/pbek/QOwnNotes/issues/3120))
+
+## 24.9.7
+- Reading from **settings** will now be **cached in memory** to possibly speed up the application,
+  hopefully not causing any regressions (for [#3027](https://github.com/pbek/QOwnNotes/issues/3027))
+- The QOwnNotes API <https://api.qownnotes.org> got migrated to PHP 8.2,
+  Symfony 6.4 and API Platform 3.3 for more speed and to be more future-proof
+  (for [#11](https://github.com/qownnotes/api/issues/11))
+- The QOwnNotesAPI Nextcloud app was enabled and tested app for Nextcloud 30
+  (for [#49](https://github.com/pbek/qownnotesapi/issues/49))
+  - There were troubles with the version API that didn't always happen when trying to access the versions of a file:
+    `Call to a member function getOwner() on null in file '/var/www/html/lib/private/Files/Filesystem.php' line 728`
+    - It's unclear why this happens, but it seems to be a problem with the Nextcloud server and not the app
+
+## 24.9.6
+- The accidental note selection when selecting a note subfolder in the experimental
+  [note tree mode](https://github.com/pbek/QOwnNotes/issues/790) was fixed
+  (for [#3072](https://github.com/pbek/QOwnNotes/issues/3072))
+  - This was also causing the wrong subfolder to be used when a new note was created
+
+## 24.9.5
+- The name detection of links in checkbox list item for bookmarks for the
+  [Web Companion browser extension](https://github.com/qownnotes/web-companion)
+  was improved (for [#3104](https://github.com/pbek/QOwnNotes/issues/3104))
+- `\n` sent by the [Web Companion browser extension](https://github.com/qownnotes/web-companion)
+  while editing, bookmarks will now be automatically removed to not break the
+  Markdown link (for [#3105](https://github.com/pbek/QOwnNotes/issues/3105))
+
+## 24.9.4
+- An issue with the **backlink widget** showing duplicate items panel was fixed
+  (for [#1717](https://github.com/pbek/QOwnNotes/issues/1717))
+- An issue with the ordered list detection in the heading highlighting was fixed
+  (for [#3101](https://github.com/pbek/QOwnNotes/issues/3101), thank you, @Waqar144)
+
+## 24.9.3
+- In the **backlink widget** and the automatic link transformation, when notes are
+  renamed, now relative links with `/` and urlencoded `/` (as `%2F`) are both supported
+  (for [#1717](https://github.com/pbek/QOwnNotes/issues/1717))
+  - The note link dialog will now not urlencode `/` anymore
+- Added more Arabic, Croatian, German translation (thank you, noureddin, milotype, rakekniven)
+
+## 24.9.2
+- The **backlink widget** link detection and UI was improved
+  (for [#1717](https://github.com/pbek/QOwnNotes/issues/1717))
+  - In checkbox lists, the checkboxes will now not be detected as part of the link
+  - Multiple occurrences of similar links can now be detected in notes
+  - A problem with the found link not showing up in the tooltips of items was fixed
+  - More information for the found notes will now be shown in the tooltip
+- In the note search line edit, the `Right` arrow key will not make the focus
+  jump to the note list anymore, the `Tab` key is enough to do that
+  (for [#3097](https://github.com/pbek/QOwnNotes/issues/3097))
+- Added more Croatian, Dutch, Korean translation (thank you, milotype, stephanp, venusgirl)
+
+## 24.9.1
+- The **backlink widget** in the navigation panel now also shows the links in the notes
+  to the current note (for [#1717](https://github.com/pbek/QOwnNotes/issues/1717))
+  - By clicking on them, you can open the note and search for the link
+- Added more Russian, Spanish, Korean, Dutch translation (thank you,
+  olesya_gerasimenko, fitojb, venusgirl, stephanp)
+
+## 24.9.0
+- There now is a **backlink widget** in the navigation panel to show notes that link
+  to the current note (for [#1717](https://github.com/pbek/QOwnNotes/issues/1717))
+  - You can click on the note to open it
+  - You can search through the note names of the backlinks
+- The aarch64 CMake build process was fixed (for [#3076](https://github.com/pbek/QOwnNotes/issues/3076))
+
+## 24.8.6
+- Added a **new editor color schema** *Everforest Hard Dark* by @eburakova
+  (for [#3088](https://github.com/pbek/QOwnNotes/issues/3088))
+- Added a **new editor color schema** *Everforest Hard Light* by @eburakova
+  (for [#3089](https://github.com/pbek/QOwnNotes/issues/3089))
+- Added more Russian, Arabic, Korean translation (thank you, olesya_gerasimenko, noureddin, venusgirl)
+- There was a new release of the **QOwnNotes Web Companion browser extension** 2024.8.0
+  - Bookmarks can now be edited in the bookmarks list (for [#65](https://github.com/qownnotes/web-companion/issues/65))
+    - This feature needs QOwnNotes 24.8.5 or higher
+  - Update dependencies
+  - Add more translations
+
+## 24.8.5
+- The CMake build process was adapted to be production ready and to be used in Nix
+  (for [#3076](https://github.com/pbek/QOwnNotes/issues/3076))
+- Support was added for the **QOwnNotes Web Companion browser extension**
+  to also allow editing of markdown line bookmarks
+  (for [#65](https://github.com/qownnotes/web-companion/issues/65))
+- Added more Dutch translation (thank you, stephanp)
+
 ## 24.8.4
 - The AppImage release was fixed after a linuxdeploy issue
   (for [#3073](https://github.com/pbek/QOwnNotes/issues/3073))

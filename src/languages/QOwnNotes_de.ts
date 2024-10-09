@@ -82,6 +82,13 @@
 </message>
 </context>
 <context>
+<name>BacklinkWidget</name>
+<message>
+<source>Open note and find &lt;code&gt;%1&lt;/code&gt;</source>
+<translation>Notiz öffnen und &lt;code&gt;%1&lt;/code&gt; finden</translation>
+</message>
+</context>
+<context>
 <name>DictionaryManagerDialog</name>
 <message>
 <source>Dictionary manager</source>
@@ -1658,6 +1665,14 @@
 <translation>Navigationseintrag finden</translation>
 </message>
 <message>
+<source>Headings</source>
+<translation>Überschriften</translation>
+</message>
+<message>
+<source>Backlinks</source>
+<translation type="unfinished">Backlinks</translation>
+</message>
+<message>
 <source>Add a tag to the current note</source>
 <translation>Zur aktuellen Notiz ein Schlagwort hinzufügen</translation>
 </message>
@@ -2314,19 +2329,19 @@
 </message>
 <message>
 <source>Move up in subfolder list</source>
-<translation type="unfinished">Move up in subfolder list</translation>
+<translation>In Unterordnerliste nach oben bewegen</translation>
 </message>
 <message>
 <source>Move down in subfolder list</source>
-<translation type="unfinished">Move down in subfolder list</translation>
+<translation>In Unterordnerliste nach unten bewegen</translation>
 </message>
 <message>
 <source>Move up in tag list</source>
-<translation type="unfinished">Move up in tag list</translation>
+<translation>In Schlagwort-Liste nach oben bewegen</translation>
 </message>
 <message>
 <source>Move down in tag list</source>
-<translation type="unfinished">Move down in tag list</translation>
+<translation>In Schlagwort-Liste nach unten bewegen</translation>
 </message>
 <message>
 <source>Enable AI support</source>
@@ -2729,9 +2744,9 @@ Falls Sie die Papierkorb-App auf Ihrem ownCloud-Server aktiviert haben, sollten 
 <message numerus="yes">
 <source>%n selected</source>
 <comment>Characters selected</comment>
-<translation type="unfinished">
+<translation>
 <numerusform>%n ausgewählt</numerusform>
-<numerusform>%n selected</numerusform>
+<numerusform>%n ausgewählt</numerusform>
 </translation>
 </message>
 <message>
@@ -2748,7 +2763,7 @@ Falls Sie die Papierkorb-App auf Ihrem ownCloud-Server aktiviert haben, sollten 
 </message>
 <message>
 <source>AI backends</source>
-<translation type="unfinished">AI backends</translation>
+<translation>KI-Backends</translation>
 </message>
 <message>
 <source>AI models</source>
@@ -3291,7 +3306,7 @@ Falls Sie die Papierkorb-App auf Ihrem ownCloud-Server aktiviert haben, sollten 
 </message>
 <message>
 <source>AI toolbar</source>
-<translation type="unfinished">AI toolbar</translation>
+<translation>KI-Toolbar</translation>
 </message>
 <message>
 <source>window toolbar</source>
@@ -3546,23 +3561,23 @@ Falls Sie die Papierkorb-App auf Ihrem ownCloud-Server aktiviert haben, sollten 
 <name>NoteFilePathLabel</name>
 <message>
 <source>Relative path of note, right-click to open context menu</source>
-<translation type="unfinished">Relative path of note, right-click to open context menu</translation>
+<translation>Relativer Pfad der Notiz, Rechts-Klick um Kontextmenü zu öffnen</translation>
 </message>
 <message>
 <source>Absolute path of note, right-click to open context menu</source>
-<translation type="unfinished">Absolute path of note, right-click to open context menu</translation>
+<translation>Absoluter Pfad der Notiz, Rechts-Klick um Kontextmenü zu öffnen</translation>
 </message>
 <message>
 <source>Copy absolute path of note</source>
-<translation type="unfinished">Copy absolute path of note</translation>
+<translation>Absoluten Pfad der Notiz kopieren</translation>
 </message>
 <message>
 <source>Copy absolute path of note subfolder</source>
-<translation type="unfinished">Copy absolute path of note subfolder</translation>
+<translation>Absoluten Pfad des Notizunterordners kopieren</translation>
 </message>
 <message>
 <source>Copy absolute path of note folder</source>
-<translation type="unfinished">Copy absolute path of note folder</translation>
+<translation>Absoluten Pfad des Notizordners kopieren</translation>
 </message>
 </context>
 <context>
@@ -3898,10 +3913,6 @@ Falls Sie die Papierkorb-App auf Ihrem ownCloud-Server aktiviert haben, sollten 
 <translation>Auf Registerkarte doppelklicken um Notiz anzuheften</translation>
 </message>
 <message>
-<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2</source>
-<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;zuletzt bearbeitet: %2</translation>
-</message>
-<message>
 <source>&lt;br /&gt;path: %1</source>
 <translation>&lt;br /&gt;Pfad: %1</translation>
 </message>
@@ -3911,15 +3922,19 @@ Falls Sie die Papierkorb-App auf Ihrem ownCloud-Server aktiviert haben, sollten 
 </message>
 <message>
 <source>Your Windows system seems to be in dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
-<translation type="unfinished">Your Windows system seems to be in dark mode. Do you also want to turn on dark mode in QOwnNotes?</translation>
+<translation>Ihr Windows-System scheint den Dunkelmodus zu verwenden. Möchten Sie den Dunkelmodus auch in QOwnNotes einschalten?</translation>
 </message>
 <message>
 <source>Your Windows system seems to be in light mode. Do you also want to turn off dark mode in QOwnNotes?</source>
-<translation type="unfinished">Your Windows system seems to be in light mode. Do you also want to turn off dark mode in QOwnNotes?</translation>
+<translation>Ihr Windows-System scheint den hellen Modus zu verwenden. Möchten Sie den hellen Modus auch in QOwnNotes einschalten?</translation>
 </message>
 <message>
 <source>Light mode detected</source>
 <translation>Heller Modus erkannt</translation>
+</message>
+<message>
+<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</source>
+<translation type="unfinished">&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</translation>
 </message>
 <message>
 <source>Your Linux system seems to use the dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
@@ -3967,7 +3982,7 @@ Falls Sie die Papierkorb-App auf Ihrem ownCloud-Server aktiviert haben, sollten 
 </message>
 <message>
 <source>Your note folder &lt;b&gt;%1&lt;/b&gt; was not found any more! Do you want to select a new one?</source>
-<translation type="unfinished">Your note folder &lt;b&gt;%1&lt;/b&gt; was not found any more! Do you want to select a new one?</translation>
+<translation>Ihr Notizordner &lt;b&gt;%1&lt;/b&gt; konnte nicht mehr gefunden werden! Möchten Sie einen neuen auswählen?</translation>
 </message>
 <message>
 <source>Please select the folder where your notes will get stored to</source>
@@ -5454,7 +5469,7 @@ Just test yourself if you get sync conflicts and set a higher value if so.</sour
 </message>
 <message>
 <source>Show note path</source>
-<translation type="unfinished">Show note path</translation>
+<translation>Pfad zu Notizen anzeigen</translation>
 </message>
 <message>
 <source>Only show relative note path</source>
@@ -5584,6 +5599,14 @@ Just test yourself if you get sync conflicts and set a higher value if so.</sour
 <message>
 <source>Automatically remove trailing spaces in the note text</source>
 <translation>Nachfolgende Leerzeichen im Notiztext automatisch entfernen</translation>
+</message>
+<message>
+<source>Notes larger than this will not be shown in the note list</source>
+<translation>Notizen, die größer als dieser Wert sind, werden in der Notizliste nicht angezeigt</translation>
+</message>
+<message>
+<source>Maximum note file size:</source>
+<translation>Maximale Größe einer Notizdatei:</translation>
 </message>
 <message>
 <source>Search script repository for AI integration scripts</source>
@@ -6540,7 +6563,7 @@ Fehlermeldung: </translation>
 <message>
 <source>Test</source>
 <comment>verb</comment>
-<translation type="unfinished">Test</translation>
+<translation>Test</translation>
 </message>
 <message>
 <source>Test connection to %1 (%2)</source>
@@ -6916,6 +6939,14 @@ Your notes will stay intact!</source>
 <translation>Nur verwaiste Dateianhänge anzeigen</translation>
 </message>
 <message>
+<source>Only show attachments that are used in the current note</source>
+<translation>Nur Anhänge anzeigen, die in der aktuellen Notiz verwendet werden</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation>Nur von der aktuellen Notiz anzeigen</translation>
+</message>
+<message>
 <source>Add selected attachments to the current note</source>
 <translation>Ausgewählte Anhänge zur aktuellen Notiz hinzufügen</translation>
 </message>
@@ -7060,6 +7091,14 @@ Your notes will stay intact!</source>
 <message>
 <source>Refresh</source>
 <translation>Aktualisierung</translation>
+</message>
+<message>
+<source>Only show images that are used in the current note</source>
+<translation>Nur Bilder anzeigen, die in der aktuellen Notiz verwendet werden</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation>Nur von der aktuellen Notiz anzeigen</translation>
 </message>
 <message>
 <source>Used in notes:</source>
@@ -7812,6 +7851,13 @@ Kann nicht rückgängig gemacht werden!</translation>
 <translation type="unfinished">
 <numerusform>Lesezeichen aus %n Notiz(en) gelöscht</numerusform>
 <numerusform>Bookmark deleted from %n note(s)</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Bookmark edited in %n note(s)</source>
+<translation type="unfinished">
+<numerusform>Lesezeichen in %n Notiz(en) bearbeitet</numerusform>
+<numerusform>Bookmark edited in %n note(s)</numerusform>
 </translation>
 </message>
 <message>

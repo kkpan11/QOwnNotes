@@ -6,9 +6,10 @@
 #include <QDebug>
 #include <QMainWindow>
 #include <QMenu>
-#include <QSettings>
 #include <QToolBar>
 #include <QWidgetAction>
+
+#include "services/settingsservice.h"
 
 ToolbarContainer::ToolbarContainer(QToolBar *toolbar)
     : name(toolbar->objectName()), title(toolbar->windowTitle()) {
@@ -125,7 +126,7 @@ void ToolbarContainer::updateToolbar() {
  * @param toolbar
  */
 void ToolbarContainer::updateIconSize(QToolBar *toolbar) {
-    QSettings settings;
+    SettingsService settings;
     int toolBarIconSize = settings.value(QStringLiteral("MainWindow/mainToolBar.iconSize")).toInt();
     QSize size(toolBarIconSize, toolBarIconSize);
     toolbar->setIconSize(size);

@@ -82,6 +82,13 @@
 </message>
 </context>
 <context>
+<name>BacklinkWidget</name>
+<message>
+<source>Open note and find &lt;code&gt;%1&lt;/code&gt;</source>
+<translation>Abrir nota y buscar &lt;code&gt;%1&lt;/code&gt;</translation>
+</message>
+</context>
+<context>
 <name>DictionaryManagerDialog</name>
 <message>
 <source>Dictionary manager</source>
@@ -1656,6 +1663,14 @@
 <message>
 <source>Find navigation item</source>
 <translation>Encontrar el elemento de navegación</translation>
+</message>
+<message>
+<source>Headings</source>
+<translation>Títulos</translation>
+</message>
+<message>
+<source>Backlinks</source>
+<translation>Retroenlaces</translation>
 </message>
 <message>
 <source>Add a tag to the current note</source>
@@ -3897,10 +3912,6 @@ Si la papelera está habilitada en su servidor ownCloud debería poder restaurar
 <translation>Haga doble clic para pegar la nota a la pestaña</translation>
 </message>
 <message>
-<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2</source>
-<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;última modificación: %2</translation>
-</message>
-<message>
 <source>&lt;br /&gt;path: %1</source>
 <translation>&lt;br /&gt;ruta: %1</translation>
 </message>
@@ -3919,6 +3930,10 @@ Si la papelera está habilitada en su servidor ownCloud debería poder restaurar
 <message>
 <source>Light mode detected</source>
 <translation>Se detectó el modo claro</translation>
+</message>
+<message>
+<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</source>
+<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;modificado por última vez: %2&lt;br /&gt;tamaño del archivo: %3</translation>
 </message>
 <message>
 <source>Your Linux system seems to use the dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
@@ -5457,7 +5472,7 @@ Se debe probar y si hay conflictos de sincronización establecer un valor más a
 </message>
 <message>
 <source>Only show relative note path</source>
-<translation type="unfinished">Only show relative note path</translation>
+<translation>Mostrar solo ruta de nota relativa</translation>
 </message>
 <message>
 <source>Action name</source>
@@ -5585,8 +5600,16 @@ Se debe probar y si hay conflictos de sincronización establecer un valor más a
 <translation>Eliminar automáticamente los espacios finales en el texto de la nota</translation>
 </message>
 <message>
+<source>Notes larger than this will not be shown in the note list</source>
+<translation>Las notas más grandes que esto no serán mostradas en la lista de notas</translation>
+</message>
+<message>
+<source>Maximum note file size:</source>
+<translation>Tamaño máximo de archivo de notas:</translation>
+</message>
+<message>
 <source>Search script repository for AI integration scripts</source>
-<translation type="unfinished">Search script repository for AI integration scripts</translation>
+<translation>Buscar repositorio de scripts para scripts de integración de IA</translation>
 </message>
 <message>
 <source>API keys</source>
@@ -5607,7 +5630,7 @@ Se debe probar y si hay conflictos de sincronización establecer un valor más a
 <message>
 <source>Test connection</source>
 <comment>"Test" as verb</comment>
-<translation type="unfinished">Test connection</translation>
+<translation>Probar conexión</translation>
 </message>
 <message>
 <source>AI backends added via the scripting engine</source>
@@ -5623,7 +5646,7 @@ Se debe probar y si hay conflictos de sincronización establecer un valor más a
 </message>
 <message>
 <source>Alternatively, you can also look in the script repository for already created AI integration scripts.</source>
-<translation type="unfinished">Alternatively, you can also look in the script repository for already created AI integration scripts.</translation>
+<translation>Alternativamente, también puede mirar en el repositorio de scripts para scripts de integración de IA ya creados.</translation>
 </message>
 <message>
 <source>Groq API key:</source>
@@ -6531,16 +6554,16 @@ Mensaje de error de conexión: </translation>
 </message>
 <message>
 <source>AI model: %1</source>
-<translation type="unfinished">AI model: %1</translation>
+<translation>Modelo de IA: %1</translation>
 </message>
 <message>
 <source>Test</source>
 <comment>verb</comment>
-<translation type="unfinished">Test</translation>
+<translation>Probar</translation>
 </message>
 <message>
 <source>Test connection to %1 (%2)</source>
-<translation type="unfinished">Test connection to %1 (%2)</translation>
+<translation>Probar conexión a %1 (%2)</translation>
 </message>
 <message>
 <source>Find a script in the script repository</source>
@@ -6878,7 +6901,7 @@ Your notes will stay intact!</source>
 <message>
 <source>%1 (%2)</source>
 <comment>dictionary name; %1 = language name, %2 = language variant name</comment>
-<translation type="unfinished">%1 (%2)</translation>
+<translation>%1 (%2)</translation>
 </message>
 </context>
 <context>
@@ -6910,6 +6933,14 @@ Your notes will stay intact!</source>
 <message>
 <source>Only show orphaned attachments</source>
 <translation>Mostrar solo archivos adjuntos huérfanos</translation>
+</message>
+<message>
+<source>Only show attachments that are used in the current note</source>
+<translation type="unfinished">Only show attachments that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
 </message>
 <message>
 <source>Add selected attachments to the current note</source>
@@ -7056,6 +7087,14 @@ Your notes will stay intact!</source>
 <message>
 <source>Refresh</source>
 <translation>Actualizar</translation>
+</message>
+<message>
+<source>Only show images that are used in the current note</source>
+<translation type="unfinished">Only show images that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
 </message>
 <message>
 <source>Used in notes:</source>
@@ -7807,6 +7846,13 @@ This cannot be undone!</source>
 <translation type="unfinished">
 <numerusform>Bookmark deleted from %n note(s)</numerusform>
 <numerusform>Bookmark deleted from %n note(s)</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Bookmark edited in %n note(s)</source>
+<translation type="unfinished">
+<numerusform>Bookmark edited in %n note(s)</numerusform>
+<numerusform>Bookmark edited in %n note(s)</numerusform>
 </translation>
 </message>
 <message>

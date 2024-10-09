@@ -82,6 +82,13 @@
 </message>
 </context>
 <context>
+<name>BacklinkWidget</name>
+<message>
+<source>Open note and find &lt;code&gt;%1&lt;/code&gt;</source>
+<translation type="unfinished">Open note and find &lt;code&gt;%1&lt;/code&gt;</translation>
+</message>
+</context>
+<context>
 <name>DictionaryManagerDialog</name>
 <message>
 <source>Dictionary manager</source>
@@ -1647,6 +1654,14 @@
 <message>
 <source>Find navigation item</source>
 <translation>Cari item navigasi</translation>
+</message>
+<message>
+<source>Headings</source>
+<translation type="unfinished">Headings</translation>
+</message>
+<message>
+<source>Backlinks</source>
+<translation type="unfinished">Backlinks</translation>
 </message>
 <message>
 <source>Add a tag to the current note</source>
@@ -3864,10 +3879,6 @@ Perlu diingat bahawa anda perlu &lt;strong&gt; ingat &lt;/ strong&gt; kata lalua
 <translation>Klik dua kali untuk melekatkan nota ke tab</translation>
 </message>
 <message>
-<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2</source>
-<translation type="unfinished">&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2</translation>
-</message>
-<message>
 <source>&lt;br /&gt;path: %1</source>
 <translation type="unfinished">&lt;br /&gt;path: %1</translation>
 </message>
@@ -3886,6 +3897,10 @@ Perlu diingat bahawa anda perlu &lt;strong&gt; ingat &lt;/ strong&gt; kata lalua
 <message>
 <source>Light mode detected</source>
 <translation type="unfinished">Light mode detected</translation>
+</message>
+<message>
+<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</source>
+<translation type="unfinished">&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</translation>
 </message>
 <message>
 <source>Your Linux system seems to use the dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
@@ -5553,6 +5568,14 @@ Pembantu isu Terbuka &lt;/ span&gt; di bahagian bawah. &lt;/ P&gt; &lt;/ body&gt
 <translation>Alih keluar spasi ketinggalan dalam teks nota secara automatik</translation>
 </message>
 <message>
+<source>Notes larger than this will not be shown in the note list</source>
+<translation type="unfinished">Notes larger than this will not be shown in the note list</translation>
+</message>
+<message>
+<source>Maximum note file size:</source>
+<translation type="unfinished">Maximum note file size:</translation>
+</message>
+<message>
 <source>Search script repository for AI integration scripts</source>
 <translation type="unfinished">Search script repository for AI integration scripts</translation>
 </message>
@@ -6888,6 +6911,14 @@ Nota anda akan kekal utuh!</translation>
 <translation type="unfinished">Only show orphaned attachments</translation>
 </message>
 <message>
+<source>Only show attachments that are used in the current note</source>
+<translation type="unfinished">Only show attachments that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
+</message>
+<message>
 <source>Add selected attachments to the current note</source>
 <translation type="unfinished">Add selected attachments to the current note</translation>
 </message>
@@ -7031,6 +7062,14 @@ Nota anda akan kekal utuh!</translation>
 <message>
 <source>Refresh</source>
 <translation type="unfinished">Refresh</translation>
+</message>
+<message>
+<source>Only show images that are used in the current note</source>
+<translation type="unfinished">Only show images that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
 </message>
 <message>
 <source>Used in notes:</source>
@@ -7781,6 +7820,12 @@ Versi nota di pelayan ownCloud anda tidak akan dipulihkan dan nota akan kekal di
 <source>Bookmark deleted from %n note(s)</source>
 <translation type="unfinished">
 <numerusform>Bookmark deleted from %n note(s)</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Bookmark edited in %n note(s)</source>
+<translation type="unfinished">
+<numerusform>Bookmark edited in %n note(s)</numerusform>
 </translation>
 </message>
 <message>

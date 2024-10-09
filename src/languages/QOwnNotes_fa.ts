@@ -82,6 +82,13 @@
 </message>
 </context>
 <context>
+<name>BacklinkWidget</name>
+<message>
+<source>Open note and find &lt;code&gt;%1&lt;/code&gt;</source>
+<translation type="unfinished">Open note and find &lt;code&gt;%1&lt;/code&gt;</translation>
+</message>
+</context>
+<context>
 <name>DictionaryManagerDialog</name>
 <message>
 <source>Dictionary manager</source>
@@ -1656,6 +1663,14 @@
 <message>
 <source>Find navigation item</source>
 <translation>یافتن مورد جهت یابی</translation>
+</message>
+<message>
+<source>Headings</source>
+<translation type="unfinished">Headings</translation>
+</message>
+<message>
+<source>Backlinks</source>
+<translation type="unfinished">Backlinks</translation>
 </message>
 <message>
 <source>Add a tag to the current note</source>
@@ -3904,10 +3919,6 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <translation>برای چسباندن یادداشت به زبانه دوبار کلیک کنید</translation>
 </message>
 <message>
-<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2</source>
-<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;اصلاحات اخیر: %2</translation>
-</message>
-<message>
 <source>&lt;br /&gt;path: %1</source>
 <translation>&lt;br /&gt; مسیر: %1</translation>
 </message>
@@ -3926,6 +3937,10 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <message>
 <source>Light mode detected</source>
 <translation>حالت روشن تشخیص داده شد</translation>
+</message>
+<message>
+<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</source>
+<translation type="unfinished">&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</translation>
 </message>
 <message>
 <source>Your Linux system seems to use the dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
@@ -5693,6 +5708,14 @@ QOwnNotesAPI
 <translation>حذف خودکار فضاهای مؤخر در متن یادداشت</translation>
 </message>
 <message>
+<source>Notes larger than this will not be shown in the note list</source>
+<translation type="unfinished">Notes larger than this will not be shown in the note list</translation>
+</message>
+<message>
+<source>Maximum note file size:</source>
+<translation type="unfinished">Maximum note file size:</translation>
+</message>
+<message>
 <source>Search script repository for AI integration scripts</source>
 <translation type="unfinished">Search script repository for AI integration scripts</translation>
 </message>
@@ -7075,6 +7098,14 @@ Your notes will stay intact!</source>
 <translation>نمایش تنها پیوست های از دست رفته</translation>
 </message>
 <message>
+<source>Only show attachments that are used in the current note</source>
+<translation type="unfinished">Only show attachments that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
+</message>
+<message>
 <source>Add selected attachments to the current note</source>
 <translation>افزودن پیوست های منتخب به یادداشت کنونی</translation>
 </message>
@@ -7219,6 +7250,14 @@ Your notes will stay intact!</source>
 <message>
 <source>Refresh</source>
 <translation>نوسازی</translation>
+</message>
+<message>
+<source>Only show images that are used in the current note</source>
+<translation type="unfinished">Only show images that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
 </message>
 <message>
 <source>Used in notes:</source>
@@ -7992,6 +8031,13 @@ This cannot be undone!</source>
 <translation type="unfinished">
 <numerusform>Bookmark deleted from %n note(s)</numerusform>
 <numerusform>Bookmark deleted from %n note(s)</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Bookmark edited in %n note(s)</source>
+<translation type="unfinished">
+<numerusform>Bookmark edited in %n note(s)</numerusform>
+<numerusform>Bookmark edited in %n note(s)</numerusform>
 </translation>
 </message>
 <message>

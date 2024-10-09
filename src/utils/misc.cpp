@@ -40,7 +40,6 @@
 #include <QProcess>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
-#include <QSettings>
 #include <QStringBuilder>
 #include <QTemporaryFile>
 #include <QTextDocument>
@@ -51,6 +50,8 @@
 #include <QXmlStreamReader>
 #include <QtGui/QIcon>
 #include <utility>
+
+#include "services/settingsservice.h"
 #if (QT_VERSION < QT_VERSION_CHECK(5, 6, 0))
 #include <QHostInfo>
 #endif
@@ -911,7 +912,7 @@ QString Utils::Misc::applicationPath() {
 }
 
 QString Utils::Misc::appendSingleAppInstanceTextIfNeeded(QString text) {
-    if (QSettings().value("allowOnlyOneAppInstance").toBool()) {
+    if (SettingsService().value("allowOnlyOneAppInstance").toBool()) {
         text.append(QStringLiteral("\n\n") +
                     QObject::tr("You are using the single app instance mode, that "
                                 "prevents the application be be started a second time. For the "
@@ -1058,7 +1059,7 @@ bool Utils::Misc::downloadUrlToFile(const QUrl &url, QFile *file) {
  * @return
  */
 QString Utils::Misc::genericCSS() {
-    QSettings settings;
+    SettingsService settings;
     const bool darkModeColors = settings.value(QStringLiteral("darkModeColors")).toBool();
     QString color = darkModeColors ? QStringLiteral("#ffd694") : QStringLiteral("#fc7600");
     QString cssStyles = QStringLiteral("a {color: ") % color % QStringLiteral("}");
@@ -1139,7 +1140,7 @@ QList<int> Utils::Misc::getSearchEnginesIds() {
  * self-builds if nothing is already set
  */
 void Utils::Misc::presetDisableAutomaticUpdateDialog() {
-    QSettings settings;
+    SettingsService settings;
 
     // disable the automatic update dialog per default for repositories and
     // self-builds
@@ -1268,7 +1269,7 @@ void Utils::Misc::storePrinterSettings(QPrinter *printer, const QString &setting
     QByteArray byteArr;
     QDataStream os(&byteArr, QIODevice::WriteOnly);
     dataStreamWrite(os, *printer);
-    QSettings().setValue(settingsKey, byteArr.toHex());
+    SettingsService().setValue(settingsKey, byteArr.toHex());
 }
 
 /**
@@ -1278,7 +1279,7 @@ void Utils::Misc::storePrinterSettings(QPrinter *printer, const QString &setting
  * @param settingsKey
  */
 void Utils::Misc::loadPrinterSettings(QPrinter *printer, const QString &settingsKey) {
-    QSettings settings;
+    SettingsService settings;
 
     if (!settings.value(settingsKey).isValid()) {
         return;
@@ -1296,7 +1297,7 @@ void Utils::Misc::loadPrinterSettings(QPrinter *printer, const QString &settings
  * @return
  */
 bool Utils::Misc::isNoteEditingAllowed() {
-    return QSettings().value(QStringLiteral("allowNoteEditing"), true).toBool();
+    return SettingsService().value(QStringLiteral("allowNoteEditing"), true).toBool();
 }
 
 /**
@@ -1305,7 +1306,7 @@ bool Utils::Misc::isNoteEditingAllowed() {
  * @return
  */
 bool Utils::Misc::useInternalExportStylingForPreview() {
-    return QSettings()
+    return SettingsService()
         .value(QStringLiteral("MainWindow/noteTextView.useInternalExportStyling"), true)
         .toBool();
 }
@@ -1316,7 +1317,7 @@ bool Utils::Misc::useInternalExportStylingForPreview() {
  * @return
  */
 QString Utils::Misc::previewFontString() {
-    return QSettings()
+    return SettingsService()
         .value(isPreviewUseEditorStyles() ? QStringLiteral("MainWindow/noteTextEdit.font")
                                           : QStringLiteral("MainWindow/noteTextView.font"))
         .toString();
@@ -1328,7 +1329,7 @@ QString Utils::Misc::previewFontString() {
  * @return
  */
 QString Utils::Misc::previewCodeFontString() {
-    return QSettings()
+    return SettingsService()
         .value(isPreviewUseEditorStyles() ? QStringLiteral("MainWindow/noteTextEdit.code.font")
                                           : QStringLiteral("MainWindow/noteTextView.code.font"))
         .toString();
@@ -1340,7 +1341,7 @@ QString Utils::Misc::previewCodeFontString() {
  * @return
  */
 bool Utils::Misc::isPreviewUseEditorStyles() {
-    return QSettings()
+    return SettingsService()
         .value(QStringLiteral("MainWindow/noteTextView.useEditorStyles"), true)
         .toBool();
 }
@@ -1351,7 +1352,7 @@ bool Utils::Misc::isPreviewUseEditorStyles() {
  * @return
  */
 bool Utils::Misc::isSocketServerEnabled() {
-    return QSettings().value(QStringLiteral("enableSocketServer"), true).toBool();
+    return SettingsService().value(QStringLiteral("enableSocketServer"), true).toBool();
 }
 
 /**
@@ -1360,7 +1361,7 @@ bool Utils::Misc::isSocketServerEnabled() {
  * @return
  */
 bool Utils::Misc::isWebAppSupportEnabled() {
-    return QSettings().value(QStringLiteral("enableWebAppSupport"), false).toBool();
+    return SettingsService().value(QStringLiteral("enableWebAppSupport"), false).toBool();
 }
 
 /**
@@ -1375,7 +1376,7 @@ bool Utils::Misc::isRestoreCursorPosition() {
     const bool defaultValue = true;
 #endif
 
-    return QSettings().value(QStringLiteral("restoreCursorPosition"), defaultValue).toBool();
+    return SettingsService().value(QStringLiteral("restoreCursorPosition"), defaultValue).toBool();
 }
 
 /**
@@ -1384,7 +1385,7 @@ bool Utils::Misc::isRestoreCursorPosition() {
  * @return
  */
 bool Utils::Misc::isDarkModeIconTheme() {
-    const QSettings settings;
+    const SettingsService settings;
     const bool darkMode = settings.value(QStringLiteral("darkMode")).toBool();
     return settings.value(QStringLiteral("darkModeIconTheme"), darkMode).toBool();
 }
@@ -1395,7 +1396,7 @@ bool Utils::Misc::isDarkModeIconTheme() {
  * @return
  */
 bool Utils::Misc::doAutomaticNoteFolderDatabaseClosing() {
-    return QSettings().value(QStringLiteral("automaticNoteFolderDatabaseClosing")).toBool();
+    return SettingsService().value(QStringLiteral("automaticNoteFolderDatabaseClosing")).toBool();
 }
 
 /**
@@ -1404,7 +1405,7 @@ bool Utils::Misc::doAutomaticNoteFolderDatabaseClosing() {
  * @return
  */
 bool Utils::Misc::isNoteListPreview() {
-    return QSettings().value(QStringLiteral("noteListPreview")).toBool();
+    return SettingsService().value(QStringLiteral("noteListPreview")).toBool();
 }
 
 /**
@@ -1413,7 +1414,7 @@ bool Utils::Misc::isNoteListPreview() {
  * @return
  */
 bool Utils::Misc::isEnableNoteTree() {
-    return QSettings().value(QStringLiteral("enableNoteTree")).toBool();
+    return SettingsService().value(QStringLiteral("enableNoteTree")).toBool();
 }
 
 /**
@@ -1422,7 +1423,7 @@ bool Utils::Misc::isEnableNoteTree() {
  * @return
  */
 QString Utils::Misc::indentCharacters() {
-    return QSettings().value("Editor/useTabIndent").toBool()
+    return SettingsService().value("Editor/useTabIndent").toBool()
                ? QStringLiteral("\t")
                : QStringLiteral(" ").repeated(indentSize());
 }
@@ -1432,7 +1433,7 @@ QString Utils::Misc::indentCharacters() {
  *
  * @return
  */
-int Utils::Misc::indentSize() { return QSettings().value("Editor/indentSize", 4).toInt(); }
+int Utils::Misc::indentSize() { return SettingsService().value("Editor/indentSize", 4).toInt(); }
 
 /**
  * Unescapes html special characters
@@ -1491,18 +1492,24 @@ void Utils::Misc::printInfo(const QString &text) { qInfo() << text; }
  * @return
  */
 QString Utils::Misc::toHumanReadableByteSize(qint64 size) {
-    double num = size;
-    const QStringList list = {"KB", "MB", "GB", "TB"};
+    static const QStringList units = {"bytes", "KB", "MB", "GB", "TB"};
+    constexpr double threshold = 1024.0;
 
-    QStringListIterator i(list);
-    QString unit(QStringLiteral("bytes"));
+    double num = qAbs(static_cast<double>(size));
+    int unitIndex = 0;
 
-    while (num >= 1024.0 && i.hasNext()) {
-        unit = i.next();
-        num /= 1024.0;
+    while (num >= threshold && unitIndex < units.size() - 1) {
+        num /= threshold;
+        ++unitIndex;
     }
 
-    return QString().setNum(num, 'f', 2) + " " + unit;
+    // Handle special case for bytes
+    if (unitIndex == 0) {
+        return QString("%1 %2").arg(size).arg(units[unitIndex]);
+    }
+
+    // Use QString::number for better performance and more control
+    return QString("%1 %2").arg(QString::number(num, 'f', 2), units[unitIndex]);
 }
 
 /**
@@ -1533,7 +1540,7 @@ QString Utils::Misc::prepareDebugInformationLine(const QString &headline, QStrin
 }
 
 QString Utils::Misc::generateDebugInformation(bool withGitHubLineBreaks) {
-    const QSettings settings;
+    const SettingsService settings;
     QString output;
 
     output += QStringLiteral("QOwnNotes Debug Information\n");
@@ -1939,7 +1946,7 @@ void Utils::Misc::transformNextcloudPreviewImages(QString &html, int maxImageWid
         QRegularExpressionMatch match = i.next();
         const QString imageTag = match.captured(0);
         QString inlineImageTag;
-        int imageWidth;
+        int imageWidth = maxImageWidth;
         ExternalImageHashItem hashItem;
 
         if (externalImageHash->contains(imageTag)) {
@@ -1978,7 +1985,7 @@ void Utils::Misc::transformRemotePreviewImages(QString &html, int maxImageWidth,
         QRegularExpressionMatch match = i.next();
         QString imageTag = match.captured(0);
         QString inlineImageTag;
-        int imageWidth;
+        int imageWidth = maxImageWidth;
         ExternalImageHashItem hashItem;
 
         if (externalImageHash->contains(imageTag)) {
@@ -2309,7 +2316,7 @@ QString Utils::Misc::fileExtensionForMimeType(const QString &mimeType) {
 }
 
 void Utils::Misc::switchToDarkOrLightMode(bool darkMode) {
-    QSettings settings;
+    SettingsService settings;
     settings.setValue("darkMode", darkMode);
     settings.setValue("darkModeColors", darkMode);
     settings.setValue("darkModeIconTheme", darkMode);
@@ -2436,7 +2443,7 @@ QString Utils::Misc::testEvernoteImportText(const QString &data) {
  * @param msg
  */
 void Utils::Misc::logToFileIfAllowed(QtMsgType msgType, const QString &msg) {
-    if (!QSettings().value(QStringLiteral("Debug/fileLogging")).toBool()) {
+    if (!SettingsService().value(QStringLiteral("Debug/fileLogging")).toBool()) {
         return;
     }
 
@@ -2639,7 +2646,11 @@ QString Utils::Misc::createAbsolutePathsInHtml(const QString &html, const QStrin
 }
 
 int Utils::Misc::getPreviewRefreshDebounceTime() {
-    return QSettings()
+    return SettingsService()
         .value(QStringLiteral("MainWindow/noteTextView.refreshDebounceTime"), 600)
         .toInt();
+}
+
+int Utils::Misc::getMaximumNoteFileSize() {
+    return SettingsService().value(QStringLiteral("maxNoteFileSize"), 1048576).toInt();
 }

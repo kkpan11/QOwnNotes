@@ -1,7 +1,8 @@
 #include "filedialog.h"
 
 #include <QDebug>
-#include <QSettings>
+
+#include "services/settingsservice.h"
 
 FileDialog::FileDialog(const QString& name) {
     if (!name.isEmpty()) {
@@ -9,7 +10,7 @@ FileDialog::FileDialog(const QString& name) {
         _generalSettingsKey = QStringLiteral("FileDialog/LastPath");
         _settingsKey = _generalSettingsKey + "-" + name;
 
-        QSettings settings;
+        SettingsService settings;
         QString path = settings.value(_settingsKey).toString();
         QFileInfo fileInfo(path);
 
@@ -43,7 +44,7 @@ FileDialog::FileDialog(const QString& name) {
  * @param path
  */
 void FileDialog::storeDirectory(QString path) {
-    QSettings settings;
+    SettingsService settings;
     QFileInfo fileInfo(path);
 
     // get the directory path from the path if it is not a directory

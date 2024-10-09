@@ -8,13 +8,13 @@
 
 #include <QDebug>
 #include <QDir>
-#include <QSettings>
 #include <QSqlError>
 #include <QSqlRecord>
 #include <utility>
 
 #include "note.h"
 #include "notefolder.h"
+#include "services/settingsservice.h"
 #include "tag.h"
 
 NoteSubFolder::NoteSubFolder() : _id{0}, _parentId{0}, _name{QLatin1String("")} {}
@@ -452,7 +452,7 @@ NoteSubFolder NoteSubFolder::activeNoteSubFolder() {
  * Saves the expand status of the item
  */
 void NoteSubFolder::saveTreeWidgetExpandState(bool expanded) const {
-    QSettings settings;
+    SettingsService settings;
     const QString settingsKey = treeWidgetExpandStateSettingsKey();
 
     // load the settings
@@ -475,7 +475,7 @@ void NoteSubFolder::saveTreeWidgetExpandState(bool expanded) const {
  * Fetches the expand status of the item
  */
 bool NoteSubFolder::treeWidgetExpandState() const {
-    const QSettings settings;
+    const SettingsService settings;
     const QString settingsKey = treeWidgetExpandStateSettingsKey();
 
     // load the settings
@@ -489,7 +489,9 @@ bool NoteSubFolder::treeWidgetExpandState() const {
  * Checks if noteSubfoldersPanelShowNotesRecursively is set
  */
 bool NoteSubFolder::isNoteSubfoldersPanelShowNotesRecursively() {
-    return QSettings().value(QStringLiteral("noteSubfoldersPanelShowNotesRecursively")).toBool();
+    return SettingsService()
+        .value(QStringLiteral("noteSubfoldersPanelShowNotesRecursively"))
+        .toBool();
 }
 
 /**
@@ -540,7 +542,7 @@ bool NoteSubFolder::willFolderBeIgnored(const QString& folderName, bool showWarn
         return true;
     }
 
-    const QSettings settings;
+    const SettingsService settings;
     const QStringList ignoredFolderRegExpList =
         settings.value(QStringLiteral("ignoreNoteSubFolders"), IGNORED_NOTE_SUBFOLDERS_DEFAULT)
             .toString()

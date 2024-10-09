@@ -4,6 +4,7 @@
 #include <utils/misc.h>
 
 #include <QDateTime>
+#include <QSet>
 
 class Bookmark;
 class CommandSnippet;
@@ -12,6 +13,26 @@ class QRegularExpression;
 class QFile;
 class QUrl;
 class QSqlQuery;
+
+struct BacklinkHit {
+    BacklinkHit(QString markdown, QString text) noexcept
+        : markdown(std::move(markdown)), text(std::move(text)) {}
+
+    bool isEmpty() const noexcept { return markdown.isEmpty() && text.isEmpty(); }
+
+    // Add operator== for comparison
+    bool operator==(const BacklinkHit &other) const {
+        return markdown == other.markdown && text == other.text;
+    }
+
+    QString markdown;
+    QString text;
+};
+
+// Add hash function for BacklinkHit
+inline uint qHash(const BacklinkHit &hit, uint seed = 0) {
+    return qHash(hit.markdown, seed) ^ qHash(hit.text, seed);
+}
 
 #define NOTE_TEXT_ENCRYPTION_PRE_STRING "<!-- BEGIN ENCRYPTED TEXT --"
 #define NOTE_TEXT_ENCRYPTION_POST_STRING "-- END ENCRYPTED TEXT -->"
@@ -279,7 +300,7 @@ class Note {
     QString textToMarkdownHtml(QString str, const QString &notesPath, int maxImageWidth = 980,
                                bool forExport = false, bool base64Images = false);
 
-    QStringList getMediaFileList();
+    QStringList getMediaFileList() const;
 
     bool hasMediaFiles();
 
@@ -342,7 +363,7 @@ class Note {
 
     static Utils::Misc::ExternalImageHash *externalImageHash();
 
-    static QString urlEncodeNoteUrl(const QString &url);
+    static QString urlEncodeNoteUrl(const QString &url, bool escapeSlashes = false);
 
     static QString urlDecodeNoteUrl(QString url);
 
@@ -359,6 +380,10 @@ class Note {
     QStringList getHeadingList();
 
     static bool applyIgnoredNotesSetting(QStringList &fileNames);
+
+    QSet<Note> findBacklinks() const;
+
+    QHash<Note, QSet<BacklinkHit>> findReverseLinkNotes();
 
    protected:
     int _id;
@@ -380,16 +405,26 @@ class Note {
     int _shareId;
     unsigned int _sharePermissions;
     bool _hasDirtyData;
+    QHash<Note, QSet<BacklinkHit>> _backlinkNoteHash;
 
     static QRegularExpression getEncryptedNoteTextRegularExpression();
     QString getEncryptedNoteText() const;
 
-    static const QString getNoteURL(const QString &baseName);
+    static QString getNoteURL(const QString &baseName);
 
     static const QString getNoteURLFromFileName(const QString &fileName);
 
     void restoreCreatedDate();
+
+    static BacklinkHit findAndReturnBacklinkHit(const QString &text, const QString &pattern);
+    static QSet<BacklinkHit> findAndReturnBacklinkHit(const QString &text,
+                                                      const QRegularExpression &regex);
+
+    void addTextToBacklinkNoteHashIfFound(const Note &note, const QString &pattern);
+    void addTextToBacklinkNoteHashIfFound(const Note &note, const QRegularExpression &pattern);
 };
+
+inline uint qHash(const Note &note, uint seed) { return qHash(note.getId(), seed); }
 
 Q_DECLARE_TYPEINFO(Note, Q_MOVABLE_TYPE);
 

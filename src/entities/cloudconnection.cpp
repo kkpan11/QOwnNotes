@@ -5,7 +5,6 @@
 
 #include <QDebug>
 #include <QRegularExpression>
-#include <QSettings>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
@@ -15,6 +14,7 @@
 
 #include "notefolder.h"
 #include "services/databaseservice.h"
+#include "services/settingsservice.h"
 
 CloudConnection::CloudConnection()
     : name(QString()), serverUrl(QString()), username(QString()), password(QString()) {
@@ -90,7 +90,7 @@ CloudConnection CloudConnection::currentCloudConnection(bool ignoreTableWarning)
 }
 
 CloudConnection CloudConnection::currentTodoCalendarCloudConnection() {
-    QSettings settings;
+    SettingsService settings;
     const int id = settings
                        .value(QStringLiteral("ownCloud/todoCalendarCloudConnectionId"),
                               firstCloudConnection().getId())
@@ -184,18 +184,21 @@ bool CloudConnection::remove() {
     }
 }
 
-void CloudConnection::removeExtraSettings() { QSettings().remove(extraSettingsSettingsKey()); }
+void CloudConnection::removeExtraSettings() {
+    SettingsService().remove(extraSettingsSettingsKey());
+}
 
 QString CloudConnection::extraSettingsSettingsKey() const {
     return QStringLiteral("CloudConnection-") + QString::number(this->id);
 }
 
 void CloudConnection::setExtraSetting(const QString &key, const QVariant &value) {
-    QSettings().setValue(extraSettingsSettingsKey() + QStringLiteral("/") + key, value);
+    SettingsService().setValue(extraSettingsSettingsKey() + QStringLiteral("/") + key, value);
 }
 
 QVariant CloudConnection::extraSetting(const QString &key, const QVariant &defaultValue) const {
-    return QSettings().value(extraSettingsSettingsKey() + QStringLiteral("/") + key, defaultValue);
+    return SettingsService().value(extraSettingsSettingsKey() + QStringLiteral("/") + key,
+                                   defaultValue);
 }
 
 CloudConnection CloudConnection::cloudConnectionFromQuery(const QSqlQuery &query) {
@@ -351,7 +354,7 @@ bool CloudConnection::migrateToCloudConnections() {
         return false;
     }
 
-    QSettings settings;
+    SettingsService settings;
     const QString serverUrl = settings.value(QStringLiteral("ownCloud/serverUrl")).toString();
     const QString username = settings.value(QStringLiteral("ownCloud/userName")).toString();
     const QString password = CryptoService::instance()->decryptToString(

@@ -13,10 +13,10 @@
 #include <QNetworkRequest>
 #include <QProcessEnvironment>
 #include <QPushButton>
-#include <QSettings>
 #include <QTemporaryFile>
 #include <QUrl>
 
+#include "services/settingsservice.h"
 #include "ui_updatedialog.h"
 
 UpdateDialog::UpdateDialog(QWidget *parent, const QString &changesHtml, const QString &releaseUrl,
@@ -126,13 +126,13 @@ void UpdateDialog::dialogButtonClicked(QAbstractButton *button) {
 
     switch (actionRole) {
         case Skip: {
-            QSettings settings;
+            SettingsService settings;
             settings.setValue(QStringLiteral("skipVersion"), this->releaseVersionString);
             qDebug() << "skip version";
             break;
         }
         case Disable: {
-            QSettings settings;
+            SettingsService settings;
             settings.setValue(QStringLiteral("disableAutomaticUpdateDialog"), true);
             qDebug() << "disable dialog";
             break;

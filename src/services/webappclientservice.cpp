@@ -22,12 +22,12 @@
 #include <utils/misc.h>
 
 #include <QJsonDocument>
-#include <QSettings>
 #include <QSslError>
 #include <QWebSocket>
 #include <QtWebSockets>
 
 #include "metricsservice.h"
+#include "services/settingsservice.h"
 
 using namespace std;
 
@@ -64,18 +64,18 @@ void WebAppClientService::close() {
 }
 
 QString WebAppClientService::getServerUrl() {
-    return QSettings()
+    return SettingsService()
         .value(QStringLiteral("webAppClientService/serverUrl"), getDefaultServerUrl())
         .toString();
 }
 
 QString WebAppClientService::getOrGenerateToken() {
-    QString token = QSettings().value(QStringLiteral("webAppClientService/token")).toString();
+    QString token = SettingsService().value(QStringLiteral("webAppClientService/token")).toString();
 
     // if not token was set
     if (token.isEmpty()) {
         token = Utils::Misc::generateRandomString(32);
-        QSettings().setValue(QStringLiteral("webAppClientService/token"), token);
+        SettingsService().setValue(QStringLiteral("webAppClientService/token"), token);
     }
 
     return token;

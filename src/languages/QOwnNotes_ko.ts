@@ -82,6 +82,13 @@
 </message>
 </context>
 <context>
+<name>BacklinkWidget</name>
+<message>
+<source>Open note and find &lt;code&gt;%1&lt;/code&gt;</source>
+<translation>노트를 열고 &lt;code&gt;%1&lt;/code&gt;를 찾기</translation>
+</message>
+</context>
+<context>
 <name>DictionaryManagerDialog</name>
 <message>
 <source>Dictionary manager</source>
@@ -1650,6 +1657,14 @@ File: QOwnNotes_en.ts</translation>
 <message>
 <source>Find navigation item</source>
 <translation>탐색 항목 찾기</translation>
+</message>
+<message>
+<source>Headings</source>
+<translation>제목</translation>
+</message>
+<message>
+<source>Backlinks</source>
+<translation>백링크</translation>
 </message>
 <message>
 <source>Add a tag to the current note</source>
@@ -3863,10 +3878,6 @@ ownCloud 서버에서 휴지통을 사용할 수 있는 경우 휴지통을 복�
 <translation>노트를 탭에 고정하려면 두 번 클릭</translation>
 </message>
 <message>
-<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2</source>
-<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;최종수정: %2</translation>
-</message>
-<message>
 <source>&lt;br /&gt;path: %1</source>
 <translation>&lt;br /&gt;경로: %1</translation>
 </message>
@@ -3885,6 +3896,10 @@ ownCloud 서버에서 휴지통을 사용할 수 있는 경우 휴지통을 복�
 <message>
 <source>Light mode detected</source>
 <translation>밝은 모드가 감지됨</translation>
+</message>
+<message>
+<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</source>
+<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;마지막 수정: %2&lt;br /&gt;파일 크기: %3</translation>
 </message>
 <message>
 <source>Your Linux system seems to use the dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
@@ -5551,6 +5566,14 @@ Just test yourself if you get sync conflicts and set a higher value if so.</sour
 <translation>노트 텍스트에서 자동으로 후행 공백 제거</translation>
 </message>
 <message>
+<source>Notes larger than this will not be shown in the note list</source>
+<translation>이보다 큰 메모는 메모 목록에 표시되지 않습니다</translation>
+</message>
+<message>
+<source>Maximum note file size:</source>
+<translation>최대 노트 파일 크기:</translation>
+</message>
+<message>
 <source>Search script repository for AI integration scripts</source>
 <translation>AI 통합 스크립트에 대한 스크립트 리포지토리 검색</translation>
 </message>
@@ -6883,6 +6906,14 @@ Your notes will stay intact!</source>
 <translation>고립된 첨부 파일만 표시</translation>
 </message>
 <message>
+<source>Only show attachments that are used in the current note</source>
+<translation>현재 노트에 사용되는 첨부 파일만 표시</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation>현재 노트에서만 표시</translation>
+</message>
+<message>
 <source>Add selected attachments to the current note</source>
 <translation>현재 노트에 선택한 첨부 파일 추가</translation>
 </message>
@@ -7026,6 +7057,14 @@ Your notes will stay intact!</source>
 <message>
 <source>Refresh</source>
 <translation>새로 고침</translation>
+</message>
+<message>
+<source>Only show images that are used in the current note</source>
+<translation>현재 노트에 사용되는 이미지만 표시</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation>현재 노트에서만 표시</translation>
 </message>
 <message>
 <source>Used in notes:</source>
@@ -7775,6 +7814,12 @@ This cannot be undone!</source>
 <source>Bookmark deleted from %n note(s)</source>
 <translation>
 <numerusform>%n개의 노트에서 북마크 삭제</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Bookmark edited in %n note(s)</source>
+<translation>
+<numerusform>%n 노트로 편집된 북마크</numerusform>
 </translation>
 </message>
 <message>

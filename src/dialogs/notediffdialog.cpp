@@ -5,9 +5,9 @@
 #include <QDebug>
 #include <QDialogButtonBox>
 #include <QPushButton>
-#include <QSettings>
 #include <QTimer>
 
+#include "services/settingsservice.h"
 #include "ui_notediffdialog.h"
 
 NoteDiffDialog::NoteDiffDialog(QWidget *parent, const QString &html)
@@ -81,13 +81,13 @@ void NoteDiffDialog::dialogButtonClicked(QAbstractButton *button) {
 
     // set the setting to ignore all external changes
     if (ui->ignoreAllExternalChangesCheckBox->isChecked()) {
-        QSettings settings;
+        SettingsService settings;
         settings.setValue(QStringLiteral("ignoreAllExternalModifications"), true);
     }
 
     // set the setting to accept all external changes
     if (ui->acceptAllExternalChangesCheckBox->isChecked()) {
-        QSettings settings;
+        SettingsService settings;
         settings.setValue(QStringLiteral("acceptAllExternalModifications"), true);
     }
 

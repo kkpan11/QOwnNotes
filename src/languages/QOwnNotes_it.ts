@@ -82,6 +82,13 @@
 </message>
 </context>
 <context>
+<name>BacklinkWidget</name>
+<message>
+<source>Open note and find &lt;code&gt;%1&lt;/code&gt;</source>
+<translation type="unfinished">Open note and find &lt;code&gt;%1&lt;/code&gt;</translation>
+</message>
+</context>
+<context>
 <name>DictionaryManagerDialog</name>
 <message>
 <source>Dictionary manager</source>
@@ -1656,6 +1663,14 @@
 <message>
 <source>Find navigation item</source>
 <translation>Trova elemento di navigazione</translation>
+</message>
+<message>
+<source>Headings</source>
+<translation type="unfinished">Headings</translation>
+</message>
+<message>
+<source>Backlinks</source>
+<translation type="unfinished">Backlinks</translation>
 </message>
 <message>
 <source>Add a tag to the current note</source>
@@ -3896,10 +3911,6 @@ Se il cestino è attivato sul server ownCloud si dovrebbe essere in grado di rip
 <translation>Doppio clic per bloccare la nota alla scheda</translation>
 </message>
 <message>
-<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2</source>
-<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;ultima modifica: %2</translation>
-</message>
-<message>
 <source>&lt;br /&gt;path: %1</source>
 <translation>&lt;br /&gt;percorso: %1</translation>
 </message>
@@ -3918,6 +3929,10 @@ Se il cestino è attivato sul server ownCloud si dovrebbe essere in grado di rip
 <message>
 <source>Light mode detected</source>
 <translation>Modalità chiara individuata</translation>
+</message>
+<message>
+<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</source>
+<translation type="unfinished">&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</translation>
 </message>
 <message>
 <source>Your Linux system seems to use the dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
@@ -5585,6 +5600,14 @@ Just test yourself if you get sync conflicts and set a higher value if so.</sour
 <translation>Rimuovi automaticamente gli spazi in coda al testo della nota</translation>
 </message>
 <message>
+<source>Notes larger than this will not be shown in the note list</source>
+<translation type="unfinished">Notes larger than this will not be shown in the note list</translation>
+</message>
+<message>
+<source>Maximum note file size:</source>
+<translation type="unfinished">Maximum note file size:</translation>
+</message>
+<message>
 <source>Search script repository for AI integration scripts</source>
 <translation type="unfinished">Search script repository for AI integration scripts</translation>
 </message>
@@ -6917,6 +6940,14 @@ Le proprie note non verranno modificate!</translation>
 <translation>Mostra solo allegati orfani</translation>
 </message>
 <message>
+<source>Only show attachments that are used in the current note</source>
+<translation type="unfinished">Only show attachments that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
+</message>
+<message>
 <source>Add selected attachments to the current note</source>
 <translation>Aggiungi allegati selezionati alla nota corrente</translation>
 </message>
@@ -7061,6 +7092,14 @@ Le proprie note non verranno modificate!</translation>
 <message>
 <source>Refresh</source>
 <translation>Aggiorna</translation>
+</message>
+<message>
+<source>Only show images that are used in the current note</source>
+<translation type="unfinished">Only show images that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
 </message>
 <message>
 <source>Used in notes:</source>
@@ -7813,6 +7852,13 @@ Non sarà possibile annullare l'operazione!</translation>
 <translation type="unfinished">
 <numerusform>Segnalibro eliminato da %n nota(e)</numerusform>
 <numerusform>Bookmark deleted from %n note(s)</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Bookmark edited in %n note(s)</source>
+<translation type="unfinished">
+<numerusform>Bookmark edited in %n note(s)</numerusform>
+<numerusform>Bookmark edited in %n note(s)</numerusform>
 </translation>
 </message>
 <message>

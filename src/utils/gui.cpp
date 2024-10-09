@@ -33,11 +33,12 @@
 #include <QPlainTextEdit>
 #include <QProcess>
 #include <QPushButton>
-#include <QSettings>
 #include <QTextBlock>
 #include <QTextCursor>
 #include <QTreeWidgetItem>
 #include <QVBoxLayout>
+
+#include "services/settingsservice.h"
 
 #define ORDER_ASCENDING 0     // Qt::AscendingOrder // = 0
 #define ORDER_DESCENDING 1    // Qt::DescendingOrder // = 1
@@ -323,7 +324,7 @@ QMessageBox::StandardButton Utils::Gui::showMessageBox(
     QWidget *parent, QMessageBox::Icon icon, const QString &title, const QString &text,
     const QString &identifier, QMessageBox::StandardButtons buttons,
     QMessageBox::StandardButton defaultButton, QMessageBox::StandardButtons skipOverrideButtons) {
-    QSettings settings;
+    SettingsService settings;
     const QString settingsKey = "MessageBoxOverride/" + identifier;
     auto overrideButton = static_cast<QMessageBox::StandardButton>(
         settings.value(settingsKey, QMessageBox::NoButton).toInt());
@@ -753,7 +754,7 @@ bool Utils::Gui::autoFormatTableAtCursor(QPlainTextEdit *textEdit) {
  * settings
  */
 void Utils::Gui::updateInterfaceFontSize(int fontSize) {
-    QSettings settings;
+    SettingsService settings;
     bool overrideInterfaceFontSize =
         settings.value(QStringLiteral("overrideInterfaceFontSize"), false).toBool();
 
@@ -827,7 +828,7 @@ Note Utils::Gui::getTabWidgetNote(QTabWidget *tabWidget, int index, bool fetchBy
 
 void Utils::Gui::storeNoteTabs(QTabWidget *tabWidget) {
     // check if we want to store note tabs
-    const QSettings settings;
+    const SettingsService settings;
     if (!settings.value(QStringLiteral("restoreNoteTabs"), true).toBool()) {
         return;
     }
@@ -867,7 +868,7 @@ void Utils::Gui::restoreNoteTabs(QTabWidget *tabWidget, QVBoxLayout *layout) {
         tabWidget->removeTab(1);
     }
 
-    const QSettings settings;
+    const SettingsService settings;
 
     // check if we want to restore note tabs
     if (settings.value(QStringLiteral("restoreNoteTabs"), true).toBool()) {
@@ -990,8 +991,10 @@ void Utils::Gui::setTreeWidgetItemToolTipForNote(QTreeWidgetItem *item, const No
     QDateTime *fileLastModified =
         (overrideFileLastModified != nullptr) ? overrideFileLastModified : &modified;
 
-    QString toolTipText = QObject::tr("<strong>%1</strong><br />last modified: %2")
-                              .arg(note.getFileName(), fileLastModified->toString());
+    QString toolTipText =
+        QObject::tr("<strong>%1</strong><br />last modified: %2<br />file size: %3")
+            .arg(note.getFileName(), fileLastModified->toString(),
+                 Utils::Misc::toHumanReadableByteSize(note.getFileSize()));
 
     NoteSubFolder noteSubFolder = note.getNoteSubFolder();
     if (noteSubFolder.isFetched()) {
@@ -1018,7 +1021,7 @@ bool Utils::Gui::doWindowsDarkModeCheck() {
     }
 
     bool windowsDarkMode = settings.value("AppsUseLightTheme") == 0;
-    bool appDarkMode = QSettings().value("darkMode").toBool();
+    bool appDarkMode = SettingsService().value("darkMode").toBool();
 
     // Check for Windows dark mode and application default mode
     if (windowsDarkMode && !appDarkMode) {
@@ -1104,7 +1107,7 @@ bool Utils::Gui::doLinuxDarkModeCheck() {
 
     //    const auto result = QString(process.readAllStandardError());
     const int systemColorSchema = QString(process.readAll()).trimmed().right(1).toInt();
-    const bool appDarkMode = QSettings().value("darkMode").toBool();
+    const bool appDarkMode = SettingsService().value("darkMode").toBool();
 
     // Check for Linux dark mode and application default mode
     if (systemColorSchema == 1 && !appDarkMode) {
@@ -1215,7 +1218,7 @@ bool Utils::Gui::enableDockWidgetQuestion(QDockWidget *dockWidget) {
  * @param widget
  */
 void Utils::Gui::fixDarkModeIcons(QWidget *widget) {
-    const bool darkMode = QSettings().value(QStringLiteral("darkMode")).toBool();
+    const bool darkMode = SettingsService().value(QStringLiteral("darkMode")).toBool();
 
     if (!darkMode) {
         return;

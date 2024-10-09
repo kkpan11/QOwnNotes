@@ -82,6 +82,13 @@
 </message>
 </context>
 <context>
+<name>BacklinkWidget</name>
+<message>
+<source>Open note and find &lt;code&gt;%1&lt;/code&gt;</source>
+<translation type="unfinished">Open note and find &lt;code&gt;%1&lt;/code&gt;</translation>
+</message>
+</context>
+<context>
 <name>DictionaryManagerDialog</name>
 <message>
 <source>Dictionary manager</source>
@@ -1674,6 +1681,14 @@
 <message>
 <source>Find navigation item</source>
 <translation>Raskite naršymo elementą</translation>
+</message>
+<message>
+<source>Headings</source>
+<translation type="unfinished">Headings</translation>
+</message>
+<message>
+<source>Backlinks</source>
+<translation type="unfinished">Backlinks</translation>
 </message>
 <message>
 <source>Add a tag to the current note</source>
@@ -3991,10 +4006,6 @@ Jei šiukšliadėžė įgalinta jūsų ownCloud serveryje, turėtumėte galėti 
 </translation>
 </message>
 <message>
-<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2</source>
-<translation type="unfinished">&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2</translation>
-</message>
-<message>
 <source>&lt;br /&gt;path: %1</source>
 <translation type="unfinished">&lt;br /&gt;path: %1</translation>
 </message>
@@ -4013,6 +4024,10 @@ Jei šiukšliadėžė įgalinta jūsų ownCloud serveryje, turėtumėte galėti 
 <message>
 <source>Light mode detected</source>
 <translation type="unfinished">Light mode detected</translation>
+</message>
+<message>
+<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</source>
+<translation type="unfinished">&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</translation>
 </message>
 <message>
 <source>Your Linux system seems to use the dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
@@ -5692,6 +5707,14 @@ Tiesiog išbandykite save, jei kyla sinchronizavimo konfliktų, ir nustatykite d
 <translation>Automatiškai pašalinkite užrašo tekste esančius tarpus</translation>
 </message>
 <message>
+<source>Notes larger than this will not be shown in the note list</source>
+<translation type="unfinished">Notes larger than this will not be shown in the note list</translation>
+</message>
+<message>
+<source>Maximum note file size:</source>
+<translation type="unfinished">Maximum note file size:</translation>
+</message>
+<message>
 <source>Search script repository for AI integration scripts</source>
 <translation type="unfinished">Search script repository for AI integration scripts</translation>
 </message>
@@ -7031,6 +7054,14 @@ Jūsų užrašai liks nepažeisti!</translation>
 <translation type="unfinished">Only show orphaned attachments</translation>
 </message>
 <message>
+<source>Only show attachments that are used in the current note</source>
+<translation type="unfinished">Only show attachments that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
+</message>
+<message>
 <source>Add selected attachments to the current note</source>
 <translation type="unfinished">Add selected attachments to the current note</translation>
 </message>
@@ -7177,6 +7208,14 @@ Jūsų užrašai liks nepažeisti!</translation>
 <message>
 <source>Refresh</source>
 <translation type="unfinished">Refresh</translation>
+</message>
+<message>
+<source>Only show images that are used in the current note</source>
+<translation type="unfinished">Only show images that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
 </message>
 <message>
 <source>Used in notes:</source>
@@ -7939,6 +7978,15 @@ Tai negali būti anuliuota!</translation>
 <numerusform>Bookmark deleted from %n note(s)</numerusform>
 <numerusform>Bookmark deleted from %n note(s)</numerusform>
 <numerusform>Bookmark deleted from %n note(s)</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Bookmark edited in %n note(s)</source>
+<translation type="unfinished">
+<numerusform>Bookmark edited in %n note(s)</numerusform>
+<numerusform>Bookmark edited in %n note(s)</numerusform>
+<numerusform>Bookmark edited in %n note(s)</numerusform>
+<numerusform>Bookmark edited in %n note(s)</numerusform>
 </translation>
 </message>
 <message>

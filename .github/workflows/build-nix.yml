@@ -21,15 +21,15 @@ on:
 
 jobs:
   build:
-    name: 🏗️ Build ${{ matrix.make-step }}
+    name: 🏗️ Build ${{ matrix.just-recipe }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        make-step: ['nix-build', 'nix-build-cmake-qt5']
+        just-recipe: ['nix-build', 'nix-build-cmake-qt5']
     steps:
       - name: ⚙️ Install Nix
-        uses: cachix/install-nix-action@V27
+        uses: cachix/install-nix-action@v30
         with:
           nix_path: nixpkgs=channel:nixos-unstable
       - name: 🧰 Checkout code
@@ -37,4 +37,4 @@ jobs:
         with:
           submodules: recursive
       - name: 🚧 Build nix package
-        run: make ${{ matrix.make-step }}
+        run: nix-shell --run "just ${{ matrix.just-recipe }}"

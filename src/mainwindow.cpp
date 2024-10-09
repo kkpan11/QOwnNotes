@@ -80,7 +80,6 @@
 #include <QRegularExpressionMatchIterator>
 #include <QScreen>
 #include <QScrollBar>
-#include <QSettings>
 #include <QShortcut>
 #include <QSystemTrayIcon>
 #include <QTemporaryFile>
@@ -118,6 +117,7 @@
 #include "services/nextclouddeckservice.h"
 #include "services/openaiservice.h"
 #include "services/owncloudservice.h"
+#include "services/settingsservice.h"
 #include "services/updateservice.h"
 #include "services/webappclientservice.h"
 #include "services/websocketserverservice.h"
@@ -162,7 +162,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     // use our custom log handler
     qInstallMessageHandler(LogWidget::logMessageOutput);
 
-    QSettings settings;
+    SettingsService settings;
 
     // Disable note editing if the user has set the start in read-only mode
     if (settings.value(QStringLiteral("startInReadOnlyMode")).toBool()) {
@@ -439,6 +439,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     // act on position clicks in the navigation widget
     connect(ui->navigationWidget, &NavigationWidget::positionClicked, this,
             &MainWindow::onNavigationWidgetPositionClicked);
+    connect(ui->backlinkWidget, &BacklinkWidget::noteClicked, this,
+            &MainWindow::onBacklinkWidgetNoteClicked);
 
     // reloads all tasks from the ownCloud server
     reloadTodoLists();
@@ -531,7 +533,7 @@ void MainWindow::initTreeWidgets() {
 }
 
 void MainWindow::initNotePreviewAndTextEdits() {
-    QSettings settings;
+    SettingsService settings;
 
     // set the search frames for the note text edits
     const bool darkMode = settings.value(QStringLiteral("darkMode")).toBool();
@@ -662,7 +664,7 @@ void MainWindow::initGlobalKeyboardShortcuts() {
     }
 
     _globalShortcuts.clear();
-    QSettings settings;
+    SettingsService settings;
     settings.beginGroup(QStringLiteral("GlobalShortcuts"));
 
     foreach (const QString &key, settings.allKeys()) {
@@ -726,7 +728,7 @@ void MainWindow::startAppVersionTest() {
  * Restores the active note history item
  */
 bool MainWindow::restoreActiveNoteHistoryItem() {
-    QSettings settings;
+    SettingsService settings;
     QVariant var = settings.value(QStringLiteral("ActiveNoteHistoryItem"));
     //    qDebug() << __func__ << " - 'var': " << var;
 
@@ -869,6 +871,8 @@ void MainWindow::initDockWidgets() {
     addDockWidget(Qt::LeftDockWidgetArea, _noteNavigationDockWidget, Qt::Vertical);
     // we want the navigation under the note list
     splitDockWidget(_noteListDockWidget, _noteNavigationDockWidget, Qt::Vertical);
+    // We want to start with the Navigation tab
+    ui->navigationTabWidget->setCurrentIndex(0);
 
     if (!_noteEditIsCentralWidget) {
         _noteEditDockWidget = new QDockWidget(tr("Note edit"), this);
@@ -915,7 +919,7 @@ void MainWindow::initDockWidgets() {
     // we only needed that label to set a layout in QtCreator
     delete ui->scriptingDemoLabel;
 
-    QSettings settings;
+    SettingsService settings;
 
     // forcing some dock widget sizes on the first application start
     if (!settings.value(QStringLiteral("dockWasInitializedOnce")).toBool()) {
@@ -976,7 +980,7 @@ void MainWindow::releaseDockWidgetSizes() {
  * Initializes if we want to start the application hidden
  */
 void MainWindow::initShowHidden() {
-    QSettings settings;
+    SettingsService settings;
     const bool startHidden = settings.value(QStringLiteral("StartHidden"), false).toBool();
 
     if (startHidden) {
@@ -1074,7 +1078,7 @@ MainWindow *MainWindow::instance() { return s_self; }
  * Initializes the editor soft wrapping
  */
 void MainWindow::initEditorSoftWrap() {
-    QSettings settings;
+    SettingsService settings;
     const bool useSoftWrapInNoteEditor =
         settings.value(QStringLiteral("useSoftWrapInNoteEditor"), true).toBool();
 
@@ -1100,7 +1104,7 @@ void MainWindow::reloadTodoLists() {
         return;
     }
 
-    QSettings settings;
+    SettingsService settings;
     QStringList calendars =
         settings.value(QStringLiteral("ownCloud/todoCalendarEnabledList")).toStringList();
     QString serverUrl = CloudConnection::currentCloudConnection().getServerUrl();
@@ -1229,7 +1233,7 @@ void MainWindow::updateWindowToolbar() {
  * Updates the workspace menu and combobox entries
  */
 void MainWindow::updateWorkspaceLists(bool rebuild) {
-    QSettings settings;
+    SettingsService settings;
     const QStringList workspaces = getWorkspaceUuidList();
     const QString currentUuid = currentWorkspaceUuid();
 
@@ -1349,7 +1353,7 @@ void MainWindow::updatePanelMenu() {
     qDebug() << __func__ << " - 'updatePanelMenu'";
 
     ui->menuPanels->clear();
-    QSettings settings;
+    SettingsService settings;
 
     const auto dockWidgets = findChildren<QDockWidget *>();
     for (QDockWidget *dockWidget : dockWidgets) {
@@ -1487,7 +1491,7 @@ void MainWindow::restoreDistractionFreeMode() {
  * Checks if we are in distraction free mode
  */
 bool MainWindow::isInDistractionFreeMode() {
-    QSettings settings;
+    SettingsService settings;
     return settings.value(QStringLiteral("DistractionFreeMode/isEnabled")).toBool();
 }
 
@@ -1500,7 +1504,7 @@ void MainWindow::toggleDistractionFreeMode() {
         ui->actionUse_one_column_mode->toggle();
     }
 
-    QSettings settings;
+    SettingsService settings;
     bool isInDistractionFreeMode = this->isInDistractionFreeMode();
 
     qDebug() << __func__ << " - 'isInDistractionFreeMode': " << isInDistractionFreeMode;
@@ -1522,7 +1526,7 @@ void MainWindow::toggleDistractionFreeMode() {
  * Does some basic styling
  */
 void MainWindow::initStyling() {
-    QSettings settings;
+    SettingsService settings;
     const bool darkMode = settings.value(QStringLiteral("darkMode")).toBool();
     QString appStyleSheet;
     QString noteTagFrameColorName;
@@ -1589,6 +1593,7 @@ void MainWindow::initStyling() {
     ui->noteListSubFrame->setStyleSheet(QString());
     ui->navigationFrame->setStyleSheet(QString());
     ui->noteEditTabWidget->setStyleSheet(QString());
+    ui->navigationTabWidget->setStyleSheet(QString());
     ui->noteViewFrame->setStyleSheet(QString());
 
     // add some margins in OS X to match the styling of the note list
@@ -1682,7 +1687,7 @@ void MainWindow::noteViewSliderValueChanged(int value, bool force) {
  * Enables or disables the distraction free mode
  */
 void MainWindow::setDistractionFreeMode(const bool enabled) {
-    QSettings settings;
+    SettingsService settings;
 
     if (enabled) {
         //
@@ -1991,7 +1996,7 @@ bool MainWindow::changeNoteFolder(const int noteFolderId, const bool forceChange
         this->notesPath = folderName;
 
         // store notesPath setting
-        QSettings settings;
+        SettingsService settings;
         // make the path relative to the portable data path if we are in
         // portable mode
         settings.setValue(
@@ -2045,7 +2050,7 @@ bool MainWindow::changeNoteFolder(const int noteFolderId, const bool forceChange
  */
 void MainWindow::storeRecentNoteFolder(const QString &addFolderName,
                                        const QString &removeFolderName) {
-    QSettings settings;
+    SettingsService settings;
     QStringList recentNoteFolders =
         settings.value(QStringLiteral("recentNoteFolders")).toStringList();
 
@@ -2071,7 +2076,7 @@ int MainWindow::openNoteDiffDialog(Note changedNote) {
 
     qDebug() << __func__ << " - 'changedNote': " << changedNote;
 
-    QSettings settings;
+    SettingsService settings;
 
     // check if we should ignore all changes
     if (settings.value(QStringLiteral("ignoreAllExternalModifications")).toBool()) {
@@ -2121,7 +2126,7 @@ void MainWindow::createSystemTrayIcon() {
  * @return
  */
 QIcon MainWindow::getSystemTrayIcon() {
-    const QSettings settings;
+    const SettingsService settings;
     const bool darkModeIcon = settings.value(QStringLiteral("darkModeTrayIcon"), false).toBool();
     const QString file = darkModeIcon ? QStringLiteral(":/images/icon-dark.png")
                                       : QStringLiteral(":/images/icon.png");
@@ -2175,7 +2180,7 @@ void MainWindow::loadNoteDirectoryList() {
         itemCount);
 
     // sort alphabetically again if necessary
-    QSettings settings;
+    SettingsService settings;
     if (settings.value(QStringLiteral("notesPanelSort"), SORT_BY_LAST_CHANGE).toInt() ==
         SORT_ALPHABETICAL) {
         ui->noteTreeWidget->sortItems(
@@ -2252,7 +2257,7 @@ bool MainWindow::addNoteToNoteTreeWidget(const Note &note, QTreeWidgetItem *pare
         updateNoteTreeWidgetItem(note, noteItem);
     }
 
-    //    QSettings settings;
+    //    SettingsService settings;
     //    if (settings.value("notesPanelSort", SORT_BY_LAST_CHANGE).toInt() ==
     //    SORT_ALPHABETICAL) {
     //        ui->noteTreeWidget->addTopLevelItem(noteItem);
@@ -2354,13 +2359,14 @@ QTreeWidgetItem *MainWindow::findNoteInNoteTreeWidget(const Note &note) {
 void MainWindow::readSettings() {
     NoteFolder::migrateToNoteFolders();
 
-    QSettings settings;
+    SettingsService settings;
     showSystemTray = settings.value(QStringLiteral("ShowSystemTray"), false).toBool();
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 0))
     QTimer::singleShot(1, this, [this] {
 #endif
-        restoreGeometry(QSettings().value(QStringLiteral("MainWindow/geometry")).toByteArray());
+        restoreGeometry(
+            SettingsService().value(QStringLiteral("MainWindow/geometry")).toByteArray());
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 0))
     });
 #endif
@@ -2375,6 +2381,8 @@ void MainWindow::readSettings() {
     // prepend the portable data path if we are in portable mode
     this->notesPath = Utils::Misc::prependPortableDataPathIfNeeded(
         settings.value(QStringLiteral("notesPath")).toString());
+
+    qDebug() << __func__ << " - 'this->notesPath': " << this->notesPath;
 
     // migration: remove GAnalytics-cid
     if (!settings.value(QStringLiteral("GAnalytics-cid")).toString().isEmpty()) {
@@ -2479,7 +2487,7 @@ void MainWindow::readSettings() {
 }
 
 bool MainWindow::startAutoReadOnlyModeIfEnabled() {
-    QSettings settings;
+    SettingsService settings;
 
     if (settings.value(QStringLiteral("autoReadOnlyMode")).toBool()) {
         _autoReadOnlyModeTimer->start(
@@ -2495,7 +2503,7 @@ bool MainWindow::startAutoReadOnlyModeIfEnabled() {
  * Restores the toolbars
  */
 void MainWindow::restoreToolbars() {
-    QSettings settings;
+    SettingsService settings;
     QList<ToolbarContainer> toolbarContainers;
     const int toolbarCount = settings.beginReadArray(QStringLiteral("toolbar"));
 
@@ -2552,7 +2560,7 @@ void MainWindow::restoreToolbars() {
  * @brief Reads all relevant settings, that can be set in the settings dialog
  */
 void MainWindow::readSettingsFromSettingsDialog(const bool isAppLaunch) {
-    QSettings settings;
+    SettingsService settings;
 
     this->notifyAllExternalModifications =
         settings.value(QStringLiteral("notifyAllExternalModifications")).toBool();
@@ -2702,7 +2710,7 @@ void MainWindow::readSettingsFromSettingsDialog(const bool isAppLaunch) {
  * Initializes the item height of the tree widgets
  */
 void MainWindow::initTreeWidgetItemHeight() {
-    QSettings settings;
+    SettingsService settings;
     int height = settings.value(QStringLiteral("itemHeight")).toInt();
 
     // if the height was 0 set it the current height of a tree widget item
@@ -2718,6 +2726,7 @@ void MainWindow::initTreeWidgetItemHeight() {
     updateTreeWidgetItemHeight(ui->noteTreeWidget, height);
     updateTreeWidgetItemHeight(ui->noteSubFolderTreeWidget, height);
     updateTreeWidgetItemHeight(ui->navigationWidget, height);
+    updateTreeWidgetItemHeight(ui->backlinkWidget, height);
 }
 
 /**
@@ -2762,7 +2771,7 @@ void MainWindow::notesWereModified(const QString &str) {
     }
 
     // if we should ignore all changes return here
-    if (QSettings().value(QStringLiteral("ignoreAllExternalNoteFolderChanges")).toBool()) {
+    if (SettingsService().value(QStringLiteral("ignoreAllExternalNoteFolderChanges")).toBool()) {
         return;
     }
 
@@ -2925,7 +2934,7 @@ void MainWindow::notesDirectoryWasModified(const QString &str) {
     }
 
     // if we should ignore all changes return here
-    if (QSettings().value(QStringLiteral("ignoreAllExternalNoteFolderChanges")).toBool()) {
+    if (SettingsService().value(QStringLiteral("ignoreAllExternalNoteFolderChanges")).toBool()) {
         return;
     }
 
@@ -3007,7 +3016,7 @@ void MainWindow::storeUpdatedNotesToDisk() {
 
         if (currentNoteChanged) {
             // strip trailing spaces of the current note (if enabled)
-            if (QSettings().value(QStringLiteral("Editor/removeTrailingSpaces")).toBool()) {
+            if (SettingsService().value(QStringLiteral("Editor/removeTrailingSpaces")).toBool()) {
                 const bool wasStripped =
                     currentNote.stripTrailingSpaces(activeNoteTextEdit()->textCursor().position());
 
@@ -3063,7 +3072,7 @@ void MainWindow::frequentPeriodicChecker() {
         MetricsService::instance()->sendHeartbeat();
     }
 
-    QSettings settings;
+    SettingsService settings;
     QDateTime lastUpdateCheck = settings.value(QStringLiteral("LastUpdateCheck")).toDateTime();
     if (!lastUpdateCheck.isValid()) {
         // set the LastUpdateCheck if it wasn't set
@@ -3183,7 +3192,7 @@ bool MainWindow::buildNotesIndex(int noteSubFolderId, bool forceRebuild) {
     bool createDemoNotes = (files.count() == 0) && !hasNoteSubFolder;
 
     if (createDemoNotes) {
-        QSettings settings;
+        SettingsService settings;
         // check if we already have created the demo notes once
         createDemoNotes = !settings.value(QStringLiteral("demoNotesCreated")).toBool();
 
@@ -3244,6 +3253,7 @@ bool MainWindow::buildNotesIndex(int noteSubFolderId, bool forceRebuild) {
     int currentCount = 0;
 
     _buildNotesIndexAfterNoteIdList.reserve(files.size());
+    const int maxNoteFileSize = Utils::Misc::getMaximumNoteFileSize();
     // create all notes from the files
     for (QString fileName : Utils::asConst(files)) {
         if (progress.wasCanceled()) {
@@ -3256,6 +3266,12 @@ bool MainWindow::buildNotesIndex(int noteSubFolderId, bool forceRebuild) {
 
         // fetching the content of the file
         QFile file(Note::getFullFilePathForFile(fileName));
+
+        if (file.size() > maxNoteFileSize) {
+            qDebug() << "Note file '" << fileName << "' is too large: " << file.size() << " > "
+                     << maxNoteFileSize;
+            continue;
+        }
 
         // update or create a note from the file
         const Note note = Note::updateOrCreateFromFile(file, noteSubFolder, withNoteNameHook);
@@ -3661,7 +3677,7 @@ QString MainWindow::selectOwnCloudNotesFolder() {
         storeRecentNoteFolder(this->notesPath, dir);
 
         this->notesPath = dir;
-        QSettings settings;
+        SettingsService settings;
         // make the path relative to the portable data path if we are in
         // portable mode
         settings.setValue(QStringLiteral("notesPath"),
@@ -4063,7 +4079,7 @@ void MainWindow::resetCurrentNote(bool goToTop) {
  * Stores the settings
  */
 void MainWindow::storeSettings() {
-    QSettings settings;
+    SettingsService settings;
 
     // don't store the window settings in distraction free mode
     if (!isInDistractionFreeMode()) {
@@ -4177,10 +4193,8 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event) {
                 }
             }
 
-            // set focus to the notes list if Key_Right or Key_Tab were
-            // pressed in the search line edit
-            if ((keyEvent->key() == Qt::Key_Right) || (keyEvent->key() == Qt::Key_Tab) ||
-                downSelectNote) {
+            // set focus to the notes list if Key_Tab was pressed in the search line edit
+            if (keyEvent->key() == Qt::Key_Tab || downSelectNote) {
                 // add the current search text to the saved searches
                 storeSavedSearch();
 
@@ -4470,9 +4484,12 @@ void MainWindow::setNoteTextFromNote(Note *note, bool updateNoteTextViewOnly,
  * Starts the parsing for the navigation widget
  */
 void MainWindow::startNavigationParser() {
-    if (ui->navigationWidget->isVisible())
+    if (ui->navigationWidget->isVisible()) {
         ui->navigationWidget->parse(activeNoteTextEdit()->document(),
                                     activeNoteTextEdit()->textCursor().position());
+    } else if (ui->backlinkWidget->isVisible()) {
+        ui->backlinkWidget->findBacklinks(currentNote);
+    }
 }
 
 /**
@@ -5264,7 +5281,7 @@ bool MainWindow::prepareExportNoteAsPDFPrinter(QPrinter *printer) {
     // under OS X and Windows the QPageSetupDialog dialog doesn't work,
     // we will use a workaround to select page sizes and the orientation
 
-    QSettings settings;
+    SettingsService settings;
 
     // select the page size
     QStringList pageSizeStrings;
@@ -5372,7 +5389,7 @@ void MainWindow::exportNoteAsPDF(QTextDocument *doc) {
  * Shows the app metrics notification if not already shown
  */
 void MainWindow::showAppMetricsNotificationIfNeeded() {
-    QSettings settings;
+    SettingsService settings;
     bool showDialog = !settings.value(QStringLiteral("appMetrics/notificationShown")).toBool();
 
     if (showDialog) {
@@ -5408,7 +5425,7 @@ void MainWindow::openTodoDialog(const QString &taskUid) {
     // show main window to prevent crashes on Windows
     show();
 
-    QSettings settings;
+    SettingsService settings;
     QStringList todoCalendarEnabledUrlList =
         settings.value(QStringLiteral("ownCloud/todoCalendarEnabledUrlList")).toStringList();
 
@@ -5490,7 +5507,7 @@ void MainWindow::noteTextEditTextWasUpdated() {
 }
 
 void MainWindow::handleNoteTextChanged() {
-    QSettings settings;
+    SettingsService settings;
     if (settings.value(QStringLiteral("notesPanelSort"), SORT_BY_LAST_CHANGE).toInt() ==
         SORT_BY_LAST_CHANGE) {
         makeCurrentNoteFirstInNoteList();
@@ -5562,7 +5579,7 @@ bool MainWindow::isTagsEnabled() { return _taggingDockWidget->isVisible(); }
  * Checks if the Markdown view is enabled
  */
 bool MainWindow::isMarkdownViewEnabled() {
-    QSettings settings;
+    SettingsService settings;
     return settings.value(QStringLiteral("markdownViewEnabled"), true).toBool();
 }
 
@@ -5597,7 +5614,7 @@ void MainWindow::filterNotesBySearchLineEditText(bool searchInNote) {
         ui->noteTreeWidget->setColumnCount(2);
         int maxWidth = 0;
         const QStringList searchTextTerms = Note::buildQueryStringList(searchText);
-        const QSettings settings;
+        const SettingsService settings;
         const bool showMatches = settings.value(QStringLiteral("showMatches"), true).toBool();
 
         while (*it) {
@@ -5989,7 +6006,7 @@ void MainWindow::on_actionAbout_QOwnNotes_triggered() {
  * Triggered by the shortcut to create a new note with date in the headline
  */
 void MainWindow::on_action_New_note_triggered() {
-    QSettings settings;
+    SettingsService settings;
     const bool newNoteAskHeadline = settings.value(QStringLiteral("newNoteAskHeadline")).toBool();
 
     // check if we want to ask for a headline
@@ -6095,7 +6112,7 @@ void MainWindow::openIssueAssistantDialog() {
 
 void MainWindow::on_actionAlphabetical_triggered(bool checked) {
     if (checked) {
-        QSettings settings;
+        SettingsService settings;
         settings.setValue(QStringLiteral("notesPanelSort"), SORT_ALPHABETICAL);
         loadNoteDirectoryList();
     }
@@ -6106,7 +6123,7 @@ void MainWindow::on_actionAlphabetical_triggered(bool checked) {
 
 void MainWindow::on_actionBy_date_triggered(bool checked) {
     if (checked) {
-        QSettings settings;
+        SettingsService settings;
         settings.setValue(QStringLiteral("notesPanelSort"), SORT_BY_LAST_CHANGE);
         loadNoteDirectoryList();
     }
@@ -6364,7 +6381,7 @@ void MainWindow::on_actionInsert_current_time_triggered() {
     QOwnNotesMarkdownTextEdit *textEdit = activeNoteTextEdit();
     QTextCursor c = textEdit->textCursor();
     const QDateTime dateTime = QDateTime::currentDateTime();
-    QSettings settings;
+    SettingsService settings;
     const QString format = settings.value(QStringLiteral("insertTimeFormat")).toString();
 
     QLocale locale = QLocale::system();
@@ -6670,7 +6687,7 @@ void MainWindow::updateNoteEncryptionUI() {
 
     // disable spell checker for encrypted text
     const bool checkSpellingEnabled =
-        QSettings().value(QStringLiteral("checkSpelling"), true).toBool();
+        SettingsService().value(QStringLiteral("checkSpelling"), true).toBool();
     const bool spellCheckerShouldBeActive = !hasEncryptedNoteText && checkSpellingEnabled;
 
     // check if the spellchecking state is not as it should be
@@ -6767,7 +6784,7 @@ void MainWindow::on_encryptedNoteTextEdit_textChanged() {
  * Opens the current note in an external editor
  */
 void MainWindow::on_action_Open_note_in_external_editor_triggered() {
-    QSettings settings;
+    SettingsService settings;
     const QString externalEditorPath =
         settings.value(QStringLiteral("externalEditorPath")).toString();
 
@@ -6843,14 +6860,15 @@ void MainWindow::storeNoteBookmark(int slot) {
     NoteHistoryItem item = NoteHistoryItem(&currentNote, ui->noteTextEdit);
     noteBookmarks[slot] = item;
 
-    QSettings().setValue(QStringLiteral("NoteBookmark%1").arg(slot), QVariant::fromValue(item));
+    SettingsService().setValue(QStringLiteral("NoteBookmark%1").arg(slot),
+                               QVariant::fromValue(item));
 
     showStatusBarMessage(tr("Bookmarked note position at slot %1").arg(QString::number(slot)),
                          3000);
 }
 
 void MainWindow::loadNoteBookmarks() {
-    QSettings settings;
+    SettingsService settings;
 
     for (int i = 0; i <= 9; i++) {
         QVariant bookmark = settings.value(QStringLiteral("NoteBookmark%1").arg(i));
@@ -6968,7 +6986,7 @@ bool MainWindow::isToolbarVisible() {
 }
 
 void MainWindow::dfmEditorWidthActionTriggered(QAction *action) {
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("DistractionFreeMode/editorWidthMode"),
                       action->whatsThis().toInt());
 
@@ -7321,14 +7339,14 @@ void MainWindow::on_actionFormat_text_italic_triggered() { applyFormatter(QStrin
  * Increases the note text font size by one
  */
 void MainWindow::on_action_Increase_note_text_size_triggered() {
-    Q_EMIT activeNoteTextEdit()->zoomIn();
+    Q_EMIT activeNoteTextEdit() -> zoomIn();
 }
 
 /**
  * Decreases the note text font size by one
  */
 void MainWindow::on_action_Decrease_note_text_size_triggered() {
-    Q_EMIT activeNoteTextEdit()->zoomOut();
+    Q_EMIT activeNoteTextEdit() -> zoomOut();
 }
 
 /**
@@ -7389,7 +7407,7 @@ void MainWindow::reloadTagTree() {
     // take care that the tags are synced from the notes to the internal db
     handleScriptingNotesTagUpdating();
 
-    QSettings settings;
+    SettingsService settings;
 
     // remove all broken note tag links
     if (!_brokenTagNoteLinksRemoved) {
@@ -7509,7 +7527,7 @@ void MainWindow::buildTagTreeForParentItem(QTreeWidgetItem *parent, bool topLeve
     const int parentId =
         (parent == nullptr || topLevel) ? 0 : parent->data(0, Qt::UserRole).toInt();
     const int activeTagId = Tag::activeTagId();
-    QSettings settings;
+    SettingsService settings;
     const QStringList expandedList =
         settings
             .value(QStringLiteral("MainWindow/tagTreeWidgetExpandState-") +
@@ -7553,7 +7571,7 @@ QTreeWidgetItem *MainWindow::addTagToTagTreeWidget(QTreeWidgetItem *parent, cons
     const int parentId = parent == nullptr ? 0 : parent->data(0, Qt::UserRole).toInt();
     const int tagId = tag._id;
     const QString name = tag._name;
-    auto hideCount = QSettings().value("tagsPanelHideNoteCount", false).toBool();
+    auto hideCount = SettingsService().value("tagsPanelHideNoteCount", false).toBool();
 
     int linkCount = 0;
     QVector<int> linkedNoteIds;
@@ -7726,7 +7744,7 @@ void MainWindow::on_newNoteTagButton_clicked() {
     ui->newNoteTagLineEdit->selectAll();
     ui->newNoteTagButton->setVisible(false);
 
-    QSettings settings;
+    SettingsService settings;
     // enable the tagging dock widget the first time tagging was used
     if (!settings.value(QStringLiteral("tagWasAddedToNote")).toBool()) {
         _taggingDockWidget->setVisible(true);
@@ -9068,6 +9086,14 @@ void MainWindow::onNavigationWidgetPositionClicked(int position) {
 }
 
 /**
+ * Jumps to the note that was clicked in the backlink widget
+ */
+void MainWindow::onBacklinkWidgetNoteClicked(int noteId, QString markdown) {
+    setCurrentNoteFromNoteId(noteId);
+    activeNoteTextEdit()->doSearch(markdown, QPlainTextEditSearchWidget::PlainTextMode);
+}
+
+/**
  * Starts a note preview regeneration to resize too large images
  */
 void MainWindow::onNoteTextViewResize(QSize size, QSize oldSize) {
@@ -9205,7 +9231,7 @@ void MainWindow::on_actionGitter_triggered() {
  * Adds the current search text to the saved searches
  */
 void MainWindow::storeSavedSearch() {
-    QSettings settings;
+    SettingsService settings;
 
     if (settings.value(QStringLiteral("disableSavedSearchesAutoCompletion")).toBool()) {
         return;
@@ -9243,7 +9269,7 @@ void MainWindow::storeSavedSearch() {
 void MainWindow::initSavedSearchesCompleter() {
     const int noteFolderId = NoteFolder::currentNoteFolderId();
     QStringList savedSearches;
-    QSettings settings;
+    SettingsService settings;
 
     if (!settings.value(QStringLiteral("disableSavedSearchesAutoCompletion")).toBool()) {
         QString settingsKey =
@@ -9281,7 +9307,7 @@ void MainWindow::on_actionInsert_headline_from_note_filename_triggered() {
  * Toggles the editor soft wrapping
  */
 void MainWindow::on_actionUse_softwrap_in_note_editor_toggled(bool arg1) {
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("useSoftWrapInNoteEditor"), arg1);
 
     // initialize the editor soft wrapping
@@ -9297,7 +9323,7 @@ void MainWindow::on_actionShow_status_bar_triggered(bool checked) {
         ui->actionShow_status_bar->setChecked(checked);
     }
 
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("showStatusBar"), checked);
 }
 
@@ -9695,7 +9721,7 @@ void MainWindow::on_noteTreeWidget_itemChanged(QTreeWidgetItem *item, int /*colu
                 //                loadNoteDirectoryList();
 
                 // sort notes if note name has changed
-                QSettings settings;
+                SettingsService settings;
                 if (settings.value(QStringLiteral("notesPanelSort"), SORT_BY_LAST_CHANGE).toInt() ==
                     SORT_ALPHABETICAL) {
                     ui->noteTreeWidget->sortItems(
@@ -9762,7 +9788,7 @@ void MainWindow::clearTagFilteringColumn() {
  * @return
  */
 bool MainWindow::showNotesFromAllNoteSubFolders() const {
-    QSettings settings;
+    SettingsService settings;
     return settings
         .value(QStringLiteral("MainWindow/showNotesFromAllNoteSubFolders"),
                _showNotesFromAllNoteSubFolders)
@@ -9771,7 +9797,7 @@ bool MainWindow::showNotesFromAllNoteSubFolders() const {
 
 void MainWindow::setShowNotesFromAllNoteSubFolders(bool show) {
     _showNotesFromAllNoteSubFolders = show;
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("MainWindow/showNotesFromAllNoteSubFolders"),
                       _showNotesFromAllNoteSubFolders);
 }
@@ -9891,7 +9917,7 @@ void MainWindow::on_actionStrike_out_text_triggered() { applyFormatter(QStringLi
  */
 void MainWindow::initShortcuts() {
     const QList<QMenu *> menus = menuList();
-    QSettings settings;
+    SettingsService settings;
 
     // we also have to clear the shortcuts directly, just removing the
     // objects didn't remove the shortcut
@@ -9988,7 +10014,7 @@ void MainWindow::on_actionShow_menu_bar_triggered(bool checked) {
         ui->actionShow_menu_bar->setChecked(checked);
     }
 
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("showMenuBar"), checked);
 
     // show the action in the toolbar if the main menu isn't shown
@@ -10057,7 +10083,7 @@ void MainWindow::addCustomAction(const QString &identifier, const QString &menuT
     action->setData(identifier);
 
     // restore the shortcut of the custom action
-    QSettings settings;
+    SettingsService settings;
     QKeySequence shortcut = QKeySequence(
         settings.value(QStringLiteral("Shortcuts/MainWindow-customAction_") + identifier)
             .toString());
@@ -10310,7 +10336,7 @@ bool MainWindow::createNewWorkspace(QString name) {
         return false;
     }
 
-    QSettings settings;
+    SettingsService settings;
     const QString currentUuid = currentWorkspaceUuid();
     settings.setValue(QStringLiteral("previousWorkspace"), currentUuid);
 
@@ -10337,7 +10363,7 @@ bool MainWindow::createNewWorkspace(QString name) {
  * @return
  */
 QString MainWindow::currentWorkspaceUuid() {
-    QSettings settings;
+    SettingsService settings;
     return settings.value(QStringLiteral("currentWorkspace")).toString();
 }
 
@@ -10480,7 +10506,7 @@ void MainWindow::setCurrentWorkspace(const QString &uuid) {
     // store the current workspace
     storeCurrentWorkspace();
 
-    QSettings settings;
+    SettingsService settings;
     QString currentUuid = currentWorkspaceUuid();
     settings.setValue(QStringLiteral("previousWorkspace"), currentUuid);
     settings.setValue(QStringLiteral("currentWorkspace"), uuid);
@@ -10501,7 +10527,7 @@ void MainWindow::setCurrentWorkspace(const QString &uuid) {
  * Stores the current workspace
  */
 void MainWindow::storeCurrentWorkspace() {
-    QSettings settings;
+    SettingsService settings;
     QString uuid = currentWorkspaceUuid();
 
     settings.setValue(QStringLiteral("workspace-") + uuid + QStringLiteral("/windowState"),
@@ -10515,7 +10541,7 @@ void MainWindow::storeCurrentWorkspace() {
  * Restores the current workspace
  */
 void MainWindow::restoreCurrentWorkspace() {
-    QSettings settings;
+    SettingsService settings;
     QStringList workspaces = getWorkspaceUuidList();
     QWidget *focusWidget = qApp->focusWidget();
 
@@ -10604,7 +10630,7 @@ void MainWindow::handleNoteSubFolderVisibility() const {
  * @return
  */
 QStringList MainWindow::getWorkspaceUuidList() {
-    QSettings settings;
+    SettingsService settings;
     return settings.value(QStringLiteral("workspaces")).toStringList();
 }
 
@@ -10640,7 +10666,7 @@ void MainWindow::on_actionRemove_current_workspace_triggered() {
     // set the new workspace
     setCurrentWorkspace(newUuid);
 
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("workspaces"), workspaces);
 
     // remove all settings in the group
@@ -10660,7 +10686,7 @@ void MainWindow::on_actionRename_current_workspace_triggered() {
         return;
     }
 
-    QSettings settings;
+    SettingsService settings;
     QString name =
         settings.value(QStringLiteral("workspace-") + uuid + QStringLiteral("/name")).toString();
 
@@ -10684,7 +10710,7 @@ void MainWindow::on_actionRename_current_workspace_triggered() {
  * Switch to the previous workspace
  */
 void MainWindow::on_actionSwitch_to_previous_workspace_triggered() {
-    QSettings settings;
+    SettingsService settings;
     QString uuid = settings.value(QStringLiteral("previousWorkspace")).toString();
 
     if (!uuid.isEmpty()) {
@@ -10793,7 +10819,7 @@ void MainWindow::on_actionSearch_text_on_the_web_triggered() {
     // handling the case in which the saved engine id
     // has been removed
 
-    QSettings settings;
+    SettingsService settings;
     typedef Utils::Misc::SearchEngine SearchEngine;
     int selectedSearchEngineId =
         settings.value(QStringLiteral("SearchEngineId"), Utils::Misc::getDefaultSearchEngineId())
@@ -10835,7 +10861,7 @@ void MainWindow::noteEditCursorPositionChanged() {
     _noteEditLineNumberLabel->setToolTip(toolTip);
 
     const bool autoSelect =
-        QSettings().value(QStringLiteral("navigationPanelAutoSelect"), true).toBool();
+        SettingsService().value(QStringLiteral("navigationPanelAutoSelect"), true).toBool();
     if (autoSelect) {
         selectNavigationItemAtPosition(textEdit->textCursor().block().position());
     }
@@ -10933,7 +10959,7 @@ void MainWindow::on_actionSave_modified_notes_triggered() {
  * Sets ascending note sort order
  */
 void MainWindow::on_actionAscending_triggered() {
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("notesPanelOrder"), ORDER_ASCENDING);
     ui->noteTreeWidget->sortItems(0, Utils::Gui::toQtOrder(ORDER_ASCENDING));
 }
@@ -10942,7 +10968,7 @@ void MainWindow::on_actionAscending_triggered() {
  * Sets descending note sort order
  */
 void MainWindow::on_actionDescending_triggered() {
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("notesPanelOrder"), ORDER_DESCENDING);
     ui->noteTreeWidget->sortItems(0, Utils::Gui::toQtOrder(ORDER_DESCENDING));
 }
@@ -11015,7 +11041,7 @@ void MainWindow::storeTagTreeWidgetExpandState() const {
         }
     }
 
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("MainWindow/tagTreeWidgetExpandState-") +
                           QString::number(NoteFolder::currentNoteFolderId()),
                       expandedList);
@@ -11044,7 +11070,7 @@ void MainWindow::updatePanelsSortOrder() {
 }
 
 void MainWindow::updateNotesPanelSortOrder() {
-    QSettings settings;
+    SettingsService settings;
     int sort = settings.value(QStringLiteral("notesPanelSort"), SORT_BY_LAST_CHANGE).toInt();
     ui->actionAlphabetical->setChecked(sort == SORT_ALPHABETICAL);
     ui->actionBy_date->setChecked(sort == SORT_BY_LAST_CHANGE);
@@ -11078,7 +11104,7 @@ void MainWindow::on_actionInsert_attachment_triggered() {
  * @param checked
  */
 void MainWindow::on_actionAllow_note_editing_triggered(bool checked) {
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("allowNoteEditing"), checked);
 
     updateNoteTextEditReadOnly();
@@ -11280,8 +11306,14 @@ void MainWindow::on_noteTreeWidget_itemDoubleClicked(QTreeWidgetItem *item, int 
  */
 void MainWindow::on_noteTreeWidget_itemSelectionChanged() {
     qDebug() << __func__;
-    if (ui->noteTreeWidget->selectedItems().size() == 1) {
-        int noteId = ui->noteTreeWidget->selectedItems()[0]->data(0, Qt::UserRole).toInt();
+    const auto &selectedItems = ui->noteTreeWidget->selectedItems();
+    if (selectedItems.size() == 1) {
+        // Don't tread folders as notes
+        if (selectedItems[0]->data(0, Qt::UserRole + 1).toInt() == FolderType) {
+            return;
+        }
+
+        int noteId = selectedItems[0]->data(0, Qt::UserRole).toInt();
         Note note = Note::fetch(noteId);
         bool currentNoteChanged = currentNote.getId() != noteId;
         setCurrentNote(std::move(note), true, false);
@@ -11327,7 +11359,7 @@ QString MainWindow::getLogText() { return _logWidget->getLogText(); }
  * Enables all logging and shows the log panel
  */
 void MainWindow::turnOnDebugLogging() {
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("LogWidget/debugLog"), true);
     settings.setValue(QStringLiteral("LogWidget/infoLog"), true);
     settings.setValue(QStringLiteral("LogWidget/warningLog"), true);
@@ -11468,6 +11500,8 @@ void MainWindow::centerAndResize() {
 void MainWindow::on_navigationLineEdit_textChanged(const QString &arg1) {
     Utils::Gui::searchForTextInTreeWidget(ui->navigationWidget, arg1,
                                           Utils::Gui::TreeWidgetSearchFlag::IntCheck);
+    Utils::Gui::searchForTextInTreeWidget(ui->backlinkWidget, arg1,
+                                          Utils::Gui::TreeWidgetSearchFlag::IntCheck);
 }
 
 const Note &MainWindow::getCurrentNote() { return currentNote; }
@@ -11541,7 +11575,7 @@ void MainWindow::disableFullScreenMode() {
 }
 
 void MainWindow::on_actionTypewriter_mode_toggled(bool arg1) {
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("Editor/centerCursor"), arg1);
     ui->noteTextEdit->updateSettings();
     ui->encryptedNoteTextEdit->updateSettings();
@@ -11553,7 +11587,7 @@ void MainWindow::on_actionTypewriter_mode_toggled(bool arg1) {
 }
 
 void MainWindow::on_actionCheck_spelling_toggled(bool checked) {
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("checkSpelling"), checked);
     ui->noteTextEdit->updateSettings();
     ui->encryptedNoteTextEdit->updateSettings();
@@ -11566,7 +11600,7 @@ void MainWindow::on_actionCheck_spelling_toggled(bool checked) {
 }
 
 void MainWindow::loadDictionaryNames() {
-    QSettings settings;
+    SettingsService settings;
 
     QStringList languages = Sonnet::Speller::availableLanguages();
     QStringList langNames = Sonnet::Speller::availableLanguageNames();
@@ -11625,13 +11659,13 @@ void MainWindow::loadDictionaryNames() {
 
 void MainWindow::onLanguageChanged(QAction *action) {
     QString lang = action->data().toString();
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("spellCheckLanguage"), lang);
     ui->noteTextEdit->updateSettings();
 }
 
 void MainWindow::loadSpellingBackends() {
-    QSettings settings;
+    SettingsService settings;
     QString prevBackend =
         settings.value(QStringLiteral("spellCheckBackend"), QStringLiteral("Hunspell")).toString();
 
@@ -11656,7 +11690,7 @@ void MainWindow::loadSpellingBackends() {
 
 void MainWindow::onSpellBackendChanged(QAction *action) {
     QString backend = action->data().toString();
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("spellCheckBackend"), backend);
     showRestartNotificationIfNeeded(true);
 }
@@ -11692,7 +11726,7 @@ void MainWindow::on_encryptedNoteTextEdit_modificationChanged(bool arg1) {
 }
 
 void MainWindow::on_actionEditorWidthCustom_triggered() {
-    QSettings settings;
+    SettingsService settings;
     bool ok;
     int characters = QInputDialog::getInt(
         this, tr("Custom editor width"), tr("Characters:"),
@@ -11730,7 +11764,7 @@ void MainWindow::on_noteEditTabWidget_currentChanged(int index) {
 
     // Allow the subfolder of the note to be selected in the subfolder list
     // See: https://github.com/pbek/QOwnNotes/issues/2861
-    if (QSettings()
+    if (SettingsService()
             .value(QStringLiteral("noteSubfoldersPanelTabsUnsetAllNotesSelection"))
             .toBool()) {
         setShowNotesFromAllNoteSubFolders(false);
@@ -11866,8 +11900,10 @@ void MainWindow::showNoteEditTabWidgetContextMenu(const QPoint &point) {
 void MainWindow::on_actionJump_to_navigation_panel_triggered() {
     if (ui->navigationLineEdit->isVisible()) {
         ui->navigationLineEdit->setFocus();
-    } else {
+    } else if (ui->navigationWidget->isVisible()) {
         ui->navigationWidget->setFocus();
+    } else if (ui->backlinkWidget->isVisible()) {
+        ui->backlinkWidget->setFocus();
     }
 }
 
@@ -12029,4 +12065,10 @@ void MainWindow::buildAiToolbarAndActions() {
 void MainWindow::on_actionEnable_AI_toggled(bool arg1) {
     OpenAiService::setEnabled(arg1);
     qDebug() << __func__ << " - 'checked': " << arg1;
+}
+
+void MainWindow::on_navigationTabWidget_currentChanged(int index) {
+    Q_UNUSED(index)
+
+    startNavigationParser();
 }

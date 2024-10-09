@@ -4,6 +4,8 @@
 #include <QString>
 #include <QtTest>
 
+#include "services/settingsservice.h"
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 #include <QRandomGenerator>
 #endif
@@ -35,7 +37,7 @@ void TestNotes::initTestCase() {
     dir.mkpath(notesPath);
 
     // store notes path for notes
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("notesPath"), notesPath);
 
     // create a note file

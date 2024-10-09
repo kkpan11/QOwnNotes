@@ -82,6 +82,13 @@
 </message>
 </context>
 <context>
+<name>BacklinkWidget</name>
+<message>
+<source>Open note and find &lt;code&gt;%1&lt;/code&gt;</source>
+<translation>Otvori bilješku i pronađi &lt;code&gt;%1&lt;/code&gt;</translation>
+</message>
+</context>
+<context>
 <name>DictionaryManagerDialog</name>
 <message>
 <source>Dictionary manager</source>
@@ -1569,7 +1576,7 @@
 <translation>
 <numerusform>Vrati &lt;strong&gt;%n&lt;/strong&gt; odabranu bilješku?</numerusform>
 <numerusform>Želite li vratiti &lt;strong&gt;%n &lt;/strong&gt; odabrane bilješke?</numerusform>
-<numerusform>Želite li vratiti &lt;strong&gt;%n &lt;/strong&gt; odabrane bilješke?</numerusform>
+<numerusform>Obnoviti &lt;strong&gt;%n &lt;/strong&gt; odabranih bilješki?</numerusform>
 </translation>
 </message>
 <message>
@@ -1579,17 +1586,17 @@
 <message numerus="yes">
 <source>&lt;strong&gt;%n&lt;/strong&gt; note(s) were restored</source>
 <translation>
-<numerusform>&lt;strong&gt;%n &lt;/strong&gt; bilješki je vraćeno</numerusform>
-<numerusform>&lt;strong&gt;%n &lt;/strong&gt; bilješki je vraćeno</numerusform>
-<numerusform>&lt;strong&gt;%n &lt;/strong&gt; bilješki je vraćeno</numerusform>
+<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješka je obnovljena</numerusform>
+<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješke su obnovljene</numerusform>
+<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješki je obnovljeno</numerusform>
 </translation>
 </message>
 <message numerus="yes">
 <source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?</source>
 <translation>
-<numerusform>Obriši &lt;strong&gt;%n&lt;/strong&gt; odabranu bilješku?</numerusform>
+<numerusform>Ukloniti &lt;strong&gt;%n&lt;/strong&gt; odabranu bilješku?</numerusform>
 <numerusform>Ukloniti &lt;strong&gt;%n&lt;/strong&gt; odabrane bilješke?</numerusform>
-<numerusform>Ukloniti &lt;strong&gt;%n&lt;/strong&gt; odabrane bilješke?</numerusform>
+<numerusform>Ukloniti &lt;strong&gt;%n&lt;/strong&gt; odabranih bilješki?</numerusform>
 </translation>
 </message>
 <message>
@@ -1599,9 +1606,9 @@
 <message numerus="yes">
 <source>&lt;strong&gt;%n&lt;/strong&gt; note(s) were removed</source>
 <translation>
-<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješki je uklonjeno</numerusform>
-<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješke uklonjene su</numerusform>
-<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješke uklonjene su</numerusform>
+<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješka je uklonjena</numerusform>
+<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješke su uklonjene</numerusform>
+<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješki su uklonjene</numerusform>
 </translation>
 </message>
 </context>
@@ -1665,6 +1672,14 @@
 <message>
 <source>Find navigation item</source>
 <translation>Pronađi navigacijsku stavku</translation>
+</message>
+<message>
+<source>Headings</source>
+<translation>Naslovi</translation>
+</message>
+<message>
+<source>Backlinks</source>
+<translation>Poveznice</translation>
 </message>
 <message>
 <source>Add a tag to the current note</source>
@@ -1860,7 +1875,7 @@
 </message>
 <message>
 <source>AI model</source>
-<translation type="unfinished">AI model</translation>
+<translation>Model UI-a</translation>
 </message>
 <message>
 <source>To&amp;do</source>
@@ -2366,7 +2381,7 @@
 </message>
 <message>
 <source>Reload scripting engine</source>
-<translation>Ponovno učitaj skripting modul</translation>
+<translation>Ponovo učitaj sustav za implementiranje skripata</translation>
 </message>
 <message>
 <source>Manage stored image files</source>
@@ -2736,28 +2751,28 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <message>
 <source>Ln %1, Col %2</source>
 <comment>Line / Column</comment>
-<translation type="unfinished">Ln %1, Col %2</translation>
+<translation>Redak %1, stupac %2</translation>
 </message>
 <message>
 <source>Line %1, Column %2</source>
-<translation type="unfinished">Line %1, Column %2</translation>
+<translation>Redak %1, stupac %2</translation>
 </message>
 <message numerus="yes">
 <source>%n selected</source>
 <comment>Characters selected</comment>
-<translation type="unfinished">
-<numerusform>%n selected</numerusform>
-<numerusform>%n selected</numerusform>
-<numerusform>%n selected</numerusform>
+<translation>
+<numerusform>%n odabarni</numerusform>
+<numerusform>%n odabarna</numerusform>
+<numerusform>%n odabarnih</numerusform>
 </translation>
 </message>
 <message>
 <source>Nextcloud Deck support disabled!</source>
-<translation type="unfinished">Nextcloud Deck support disabled!</translation>
+<translation>Podrška za Nextcloud Deck je deaktivirana!</translation>
 </message>
 <message>
 <source>Nextcloud Deck support is not enabled or the settings are invalid.&lt;br /&gt;Please check your &lt;strong&gt;Nextcloud&lt;/strong&gt; configuration in the settings!</source>
-<translation type="unfinished">Nextcloud Deck support is not enabled or the settings are invalid.&lt;br /&gt;Please check your &lt;strong&gt;Nextcloud&lt;/strong&gt; configuration in the settings!</translation>
+<translation>Podrška za Nextcloud Deck je deaktivirana ili su postavke neispravne.&lt;br /&gt;Provjeri svoju &lt;strong&gt;Nextcloud&lt;/strong&gt; konfiguraciju u postavkama!</translation>
 </message>
 <message>
 <source>Note path '%1' was copied to the clipboard</source>
@@ -2765,19 +2780,19 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 </message>
 <message>
 <source>AI backends</source>
-<translation type="unfinished">AI backends</translation>
+<translation>Pozadinske funkcije UI-a</translation>
 </message>
 <message>
 <source>AI models</source>
-<translation type="unfinished">AI models</translation>
+<translation>Modeli UI-a</translation>
 </message>
 <message>
 <source>AI backend selector</source>
-<translation type="unfinished">AI backend selector</translation>
+<translation>Selektor pozadinskih funkcija UI-a</translation>
 </message>
 <message>
 <source>AI model selector</source>
-<translation type="unfinished">AI model selector</translation>
+<translation>Selektor modela UI-a</translation>
 </message>
 <message>
 <source>Temporary file can't be opened</source>
@@ -2823,7 +2838,7 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 </message>
 <message>
 <source>The scripting engine was reloaded</source>
-<translation>Mehanizam skriptiranja je ponovno učitan</translation>
+<translation>Sustav za implementiranje skripata je ponovo učitan</translation>
 </message>
 <message>
 <source>HTML files</source>
@@ -3932,10 +3947,6 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>Dvaput kliknite da biste zalijepili bilješku na karticu</translation>
 </message>
 <message>
-<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2</source>
-<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;zadnja promjena: %2</translation>
-</message>
-<message>
 <source>&lt;br /&gt;path: %1</source>
 <translation>&lt;br /&gt;staza: %1</translation>
 </message>
@@ -3954,6 +3965,10 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <message>
 <source>Light mode detected</source>
 <translation>Otkriven je svjetlosni način rada</translation>
+</message>
+<message>
+<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</source>
+<translation type="unfinished">&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</translation>
 </message>
 <message>
 <source>Your Linux system seems to use the dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
@@ -4811,11 +4826,11 @@ Do you want to install it anyway?</source>
 </message>
 <message>
 <source>You need to reload the scripting engine if you modify a script file</source>
-<translation>Morate ponovno učitati skriptni pogon ako izmijenite datoteku skripte</translation>
+<translation>Sustav za implementiranje skripata moraš ponovo učitati ako promijeniš jednu datoteku skripta</translation>
 </message>
 <message>
 <source>Reload scripting engine</source>
-<translation>Učitaj mehanizam za skriptiranje</translation>
+<translation>Ponovo učitaj sustav za implementiranje skripata</translation>
 </message>
 <message>
 <source>Validate script</source>
@@ -5424,7 +5439,7 @@ Samo se testirajte ako dobijete sukobe pri sinkronizaciji i postavite višu vrij
 </message>
 <message>
 <source>You can access your ownCloud server from inside the application for example to manage trashed notes and note versions or to share notes. This integration doesn't do note file syncing. You still need to install the ownCloud sync client for syncing the files.</source>
-<translation>Možete pristupiti svom ownCloud poslužitelju iz aplikacije, na primjer za upravljanje otpadnim bilješkama i verzijama bilješki ili za dijeljenje bilješki. Ova integracija ne bilježi sinkronizaciju datoteka. Još uvijek morate instalirati ownCloud klijent za sinkronizaciju za sinkronizaciju datoteka.</translation>
+<translation>Možete pristupiti svom ownCloud poslužitelju iz aplikacije, na primjer za upravljanje otpadnim bilješkama i verzijama bilješki ili za dijeljenje bilješki. Ova integracija ne bilježi sinkronizaciju datoteka. Još uvijek morate instalirati ownCloud klijent za sinkronizaciju za sinkroniziranje datoteka.</translation>
 </message>
 <message>
 <source>You will find this path in the &lt;i&gt;Nextcloud / ownCloud&lt;/i&gt; settings</source>
@@ -5444,7 +5459,7 @@ Samo se testirajte ako dobijete sukobe pri sinkronizaciji i postavite višu vrij
 </message>
 <message>
 <source>Enable Nextcloud Deck support</source>
-<translation type="unfinished">Enable Nextcloud Deck support</translation>
+<translation>Aktiviraj podršku za Nextcloud Deck</translation>
 </message>
 <message>
 <source>You can access your ownCloud server or a generic CalDAV server to manage your todo lists.</source>
@@ -5528,7 +5543,7 @@ Samo se testirajte ako dobijete sukobe pri sinkronizaciji i postavite višu vrij
 </message>
 <message>
 <source>When inactive, enter read-only mode automatically after:</source>
-<translation type="unfinished">When inactive, enter read-only mode automatically after:</translation>
+<translation>Kada je neaktivno, automatski uđi u modus samo-za-čitanje nakon:</translation>
 </message>
 <message>
 <source> sec</source>
@@ -5628,8 +5643,16 @@ Samo se testirajte ako dobijete sukobe pri sinkronizaciji i postavite višu vrij
 <translation>Automatski ukloni zaostale prostore u tekstu bilješke</translation>
 </message>
 <message>
+<source>Notes larger than this will not be shown in the note list</source>
+<translation type="unfinished">Notes larger than this will not be shown in the note list</translation>
+</message>
+<message>
+<source>Maximum note file size:</source>
+<translation type="unfinished">Maximum note file size:</translation>
+</message>
+<message>
 <source>Search script repository for AI integration scripts</source>
-<translation type="unfinished">Search script repository for AI integration scripts</translation>
+<translation>Pretraži repozitorij skripti za skripte za integraciju umjetne inteligencije</translation>
 </message>
 <message>
 <source>API keys</source>
@@ -5650,11 +5673,11 @@ Samo se testirajte ako dobijete sukobe pri sinkronizaciji i postavite višu vrij
 <message>
 <source>Test connection</source>
 <comment>"Test" as verb</comment>
-<translation type="unfinished">Test connection</translation>
+<translation>Provjeri vezu</translation>
 </message>
 <message>
 <source>AI backends added via the scripting engine</source>
-<translation type="unfinished">AI backends added via the scripting engine</translation>
+<translation>UI pozadine dodane putem sustava za implementiranje skripata</translation>
 </message>
 <message>
 <source>To make use of the AI backends, you can either use the scripting command &lt;a href="%1"&gt;aiComplete&lt;/a&gt;, or look in the script repository for already-written scripts.</source>
@@ -6569,28 +6592,28 @@ Poruka o pogrešci veze: </translation>
 </message>
 <message>
 <source>API test result for %1 (%2)</source>
-<translation type="unfinished">API test result for %1 (%2)</translation>
+<translation>Rezultat API testa za %1 (%2)</translation>
 </message>
 <message>
 <source>AI backend: %1</source>
-<translation type="unfinished">AI backend: %1</translation>
+<translation>Pozadinske funkcije UI-a: %1</translation>
 </message>
 <message>
 <source>API base URL</source>
-<translation type="unfinished">API base URL</translation>
+<translation>Osnovni URL API-ja</translation>
 </message>
 <message>
 <source>AI model: %1</source>
-<translation type="unfinished">AI model: %1</translation>
+<translation>Model UI-a: %1</translation>
 </message>
 <message>
 <source>Test</source>
 <comment>verb</comment>
-<translation type="unfinished">Test</translation>
+<translation>Provjeri</translation>
 </message>
 <message>
 <source>Test connection to %1 (%2)</source>
-<translation type="unfinished">Test connection to %1 (%2)</translation>
+<translation>Provjeri vezu na %1 (%2)</translation>
 </message>
 <message>
 <source>Find a script in the script repository</source>
@@ -6967,6 +6990,14 @@ Vaše bilješke će ostati netaknute!</translation>
 <translation>Prikaži samo samostalne privitke</translation>
 </message>
 <message>
+<source>Only show attachments that are used in the current note</source>
+<translation type="unfinished">Only show attachments that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
+</message>
+<message>
 <source>Add selected attachments to the current note</source>
 <translation>Dodaj odabrane privitke u trenutačnu bilješku</translation>
 </message>
@@ -7112,6 +7143,14 @@ Vaše bilješke će ostati netaknute!</translation>
 <message>
 <source>Refresh</source>
 <translation>Aktualiziraj</translation>
+</message>
+<message>
+<source>Only show images that are used in the current note</source>
+<translation type="unfinished">Only show images that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
 </message>
 <message>
 <source>Used in notes:</source>
@@ -7800,7 +7839,7 @@ This cannot be undone!</source>
 <name>VersionDialog</name>
 <message>
 <source>Note versions on your ownCloud server</source>
-<translation>Verije bilješki na vašem poslužitelju</translation>
+<translation>Verzije bilješki na vašem ownCloud poslužitelju</translation>
 </message>
 <message>
 <source>Diff</source>
@@ -7868,8 +7907,16 @@ This cannot be undone!</source>
 <source>Bookmark deleted from %n note(s)</source>
 <translation type="unfinished">
 <numerusform>Bookmark deleted from %n note(s)</numerusform>
-<numerusform>Bookmark deleted from %n note(s)</numerusform>
-<numerusform>Bookmark deleted from %n note(s)</numerusform>
+<numerusform>Oznaka izbrisana iz %n bilješke</numerusform>
+<numerusform>Oznaka izbrisana iz %n bilješki</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Bookmark edited in %n note(s)</source>
+<translation>
+<numerusform>Oznaka uređena u %n bilješci</numerusform>
+<numerusform>Oznaka uređena u %n bilješke</numerusform>
+<numerusform>Oznaka uređena u %n bilješki</numerusform>
 </translation>
 </message>
 <message>
@@ -7952,7 +7999,7 @@ This cannot be undone!</source>
 </message>
 <message>
 <source>Plain-text file Markdown note-taking with ownCloud integration</source>
-<translation type="unfinished">Plain-text file Markdown note-taking with ownCloud integration</translation>
+<translation>Tekstualna datoteka bilješki u Markdown formatu s ownCloud integracijom</translation>
 </message>
 <message>
 <source>Show subfolders</source>
@@ -8023,7 +8070,7 @@ This cannot be undone!</source>
 </message>
 <message>
 <source>Generate shell completion code. Supports `fish`, `bash`.</source>
-<translation type="unfinished">Generate shell completion code. Supports `fish`, `bash`.</translation>
+<translation>Generiraj kod ljuske. Podržava `fish`, `bash`.</translation>
 </message>
 <message>
 <source>Single application mode is not supported on your system!</source>

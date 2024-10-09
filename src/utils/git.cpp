@@ -19,10 +19,10 @@
 #include <QDebug>
 #include <QProcess>
 #include <QStandardPaths>
-#include <QtCore/QSettings>
 
 #include "gui.h"
 #include "misc.h"
+#include "services/settingsservice.h"
 
 /**
  * Checks if the current note folder uses git
@@ -116,7 +116,7 @@ bool Utils::Git::executeGitCommand(const QString& gitExe, const QStringList& arg
  * @return
  */
 QString Utils::Git::gitCommand() {
-    QSettings settings;
+    SettingsService settings;
     QString path = settings.value("gitExecutablePath").toString();
 
     // ok, user defined path
@@ -145,7 +145,7 @@ QString Utils::Git::gitCommand() {
  * @return
  */
 bool Utils::Git::hasLogCommand() {
-    QSettings settings;
+    SettingsService settings;
     return !settings.value("gitLogCommand").toString().isEmpty();
 }
 
@@ -155,7 +155,7 @@ bool Utils::Git::hasLogCommand() {
  * @param filePath
  */
 void Utils::Git::showLog(const QString& filePath) {
-    QSettings settings;
+    SettingsService settings;
     QString gitLogCommand = settings.value("gitLogCommand").toString();
 
     if (gitLogCommand.isEmpty()) {

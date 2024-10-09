@@ -2,7 +2,7 @@
   pkgs.mkShell {
     # nativeBuildInputs is usually what you want -- tools you need to run
     nativeBuildInputs = with pkgs; with qt6; [
-      gnumake
+      just
       crowdin-cli
       cmake
       qmake
@@ -12,6 +12,10 @@
       libclang  # for clang-format
       xmlstarlet # for download-icons.sh and download_translations.sh
       lychee  # for link checking
+      lurk  # strace replacement
+      procs # fetches process info
+      gawk  # for parsing procs output
+      fzf # for interactive process selection
 
       # for ./build-systems/github/build-github-src.sh
       coreutils

@@ -80,6 +80,13 @@
 </message>
 </context>
 <context>
+<name>BacklinkWidget</name>
+<message>
+<source>Open note and find &lt;code&gt;%1&lt;/code&gt;</source>
+<translation>Notitie openen en &lt;code&gt;%1&lt;/code&gt; zoeken</translation>
+</message>
+</context>
+<context>
 <name>DictionaryManagerDialog</name>
 <message>
 <source>Dictionary manager</source>
@@ -1653,6 +1660,14 @@
 <message>
 <source>Find navigation item</source>
 <translation>Zoek navigatie-item</translation>
+</message>
+<message>
+<source>Headings</source>
+<translation>Koppen</translation>
+</message>
+<message>
+<source>Backlinks</source>
+<translation>Backlinks</translation>
 </message>
 <message>
 <source>Add a tag to the current note</source>
@@ -3899,10 +3914,6 @@ Als de prullenbak is ingeschakeld op de server van uw ownCloud moet je in staat 
 <translation>Dubbelklik om de notitie op het tabblad te plakken</translation>
 </message>
 <message>
-<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2</source>
-<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;laatst bewerkt: %2</translation>
-</message>
-<message>
 <source>&lt;br /&gt;path: %1</source>
 <translation>&lt;br /&gt;pad: %1</translation>
 </message>
@@ -3921,6 +3932,10 @@ Als de prullenbak is ingeschakeld op de server van uw ownCloud moet je in staat 
 <message>
 <source>Light mode detected</source>
 <translation>Lichtmodus gedetecteerd</translation>
+</message>
+<message>
+<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</source>
+<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;laatst gewijzigd: %2&lt;br /&gt;bestandsgrootte: %3</translation>
 </message>
 <message>
 <source>Your Linux system seems to use the dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
@@ -5590,6 +5605,14 @@ Just test yourself if you get sync conflicts and set a higher value if so.</sour
 <translation>Verwijder automatisch volgspaties in de notitietekst</translation>
 </message>
 <message>
+<source>Notes larger than this will not be shown in the note list</source>
+<translation>Notities die groter zijn dan dit, worden niet weergegeven in de notitielijst</translation>
+</message>
+<message>
+<source>Maximum note file size:</source>
+<translation>Maximale bestandsgrootte van notities:</translation>
+</message>
+<message>
 <source>Search script repository for AI integration scripts</source>
 <translation>Scriptrepository doorzoeken op AI-integratiescripts</translation>
 </message>
@@ -6925,6 +6948,14 @@ Je notities zullen intact blijven!</translation>
 <translation>Toon alleen verweesde bijlagen</translation>
 </message>
 <message>
+<source>Only show attachments that are used in the current note</source>
+<translation>Alleen bijlagen weergeven die in de huidige notitie worden gebruikt</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation>Alleen weergeven van de huidige notitie</translation>
+</message>
+<message>
 <source>Add selected attachments to the current note</source>
 <translation>Voeg geselecteerde bijlagen toe aan de huidige notitie</translation>
 </message>
@@ -7069,6 +7100,14 @@ Je notities zullen intact blijven!</translation>
 <message>
 <source>Refresh</source>
 <translation>Vernieuwen</translation>
+</message>
+<message>
+<source>Only show images that are used in the current note</source>
+<translation>Alleen afbeeldingen weergeven die in de huidige notitie worden gebruikt</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation>Alleen weergeven van de huidige notitie</translation>
 </message>
 <message>
 <source>Used in notes:</source>
@@ -7820,6 +7859,13 @@ Dit kan niet ongedaan worden gemaakt!</translation>
 <translation>
 <numerusform>Bladwijzer verwijderd van %n notitie</numerusform>
 <numerusform>Bladwijzer verwijderd van %n notities</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Bookmark edited in %n note(s)</source>
+<translation>
+<numerusform>Bladwijzer bewerkt in %n notitie(s)</numerusform>
+<numerusform>Bladwijzer bewerkt in %n notities</numerusform>
 </translation>
 </message>
 <message>

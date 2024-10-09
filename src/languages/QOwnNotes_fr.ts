@@ -82,6 +82,13 @@
 </message>
 </context>
 <context>
+<name>BacklinkWidget</name>
+<message>
+<source>Open note and find &lt;code&gt;%1&lt;/code&gt;</source>
+<translation>Ouvrir la note et rechercher &lt;code&gt;%1&lt;/code&gt;</translation>
+</message>
+</context>
+<context>
 <name>DictionaryManagerDialog</name>
 <message>
 <source>Dictionary manager</source>
@@ -1656,6 +1663,14 @@
 <message>
 <source>Find navigation item</source>
 <translation>Trouver l'élément de navigation</translation>
+</message>
+<message>
+<source>Headings</source>
+<translation type="unfinished">Headings</translation>
+</message>
+<message>
+<source>Backlinks</source>
+<translation type="unfinished">Backlinks</translation>
 </message>
 <message>
 <source>Add a tag to the current note</source>
@@ -3897,10 +3912,6 @@ Si la corbeille est activée sur votre serveur ownCloud, vous devriez pouvoir re
 <translation>Double-clic pour épingler la note à l'onglet</translation>
 </message>
 <message>
-<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2</source>
-<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;Dernière modification: %2</translation>
-</message>
-<message>
 <source>&lt;br /&gt;path: %1</source>
 <translation>&lt;br /&gt;chemin d’accès: %1</translation>
 </message>
@@ -3919,6 +3930,10 @@ Si la corbeille est activée sur votre serveur ownCloud, vous devriez pouvoir re
 <message>
 <source>Light mode detected</source>
 <translation>Mode clair détecté</translation>
+</message>
+<message>
+<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2&lt;br /&gt;file size: %3</source>
+<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;modifié pour la dernière fois : %2&lt;br /&gt;taille du fichier : %3</translation>
 </message>
 <message>
 <source>Your Linux system seems to use the dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
@@ -5587,6 +5602,14 @@ Vous pouvez tester vous-même. Si vous avez des conflits de synchronisation, vou
 <translation>Supprimer automatiquement les espaces en fin de ligne dans le texte de la note</translation>
 </message>
 <message>
+<source>Notes larger than this will not be shown in the note list</source>
+<translation>Les notes plus grandes ne seront pas affichées dans la liste de notes</translation>
+</message>
+<message>
+<source>Maximum note file size:</source>
+<translation>Taille maximum de fichier de note :</translation>
+</message>
+<message>
 <source>Search script repository for AI integration scripts</source>
 <translation>Rechercher des scripts d’intégration d’IA dans le dépôt de scripts</translation>
 </message>
@@ -6919,6 +6942,14 @@ Vos notes resteront intactes!</translation>
 <translation>Afficher uniquement les pièces jointes orphelines</translation>
 </message>
 <message>
+<source>Only show attachments that are used in the current note</source>
+<translation type="unfinished">Only show attachments that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
+</message>
+<message>
 <source>Add selected attachments to the current note</source>
 <translation>Ajouter les pièces jointes sélectionnées à la note actuelle</translation>
 </message>
@@ -7063,6 +7094,14 @@ Vos notes resteront intactes!</translation>
 <message>
 <source>Refresh</source>
 <translation>Rafraîchir</translation>
+</message>
+<message>
+<source>Only show images that are used in the current note</source>
+<translation type="unfinished">Only show images that are used in the current note</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation type="unfinished">Only show from current note</translation>
 </message>
 <message>
 <source>Used in notes:</source>
@@ -7819,6 +7858,13 @@ Cela ne peut être annuler !</translation>
 <translation>
 <numerusform>Signet supprimé de %n note</numerusform>
 <numerusform>Signet supprimé de %n notes</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Bookmark edited in %n note(s)</source>
+<translation>
+<numerusform>Signet modifié dans %n note</numerusform>
+<numerusform>Signet modifié dans %n notes</numerusform>
 </translation>
 </message>
 <message>
