@@ -1,7 +1,5 @@
 # Install on FreeBSD
 
-Istnieje pakiet stworzony przez społeczność dla **FreeBSD** przez *Matthew Stobbs* na
-
- porcie QOwnNotes FreeBSD<//2>.</p> 
+There is a community-created package for **FreeBSD** by _Matthew Stobbs_ at [QOwnNotes FreeBSD port](https://www.freshports.org/deskutils/qownnotes).
 
 Wielkie podziękowania dla Mateusza!

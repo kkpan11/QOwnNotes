@@ -1,11 +1,9 @@
 # Jak mogę wyświetlić sam panel podglądu bez panelu edycji notatki?
 
-Można to zrobić, dezaktywując **panel edycji notatki** jako **centralny widżet** w **Ustawieniach paneli**.
+Open **Settings > Interface > Layouts**, select the layout, and choose **Note preview** as its **central widget**.
 
-Następnie najlepiej jest utworzyć nowy obszar roboczy `Tylko podgląd`, klikając w menu głównym **Okno / Obszar roboczy / Dodaj nowy obszar roboczy**. Umożliwi to przełączanie się między różnymi układami paneli.
+You can create a new layout first with **Add from current**, or use **Add from preset...** and select the **Preview only** preset.
 
-Afterward you can turn off the note edit panel in the **Window / Panels menu**.
+Afterward, turn off the note edit panel in the **Window > Panels** menu. The preview will automatically use the available central area.
 
 Pamiętaj również, że wszystkie panele można dowolnie przesuwać, klikając w menu głównym **Okno / Odblokuj panele**. Możesz też zmienić rozmiar każdego z paneli zależnie od potrzeb.
-
-Alternatywnie możesz przejść na układ **Tylko podgląd** w **Ustawieniach układu**.

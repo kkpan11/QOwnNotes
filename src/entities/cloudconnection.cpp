@@ -5,7 +5,6 @@
 
 #include <QDebug>
 #include <QRegularExpression>
-#include <QSettings>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
@@ -15,6 +14,7 @@
 
 #include "notefolder.h"
 #include "services/databaseservice.h"
+#include "services/settingsservice.h"
 
 CloudConnection::CloudConnection()
     : name(QString()), serverUrl(QString()), username(QString()), password(QString()) {
@@ -90,7 +90,7 @@ CloudConnection CloudConnection::currentCloudConnection(bool ignoreTableWarning)
 }
 
 CloudConnection CloudConnection::currentTodoCalendarCloudConnection() {
-    QSettings settings;
+    SettingsService settings;
     const int id = settings
                        .value(QStringLiteral("ownCloud/todoCalendarCloudConnectionId"),
                               firstCloudConnection().getId())
@@ -170,6 +170,14 @@ int CloudConnection::countAll() {
 bool CloudConnection::remove() {
     QSqlDatabase db = QSqlDatabase::database(QStringLiteral("disk"));
     QSqlQuery query(db);
+    QString storedPassword;
+
+    query.prepare(QStringLiteral("SELECT password FROM cloudConnection WHERE id = :id"));
+    query.bindValue(QStringLiteral(":id"), this->id);
+
+    if (query.exec() && query.first()) {
+        storedPassword = query.value(0).toString();
+    }
 
     query.prepare(QStringLiteral("DELETE FROM cloudConnection WHERE id = :id"));
     query.bindValue(QStringLiteral(":id"), this->id);
@@ -178,24 +186,28 @@ bool CloudConnection::remove() {
         qWarning() << __func__ << ": " << query.lastError();
         return false;
     } else {
+        CryptoService::instance()->deleteSecret(storedPassword);
         removeExtraSettings();
 
         return true;
     }
 }
 
-void CloudConnection::removeExtraSettings() { QSettings().remove(extraSettingsSettingsKey()); }
+void CloudConnection::removeExtraSettings() {
+    SettingsService().remove(extraSettingsSettingsKey());
+}
 
 QString CloudConnection::extraSettingsSettingsKey() const {
     return QStringLiteral("CloudConnection-") + QString::number(this->id);
 }
 
 void CloudConnection::setExtraSetting(const QString &key, const QVariant &value) {
-    QSettings().setValue(extraSettingsSettingsKey() + QStringLiteral("/") + key, value);
+    SettingsService().setValue(extraSettingsSettingsKey() + QStringLiteral("/") + key, value);
 }
 
 QVariant CloudConnection::extraSetting(const QString &key, const QVariant &defaultValue) const {
-    return QSettings().value(extraSettingsSettingsKey() + QStringLiteral("/") + key, defaultValue);
+    return SettingsService().value(extraSettingsSettingsKey() + QStringLiteral("/") + key,
+                                   defaultValue);
 }
 
 CloudConnection CloudConnection::cloudConnectionFromQuery(const QSqlQuery &query) {
@@ -209,15 +221,15 @@ bool CloudConnection::fillFromQuery(const QSqlQuery &query) {
     this->name = query.value(QStringLiteral("name")).toString();
     this->serverUrl = query.value(QStringLiteral("server_url")).toString();
     this->username = query.value(QStringLiteral("username")).toString();
-    this->password = CryptoService::instance()->decryptToString(
-        query.value(QStringLiteral("password")).toString());
+    QString storedPassword = query.value(QStringLiteral("password")).toString();
+    this->password = CryptoService::instance()->decryptToString(storedPassword);
     this->priority = query.value(QStringLiteral("priority")).toInt();
 
     const int databaseVersion =
         DatabaseService::getAppData(QStringLiteral("database_version")).toInt();
 
     this->accountId = databaseVersion >= 41 ? query.value(QStringLiteral("account_id")).toString()
-                                            : QStringLiteral("");
+                                            : QLatin1String("");
 
     this->appQOwnNotesAPIEnabled =
         databaseVersion >= 34 ? query.value(QStringLiteral("qownnotesapi_enabled")).toBool() : true;
@@ -227,9 +239,13 @@ bool CloudConnection::fillFromQuery(const QSqlQuery &query) {
 
 QList<CloudConnection> CloudConnection::fetchAll() {
     QSqlDatabase db = QSqlDatabase::database(QStringLiteral("disk"));
-    QSqlQuery query(db);
-
     QList<CloudConnection> cloudConnectionList;
+
+    if (!db.tables().contains(QStringLiteral("cloudConnection"), Qt::CaseInsensitive)) {
+        return cloudConnectionList;
+    }
+
+    QSqlQuery query(db);
 
     query.prepare(QStringLiteral("SELECT * FROM cloudConnection ORDER BY priority ASC, id ASC"));
     if (!query.exec()) {
@@ -271,7 +287,11 @@ bool CloudConnection::store() {
     query.bindValue(QStringLiteral(":username"), this->username);
     query.bindValue(QStringLiteral(":account_id"), this->accountId);
     query.bindValue(QStringLiteral(":password"),
-                    CryptoService::instance()->encryptToString(this->password));
+                    this->id > 0
+                        ? CryptoService::instance()->encryptToString(
+                              this->password,
+                              QStringLiteral("database/cloudConnection/%1/password").arg(this->id))
+                        : CryptoService::instance()->encryptToString(this->password));
     query.bindValue(QStringLiteral(":priority"), this->priority);
     query.bindValue(QStringLiteral(":qownnotesapi_enabled"), this->appQOwnNotesAPIEnabled);
 
@@ -313,7 +333,11 @@ bool CloudConnection::storeMigratedCloudConnection() {
     query.bindValue(QStringLiteral(":serverUrl"), this->serverUrl);
     query.bindValue(QStringLiteral(":username"), this->username);
     query.bindValue(QStringLiteral(":password"),
-                    CryptoService::instance()->encryptToString(this->password));
+                    this->id > 0
+                        ? CryptoService::instance()->encryptToString(
+                              this->password,
+                              QStringLiteral("database/cloudConnection/%1/password").arg(this->id))
+                        : CryptoService::instance()->encryptToString(this->password));
     query.bindValue(QStringLiteral(":priority"), this->priority);
 
     if (!query.exec()) {
@@ -351,7 +375,7 @@ bool CloudConnection::migrateToCloudConnections() {
         return false;
     }
 
-    QSettings settings;
+    SettingsService settings;
     const QString serverUrl = settings.value(QStringLiteral("ownCloud/serverUrl")).toString();
     const QString username = settings.value(QStringLiteral("ownCloud/userName")).toString();
     const QString password = CryptoService::instance()->decryptToString(

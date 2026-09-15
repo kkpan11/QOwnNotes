@@ -399,18 +399,115 @@
              </widget>
             </item>
             <item>
-             <widget class="NavigationWidget" name="navigationWidget">
-              <property name="frameShape">
-               <enum>QFrame::Shape::NoFrame</enum>
-              </property>
-              <attribute name="headerVisible">
-               <bool>false</bool>
-              </attribute>
-              <column>
-               <property name="text">
-                <string>Navigation</string>
+              <widget class="QTabWidget" name="navigationTabWidget">
+               <property name="currentIndex">
+                <number>2</number>
                </property>
-              </column>
+              <property name="documentMode">
+               <bool>true</bool>
+              </property>
+              <widget class="QWidget" name="navigationTab">
+               <attribute name="title">
+                <string>Headings</string>
+               </attribute>
+               <layout class="QGridLayout" name="gridLayout_3">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="NavigationWidget" name="navigationWidget">
+                  <property name="frameShape">
+                   <enum>QFrame::Shape::NoFrame</enum>
+                  </property>
+                  <attribute name="headerVisible">
+                   <bool>false</bool>
+                  </attribute>
+                  <column>
+                   <property name="text">
+                    <string>Navigation</string>
+                   </property>
+                  </column>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="fileNavigationTab">
+               <attribute name="title">
+                <string>Files</string>
+               </attribute>
+               <layout class="QGridLayout" name="gridLayout_17">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="FileNavigationWidget" name="fileNavigationWidget">
+                  <property name="frameShape">
+                   <enum>QFrame::Shape::NoFrame</enum>
+                  </property>
+                  <attribute name="headerVisible">
+                   <bool>false</bool>
+                  </attribute>
+                  <column>
+                   <property name="text">
+                    <string>Files</string>
+                   </property>
+                  </column>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="backlinkTab">
+               <attribute name="title">
+                <string>Backlinks</string>
+               </attribute>
+               <layout class="QGridLayout" name="gridLayout_5">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="BacklinkWidget" name="backlinkWidget">
+                  <property name="frameShape">
+                   <enum>QFrame::Shape::NoFrame</enum>
+                  </property>
+                  <attribute name="headerVisible">
+                   <bool>false</bool>
+                  </attribute>
+                  <column>
+                   <property name="text">
+                    <string>Navigation</string>
+                   </property>
+                  </column>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
              </widget>
             </item>
            </layout>
@@ -633,6 +730,9 @@
                 <number>0</number>
                </property>
               </widget>
+             </item>
+             <item>
+              <widget class="ZoomableGraphicsView" name="noteGraphicsView"/>
              </item>
             </layout>
            </widget>
@@ -909,27 +1009,74 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <addaction name="actionImport_notes_from_text_files"/>
      <addaction name="actionImport_bookmarks_from_server"/>
     </widget>
-    <widget class="QMenu" name="menuNavigation">
-     <property name="title">
-      <string>Navigation</string>
-     </property>
-     <property name="icon">
-      <iconset theme="go-down" resource="breeze-qownnotes.qrc">
-       <normaloff>:/icons/breeze-qownnotes/16x16/go-down.svg</normaloff>:/icons/breeze-qownnotes/16x16/go-down.svg</iconset>
-     </property>
-     <addaction name="action_Back_in_note_history"/>
-     <addaction name="action_Forward_in_note_history"/>
-     <addaction name="actionPrevious_Note"/>
-     <addaction name="actionNext_note"/>
-     <addaction name="actionPrevious_note_tab"/>
-     <addaction name="actionNext_note_tab"/>
-     <addaction name="actionMove_up_in_subfolder_list"/>
-     <addaction name="actionMove_down_in_subfolder_list"/>
-     <addaction name="actionMove_up_in_tag_list"/>
-     <addaction name="actionMove_down_in_tag_list"/>
-     <addaction name="actionClose_current_note_tab"/>
-     <addaction name="actionToggle_note_stickiness_of_current_tab"/>
-    </widget>
+     <widget class="QMenu" name="menuNavigation">
+      <property name="title">
+       <string>Navigation</string>
+      </property>
+      <property name="icon">
+       <iconset theme="go-down" resource="breeze-qownnotes.qrc">
+        <normaloff>:/icons/breeze-qownnotes/16x16/go-down.svg</normaloff>:/icons/breeze-qownnotes/16x16/go-down.svg</iconset>
+      </property>
+       <addaction name="action_Back_in_note_history"/>
+       <addaction name="action_Forward_in_note_history"/>
+       <addaction name="separator"/>
+       <addaction name="action_Previous_heading"/>
+       <addaction name="action_Next_heading"/>
+       <addaction name="actionFold_all_headings"/>
+       <addaction name="actionUnfold_all_headings"/>
+       <addaction name="separator"/>
+       <addaction name="actionPrevious_Note"/>
+      <addaction name="actionNext_note"/>
+      <addaction name="actionPrevious_note_tab"/>
+      <addaction name="actionNext_note_tab"/>
+      <addaction name="actionMove_up_in_subfolder_list"/>
+      <addaction name="actionMove_down_in_subfolder_list"/>
+      <addaction name="actionMove_up_in_tag_list"/>
+      <addaction name="actionMove_down_in_tag_list"/>
+      <addaction name="actionClose_current_note_tab"/>
+      <addaction name="actionToggle_note_stickiness_of_current_tab"/>
+      <addaction name="separator"/>
+      <addaction name="menuStore_note_bookmark"/>
+      <addaction name="menuGoto_note_bookmark"/>
+      <addaction name="separator"/>
+      <addaction name="actionOpen_note_bookmark_dialog"/>
+      <widget class="QMenu" name="menuStore_note_bookmark">
+       <property name="title">
+        <string>Store note bookmark</string>
+       </property>
+       <property name="icon">
+        <iconset theme="bookmark-new" resource="breeze-qownnotes.qrc">
+         <normaloff>:/icons/breeze-qownnotes/16x16/bookmark-new.svg</normaloff>:/icons/breeze-qownnotes/16x16/bookmark-new.svg</iconset>
+       </property>
+       <addaction name="actionStore_note_bookmark_1"/>
+       <addaction name="actionStore_note_bookmark_2"/>
+       <addaction name="actionStore_note_bookmark_3"/>
+       <addaction name="actionStore_note_bookmark_4"/>
+       <addaction name="actionStore_note_bookmark_5"/>
+       <addaction name="actionStore_note_bookmark_6"/>
+       <addaction name="actionStore_note_bookmark_7"/>
+       <addaction name="actionStore_note_bookmark_8"/>
+       <addaction name="actionStore_note_bookmark_9"/>
+      </widget>
+      <widget class="QMenu" name="menuGoto_note_bookmark">
+       <property name="title">
+        <string>Go to note bookmark</string>
+       </property>
+       <property name="icon">
+        <iconset theme="bookmarks" resource="breeze-qownnotes.qrc">
+         <normaloff>:/icons/breeze-qownnotes/16x16/bookmarks.svg</normaloff>:/icons/breeze-qownnotes/16x16/bookmarks.svg</iconset>
+       </property>
+       <addaction name="actionGoto_note_bookmark_1"/>
+       <addaction name="actionGoto_note_bookmark_2"/>
+       <addaction name="actionGoto_note_bookmark_3"/>
+       <addaction name="actionGoto_note_bookmark_4"/>
+       <addaction name="actionGoto_note_bookmark_5"/>
+       <addaction name="actionGoto_note_bookmark_6"/>
+       <addaction name="actionGoto_note_bookmark_7"/>
+       <addaction name="actionGoto_note_bookmark_8"/>
+       <addaction name="actionGoto_note_bookmark_9"/>
+      </widget>
+     </widget>
     <widget class="QMenu" name="menuPrint">
      <property name="title">
       <string>Print</string>
@@ -984,7 +1131,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <addaction name="action_Reload_note_folder"/>
     <addaction name="actionSelect_note_folder"/>
     <addaction name="noteFoldersMenu"/>
-    <addaction name="actionSet_ownCloud_Folder"/>
+    <addaction name="actionSet_Cloud_Folder"/>
     <addaction name="separator"/>
     <addaction name="action_Settings"/>
     <addaction name="separator"/>
@@ -1008,6 +1155,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <addaction name="actionOpen_IRC_Channel"/>
     </widget>
     <addaction name="actionFind_action"/>
+    <addaction name="actionRedo_action"/>
     <addaction name="separator"/>
     <addaction name="actionCheck_for_updates"/>
     <addaction name="actionShow_changelog"/>
@@ -1041,6 +1189,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <addaction name="actionInsert_current_time"/>
      <addaction name="actionInsert_code_block"/>
      <addaction name="actionInsert_block_quote"/>
+     <addaction name="actionInsert_footnote"/>
+     <addaction name="actionInsert_checkbox_list_item"/>
      <addaction name="actionInsert_headline_from_note_filename"/>
      <addaction name="actionInsert_Nextcloud_Deck_card"/>
     </widget>
@@ -1057,6 +1207,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <addaction name="actionFormat_text_underline"/>
      <addaction name="actionStrike_out_text"/>
      <addaction name="actionToggle_text_case"/>
+    </widget>
+    <widget class="QMenu" name="menuSelect">
+     <property name="title">
+      <string>Select</string>
+     </property>
+     <addaction name="actionSelect_enclosed_text"/>
     </widget>
     <widget class="QMenu" name="menuExtra">
      <property name="title">
@@ -1096,6 +1252,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      </property>
      <addaction name="actionShow_versions"/>
      <addaction name="actionShow_note_git_versions"/>
+     <addaction name="actionShow_note_git_versions_external"/>
     </widget>
     <widget class="QMenu" name="menuEncryption">
      <property name="title">
@@ -1119,31 +1276,71 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <string>Spelling backend</string>
      </property>
     </widget>
-    <widget class="QMenu" name="menuAI_model">
-     <property name="title">
-      <string>AI model</string>
-     </property>
-    </widget>
-    <addaction name="menuEditNote"/>
+     <widget class="QMenu" name="menuAI_model">
+      <property name="title">
+       <string>AI model</string>
+      </property>
+     </widget>
+     <widget class="QMenu" name="menuNoteTextEditContext">
+      <property name="title">
+       <string>Note text edit</string>
+      </property>
+      <widget class="QMenu" name="menuNoteTextEditListOperations">
+       <property name="title">
+        <string>List operations</string>
+       </property>
+       <addaction name="actionToggle_checkboxes"/>
+       <addaction name="actionCreate_ordered_list"/>
+       <addaction name="actionCreate_alphabetical_list"/>
+       <addaction name="actionCreate_unordered_list"/>
+       <addaction name="actionCreate_checkbox_list"/>
+       <addaction name="actionClear_list_formatting"/>
+       <addaction name="actionOrder_checkboxes"/>
+      </widget>
+      <widget class="QMenu" name="menuNoteTextEditMarkdownOperations">
+       <property name="title">
+        <string>Markdown operations</string>
+       </property>
+       <addaction name="actionIncrease_heading_depth"/>
+       <addaction name="actionDecrease_heading_depth"/>
+      </widget>
+      <addaction name="actionInsert_text_link"/>
+      <addaction name="actionInsert_block_quote"/>
+      <addaction name="separator"/>
+      <addaction name="menuNoteTextEditListOperations"/>
+      <addaction name="menuNoteTextEditMarkdownOperations"/>
+      <addaction name="separator"/>
+      <addaction name="actionSearch_text_on_the_web"/>
+      <addaction name="action_Find_note"/>
+      <addaction name="separator"/>
+      <addaction name="actionCopy_code_block"/>
+     </widget>
+     <addaction name="menuEditNote"/>
     <addaction name="action_Remove_note"/>
     <addaction name="separator"/>
     <addaction name="action_Find_text_in_note"/>
     <addaction name="actionReplace_in_current_note"/>
     <addaction name="separator"/>
-    <addaction name="menuInsert"/>
-    <addaction name="menuFormat"/>
-    <addaction name="actionSelect_all_notes"/>
-    <addaction name="actionPaste_image"/>
+     <addaction name="menuInsert"/>
+     <addaction name="menuFormat"/>
+     <addaction name="menuSelect"/>
+     <addaction name="actionSelect_all_notes"/>
+     <addaction name="actionPaste_image"/>
     <addaction name="separator"/>
     <addaction name="menuVersioning"/>
     <addaction name="menuEncryption"/>
     <addaction name="actionManage_stored_images"/>
     <addaction name="actionManage_stored_attachments"/>
-    <addaction name="menuExtra"/>
-    <addaction name="separator"/>
-    <addaction name="actionCheck_spelling"/>
-    <addaction name="menuSpelling_backend"/>
-    <addaction name="menuLanguages"/>
+    <addaction name="actionSend_clipboard"/>
+    <addaction name="actionSend_clipboard_as_text"/>
+     <addaction name="menuExtra"/>
+     <addaction name="menuNoteTextEditContext"/>
+     <addaction name="separator"/>
+      <addaction name="actionCheck_spelling"/>
+     <addaction name="actionCheck_grammar_with_LanguageTool"/>
+      <addaction name="actionCheck_grammar_with_Harper"/>
+      <addaction name="menuSpelling_backend"/>
+     <addaction name="menuLanguages"/>
     <addaction name="actionManage_dictionaries"/>
     <addaction name="separator"/>
     <addaction name="actionEnable_AI"/>
@@ -1155,6 +1352,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
     </property>
     <addaction name="actionShow_Todo_List"/>
     <addaction name="action_Load_Todo_Items"/>
+    <addaction name="separator"/>
+    <addaction name="actionManage_Nextcloud_Deck_cards"/>
+    <addaction name="actionInsert_Nextcloud_Deck_card"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -1173,9 +1373,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <addaction name="actionEditorWidthFull"/>
      <addaction name="actionEditorWidthCustom"/>
     </widget>
-    <widget class="QMenu" name="menuWorkspaces">
+    <widget class="QMenu" name="menuLayouts">
      <property name="title">
-      <string>Workspaces</string>
+      <string>Layouts</string>
      </property>
     </widget>
     <widget class="QMenu" name="menuPanels">
@@ -1203,15 +1403,17 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <addaction name="actionShow_all_panels"/>
      <addaction name="actionShow_Hide_application"/>
     </widget>
-    <widget class="QMenu" name="menuWorkspace">
-     <property name="title">
-      <string>Workspace</string>
-     </property>
-     <addaction name="actionStore_as_new_workspace"/>
-     <addaction name="actionRemove_current_workspace"/>
-     <addaction name="actionRename_current_workspace"/>
-     <addaction name="actionSwitch_to_previous_workspace"/>
-    </widget>
+     <widget class="QMenu" name="menuLayout">
+      <property name="title">
+       <string>Layout</string>
+      </property>
+      <addaction name="actionManage_layouts"/>
+      <addaction name="separator"/>
+      <addaction name="actionStore_as_new_layout"/>
+      <addaction name="actionRemove_current_layout"/>
+      <addaction name="actionRename_current_layout"/>
+      <addaction name="actionSwitch_to_previous_layout"/>
+     </widget>
     <widget class="QMenu" name="menuJumpTo">
      <property name="title">
       <string>Jump to</string>
@@ -1226,10 +1428,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <addaction name="menuJumpTo"/>
     <addaction name="menuToolbars"/>
     <addaction name="menuPanels"/>
-    <addaction name="menuWorkspaces"/>
+    <addaction name="menuLayouts"/>
     <addaction name="actionUnlock_panels"/>
+    <addaction name="actionReattach_panels"/>
     <addaction name="separator"/>
-    <addaction name="menuWorkspace"/>
+    <addaction name="menuLayout"/>
     <addaction name="separator"/>
     <addaction name="actionUse_softwrap_in_note_editor"/>
     <addaction name="actionTypewriter_mode"/>
@@ -1289,6 +1492,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <addaction name="action_Remove_note"/>
    <addaction name="action_Open_note_in_external_editor"/>
    <addaction name="actionShow_local_trash"/>
+   <addaction name="actionShow_note_git_versions"/>
    <addaction name="actionAllow_note_editing"/>
    <addaction name="separator"/>
    <addaction name="action_Back_in_note_history"/>
@@ -1319,7 +1523,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <enum>QAction::MenuRole::QuitRole</enum>
    </property>
   </action>
-  <action name="actionSet_ownCloud_Folder">
+  <action name="actionSet_Cloud_Folder">
    <property name="icon">
     <iconset theme="folder-sync" resource="breeze-qownnotes.qrc">
      <normaloff>:/icons/breeze-qownnotes/16x16/folder-sync.svg</normaloff>:/icons/breeze-qownnotes/16x16/folder-sync.svg</iconset>
@@ -1337,7 +1541,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <normaloff>:/icons/breeze-qownnotes/16x16/edit-find.svg</normaloff>:/icons/breeze-qownnotes/16x16/edit-find.svg</iconset>
    </property>
    <property name="text">
-    <string>&amp;Find note</string>
+    <string>&amp;Find text in notes</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+Shift+F</string>
@@ -1469,6 +1673,17 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <string>Select &amp;all notes</string>
    </property>
   </action>
+  <action name="actionSelect_enclosed_text">
+   <property name="text">
+    <string>Select enclosed &amp;text</string>
+   </property>
+   <property name="toolTip">
+    <string>Select the innermost text around the current cursor position</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Alt+I</string>
+   </property>
+  </action>
   <action name="actionInsert_text_link">
    <property name="icon">
     <iconset theme="text-frame-link" resource="breeze-qownnotes.qrc">
@@ -1529,11 +1744,59 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <property name="text">
     <string>Forward in note history</string>
    </property>
-   <property name="shortcut">
-    <string notr="true">Alt+Right</string>
-   </property>
-  </action>
-  <action name="action_Shortcuts">
+    <property name="shortcut">
+     <string notr="true">Alt+Right</string>
+    </property>
+   </action>
+   <action name="action_Previous_heading">
+    <property name="icon">
+     <iconset theme="go-up" resource="breeze-qownnotes.qrc">
+      <normaloff>:/icons/breeze-qownnotes/16x16/go-up.svg</normaloff>:/icons/breeze-qownnotes/16x16/go-up.svg</iconset>
+    </property>
+    <property name="text">
+     <string>Previous &amp;heading</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+Shift+Page Up</string>
+    </property>
+   </action>
+   <action name="action_Next_heading">
+    <property name="icon">
+     <iconset theme="go-down" resource="breeze-qownnotes.qrc">
+      <normaloff>:/icons/breeze-qownnotes/16x16/go-down.svg</normaloff>:/icons/breeze-qownnotes/16x16/go-down.svg</iconset>
+    </property>
+    <property name="text">
+     <string>Next heading</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+Shift+Page Down</string>
+    </property>
+   </action>
+   <action name="actionFold_all_headings">
+    <property name="icon">
+     <iconset theme="view-hidden" resource="breeze-qownnotes.qrc">
+      <normaloff>:/icons/breeze-qownnotes/16x16/view-hidden.svg</normaloff>:/icons/breeze-qownnotes/16x16/view-hidden.svg</iconset>
+    </property>
+    <property name="text">
+     <string>Fold all headings</string>
+    </property>
+    <property name="toolTip">
+     <string>Fold all headings in the current note</string>
+    </property>
+   </action>
+   <action name="actionUnfold_all_headings">
+    <property name="icon">
+     <iconset theme="view-visible" resource="breeze-qownnotes.qrc">
+      <normaloff>:/icons/breeze-qownnotes/16x16/view-visible.svg</normaloff>:/icons/breeze-qownnotes/16x16/view-visible.svg</iconset>
+    </property>
+    <property name="text">
+     <string>Unfold all headings</string>
+    </property>
+    <property name="toolTip">
+     <string>Unfold all headings in the current note</string>
+    </property>
+   </action>
+   <action name="action_Shortcuts">
    <property name="icon">
     <iconset theme="applications-system" resource="breeze-qownnotes.qrc">
      <normaloff>:/icons/breeze-qownnotes/16x16/applications-system.svg</normaloff>:/icons/breeze-qownnotes/16x16/applications-system.svg</iconset>
@@ -2034,7 +2297,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Use softwrap in note editor and preview</string>
+    <string>Use softwrap in note editor</string>
    </property>
   </action>
   <action name="actionShow_status_bar">
@@ -2166,7 +2429,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <normaloff>:/icons/breeze-qownnotes/16x16/edit-find.svg</normaloff>:/icons/breeze-qownnotes/16x16/edit-find.svg</iconset>
    </property>
    <property name="text">
-    <string>Find notes in all tags / subfolders</string>
+    <string>Find text in notes in all tags / subfolders</string>
    </property>
    <property name="shortcut">
     <string notr="true">Alt+F</string>
@@ -2256,46 +2519,63 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <string>Unlock panels</string>
    </property>
   </action>
-  <action name="actionRemove_current_workspace">
+  <action name="actionReattach_panels">
+   <property name="text">
+    <string>Reattach floating panels</string>
+   </property>
+   <property name="toolTip">
+    <string>Reattaches all floating panels</string>
+   </property>
+  </action>
+  <action name="actionRemove_current_layout">
    <property name="icon">
     <iconset theme="list-remove" resource="breeze-dark-qownnotes.qrc">
      <normaloff>:/icons/breeze-dark-qownnotes/16x16/list-remove.svg</normaloff>:/icons/breeze-dark-qownnotes/16x16/list-remove.svg</iconset>
    </property>
    <property name="text">
-    <string>Remove current workspace</string>
+    <string>Remove current layout</string>
    </property>
   </action>
-  <action name="actionStore_as_new_workspace">
+  <action name="actionStore_as_new_layout">
    <property name="icon">
     <iconset theme="list-add" resource="breeze-qownnotes.qrc">
      <normaloff>:/icons/breeze-qownnotes/16x16/list-add.svg</normaloff>:/icons/breeze-qownnotes/16x16/list-add.svg</iconset>
    </property>
    <property name="text">
-    <string>Add new workspace</string>
+    <string>Add new layout</string>
    </property>
   </action>
-  <action name="actionRename_current_workspace">
+  <action name="actionRename_current_layout">
    <property name="icon">
     <iconset theme="document-edit" resource="breeze-qownnotes.qrc">
      <normaloff>:/icons/breeze-qownnotes/16x16/document-edit.svg</normaloff>:/icons/breeze-qownnotes/16x16/document-edit.svg</iconset>
    </property>
    <property name="text">
-    <string>Rename current workspace</string>
+    <string>Rename current layout</string>
    </property>
   </action>
-  <action name="actionSwitch_to_previous_workspace">
-   <property name="icon">
-    <iconset theme="go-previous" resource="breeze-qownnotes.qrc">
-     <normaloff>:/icons/breeze-qownnotes/16x16/go-previous.svg</normaloff>:/icons/breeze-qownnotes/16x16/go-previous.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Switch to previous workspace</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true">Alt+Shift+P</string>
-   </property>
-  </action>
-  <action name="actionShow_all_panels">
+   <action name="actionSwitch_to_previous_layout">
+    <property name="icon">
+     <iconset theme="go-previous" resource="breeze-qownnotes.qrc">
+      <normaloff>:/icons/breeze-qownnotes/16x16/go-previous.svg</normaloff>:/icons/breeze-qownnotes/16x16/go-previous.svg</iconset>
+    </property>
+    <property name="text">
+     <string>Switch to previous layout</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Alt+Shift+P</string>
+    </property>
+   </action>
+   <action name="actionManage_layouts">
+    <property name="icon">
+     <iconset theme="configure" resource="breeze-qownnotes.qrc">
+      <normaloff>:/icons/breeze-qownnotes/16x16/configure.svg</normaloff>:/icons/breeze-qownnotes/16x16/configure.svg</iconset>
+    </property>
+    <property name="text">
+     <string>Manage layouts</string>
+    </property>
+   </action>
+   <action name="actionShow_all_panels">
    <property name="text">
     <string>Show all panels</string>
    </property>
@@ -2316,6 +2596,24 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+Shift+A</string>
+   </property>
+  </action>
+  <action name="actionRedo_action">
+   <property name="icon">
+    <iconset theme="view-refresh" resource="breeze-qownnotes.qrc">
+     <normaloff>:/icons/breeze-qownnotes/16x16/view-refresh.svg</normaloff>:/icons/breeze-qownnotes/16x16/view-refresh.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Redo last action</string>
+   </property>
+   <property name="toolTip">
+    <string>Redo the last action</string>
+   </property>
+   <property name="statusTip">
+    <string>Redo the last action</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Alt+Shift+A</string>
    </property>
   </action>
   <action name="actionInsert_table">
@@ -2340,6 +2638,23 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+Shift+B</string>
+   </property>
+  </action>
+  <action name="actionInsert_checkbox_list_item">
+   <property name="icon">
+    <iconset theme="task-new" resource="breeze-qownnotes.qrc">
+     <normaloff>:/icons/breeze-qownnotes/16x16/task-new.svg</normaloff>:/icons/breeze-qownnotes/16x16/task-new.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Insert checkbox list item</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Alt+L</string>
+   </property>
+  </action>
+  <action name="actionInsert_footnote">
+   <property name="text">
+    <string>Insert &amp;footnote</string>
    </property>
   </action>
   <action name="actionSearch_text_on_the_web">
@@ -2424,6 +2739,15 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </property>
    <property name="text">
     <string>Show note git versions</string>
+   </property>
+  </action>
+  <action name="actionShow_note_git_versions_external">
+   <property name="icon">
+    <iconset theme="appointment-new" resource="breeze-qownnotes.qrc">
+     <normaloff>:/icons/breeze-qownnotes/16x16/appointment-new.svg</normaloff>:/icons/breeze-qownnotes/16x16/appointment-new.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Show note git versions externally</string>
    </property>
   </action>
   <action name="actionScript_repository">
@@ -2594,6 +2918,22 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <string>Manage dictionaries</string>
    </property>
   </action>
+  <action name="actionCheck_grammar_with_LanguageTool">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Check grammar with LanguageTool</string>
+   </property>
+  </action>
+  <action name="actionCheck_grammar_with_Harper">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Check grammar with Harper</string>
+   </property>
+  </action>
   <action name="actionEditorWidthCustom">
    <property name="checkable">
     <bool>true</bool>
@@ -2658,12 +2998,161 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <string notr="true">Ctrl+Shift+N</string>
    </property>
   </action>
-  <action name="actionToggle_note_stickiness_of_current_tab">
-   <property name="text">
-    <string>Toggle note stickiness of current tab</string>
-   </property>
-  </action>
-  <action name="actionFormat_text_underline">
+   <action name="actionToggle_note_stickiness_of_current_tab">
+    <property name="text">
+     <string>Toggle note pinning of current tab</string>
+    </property>
+   </action>
+   <action name="actionStore_note_bookmark_1">
+    <property name="text">
+     <string>Store bookmark at slot 1</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+Shift+1</string>
+    </property>
+   </action>
+   <action name="actionStore_note_bookmark_2">
+    <property name="text">
+     <string>Store bookmark at slot 2</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+Shift+2</string>
+    </property>
+   </action>
+   <action name="actionStore_note_bookmark_3">
+    <property name="text">
+     <string>Store bookmark at slot 3</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+Shift+3</string>
+    </property>
+   </action>
+   <action name="actionStore_note_bookmark_4">
+    <property name="text">
+     <string>Store bookmark at slot 4</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+Shift+4</string>
+    </property>
+   </action>
+   <action name="actionStore_note_bookmark_5">
+    <property name="text">
+     <string>Store bookmark at slot 5</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+Shift+5</string>
+    </property>
+   </action>
+   <action name="actionStore_note_bookmark_6">
+    <property name="text">
+     <string>Store bookmark at slot 6</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+Shift+6</string>
+    </property>
+   </action>
+   <action name="actionStore_note_bookmark_7">
+    <property name="text">
+     <string>Store bookmark at slot 7</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+Shift+7</string>
+    </property>
+   </action>
+   <action name="actionStore_note_bookmark_8">
+    <property name="text">
+     <string>Store bookmark at slot 8</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+Shift+8</string>
+    </property>
+   </action>
+   <action name="actionStore_note_bookmark_9">
+    <property name="text">
+     <string>Store bookmark at slot 9</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+Shift+9</string>
+    </property>
+   </action>
+   <action name="actionGoto_note_bookmark_1">
+    <property name="text">
+     <string>Go to bookmark at slot 1</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+1</string>
+    </property>
+   </action>
+   <action name="actionGoto_note_bookmark_2">
+    <property name="text">
+     <string>Go to bookmark at slot 2</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+2</string>
+    </property>
+   </action>
+   <action name="actionGoto_note_bookmark_3">
+    <property name="text">
+     <string>Go to bookmark at slot 3</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+3</string>
+    </property>
+   </action>
+   <action name="actionGoto_note_bookmark_4">
+    <property name="text">
+     <string>Go to bookmark at slot 4</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+4</string>
+    </property>
+   </action>
+   <action name="actionGoto_note_bookmark_5">
+    <property name="text">
+     <string>Go to bookmark at slot 5</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+5</string>
+    </property>
+   </action>
+   <action name="actionGoto_note_bookmark_6">
+    <property name="text">
+     <string>Go to bookmark at slot 6</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+6</string>
+    </property>
+   </action>
+   <action name="actionGoto_note_bookmark_7">
+    <property name="text">
+     <string>Go to bookmark at slot 7</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+7</string>
+    </property>
+   </action>
+   <action name="actionGoto_note_bookmark_8">
+    <property name="text">
+     <string>Go to bookmark at slot 8</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+8</string>
+    </property>
+   </action>
+   <action name="actionGoto_note_bookmark_9">
+    <property name="text">
+     <string>Go to bookmark at slot 9</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true">Ctrl+9</string>
+    </property>
+   </action>
+   <action name="actionOpen_note_bookmark_dialog">
+    <property name="text">
+     <string>Note bookmarks</string>
+    </property>
+   </action>
+   <action name="actionFormat_text_underline">
    <property name="icon">
     <iconset theme="format-text-underline" resource="breeze-qownnotes.qrc">
      <normaloff>:/icons/breeze-qownnotes/16x16/format-text-underline.svg</normaloff>:/icons/breeze-qownnotes/16x16/format-text-underline.svg</iconset>
@@ -2726,9 +3215,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <property name="text">
     <string>Insert Nextcloud Deck card link</string>
    </property>
-   <property name="shortcut">
-    <string notr="true">Ctrl+Alt+D</string>
-   </property>
   </action>
   <action name="actionCopy_path_to_note_to_clipboard">
    <property name="text">
@@ -2784,6 +3270,86 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <string>Enable AI support</string>
    </property>
   </action>
+  <action name="actionManage_Nextcloud_Deck_cards">
+   <property name="icon">
+    <iconset theme="folder-cloud" resource="breeze-qownnotes.qrc">
+     <normaloff>:/icons/breeze-qownnotes/16x16/folder-cloud.svg</normaloff>:/icons/breeze-qownnotes/16x16/folder-cloud.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Manage Nextcloud Deck cards</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+D</string>
+   </property>
+  </action>
+  <action name="actionSend_clipboard">
+   <property name="icon">
+    <iconset theme="document-share" resource="breeze-qownnotes.qrc">
+     <normaloff>:/icons/breeze-qownnotes/16x16/document-share.svg</normaloff>:/icons/breeze-qownnotes/16x16/document-share.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Send clipboard</string>
+   </property>
+  </action>
+  <action name="actionSend_clipboard_as_text">
+   <property name="icon">
+    <iconset theme="document-share" resource="breeze-qownnotes.qrc">
+     <normaloff>:/icons/breeze-qownnotes/16x16/document-share.svg</normaloff>:/icons/breeze-qownnotes/16x16/document-share.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Send clipboard as text</string>
+   </property>
+  </action>
+  <action name="actionToggle_checkboxes">
+   <property name="text">
+    <string>Toggle checkbox(es)</string>
+   </property>
+  </action>
+  <action name="actionCreate_ordered_list">
+   <property name="text">
+    <string>1. 2. 3. list</string>
+   </property>
+  </action>
+  <action name="actionCreate_alphabetical_list">
+   <property name="text">
+    <string>a. b. c. list</string>
+   </property>
+  </action>
+  <action name="actionCreate_unordered_list">
+   <property name="text">
+    <string>- list</string>
+   </property>
+  </action>
+  <action name="actionCreate_checkbox_list">
+   <property name="text">
+    <string>Create checkbox list</string>
+   </property>
+  </action>
+  <action name="actionClear_list_formatting">
+   <property name="text">
+    <string>Clear list formatting</string>
+   </property>
+  </action>
+  <action name="actionOrder_checkboxes">
+   <property name="text">
+    <string>Order checkboxes</string>
+   </property>
+  </action>
+  <action name="actionIncrease_heading_depth">
+   <property name="text">
+    <string>Increase heading depth</string>
+   </property>
+  </action>
+  <action name="actionDecrease_heading_depth">
+   <property name="text">
+    <string>Decrease heading depth</string>
+   </property>
+  </action>
+  <action name="actionCopy_code_block">
+   <property name="text">
+    <string>Copy code block</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -2796,6 +3362,16 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <class>NavigationWidget</class>
    <extends>QTreeWidget</extends>
    <header location="global">widgets/navigationwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>FileNavigationWidget</class>
+   <extends>QTreeWidget</extends>
+   <header location="global">widgets/filenavigationwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>BacklinkWidget</class>
+   <extends>QTreeWidget</extends>
+   <header location="global">widgets/backlinkwidget.h</header>
   </customwidget>
   <customwidget>
    <class>NotePreviewWidget</class>
@@ -2816,6 +3392,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <class>NoteSubFolderTree</class>
    <extends>QTreeWidget</extends>
    <header>widgets/notesubfoldertree.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ZoomableGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">widgets/noterelationscene.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

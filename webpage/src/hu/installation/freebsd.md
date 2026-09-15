@@ -1,5 +1,5 @@
 # Telepítse a FreeBSD-re
 
-Van egy közösség által létrehozott csomag a **FreeBSD**hez, amelyet *Matthew Stobbs* készített a [QOwnNotes FreeBSD porton](https://svnweb.freebsd.org/ports/head/deskutils/qownnotes).
+There is a community-created package for **FreeBSD** by _Matthew Stobbs_ at [QOwnNotes FreeBSD port](https://www.freshports.org/deskutils/qownnotes).
 
 Nagy köszönet Matthewnak!

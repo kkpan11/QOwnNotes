@@ -1,6 +1,7 @@
 #include "notesubfolderapi.h"
 
 #include <entities/note.h>
+#include <entities/notefolder.h>
 
 #include <QVector>
 
@@ -71,6 +72,10 @@ QList<QObject *> NoteSubFolderApi::fetchNoteSubFoldersByParentId(int parentId) {
 
     const auto noteSubFolders = NoteSubFolder::fetchAllByParentId(parentId);
     for (const auto &noteSubFolder : noteSubFolders) {
+        // Skip excluded subfolders
+        if (NoteFolder::isCurrentSubfolderPathExcluded(noteSubFolder.relativePath())) {
+            continue;
+        }
         noteSubFolderApis.append(NoteSubFolderApi::fromNoteSubFolder(noteSubFolder));
     }
 

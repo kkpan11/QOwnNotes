@@ -10,12 +10,8 @@
   github="pbek"
   keybase="pbek" />
 
-<ProfileCard
-  name="Waqar Ahmed"
-  img="https://www.gravatar.com/avatar/906b60ea647baf206f452687d1de8ba0?s=164"
-  backgroundImg="/screenshots/screenshot-darkmode.png"
-  functions="Highlighting, Spellchecker, Speed improvements, …"
-  github="Waqar144" />
+See the [GitHub contributors page](https://github.com/pbek/QOwnNotes/graphs/contributors)
+for everyone who has contributed to QOwnNotes.
 
 ## Translations
 

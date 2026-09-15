@@ -1,14 +1,15 @@
-# Installa come AppImage
+# Instalar como AppImage
 
-Puede descargar la última AppImage de la [página de versiones de QOwnNotes](https://github.com/pbek/QOwnNotes/releases). Debe llamarse como `QOwnNotes-x86_64.AppImage` en esa página.
+Puede descargar la última AppImage de la [página de lanzamientos de QOwnNotes](https://github.com/pbek/QOwnNotes/releases). Debería llamarse algo parecido a `QOwnNotes-x86_64.AppImage` en esa página.
 
 ::: tip
 Si tiene [jq](https://stedolan.github.io/jq/) instalado, también puede descarga la última AppImage directamente:
 
 ```bash
-# consulte la última versión de Linux desde la API QOwnNotes, analice el JSON para la URL y descárguelo
+# consulte el último lanzamiento de Linux desde la API de QOwnNotes, analice el JSON para la URL y descárguelo
 curl -L https://api.qownnotes.org/latest_releases/linux | jq .url | xargs curl -Lo QOwnNotes-x86_64.AppImage
 ```
+
 :::
 
 Luego puede cambiar los permisos de ejecución en el archivo:
@@ -17,12 +18,44 @@ Luego puede cambiar los permisos de ejecución en el archivo:
 chmod a+x QOwnNotes-*.AppImage
 ```
 
-Afterward you should be able to execute the AppImage to run QOwnNotes.
+Posteriormente, debería ser capaz de ejecutar la AppImage para usar QOwnNotes.
+
+Current QOwnNotes AppImages include the required FUSE userspace library and do not require `libfuse2` to be installed separately. The system still needs kernel FUSE support. Older QOwnNotes AppImages may still require `libfuse2`.
 
 ::: warning
 Si desea utilizar el **actualizador automático**, asegúrese de colocar su AppImage en un lugar donde su cuenta de usuario tenga acceso de escritura, como en algún lugar de su directorio de inicio.
 :::
 
 ::: tip
-Si tiene problemas para ejecutar AppImage, porque su versión de glibc es demasiado antigua, puede probar la [AppImage construida en OBS](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/AppImage/QOwnNotes-latest-x86_64.AppImage), debe estar construida con glibc 2.16.
+Si tiene problemas para ejecutar AppImage, porque su versión de glibc es demasiado antigua, puede probar la [AppImage construida en OBS](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/AppImage/QOwnNotes-latest-x86_64.AppImage), que debería estar construida con glibc 2.16.
+:::
+
+## Modo portátil
+
+Puede ejecutar la AppImage en modo **portátil** pasando el argumento `--portable`:
+
+```bash
+./QOwnNotes-x86_64.AppImage --portable
+```
+
+En el modo portátil, todos los datos de la aplicación se almacenan en una carpeta `Data` junto al archivo AppImage, en lugar de en su directorio personal. Esto incluye:
+
+- Configuración (`Data/QOwnNotes.ini`)
+- La base de datos de notas (`Data/QOwnNotes.sqlite`)
+- Sus notas (`Data/Notes/`)
+- Scripts, diccionarios de corrección ortográfica y otros datos de la aplicación
+
+Esto facilita llevar QOwnNotes junto con todas sus notas en una unidad USB o cualquier otro dispositivo de almacenamiento portátil.
+
+::: Consejo Asegúrese de que el directorio que contiene el archivo AppImage tenga permisos de escritura, para que la carpeta `Data` pueda crearse junto a él.
+:::
+
+::: tip
+Si QOwnNotes registra el mensaje `Could not write secret to keychain`, instale los paquetes de Secret Service que falten en su distribución de Linux y reinicie su sesión de escritorio.
+
+Para escritorios basados en GNOME y otros sistemas de Servicio Secreto, instale `gnome-keyring`, `libsecret` y `seahorse`.
+
+Para KDE Plasma, instale soporte para KWallet como `kwalletmanager`.
+
+QOwnNotes recurrirá al cifrado heredado si el llavero del escritorio no está disponible.
 :::

@@ -38,6 +38,12 @@ echo Deleting temporary files
 del %source%
 del %unzipExecutable%
 echo ======================================
+echo Deleting language files in root dir
+del /Q %destination%\*.qm
+echo ======================================
+echo Deleting icuuc.dll, which could cause issues
+del /Q icuuc.dll
+echo ======================================
 echo Starting QOwnNotes:
 echo %qownnotesCommand%
 rem start in background

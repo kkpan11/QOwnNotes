@@ -8,8 +8,8 @@ import QOwnNotesTypes 1.0
 
 Script {
     /**
-        * Will be run when the scripting engine initializes
-        */
+     * Will be run when the scripting engine initializes
+     */
     function init() {
         script.log("Hello world!");
     }
@@ -33,5 +33,5 @@ In the **Scripting settings** you can also install scripts directly from the [**
 در صورت نیاز به دسترسی برای عملکرد معینی در QOwnNotes یا داشتن سؤال و ایده ای، لطفاً یک مسئله را در [صفحه مسائل QOwnNotes](https://github.com/pbek/QOwnNotes/issues) باز کنید.
 
 ::: tip
-برای ورود می توانید از فرمان `script.log()` استفاده کنید تا وارد ابزارک ورود شوید.
+For logging, you can use the `script.log()` command to log to the _Log panel_, which you can turn on in the _Window / Panels_ menu.
 :::

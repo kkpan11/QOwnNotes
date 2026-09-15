@@ -1,4 +1,6 @@
-#!/usr/bin/env bash
+#! /usr/bin/env nix-shell
+#! nix-shell --pure -i bash -p crowdin-cli xmlstarlet perl
+# shellcheck shell=bash
 #
 # Use this script in $ProjectFileDir$ to download the translations from Crowdin
 #
@@ -99,28 +101,48 @@ popd || exit 1
 
 echo "Remove all translated webpage folders, but German, Hungarian, Persian and Dutch..."
 # Remove all active languages here!
-find webpage/src -type d -regextype posix-egrep -regex ".+src\/(am|be|bg|bn|bs|ca|ceb|cs|da|el|et|eu|fi|fil|ga|gl|ha|he|hi|hil|hr|id|is|ja|km|ku|lt|lv|mi|mk|ms|no|pa|pcm|pt|ro|ru|si|sk|sl|sn|sq|sr|sv|ta|th|tl|tlh|tr|uk|ur|uz|vi|xh|yi|zh|zu)$" -exec rm -Rf "{}" \;
-
+find webpage/src -type d -regextype posix-egrep -regex ".+src\/(am|be|bg|bn|bs|ca|ceb|cs|da|en|el|et|eu|fi|fil|ga|gl|ha|he|hi|hil|hr|id|is|ja|km|ku|lt|lv|mi|mk|ms|no|pa|pcm|pt|ro|ru|si|sk|sl|sn|sq|sr|sv|ta|th|tl|tlh|tr|uk|ur|uz|vi|xh|yi|zh|zu)$" -exec rm -Rf "{}" \;
 
 #
 # Fix Crowdin translation bugs
 #
 
 fixCrowdinTranslationProblems() {
+  # Fix missing space between ::: and container type (e.g. :::tip -> ::: tip)
+  sed -i -E -e 's/^:::([a-zA-Z])/\:\:\: \1/g' "$1"
   sed -i -e 's/::: Tip/::: tip/g' "$1"
   sed -i -e 's/::: tipp/::: tip/g' "$1"
   sed -i -e 's/::: suggerimento/::: tip/g' "$1"
   sed -i -e 's/::: Trinkgeld/::: tip/g' "$1"
+  sed -i -E -e 's/^:::[[:space:]]*팁[[:space:]]*(.*)$/::: tip\n\1/g' "$1"
   sed -i -e 's/::: Warnung/::: warning/g' "$1"
+  sed -i -E -e 's/^:::[[:space:]]*경고[[:space:]]*(.*)$/::: warning\n\1/g' "$1"
   sed -i -e 's/::: warning /::: warning\n/g' "$1"
   sed -i -e 's/::: tip /::: tip\n/g' "$1"
   sed -i -e ':a' -e 'N' -e '$!ba' -e 's/::: tip\nInfo /::: tip Info\n/g' "$1"
   sed -i -e ':a' -e 'N' -e '$!ba' -e 's/::: tip\nImportant /::: tip Important\n/g' "$1"
   sed -i -e 's/ :::$/\n:::/g' "$1"
+  perl -i -pe 's|<a href="([^"]+)"([^>]*)>([^<]+)</a>|[$3]($1)|g' "$1"
+  # Fix malformed anchor tags where the closing > of the opening tag is missing (e.g. <a href="url"text</a>)
+  perl -i -pe 's|<a href="([^"]+)"([^>\s<][^<]*)</a>|[$2]($1)|g' "$1"
   sed -i -e ':a' -e 'N' -e '$!ba' -e 's/~~~\n~~~/```\n~~~/g' "$1"
+  # Convert <code>text</code> pairs to backtick code spans
+  perl -i -pe 's|<code>([^<]*)</code>|`$1`|g' "$1"
+  # Convert <li> at the start of a line to a markdown list item
+  sed -i -E 's|^<li>|- |g' "$1"
+  # Remove orphaned HTML list/paragraph tags that break Vue template compilation
+  sed -i -E 's|</?(li|ul|ol|p)\s*>||g' "$1"
+  # Remove remaining orphaned <code> and </code> tags
+  sed -i -E 's|</?code\s*>||g' "$1"
+  # Remove numeric placeholder tags like <0>, </0>, <1>, </1>, </0 >, etc.
+  sed -i -E 's|</?[0-9]+\s*>||g' "$1"
+  # Fix HTML entity &gt; to > inside backtick code spans (Crowdin sometimes encodes -> as -&gt;)
+  perl -i -pe 's|(`[^`]*?)&gt;([^`]*`)|$1>$2|g' "$1"
+  # Fix HTML entity &lt; to < inside backtick code spans
+  perl -i -pe 's|(`[^`]*?)&lt;([^`]*`)|$1<$2|g' "$1"
 }
 
 echo "Fix Crowdin translation bugs..."
 export -f fixCrowdinTranslationProblems
 # Add all active languages here!
-find webpage/src -type f -regextype posix-egrep -regex ".+src\/(de|nl|fa|hu|es|fr|it|ar|pl)\/.+\.md" -exec bash -c 'fixCrowdinTranslationProblems "$0"' {} \;
+find webpage/src -type f -regextype posix-egrep -regex ".+src\/(de|nl|fa|hu|es|fr|it|ar|pl|ko)\/.+\.md" -exec bash -c 'fixCrowdinTranslationProblems "$0"' {} \;

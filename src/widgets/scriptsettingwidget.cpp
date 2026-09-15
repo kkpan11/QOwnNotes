@@ -7,9 +7,10 @@
 #include <QJsonObject>
 #include <limits>
 
+#include "services/cryptoservice.h"
 #include "ui_scriptsettingwidget.h"
 
-ScriptSettingWidget::ScriptSettingWidget(QWidget *parent, Script script,
+ScriptSettingWidget::ScriptSettingWidget(QWidget *parent, const Script &script,
                                          QMap<QString, QVariant> variableMap)
     : QWidget(parent), ui(new Ui::ScriptSettingWidget) {
     ui->setupUi(this);
@@ -73,6 +74,25 @@ ScriptSettingWidget::ScriptSettingWidget(QWidget *parent, Script script,
         }
 
         ui->stringLineEdit->setText(value);
+        ui->stringLineEdit->setEchoMode(QLineEdit::Normal);
+        ui->stringLineEdit->show();
+    } else if (type == "string-secret") {
+        QString value;
+        // The secret identifier is the identifier with a "!" in front (so we can mask it in the
+        // settings dump)
+        const QString secretIdentifier = QStringLiteral("!") + identifier;
+
+        if (!jsonObject.value(secretIdentifier).isUndefined()) {
+            value = jsonObject.value(secretIdentifier).toString();
+
+            // Decrypt the value if the value is not empty
+            if (!value.isEmpty()) {
+                value = CryptoService::instance()->decryptToString(value);
+            }
+        }
+
+        ui->stringLineEdit->setText(value);
+        ui->stringLineEdit->setEchoMode(QLineEdit::Password);
         ui->stringLineEdit->show();
     } else if (type == "text") {
         QString value = jsonObject.value(identifier).toString();
@@ -136,6 +156,13 @@ void ScriptSettingWidget::storeSettingsVariable(const QJsonValue &value) {
     _script.refetch();
 
     QString identifier = _variableMap["identifier"].toString();
+
+    // The secret identifier is the identifier with a "!" in front (so we can mask it in the
+    // settings dump)
+    if (_variableMap["type"].toString() == "string-secret") {
+        identifier = QStringLiteral("!") + identifier;
+    }
+
     QJsonObject jsonObject = _script.getSettingsVariablesJsonObject();
     jsonObject.insert(identifier, value);
     _script.setSettingsVariablesJson(jsonObject);
@@ -148,7 +175,14 @@ void ScriptSettingWidget::storeSettingsVariable(const QJsonValue &value) {
  * @param arg1
  */
 void ScriptSettingWidget::on_stringLineEdit_textChanged(const QString &arg1) {
-    storeSettingsVariable(arg1);
+    if (_variableMap["type"].toString() == "string-secret") {
+        const QString key = QStringLiteral("database/script/%1/settings/!%2")
+                                .arg(_script.getId())
+                                .arg(_variableMap["identifier"].toString());
+        storeSettingsVariable(CryptoService::instance()->encryptToString(arg1, key));
+    } else {
+        storeSettingsVariable(arg1);
+    }
 }
 
 /**

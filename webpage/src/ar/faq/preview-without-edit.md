@@ -1,11 +1,9 @@
 # كيف يمكنني إظهار لوحة المعاينة فقط بدون لوحة تحرير الملاحظات؟
 
-يمكنك فعل ذلك بتعطيل خيار أن **لوحة تحرير الملاحظات** هي **الأداة المركزية** في **إعدادات اللوحات**.
+Open **Settings > Interface > Layouts**, select the layout, and choose **Note preview** as its **central widget**.
 
-عندئذٍ الأفضل إنشاء مساحة عمل جديدة من نوع `معاينة فقط` بالضغط على **نافذة &gt; مساحة العمل &gt; أضف مساحة عمل جديدة** في القائمة الرئيسية. وستتمكن من التحويل بين تخطيطات الواجهة المختلفة.
+You can create a new layout first with **Add from current**, or use **Add from preset...** and select the **Preview only** preset.
 
-بعد ذلك يمكنك إخفاء لوحة تحرير الملاحظات من **قائمة نافذة &gt; لوحات**.
+Afterward, turn off the note edit panel in the **Window > Panels** menu. The preview will automatically use the available central area.
 
 تذكر أنك تستطيع تحريك جميع اللوحات كما تشاء، بنقر **نافذة &gt; فكّ قفل اللوحات** في القائمة الرئيسية. وتستطيع أيضا تغيير حجم جميع اللوحات لتناسب احتياجك.
-
-كبديل، يمكنك التحويل إلى تخطيط **معاينة فقط** في **إعدادات تخطيط الواجهة**.

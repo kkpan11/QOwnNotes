@@ -12,12 +12,12 @@
 #include <QKeyEvent>
 #include <QMenu>
 #include <QMessageBox>
-#include <QSettings>
 #include <QShortcut>
 #include <QSplitter>
 
 #include "entities/calendaritem.h"
-#include "services/owncloudservice.h"
+#include "services/cloudservice.h"
+#include "services/settingsservice.h"
 #include "ui_tododialog.h"
 
 TodoDialog::TodoDialog(const QString &taskUid, QWidget *parent)
@@ -51,17 +51,18 @@ TodoDialog::TodoDialog(const QString &taskUid, QWidget *parent)
     ui->tagCloudLayout->setSizeConstraint(QLayout::SetFixedSize);
     ui->tagsLayout->addWidget(_todoTagsScrollArea);
     _todoTagsScrollArea->setVisible(false);
+    ui->editFrame->setEnabled(false);
 }
 
 void TodoDialog::updateCalendarItem(CalendarItem item) {
-    OwnCloudService *ownCloud = OwnCloudService::instance();
-    bool result = ownCloud->updateICSDataOfCalendarItem(&item);
+    CloudService *cloud = CloudService::instance();
+    bool result = cloud->updateICSDataOfCalendarItem(&item);
 
     qDebug() << __func__ << " - 'result': " << result;
 
     if (result) {
         // post the calendar item to the server (and reload note tree)
-        ownCloud->postCalendarItemToServer(item, this);
+        cloud->postCalendarItemToServer(item, this);
     }
 }
 
@@ -101,6 +102,8 @@ TodoDialog::~TodoDialog() { delete ui; }
 void TodoDialog::setupUi() {
     setupMainSplitter();
     refreshUi();
+    Utils::Gui::initTreeWidgetHeaderOrderPersistence(
+        ui->todoItemTreeWidget, QStringLiteral("TodoDialog/todoItemTreeWidgetHeaderOrder"));
 
     ui->newItemEdit->installEventFilter(this);
     ui->todoItemTreeWidget->installEventFilter(this);
@@ -171,7 +174,7 @@ void TodoDialog::refreshUi() {
 
     ui->todoItemLoadingProgressBar->hide();
 
-    QSettings settings;
+    SettingsService settings;
 
     {
         const QSignalBlocker blocker(ui->showCompletedItemsCheckBox);
@@ -214,7 +217,7 @@ void TodoDialog::setupMainSplitter() {
     this->mainSplitter->addWidget(ui->editFrame);
 
     // restore splitter sizes
-    QSettings settings;
+    SettingsService settings;
     QByteArray state = settings.value(QStringLiteral("TodoDialog/mainSplitterState")).toByteArray();
     this->mainSplitter->restoreState(state);
 
@@ -228,7 +231,7 @@ void TodoDialog::loadTodoListData() {
     const QSignalBlocker blocker(ui->todoListSelector);
     Q_UNUSED(blocker)
 
-    QSettings settings;
+    SettingsService settings;
     ui->todoListSelector->clear();
     ui->todoListSelector->addItems(
         settings.value(QStringLiteral("ownCloud/todoCalendarEnabledList")).toStringList());
@@ -240,8 +243,8 @@ void TodoDialog::loadTodoListData() {
 void TodoDialog::reloadTodoList() {
     ui->todoItemLoadingProgressBar->setValue(0);
     ui->todoItemLoadingProgressBar->show();
-    OwnCloudService *ownCloud = OwnCloudService::instance();
-    ownCloud->todoGetTodoList(ui->todoListSelector->currentText(), this);
+    CloudService *cloud = CloudService::instance();
+    cloud->todoGetTodoList(ui->todoListSelector->currentText(), this);
 }
 
 /**
@@ -350,8 +353,12 @@ void TodoDialog::reloadTodoListItems() {
         }
     }
 
-    ui->todoItemTreeWidget->resizeColumnToContents(0);
-    ui->todoItemTreeWidget->resizeColumnToContents(1);
+    if (Utils::Gui::hasTreeWidgetHeaderLayout(ui->todoItemTreeWidget)) {
+        Utils::Gui::restoreTreeWidgetHeaderLayout(ui->todoItemTreeWidget);
+    } else {
+        ui->todoItemTreeWidget->resizeColumnToContents(0);
+        ui->todoItemTreeWidget->resizeColumnToContents(1);
+    }
 
     // set the current row of the task list to the first row
     jumpToTodoListItem();
@@ -413,6 +420,7 @@ void TodoDialog::clearTodoList() {
 }
 
 void TodoDialog::resetEditFrameControls() {
+    ui->editFrame->setEnabled(false);
     ui->summaryEdit->setText(QString());
     ui->descriptionEdit->setPlainText(QString());
     ui->tagsLineEdit->setText(QString());
@@ -437,7 +445,7 @@ QTreeWidgetItem *TodoDialog::findTodoItemTreeWidgetItemByUID(const QString &uid)
 }
 
 void TodoDialog::storeSettings() {
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("TodoDialog/geometry"), saveGeometry());
     settings.setValue(QStringLiteral("TodoDialog/mainSplitterState"),
                       this->mainSplitter->saveState());
@@ -480,6 +488,8 @@ void TodoDialog::on_todoListSelector_currentIndexChanged(int index) {
     Q_UNUSED(index)
 
     ui->newItemEdit->clear();
+
+    resetEditFrameControls();
 
     // store the todoListSelectorSelectedItem
     storeSettings();
@@ -525,17 +535,17 @@ void TodoDialog::on_saveButton_clicked() {
 
     updateCurrentCalendarItemWithFormData();
 
-    OwnCloudService *ownCloud = OwnCloudService::instance();
+    CloudService *cloud = CloudService::instance();
 
     // update the local icsData from server
-    ownCloud->updateICSDataOfCalendarItem(&currentCalendarItem);
+    cloud->updateICSDataOfCalendarItem(&currentCalendarItem);
 
     // post the calendar item to the server
-    ownCloud->postCalendarItemToServer(currentCalendarItem, this);
+    cloud->postCalendarItemToServer(currentCalendarItem, this);
 
     qDebug() << currentCalendarItem;
 
-    QSettings settings;
+    SettingsService settings;
     if (settings.value(QStringLiteral("closeTodoListAfterSave")).toBool()) {
         close();
     }
@@ -579,10 +589,10 @@ void TodoDialog::createNewTodoItem(const QString &name, const QString &relatedUi
     // set the focus to the description edit after we loaded the tasks
     _setFocusToDescriptionEdit = true;
 
-    OwnCloudService *ownCloud = OwnCloudService::instance();
+    CloudService *cloud = CloudService::instance();
 
     // post the calendar item to the server
-    ownCloud->postCalendarItemToServer(calItem, this);
+    cloud->postCalendarItemToServer(calItem, this);
 
     //    if ( calItem.isFetched() )
     //    {
@@ -614,8 +624,10 @@ void TodoDialog::on_removeButton_clicked() {
 
         // remove the calendar item from the ownCloud server
         // (this will reload the task list as well)
-        OwnCloudService *ownCloud = OwnCloudService::instance();
-        ownCloud->removeCalendarItem(calItem, this);
+        CloudService *cloud = CloudService::instance();
+        cloud->removeCalendarItem(calItem, this);
+
+        resetEditFrameControls();
     }
 }
 
@@ -658,7 +670,7 @@ void TodoDialog::on_newItemEdit_textChanged() {
         QLatin1String(""), Qt::MatchContains | Qt::MatchRecursive);
 
     // search todo item if at least 2 characters were entered
-    if (arg1.count() >= 2) {
+    if (arg1.size() >= 2) {
         QList<QString> uidList =
             CalendarItem::searchAsUidList(arg1, ui->todoListSelector->currentText());
 
@@ -701,7 +713,7 @@ void TodoDialog::searchForSearchLineTextInNoteTextEdit() {
 void TodoDialog::searchInDescriptionTextEdit(QString &str) {
     QList<QTextEdit::ExtraSelection> extraSelections;
 
-    if (str.count() >= 2) {
+    if (str.size() >= 2) {
         ui->descriptionEdit->moveCursor(QTextCursor::Start);
         QColor color = QColor(0, 180, 0, 100);
 
@@ -859,6 +871,7 @@ void TodoDialog::on_todoItemTreeWidget_currentItemChanged(QTreeWidgetItem *curre
         ui->saveButton->setEnabled(true);
         ui->noteButton->setEnabled(true);
         ui->removeButton->setEnabled(true);
+        ui->editFrame->setEnabled(true);
     }
 }
 
@@ -878,10 +891,10 @@ void TodoDialog::on_todoItemTreeWidget_itemChanged(QTreeWidgetItem *item, int co
         calItem.updateCompleted(item->checkState(0) == Qt::Checked);
         calItem.store();
 
-        OwnCloudService *ownCloud = OwnCloudService::instance();
+        CloudService *cloud = CloudService::instance();
 
         // post the calendar item to the server
-        ownCloud->postCalendarItemToServer(calItem, this);
+        cloud->postCalendarItemToServer(calItem, this);
     }
 }
 
@@ -949,7 +962,7 @@ void TodoDialog::reloadCurrentTags() {
 QString TodoDialog::getTagString() {
     // Remove any possible empty items
     _todoTagsList.removeAll(QString(""));
-    _todoTagsList.removeAll(QString(" "));
+    _todoTagsList.removeAll(QStringLiteral(" "));
     QString fullTagString;
     // We can't use regular join since it also joins escaped commas
     for (const auto &str : _todoTagsList) {

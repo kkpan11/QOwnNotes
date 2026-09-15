@@ -32,6 +32,7 @@
 
 #include <litehtml.h>
 
+#include <QHash>
 #include <QPaintDevice>
 #include <QPixmap>
 #include <QPoint>
@@ -57,6 +58,16 @@ public:
         int x = -1;
     };
 
+    // Per-element selection segment info used by draw_text to render only
+    // the selected portion of a text element in the highlight text color.
+    struct SegmentInfo
+    {
+        int charStart = 0;  // First selected character index (0 = from beginning)
+        int charEnd = -1;   // One-past-last selected char (-1 = to end of string)
+        int pixelStart = 0; // Pixel offset of charStart from element left edge
+        int pixelEnd = -1;  // Pixel offset of charEnd from element left edge (-1 = to right edge)
+    };
+
     enum class Mode { Free, Word };
 
     bool isValid() const;
@@ -68,6 +79,11 @@ public:
     Element endElem;
     QVector<QRect> selection;
     QString text;
+
+    // Maps each selected element's unadjusted placement rect (document
+    // coordinates) to its selection segment info; populated by update() and
+    // consumed by DocumentContainerPrivate::draw_text().
+    QHash<QRect, SegmentInfo> segmentMap;
 
     QPoint selectionStartDocumentPos;
     Mode mode = Mode::Free;
@@ -133,9 +149,10 @@ public: // document_container API
                   bool valid_y) override;
     void del_clip() override;
     void get_client_rect(litehtml::position &client) const override;
-    std::shared_ptr<litehtml::element> create_element(const litehtml::tchar_t *tag_name,
-                                                      const litehtml::string_map &attributes,
-                                                      const std::shared_ptr<litehtml::document> &doc) override;
+    std::shared_ptr<litehtml::element> create_element(
+        const litehtml::tchar_t *tag_name,
+        const litehtml::string_map &attributes,
+        const std::shared_ptr<litehtml::document> &doc) override;
     void get_media_features(litehtml::media_features &media) const override;
     void get_language(litehtml::tstring &language, litehtml::tstring &culture) const override;
 

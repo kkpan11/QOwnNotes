@@ -15,6 +15,7 @@
 
 #include "libraries/fuzzy/kfuzzymatcher.h"
 #include "models/commandmodel.h"
+#include "services/settingsservice.h"
 #include "utils/misc.h"
 
 class CommandBarFilterModel : public QSortFilterProxyModel {
@@ -57,6 +58,9 @@ class CommandBarStyleDelegate : public QStyledItemDelegate {
                const QModelIndex &index) const override {
         QStyleOptionViewItem options = option;
         initStyleOption(&options, index);
+        SettingsService settings;
+        const bool hideMenuIcons = Utils::Misc::areMenuIconsHidden();
+        if (hideMenuIcons) options.icon = QIcon();    // remove icon
 
         QTextDocument doc;
 
@@ -74,7 +78,16 @@ class CommandBarStyleDelegate : public QStyledItemDelegate {
         const QString component = QStringLiteral("<span style=\"color: gray;\">") + strs.at(0) +
                                   QStringLiteral(": </span>");
 
-        doc.setHtml(component + str);
+        str = component + str;
+        bool overrideInterfaceFontSize =
+            settings.value(QStringLiteral("overrideInterfaceFontSize"), false).toBool();
+        if (overrideInterfaceFontSize) {
+            str = QStringLiteral("<span style=\"font-size: %1px;\">")
+                      .arg(settings.value(QStringLiteral("interfaceFontSize"), 11).toString()) +
+                  str + QStringLiteral("</span>");
+        }
+
+        doc.setHtml(str);
         doc.setDocumentMargin(2);
 
         painter->save();
@@ -99,7 +112,7 @@ class CommandBarStyleDelegate : public QStyledItemDelegate {
             auto r = options.widget->style()->subElementRect(QStyle::SE_ItemViewItemText, &options,
                                                              options.widget);
             auto hasIcon = index.data(Qt::DecorationRole).value<QIcon>().isNull();
-            if (hasIcon)
+            if (hasIcon && !hideMenuIcons)
                 doc.setTextWidth(r.width() - 25);
             else
                 doc.setTextWidth(r.width());
@@ -109,7 +122,7 @@ class CommandBarStyleDelegate : public QStyledItemDelegate {
         painter->translate(option.rect.x(), option.rect.y());
         // leave space for icon
 
-        if (!rtl) painter->translate(25, 0);
+        if (!rtl && !hideMenuIcons) painter->translate(25, 0);
 
         QAbstractTextDocumentLayout::PaintContext ctx;
         ctx.palette.setColor(QPalette::Text, options.palette.text().color());

@@ -46,6 +46,8 @@ class IssueAssistantDialog : public MasterDialog {
 
     void on_newIssueButton_clicked();
 
+    void on_debugInfoAnonymizeCheckBox_toggled(bool checked);
+
    private:
     Ui::IssueAssistantDialog *ui;
 
@@ -54,4 +56,6 @@ class IssueAssistantDialog : public MasterDialog {
     void generateSubmitPageContent() const;
 
     void refreshPage(int index) const;
+
+    void refreshDebugOutput() const;
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QHash>
+#include <QList>
 #include <QString>
 #include <QXmlStreamReader>
 
@@ -22,6 +23,12 @@ class EvernoteImportDialog : public MasterDialog {
         QString fileName;
     };
 
+    struct MetaDataEntry {
+        QString key;
+        QString name;
+        QString value;
+    };
+
    public:
     explicit EvernoteImportDialog(QWidget *parent = 0);
     ~EvernoteImportDialog();
@@ -39,7 +46,7 @@ class EvernoteImportDialog : public MasterDialog {
     QHash<QString, MediaFileData> _mediaFileDataHash;
     QHash<QString, MediaFileData> _attachmentFileDataHash;
     QHash<QString, QString> _metaDataAttributeHash;
-    QString _metaDataTableText;
+    QList<MetaDataEntry> _metaDataEntries;
 
     void setupMetaDataTreeWidgetItems();
 
@@ -64,6 +71,7 @@ class EvernoteImportDialog : public MasterDialog {
     void parseMetaDataItem(QXmlStreamReader &xml, bool isNoteAttribute = false);
     void determineMetaDataAttributes();
     QString compileMetaDataText();
+    bool isMetaDataFrontmatterEnabled() const;
     void parseNoteAttributes(QXmlStreamReader &xml);
     void tagNote(Note &note, QStringList &tagNames);
     void resetNoteCount();

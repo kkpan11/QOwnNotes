@@ -5,16 +5,14 @@
 [Issues](https://github.com/pbek/QOwnNotes/issues) |
 [Shortcuts](https://www.qownnotes.org/getting-started/shortcuts.html) |
 [Documentation](https://www.qownnotes.org/getting-started/concept.html) |
+[Privacy Policy](./PRIVACY.md) |
 [Screenshots](https://www.qownnotes.org/getting-started/overview.html) |
-[Nextcloud API](https://apps.nextcloud.com/apps/qownnotesapi) |
-[Nextcloud App Page](https://apps.nextcloud.com/apps/qownnotes) |
-[ownCloud API](https://marketplace.owncloud.com/apps/qownnotesapi) |
+[Nextcloud API App](https://apps.nextcloud.com/apps/qownnotesapi) |
+[ownCloud API App](https://marketplace.owncloud.com/apps/qownnotesapi) |
+[Matrix room](https://matrix.to/#/#qownnotes:matrix.org) |
 [Telegram Group](https://t.me/QOwnNotes) |
 [IRC Chat](https://web.libera.chat/#qownnotes) |
-[Gitter Chat](https://gitter.im/qownnotes/qownnotes) |
 [Mastodon](https://social.qownnotes.org/@qownnotes) |
-[Twitter](https://twitter.com/QOwnNotes) |
-[Facebook](https://www.facebook.com/QOwnNotes) |
 [QOwnNotes Web Companion Firefox extension](https://addons.mozilla.org/en-US/firefox/addon/qownnotes-web-companion/) |
 [QOwnNotes Web Companion Chrome extension](https://chrome.google.com/webstore/detail/qownnotes-web-companion/pkgkfnampapjbopomdpnkckbjdnpkbkp) |
 [QOwnNotes Web App](https://app.qownnotes.org/) |
@@ -28,7 +26,6 @@
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/qownnotes/localized.svg)](https://crowdin.com/project/qownnotes)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/qownnotes/qownnotes)
 
-
 [QOwnNotes](https://www.qownnotes.org) is the **open source notepad** with
 [**Markdown support**](https://github.com/pbek/QOwnNotes/blob/main/src/demonotes/Markdown%20Cheatsheet.md)
 and **todo list manager** for **GNU/Linux**, **macOS** and **Windows**,
@@ -37,7 +34,7 @@ and [**ownCloud Notes**](https://github.com/owncloud/notes).
 
 You are able to **write down** your **thoughts** with **QOwnNotes** and
 **edit or search** for them later from your **mobile device**, like with
-[Nextcloud Notes for Android](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes)
+[QOwnNotes Android](https://github.com/qownnotes/qownnotes-android/releases), the default Android app,
 or the **Nextcloud / ownCloud web-service**.
 
 The notes are stored as **plain text markdown files** and are
@@ -61,15 +58,16 @@ app on your server.
 
 To access your ownCloud notes from your **mobile device** you may want to get one of these:
 
+- For Android (default): [QOwnNotes Android](https://github.com/qownnotes/qownnotes-android/releases)
 - For Android and OwnCloud: [MyOwnNotes](https://f-droid.org/app/org.aykit.MyOwnNotes)
 - For Android and Nextcloud: [Notes](https://f-droid.org/packages/it.niedermann.owncloud.notes)
 - For iOS: [CloudNotes](https://itunes.apple.com/app/cloudnotes-owncloud-notes/id813973264)
 
-On Android you could also use any sync-tool like *Synchronize Ultimate* or *FolderSync*
-to sync your note files and use software like *neutriNotes* or
+On Android you could also use any sync-tool like _Synchronize Ultimate_ or _FolderSync_
+to sync your note files and use software like _neutriNotes_ or
 [**Markor**](https://f-droid.org/packages/net.gsantner.markor/) to edit your notes.
 
-On iOS [Notebooks](https://itunes.apple.com/us/app/notebooks-write-and-organize/id780438662)
+On iOS [Notebooks](https://www.notebooksapp.com/ios)
 may also work well (syncing notes via WebDAV).
 
 ## Screenshot
@@ -87,51 +85,56 @@ You can visit the [QOwnNotes project page](https://www.qownnotes.org) for more *
   (install [QOwnNotesAPI](https://github.com/pbek/qownnotesapi) on your server)
 - **trashed notes** can be restored from your Nextcloud / ownCloud server
   (install [QOwnNotesAPI](https://github.com/pbek/qownnotesapi) on your server)
-    - there also is a local trash
+  - there also are **local trash** and **system trash** modes
 - sub-string searching of notes is possible and search results are highlighted in the notes
 - application can be operated with **customizable keyboard shortcuts**
+  - supports **global keyboard shortcuts on Wayland**
 - external changes of note files are watched (notes or note list are reloaded)
 - differences between current note and externally changed note are shown in a dialog
 - **markdown highlighting** of notes and a markdown **preview**
-- **[spellchecking](https://www.qownnotes.org/editor/spellchecking.html)** support
+  - includes **inline image previews**, **heading folding**, and optional hiding of Markdown formatting syntax
+- optional **wiki-style note links** like `[[Note]]` with auto-completion, heading anchors, aliases, backlinks, and refactoring support
+- **[spellchecking](https://www.qownnotes.org/editor/spellchecking.html)** and optional **[LanguageTool grammar and style checking](https://www.qownnotes.org/editor/languagetool.html)**, **[Harper grammar and style checking](https://www.qownnotes.org/editor/harper.html)**, and **[Markdown LSP](https://www.qownnotes.org/editor/markdownlsp.html)** support (e.g. [Marksman](https://github.com/artempyanykh/marksman) for completions and diagnostics, or [Rumdl](https://github.com/rvben/rumdl) for linting)
 - **tabbing support** for editing notes
 - scripting support and an online [script repository](https://github.com/qownnotes/scripts)
   where you can install scripts inside the application
-- implementation of the **[OpenAI completion API](https://www.qownnotes.org/blog/2024-05-17-AI-support-was-added-to-QOwnNotes.html)** to be used in scripts
+- built-in **AI support** with script integration for providers like **OpenAI** and **Groq**
+  - includes a built-in **MCP server** so external AI agents can search and fetch notes securely
 - [QOwnNotes Web Companion browser extension](https://github.com/qownnotes/web-companion)
-  to a add notes from the selected text and other features
-	- visit the [Chrome Web Store](https://chrome.google.com/webstore/detail/qownnotes-web-companion/pkgkfnampapjbopomdpnkckbjdnpkbkp)
-	  page to install the app on Google Chrome
-	- visit the [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/qownnotes-web-companion)
-	  page to install the app on Mozilla Firefox
+  to add notes from the selected text and other features
+  - visit the [Chrome Web Store](https://chrome.google.com/webstore/detail/qownnotes-web-companion/pkgkfnampapjbopomdpnkckbjdnpkbkp)
+    page to install the app on Google Chrome
+  - visit the [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/qownnotes-web-companion)
+    page to install the app on Mozilla Firefox
 - notes are getting their name from the first line of the note text (just like
   in the Nextcloud / ownCloud notes web-application) and the note text files are
   automatically renamed, if the first line changes
-    - this feature can also be turned off, and you can use any filename you like
-- manage your Nextcloud / ownCloud todo lists (ownCloud tasks or Tasks Plus / Calendar Plus)
+  - this feature can also be turned off, and you can use any filename you like
+- manage your Nextcloud / ownCloud todo lists (ownCloud tasks or Tasks Plus / Calendar Plus), or use another **CalDAV** server
 - create [Nextcloud Deck](https://apps.nextcloud.com/apps/deck) cards and link to them in your notes
 - **encryption of notes** (AES-256 is built in, or you can use custom encryption methods like
   **[Keybase.io](https://keybase.io)** ([encryption-keybase.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/encryption-keybase.qml)) or
   **PGP** ([encryption-pgp.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/encryption-pgp.qml)))
-- **dark mode** theme support
+- **dark mode** theme support, live theme switching, and custom **color modes**
 - all **panels can be placed wherever you want**, they can even float or stack (fully dockable)
 - **toolbars** are **fully customizable**
 - support for **freedesktop theme icons**, so you can use QOwnNotes with your
   native desktop icons and with your favorite dark desktop theme
   QOwnNotes supports Freedesktop icon themes
 - support for hierarchical **note tagging** and **note subfolders**
+  - linked files and attachments can be managed from the **Navigation panel**
 - support for **sharing notes** on your Nextcloud / ownCloud server
 - **portable mode** for carrying QOwnNotes around on USB sticks
 - **Vim mode**
 - **distraction free mode**, **full-screen mode**, **typewriter mode**
-- Evernote (now with large files) and Joplin import
+- Evernote (now with large files and optional **YAML front matter** metadata) and Joplin import
 - QOwnNotes is **available in over 60 different languages** like English, German,
   French, Polish, Chinese, Japanese, Russian, Portuguese, Hungarian, Dutch and Spanish
-	- [Your help](https://www.qownnotes.org/contributing/translation.html) is
-	  very much appreciated to improve these translations or to translate
-	  QOwnNotes in more languages
-	- Join the fun at **[Crowdin](https://crowdin.com/project/qownnotes)**
-	  to **help** with the **translations**
+  - [Your help](https://www.qownnotes.org/contributing/translation.html) is
+    very much appreciated to improve these translations or to translate
+    QOwnNotes in more languages
+  - Join the fun at **[Crowdin](https://crowdin.com/project/qownnotes)**
+    to **help** with the **translations**
 
 ## Installation
 
@@ -156,7 +159,7 @@ git submodule update --init
 Then download [Qt Creator](https://www.qt.io/download-open-source), you will also
 need the packages `qtwebsockets` to build QOwnNotes with Qt6
 (only `qtwebsockets` for Qt5). If you build under Windows, you want to stick to
-*MinGw 64-bit*.
+_MinGw 64-bit_.
 
 Afterward open the project file `src/QOwnNotes.pro` and click on
 **Build** / **Build Project QOwnNotes**.

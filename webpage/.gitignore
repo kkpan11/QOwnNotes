@@ -11,3 +11,20 @@ dist
 config.local.js
 basement_dist
 /scripts/vendor/
+.shared
+src/.vuepress/.cache
+src/.vuepress/.temp
+src/.vuepress/blog-data.json
+test-results
+playwright-report/
+
+# Devenv
+.devenv*
+devenv.local.nix
+devenv.local.yaml
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml

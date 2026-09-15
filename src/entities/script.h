@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2024 Patrizio Bekerle -- <patrizio@bekerle.com>
+ * Copyright (c) 2014-2026 Patrizio Bekerle -- <patrizio@bekerle.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -82,9 +82,17 @@ class Script {
     bool isScriptFromRepository() const;
     QUrl remoteScriptUrl() const;
     QUrl remoteFileUrl(const QString& fileName) const;
+    QUrl remoteChangelogUrl() const;
+    QUrl repositoryChangelogUrl() const;
+    static QString changelogForVersionRange(const QString& changelog,
+                                            const QString& installedVersion,
+                                            const QString& targetVersion);
+    static QString changelogHtmlForVersionRange(const QString& changelog,
+                                                const QString& installedVersion,
+                                                const QString& targetVersion);
     static bool scriptFromRepositoryExists(const QString& identifier);
     void setSettingsVariablesJson(QString json);
-    QString getSettingsVariablesJson() const;
+    QString getSettingsVariablesJson(bool hideSecrets) const;
     QJsonObject getSettingsVariablesJsonObject() const;
     void setSettingsVariablesJson(const QJsonObject& jsonObject);
     QString getScriptDirPath() const;

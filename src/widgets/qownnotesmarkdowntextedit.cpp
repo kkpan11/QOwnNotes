@@ -1,42 +1,550 @@
 #include "qownnotesmarkdowntextedit.h"
 
 #include <utils/gui.h>
+#include <utils/listutils.h>
 #include <utils/misc.h>
 #include <utils/schema.h>
 
 #include <QApplication>
 #include <QClipboard>
 #include <QDebug>
+#include <QDesktopServices>
+#include <QDir>
+#include <QDragEnterEvent>
+#include <QDragMoveEvent>
+#include <QDropEvent>
+#include <QEvent>
+#include <QEventLoop>
+#include <QFileInfo>
 #include <QFont>
 #include <QFontDatabase>
+#include <QHash>
+#include <QHelpEvent>
+#include <QImageReader>
 #include <QJSEngine>
+#include <QKeyEvent>
+#include <QLineEdit>
 #include <QMenu>
 #include <QMimeData>
+#include <QMouseEvent>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QPainter>
+#include <QPixmap>
 #include <QRegularExpression>
-#include <QSettings>
+#include <QSet>
+#include <QTextBlock>
 #include <QTextCursor>
+#include <QTextDocument>
 #include <QTextDocumentFragment>
+#include <QTextEdit>
+#include <QTextFormat>
+#include <QTextLayout>
+#include <QTextOption>
+#include <QTimer>
+#include <QToolTip>
+#include <QUrl>
+#include <QVariant>
+#include <QVector>
+#include <QWidgetAction>
+#include <QtGlobal>
+#include <algorithm>
 
 #include "entities/notefolder.h"
+#include "helpers/qownnotesmarkdownhighlighter.h"
 #include "helpers/qownspellchecker.h"
 #include "libraries/qmarkdowntextedit/linenumberarea.h"
 #include "mainwindow.h"
+#ifdef LANGUAGETOOL_ENABLED
+#include "services/languagetoolchecker.h"
+#endif
+#ifdef HARPER_ENABLED
+#include "services/harperchecker.h"
+#endif
+#include "dialogs/markdowntabledialog.h"
+#include "services/cloudservice.h"
+#include "services/markdownlspclient.h"
+#include "services/markdownlspdocumenttracker.h"
+#include "services/markdownlspignoredrules.h"
+#include "services/nextclouddeckservice.h"
+#include "services/openaiservice.h"
 #include "services/scriptingservice.h"
+#include "services/settingsservice.h"
 #include "utils/urlhandler.h"
+#include "version.h"
+
+namespace {
+constexpr int kFoldIndicatorPadding = 2;
+constexpr int kHoveredLinkProperty = QTextFormat::UserProperty + 0x514f;
+QHash<QString, QSet<QString>> s_foldedHeadingStateByNoteReference;
+
+static QChar accentForDeadKey(int key) {
+    switch (key) {
+        case Qt::Key_Dead_Acute:
+            return QChar(0x0301);
+        case Qt::Key_Dead_Grave:
+            return QChar(0x0300);
+        case Qt::Key_Dead_Circumflex:
+            return QChar(0x0302);
+        case Qt::Key_Dead_Diaeresis:
+            return QChar(0x0308);
+        case Qt::Key_Dead_Tilde:
+            return QChar(0x0303);
+        default:
+            return QChar();
+    }
+}
+
+static QChar spacingAccentForCombiningMark(QChar accent) {
+    switch (accent.unicode()) {
+        case 0x0300:
+            return QLatin1Char('`');
+        case 0x0301:
+            return QChar(0x00B4);
+        case 0x0302:
+            return QLatin1Char('^');
+        case 0x0303:
+            return QLatin1Char('~');
+        case 0x0308:
+            return QChar(0x00A8);
+        default:
+            return QChar();
+    }
+}
+
+static QString composeDeadKey(QChar accent, QChar character) {
+    return QString(character).append(accent).normalized(QString::NormalizationForm_C);
+}
+
+struct SetextHeadingUnderline {
+    int level = 0;
+    int leadingSpaces = 0;
+    int markerCount = 0;
+
+    bool isValid() const { return level > 0; }
+};
+
+static int markdownHeadingIndent(const QString &line) {
+    int i = 0;
+    while (i < line.size() && i < 3 && line.at(i) == QLatin1Char(' ')) {
+        ++i;
+    }
+
+    return i;
+}
+
+static int atxHeadingLevel(const QString &line, int *headingMarkerStart = nullptr,
+                           int *headingMarkerEnd = nullptr) {
+    int i = markdownHeadingIndent(line);
+    const int markerStart = i;
+    while (i < line.size() && line.at(i) == QLatin1Char('#')) {
+        ++i;
+    }
+
+    const int headingLevel = i - markerStart;
+    if (headingLevel <= 0 || headingLevel > 6) {
+        return 0;
+    }
+
+    if (i < line.size() && line.at(i) != QLatin1Char(' ') && line.at(i) != QLatin1Char('\t')) {
+        return 0;
+    }
+
+    if (headingMarkerStart) {
+        *headingMarkerStart = markerStart;
+    }
+
+    if (headingMarkerEnd) {
+        *headingMarkerEnd = i;
+    }
+
+    return headingLevel;
+}
+
+static SetextHeadingUnderline parseSetextHeadingUnderline(const QString &line) {
+    SetextHeadingUnderline underline;
+
+    int i = markdownHeadingIndent(line);
+    underline.leadingSpaces = i;
+
+    if (i >= line.size()) {
+        return underline;
+    }
+
+    const QChar marker = line.at(i);
+    if (marker != QLatin1Char('=') && marker != QLatin1Char('-')) {
+        return underline;
+    }
+
+    const int markerStart = i;
+    while (i < line.size() && line.at(i) == marker) {
+        ++i;
+    }
+
+    underline.markerCount = i - markerStart;
+
+    while (i < line.size() && (line.at(i) == QLatin1Char(' ') || line.at(i) == QLatin1Char('\t'))) {
+        ++i;
+    }
+
+    if (i != line.size()) {
+        return {};
+    }
+
+    underline.level = (marker == QLatin1Char('=')) ? 1 : 2;
+    return underline;
+}
+
+static int boundedHeadingLevel(const int headingLevel, const int levelDelta) {
+#if __cplusplus >= 201703L
+    return std::clamp(headingLevel + levelDelta, 1, 6);
+#else
+    return qBound(1, headingLevel + levelDelta, 6);
+#endif
+}
+
+QString changeHeadingDepth(const QString &text, const int levelDelta) {
+    QString normalizedText = text;
+    normalizedText.replace(QChar(0x2029), QLatin1Char('\n'));
+
+    QStringList lines = normalizedText.split(QLatin1Char('\n'),
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+                                             QString::KeepEmptyParts
+#else
+                                             Qt::KeepEmptyParts
+#endif
+    );
+    QStringList updatedLines;
+    updatedLines.reserve(lines.size());
+
+    for (int lineIndex = 0; lineIndex < lines.size(); ++lineIndex) {
+        const QString &line = lines.at(lineIndex);
+
+        int headingMarkerStart = 0;
+        int headingMarkerEnd = 0;
+        const int atxLevel = atxHeadingLevel(line, &headingMarkerStart, &headingMarkerEnd);
+        if (atxLevel > 0) {
+            const int newHeadingLevel = boundedHeadingLevel(atxLevel, levelDelta);
+            if (newHeadingLevel == atxLevel) {
+                updatedLines.append(line);
+                continue;
+            }
+
+            updatedLines.append(line.left(headingMarkerStart) +
+                                QString(newHeadingLevel, QLatin1Char('#')) +
+                                line.mid(headingMarkerEnd));
+            continue;
+        }
+
+        if (lineIndex + 1 < lines.size()) {
+            const SetextHeadingUnderline underline =
+                parseSetextHeadingUnderline(lines.at(lineIndex + 1));
+            const int titleIndent = markdownHeadingIndent(line);
+            const QString titleText = line.mid(titleIndent).trimmed();
+
+            if (underline.isValid() && !titleText.isEmpty()) {
+                const int newHeadingLevel = boundedHeadingLevel(underline.level, levelDelta);
+                if (newHeadingLevel <= 2) {
+                    updatedLines.append(line);
+
+                    if (newHeadingLevel == underline.level) {
+                        updatedLines.append(lines.at(lineIndex + 1));
+                    } else {
+                        const int underlineWidth = std::max(
+                            underline.markerCount, std::max(static_cast<int>(titleText.size()), 3));
+                        const QChar marker =
+                            (newHeadingLevel == 1) ? QLatin1Char('=') : QLatin1Char('-');
+                        updatedLines.append(QString(underline.leadingSpaces, QLatin1Char(' ')) +
+                                            QString(underlineWidth, marker));
+                    }
+                } else {
+                    updatedLines.append(line.left(titleIndent) +
+                                        QString(newHeadingLevel, QLatin1Char('#')) +
+                                        QStringLiteral(" ") + titleText);
+                }
+
+                ++lineIndex;
+                continue;
+            }
+        }
+
+        updatedLines.append(line);
+    }
+
+    return updatedLines.join(QLatin1Char('\n'));
+}
+
+struct InnerSelectionCandidate {
+    int innerStart = -1;
+    int innerEnd = -1;
+
+    bool isValid() const { return innerStart >= 0 && innerEnd >= innerStart; }
+    int length() const { return innerEnd - innerStart; }
+};
+
+static void addSelectionCandidate(InnerSelectionCandidate &best, const int innerStart,
+                                  const int innerEnd, const int targetStart, const int targetEnd) {
+    if (innerStart < 0 || innerEnd < innerStart || innerStart > targetStart ||
+        innerEnd < targetEnd) {
+        return;
+    }
+
+    if (!best.isValid() || (innerEnd - innerStart) < best.length() ||
+        ((innerEnd - innerStart) == best.length() && innerStart > best.innerStart)) {
+        best.innerStart = innerStart;
+        best.innerEnd = innerEnd;
+    }
+}
+
+static bool isEscapedToken(const QString &text, const int pos) {
+    int backslashCount = 0;
+
+    for (int i = pos - 1; i >= 0 && text.at(i) == QLatin1Char('\\'); --i) {
+        ++backslashCount;
+    }
+
+    return (backslashCount % 2) == 1;
+}
+
+static void addStackedTokenCandidates(const QString &text, const QString &openToken,
+                                      const QString &closeToken, const int targetStart,
+                                      const int targetEnd, InnerSelectionCandidate &best) {
+    QVector<int> openPositions;
+    const int maxStart = text.size() - std::min(openToken.size(), closeToken.size());
+
+    for (int i = 0; i <= maxStart;) {
+        if (text.mid(i, closeToken.size()) == closeToken && !openPositions.isEmpty()) {
+            const int openPos = openPositions.takeLast();
+            addSelectionCandidate(best, openPos + openToken.size(), i, targetStart, targetEnd);
+            i += closeToken.size();
+            continue;
+        }
+
+        if (text.mid(i, openToken.size()) == openToken) {
+            openPositions.append(i);
+            i += openToken.size();
+            continue;
+        }
+
+        ++i;
+    }
+}
+
+static void addRepeatedTokenCandidates(const QString &text, const QString &token,
+                                       const int targetStart, const int targetEnd,
+                                       InnerSelectionCandidate &best, const bool escapable) {
+    int openPos = -1;
+
+    for (int i = 0; i <= text.size() - token.size();) {
+        if (text.mid(i, token.size()) != token || (escapable && isEscapedToken(text, i))) {
+            ++i;
+            continue;
+        }
+
+        if (openPos < 0) {
+            openPos = i;
+        } else {
+            addSelectionCandidate(best, openPos + token.size(), i, targetStart, targetEnd);
+            openPos = -1;
+        }
+
+        i += token.size();
+    }
+}
+
+static void addMarkdownRangeCandidate(const QString &blockText,
+                                      MarkdownHighlighter *markdownHighlighter,
+                                      const MarkdownHighlighter::RangeType rangeType,
+                                      const int blockNumber, const int probePosition,
+                                      const int targetStart, const int targetEnd,
+                                      InnerSelectionCandidate &best) {
+    if (!markdownHighlighter || probePosition < 0 || probePosition >= blockText.size()) {
+        return;
+    }
+
+    const auto range = markdownHighlighter->getSpanRange(rangeType, blockNumber, probePosition);
+    if (range.first < 0 || range.second < 0 || range.first >= blockText.size()) {
+        return;
+    }
+
+    if (rangeType == MarkdownHighlighter::RangeType::CodeSpan) {
+        int delimiterLength = 0;
+
+        while ((range.first + delimiterLength) < blockText.size() &&
+               blockText.at(range.first + delimiterLength) == QLatin1Char('`')) {
+            ++delimiterLength;
+        }
+
+        if (delimiterLength > 0) {
+            addSelectionCandidate(best, range.first + delimiterLength, range.second, targetStart,
+                                  targetEnd);
+        }
+
+        return;
+    }
+
+    const QChar marker = blockText.at(range.first);
+    if (rangeType != MarkdownHighlighter::RangeType::Emphasis ||
+        (marker != QLatin1Char('*') && marker != QLatin1Char('_'))) {
+        return;
+    }
+
+    int leftMarkerStart = range.first;
+    while (leftMarkerStart > 0 && blockText.at(leftMarkerStart - 1) == marker) {
+        --leftMarkerStart;
+    }
+
+    const int delimiterLength = range.first - leftMarkerStart + 1;
+    int rightMarkerIndex = range.second;
+
+    if (rightMarkerIndex >= blockText.size() || blockText.at(rightMarkerIndex) != marker) {
+        --rightMarkerIndex;
+    }
+
+    const int rightMarkerStart = rightMarkerIndex - delimiterLength + 1;
+    if (delimiterLength <= 0 || rightMarkerStart < 0 || rightMarkerIndex < 0 ||
+        blockText.at(rightMarkerIndex) != marker) {
+        return;
+    }
+
+    for (int i = rightMarkerStart; i <= rightMarkerIndex; ++i) {
+        if (blockText.at(i) != marker) {
+            return;
+        }
+    }
+
+    addSelectionCandidate(best, leftMarkerStart + delimiterLength, rightMarkerStart, targetStart,
+                          targetEnd);
+}
+
+struct WikiLinkCompletionContext {
+    QString filterText;
+    int startPosition = -1;
+    int cursorPosition = -1;
+};
+
+static bool currentWikiLinkCompletionContext(const QPlainTextEdit *edit,
+                                             WikiLinkCompletionContext &context) {
+    if (!edit) {
+        return false;
+    }
+
+    QTextCursor cursor = edit->textCursor();
+    if (cursor.hasSelection()) {
+        return false;
+    }
+
+    const QTextBlock block = cursor.block();
+    const QString blockText = block.text();
+    const int positionInBlock = cursor.positionInBlock();
+    const QString leftText = blockText.left(positionInBlock);
+    const int openPos = leftText.lastIndexOf(QStringLiteral("[["));
+    if (openPos < 0) {
+        return false;
+    }
+
+    const QString candidate = leftText.mid(openPos + 2);
+    if (candidate.contains(QChar('|')) || candidate.contains(QStringLiteral("]]")) ||
+        candidate.contains(QChar('[')) || candidate.contains(QChar(']')) ||
+        candidate.contains(QChar('\n'))) {
+        return false;
+    }
+
+    context.filterText = candidate.trimmed();
+    context.startPosition = block.position() + openPos + 2;
+    context.cursorPosition = cursor.position();
+    return true;
+}
+}    // namespace
+
+// Initialize static member
+QOwnNotesMarkdownTextEdit *QOwnNotesMarkdownTextEdit::_activeAutocompleteEditor = nullptr;
 
 QOwnNotesMarkdownTextEdit::QOwnNotesMarkdownTextEdit(QWidget *parent)
     : QMarkdownTextEdit(parent, false) {
     // We need to set the internal variable to true, because we start with a highlighter
     _highlightingEnabled = true;
     _highlighter = nullptr;
-    if (parent->objectName() != QStringLiteral("LogWidget")) {
+    if (!parent || parent->objectName() != QStringLiteral("LogWidget")) {
         _highlighter = new QOwnNotesMarkdownHighlighter(document());
+
+        connect(_highlighter, &QOwnNotesMarkdownHighlighter::highlightingFinished, this,
+                &QOwnNotesMarkdownTextEdit::refreshFoldingSidebar);
+        connect(_highlighter, &QOwnNotesMarkdownHighlighter::highlightingFinished, this,
+                &QOwnNotesMarkdownTextEdit::scheduleRestoreCurrentFoldedHeadingState);
+
+        _markdownLspTracker = new MarkdownLspDocumentTracker(this);
 
         setStyles();
         updateSettings();
     }
 
-    QSettings settings;
+    // Initialize AI autocomplete timer (only for note editors, not log widget)
+    _aiAutocompleteTimer = new QTimer(this);
+    _aiAutocompleteTimer->setSingleShot(true);
+    _aiAutocompleteTimer->setInterval(500);    // Wait 500ms after typing stops
+    connect(_aiAutocompleteTimer, &QTimer::timeout, this,
+            &QOwnNotesMarkdownTextEdit::requestAiAutocomplete);
+
+    _markdownLspChangeTimer = new QTimer(this);
+    _markdownLspChangeTimer->setSingleShot(true);
+    _markdownLspChangeTimer->setInterval(200);
+    connect(_markdownLspChangeTimer, &QTimer::timeout, this,
+            &QOwnNotesMarkdownTextEdit::sendMarkdownLspChange);
+
+    // NOTE: Callback registration is now done globally in OpenAiService constructor
+    // We just need to register this editor as active if it's a note editor
+    if (!parent || parent->objectName() != QStringLiteral("LogWidget")) {
+        qDebug() << __func__ << " - Registering as active editor";
+        registerAsActiveEditor();
+    } else {
+        qDebug() << __func__ << " - Skipping registration for non-editor widget:" << objectName();
+    }
+
+    // Use DirectConnection to ensure signal is delivered immediately before widget can be destroyed
+    // This prevents the "0 receivers" problem when widgets are recreated
+    bool conn1 = connect(
+        OpenAiService::instance(), &OpenAiService::autocompleteCompleted, this,
+        [this](const QString &result) {
+            qDebug() << "*** LAMBDA RECEIVED autocompleteCompleted signal for widget:" << this
+                     << objectName();
+            this->onAiAutocompleteCompleted(result);
+        },
+        Qt::DirectConnection);
+    bool conn2 = connect(OpenAiService::instance(), &OpenAiService::autocompleteErrorOccurred, this,
+                         &QOwnNotesMarkdownTextEdit::onAiAutocompleteTimeout, Qt::DirectConnection);
+
+    qDebug() << __func__
+             << " - AI autocomplete signals connected (DirectConnection), conn1:" << conn1
+             << "conn2:" << conn2;
+    qDebug() << __func__ << " - Connected to OpenAiService instance:" << OpenAiService::instance();
+
+    // Test: Call the slot directly to verify it exists
+    qDebug() << __func__ << " - Testing slot by calling it directly...";
+    onAiAutocompleteCompleted("TEST DIRECT CALL");
+    qDebug() << __func__ << " - Direct call completed";
+
+    // Connect to text changes to trigger autocomplete
+    connect(this, &QOwnNotesMarkdownTextEdit::textChanged, this, [this]() {
+        // Only trigger if autocomplete is enabled
+        if (OpenAiService::getAutocompleteEnabled() && OpenAiService::getEnabled()) {
+            // Skip for log widgets
+            if (objectName() == QStringLiteral("logTextEdit")) {
+                return;
+            }
+            // Don't clear or restart timer if we're currently inserting a suggestion
+            if (_isInsertingAiSuggestion) {
+                return;
+            }
+            clearAiAutocompleteSuggestion();
+            _aiAutocompleteTimer->start();
+        }
+    });
+
+    viewport()->setMouseTracking(true);
+
+    SettingsService settings;
     MarkdownHighlighter::HighlightingOptions options;
 
     if (settings.value(QStringLiteral("fullyHighlightedBlockquotes")).toBool()) {
@@ -57,25 +565,220 @@ QOwnNotesMarkdownTextEdit::QOwnNotesMarkdownTextEdit(QWidget *parent)
     }
 
     // ignores note clicks in QMarkdownTextEdit in the note text edit
-    setIgnoredClickUrlSchemata(QStringList({"note", "task", "deck"}));
+    setIgnoredClickUrlSchemata(QStringList({"note", "task", "deck", "wikilink"}));
 
     connect(this, &QOwnNotesMarkdownTextEdit::zoomIn, this, [this]() { onZoom(/*in=*/true); });
     connect(this, &QOwnNotesMarkdownTextEdit::zoomOut, this, [this]() { onZoom(/*in=*/false); });
 
-    connect(this, &QOwnNotesMarkdownTextEdit::urlClicked, this, [](const QString &url) {
+    connect(this, &QOwnNotesMarkdownTextEdit::urlClicked, this, [this](const QString &url) {
         if (!MainWindow::instance()) {
             qWarning() << "No MainWindow! shouldn't happen!";
             return;
         }
-        UrlHandler().openUrl(url);
+        // Use the openUrl method which properly handles the openInNewTab flag
+        openUrl(url, _openLinkInNewTab);
     });
 
     connect(MainWindow::instance(), &MainWindow::settingsChanged, this,
             &QOwnNotesMarkdownTextEdit::updateSettings);
 
+    connect(MarkdownLspIgnoredRules::instance(), &MarkdownLspIgnoredRules::ignoredRulesChanged,
+            this, &QOwnNotesMarkdownTextEdit::refreshMarkdownLspDiagnostics);
+
+#ifdef LANGUAGETOOL_ENABLED
+    connect(LanguageToolChecker::instance(), &LanguageToolChecker::blockMatchesUpdated, this,
+            [this](const QVector<int> &blockNumbers) {
+                if (!document() || !highlighter()) {
+                    return;
+                }
+
+                if (blockNumbers.isEmpty()) {
+                    highlighter()->rehighlight();
+                    return;
+                }
+
+                for (const int blockNumber : blockNumbers) {
+                    const QTextBlock block = document()->findBlockByNumber(blockNumber);
+                    if (block.isValid()) {
+                        highlighter()->rehighlightBlock(block);
+                    }
+                }
+            });
+#endif
+
+#ifdef HARPER_ENABLED
+    connect(HarperChecker::instance(), &HarperChecker::blockMatchesUpdated, this,
+            [this](const QVector<int> &blockNumbers) {
+                if (!document() || !highlighter()) {
+                    return;
+                }
+
+                if (blockNumbers.isEmpty()) {
+                    highlighter()->rehighlight();
+                    return;
+                }
+
+                for (const int blockNumber : blockNumbers) {
+                    const QTextBlock block = document()->findBlockByNumber(blockNumber);
+                    if (block.isValid()) {
+                        highlighter()->rehighlightBlock(block);
+                    }
+                }
+            });
+#endif
+
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, &QOwnNotesMarkdownTextEdit::customContextMenuRequested, this,
             &QOwnNotesMarkdownTextEdit::onContextMenu);
+
+    refreshFoldingSidebar();
+}
+
+bool QOwnNotesMarkdownTextEdit::hoveredMarkdownLink(const QPoint &position, QTextCursor *linkCursor,
+                                                    bool includeLinkLabel) {
+    QTextCursor cursor = cursorForPosition(position);
+    const QTextBlock block = cursor.block();
+    const QString text = block.text();
+    const int positionInBlock = cursor.position() - block.position();
+    const QMap<QString, QString> urls = parseMarkdownUrlsFromText(text);
+
+    for (auto it = urls.constBegin(); it != urls.constEnd(); ++it) {
+        const QString &parsedText = it.key();
+        QString hoverText = parsedText;
+        int hoverOffset = 0;
+        QString hitText = parsedText;
+        int hitOffset = 0;
+
+        const int destinationSeparator = parsedText.lastIndexOf(QStringLiteral("]("));
+        const int destinationStart = destinationSeparator >= 0 ? destinationSeparator + 2 : -1;
+        if (destinationStart >= 0) {
+            // Keep the source spelling so percent-encoded destinations retain
+            // the same range as the text displayed in the editor.
+            hoverText = parsedText.mid(destinationStart, parsedText.size() - destinationStart - 1);
+            hoverOffset = destinationStart;
+            if (includeLinkLabel) {
+                // Exclude a preceding checkbox that the shared parser may include.
+                const int labelStart =
+                    parsedText.lastIndexOf(QLatin1Char('['), destinationSeparator);
+                if (labelStart > 0) {
+                    hitText = parsedText.mid(labelStart);
+                    hitOffset = labelStart;
+                }
+            } else {
+                hitText = hoverText;
+                hitOffset = hoverOffset;
+            }
+        } else if (parsedText.startsWith(QLatin1Char('<')) &&
+                   parsedText.endsWith(QLatin1Char('>'))) {
+            hoverText = parsedText.mid(1, parsedText.size() - 2);
+            hoverOffset = 1;
+            if (!includeLinkLabel) {
+                hitText = hoverText;
+                hitOffset = hoverOffset;
+            }
+        } else {
+            // The shared parser can include a preceding checkbox in reference
+            // links such as "[ ] [label][id]".
+            const int referenceSeparator = parsedText.lastIndexOf(QStringLiteral("]["));
+            if (referenceSeparator >= 0) {
+                const int labelStart = parsedText.lastIndexOf(QLatin1Char('['), referenceSeparator);
+                if (labelStart > 0) {
+                    hoverText = parsedText.mid(labelStart);
+                    hoverOffset = labelStart;
+                    hitText = hoverText;
+                    hitOffset = hoverOffset;
+                }
+            }
+        }
+
+        int parsedStart = text.indexOf(parsedText);
+        while (parsedStart >= 0) {
+            const int hoverStart = parsedStart + hoverOffset;
+            const int hoverEnd = hoverStart + hoverText.size();
+            const int hitStart = parsedStart + hitOffset;
+            const int hitEnd = hitStart + hitText.size();
+            if (positionInBlock >= hitStart && positionInBlock < hitEnd) {
+                if (linkCursor != nullptr) {
+                    linkCursor->setPosition(block.position() + hoverStart);
+                    linkCursor->setPosition(block.position() + hoverEnd, QTextCursor::KeepAnchor);
+                }
+                return true;
+            }
+            parsedStart = text.indexOf(parsedText, parsedStart + parsedText.size());
+        }
+    }
+
+    return false;
+}
+
+void QOwnNotesMarkdownTextEdit::clearHoveredLink() {
+    if (_hoveredLinkStart < 0) {
+        return;
+    }
+
+    QList<QTextEdit::ExtraSelection> selections = extraSelections();
+    for (auto it = selections.begin(); it != selections.end();) {
+        if (it->format.property(kHoveredLinkProperty).toBool()) {
+            it = selections.erase(it);
+        } else {
+            ++it;
+        }
+    }
+
+    _hoveredLinkStart = -1;
+    _hoveredLinkEnd = -1;
+    setExtraSelections(selections);
+}
+
+void QOwnNotesMarkdownTextEdit::mouseMoveEvent(QMouseEvent *event) {
+    QMarkdownTextEdit::mouseMoveEvent(event);
+    updateHoveredLink(event->pos(), event->modifiers().testFlag(Qt::ControlModifier));
+}
+
+void QOwnNotesMarkdownTextEdit::updateHoveredLink(const QPoint &position, bool enabled) {
+    QTextCursor linkCursor(document());
+    const bool isLink = enabled && hoveredMarkdownLink(position, &linkCursor, true);
+    viewport()->setCursor(isLink ? Qt::PointingHandCursor : Qt::IBeamCursor);
+
+    const int start = isLink ? linkCursor.selectionStart() : -1;
+    const int end = isLink ? linkCursor.selectionEnd() : -1;
+    if (start == _hoveredLinkStart && end == _hoveredLinkEnd) {
+        const auto selections = extraSelections();
+        for (const auto &selection : selections) {
+            if (selection.format.property(kHoveredLinkProperty).toBool()) {
+                return;
+            }
+        }
+    }
+
+    clearHoveredLink();
+    if (!isLink) {
+        return;
+    }
+
+    QTextEdit::ExtraSelection selection;
+    selection.cursor = linkCursor;
+    selection.format.setForeground(
+        Utils::Schema::schemaSettings->getForegroundColor(Utils::Schema::LinkHoverPresetIndex));
+    selection.format.setFontUnderline(true);
+    selection.format.setProperty(kHoveredLinkProperty, true);
+
+    QList<QTextEdit::ExtraSelection> selections = extraSelections();
+    selections.append(selection);
+    _hoveredLinkStart = start;
+    _hoveredLinkEnd = end;
+    setExtraSelections(selections);
+}
+
+void QOwnNotesMarkdownTextEdit::leaveEvent(QEvent *event) {
+    clearHoveredLink();
+    viewport()->setCursor(Qt::IBeamCursor);
+    QMarkdownTextEdit::leaveEvent(event);
+}
+
+void QOwnNotesMarkdownTextEdit::focusOutEvent(QFocusEvent *event) {
+    clearHoveredLink();
+    QMarkdownTextEdit::focusOutEvent(event);
 }
 
 /*
@@ -84,8 +787,7 @@ QOwnNotesMarkdownTextEdit::QOwnNotesMarkdownTextEdit(QWidget *parent)
  * See: https://github.com/pbek/QOwnNotes/issues/2679
  */
 QSize QOwnNotesMarkdownTextEdit::minimumSizeHint() const {
-    int lineWidthLeftMargin =
-        _lineNumArea->isLineNumAreaEnabled() ? _lineNumArea->lineNumAreaWidth() : 0;
+    int lineWidthLeftMargin = _lineNumArea->lineNumAreaWidth();
 
     // Let the min size be the defaultMinSize + lineNumAreaWidth + paper margin
     auto sizeHint = QMarkdownTextEdit::minimumSizeHint();
@@ -99,16 +801,18 @@ void QOwnNotesMarkdownTextEdit::onZoom(bool in) {
     const int fontSize = modifyFontSize(mode);
 
     auto mainWindow = MainWindow::instance();
-    if (mainWindow && mainWindow->isInDistractionFreeMode()) {
+    if (mainWindow && MainWindow::isInDistractionFreeMode()) {
         setPaperMargins();
         if (in) {
             mainWindow->showStatusBarMessage(tr("Increased font size to %1 pt").arg(fontSize),
-                                             3000);
+                                             QStringLiteral("🔤"), 3000);
         } else {
             mainWindow->showStatusBarMessage(tr("Decreased font size to %1 pt").arg(fontSize),
-                                             3000);
+                                             QStringLiteral("🔤"), 3000);
         }
     }
+
+    setPaperMargins();
 }
 
 /**
@@ -120,6 +824,15 @@ void QOwnNotesMarkdownTextEdit::onZoom(bool in) {
 void QOwnNotesMarkdownTextEdit::setFormatStyle(MarkdownHighlighter::HighlighterState index) {
     QTextCharFormat format;
     Utils::Schema::schemaSettings->setFormatStyle(index, format);
+
+    if (index == MarkdownHighlighter::HighlighterState::WikiLink) {
+        format.setFontUnderline(true);
+        format.setUnderlineStyle(QTextCharFormat::DotLine);
+    } else if (index == MarkdownHighlighter::HighlighterState::WikiLinkBroken) {
+        format.setFontUnderline(true);
+        format.setUnderlineStyle(QTextCharFormat::DashUnderline);
+    }
+
     if (_highlighter) {
         _highlighter->setTextFormat(index, format);
     }
@@ -134,7 +847,7 @@ void QOwnNotesMarkdownTextEdit::setFormatStyle(MarkdownHighlighter::HighlighterS
  */
 void QOwnNotesMarkdownTextEdit::overrideFontSizeStyle(int fontSize) {
     bool overrideInterfaceFontSize =
-        QSettings().value(QStringLiteral("overrideInterfaceFontSize"), false).toBool();
+        SettingsService().value(QStringLiteral("overrideInterfaceFontSize"), false).toBool();
 
     // remove old style
     QString stylesheet = styleSheet().remove(QRegularExpression(
@@ -181,7 +894,7 @@ void QOwnNotesMarkdownTextEdit::setStyles() {
     setFormatStyle(MarkdownHighlighter::HighlighterState::H4);
     setFormatStyle(MarkdownHighlighter::HighlighterState::H5);
     setFormatStyle(MarkdownHighlighter::HighlighterState::H6);
-    setFormatStyle(MarkdownHighlighter::HighlighterState::HorizontalRuler);
+    setFormatStyle(MarkdownHighlighter::HighlighterState::HorizontalRule);
     setFormatStyle(MarkdownHighlighter::HighlighterState::List);
     setFormatStyle(MarkdownHighlighter::HighlighterState::CheckBoxChecked);
     setFormatStyle(MarkdownHighlighter::HighlighterState::CheckBoxUnChecked);
@@ -195,9 +908,13 @@ void QOwnNotesMarkdownTextEdit::setStyles() {
     setFormatStyle(MarkdownHighlighter::HighlighterState::Image);
     setFormatStyle(MarkdownHighlighter::HighlighterState::InlineCodeBlock);
     setFormatStyle(MarkdownHighlighter::HighlighterState::Link);
+    setFormatStyle(MarkdownHighlighter::HighlighterState::LinkInternal);
+    setFormatStyle(MarkdownHighlighter::HighlighterState::WikiLink);
+    setFormatStyle(MarkdownHighlighter::HighlighterState::WikiLinkBroken);
     setFormatStyle(MarkdownHighlighter::HighlighterState::Table);
     setFormatStyle(MarkdownHighlighter::HighlighterState::BrokenLink);
     setFormatStyle(MarkdownHighlighter::HighlighterState::TrailingSpace);
+    setFormatStyle(MarkdownHighlighter::HighlighterState::Whitespace);
 
     setFormatStyle(MarkdownHighlighter::HighlighterState::CodeType);
     setFormatStyle(MarkdownHighlighter::HighlighterState::CodeKeyWord);
@@ -209,7 +926,7 @@ void QOwnNotesMarkdownTextEdit::setStyles() {
 
 #ifdef Q_OS_WIN32
     // set the selection background color to a light blue if not in dark mode
-    if (!QSettings().value(QStringLiteral("darkMode")).toBool()) {
+    if (!SettingsService().value(QStringLiteral("darkMode")).toBool()) {
         // light green (#9be29b) could be another choice, but be aware that
         // this color will be used for mouse and keyboard selections too
         setStyleSheet(styleSheet() +
@@ -223,7 +940,7 @@ void QOwnNotesMarkdownTextEdit::setStyles() {
  * Modifies the font size of the text edit
  */
 int QOwnNotesMarkdownTextEdit::modifyFontSize(FontModificationMode mode) {
-    QSettings settings;
+    SettingsService settings;
     QFont font = this->font();
     int fontSize = font.pointSize();
     bool doSetStyles = false;
@@ -323,8 +1040,9 @@ int QOwnNotesMarkdownTextEdit::modifyFontSize(FontModificationMode mode) {
  * "/path/to/my/file/QOwnNotes.pdf" if the operating system
  * supports that handler
  */
-void QOwnNotesMarkdownTextEdit::openUrl(const QString &urlString) {
-    qDebug() << "QOwnNotesMarkdownTextEdit " << __func__ << " - 'urlString': " << urlString;
+void QOwnNotesMarkdownTextEdit::openUrl(const QString &urlString, bool openInNewTab) {
+    qDebug() << "QOwnNotesMarkdownTextEdit " << __func__ << " - 'urlString': " << urlString
+             << " - 'openInNewTab': " << openInNewTab;
 
     QString notesPath = NoteFolder::currentLocalPath();
     QString windowsSlash = QString();
@@ -340,7 +1058,22 @@ void QOwnNotesMarkdownTextEdit::openUrl(const QString &urlString) {
     urlCopy.replace(QRegularExpression(QStringLiteral("^file:[\\/]{2}([^\\/].+)$")),
                     QStringLiteral("file://") + windowsSlash + notesPath + QStringLiteral("/\\1"));
 
-    QMarkdownTextEdit::openUrl(urlCopy);
+    // Check if this is a note URL that should be handled specially
+    QUrl url(urlCopy);
+    const QString scheme = url.scheme();
+
+    // If it's a note URL, noteid URL, file URL in note folder, has no scheme (relative link),
+    // or is a Nextcloud Deck card URL, use UrlHandler which knows how to handle these properly
+    if (scheme == QStringLiteral("note") || scheme == QStringLiteral("noteid") ||
+        scheme == QStringLiteral("wikilink") || scheme == QStringLiteral("file") ||
+        scheme.isEmpty() || Note::fileUrlIsNoteInCurrentNoteFolder(url) ||
+        NextcloudDeckService::isCardUrl(urlCopy)) {
+        // Use UrlHandler for note and Deck URLs with the openInNewTab flag
+        UrlHandler().openUrl(urlCopy, openInNewTab);
+    } else {
+        // For other URLs (http, https, etc.), use the base class implementation
+        QMarkdownTextEdit::openUrl(urlCopy, openInNewTab);
+    }
 }
 
 // void QOwnNotesMarkdownTextEdit::setViewportMargins(
@@ -352,7 +1085,7 @@ void QOwnNotesMarkdownTextEdit::openUrl(const QString &urlString) {
  * Sets the viewport margins for the distraction free mode
  */
 void QOwnNotesMarkdownTextEdit::setPaperMargins(int width) {
-    QSettings settings;
+    SettingsService settings;
     bool isInDistractionFreeMode =
         settings.value(QStringLiteral("DistractionFreeMode/isEnabled")).toBool();
     bool editorWidthInDFMOnly =
@@ -393,7 +1126,7 @@ void QOwnNotesMarkdownTextEdit::setPaperMargins(int width) {
                 // set the size of characterAmount times the size of "O"
                 // characters
 #if QT_VERSION < QT_VERSION_CHECK(5, 11, 0)
-            int proposedEditorWidth = metrics.width(QString("O").repeated(characterAmount));
+            int proposedEditorWidth = metrics.width(QStringLiteral("O").repeated(characterAmount));
 #else
             int proposedEditorWidth =
                 metrics.horizontalAdvance(QStringLiteral("O").repeated(characterAmount));
@@ -414,8 +1147,7 @@ void QOwnNotesMarkdownTextEdit::setPaperMargins(int width) {
 
         setViewportMargins(margin, 20, margin, 0);
     } else {
-        int lineWidthLeftMargin =
-            lineNumberArea()->isLineNumAreaEnabled() ? lineNumberArea()->lineNumAreaWidth() : 0;
+        int lineWidthLeftMargin = lineNumberArea()->lineNumAreaWidth();
 
         setLineNumberLeftMarginOffset(10);
         setViewportMargins(10 + lineWidthLeftMargin, 10, 10, 0);
@@ -478,6 +1210,75 @@ void QOwnNotesMarkdownTextEdit::toggleCase() {
     setTextCursor(c);
 }
 
+void QOwnNotesMarkdownTextEdit::selectEnclosedText() {
+    QTextCursor cursor = textCursor();
+    const QTextBlock block = cursor.block();
+    if (!block.isValid()) {
+        return;
+    }
+
+    const QString blockText = block.text();
+    if (blockText.isEmpty()) {
+        return;
+    }
+
+    const int blockStart = block.position();
+    int targetStart = cursor.positionInBlock();
+    int targetEnd = targetStart;
+
+    if (cursor.hasSelection()) {
+        QTextCursor selectionStartCursor(document());
+        selectionStartCursor.setPosition(cursor.selectionStart());
+
+        const int selectionEndPos = std::max(cursor.selectionStart(), cursor.selectionEnd() - 1);
+        QTextCursor selectionEndCursor(document());
+        selectionEndCursor.setPosition(selectionEndPos);
+
+        if (selectionStartCursor.block() != block || selectionEndCursor.block() != block) {
+            return;
+        }
+
+        targetStart = cursor.selectionStart() - blockStart;
+        targetEnd = cursor.selectionEnd() - blockStart;
+    }
+
+    InnerSelectionCandidate bestCandidate;
+    const int lastBlockPosition = blockText.size() - 1;
+    const int probePosition =
+        qBound(0, std::min(targetStart, lastBlockPosition), lastBlockPosition);
+
+    addMarkdownRangeCandidate(blockText, highlighter(), MarkdownHighlighter::RangeType::CodeSpan,
+                              block.blockNumber(), probePosition, targetStart, targetEnd,
+                              bestCandidate);
+    addMarkdownRangeCandidate(blockText, highlighter(), MarkdownHighlighter::RangeType::Emphasis,
+                              block.blockNumber(), probePosition, targetStart, targetEnd,
+                              bestCandidate);
+
+    addStackedTokenCandidates(blockText, QStringLiteral("[["), QStringLiteral("]]"), targetStart,
+                              targetEnd, bestCandidate);
+    addStackedTokenCandidates(blockText, QStringLiteral("("), QStringLiteral(")"), targetStart,
+                              targetEnd, bestCandidate);
+    addStackedTokenCandidates(blockText, QStringLiteral("["), QStringLiteral("]"), targetStart,
+                              targetEnd, bestCandidate);
+    addStackedTokenCandidates(blockText, QStringLiteral("{"), QStringLiteral("}"), targetStart,
+                              targetEnd, bestCandidate);
+
+    addRepeatedTokenCandidates(blockText, QStringLiteral("~~"), targetStart, targetEnd,
+                               bestCandidate, false);
+    addRepeatedTokenCandidates(blockText, QStringLiteral("\""), targetStart, targetEnd,
+                               bestCandidate, true);
+    addRepeatedTokenCandidates(blockText, QStringLiteral("'"), targetStart, targetEnd,
+                               bestCandidate, true);
+
+    if (!bestCandidate.isValid()) {
+        return;
+    }
+
+    cursor.setPosition(blockStart + bestCandidate.innerStart);
+    cursor.setPosition(blockStart + bestCandidate.innerEnd, QTextCursor::KeepAnchor);
+    setTextCursor(cursor);
+}
+
 void QOwnNotesMarkdownTextEdit::insertCodeBlock() {
     QTextCursor c = this->textCursor();
     QString selectedText = c.selection().toPlainText();
@@ -516,45 +1317,137 @@ void QOwnNotesMarkdownTextEdit::insertCodeBlock() {
     }
 }
 
+void QOwnNotesMarkdownTextEdit::insertWikiLink() {
+    QTextCursor cursor = textCursor();
+    const QString selectedText = cursor.selectedText();
+
+    if (!selectedText.isEmpty()) {
+        cursor.insertText(QStringLiteral("[[") + selectedText + QStringLiteral("]]"));
+        setTextCursor(cursor);
+        return;
+    }
+
+    cursor.insertText(QStringLiteral("[[]]"));
+    cursor.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, 2);
+    setTextCursor(cursor);
+
+    if (Note::isWikiLinkSupportEnabled()) {
+        QTimer::singleShot(0, this, &QOwnNotesMarkdownTextEdit::onAutoCompleteRequested);
+    }
+}
+
 void QOwnNotesMarkdownTextEdit::onAutoCompleteRequested() {
+    if (!Utils::Misc::isNoteEditingAllowed()) {
+        // Checkbox handling must take priority over opening a link that follows the marker.
+        if (Utils::Gui::isCheckBoxAtCursor(this)) {
+            auto *mainWindow = MainWindow::instance();
+            if (mainWindow && mainWindow->doNoteEditingCheck()) {
+                Utils::Gui::toggleCheckBoxAtCursor(this);
+            }
+
+            return;
+        }
+
+        if (openLinkAtCursorPosition()) {
+            MainWindow::instance()->showStatusBarMessage(
+                tr("An url was opened at the current cursor position"), QStringLiteral("📃"), 5000);
+
+            return;
+        }
+
+        if (MainWindow::instance()) {
+            MainWindow::instance()->doNoteEditingCheck();
+        }
+
+        if (!Utils::Misc::isNoteEditingAllowed()) {
+            return;
+        }
+    } else if (isReadOnly()) {
+        if (openLinkAtCursorPosition()) {
+            MainWindow::instance()->showStatusBarMessage(
+                tr("An url was opened at the current cursor position"), QStringLiteral("📃"), 5000);
+        }
+
+        return;
+    }
+
     // attempt to toggle a checkbox at the cursor position
     if (Utils::Gui::toggleCheckBoxAtCursor(this)) {
         return;
     }
 
-    // try to open a link at the cursor position
-    if (openLinkAtCursorPosition()) {
+    QString wikiFilterText;
+    int wikiReplaceLength = 0;
+    QStringList wikiResultList;
+    const bool wikiContextActive =
+        Note::isWikiLinkSupportEnabled() &&
+        wikiLinkAutoComplete(wikiResultList, wikiFilterText, wikiReplaceLength);
+
+    // Don't treat typing inside a wiki-link target as an activation request.
+    // This prevents completing the leading "[[" from opening or creating the note.
+    if (!wikiContextActive && openLinkAtCursorPosition()) {
         MainWindow::instance()->showStatusBarMessage(
-            tr("An url was opened at the current cursor position"), 5000);
+            tr("An url was opened at the current cursor position"), QStringLiteral("📃"), 5000);
         return;
     }
 
-    // attempt a Markdown table auto-format
+    double resultValue;
+    const bool equationSolved = solveEquation(resultValue);
+
+    // Attempt a Markdown table auto-format
     if (Utils::Gui::autoFormatTableAtCursor(this)) {
         return;
     }
 
+    // Gather the built-in completion candidates first, so they can take
+    // precedence over the asynchronous Markdown LSP completion
+    QStringList resultList;
+    const bool hasWordCompletions = !wikiContextActive && autoComplete(resultList);
+
+    // Load texts from scripts to show in the autocompletion list
+    const QStringList autocompletionList = ScriptingService::instance()->callAutocompletionHook();
+
+    const bool hasBuiltInCompletions =
+        wikiContextActive || equationSolved || hasWordCompletions || !autocompletionList.isEmpty();
+
+    // Only request completions from the Markdown LSP server if there are no
+    // built-in completions, otherwise the asynchronous LSP response would
+    // replace the built-in autocompletion menu
+    if (!hasBuiltInCompletions && _markdownLspEnabled && _markdownLspClient &&
+        !_markdownLspUri.isEmpty()) {
+        const QTextCursor cursor = textCursor();
+        const int line = cursor.blockNumber();
+        const int character = cursor.positionInBlock();
+        _markdownLspCompletionRequestId =
+            _markdownLspClient->requestCompletion(_markdownLspUri, line, character);
+        if (_markdownLspCompletionRequestId >= 0) {
+            return;
+        }
+    }
+
     QMenu menu;
 
-    double resultValue;
-    if (solveEquation(resultValue)) {
+    if (wikiContextActive) {
+        for (const QString &text : Utils::asConst(wikiResultList)) {
+            auto *action = menu.addAction(text);
+            action->setData(text);
+            action->setWhatsThis(QStringLiteral("wikilink-autocomplete"));
+        }
+    }
+
+    if (equationSolved) {
         const QString text = QString::number(resultValue);
         auto *action = menu.addAction(QStringLiteral("= ") + text);
         action->setData(text);
         action->setWhatsThis(QStringLiteral("equation"));
     }
 
-    QStringList resultList;
-    if (autoComplete(resultList)) {
-        for (const QString &text : Utils::asConst(resultList)) {
-            auto *action = menu.addAction(text);
-            action->setData(text);
-            action->setWhatsThis(QStringLiteral("autocomplete"));
-        }
+    for (const QString &text : Utils::asConst(resultList)) {
+        auto *action = menu.addAction(text);
+        action->setData(text);
+        action->setWhatsThis(QStringLiteral("autocomplete"));
     }
 
-    // load texts from scripts to show in the autocompletion list
-    const QStringList autocompletionList = ScriptingService::instance()->callAutocompletionHook();
     if (!autocompletionList.isEmpty()) {
         auto *action = menu.addAction(QString());
         action->setSeparator(true);
@@ -573,7 +1466,34 @@ void QOwnNotesMarkdownTextEdit::onAutoCompleteRequested() {
     globalPos.setX(globalPos.x() + viewportMargins().left());
 
     if (menu.actions().count() > 0) {
-        QAction *selectedItem = menu.exec(globalPos);
+        // If there is only one completion candidate and the setting is
+        // enabled, insert it directly without showing the popup menu.
+        // Separators are ignored while counting the candidates.
+        QAction *selectedItem = nullptr;
+        if (SettingsService()
+                .value(QStringLiteral("Editor/autocompleteApplySingleResult"), false)
+                .toBool()) {
+            QAction *singleAction = nullptr;
+            for (QAction *action : menu.actions()) {
+                if (action->isSeparator()) {
+                    continue;
+                }
+
+                if (singleAction != nullptr) {
+                    singleAction = nullptr;
+                    break;
+                }
+
+                singleAction = action;
+            }
+
+            selectedItem = singleAction;
+        }
+
+        if (selectedItem == nullptr) {
+            selectedItem = menu.exec(globalPos);
+        }
+
         if (selectedItem) {
             const QString text = selectedItem->data().toString();
             const QString type = selectedItem->whatsThis();
@@ -582,7 +1502,31 @@ void QOwnNotesMarkdownTextEdit::onAutoCompleteRequested() {
                 return;
             }
 
-            if (type == QStringLiteral("autocomplete")) {
+            if (auto *mainWindow = MainWindow::instance()) {
+                if (!mainWindow->doNoteEditingCheck()) {
+                    return;
+                }
+            }
+
+            if (type == QStringLiteral("wikilink-autocomplete")) {
+                WikiLinkCompletionContext context;
+                if (!currentWikiLinkCompletionContext(this, context)) {
+                    return;
+                }
+
+                QTextCursor c = textCursor();
+                c.setPosition(context.startPosition, QTextCursor::MoveAnchor);
+                c.setPosition(context.cursorPosition, QTextCursor::KeepAnchor);
+                c.insertText(text);
+
+                const QString rightText = toPlainText().mid(c.position(), 2);
+                if (rightText != QStringLiteral("]]")) {
+                    c.insertText(QStringLiteral("]]"));
+                    c.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, 2);
+                }
+
+                setTextCursor(c);
+            } else if (type == QStringLiteral("autocomplete")) {
                 // overwrite the currently written word
                 QTextCursor c = textCursor();
                 c.movePosition(QTextCursor::StartOfWord, QTextCursor::KeepAnchor);
@@ -674,6 +1618,41 @@ bool QOwnNotesMarkdownTextEdit::autoComplete(QStringList &resultList) const {
     return true;
 }
 
+bool QOwnNotesMarkdownTextEdit::wikiLinkAutoComplete(QStringList &resultList, QString &filterText,
+                                                     int &replaceLength) const {
+    WikiLinkCompletionContext context;
+    if (!currentWikiLinkCompletionContext(this, context)) {
+        return false;
+    }
+
+    filterText = context.filterText;
+    replaceLength = context.cursorPosition - context.startPosition;
+
+    QSet<QString> results;
+    const QVector<Note> notes = Note::fetchAll();
+    for (const Note &note : notes) {
+        results.insert(note.getName());
+
+        const QString subfolderPath = note.relativeNoteSubFolderPath();
+        if (!subfolderPath.isEmpty()) {
+            results.insert(subfolderPath + QStringLiteral("/") + note.getName());
+        }
+    }
+
+    resultList = results.values();
+    std::sort(resultList.begin(), resultList.end(),
+              [](const QString &a, const QString &b) { return a.toLower() < b.toLower(); });
+
+    if (!filterText.isEmpty()) {
+        resultList = resultList.filter(QRegularExpression(
+            QRegularExpression::escape(filterText), QRegularExpression::CaseInsensitiveOption));
+    }
+
+    resultList.removeDuplicates();
+    resultList.removeAll(filterText);
+    return !resultList.isEmpty();
+}
+
 /**
  * Tries to find an equation in the current line and solves it
  *
@@ -703,7 +1682,7 @@ bool QOwnNotesMarkdownTextEdit::solveEquation(double &returnValue) {
     if (!match.hasMatch()) {
         if (equation.trimmed().endsWith(QChar('='))) {
             MainWindow::instance()->showStatusBarMessage(
-                tr("No equation was found in front of the cursor"), 5000);
+                tr("No equation was found in front of the cursor"), QStringLiteral("🧮"), 5000);
         }
 
         return false;
@@ -724,7 +1703,8 @@ bool QOwnNotesMarkdownTextEdit::solveEquation(double &returnValue) {
     }
 
     MainWindow::instance()->showStatusBarMessage(
-        tr("Result for equation: %1 = %2").arg(equation, QString::number(resultValue)), 10000);
+        tr("Result for equation: %1 = %2").arg(equation, QString::number(resultValue)),
+        QStringLiteral("🧮"), 10000);
 
     // check if cursor is after the "="
     match = QRegularExpression(QStringLiteral("=\\s*$")).match(text);
@@ -759,15 +1739,121 @@ void QOwnNotesMarkdownTextEdit::insertBlockQuote() {
     }
 }
 
+void QOwnNotesMarkdownTextEdit::insertFootnote() {
+    const QString text = toPlainText();
+
+    // Collect all footnote numbers that are already used, both by footnote
+    // references like "[^1]" and footnote definitions like "[^1]:"
+    QSet<int> usedNumbers;
+    static const QRegularExpression re(QStringLiteral("\\[\\^(\\d+)\\]"));
+    QRegularExpressionMatchIterator it = re.globalMatch(text);
+    while (it.hasNext()) {
+        usedNumbers.insert(it.next().captured(1).toInt());
+    }
+
+    // Find the lowest free footnote number, starting at 1
+    int number = 1;
+    while (usedNumbers.contains(number)) {
+        ++number;
+    }
+
+    // Insert the footnote reference at the current cursor position
+    QTextCursor cursor = textCursor();
+    cursor.insertText(QStringLiteral("[^%1]").arg(number));
+
+    // Add the footnote definition at the end of the note
+    cursor.movePosition(QTextCursor::End);
+    const QString blockText = cursor.block().text();
+    if (!blockText.isEmpty()) {
+        // Add one new line after the current last block and one additional
+        // new line if the last block already is a footnote definition
+        cursor.insertText(blockText.contains(QRegularExpression(QStringLiteral("^\\[\\^.+?\\]:")))
+                              ? QStringLiteral("\n")
+                              : QStringLiteral("\n\n"));
+    }
+    cursor.insertText(QStringLiteral("[^%1]: ").arg(number));
+
+    // Move the cursor to the end of the note to enter the footnote text
+    setTextCursor(cursor);
+}
+
+QTextCursor QOwnNotesMarkdownTextEdit::fullLineSelectionCursor() const {
+    QTextCursor cursor = textCursor();
+    if (!cursor.hasSelection()) {
+        cursor.movePosition(QTextCursor::StartOfBlock);
+        cursor.movePosition(QTextCursor::EndOfBlock, QTextCursor::KeepAnchor);
+        return cursor;
+    }
+
+    const int selectionStart = cursor.selectionStart();
+    int selectionEnd = cursor.selectionEnd();
+
+    QTextCursor lineCursor(document());
+    lineCursor.setPosition(selectionStart);
+    lineCursor.movePosition(QTextCursor::StartOfBlock);
+
+    QTextCursor endCursor(document());
+    endCursor.setPosition(selectionEnd);
+    if (selectionEnd > selectionStart && endCursor.atBlockStart()) {
+        endCursor.movePosition(QTextCursor::PreviousCharacter);
+    }
+    endCursor.movePosition(QTextCursor::EndOfBlock);
+
+    lineCursor.setPosition(endCursor.position(), QTextCursor::KeepAnchor);
+    return lineCursor;
+}
+
+bool QOwnNotesMarkdownTextEdit::replaceFullLineSelection(const QString &text) {
+    QTextCursor cursor = fullLineSelectionCursor();
+    if (!cursor.hasSelection()) {
+        return false;
+    }
+
+    const int start = cursor.selectionStart();
+    cursor.beginEditBlock();
+    cursor.insertText(text);
+    cursor.setPosition(start);
+    cursor.setPosition(start + text.size(), QTextCursor::KeepAnchor);
+    cursor.endEditBlock();
+    setTextCursor(cursor);
+    return true;
+}
+
+bool QOwnNotesMarkdownTextEdit::changeHeadingDepthOfSelection(const int levelDelta) {
+    QTextCursor cursor = fullLineSelectionCursor();
+    if (!cursor.hasSelection()) {
+        return false;
+    }
+
+    return replaceFullLineSelection(changeHeadingDepth(cursor.selectedText(), levelDelta));
+}
+
 QMargins QOwnNotesMarkdownTextEdit::viewportMargins() {
     return QMarkdownTextEdit::viewportMargins();
 }
 
 void QOwnNotesMarkdownTextEdit::setText(const QString &text) {
-    // set a search delay of 250ms for text with more than 200k characters
-    setSearchWidgetDebounceDelay(text.size() > 200000 ? 250 : 0);
+    // Set a search delay of 300ms for text with more than 20k characters
+    setSearchWidgetDebounceDelay(text.size() > 20000 ? 300 : 0);
+    _foldingStateRestorePending = !_currentNoteReference.isEmpty();
+    _foldingStateRestoreAttempts = 0;
 
     QMarkdownTextEdit::setText(text);
+}
+
+void QOwnNotesMarkdownTextEdit::setCurrentNoteReference(const QString &noteReference) {
+    const QString effectiveNoteReference = _headingFoldingEnabled ? noteReference : QString();
+
+    if (_currentNoteReference == effectiveNoteReference) {
+        _foldingStateRestorePending = !effectiveNoteReference.isEmpty();
+        _foldingStateRestoreAttempts = 0;
+        return;
+    }
+
+    storeCurrentFoldedHeadingState();
+    _currentNoteReference = effectiveNoteReference;
+    _foldingStateRestorePending = !_currentNoteReference.isEmpty();
+    _foldingStateRestoreAttempts = 0;
 }
 
 /**
@@ -789,20 +1875,777 @@ void QOwnNotesMarkdownTextEdit::resizeEvent(QResizeEvent *event) {
     QMarkdownTextEdit::resizeEvent(event);
 }
 
+void QOwnNotesMarkdownTextEdit::paintEvent(QPaintEvent *event) {
+    if (_showMarkdownImagePreviews) {
+        QMarkdownTextEdit::paintEvent(event);
+        paintMarkdownImagePreviews();
+    } else {
+        QMarkdownTextEdit::paintEvent(event);
+    }
+}
+
+int QOwnNotesMarkdownTextEdit::sidebarAdditionalWidth() const {
+    if (objectName() == QStringLiteral("logTextEdit") || !_headingFoldingEnabled ||
+        !_hasFoldableHeadings) {
+        return 0;
+    }
+
+    const int indicatorSize = qMax(7, fontMetrics().height() - 8);
+    return indicatorSize + (kFoldIndicatorPadding * 2);
+}
+
+bool QOwnNotesMarkdownTextEdit::isHeadingBlock(const QTextBlock &block, int *level) {
+    if (!block.isValid()) {
+        return false;
+    }
+
+    const int state = block.userState();
+    if (state < MarkdownHighlighter::H1 || state > MarkdownHighlighter::H6) {
+        return false;
+    }
+
+    if (level != nullptr) {
+        *level = state - MarkdownHighlighter::H1 + 1;
+    }
+
+    return true;
+}
+
+bool QOwnNotesMarkdownTextEdit::foldRegionForHeaderBlock(const QTextBlock &headerBlock,
+                                                         FoldRegion &region) const {
+    int level = 0;
+    if (!isHeadingBlock(headerBlock, &level)) {
+        return false;
+    }
+
+    QTextBlock block = headerBlock.next();
+    QTextBlock lastContentBlock;
+
+    while (block.isValid()) {
+        int nextLevel = 0;
+        if (isHeadingBlock(block, &nextLevel) && nextLevel <= level) {
+            break;
+        }
+
+        lastContentBlock = block;
+        block = block.next();
+    }
+
+    if (!lastContentBlock.isValid()) {
+        return false;
+    }
+
+    region.headerBlock = headerBlock;
+    region.firstContentBlock = headerBlock.next();
+    region.lastContentBlock = lastContentBlock;
+    return true;
+}
+
+bool QOwnNotesMarkdownTextEdit::isHeadingFolded(const QTextBlock &headerBlock) const {
+    FoldRegion region;
+    return foldRegionForHeaderBlock(headerBlock, region) && !region.firstContentBlock.isVisible();
+}
+
+QString QOwnNotesMarkdownTextEdit::headingStateKey(const QTextBlock &headerBlock,
+                                                   QHash<QString, int> &headingOccurrences) {
+    int level = 0;
+    if (!isHeadingBlock(headerBlock, &level)) {
+        return QString();
+    }
+
+    const QString headingText = headerBlock.text();
+    const int occurrence = ++headingOccurrences[headingText];
+    return QStringLiteral("%1:%2:%3").arg(level).arg(occurrence).arg(headingText);
+}
+
+bool QOwnNotesMarkdownTextEdit::setFoldRegionFolded(const FoldRegion &region, bool folded) {
+    if (!region.firstContentBlock.isValid() || !region.lastContentBlock.isValid()) {
+        return false;
+    }
+
+    const bool currentlyFolded = !region.firstContentBlock.isVisible();
+    if (currentlyFolded == folded) {
+        return false;
+    }
+
+    QTextCursor cursor = textCursor();
+    const int firstPosition = region.firstContentBlock.position();
+    const int lastPosition = region.lastContentBlock.position() + region.lastContentBlock.length();
+
+    if (folded && cursor.position() >= firstPosition && cursor.position() < lastPosition) {
+        cursor.setPosition(region.headerBlock.position());
+        setTextCursor(cursor);
+    }
+
+    QTextBlock block = region.firstContentBlock;
+    while (block.isValid()) {
+        block.setVisible(!folded);
+        if (folded) {
+            block.setLineCount(0);
+        } else {
+            QTextLayout *layout = block.layout();
+            block.setLineCount(layout ? qMax(1, layout->lineCount()) : 1);
+        }
+
+        if (block == region.lastContentBlock) {
+            break;
+        }
+
+        block = block.next();
+    }
+
+    document()->markContentsDirty(firstPosition, lastPosition - firstPosition);
+    viewport()->update();
+    lineNumberArea()->update();
+    ensureCursorVisible();
+    storeCurrentFoldedHeadingState();
+    return true;
+}
+
+bool QOwnNotesMarkdownTextEdit::setHeadingFolded(const QTextBlock &headerBlock, bool folded) {
+    FoldRegion region;
+    return foldRegionForHeaderBlock(headerBlock, region) && setFoldRegionFolded(region, folded);
+}
+
+bool QOwnNotesMarkdownTextEdit::hasFoldableHeadings() const {
+    QTextBlock block = document()->firstBlock();
+    while (block.isValid()) {
+        FoldRegion region;
+        if (foldRegionForHeaderBlock(block, region)) {
+            return true;
+        }
+
+        block = block.next();
+    }
+
+    return false;
+}
+
+void QOwnNotesMarkdownTextEdit::refreshFoldingSidebar() {
+    if (!_headingFoldingEnabled) {
+        _hasFoldableHeadings = false;
+        updateLineNumberAreaWidth(0);
+        lineNumberArea()->update();
+        return;
+    }
+
+    const bool hadFoldableHeadings = _hasFoldableHeadings;
+    _hasFoldableHeadings = hasFoldableHeadings();
+
+    if (hadFoldableHeadings != _hasFoldableHeadings) {
+        updateLineNumberAreaWidth(0);
+    }
+
+    lineNumberArea()->update();
+}
+
+void QOwnNotesMarkdownTextEdit::paintSidebar(QPainter *painter, const QRect &eventRect) {
+    const int additionalWidth = sidebarAdditionalWidth();
+    if (additionalWidth <= 0) {
+        return;
+    }
+
+    QTextBlock block = firstVisibleBlock();
+    int top = qRound(blockBoundingGeometry(block).translated(contentOffset()).top());
+    top += viewportMargins().top();
+    int bottom = top;
+
+    const QColor gutterColor = palette().color(QPalette::Active, QPalette::Window);
+    QColor iconColor = palette().color(QPalette::Active, QPalette::WindowText);
+    if (qAbs(iconColor.lightness() - gutterColor.lightness()) < 96) {
+        iconColor = gutterColor.lightness() < 128 ? QColor(Qt::white) : QColor(Qt::black);
+    }
+    QColor borderColor = iconColor;
+    borderColor.setAlpha(180);
+
+    painter->save();
+    painter->setRenderHint(QPainter::Antialiasing, true);
+
+    while (block.isValid() && top <= eventRect.bottom()) {
+        top = bottom;
+        bottom = top + qRound(blockBoundingRect(block).height());
+
+        if (block.isVisible() && bottom >= eventRect.top()) {
+            FoldRegion region;
+            if (foldRegionForHeaderBlock(block, region)) {
+                const int indicatorSize = qMax(7, fontMetrics().height() - 8);
+                const int x = kFoldIndicatorPadding;
+                const int y =
+                    top + qMax(0, (qRound(blockBoundingRect(block).height()) - indicatorSize) / 2);
+                const QRect indicatorRect(x, y, indicatorSize, indicatorSize);
+                const bool folded = isHeadingFolded(block);
+
+                painter->setPen(borderColor);
+                painter->setBrush(Qt::NoBrush);
+                painter->drawRect(indicatorRect.adjusted(0, 0, -1, -1));
+
+                painter->setPen(QPen(iconColor, 1.5));
+                painter->drawLine(indicatorRect.left() + 2, indicatorRect.center().y(),
+                                  indicatorRect.right() - 2, indicatorRect.center().y());
+
+                if (folded) {
+                    painter->drawLine(indicatorRect.center().x(), indicatorRect.top() + 2,
+                                      indicatorRect.center().x(), indicatorRect.bottom() - 2);
+                }
+            }
+        }
+
+        block = block.next();
+    }
+
+    painter->restore();
+}
+
+bool QOwnNotesMarkdownTextEdit::headerBlockAtSidebarPosition(const QPoint &pos,
+                                                             QTextBlock &headerBlock) const {
+    if (pos.x() > sidebarAdditionalWidth()) {
+        return false;
+    }
+
+    QTextBlock block = firstVisibleBlock();
+    int top = qRound(blockBoundingGeometry(block).translated(contentOffset()).top());
+    top += QPlainTextEdit::viewportMargins().top();
+    int bottom = top;
+
+    while (block.isValid()) {
+        top = bottom;
+        bottom = top + qRound(blockBoundingRect(block).height());
+
+        if (block.isVisible() && pos.y() >= top && pos.y() <= bottom) {
+            FoldRegion region;
+            if (foldRegionForHeaderBlock(block, region)) {
+                headerBlock = block;
+                return true;
+            }
+
+            return false;
+        }
+
+        if (top > pos.y()) {
+            return false;
+        }
+
+        block = block.next();
+    }
+
+    return false;
+}
+
+void QOwnNotesMarkdownTextEdit::storeCurrentFoldedHeadingState() {
+    if (!_headingFoldingEnabled || _currentNoteReference.isEmpty() ||
+        _isApplyingStoredFoldingState) {
+        return;
+    }
+
+    QSet<QString> foldedHeadingState;
+    QHash<QString, int> headingOccurrences;
+    QTextBlock block = document()->firstBlock();
+
+    while (block.isValid()) {
+        if (isHeadingFolded(block)) {
+            const QString headingKey = headingStateKey(block, headingOccurrences);
+            if (!headingKey.isEmpty()) {
+                foldedHeadingState.insert(headingKey);
+            }
+        } else if (isHeadingBlock(block)) {
+            headingStateKey(block, headingOccurrences);
+        }
+
+        block = block.next();
+    }
+
+    if (foldedHeadingState.isEmpty()) {
+        s_foldedHeadingStateByNoteReference.remove(_currentNoteReference);
+    } else {
+        s_foldedHeadingStateByNoteReference[_currentNoteReference] = foldedHeadingState;
+    }
+}
+
+void QOwnNotesMarkdownTextEdit::scheduleRestoreCurrentFoldedHeadingState() {
+    if (!_foldingStateRestorePending || _currentNoteReference.isEmpty()) {
+        return;
+    }
+
+    QTimer::singleShot(0, this, &QOwnNotesMarkdownTextEdit::restoreCurrentFoldedHeadingState);
+}
+
+void QOwnNotesMarkdownTextEdit::restoreCurrentFoldedHeadingState() {
+    if (!_foldingStateRestorePending || _currentNoteReference.isEmpty() ||
+        !_headingFoldingEnabled) {
+        return;
+    }
+
+    const QSet<QString> foldedHeadingState =
+        s_foldedHeadingStateByNoteReference.value(_currentNoteReference);
+    _foldingStateRestorePending = false;
+
+    if (foldedHeadingState.isEmpty()) {
+        return;
+    }
+
+    if (!_hasFoldableHeadings && _foldingStateRestoreAttempts < 5) {
+        ++_foldingStateRestoreAttempts;
+        QTimer::singleShot(0, this, &QOwnNotesMarkdownTextEdit::restoreCurrentFoldedHeadingState);
+        return;
+    }
+
+    _isApplyingStoredFoldingState = true;
+    _foldingStateRestoreAttempts = 0;
+    QHash<QString, int> headingOccurrences;
+    QTextBlock block = document()->firstBlock();
+
+    while (block.isValid()) {
+        const QString headingKey = headingStateKey(block, headingOccurrences);
+        if (!headingKey.isEmpty() && foldedHeadingState.contains(headingKey)) {
+            setHeadingFolded(block, true);
+        }
+
+        block = block.next();
+    }
+
+    _isApplyingStoredFoldingState = false;
+    refreshFoldingSidebar();
+}
+
+bool QOwnNotesMarkdownTextEdit::sidebarMousePressEvent(QMouseEvent *event) {
+    if (event == nullptr || event->button() != Qt::LeftButton || sidebarAdditionalWidth() <= 0) {
+        return false;
+    }
+
+    QTextBlock headerBlock;
+    if (!headerBlockAtSidebarPosition(event->pos(), headerBlock)) {
+        return false;
+    }
+
+    const bool handled = setHeadingFolded(headerBlock, !isHeadingFolded(headerBlock));
+    if (handled) {
+        event->accept();
+    }
+
+    return handled;
+}
+
+void QOwnNotesMarkdownTextEdit::foldAllHeadings() {
+    if (!_headingFoldingEnabled) {
+        return;
+    }
+
+    QTextBlock block = document()->firstBlock();
+    while (block.isValid()) {
+        setHeadingFolded(block, true);
+        block = block.next();
+    }
+
+    refreshFoldingSidebar();
+}
+
+void QOwnNotesMarkdownTextEdit::unfoldAllHeadings() {
+    QTextBlock block = document()->firstBlock();
+    while (block.isValid()) {
+        setHeadingFolded(block, false);
+        block = block.next();
+    }
+
+    refreshFoldingSidebar();
+}
+
+/**
+ * Resolves a raw Markdown image source string to a canonical URL string
+ * suitable for loading (file://, data:image/, http(s)://, or Nextcloud
+ * /core/preview path).
+ */
+static QString resolveMarkdownImageSource(const QString &rawSource,
+                                          const QString &noteDirectoryPath) {
+    QString source = rawSource.trimmed();
+    if (source.isEmpty()) {
+        return QString();
+    }
+
+    // Handle angle-bracket wrapped paths: <path with spaces.png>
+    if (source.startsWith(QLatin1Char('<')) && source.endsWith(QLatin1Char('>')) &&
+        source.size() > 2) {
+        source = source.mid(1, source.size() - 2).trimmed();
+    }
+
+    // Data URIs are returned as-is
+    if (source.startsWith(QLatin1String("data:image/"), Qt::CaseInsensitive)) {
+        return source;
+    }
+
+    // Strip optional Markdown image title: path "title" or path 'title'
+    if (!source.startsWith(QLatin1Char('<'))) {
+        int splitPos = -1;
+        bool inSingleQuote = false;
+        bool inDoubleQuote = false;
+        for (int i = 0; i < source.size(); ++i) {
+            const QChar ch = source.at(i);
+            if (ch == QLatin1Char('"') && !inSingleQuote) {
+                inDoubleQuote = !inDoubleQuote;
+                continue;
+            }
+            if (ch == QLatin1Char('\'') && !inDoubleQuote) {
+                inSingleQuote = !inSingleQuote;
+                continue;
+            }
+            if (!inSingleQuote && !inDoubleQuote && ch.isSpace()) {
+                splitPos = i;
+                break;
+            }
+        }
+        if (splitPos > 0) {
+            source = source.left(splitPos).trimmed();
+        }
+    }
+
+    if (source.isEmpty()) {
+        return QString();
+    }
+
+    const QUrl sourceUrl(source);
+    if (sourceUrl.isLocalFile()) {
+        return QLatin1String("file://") + sourceUrl.toLocalFile();
+    }
+
+    if (!sourceUrl.scheme().isEmpty()) {
+        return source;
+    }
+
+    // Nextcloud preview paths are resolved later with authentication
+    if (source.startsWith(QLatin1String("/core/preview"))) {
+        return source;
+    }
+
+    if (QFileInfo(source).isAbsolute()) {
+        return QLatin1String("file://") + source;
+    }
+
+    return QLatin1String("file://") + QDir(noteDirectoryPath).absoluteFilePath(source);
+}
+
+/**
+ * Loads a pixmap from a resolved image source string and caches the result.
+ * Failed loads are also cached to avoid repeated expensive lookups.
+ */
+static QPixmap loadMarkdownImagePixmap(const QString &resolvedSource) {
+    static QHash<QString, QPixmap> imageCache;
+    static QSet<QString> failedImageCache;
+    static const QRegularExpression srcRegex(QStringLiteral("src=\"([^\"]+)\""));
+
+    if (resolvedSource.isEmpty()) {
+        return QPixmap();
+    }
+
+    if (imageCache.contains(resolvedSource)) {
+        return imageCache.value(resolvedSource);
+    }
+
+    if (failedImageCache.contains(resolvedSource)) {
+        return QPixmap();
+    }
+
+    QImage image;
+
+    if (resolvedSource.startsWith(QLatin1String("file://"))) {
+        const QString localPath = resolvedSource.mid(7);
+        QFileInfo info(localPath);
+        if (!info.exists() || !info.isFile()) {
+            failedImageCache.insert(resolvedSource);
+            return QPixmap();
+        }
+
+        QImageReader reader(localPath);
+        reader.setAutoTransform(true);
+        image = reader.read();
+    } else if (resolvedSource.startsWith(QLatin1String("data:image/"), Qt::CaseInsensitive)) {
+        const int markerPos = resolvedSource.indexOf(QStringLiteral(";base64,"));
+        if (markerPos < 0) {
+            failedImageCache.insert(resolvedSource);
+            return QPixmap();
+        }
+
+        const QString base64 = resolvedSource.mid(markerPos + 8);
+        image = QImage::fromData(QByteArray::fromBase64(base64.toLatin1()));
+    } else if (resolvedSource.startsWith(QLatin1String("/core/preview"))) {
+        if (!CloudService::isCloudSupportEnabled()) {
+            failedImageCache.insert(resolvedSource);
+            return QPixmap();
+        }
+
+        int width = 0;
+        const QString imgTag =
+            QStringLiteral("<img src=\"") + resolvedSource + QStringLiteral("\" alt=\"img\"/>");
+        const QString inlineTag =
+            CloudService::instance()->nextcloudPreviewImageTagToInlineImageTag(imgTag, width);
+        const QRegularExpressionMatch srcMatch = srcRegex.match(inlineTag);
+        if (!srcMatch.hasMatch()) {
+            failedImageCache.insert(resolvedSource);
+            return QPixmap();
+        }
+
+        const QString dataUrl = srcMatch.captured(1);
+        const int markerPos = dataUrl.indexOf(QStringLiteral(";base64,"));
+        if (markerPos < 0) {
+            failedImageCache.insert(resolvedSource);
+            return QPixmap();
+        }
+
+        const QString base64 = dataUrl.mid(markerPos + 8);
+        image = QImage::fromData(QByteArray::fromBase64(base64.toLatin1()));
+    } else {
+        // Remote URL: do not block the paint event with a synchronous download.
+        // Start an async fetch; the result will be stored in the cache and the
+        // viewport will be refreshed once the download completes.
+        static QSet<QString> pendingDownloadCache;
+        if (!pendingDownloadCache.contains(resolvedSource)) {
+            pendingDownloadCache.insert(resolvedSource);
+
+            // Use a shared network manager to avoid spawning one per request.
+            static QNetworkAccessManager *netManager = nullptr;
+            if (!netManager) {
+                netManager = new QNetworkAccessManager();
+            }
+
+            QNetworkRequest request((QUrl(resolvedSource)));
+#if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
+            // RedirectPolicyAttribute was introduced in Qt 5.9
+            request.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
+                                 QNetworkRequest::NoLessSafeRedirectPolicy);
+#endif
+            request.setHeader(QNetworkRequest::UserAgentHeader,
+                              Utils::Misc::friendlyUserAgentString());
+
+            QNetworkReply *reply = netManager->get(request);
+            QObject::connect(reply, &QNetworkReply::finished, reply, [reply, resolvedSource]() {
+                reply->deleteLater();
+                pendingDownloadCache.remove(resolvedSource);
+
+                if (reply->error() != QNetworkReply::NoError) {
+                    failedImageCache.insert(resolvedSource);
+                    return;
+                }
+
+                const QByteArray data = reply->readAll();
+                const QImage img = QImage::fromData(data);
+                if (img.isNull()) {
+                    failedImageCache.insert(resolvedSource);
+                    return;
+                }
+
+                const QPixmap pix = QPixmap::fromImage(img);
+                if (pix.isNull()) {
+                    failedImageCache.insert(resolvedSource);
+                    return;
+                }
+
+                imageCache.insert(resolvedSource, pix);
+
+                // Trigger a repaint on all markdown text edit widgets so the
+                // newly downloaded image is shown without the user having to
+                // interact with the editor.
+                const auto widgets = QApplication::allWidgets();
+                for (QWidget *w : widgets) {
+                    if (auto *edit = qobject_cast<QOwnNotesMarkdownTextEdit *>(w)) {
+                        if (edit->viewport()) {
+                            edit->viewport()->update();
+                        }
+                    }
+                }
+            });
+        }
+        // Return null for now; the next paint will pick up the cached pixmap.
+        return QPixmap();
+    }
+
+    if (image.isNull()) {
+        failedImageCache.insert(resolvedSource);
+        return QPixmap();
+    }
+
+    const QPixmap pixmap = QPixmap::fromImage(image);
+    if (pixmap.isNull()) {
+        failedImageCache.insert(resolvedSource);
+        return QPixmap();
+    }
+
+    imageCache.insert(resolvedSource, pixmap);
+    return pixmap;
+}
+
+void QOwnNotesMarkdownTextEdit::paintMarkdownImagePreviews() {
+    if (objectName() == QStringLiteral("logTextEdit")) {
+        return;
+    }
+
+    auto *mainWindow = MainWindow::instance();
+    QString noteDirectoryPath = NoteFolder::currentLocalPath();
+    if (mainWindow) {
+        const QString currentNotePath = mainWindow->getCurrentNote().fullNoteFilePath();
+        if (!currentNotePath.isEmpty()) {
+            noteDirectoryPath = QFileInfo(currentNotePath).absolutePath();
+        }
+    }
+
+    static const QRegularExpression imageRegex(
+        QStringLiteral(R"(!\[[^\]]*\]\(([^\n\)]*)\)(?:\s*\{[^}]*\})?)"));
+
+    struct PreviewDrawItem {
+        QRect targetRect;
+        QPixmap pixmap;
+    };
+    QVector<PreviewDrawItem> drawItems;
+
+    QTextBlock block = firstVisibleBlock();
+    const qreal contentX = contentOffset().x();
+    const QRect viewportRect = viewport()->rect();
+
+    // Thumbnail size: as tall as one text line, square
+    const int thumbSize = fontMetrics().height();
+    const int thumbSpacing = 4;
+
+    int top = qRound(blockBoundingGeometry(block).translated(contentOffset()).top());
+    int bottom = top + qRound(blockBoundingRect(block).height());
+
+    while (block.isValid()) {
+        if (!block.isVisible()) {
+            block = block.next();
+            continue;
+        }
+
+        if (bottom < 0) {
+            block = block.next();
+            top = bottom;
+            bottom = top + qRound(blockBoundingRect(block).height());
+            continue;
+        }
+
+        if (top > viewportRect.bottom()) {
+            break;
+        }
+
+        const QString text = block.text();
+        QTextLayout *layout = block.layout();
+        if (!layout) {
+            block = block.next();
+            top = bottom;
+            bottom = top + qRound(blockBoundingRect(block).height());
+            continue;
+        }
+
+        QRegularExpressionMatchIterator iterator = imageRegex.globalMatch(text);
+
+        while (iterator.hasNext()) {
+            const QRegularExpressionMatch match = iterator.next();
+            const int tagEnd = match.capturedEnd(0);
+            const QTextLine line = layout->lineForTextPosition(tagEnd - 1);
+            if (!line.isValid()) {
+                continue;
+            }
+
+            // Only show inline image previews when no visible text follows the
+            // image tag on the same layout line to avoid cursor/caret mismatch.
+            const int lineTextEnd = line.textStart() + line.textLength();
+            if (tagEnd < lineTextEnd) {
+                const QString trailingText = text.mid(tagEnd, lineTextEnd - tagEnd).trimmed();
+                if (!trailingText.isEmpty()) {
+                    continue;
+                }
+            }
+
+            const QString resolvedSource =
+                resolveMarkdownImageSource(match.captured(1), noteDirectoryPath);
+            const QPixmap pixmap = loadMarkdownImagePixmap(resolvedSource);
+            if (pixmap.isNull()) {
+                continue;
+            }
+
+            // Find the line that contains the end of the image tag and compute
+            // the pixel X position right after the closing parenthesis
+            // cursorToX gives us the X coordinate of the character at tagEnd
+            // within the line's local coordinate system
+            const qreal cursorX = line.cursorToX(tagEnd);
+            QRectF lineRect = line.rect();
+            lineRect.translate(contentX, top);
+
+            const int x = qRound(lineRect.left() + cursorX) + thumbSpacing;
+            const int y = qRound(lineRect.top() + (lineRect.height() - thumbSize) / 2.0);
+            const QRect targetRect(x, y, thumbSize, thumbSize);
+
+            if (!viewportRect.intersects(targetRect)) {
+                continue;
+            }
+
+            drawItems.append({targetRect, pixmap});
+        }
+
+        block = block.next();
+        top = bottom;
+        bottom = top + qRound(blockBoundingRect(block).height());
+    }
+
+    QPainter painter(viewport());
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
+    for (const auto &item : drawItems) {
+        // Draw a subtle rounded border around the thumbnail
+        painter.setPen(QPen(QColor(120, 120, 120, 160)));
+        painter.setBrush(QColor(255, 255, 255, 140));
+        painter.drawRoundedRect(item.targetRect.adjusted(-1, -1, 1, 1), 2, 2);
+
+        // Scale pixmap to fit the square thumbnail, keeping aspect ratio
+        const QPixmap scaledPixmap =
+            item.pixmap.scaled(thumbSize, thumbSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        QRect pixmapRect(QPoint(0, 0), scaledPixmap.size());
+        pixmapRect.moveCenter(item.targetRect.center());
+        painter.drawPixmap(pixmapRect.topLeft(), scaledPixmap);
+    }
+}
+
 bool QOwnNotesMarkdownTextEdit::canInsertFromMimeData(const QMimeData *source) const {
-    return (!source->hasUrls());
+    return source->hasUrls() || QMarkdownTextEdit::canInsertFromMimeData(source);
+}
+
+void QOwnNotesMarkdownTextEdit::dragEnterEvent(QDragEnterEvent *event) {
+    if (event->mimeData()->hasUrls()) {
+        event->acceptProposedAction();
+        return;
+    }
+
+    QMarkdownTextEdit::dragEnterEvent(event);
+}
+
+void QOwnNotesMarkdownTextEdit::dragMoveEvent(QDragMoveEvent *event) {
+    if (event->mimeData()->hasUrls()) {
+        event->acceptProposedAction();
+        return;
+    }
+
+    QMarkdownTextEdit::dragMoveEvent(event);
+}
+
+void QOwnNotesMarkdownTextEdit::dropEvent(QDropEvent *event) {
+    if (event->mimeData()->hasUrls()) {
+        if (auto mainWindow = MainWindow::instance()) {
+            event->acceptProposedAction();
+            mainWindow->handleInsertingFromMimeData(event->mimeData());
+            return;
+        }
+    }
+
+    QMarkdownTextEdit::dropEvent(event);
 }
 
 /**
  * Handles pasting from clipboard
  */
 void QOwnNotesMarkdownTextEdit::insertFromMimeData(const QMimeData *source) {
-    // if there is text in the clipboard do the normal pasting process
-    if (source->hasText()) {
+    // File clipboard data can also contain text, so URLs need to take precedence.
+    if (source->hasUrls()) {
+        if (auto mainWindow = MainWindow::instance()) {
+            mainWindow->handleInsertingFromMimeData(source);
+        }
+    } else if (source->hasText()) {
         QMarkdownTextEdit::insertFromMimeData(source);
     } else if (auto mainWindow = MainWindow::instance()) {
-        // to more complex pasting if there was no text (and a main window
-        // was set)
         mainWindow->handleInsertingFromMimeData(source);
     }
 }
@@ -815,7 +2658,7 @@ void QOwnNotesMarkdownTextEdit::updateSettings() {
     const QSignalBlocker blocker(this);
     Q_UNUSED(blocker)
 
-    QSettings settings;
+    SettingsService settings;
     QMarkdownTextEdit::AutoTextOptions options;
 
     if (settings.value(QStringLiteral("Editor/autoBracketClosing"), true).toBool()) {
@@ -844,6 +2687,32 @@ void QOwnNotesMarkdownTextEdit::updateSettings() {
         }
     }
 
+#ifdef LANGUAGETOOL_ENABLED
+    auto *languageToolChecker = LanguageToolChecker::instance();
+    if (languageToolChecker) {
+        if ((objectName() == QStringLiteral("noteTextEdit")) ||
+            (objectName() == QStringLiteral("encryptedNoteTextEdit")) || objectName().isEmpty()) {
+            languageToolChecker->setTextEdit(this);
+            languageToolChecker->scheduleCheck(true);
+        } else {
+            languageToolChecker->clearForTextEdit(this);
+        }
+    }
+#endif
+
+#ifdef HARPER_ENABLED
+    auto *harperChecker = HarperChecker::instance();
+    if (harperChecker) {
+        if ((objectName() == QStringLiteral("noteTextEdit")) ||
+            (objectName() == QStringLiteral("encryptedNoteTextEdit")) || objectName().isEmpty()) {
+            harperChecker->setTextEdit(this);
+            harperChecker->scheduleCheck(true);
+        } else {
+            harperChecker->clearForTextEdit(this);
+        }
+    }
+#endif
+
     // highlighting is always disabled for logTextEdit
     if (objectName() != QStringLiteral("logTextEdit")) {
         // enable or disable Markdown highlighting
@@ -851,6 +2720,13 @@ void QOwnNotesMarkdownTextEdit::updateSettings() {
             settings.value(QStringLiteral("markdownHighlightingEnabled"), true).toBool();
 
         setHighlightingEnabled(highlightingEnabled);
+
+        if (_highlighter) {
+            // enable or disable highlighting of inline formatting across multiple lines
+            _highlighter->setMultilineInlineHighlightingEnabled(
+                settings.value(QStringLiteral("Editor/multilineInlineHighlighting"), true)
+                    .toBool());
+        }
 
         if (highlightingEnabled) {
             // set the new highlighting styles
@@ -864,19 +2740,77 @@ void QOwnNotesMarkdownTextEdit::updateSettings() {
     const bool hlCurrLine =
         settings.value(QStringLiteral("Editor/highlightCurrentLine"), true).toBool();
     setHighlightCurrentLine(hlCurrLine);
+
+    QTextOption textOption = document()->defaultTextOption();
+    QTextOption::Flags textOptionFlags = textOption.flags();
+    const bool showWhitespaceMarkers =
+        settings.value(QStringLiteral("Editor/showWhitespaceMarkers"), false).toBool();
+    if (_highlighter) {
+        _highlighter->setWhitespaceMarkerHighlighting(
+            showWhitespaceMarkers,
+            Utils::Schema::schemaSettings->getForegroundColor(MarkdownHighlighter::Whitespace));
+    }
+    if (showWhitespaceMarkers) {
+        textOptionFlags |= QTextOption::ShowTabsAndSpaces;
+    } else {
+        textOptionFlags &= ~QTextOption::ShowTabsAndSpaces;
+    }
+
+    const bool showLineEndingMarkers =
+        settings.value(QStringLiteral("Editor/showLineEndingMarkers"), false).toBool();
+    if (showLineEndingMarkers) {
+        textOptionFlags |= QTextOption::ShowLineAndParagraphSeparators |
+                           QTextOption::AddSpaceForLineAndParagraphSeparators;
+    } else {
+        textOptionFlags &= ~(QTextOption::ShowLineAndParagraphSeparators |
+                             QTextOption::AddSpaceForLineAndParagraphSeparators);
+    }
+    textOption.setFlags(textOptionFlags);
+    document()->setDefaultTextOption(textOption);
+
+    // Hide formatting syntax on non-cursor blocks (Typora-like)
+    const bool hideFormattingSyntax =
+        settings.value(QStringLiteral("Editor/hideFormattingSyntax"), false).toBool();
+    if (_highlighter) {
+        _highlighter->setHideFormattingSyntax(hideFormattingSyntax);
+        _highlighter->setCurrentCursorBlockNumber(textCursor().blockNumber());
+    }
+
+    const bool hangingIndentEnabled =
+        settings.value(QStringLiteral("Editor/hangingIndent"), false).toBool();
+    setHangingIndentEnabled(hangingIndentEnabled);
+    _headingFoldingEnabled =
+        settings.value(QStringLiteral("Editor/headingFolding"), false).toBool();
+    if (!_headingFoldingEnabled) {
+        setCurrentNoteReference(QString());
+        unfoldAllHeadings();
+    }
+    _showMarkdownImagePreviews =
+        settings.value(QStringLiteral("Editor/showMarkdownImagePreviews"), true).toBool();
+    viewport()->update();
+    refreshFoldingSidebar();
     const auto color = Utils::Schema::schemaSettings->getBackgroundColor(
         MarkdownHighlighter::HighlighterState::CurrentLineBackgroundColor);
     setCurrentLineHighlightColor(color);
 
     _centerCursor = settings.value(QStringLiteral("Editor/centerCursor")).toBool();
     QMarkdownTextEdit::updateSettings();
+
+    if (_markdownLspInitialized) {
+        applyMarkdownLspSettings();
+    }
 }
 
 void QOwnNotesMarkdownTextEdit::onContextMenu(QPoint pos) {
     auto *spellCheckMenu = spellCheckContextMenu(pos);
+    const QTextCursor cursorAtMouse = cursorForPosition(pos);
+    auto *lspMenu = markdownLspContextMenu(cursorAtMouse);
 
     const QPoint globalPos = this->viewport()->mapToGlobal(pos);
     QMenu *menu = this->createStandardContextMenu();
+    if (lspMenu) {
+        menu->insertMenu(menu->actions().constFirst(), lspMenu);
+    }
     if (spellCheckMenu) {
         // insert spell check at the top if available
         menu->insertMenu(menu->actions().constFirst(), spellCheckMenu);
@@ -902,9 +2836,32 @@ void QOwnNotesMarkdownTextEdit::onContextMenu(QPoint pos) {
             &QOwnNotesMarkdownTextEdit::insertBlockQuote);
     blockQuoteTextAction->setEnabled(isAllowNoteEditing);
 
+    QAction *footnoteAction = menu->addAction(tr("Insert &footnote"));
+    connect(footnoteAction, &QAction::triggered, this, &QOwnNotesMarkdownTextEdit::insertFootnote);
+    footnoteAction->setEnabled(isAllowNoteEditing);
+
     if (isTextSelected) {
+        QMenu *listOperationsMenu = menu->addMenu(tr("List operations"));
+        listOperationsMenu->setEnabled(isAllowNoteEditing);
+
+        listOperationsMenu->addAction(MainWindow::instance()->toggleCheckboxesAction());
+        listOperationsMenu->addAction(MainWindow::instance()->createOrderedListAction());
+        listOperationsMenu->addAction(MainWindow::instance()->createAlphabeticalListAction());
+        listOperationsMenu->addAction(MainWindow::instance()->createUnorderedListAction());
+        listOperationsMenu->addAction(MainWindow::instance()->createCheckboxListAction());
+        listOperationsMenu->addAction(MainWindow::instance()->clearListFormattingAction());
+        listOperationsMenu->addAction(MainWindow::instance()->orderCheckboxesAction());
+
+        QMenu *markdownOperationsMenu = menu->addMenu(tr("Markdown operations"));
+        markdownOperationsMenu->setEnabled(isAllowNoteEditing);
+
+        markdownOperationsMenu->addAction(MainWindow::instance()->increaseHeadingDepthAction());
+        markdownOperationsMenu->addAction(MainWindow::instance()->decreaseHeadingDepthAction());
+
         menu->addAction(MainWindow::instance()->searchTextOnWebAction());
+        menu->addAction(MainWindow::instance()->findNoteAction());
     }
+
     //     searchAction->setEnabled(isTextSelected);
     //     QAction *searchAction =
     //         menu->addAction(ui->actionSearch_text_on_the_web->text());
@@ -936,6 +2893,54 @@ void QOwnNotesMarkdownTextEdit::onContextMenu(QPoint pos) {
 
     menu->addSeparator();
 
+    if (_markdownLspEnabled && _markdownLspClient && !_markdownLspUri.isEmpty()) {
+        QMenu *lspMenu = menu->addMenu(tr("Markdown LSP"));
+        QAction *formatDocumentAction = lspMenu->addAction(tr("Format document"));
+        formatDocumentAction->setEnabled(isAllowNoteEditing);
+        connect(formatDocumentAction, &QAction::triggered, this,
+                [this]() { requestMarkdownLspFormatting(false); });
+
+        QAction *formatSelectionAction = lspMenu->addAction(tr("Format selection"));
+        formatSelectionAction->setEnabled(isAllowNoteEditing && isTextSelected);
+        connect(formatSelectionAction, &QAction::triggered, this,
+                [this]() { requestMarkdownLspFormatting(true); });
+
+        menu->addSeparator();
+    }
+
+    // add table column insertion actions if cursor is in a table
+    if (Utils::Gui::isTableAtCursor(this)) {
+        QAction *addColumnLeftAction = menu->addAction(tr("Add table column left"));
+        addColumnLeftAction->setEnabled(isAllowNoteEditing);
+        connect(addColumnLeftAction, &QAction::triggered, this,
+                [this]() { Utils::Gui::insertTableColumnLeft(this); });
+
+        QAction *addColumnRightAction = menu->addAction(tr("Add table column right"));
+        addColumnRightAction->setEnabled(isAllowNoteEditing);
+        connect(addColumnRightAction, &QAction::triggered, this,
+                [this]() { Utils::Gui::insertTableColumnRight(this); });
+
+        QAction *addRowAboveAction = menu->addAction(tr("Add table row above"));
+        addRowAboveAction->setEnabled(isAllowNoteEditing);
+        connect(addRowAboveAction, &QAction::triggered, this,
+                [this]() { Utils::Gui::insertTableRowAbove(this); });
+
+        QAction *addRowBelowAction = menu->addAction(tr("Add table row below"));
+        addRowBelowAction->setEnabled(isAllowNoteEditing);
+        connect(addRowBelowAction, &QAction::triggered, this,
+                [this]() { Utils::Gui::insertTableRowBelow(this); });
+
+        QAction *editTableAction = menu->addAction(tr("Edit table"));
+        editTableAction->setEnabled(isAllowNoteEditing);
+        connect(editTableAction, &QAction::triggered, this, [this]() {
+            auto *dialog = new MarkdownTableDialog(this, this);
+            dialog->exec();
+            delete dialog;
+        });
+
+        menu->addSeparator();
+    }
+
     // add the print menu
     QMenu *printMenu = menu->addMenu(tr("Print"));
     QIcon printIcon =
@@ -952,7 +2957,7 @@ void QOwnNotesMarkdownTextEdit::onContextMenu(QPoint pos) {
         auto mainWindow = MainWindow::instance();
         auto *textEdit = new QOwnNotesMarkdownTextEdit(this);
         textEdit->setPlainText(mainWindow->selectedNoteTextEditText());
-        mainWindow->printTextDocument(textEdit->document());
+        mainWindow->printTextDocument(textEdit->document(), true);
     });
 
     // add the print selected text (preview) action
@@ -990,7 +2995,7 @@ void QOwnNotesMarkdownTextEdit::onContextMenu(QPoint pos) {
         auto mainWindow = MainWindow::instance();
         auto *textEdit = new QOwnNotesMarkdownTextEdit(this);
         textEdit->setPlainText(mainWindow->selectedNoteTextEditText());
-        mainWindow->exportNoteAsPDF(textEdit->document());
+        mainWindow->exportNoteAsPDF(textEdit->document(), true);
     });
 
     // add the export selected text (preview) action
@@ -1014,6 +3019,8 @@ void QOwnNotesMarkdownTextEdit::onContextMenu(QPoint pos) {
 
     // add some other existing menu entries
     auto mainWindow = MainWindow::instance();
+    QMenu *selectMenu = menu->addMenu(tr("Select"));
+    selectMenu->addAction(mainWindow->selectEnclosedTextAction());
     menu->addAction(mainWindow->pasteImageAction());
     menu->addAction(mainWindow->autocompleteAction());
     menu->addAction(mainWindow->splitNoteAtPosAction());
@@ -1036,9 +3043,6 @@ void QOwnNotesMarkdownTextEdit::onContextMenu(QPoint pos) {
 
 QMenu *QOwnNotesMarkdownTextEdit::spellCheckContextMenu(QPoint pos) {
     auto spellchecker = QOwnSpellChecker::instance();
-    if (!spellchecker || !spellchecker->isActive() || _isSpellCheckingDisabled) {
-        return nullptr;
-    }
 
     // obtain the cursor at current mouse position
     QTextCursor cursorAtMouse = cursorForPosition(pos);
@@ -1047,6 +3051,27 @@ QMenu *QOwnNotesMarkdownTextEdit::spellCheckContextMenu(QPoint pos) {
     QTextCursor cursor = textCursor();
     if (MarkdownHighlighter::isCodeBlock(cursor.block().userState())) {
         return nullptr;
+    }
+
+    auto *menu = new QMenu(this);
+    bool hasEntries = false;
+
+#ifdef LANGUAGETOOL_ENABLED
+    addLanguageToolMenuSection(menu, cursorAtMouse, cursor, hasEntries);
+#endif
+
+#ifdef HARPER_ENABLED
+    addHarperMenuSection(menu, cursorAtMouse, cursor, hasEntries);
+#endif
+
+    if (!spellchecker || !spellchecker->isActive() || _isSpellCheckingDisabled) {
+        if (!hasEntries) {
+            delete menu;
+            return nullptr;
+        }
+
+        menu->setTitle(tr("Spelling"));
+        return menu;
     }
 
     // Check if the user clicked a selected word
@@ -1087,7 +3112,13 @@ QMenu *QOwnNotesMarkdownTextEdit::spellCheckContextMenu(QPoint pos) {
                                   spellchecker->isWordMisspelled(selectedWord);
 
     if (!wordIsMisspelled) {
-        return nullptr;
+        if (!hasEntries) {
+            delete menu;
+            return nullptr;
+        }
+
+        menu->setTitle(tr("Spelling"));
+        return menu;
     }
 
     if (!selectedWordClicked) {
@@ -1096,8 +3127,10 @@ QMenu *QOwnNotesMarkdownTextEdit::spellCheckContextMenu(QPoint pos) {
         cursor = textCursor();
     }
 
-    // Create the suggestion menu
-    auto *menu = new QMenu(this);
+    if (hasEntries) {
+        menu->addSeparator();
+    }
+
     // Add the suggestions to the menu
     const QStringList reps = spellchecker->suggestionsForWord(selectedWord, cursor, 8);
     if (reps.isEmpty()) {
@@ -1107,6 +3140,10 @@ QMenu *QOwnNotesMarkdownTextEdit::spellCheckContextMenu(QPoint pos) {
         for (const QString &rep : reps) {
             menu->addAction(rep, this, [rep, this, cursor]() mutable {
                 if (!cursor.isNull()) {
+                    // Turn off read-only mode first so the note will be stored
+                    if (auto *mw = MainWindow::instance()) {
+                        mw->allowNoteEditing();
+                    }
                     cursor.insertText(rep);
                     setTextCursor(cursor);
                 }
@@ -1133,7 +3170,287 @@ QMenu *QOwnNotesMarkdownTextEdit::spellCheckContextMenu(QPoint pos) {
     return menu;
 }
 
+QMenu *QOwnNotesMarkdownTextEdit::markdownLspContextMenu(const QTextCursor &cursorAtMouse) {
+    if (!_markdownLspEnabled || !_markdownLspClient || _markdownLspDiagnostics.isEmpty()) {
+        return nullptr;
+    }
+
+    // Find a diagnostic whose range covers the cursor position
+    const int cursorLine = cursorAtMouse.blockNumber();
+    const int cursorCol = cursorAtMouse.positionInBlock();
+    const MarkdownLspClient::Diagnostic *match = nullptr;
+    const auto &constMarkdownLspDiagnostics = _markdownLspDiagnostics;
+    for (const auto &diag : constMarkdownLspDiagnostics) {
+        if (cursorLine >= diag.range.startLine && cursorLine <= diag.range.endLine) {
+            // For single-line diagnostics also check column range
+            if (diag.range.startLine == diag.range.endLine) {
+                if (cursorCol >= diag.range.startCharacter &&
+                    cursorCol <= diag.range.endCharacter) {
+                    match = &diag;
+                    break;
+                }
+            } else {
+                match = &diag;
+                break;
+            }
+        }
+    }
+
+    if (!match) {
+        return nullptr;
+    }
+
+    auto *lspMenu = new QMenu(match->message, this);
+    auto *ignoredRules = MarkdownLspIgnoredRules::instance();
+
+    // Request code actions for this diagnostic and wait briefly for the response
+    // using a local event loop (same pattern as QDialog::exec)
+    _markdownLspCodeActionRequestId =
+        _markdownLspClient->requestCodeActions(_markdownLspUri, match->range, {*match});
+
+    if (_markdownLspCodeActionRequestId >= 0) {
+        QVector<MarkdownLspClient::CodeAction> receivedActions;
+        int receivedId = -1;
+
+        // Wait up to 2 seconds for the response
+        QEventLoop loop;
+        QTimer timeout;
+        timeout.setSingleShot(true);
+        timeout.setInterval(2000);
+        connect(&timeout, &QTimer::timeout, &loop, &QEventLoop::quit);
+        connect(_markdownLspClient, &MarkdownLspClient::codeActionsReceived, &loop,
+                [&](int id, const QVector<MarkdownLspClient::CodeAction> &actions) {
+                    receivedId = id;
+                    receivedActions = actions;
+                    loop.quit();
+                });
+        timeout.start();
+        loop.exec();
+
+        if (receivedId == _markdownLspCodeActionRequestId) {
+            _markdownLspCodeActionRequestId = -1;
+            const auto &constReceivedActions = receivedActions;
+            for (const auto &action : constReceivedActions) {
+                lspMenu->addAction(action.title, this, [this, action]() {
+                    if (action.hasEdits()) {
+                        applyMarkdownLspTextEdits(action.edits);
+                    } else if (action.hasCommand()) {
+                        _markdownLspClient->executeCommand(action.command);
+                    }
+                });
+            }
+        }
+    }
+
+    const QString ruleId = match->ruleId();
+    if (!ruleId.isEmpty() && ignoredRules && !ignoredRules->isRuleIgnored(ruleId)) {
+        const QString displayRuleName = match->displayRuleName();
+        const QString actionText = displayRuleName.isEmpty()
+                                       ? tr("Ignore this rule globally")
+                                       : tr("Ignore rule %1 globally").arg(displayRuleName);
+        lspMenu->addAction(actionText, this, [this, ignoredRules, ruleId]() {
+            ignoredRules->ignoreRule(ruleId);
+            refreshMarkdownLspDiagnostics();
+        });
+    }
+
+    return lspMenu;
+}
+
+#ifdef LANGUAGETOOL_ENABLED
+void QOwnNotesMarkdownTextEdit::addLanguageToolMenuSection(QMenu *menu,
+                                                           const QTextCursor &cursorAtMouse,
+                                                           const QTextCursor &selectedCursor,
+                                                           bool &hasEntries) {
+    auto *checker = LanguageToolChecker::instance();
+    if ((checker == nullptr) || !checker->isEnabled()) {
+        return;
+    }
+
+    QTextCursor matchCursor(cursorAtMouse);
+    matchCursor.clearSelection();
+    const auto blockMatch = checker->matchAtPosition(matchCursor, matchCursor.positionInBlock());
+    if ((blockMatch.blockNumber < 0) || checker->isRuleIgnored(blockMatch.match.ruleId)) {
+        return;
+    }
+
+    QTextCursor replacementCursor(selectedCursor);
+    const int blockPosition = matchCursor.block().position();
+    replacementCursor.setPosition(blockPosition + blockMatch.match.offset);
+    replacementCursor.setPosition(blockPosition + blockMatch.match.offset + blockMatch.match.length,
+                                  QTextCursor::KeepAnchor);
+
+    const QString category = blockMatch.match.ruleCategory.isEmpty()
+                                 ? tr("LanguageTool")
+                                 : blockMatch.match.ruleCategory;
+    QString headerText = category;
+    if (!blockMatch.match.shortMessage.isEmpty()) {
+        headerText += QStringLiteral(": ") + blockMatch.match.shortMessage;
+    } else if (!blockMatch.match.message.isEmpty()) {
+        headerText += QStringLiteral(": ") + blockMatch.match.message;
+    }
+
+    QAction *headerAction = menu->addAction(headerText);
+    headerAction->setEnabled(false);
+
+    if (blockMatch.match.replacements.isEmpty()) {
+        QAction *noSuggestionsAction = menu->addAction(tr("No suggestions"));
+        noSuggestionsAction->setEnabled(false);
+    } else {
+        const QStringList replacements = blockMatch.match.replacements.mid(0, 8);
+        for (const QString &replacement : replacements) {
+            menu->addAction(replacement, this, [this, replacementCursor, replacement]() mutable {
+                applyLanguageToolReplacement(replacementCursor, replacement);
+            });
+        }
+    }
+
+    if (!blockMatch.match.ruleUrl.isEmpty()) {
+        const auto url = blockMatch.match.ruleUrl;
+        menu->addAction(tr("More info..."), this,
+                        [url]() { QDesktopServices::openUrl(QUrl(url)); });
+    }
+
+    const auto ruleId = blockMatch.match.ruleId;
+    menu->addAction(tr("Ignore this rule"), this, [this, checker, ruleId]() {
+        checker->ignoreRule(ruleId);
+        if (highlighter()) {
+            highlighter()->rehighlight();
+        }
+    });
+
+    // Add "Ignore this word" option for typo/spelling matches
+    const QString matchedWord = replacementCursor.selectedText();
+    if (!matchedWord.isEmpty()) {
+        menu->addAction(tr("Ignore word \"%1\"").arg(matchedWord), this,
+                        [this, checker, matchedWord]() {
+                            checker->ignoreWord(matchedWord);
+                            if (highlighter()) {
+                                highlighter()->rehighlight();
+                            }
+                        });
+    }
+
+    hasEntries = true;
+}
+
+void QOwnNotesMarkdownTextEdit::applyLanguageToolReplacement(const QTextCursor &cursor,
+                                                             const QString &replacement) {
+    QTextCursor mutableCursor(cursor);
+    if (mutableCursor.isNull()) {
+        return;
+    }
+
+    // Turn off read-only mode first so the note will be stored
+    if (auto *mw = MainWindow::instance()) {
+        mw->allowNoteEditing();
+    }
+
+    mutableCursor.insertText(replacement);
+    setTextCursor(mutableCursor);
+}
+#endif
+
+#ifdef HARPER_ENABLED
+void QOwnNotesMarkdownTextEdit::addHarperMenuSection(QMenu *menu, const QTextCursor &cursorAtMouse,
+                                                     const QTextCursor &selectedCursor,
+                                                     bool &hasEntries) {
+    auto *checker = HarperChecker::instance();
+    if ((checker == nullptr) || !checker->isEnabled()) {
+        return;
+    }
+
+    QTextCursor matchCursor(cursorAtMouse);
+    matchCursor.clearSelection();
+    const auto blockMatch = checker->matchAtPosition(matchCursor, matchCursor.positionInBlock());
+    if ((blockMatch.blockNumber < 0) || checker->isRuleIgnored(blockMatch.match.ruleId)) {
+        return;
+    }
+
+    if (hasEntries) {
+        menu->addSeparator();
+    }
+
+    QTextCursor replacementCursor(selectedCursor);
+    const int blockPosition = matchCursor.block().position();
+    replacementCursor.setPosition(blockPosition + blockMatch.match.offset);
+    replacementCursor.setPosition(blockPosition + blockMatch.match.offset + blockMatch.match.length,
+                                  QTextCursor::KeepAnchor);
+
+    const QString category =
+        blockMatch.match.ruleCategory.isEmpty() ? tr("Harper") : blockMatch.match.ruleCategory;
+    QString headerText = category;
+    if (!blockMatch.match.shortMessage.isEmpty()) {
+        headerText += QStringLiteral(": ") + blockMatch.match.shortMessage;
+    } else if (!blockMatch.match.message.isEmpty()) {
+        headerText += QStringLiteral(": ") + blockMatch.match.message;
+    }
+
+    QAction *headerAction = menu->addAction(headerText);
+    headerAction->setEnabled(false);
+
+    if (blockMatch.match.replacements.isEmpty()) {
+        QAction *noSuggestionsAction = menu->addAction(tr("No suggestions"));
+        noSuggestionsAction->setEnabled(false);
+    } else {
+        const QStringList replacements = blockMatch.match.replacements.mid(0, 8);
+        for (const QString &replacement : replacements) {
+            menu->addAction(replacement, this, [this, replacementCursor, replacement]() mutable {
+                applyHarperReplacement(replacementCursor, replacement);
+            });
+        }
+    }
+
+    const auto ruleId = blockMatch.match.ruleId;
+    menu->addAction(tr("Ignore this rule"), this, [this, checker, ruleId]() {
+        checker->ignoreRule(ruleId);
+        if (highlighter()) {
+            highlighter()->rehighlight();
+        }
+    });
+
+    const QString matchedWord = replacementCursor.selectedText();
+    if (!matchedWord.isEmpty()) {
+        menu->addAction(tr("Ignore word \"%1\"").arg(matchedWord), this,
+                        [this, checker, matchedWord]() {
+                            checker->ignoreWord(matchedWord);
+                            if (highlighter()) {
+                                highlighter()->rehighlight();
+                            }
+                        });
+    }
+
+    hasEntries = true;
+}
+
+void QOwnNotesMarkdownTextEdit::applyHarperReplacement(const QTextCursor &cursor,
+                                                       const QString &replacement) {
+    QTextCursor mutableCursor(cursor);
+    if (mutableCursor.isNull()) {
+        return;
+    }
+
+    if (auto *mw = MainWindow::instance()) {
+        mw->allowNoteEditing();
+    }
+
+    mutableCursor.insertText(replacement);
+    setTextCursor(mutableCursor);
+}
+#endif
+
 bool QOwnNotesMarkdownTextEdit::eventFilter(QObject *obj, QEvent *event) {
+    if (event->type() == QEvent::MouseButtonRelease && obj == viewport()) {
+        auto *mouseEvent = static_cast<QMouseEvent *>(event);
+        if (mouseEvent->button() == Qt::LeftButton &&
+            mouseEvent->modifiers().testFlag(Qt::ControlModifier) &&
+            !hoveredMarkdownLink(mouseEvent->pos(), nullptr, true)) {
+            // Do not let the base parser activate a link from an overly broad
+            // Markdown match, such as the checkbox preceding an inline link.
+            return QPlainTextEdit::eventFilter(obj, event);
+        }
+    }
+
     if (event->type() == QEvent::KeyPress) {
         auto *keyEvent = static_cast<QKeyEvent *>(event);
 
@@ -1143,6 +3460,10 @@ bool QOwnNotesMarkdownTextEdit::eventFilter(QObject *obj, QEvent *event) {
             if ((keyEvent->key() == Qt::Key_Escape) && _searchWidget->isVisible()) {
                 _searchWidget->deactivate();
                 return true;
+            } else if ((keyEvent->key() == Qt::Key_R) &&
+                       keyEvent->modifiers().testFlag(Qt::ControlModifier) &&
+                       !Utils::Misc::isNoteEditingAllowed()) {
+                MainWindow::instance()->allowNoteEditing();
             } else if (!Utils::Misc::isNoteEditingAllowed()) {
                 const auto noModifierKeys = QList<int>()
                                             << Qt::Key_Return << Qt::Key_Enter << Qt::Key_Space
@@ -1151,7 +3472,13 @@ bool QOwnNotesMarkdownTextEdit::eventFilter(QObject *obj, QEvent *event) {
                                             << Qt::Key_BraceLeft << Qt::Key_BracketLeft
                                             << Qt::Key_Plus << Qt::Key_Comma << Qt::Key_Period;
 
-                const auto controlModifierKeys = QList<int>() << Qt::Key_V << Qt::Key_Space;
+                if ((keyEvent->key() == Qt::Key_Space) &&
+                    keyEvent->modifiers().testFlag(Qt::ControlModifier)) {
+                    onAutoCompleteRequested();
+                    return true;
+                }
+
+                const auto controlModifierKeys = QList<int>() << Qt::Key_V;
 
                 // show notification if user tries to edit a note while
                 // note editing is turned off
@@ -1167,7 +3494,7 @@ bool QOwnNotesMarkdownTextEdit::eventFilter(QObject *obj, QEvent *event) {
                         // not if manually answered.
                         // You may see: https://github.com/pbek/QOwnNotes/issues/2421
                         // This check is partially copied from utils/gui.cpp showMessage()
-                        QSettings settings;
+                        SettingsService settings;
                         const QString settingsKey =
                             QStringLiteral("MessageBoxOverride/readonly-mode-allow");
                         auto overrideButton = static_cast<QMessageBox::StandardButton>(
@@ -1181,8 +3508,9 @@ bool QOwnNotesMarkdownTextEdit::eventFilter(QObject *obj, QEvent *event) {
                     return true;
                 }
             } else {
-                // disable note editing if escape key was pressed
-                if (keyEvent->key() == Qt::Key_Escape) {
+                // Disable note editing if Escape key was pressed and
+                // read-only mode feature is enabled
+                if (keyEvent->key() == Qt::Key_Escape && Utils::Misc::isReadOnlyModeEnabled()) {
                     MainWindow::instance()->disallowNoteEditing();
 
                     return true;
@@ -1196,5 +3524,889 @@ bool QOwnNotesMarkdownTextEdit::eventFilter(QObject *obj, QEvent *event) {
         }
     }
 
-    return QMarkdownTextEdit::eventFilter(obj, event);
+    const bool handled = QMarkdownTextEdit::eventFilter(obj, event);
+    if ((event->type() == QEvent::KeyPress || event->type() == QEvent::KeyRelease) &&
+        static_cast<QKeyEvent *>(event)->key() == Qt::Key_Control) {
+        updateHoveredLink(viewport()->mapFromGlobal(QCursor::pos()),
+                          event->type() == QEvent::KeyPress);
+    }
+    return handled;
+}
+
+void QOwnNotesMarkdownTextEdit::updateIgnoredClickUrlRegexps() {
+    // Deck card URLs are now fully handled by openUrl() via UrlHandler, so we
+    // must not add them to the ignored-click list — doing so would cause
+    // openLinkAtCursorPosition() to return early and swallow the Ctrl+Click,
+    // preventing the Nextcloud Deck dialog from opening in the note editor.
+    // Clear any previously set regexps to avoid stale state.
+    setIgnoredClickUrlRegexps({});
+}
+
+/**
+ * Requests AI autocomplete for the current text
+ */
+void QOwnNotesMarkdownTextEdit::requestAiAutocomplete() {
+    qDebug() << __func__ << " - called";
+
+    if (!OpenAiService::getAutocompleteEnabled() || !OpenAiService::getEnabled()) {
+        qDebug() << __func__ << " - autocomplete not enabled, returning";
+        return;
+    }
+
+    qDebug() << __func__ << " - autocomplete is enabled, proceeding";
+
+    // Don't autocomplete if there's a selection
+    QTextCursor cursor = textCursor();
+    if (cursor.hasSelection()) {
+        qDebug() << __func__ << " - cursor has selection, returning";
+        return;
+    }
+
+    // Get the current text context (e.g., last 200 characters)
+    cursor.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
+    QString context = cursor.selectedText();
+
+    // Limit context to last 500 characters to avoid too large prompts
+    if (context.length() > 500) {
+        context = context.right(500);
+    }
+
+    qDebug() << __func__ << " - context:" << context;
+
+    // Don't request if context is too short
+    if (context.trimmed().length() < 10) {
+        qDebug() << __func__ << " - context too short, returning";
+        return;
+    }
+
+    // Store the current cursor position
+    _aiAutocompletePosition = textCursor().position();
+
+    qDebug() << __func__ << " - calling completeAsync, position:" << _aiAutocompletePosition;
+
+    // Request completion from OpenAI service
+    OpenAiService::instance()->completeAsync(context);
+}
+
+/**
+ * Shows the AI autocomplete suggestion
+ */
+void QOwnNotesMarkdownTextEdit::showAiAutocompleteSuggestion(const QString &suggestion) {
+    qDebug() << "=== showAiAutocompleteSuggestion CALLED ===" << this;
+    qDebug() << __func__ << " - Widget:" << objectName();
+
+    SettingsService settings;
+    bool enabled = settings.value(QStringLiteral("ai/autocompleteEnabled")).toBool();
+    qDebug() << __func__ << " - ai/autocompleteEnabled setting:" << enabled;
+
+    if (!enabled) {
+        qDebug() << __func__ << " - autocomplete not enabled in settings, returning";
+        return;
+    }
+
+    qDebug() << __func__ << " - 'suggestion': " << suggestion;
+
+    if (suggestion.isEmpty()) {
+        qDebug() << __func__ << " - suggestion is empty, returning";
+        return;
+    }
+
+    // Check if cursor hasn't moved too far from the autocomplete position
+    int currentPos = textCursor().position();
+    qDebug() << __func__ << " - 'currentPos': " << currentPos
+             << " '_aiAutocompletePosition': " << _aiAutocompletePosition;
+
+    if (currentPos < _aiAutocompletePosition || currentPos > _aiAutocompletePosition + 50) {
+        // Cursor has moved too much, don't show suggestion
+        qDebug() << __func__ << " - cursor moved too much, returning";
+        return;
+    }
+
+    _aiAutocompleteSuggestion = suggestion;
+    _isInsertingAiSuggestion = true;
+
+    qDebug() << __func__ << " - inserting suggestion text...";
+
+    // Insert the suggestion with a gray color format
+    QTextCursor cursor = textCursor();
+    cursor.beginEditBlock();
+
+    // Store the original format to restore it later
+    QTextCharFormat originalFormat = cursor.charFormat();
+
+    // Create the suggestion format
+    QTextCharFormat format;
+    format.setForeground(QColor(128, 128, 128));    // Gray color
+    format.setFontItalic(true);
+
+    cursor.insertText(_aiAutocompleteSuggestion, format);
+
+    // Select the suggestion so it can be easily replaced
+    cursor.setPosition(currentPos);
+    cursor.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor,
+                        _aiAutocompleteSuggestion.length());
+
+    // Reset the character format to the original to prevent the italic format
+    // from affecting subsequent text
+    cursor.setCharFormat(originalFormat);
+
+    cursor.endEditBlock();
+    setTextCursor(cursor);
+
+    qDebug() << __func__ << " - suggestion inserted and selected successfully!";
+
+    _isInsertingAiSuggestion = false;
+}
+
+/**
+ * Clears the AI autocomplete suggestion
+ */
+void QOwnNotesMarkdownTextEdit::clearAiAutocompleteSuggestion() {
+    if (_aiAutocompleteSuggestion.isEmpty()) {
+        return;
+    }
+
+    _isInsertingAiSuggestion = true;
+
+    QTextCursor cursor = textCursor();
+
+    // If we have selected text that matches our suggestion, delete it
+    if (cursor.hasSelection()) {
+        QString selectedText = cursor.selectedText();
+        if (selectedText == _aiAutocompleteSuggestion) {
+            cursor.removeSelectedText();
+            setTextCursor(cursor);
+        }
+    }
+
+    _aiAutocompleteSuggestion.clear();
+    _aiAutocompletePosition = -1;
+    _isInsertingAiSuggestion = false;
+}
+
+/**
+ * Accepts the current AI autocomplete suggestion
+ */
+void QOwnNotesMarkdownTextEdit::acceptAiAutocompleteSuggestion() {
+    if (_aiAutocompleteSuggestion.isEmpty()) {
+        return;
+    }
+
+    _isInsertingAiSuggestion = true;
+
+    QTextCursor cursor = textCursor();
+
+    // If we have the suggestion selected, replace it with normal formatted text
+    if (cursor.hasSelection()) {
+        QString selectedText = cursor.selectedText();
+        if (selectedText == _aiAutocompleteSuggestion) {
+            // Remove the formatted suggestion
+            cursor.removeSelectedText();
+            // Insert as normal text
+            cursor.insertText(_aiAutocompleteSuggestion);
+            setTextCursor(cursor);
+        }
+    }
+
+    _aiAutocompleteSuggestion.clear();
+    _aiAutocompletePosition = -1;
+    _isInsertingAiSuggestion = false;
+}
+
+/**
+ * Called when AI autocomplete is completed
+ */
+void QOwnNotesMarkdownTextEdit::onAiAutocompleteCompleted(const QString &result) {
+    qDebug() << "=== onAiAutocompleteCompleted CALLED ===" << this;
+    qDebug() << __func__ << " - Widget:" << objectName()
+             << "Parent:" << (parent() ? parent()->objectName() : "null");
+    qDebug() << __func__ << " - 'result': " << result;
+
+    if (result.isEmpty()) {
+        qDebug() << __func__ << " - result is empty, returning";
+        return;
+    }
+
+    qDebug() << __func__ << " - Processing result, length:" << result.length();
+
+    // Extract the first line or first sentence as suggestion
+    QString suggestion = result.trimmed();
+
+    // Take only the first line or up to 100 characters
+    int newlinePos = suggestion.indexOf('\n');
+    if (newlinePos > 0 && newlinePos < 100) {
+        suggestion = suggestion.left(newlinePos);
+    } else if (suggestion.length() > 100) {
+        suggestion = suggestion.left(100);
+        // Try to break at a word boundary
+        int lastSpace = suggestion.lastIndexOf(' ');
+        if (lastSpace > 50) {
+            suggestion = suggestion.left(lastSpace);
+        }
+    }
+
+    qDebug() << __func__ << " - 'suggestion': " << suggestion;
+    qDebug() << __func__ << " - 'cursor position': " << textCursor().position();
+    qDebug() << __func__ << " - '_aiAutocompletePosition': " << _aiAutocompletePosition;
+
+    qDebug() << __func__ << " - Calling showAiAutocompleteSuggestion...";
+    showAiAutocompleteSuggestion(suggestion);
+    qDebug() << __func__ << " - showAiAutocompleteSuggestion returned";
+}
+
+/**
+ * Called when AI autocomplete request times out or errors
+ */
+void QOwnNotesMarkdownTextEdit::onAiAutocompleteTimeout(const QString &errorString) {
+    qDebug() << __func__ << " - error:" << errorString;
+    // Just clear the state, don't show error to user
+    _aiAutocompleteSuggestion.clear();
+    _aiAutocompletePosition = -1;
+}
+
+/**
+ * Override keyPressEvent to handle Tab and Escape for autocomplete
+ */
+void QOwnNotesMarkdownTextEdit::keyPressEvent(QKeyEvent *e) {
+    if (!isReadOnly()) {
+        const QChar deadKeyAccent = accentForDeadKey(e->key());
+        if (!deadKeyAccent.isNull() && e->text().isEmpty()) {
+            _pendingDeadKey = deadKeyAccent;
+            e->accept();
+            return;
+        }
+
+        if (!_pendingDeadKey.isNull()) {
+            if (e->key() == Qt::Key_Escape) {
+                _pendingDeadKey = QChar();
+            } else if (!(e->modifiers() &
+                         (Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier)) &&
+                       e->text().size() == 1) {
+                const QChar accent = _pendingDeadKey;
+                _pendingDeadKey = QChar();
+
+                const QChar character = e->text().at(0);
+                const QString composed = composeDeadKey(accent, character);
+                QTextCursor cursor = textCursor();
+                cursor.insertText(composed.size() == 1
+                                      ? composed
+                                      : QString(spacingAccentForCombiningMark(accent)));
+                if (composed.size() != 1 && character != QLatin1Char(' ')) {
+                    cursor.insertText(e->text());
+                }
+                setTextCursor(cursor);
+                e->accept();
+                return;
+            }
+        }
+    } else {
+        _pendingDeadKey = QChar();
+    }
+
+    // Handle Tab key to accept AI autocomplete suggestion
+    if (e->key() == Qt::Key_Tab && !_aiAutocompleteSuggestion.isEmpty()) {
+        acceptAiAutocompleteSuggestion();
+        e->accept();
+        return;
+    }
+
+    // Handle Escape key to dismiss AI autocomplete suggestion
+    if (e->key() == Qt::Key_Escape && !_aiAutocompleteSuggestion.isEmpty()) {
+        clearAiAutocompleteSuggestion();
+        e->accept();
+        return;
+    }
+
+    // Clear suggestion on any other key press
+    if (!_aiAutocompleteSuggestion.isEmpty()) {
+        clearAiAutocompleteSuggestion();
+    }
+
+    // Call parent implementation
+    QMarkdownTextEdit::keyPressEvent(e);
+
+    if (!e->isAccepted() || !Note::isWikiLinkSupportEnabled()) {
+        return;
+    }
+
+    if (e->text() == QStringLiteral("[") &&
+        (e->modifiers() == Qt::NoModifier || e->modifiers() == Qt::ShiftModifier)) {
+        // Only trigger automatic note filename selection if the setting is enabled
+        const bool autoSelect =
+            SettingsService()
+                .value(QStringLiteral("Editor/wikiLinkFileNameAutoSelect"), false)
+                .toBool();
+        if (!autoSelect) {
+            return;
+        }
+
+        WikiLinkCompletionContext context;
+        if (currentWikiLinkCompletionContext(this, context)) {
+            QTimer::singleShot(0, this, &QOwnNotesMarkdownTextEdit::onAutoCompleteRequested);
+        }
+    }
+}
+
+/**
+ * Override focusInEvent to register this editor as active when it receives focus
+ */
+void QOwnNotesMarkdownTextEdit::focusInEvent(QFocusEvent *e) {
+    // Register as the active editor for autocomplete when receiving focus
+    // Skip for log widgets
+    if (objectName() != QStringLiteral("logTextEdit")) {
+        qDebug() << __func__ << " - Registering as active editor:" << this << objectName();
+        registerAsActiveEditor();
+#ifdef LANGUAGETOOL_ENABLED
+        LanguageToolChecker::instance()->setTextEdit(this);
+#endif
+#ifdef HARPER_ENABLED
+        HarperChecker::instance()->setTextEdit(this);
+#endif
+    }
+
+    // Call parent implementation
+    QMarkdownTextEdit::focusInEvent(e);
+}
+
+/**
+ * Override inputMethodQuery to fix IME candidate window position on Windows.
+ * When viewport margins are set (e.g. for paper margins), the cursor rectangle
+ * returned to the IME must be offset by the top/left margin so that the
+ * candidate window appears adjacent to the cursor rather than overlapping it.
+ */
+QVariant QOwnNotesMarkdownTextEdit::inputMethodQuery(Qt::InputMethodQuery property) const {
+    QVariant result = QPlainTextEdit::inputMethodQuery(property);
+
+    const bool isCursorQuery =
+        (property == Qt::ImCursorRectangle || property == Qt::ImAnchorRectangle);
+    if (isCursorQuery) {
+        // viewportMargins() is non-const in this class, so cast away const to call it
+        const QMargins vm = const_cast<QOwnNotesMarkdownTextEdit *>(this)->viewportMargins();
+        if (vm.top() != 0 || vm.left() != 0) {
+            if (result.userType() == QMetaType::QRectF) {
+                result = result.toRectF().translated(qreal(vm.left()), qreal(vm.top()));
+            }
+        }
+    }
+
+    return result;
+}
+
+/**
+ * Register this editor as the active one for AI autocomplete
+ */
+void QOwnNotesMarkdownTextEdit::registerAsActiveEditor() {
+    qDebug() << __func__ << " - Registering editor:" << this << objectName();
+    _activeAutocompleteEditor = this;
+    // Also store in QApplication property for access from OpenAiService callback
+    qApp->setProperty("activeAutocompleteEditor", QVariant::fromValue<QObject *>(this));
+}
+
+/**
+ * Unregister this editor from receiving AI autocomplete
+ */
+void QOwnNotesMarkdownTextEdit::unregisterAsActiveEditor() {
+    qDebug() << __func__ << " - Unregistering editor:" << this << objectName();
+    if (_activeAutocompleteEditor == this) {
+        _activeAutocompleteEditor = nullptr;
+        // Also clear QApplication property
+        qApp->setProperty("activeAutocompleteEditor", QVariant::fromValue<QObject *>(nullptr));
+    }
+}
+
+/**
+ * Get the currently active editor for AI autocomplete
+ */
+QOwnNotesMarkdownTextEdit *QOwnNotesMarkdownTextEdit::getActiveEditorForAutocomplete() {
+    return _activeAutocompleteEditor;
+}
+
+QOwnNotesMarkdownTextEdit::~QOwnNotesMarkdownTextEdit() {
+    qDebug() << "*** QOwnNotesMarkdownTextEdit DESTROYED ***" << this << objectName();
+    closeMarkdownLspDocument();
+#ifdef LANGUAGETOOL_ENABLED
+    LanguageToolChecker::instance()->clearForTextEdit(this, false);
+#endif
+#ifdef HARPER_ENABLED
+    HarperChecker::instance()->clearForTextEdit(this, false);
+#endif
+    // Unregister if this was the active editor
+    unregisterAsActiveEditor();
+}
+
+void QOwnNotesMarkdownTextEdit::setMarkdownLspDocumentPath(const QString &filePath,
+                                                           const QString &text) {
+    if (!_markdownLspEnabled || !_markdownLspTracker) {
+        return;
+    }
+
+    const QString uri = QUrl::fromLocalFile(filePath).toString();
+    if (uri.isEmpty()) {
+        return;
+    }
+
+    if (_markdownLspUri == uri) {
+        return;
+    }
+
+    // Close previous document via the tracker
+    if (_markdownLspTracker->isOpen()) {
+        _markdownLspTracker->close();
+    }
+
+    _markdownLspUri = uri;
+    _markdownLspVersion = 1;
+
+    if (_markdownLspClient) {
+        _markdownLspTracker->open(_markdownLspUri, text);
+    }
+}
+
+void QOwnNotesMarkdownTextEdit::closeMarkdownLspDocument() {
+    if (_markdownLspTracker && _markdownLspTracker->isOpen()) {
+        _markdownLspTracker->close();
+    }
+
+    _markdownLspUri.clear();
+    _markdownLspVersion = 0;
+    _markdownLspAllDiagnostics.clear();
+    _markdownLspDiagnostics.clear();
+
+    if (auto *h = dynamic_cast<QOwnNotesMarkdownHighlighter *>(highlighter())) {
+        h->clearMarkdownLspDiagnostics();
+    }
+}
+
+void QOwnNotesMarkdownTextEdit::initializeMarkdownLsp() {
+    _markdownLspInitialized = true;
+    applyMarkdownLspSettings();
+}
+
+void QOwnNotesMarkdownTextEdit::applyMarkdownLspSettings() {
+    SettingsService settings;
+    const bool enabled =
+        settings.value(QStringLiteral("Editor/markdownLspEnabled"), false).toBool();
+    const QString command =
+        settings.value(QStringLiteral("Editor/markdownLspCommand"), QStringLiteral("marksman"))
+            .toString();
+    const QStringList arguments =
+        settings.value(QStringLiteral("Editor/markdownLspArguments")).toStringList();
+    const bool verboseLogging =
+        settings.value(QStringLiteral("Editor/markdownLspVerboseLogging"), false).toBool();
+    const bool serverConfigurationChanged =
+        (_markdownLspCommand != command) || (_markdownLspArguments != arguments);
+
+    if (!enabled) {
+        _markdownLspEnabled = false;
+        _markdownLspCommand = command;
+        _markdownLspArguments = arguments;
+        if (_markdownLspClient) {
+            closeMarkdownLspDocument();
+            _markdownLspClient->shutdown();
+        }
+        return;
+    }
+
+    if (!_markdownLspClient) {
+        _markdownLspClient = new MarkdownLspClient(this);
+        connect(_markdownLspClient, &MarkdownLspClient::completionReceived, this,
+                &QOwnNotesMarkdownTextEdit::showMarkdownLspCompletions);
+        connect(_markdownLspClient, &MarkdownLspClient::formattingReceived, this,
+                &QOwnNotesMarkdownTextEdit::applyMarkdownLspFormatting);
+        connect(_markdownLspClient, &MarkdownLspClient::diagnosticsReceived, this,
+                &QOwnNotesMarkdownTextEdit::showMarkdownLspDiagnostics);
+        connect(_markdownLspClient, &MarkdownLspClient::errorMessage, this,
+                [this](const QString &message) {
+                    if (!message.trimmed().isEmpty()) {
+                        qWarning() << "Markdown LSP:" << message.trimmed();
+                    }
+                });
+        connect(_markdownLspClient, &MarkdownLspClient::serverInitialized, this, [this]() {
+            if (auto *mw = MainWindow::instance()) {
+                mw->showStatusBarMessage(tr("Markdown LSP server connected"), 3000);
+            }
+
+            // Configure the tracker's sync kind based on the server's capability
+            if (_markdownLspTracker && _markdownLspClient) {
+                const auto kind = _markdownLspClient->serverSyncKind();
+                if (kind == MarkdownLspClient::SyncIncremental) {
+                    _markdownLspTracker->setSyncKind(MarkdownLspDocumentTracker::SyncIncremental);
+                } else {
+                    _markdownLspTracker->setSyncKind(MarkdownLspDocumentTracker::SyncFull);
+                }
+            }
+        });
+
+        // Wire the tracker to the client and document
+        if (_markdownLspTracker) {
+            _markdownLspTracker->setClient(_markdownLspClient);
+            _markdownLspTracker->setDocument(document());
+        }
+    }
+
+    QString reopenUri;
+    QString reopenText;
+    const bool restartClient = serverConfigurationChanged && _markdownLspClient->isRunning();
+    if (restartClient) {
+        reopenUri = _markdownLspUri;
+        reopenText = toPlainText();
+        closeMarkdownLspDocument();
+        _markdownLspClient->shutdown();
+    }
+
+    _markdownLspCommand = command;
+    _markdownLspArguments = arguments;
+    _markdownLspClient->setServerCommand(command, arguments);
+    _markdownLspClient->setVerboseLogging(verboseLogging);
+    const bool needsStart = !_markdownLspClient->isRunning();
+    if (needsStart) {
+        if (!_markdownLspClient->start()) {
+            return;
+        }
+
+        const QString rootPath = NoteFolder::currentLocalPath();
+        _markdownLspClient->initialize(rootPath, QStringLiteral("QOwnNotes"),
+                                       QStringLiteral(VERSION));
+    }
+
+    _markdownLspEnabled = true;
+
+    if (!reopenUri.isEmpty()) {
+        _markdownLspUri = reopenUri;
+        _markdownLspVersion = 1;
+        _markdownLspTracker->open(_markdownLspUri, reopenText);
+        return;
+    }
+
+    if (needsStart && !_markdownLspUri.isEmpty()) {
+        _markdownLspVersion = 1;
+        _markdownLspTracker->open(_markdownLspUri, toPlainText());
+    }
+}
+
+void QOwnNotesMarkdownTextEdit::scheduleMarkdownLspChange() {
+    if (!_markdownLspEnabled || !_markdownLspClient || _markdownLspUri.isEmpty()) {
+        return;
+    }
+
+    _markdownLspPendingText = toPlainText();
+    _markdownLspChangeTimer->start();
+}
+
+void QOwnNotesMarkdownTextEdit::sendMarkdownLspChange() {
+    if (!_markdownLspEnabled || !_markdownLspClient || _markdownLspUri.isEmpty()) {
+        return;
+    }
+
+    _markdownLspVersion++;
+    _markdownLspClient->didChange(_markdownLspUri, _markdownLspPendingText, _markdownLspVersion);
+}
+
+void QOwnNotesMarkdownTextEdit::showMarkdownLspCompletions(int requestId,
+                                                           const QStringList &items) {
+    if (requestId != _markdownLspCompletionRequestId || _markdownLspCompletionRequestId == -1) {
+        return;
+    }
+
+    if (items.isEmpty()) {
+        _markdownLspCompletionRequestId = -1;
+        return;
+    }
+
+    const QString initialFilter = currentWord();
+
+    QMenu menu;
+    auto *filterEdit = new QLineEdit(&menu);
+    filterEdit->setPlaceholderText(tr("Filter completions"));
+    filterEdit->setClearButtonEnabled(true);
+    filterEdit->setText(initialFilter);
+
+    auto *filterAction = new QWidgetAction(&menu);
+    filterAction->setDefaultWidget(filterEdit);
+    menu.addAction(filterAction);
+    menu.addSeparator();
+
+    QList<QAction *> completionActions;
+    for (const QString &text : items) {
+        auto *action = menu.addAction(text);
+        action->setData(text);
+        action->setWhatsThis(QStringLiteral("autocomplete"));
+        completionActions.append(action);
+    }
+
+    _markdownLspCompletionRequestId = -1;
+
+    if (menu.actions().isEmpty()) {
+        return;
+    }
+
+    // If there is only one completion item and the setting is enabled,
+    // insert it directly without showing the popup menu
+    const bool applySingleResult =
+        SettingsService()
+            .value(QStringLiteral("Editor/autocompleteApplySingleResult"), false)
+            .toBool();
+    auto updateFilter = [filterEdit, completionActions]() {
+        const QString query = filterEdit->text().trimmed();
+        const bool hasQuery = !query.isEmpty();
+        for (QAction *action : completionActions) {
+            if (!action) {
+                continue;
+            }
+            const bool matches = !hasQuery || action->text().contains(query, Qt::CaseInsensitive);
+            action->setVisible(matches);
+        }
+    };
+
+    connect(filterEdit, &QLineEdit::textChanged, this, [updateFilter]() { updateFilter(); });
+    connect(filterEdit, &QLineEdit::returnPressed, this, [this, completionActions]() {
+        for (QAction *action : completionActions) {
+            if (action && action->isVisible()) {
+                action->trigger();
+                return;
+            }
+        }
+    });
+    updateFilter();
+
+    QPoint globalPos = mapToGlobal(cursorRect().bottomRight());
+    globalPos.setY(globalPos.y() + viewportMargins().top());
+    globalPos.setX(globalPos.x() + viewportMargins().left());
+
+    QTimer::singleShot(0, filterEdit, [filterEdit]() {
+        filterEdit->setFocus(Qt::PopupFocusReason);
+        if (filterEdit->text().isEmpty()) {
+            filterEdit->selectAll();
+        } else {
+            filterEdit->setCursorPosition(filterEdit->text().size());
+        }
+    });
+
+    QAction *selectedItem = (applySingleResult && completionActions.count() == 1)
+                                ? completionActions.first()
+                                : menu.exec(globalPos);
+    if (!selectedItem) {
+        return;
+    }
+
+    const QString text = selectedItem->data().toString();
+    if (text.isEmpty()) {
+        return;
+    }
+
+    QTextCursor c = textCursor();
+    c.movePosition(QTextCursor::StartOfWord, QTextCursor::KeepAnchor);
+    c.insertText(text + QStringLiteral(" "));
+}
+
+void QOwnNotesMarkdownTextEdit::showMarkdownLspDiagnostics(
+    const QString &uri, const QVector<MarkdownLspClient::Diagnostic> &diagnostics) {
+    // Normalize both URIs by percent-decoding before comparing, since some LSP
+    // servers (e.g. rumdl) encode spaces as %20 while we store the raw path
+    const QString normalizedUri = QUrl::fromPercentEncoding(uri.toUtf8());
+    const QString normalizedCurrentUri = QUrl::fromPercentEncoding(_markdownLspUri.toUtf8());
+    if (normalizedUri != normalizedCurrentUri) {
+        return;
+    }
+
+    _markdownLspAllDiagnostics = diagnostics;
+    applyMarkdownLspDiagnostics(filteredMarkdownLspDiagnostics(diagnostics));
+}
+
+QVector<MarkdownLspClient::Diagnostic> QOwnNotesMarkdownTextEdit::filteredMarkdownLspDiagnostics(
+    const QVector<MarkdownLspClient::Diagnostic> &diagnostics) const {
+    auto *ignoredRules = MarkdownLspIgnoredRules::instance();
+    if (!ignoredRules) {
+        return diagnostics;
+    }
+
+    QVector<MarkdownLspClient::Diagnostic> filteredDiagnostics;
+    filteredDiagnostics.reserve(diagnostics.size());
+    for (const MarkdownLspClient::Diagnostic &diagnostic : diagnostics) {
+        if (ignoredRules->isRuleIgnored(diagnostic.ruleId())) {
+            continue;
+        }
+
+        filteredDiagnostics.append(diagnostic);
+    }
+
+    return filteredDiagnostics;
+}
+
+void QOwnNotesMarkdownTextEdit::applyMarkdownLspDiagnostics(
+    const QVector<MarkdownLspClient::Diagnostic> &diagnostics) {
+    auto *h = dynamic_cast<QOwnNotesMarkdownHighlighter *>(highlighter());
+    if (!h || !document()) {
+        _markdownLspDiagnostics = diagnostics;
+        return;
+    }
+
+    // Collect blocks that had old diagnostics so we can clear their underlines
+    QSet<int> dirtyLines;
+    for (const MarkdownLspClient::Diagnostic &diag : _markdownLspDiagnostics) {
+        for (int line = diag.range.startLine; line <= diag.range.endLine; ++line) {
+            dirtyLines.insert(line);
+        }
+    }
+
+    _markdownLspDiagnostics = diagnostics;
+    h->setMarkdownLspDiagnostics(diagnostics);
+
+    // Also collect blocks that have new diagnostics
+    for (const MarkdownLspClient::Diagnostic &diag : diagnostics) {
+        for (int line = diag.range.startLine; line <= diag.range.endLine; ++line) {
+            dirtyLines.insert(line);
+        }
+    }
+
+    if (dirtyLines.isEmpty()) {
+        return;
+    }
+
+    const QSet<int> &constDirtyLines = dirtyLines;
+    for (const int line : constDirtyLines) {
+        const QTextBlock block = document()->findBlockByNumber(line);
+        if (block.isValid()) {
+            h->rehighlightBlock(block);
+        }
+    }
+}
+
+void QOwnNotesMarkdownTextEdit::refreshMarkdownLspDiagnostics() {
+    applyMarkdownLspDiagnostics(filteredMarkdownLspDiagnostics(_markdownLspAllDiagnostics));
+}
+
+void QOwnNotesMarkdownTextEdit::applyMarkdownLspTextEdits(
+    const QVector<MarkdownLspClient::TextEdit> &edits) {
+    if (edits.isEmpty()) {
+        return;
+    }
+
+    _markdownLspApplyingEdits = true;
+
+    // Suppress the tracker so it doesn't record the programmatic edits
+    if (_markdownLspTracker) {
+        _markdownLspTracker->setSuppressed(true);
+    }
+
+    struct ResolvedEdit {
+        int start = 0;
+        int end = 0;
+        QString text;
+    };
+
+    QVector<ResolvedEdit> resolved;
+    resolved.reserve(edits.size());
+
+    for (const MarkdownLspClient::TextEdit &edit : edits) {
+        const QTextBlock startBlock = document()->findBlockByNumber(edit.range.startLine);
+        const QTextBlock endBlock = document()->findBlockByNumber(edit.range.endLine);
+        if (!startBlock.isValid() || !endBlock.isValid()) {
+            continue;
+        }
+
+        const int startPosition = startBlock.position() + edit.range.startCharacter;
+        const int endPosition = endBlock.position() + edit.range.endCharacter;
+        if (endPosition < startPosition) {
+            continue;
+        }
+
+        ResolvedEdit resolvedEdit;
+        resolvedEdit.start = startPosition;
+        resolvedEdit.end = endPosition;
+        resolvedEdit.text = edit.newText;
+        resolved.append(resolvedEdit);
+    }
+
+    std::sort(resolved.begin(), resolved.end(),
+              [](const ResolvedEdit &left, const ResolvedEdit &right) {
+                  if (left.start == right.start) {
+                      return left.end > right.end;
+                  }
+                  return left.start > right.start;
+              });
+
+    // Clear the diagnostic cache before applying edits so that the rehighlight
+    // triggered by endEditBlock() will not re-apply the old LSP underlines.
+    _markdownLspDiagnostics.clear();
+
+    if (auto *h = dynamic_cast<QOwnNotesMarkdownHighlighter *>(highlighter())) {
+        h->clearMarkdownLspDiagnostics();
+    }
+
+    QTextCursor cursor(document());
+    cursor.beginEditBlock();
+    for (const ResolvedEdit &edit : resolved) {
+        cursor.setPosition(edit.start);
+        cursor.setPosition(edit.end, QTextCursor::KeepAnchor);
+        cursor.insertText(edit.text);
+    }
+    cursor.endEditBlock();
+
+    _markdownLspApplyingEdits = false;
+
+    if (_markdownLspTracker) {
+        _markdownLspTracker->setSuppressed(false);
+    }
+
+    if (_markdownLspEnabled && _markdownLspTracker) {
+        // Quick-fixes invalidate the current diagnostics immediately, so refresh
+        // the LSP state right away instead of waiting for the debounce timer.
+        _markdownLspTracker->flushFullSync();
+    }
+}
+
+void QOwnNotesMarkdownTextEdit::applyMarkdownLspFormatting(
+    int requestId, const QVector<MarkdownLspClient::TextEdit> &edits) {
+    if (requestId != _markdownLspFormattingRequestId &&
+        requestId != _markdownLspRangeFormattingRequestId) {
+        return;
+    }
+
+    if (requestId == _markdownLspFormattingRequestId) {
+        _markdownLspFormattingRequestId = -1;
+    }
+    if (requestId == _markdownLspRangeFormattingRequestId) {
+        _markdownLspRangeFormattingRequestId = -1;
+    }
+
+    applyMarkdownLspTextEdits(edits);
+}
+
+void QOwnNotesMarkdownTextEdit::requestMarkdownLspFormatting(bool useSelection) {
+    if (!_markdownLspEnabled || !_markdownLspClient || _markdownLspUri.isEmpty()) {
+        return;
+    }
+
+    const int tabSize = 4;
+    const bool insertSpaces = true;
+
+    if (useSelection) {
+        QTextCursor cursor = textCursor();
+        if (!cursor.hasSelection()) {
+            return;
+        }
+
+        const int startPos = cursor.selectionStart();
+        const int endPos = cursor.selectionEnd();
+
+        QTextBlock startBlock = document()->findBlock(startPos);
+        QTextBlock endBlock = document()->findBlock(endPos);
+        if (!startBlock.isValid() || !endBlock.isValid()) {
+            return;
+        }
+
+        MarkdownLspClient::DiagnosticRange range;
+        range.startLine = startBlock.blockNumber();
+        range.startCharacter = startPos - startBlock.position();
+        range.endLine = endBlock.blockNumber();
+        range.endCharacter = endPos - endBlock.position();
+
+        _markdownLspRangeFormattingRequestId = _markdownLspClient->requestRangeFormatting(
+            _markdownLspUri, range, tabSize, insertSpaces);
+        return;
+    }
+
+    _markdownLspFormattingRequestId =
+        _markdownLspClient->requestDocumentFormatting(_markdownLspUri, tabSize, insertSpaces);
 }

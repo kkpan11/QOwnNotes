@@ -69,12 +69,13 @@ public:
 
     // declaring this Q_INVOKABLE to make it Squish-testable
     Q_INVOKABLE QString selectedText() const;
+    Q_INVOKABLE QString selectedHtml() const;
 
 signals:
     void linkClicked(const QUrl &url);
     void linkHighlighted(const QUrl &url);
     void copyAvailable(bool available);
-    void contextMenuRequested(const QPoint &pos, const QUrl &url);
+    void contextMenuRequested(const QPoint &pos, const QUrl &linkUrl, const QUrl &imageUrl);
 
 protected:
     void paintEvent(QPaintEvent *event) override;
@@ -90,6 +91,8 @@ protected:
 private:
     void updateHightlightedLink();
     void setHightlightedLink(const QUrl &url);
+    void updateSelection(const QPoint &position);
+    void scrollSelection();
     void withFixedTextPosition(const std::function<void()> &action);
     void render();
     QPoint scrollPosition() const;

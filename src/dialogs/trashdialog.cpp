@@ -1,17 +1,16 @@
 #include "trashdialog.h"
 
-#include <services/owncloudservice.h>
+#include <services/cloudservice.h>
 #include <utils/gui.h>
-#include <utils/misc.h>
 
 #include <QDebug>
 #include <QJSValue>
 #include <QJSValueIterator>
 #include <QPushButton>
-#include <QSettings>
 #include <QSplitter>
 
 #include "mainwindow.h"
+#include "services/settingsservice.h"
 #include "ui_trashdialog.h"
 
 TrashDialog::TrashDialog(const QJSValue &notes, QWidget *parent)
@@ -29,11 +28,11 @@ TrashDialog::TrashDialog(const QJSValue &notes, QWidget *parent)
 
     button = new QPushButton(tr("&Restore selected note on server"));
     button->setToolTip(
-        Utils::Misc::replaceOwnCloudText(tr("<h3>Slower, but with note versions</h3>"
-                                            "<p>The note will be restored on your ownCloud "
-                                            "server with all versions.</p>"
-                                            "<p>You will have to wait until it is synced to "
-                                            "QOwnNotes by ownCloud sync.</p>")));
+        tr("<h3>Slower, but with note versions</h3>"
+           "<p>The note will be restored on your Nextcloud / ownCloud "
+           "server with all versions.</p>"
+           "<p>You will have to wait until it is synced to "
+           "QOwnNotes by Nextcloud / ownCloud sync.</p>"));
     button->setProperty("ActionRole", RestoreOnServer);
     button->setDefault(false);
     button->setIcon(QIcon::fromTheme(QStringLiteral("view-restore"),
@@ -41,12 +40,12 @@ TrashDialog::TrashDialog(const QJSValue &notes, QWidget *parent)
     ui->buttonBox->addButton(button, QDialogButtonBox::ActionRole);
 
     button = new QPushButton(tr("&Download selected note"));
-    button->setToolTip(Utils::Misc::replaceOwnCloudText(
+    button->setToolTip(
         tr("<h3>Faster, but without versions</h3>"
            "<p>The note will be created with the text from the preview.</p>"
-           "<p>The note versions on your ownCloud server will not be restored "
-           "and the note will remain in the trash.</p>"
-           "<p>You can always restore the note and its versions later.</p>")));
+           "<p>The note versions on your Nextcloud / ownCloud server will not be "
+           "restored and the note will remain in the trash.</p>"
+           "<p>You can always restore the note and its versions later.</p>"));
     button->setProperty("ActionRole", Download);
     button->setDefault(false);
     button->setIcon(QIcon::fromTheme(QStringLiteral("edit-download"),
@@ -126,7 +125,7 @@ void TrashDialog::setupMainSplitter() {
     trashSplitter->addWidget(ui->noteBrowserFrame);
 
     // restore splitter sizes
-    QSettings settings;
+    SettingsService settings;
     QByteArray state = settings.value(QStringLiteral("trashSplitterSizes")).toByteArray();
     trashSplitter->restoreState(state);
 
@@ -136,7 +135,7 @@ void TrashDialog::setupMainSplitter() {
 
 void TrashDialog::storeSettings() {
     // store the splitter sizes
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("trashSplitterSizes"), trashSplitter->saveState());
 }
 
@@ -178,12 +177,12 @@ void TrashDialog::dialogButtonClicked(QAbstractButton *button) {
 
                 const int timestamp = this->timestampList->value(ui->trashListWidget->currentRow());
                 auto currentItem = ui->trashListWidget->currentItem();
-                OwnCloudService *ownCloud = OwnCloudService::instance();
+                CloudService *cloud = CloudService::instance();
                 ui->trashListWidget->setDisabled(true);
                 ui->buttonBox->setDisabled(true);
 
                 // delete trashed note on server
-                const int statusCode = ownCloud->deleteTrashedNoteOnServer(fileName, timestamp);
+                const int statusCode = cloud->deleteTrashedNoteOnServer(fileName, timestamp);
 
                 if (statusCode >= 200 && statusCode < 300) {
                     delete currentItem;

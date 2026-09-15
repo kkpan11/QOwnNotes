@@ -16,6 +16,127 @@
 </message>
 </context>
 <context>
+<name>AiSettingsWidget</name>
+<message>
+<source>To make use of the AI backends, you can either use the scripting command &lt;a href="%1"&gt;aiComplete&lt;/a&gt;, or look in the script repository for already-written scripts.</source>
+<translation type="unfinished">To make use of the AI backends, you can either use the scripting command &lt;a href="%1"&gt;aiComplete&lt;/a&gt;, or look in the script repository for already-written scripts.</translation>
+</message>
+<message>
+<source>You can use the scripting hook &lt;a href="%1"&gt;openAiBackendsHook&lt;/a&gt; to add more OpenAI API compatible backends.</source>
+<translation type="unfinished">You can use the scripting hook &lt;a href="%1"&gt;openAiBackendsHook&lt;/a&gt; to add more OpenAI API compatible backends.</translation>
+</message>
+<message>
+<source>Alternatively, you can also look in the script repository for already created AI integration scripts.</source>
+<translation type="unfinished">Alternatively, you can also look in the script repository for already created AI integration scripts.</translation>
+</message>
+<message>
+<source>Search script repository for AI integration scripts</source>
+<translation type="unfinished">Search script repository for AI integration scripts</translation>
+</message>
+<message>
+<source>Search script repository</source>
+<translation type="unfinished">Search script repository</translation>
+</message>
+<message>
+<source>AI backends added via the scripting engine</source>
+<translation type="unfinished">AI backends added via the scripting engine</translation>
+</message>
+<message>
+<source>API keys</source>
+<translation type="unfinished">API keys</translation>
+</message>
+<message>
+<source>OpenAI API key:</source>
+<translation type="unfinished">OpenAI API key:</translation>
+</message>
+<message>
+<source>Create Groq API key</source>
+<translation type="unfinished">Create Groq API key</translation>
+</message>
+<message>
+<source>Create OpenAI API key</source>
+<translation type="unfinished">Create OpenAI API key</translation>
+</message>
+<message>
+<source>API key</source>
+<translation type="unfinished">API key</translation>
+</message>
+<message>
+<source>Groq API key:</source>
+<translation type="unfinished">Groq API key:</translation>
+</message>
+<message>
+<source>Test connection</source>
+<comment>"Test" as verb</comment>
+<translation type="unfinished">Test connection</translation>
+</message>
+<message>
+<source>API settings</source>
+<translation type="unfinished">API settings</translation>
+</message>
+<message>
+<source>Time the application will wait for a response from the server before timing out and returning an error message.</source>
+<translation type="unfinished">Time the application will wait for a response from the server before timing out and returning an error message.</translation>
+</message>
+<message>
+<source>Response timeout:</source>
+<translation type="unfinished">Response timeout:</translation>
+</message>
+<message>
+<source>sec</source>
+<comment>seconds</comment>
+<translation type="unfinished">sec</translation>
+</message>
+<message>
+<source>API test result for %1 (%2)</source>
+<translation type="unfinished">API test result for %1 (%2)</translation>
+</message>
+<message>
+<source>AI backend: %1</source>
+<translation type="unfinished">AI backend: %1</translation>
+</message>
+<message>
+<source>API base URL</source>
+<translation type="unfinished">API base URL</translation>
+</message>
+<message>
+<source>AI model: %1</source>
+<translation type="unfinished">AI model: %1</translation>
+</message>
+<message>
+<source>Test</source>
+<comment>verb</comment>
+<translation type="unfinished">Test</translation>
+</message>
+<message>
+<source>Test connection to %1 (%2)</source>
+<translation type="unfinished">Test connection to %1 (%2)</translation>
+</message>
+</context>
+<context>
+<name>AiToolbarManager</name>
+<message>
+<source>Waiting for answer from AI</source>
+<translation type="unfinished">Waiting for answer from AI</translation>
+</message>
+<message>
+<source>AI backends</source>
+<translation type="unfinished">AI backends</translation>
+</message>
+<message>
+<source>AI models</source>
+<translation type="unfinished">AI models</translation>
+</message>
+<message>
+<source>AI backend selector</source>
+<translation type="unfinished">AI backend selector</translation>
+</message>
+<message>
+<source>AI model selector</source>
+<translation type="unfinished">AI model selector</translation>
+</message>
+</context>
+<context>
 <name>AttachmentDialog</name>
 <message>
 <source>Insert attachment</source>
@@ -79,6 +200,546 @@
 %1</source>
 <translation>Nije moguće pohraniti preuzetu datoteku:
 %1</translation>
+</message>
+</context>
+<context>
+<name>BacklinkWidget</name>
+<message>
+<source>Open note and find &lt;code&gt;%1&lt;/code&gt;</source>
+<translation>Otvori bilješku i pronađi &lt;code&gt;%1&lt;/code&gt;</translation>
+</message>
+</context>
+<context>
+<name>CloudService</name>
+<message>
+<source>incorrect</source>
+<translation type="unfinished">incorrect</translation>
+</message>
+<message>
+<source>not connected</source>
+<translation type="unfinished">not connected</translation>
+</message>
+<message>
+<source>Username / password error</source>
+<translation type="unfinished">Username / password error</translation>
+</message>
+<message>
+<source>Your calendar username or password is incorrect!</source>
+<translation type="unfinished">Your calendar username or password is incorrect!</translation>
+</message>
+<message>
+<source>ok</source>
+<translation type="unfinished">ok</translation>
+</message>
+<message>
+<source>not correct</source>
+<translation type="unfinished">not correct</translation>
+</message>
+<message>
+<source>not detected</source>
+<translation type="unfinished">not detected</translation>
+</message>
+<message>
+<source>not found</source>
+<translation type="unfinished">not found</translation>
+</message>
+<message>
+<source>unknown</source>
+<translation type="unfinished">unknown</translation>
+</message>
+<message>
+<source>version %1 too low</source>
+<translation type="unfinished">version %1 too low</translation>
+</message>
+<message>
+<source>not enabled</source>
+<translation type="unfinished">not enabled</translation>
+</message>
+<message>
+<source>API app version too low</source>
+<translation type="unfinished">API app version too low</translation>
+</message>
+<message>
+<source>Please consider updating your QOwnNotesAPI app on your server, your app version %1 is too low and may cause troubles in QOwnNotes.</source>
+<translation type="unfinished">Please consider updating your QOwnNotesAPI app on your server, your app version %1 is too low and may cause troubles in QOwnNotes.</translation>
+</message>
+<message>
+<source>Nextcloud / ownCloud server connection error</source>
+<translation type="unfinished">Nextcloud / ownCloud server connection error</translation>
+</message>
+<message>
+<source>Nextcloud / ownCloud server error: &lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;Please check your Nextcloud / ownCloud configuration.</source>
+<translation type="unfinished">Nextcloud / ownCloud server error: &lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;Please check your Nextcloud / ownCloud configuration.</translation>
+</message>
+<message>
+<source>You need to setup your Nextcloud / ownCloud server!</source>
+<translation type="unfinished">You need to setup your Nextcloud / ownCloud server!</translation>
+</message>
+<message>
+<source>Done with loading note versions</source>
+<translation type="unfinished">Done with loading note versions</translation>
+</message>
+<message>
+<source>No versions found</source>
+<translation type="unfinished">No versions found</translation>
+</message>
+<message>
+<source>There are no versions for this note or the note wasn't found on the server.</source>
+<translation type="unfinished">There are no versions for this note or the note wasn't found on the server.</translation>
+</message>
+<message>
+<source>Done with loading trashed notes</source>
+<translation type="unfinished">Done with loading trashed notes</translation>
+</message>
+<message>
+<source>No trashed notes</source>
+<translation type="unfinished">No trashed notes</translation>
+</message>
+<message>
+<source>No trashed notes were found on the server.</source>
+<translation type="unfinished">No trashed notes were found on the server.</translation>
+</message>
+<message>
+<source>Error while loading todo lists!</source>
+<translation type="unfinished">Error while loading todo lists!</translation>
+</message>
+<message>
+<source>Your CalDAV server didn't reply anything!</source>
+<translation type="unfinished">Your CalDAV server didn't reply anything!</translation>
+</message>
+<message>
+<source>Error message from your CalDAV server: &lt;strong&gt;%1&lt;/strong&gt;</source>
+<translation type="unfinished">Error message from your CalDAV server: &lt;strong&gt;%1&lt;/strong&gt;</translation>
+</message>
+<message>
+<source>No bookmarks</source>
+<translation type="unfinished">No bookmarks</translation>
+</message>
+<message>
+<source>No bookmarks were found on the server.</source>
+<translation type="unfinished">No bookmarks were found on the server.</translation>
+</message>
+</context>
+<context>
+<name>CloudSettingsWidget</name>
+<message>
+<source>cloud support</source>
+<translation type="unfinished">cloud support</translation>
+</message>
+<message>
+<source>Enable cloud support</source>
+<translation type="unfinished">Enable cloud support</translation>
+</message>
+<message>
+<source>You can access your Nextcloud / ownCloud server from inside the application for example to manage trashed notes and note versions or to share notes. This integration doesn't do note file syncing. You still need to install the Nextcloud / ownCloud sync client for syncing the files.</source>
+<translation type="unfinished">You can access your Nextcloud / ownCloud server from inside the application for example to manage trashed notes and note versions or to share notes. This integration doesn't do note file syncing. You still need to install the Nextcloud / ownCloud sync client for syncing the files.</translation>
+</message>
+<message>
+<source>Your Nextcloud / ownCloud server</source>
+<translation type="unfinished">Your Nextcloud / ownCloud server</translation>
+</message>
+<message>
+<source>Please install the latest version of &lt;a href="https://github.com/pbek/qownnotesapi"&gt;&lt;b&gt;QOwnNotesAPI&lt;/b&gt;&lt;/a&gt; (at least version QOWNNOTESAPI_MIN_VERSION) on your Nextcloud / ownCloud server if you want QOwnNotes to be able to access note versions and trashed notes.</source>
+<translation type="unfinished">Please install the latest version of &lt;a href="https://github.com/pbek/qownnotesapi"&gt;&lt;b&gt;QOwnNotesAPI&lt;/b&gt;&lt;/a&gt; (at least version QOWNNOTESAPI_MIN_VERSION) on your Nextcloud / ownCloud server if you want QOwnNotes to be able to access note versions and trashed notes.</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You also need to have the two Nextcloud / ownCloud core apps &lt;b&gt;Versions&lt;/b&gt; and &lt;b&gt;Deleted files&lt;/b&gt; enabled on your Nextcloud / ownCloud server (that should be the default).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You also need to have the two Nextcloud / ownCloud core apps &lt;b&gt;Versions&lt;/b&gt; and &lt;b&gt;Deleted files&lt;/b&gt; enabled on your Nextcloud / ownCloud server (that should be the default).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You will still need the &lt;b&gt;Nextcloud / ownCloud sync client&lt;/b&gt; (or another desktop sync client) to sync your notes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You will still need the &lt;b&gt;Nextcloud / ownCloud sync client&lt;/b&gt; (or another desktop sync client) to sync your notes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Opens your Nextcloud / ownCloud server &lt;span style=" font-weight:600;"&gt;App configuration&lt;/span&gt; page in your webbrowser to install or update QOwnNotesAPI and to enable the core apps &lt;span style=" font-weight:600;"&gt;Versions&lt;/span&gt; and &lt;span style=" font-weight:600;"&gt;Deleted files&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Opens your Nextcloud / ownCloud server &lt;span style=" font-weight:600;"&gt;App configuration&lt;/span&gt; page in your webbrowser to install or update QOwnNotesAPI and to enable the core apps &lt;span style=" font-weight:600;"&gt;Versions&lt;/span&gt; and &lt;span style=" font-weight:600;"&gt;Deleted files&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>Open your NC / oC server &amp;Apps page</source>
+<translation type="unfinished">Open your NC / oC server &amp;Apps page</translation>
+</message>
+<message>
+<source>Opens your Nextcloud / ownCloud server App Password page in your webbrowser to create a new app password for the application</source>
+<translation type="unfinished">Opens your Nextcloud / ownCloud server App Password page in your webbrowser to create a new app password for the application</translation>
+</message>
+<message>
+<source>Open your NC / oC server App Password page</source>
+<translation type="unfinished">Open your NC / oC server App Password page</translation>
+</message>
+<message>
+<source>Error Message</source>
+<translation type="unfinished">Error Message</translation>
+</message>
+<message>
+<source>Select a connection to edit</source>
+<translation type="unfinished">Select a connection to edit</translation>
+</message>
+<message>
+<source>Add connection</source>
+<translation type="unfinished">Add connection</translation>
+</message>
+<message>
+<source>Remove connection</source>
+<translation type="unfinished">Remove connection</translation>
+</message>
+<message>
+<source>Connection name:</source>
+<translation type="unfinished">Connection name:</translation>
+</message>
+<message>
+<source>NC / oC server url:</source>
+<translation type="unfinished">NC / oC server url:</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the URL of your Nextcloud / ownCloud server, for example: &lt;span style=" font-style:italic;"&gt;https://cloud.yourserver.com&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the URL of your Nextcloud / ownCloud server, for example: &lt;span style=" font-style:italic;"&gt;https://cloud.yourserver.com&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>The login flow v2 only works with Nextcloud, not with ownCloud. If you have troubles you need to create an app password by hand.</source>
+<translation type="unfinished">The login flow v2 only works with Nextcloud, not with ownCloud. If you have troubles you need to create an app password by hand.</translation>
+</message>
+<message>
+<source>Login to Nextcloud to grant access</source>
+<translation type="unfinished">Login to Nextcloud to grant access</translation>
+</message>
+<message>
+<source>Cancel Nextcloud login</source>
+<translation type="unfinished">Cancel Nextcloud login</translation>
+</message>
+<message>
+<source>Username:</source>
+<translation type="unfinished">Username:</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the username on your Nextcloud / ownCloud server.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the username on your Nextcloud / ownCloud server.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>Your Nextcloud / ownCloud username</source>
+<translation type="unfinished">Your Nextcloud / ownCloud username</translation>
+</message>
+<message>
+<source>Password:</source>
+<translation type="unfinished">Password:</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the password for your username.&lt;br/&gt;Currently the password will be stored encrypted with the other settings, but is not very secure.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the password for your username.&lt;br/&gt;Currently the password will be stored encrypted with the other settings, but is not very secure.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>Your Nextcloud / ownCloud password</source>
+<translation type="unfinished">Your Nextcloud / ownCloud password</translation>
+</message>
+<message>
+<source>If your password doesn't work, create an app password (button on the right)</source>
+<translation type="unfinished">If your password doesn't work, create an app password (button on the right)</translation>
+</message>
+<message>
+<source>Enable QOwnNotesAPI app support</source>
+<translation type="unfinished">Enable QOwnNotesAPI app support</translation>
+</message>
+<message>
+<source>Enable Nextcloud Deck support</source>
+<translation type="unfinished">Enable Nextcloud Deck support</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click here to test the connection to your Nextcloud / ownCloud server.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click here to test the connection to your Nextcloud / ownCloud server.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>&amp;Connect to NC / oC server</source>
+<translation type="unfinished">&amp;Connect to NC / oC server</translation>
+</message>
+<message>
+<source>Connection status</source>
+<translation type="unfinished">Connection status</translation>
+</message>
+<message>
+<source>unknown</source>
+<translation type="unfinished">unknown</translation>
+</message>
+<message>
+<source>connection to web server</source>
+<translation type="unfinished">connection to web server</translation>
+</message>
+<message>
+<source>Nextcloud / ownCloud server detected</source>
+<translation type="unfinished">Nextcloud / ownCloud server detected</translation>
+</message>
+<message>
+<source>username and password correct</source>
+<translation type="unfinished">username and password correct</translation>
+</message>
+<message>
+<source>connection to QOwnNotesAPI</source>
+<translation type="unfinished">connection to QOwnNotesAPI</translation>
+</message>
+<message>
+<source>versions app enabled on server</source>
+<translation type="unfinished">versions app enabled on server</translation>
+</message>
+<message>
+<source>trash app enabled on server</source>
+<translation type="unfinished">trash app enabled on server</translation>
+</message>
+<message>
+<source>You will find this path in the &lt;i&gt;Nextcloud / ownCloud&lt;/i&gt; settings</source>
+<translation type="unfinished">You will find this path in the &lt;i&gt;Nextcloud / ownCloud&lt;/i&gt; settings</translation>
+</message>
+<message>
+<source>notes path found on server</source>
+<translation type="unfinished">notes path found on server</translation>
+</message>
+<message>
+<source>notes path &lt;b&gt;%1&lt;/b&gt; found on server</source>
+<translation type="unfinished">notes path &lt;b&gt;%1&lt;/b&gt; found on server</translation>
+</message>
+<message>
+<source>Remove cloud connection</source>
+<translation type="unfinished">Remove cloud connection</translation>
+</message>
+<message>
+<source>Do you really want to remove the cloud connection &lt;strong&gt;%1&lt;/strong&gt;?</source>
+<translation type="unfinished">Do you really want to remove the cloud connection &lt;strong&gt;%1&lt;/strong&gt;?</translation>
+</message>
+<message>
+<source>The connection was made successfully!
+Server version: %1
+QOwnNotesAPI version: %2</source>
+<translation type="unfinished">The connection was made successfully!
+Server version: %1
+QOwnNotesAPI version: %2</translation>
+</message>
+<message>
+<source>There was an error connecting to the Nextcloud / ownCloud Server!
+You also need to have the QOwnNotesAPI app installed and enabled!
+
+Connection error message: </source>
+<translation type="unfinished">There was an error connecting to the Nextcloud / ownCloud Server!
+You also need to have the QOwnNotesAPI app installed and enabled!
+
+Connection error message: </translation>
+</message>
+</context>
+<context>
+<name>ColorModeSettingsWidget</name>
+<message>
+<source>Color modes</source>
+<translation type="unfinished">Color modes</translation>
+</message>
+<message>
+<source>&amp;Add color mode</source>
+<translation type="unfinished">&amp;Add color mode</translation>
+</message>
+<message>
+<source>&amp;Remove color mode</source>
+<translation type="unfinished">&amp;Remove color mode</translation>
+</message>
+<message>
+<source>Name:</source>
+<translation type="unfinished">Name:</translation>
+</message>
+<message>
+<source>Name of the color mode</source>
+<translation type="unfinished">Name of the color mode</translation>
+</message>
+<message>
+<source>Color mode name</source>
+<translation type="unfinished">Color mode name</translation>
+</message>
+<message>
+<source>Use as active color mode</source>
+<translation type="unfinished">Use as active color mode</translation>
+</message>
+<message>
+<source>Dark mode</source>
+<translation type="unfinished">Dark mode</translation>
+</message>
+<message>
+<source>This enables the dark mode, interface and icons will be modified. You need to restart the application to let these changes take action.</source>
+<translation type="unfinished">This enables the dark mode, interface and icons will be modified. You need to restart the application to let these changes take action.</translation>
+</message>
+<message>
+<source>Enable dark mode</source>
+<translation type="unfinished">Enable dark mode</translation>
+</message>
+<message>
+<source>Only some colors will be adapted, your desktop theme will control the rest. You need to restart the application to let these changes take action.</source>
+<translation type="unfinished">Only some colors will be adapted, your desktop theme will control the rest. You need to restart the application to let these changes take action.</translation>
+</message>
+<message>
+<source>Optimize preview colors for dark mode desktop themes</source>
+<translation type="unfinished">Optimize preview colors for dark mode desktop themes</translation>
+</message>
+<message>
+<source>You may need to restart the application to let these changes take effect</source>
+<translation type="unfinished">You may need to restart the application to let these changes take effect</translation>
+</message>
+<message>
+<source>Enable dark mode application icon and tray icon</source>
+<translation type="unfinished">Enable dark mode application icon and tray icon</translation>
+</message>
+<message>
+<source>Icons</source>
+<translation type="unfinished">Icons</translation>
+</message>
+<message>
+<source>Use internal icon theme instead of system icon theme</source>
+<translation type="unfinished">Use internal icon theme instead of system icon theme</translation>
+</message>
+<message>
+<source>Enforce system icon theme</source>
+<translation type="unfinished">Enforce system icon theme</translation>
+</message>
+<message>
+<source>Enable dark mode icon theme</source>
+<translation type="unfinished">Enable dark mode icon theme</translation>
+</message>
+<message>
+<source>Editor color schema</source>
+<translation type="unfinished">Editor color schema</translation>
+</message>
+<message>
+<source>Select the editor color schema for this color mode</source>
+<translation type="unfinished">Select the editor color schema for this color mode</translation>
+</message>
+<message>
+<source>New color mode</source>
+<translation type="unfinished">New color mode</translation>
+</message>
+<message>
+<source>Remove color mode</source>
+<translation type="unfinished">Remove color mode</translation>
+</message>
+<message>
+<source>Remove the color mode &lt;strong&gt;%1&lt;/strong&gt;?</source>
+<translation type="unfinished">Remove the color mode &lt;strong&gt;%1&lt;/strong&gt;?</translation>
+</message>
+<message>
+<source>Color mode</source>
+<translation>Modus boje</translation>
+</message>
+</context>
+<context>
+<name>DebugOptionSettingsWidget</name>
+<message>
+<source>Enable logging to file</source>
+<translation type="unfinished">Enable logging to file</translation>
+</message>
+<message>
+<source>Clear log file</source>
+<translation type="unfinished">Clear log file</translation>
+</message>
+<message>
+<source>Fake old version number to trigger update</source>
+<translation type="unfinished">Fake old version number to trigger update</translation>
+</message>
+<message>
+<source>Fake old versions for installed repository scripts to trigger the script update dialog</source>
+<translation type="unfinished">Fake old versions for installed repository scripts to trigger the script update dialog</translation>
+</message>
+<message>
+<source>Fake old script versions to trigger script updates</source>
+<translation type="unfinished">Fake old script versions to trigger script updates</translation>
+</message>
+<message>
+<source>Log file path:</source>
+<translation type="unfinished">Log file path:</translation>
+</message>
+<message>
+<source>Script hook execution time warning threshold (ms):</source>
+<translation type="unfinished">Script hook execution time warning threshold (ms):</translation>
+</message>
+<message>
+<source>Log a warning when a script hook takes longer than this many milliseconds. When debug logging is enabled, all hook times are logged unconditionally.</source>
+<translation type="unfinished">Log a warning when a script hook takes longer than this many milliseconds. When debug logging is enabled, all hook times are logged unconditionally.</translation>
+</message>
+<message>
+<source>Log file cleared</source>
+<translation type="unfinished">Log file cleared</translation>
+</message>
+<message>
+<source>The log file &lt;strong&gt;%1&lt;/strong&gt; was cleared.</source>
+<translation type="unfinished">The log file &lt;strong&gt;%1&lt;/strong&gt; was cleared.</translation>
+</message>
+</context>
+<context>
+<name>DebugSettingsWidget</name>
+<message>
+<source>Debug information</source>
+<translation type="unfinished">Debug information</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You can &lt;span style=" font-weight:600;"&gt;copy and paste&lt;/span&gt; this text (or parts of this text) in an &lt;span style=" font-weight:600;"&gt;issue&lt;/span&gt; on the &lt;a href="https://github.com/pbek/QOwnNotes/issues"&gt;QOwnNotes issues page&lt;/a&gt; if you have &lt;span style=" font-weight:600;"&gt;questions or troubles&lt;/span&gt; with QOwnNotes. Data that is too sensitive is hidden in this information.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You can &lt;span style=" font-weight:600;"&gt;copy and paste&lt;/span&gt; this text (or parts of this text) in an &lt;span style=" font-weight:600;"&gt;issue&lt;/span&gt; on the &lt;a href="https://github.com/pbek/QOwnNotes/issues"&gt;QOwnNotes issues page&lt;/a&gt; if you have &lt;span style=" font-weight:600;"&gt;questions or troubles&lt;/span&gt; with QOwnNotes. Data that is too sensitive is hidden in this information.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The best way to post issues is to use the issue assistant by pressing the &lt;span style=" font-weight:600;"&gt;Open issue assistant&lt;/span&gt; button on the bottom.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The best way to post issues is to use the issue assistant by pressing the &lt;span style=" font-weight:600;"&gt;Open issue assistant&lt;/span&gt; button on the bottom.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>GitHub doesn't need two spaces at the end of the line to do a line break</source>
+<translation type="unfinished">GitHub doesn't need two spaces at the end of the line to do a line break</translation>
+</message>
+<message>
+<source>Use GitHub line breaks</source>
+<translation type="unfinished">Use GitHub line breaks</translation>
+</message>
+<message>
+<source>Hide usernames in paths and anonymize other personal identifiers in the generated debug information</source>
+<translation type="unfinished">Hide usernames in paths and anonymize other personal identifiers in the generated debug information</translation>
+</message>
+<message>
+<source>Anonymize personal information</source>
+<translation type="unfinished">Anonymize personal information</translation>
+</message>
+<message>
+<source>This is the best way to open an issue</source>
+<translation type="unfinished">This is the best way to open an issue</translation>
+</message>
+<message>
+<source>Open issue assistant</source>
+<translation type="unfinished">Open issue assistant</translation>
+</message>
+<message>
+<source>Please use this in the issue tracker</source>
+<translation type="unfinished">Please use this in the issue tracker</translation>
+</message>
+<message>
+<source>&amp;Copy debug information to clipboard</source>
+<translation type="unfinished">&amp;Copy debug information to clipboard</translation>
+</message>
+<message>
+<source>Please don't use this in the issue tracker</source>
+<translation type="unfinished">Please don't use this in the issue tracker</translation>
+</message>
+<message>
+<source>&amp;Save debug information</source>
+<translation type="unfinished">&amp;Save debug information</translation>
+</message>
+<message>
+<source>Open settings file in external editor</source>
+<translation type="unfinished">Open settings file in external editor</translation>
+</message>
+<message>
+<source>Open settings file</source>
+<translation type="unfinished">Open settings file</translation>
+</message>
+<message>
+<source>Please don't use this in the issue tracker, copy the debug information text directly into the issue.</source>
+<translation type="unfinished">Please don't use this in the issue tracker, copy the debug information text directly into the issue.</translation>
+</message>
+<message>
+<source>Markdown files</source>
+<translation type="unfinished">Markdown files</translation>
+</message>
+<message>
+<source>Save debug information</source>
+<translation type="unfinished">Save debug information</translation>
+</message>
+<message>
+<source>The debug information was copied to the clipboard.</source>
+<translation type="unfinished">The debug information was copied to the clipboard.</translation>
 </message>
 </context>
 <context>
@@ -170,14 +831,6 @@
 <message>
 <source>Gujarati</source>
 <translation>Gudžaratski</translation>
-</message>
-<message>
-<source>Portugese (Brazilian)</source>
-<translation>Portugalski (brazilski)</translation>
-</message>
-<message>
-<source>Portugese</source>
-<translation>Portugalski</translation>
 </message>
 <message>
 <source>Danish</source>
@@ -428,6 +1081,14 @@
 <translation>Perzijski</translation>
 </message>
 <message>
+<source>Portuguese (Brazilian)</source>
+<translation>Portugalski (brazilski)</translation>
+</message>
+<message>
+<source>Portuguese</source>
+<translation>Portugalski</translation>
+</message>
+<message>
 <source>Romanian</source>
 <translation>Rumunjski</translation>
 </message>
@@ -571,6 +1232,219 @@
 </message>
 </context>
 <context>
+<name>DistractionFreeManager</name>
+<message>
+<source>Leave</source>
+<translation type="unfinished">Leave</translation>
+</message>
+<message>
+<source>Custom editor width</source>
+<translation>Prilagođena širina uređivača</translation>
+</message>
+<message>
+<source>Characters:</source>
+<translation>Znakovi:</translation>
+</message>
+</context>
+<context>
+<name>EditorFontColorSettingsWidget</name>
+<message>
+<source>Fonts</source>
+<translation type="unfinished">Fonts</translation>
+</message>
+<message>
+<source>Default font:</source>
+<translation type="unfinished">Default font:</translation>
+</message>
+<message>
+<source>Set a new font</source>
+<translation type="unfinished">Set a new font</translation>
+</message>
+<message>
+<source>Reset font</source>
+<translation type="unfinished">Reset font</translation>
+</message>
+<message>
+<source>Code font:</source>
+<translation type="unfinished">Code font:</translation>
+</message>
+<message>
+<source>Set a new code font</source>
+<translation type="unfinished">Set a new code font</translation>
+</message>
+<message>
+<source>Reset code font</source>
+<translation type="unfinished">Reset code font</translation>
+</message>
+</context>
+<context>
+<name>EditorSettingsWidget</name>
+<message>
+<source>Markdown highlighting</source>
+<translation type="unfinished">Markdown highlighting</translation>
+</message>
+<message>
+<source>Note that disabling this will also disable the navigation panel!</source>
+<translation type="unfinished">Note that disabling this will also disable the navigation panel!</translation>
+</message>
+<message>
+<source>Enable markdown highlighting</source>
+<translation type="unfinished">Enable markdown highlighting</translation>
+</message>
+<message>
+<source>Fully highlight blockquotes</source>
+<translation type="unfinished">Fully highlight blockquotes</translation>
+</message>
+<message>
+<source>Editor options</source>
+<translation type="unfinished">Editor options</translation>
+</message>
+<message>
+<source>Enable automatic closing of brackets and markdown formatting characters</source>
+<translation type="unfinished">Enable automatic closing of brackets and markdown formatting characters</translation>
+</message>
+<message>
+<source>You have to use the backspace key to remove the opening character</source>
+<translation type="unfinished">You have to use the backspace key to remove the opening character</translation>
+</message>
+<message>
+<source>Enable automatic removal of matching closing characters</source>
+<translation type="unfinished">Enable automatic removal of matching closing characters</translation>
+</message>
+<message>
+<source>Highlight the current line</source>
+<translation type="unfinished">Highlight the current line</translation>
+</message>
+<message>
+<source>Only use editor width setting in distraction free mode</source>
+<translation type="unfinished">Only use editor width setting in distraction free mode</translation>
+</message>
+<message>
+<source>Enable Vim mode (some QOwnNotes shortcuts will not work)</source>
+<translation type="unfinished">Enable Vim mode (some QOwnNotes shortcuts will not work)</translation>
+</message>
+<message>
+<source>Disable cursor blinking</source>
+<translation type="unfinished">Disable cursor blinking</translation>
+</message>
+<message>
+<source>Note-edit cursor width:</source>
+<translation type="unfinished">Note-edit cursor width:</translation>
+</message>
+<message>
+<source>Reset the cursor width</source>
+<translation type="unfinished">Reset the cursor width</translation>
+</message>
+<message>
+<source>Automatically remove trailing spaces in the note text</source>
+<translation type="unfinished">Automatically remove trailing spaces in the note text</translation>
+</message>
+<message>
+<source>Ensure an empty last line in the note text</source>
+<translation type="unfinished">Ensure an empty last line in the note text</translation>
+</message>
+<message>
+<source>Show line numbers and bookmark markers (1-9)</source>
+<translation type="unfinished">Show line numbers and bookmark markers (1-9)</translation>
+</message>
+<message>
+<source>Show visible markers for spaces and tabs in the note editor</source>
+<translation type="unfinished">Show visible markers for spaces and tabs in the note editor</translation>
+</message>
+<message>
+<source>Show whitespace markers</source>
+<translation type="unfinished">Show whitespace markers</translation>
+</message>
+<message>
+<source>Show visible markers for line endings in the note editor</source>
+<translation type="unfinished">Show visible markers for line endings in the note editor</translation>
+</message>
+<message>
+<source>Show line ending markers</source>
+<translation type="unfinished">Show line ending markers</translation>
+</message>
+<message>
+<source>Show character, word and line count in the status bar</source>
+<translation type="unfinished">Show character, word and line count in the status bar</translation>
+</message>
+<message>
+<source>Show small Markdown preview images in the editor, if there is no text after the image</source>
+<translation type="unfinished">Show small Markdown preview images in the editor, if there is no text after the image</translation>
+</message>
+<message>
+<source>Shows fold buttons for Markdown headings and allows collapsing their contents</source>
+<translation type="unfinished">Shows fold buttons for Markdown headings and allows collapsing their contents</translation>
+</message>
+<message>
+<source>Enable heading folding in the editor</source>
+<translation type="unfinished">Enable heading folding in the editor</translation>
+</message>
+<message>
+<source>Hides markdown formatting syntax (like **, *, #) on lines that are not being edited</source>
+<translation type="unfinished">Hides markdown formatting syntax (like **, *, #) on lines that are not being edited</translation>
+</message>
+<message>
+<source>Hide markdown formatting syntax on inactive lines</source>
+<translation type="unfinished">Hide markdown formatting syntax on inactive lines</translation>
+</message>
+<message>
+<source>Enable wiki-style link support [[note name]]</source>
+<translation type="unfinished">Enable wiki-style link support [[note name]]</translation>
+</message>
+<message>
+<source>Show the note filename selection when [[ is typed</source>
+<translation type="unfinished">Show the note filename selection when [[ is typed</translation>
+</message>
+<message>
+<source>Show note filename selection when [[ is typed</source>
+<translation type="unfinished">Show note filename selection when [[ is typed</translation>
+</message>
+<message>
+<source>Applies to word, wiki-link, equation, script and Markdown LSP completions</source>
+<translation type="unfinished">Applies to word, wiki-link, equation, script and Markdown LSP completions</translation>
+</message>
+<message>
+<source>Insert autocompletion directly if there is only one result</source>
+<translation type="unfinished">Insert autocompletion directly if there is only one result</translation>
+</message>
+<message>
+<source>Tabs and Indents</source>
+<translation type="unfinished">Tabs and Indents</translation>
+</message>
+<message>
+<source>Use tab character instead of spaces</source>
+<translation type="unfinished">Use tab character instead of spaces</translation>
+</message>
+<message>
+<source>Indent:</source>
+<translation type="unfinished">Indent:</translation>
+</message>
+<message>
+<source>Enable hanging indentation for Markdown lists</source>
+<translation type="unfinished">Enable hanging indentation for Markdown lists</translation>
+</message>
+<message>
+<source>Here you can set your own time format for inserting the current time into a note.</source>
+<translation type="unfinished">Here you can set your own time format for inserting the current time into a note.</translation>
+</message>
+<message>
+<source>Insert current time</source>
+<translation type="unfinished">Insert current time</translation>
+</message>
+<message>
+<source>Time format:</source>
+<translation type="unfinished">Time format:</translation>
+</message>
+<message>
+<source>Enter your custom time format, like "dd.MM.yyyy hh:mm"</source>
+<translation type="unfinished">Enter your custom time format, like "dd.MM.yyyy hh:mm"</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You might want to take a look at all available &lt;a href="http://docs.qownnotes.org/en/latest/editor/time-formats/"&gt;time formats&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You might want to take a look at all available &lt;a href="http://docs.qownnotes.org/en/latest/editor/time-formats/"&gt;time formats&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+</context>
+<context>
 <name>EvernoteImportDialog</name>
 <message>
 <source>Evernote Import</source>
@@ -583,6 +1457,10 @@
 <message>
 <source>Please select the Evernote enex file you want to import:</source>
 <translation>Odaberite Evernote enex datoteku koju želite importirati:</translation>
+</message>
+<message>
+<source>Import metadata as YAML front matter</source>
+<translation type="unfinished">Import metadata as YAML front matter</translation>
 </message>
 <message>
 <source>Number of imported notes</source>
@@ -710,6 +1588,57 @@
 </message>
 </context>
 <context>
+<name>ExportPrintManager</name>
+<message>
+<source>Print note</source>
+<translation>Ispiši bilješku</translation>
+</message>
+<message>
+<source>Letter</source>
+<translation>Pismo</translation>
+</message>
+<message>
+<source>Page size</source>
+<translation>Veličina stranice</translation>
+</message>
+<message>
+<source>Page size:</source>
+<translation>Veličina stranice:</translation>
+</message>
+<message>
+<source>Portrait</source>
+<translation>Uspravni</translation>
+</message>
+<message>
+<source>Landscape</source>
+<translation>Ležeći</translation>
+</message>
+<message>
+<source>Orientation</source>
+<translation>Položaj</translation>
+</message>
+<message>
+<source>Orientation:</source>
+<translation>Položaj:</translation>
+</message>
+<message>
+<source>PDF files</source>
+<translation>PDF datoteke</translation>
+</message>
+<message>
+<source>Export current note as PDF</source>
+<translation>Izvezi odabranu bilješku kao PDF</translation>
+</message>
+<message>
+<source>HTML files</source>
+<translation>HTML datoteke</translation>
+</message>
+<message>
+<source>Export current note as HTML file</source>
+<translation>Izvezi odabranu bilješku kao HTML datoteku</translation>
+</message>
+</context>
+<context>
 <name>FakeVim</name>
 <message>
 <source>Use FakeVim</source>
@@ -769,19 +1698,19 @@
 </message>
 <message>
 <source>Use smartcase</source>
-<translation>Koristi pametno razlikovanje velikih/malih slova</translation>
+<translation>Koristi smartcase</translation>
 </message>
 <message>
 <source>Use ignorecase</source>
-<translation>Koristi nerazlikovanje velikih/malih slova</translation>
+<translation>Koristi ignorecase</translation>
 </message>
 <message>
 <source>Use wrapscan</source>
-<translation>Koristite wrapscan</translation>
+<translation>Koristi wrapscan</translation>
 </message>
 <message>
 <source>Use tildeop</source>
-<translation>Koristite tildeop</translation>
+<translation>Koristi tildeop</translation>
 </message>
 <message>
 <source>Show partial command</source>
@@ -806,6 +1735,10 @@
 <message>
 <source>Keyword characters:</source>
 <translation>Znakovi ključne riječi:</translation>
+</message>
+<message>
+<source/>
+<translation type="unfinished"/>
 </message>
 <message>
 <source>Use Vim-style Editing</source>
@@ -1000,6 +1933,109 @@
 </message>
 </context>
 <context>
+<name>FileNavigationWidget</name>
+<message>
+<source>Media files</source>
+<translation>Medijske datoteke</translation>
+</message>
+<message>
+<source>Attachments</source>
+<translation>Prilozi</translation>
+</message>
+<message>
+<source>Invalid file name</source>
+<translation>Nevaljano ime datoteke</translation>
+</message>
+<message>
+<source>The file name &lt;strong&gt;%1&lt;/strong&gt; is invalid.</source>
+<translation>Ime datoteke &lt;strong&gt;%1&lt;/strong&gt; nije valjano.</translation>
+</message>
+<message>
+<source>Delete linked files</source>
+<translation>Izbriši povezane datoteke</translation>
+</message>
+<message numerus="yes">
+<source>Delete &lt;strong&gt;%n&lt;/strong&gt; selected linked file(s)? You can also remove their links from &lt;strong&gt;%1&lt;/strong&gt; note file(s) afterwards.</source>
+<translation type="unfinished">
+<numerusform>Delete &lt;strong&gt;%n&lt;/strong&gt; selected linked file(s)? You can also remove their links from &lt;strong&gt;%1&lt;/strong&gt; note file(s) afterwards.</numerusform>
+<numerusform>Delete &lt;strong&gt;%n&lt;/strong&gt; selected linked file(s)? You can also remove their links from &lt;strong&gt;%1&lt;/strong&gt; note file(s) afterwards.</numerusform>
+<numerusform>Delete &lt;strong&gt;%n&lt;/strong&gt; selected linked file(s)? You can also remove their links from &lt;strong&gt;%1&lt;/strong&gt; note file(s) afterwards.</numerusform>
+</translation>
+</message>
+<message>
+<source>Deleting the file &lt;strong&gt;%1&lt;/strong&gt; failed!</source>
+<translation type="unfinished">Deleting the file &lt;strong&gt;%1&lt;/strong&gt; failed!</translation>
+</message>
+<message numerus="yes">
+<source>Deleting &lt;strong&gt;%n&lt;/strong&gt; linked file(s) failed!</source>
+<translation type="unfinished">
+<numerusform>Deleting &lt;strong&gt;%n&lt;/strong&gt; linked file(s) failed!</numerusform>
+<numerusform>Deleting &lt;strong&gt;%n&lt;/strong&gt; linked file(s) failed!</numerusform>
+<numerusform>Deleting &lt;strong&gt;%n&lt;/strong&gt; linked file(s) failed!</numerusform>
+</translation>
+</message>
+<message>
+<source>File deleting failed</source>
+<translation type="unfinished">File deleting failed</translation>
+</message>
+<message>
+<source>Remove linked file references</source>
+<translation type="unfinished">Remove linked file references</translation>
+</message>
+<message numerus="yes">
+<source>The deleted file(s) are used in &lt;strong&gt;%n&lt;/strong&gt; note file(s). Would you like to remove those media and attachment links everywhere? This will update &lt;strong&gt;%n&lt;/strong&gt; note file(s).</source>
+<translation type="unfinished">
+<numerusform>The deleted file(s) are used in &lt;strong&gt;%n&lt;/strong&gt; note file(s). Would you like to remove those media and attachment links everywhere? This will update &lt;strong&gt;%n&lt;/strong&gt; note file(s).</numerusform>
+<numerusform>The deleted file(s) are used in &lt;strong&gt;%n&lt;/strong&gt; note file(s). Would you like to remove those media and attachment links everywhere? This will update &lt;strong&gt;%n&lt;/strong&gt; note file(s).</numerusform>
+<numerusform>The deleted file(s) are used in &lt;strong&gt;%n&lt;/strong&gt; note file(s). Would you like to remove those media and attachment links everywhere? This will update &lt;strong&gt;%n&lt;/strong&gt; note file(s).</numerusform>
+</translation>
+</message>
+<message>
+<source>File doesn't exist</source>
+<translation type="unfinished">File doesn't exist</translation>
+</message>
+<message>
+<source>The file &lt;strong&gt;%1&lt;/strong&gt; doesn't exist, you cannot rename it!</source>
+<translation type="unfinished">The file &lt;strong&gt;%1&lt;/strong&gt; doesn't exist, you cannot rename it!</translation>
+</message>
+<message>
+<source>File exists</source>
+<translation type="unfinished">File exists</translation>
+</message>
+<message>
+<source>File &lt;strong&gt;%1&lt;/strong&gt; already exists, you need to remove it before choosing &lt;strong&gt;%2&lt;/strong&gt; as new filename!</source>
+<translation type="unfinished">File &lt;strong&gt;%1&lt;/strong&gt; already exists, you need to remove it before choosing &lt;strong&gt;%2&lt;/strong&gt; as new filename!</translation>
+</message>
+<message>
+<source>File renaming failed</source>
+<translation type="unfinished">File renaming failed</translation>
+</message>
+<message>
+<source>Renaming of file &lt;strong&gt;%1&lt;/strong&gt; failed!</source>
+<translation type="unfinished">Renaming of file &lt;strong&gt;%1&lt;/strong&gt; failed!</translation>
+</message>
+<message>
+<source>File name changed</source>
+<translation type="unfinished">File name changed</translation>
+</message>
+<message numerus="yes">
+<source>The %1 &lt;strong&gt;%2&lt;/strong&gt; is used in &lt;strong&gt;%n&lt;/strong&gt; note file(s). Would you like to refactor that filename everywhere? This will update &lt;strong&gt;%n&lt;/strong&gt; note file(s).</source>
+<translation type="unfinished">
+<numerusform>The %1 &lt;strong&gt;%2&lt;/strong&gt; is used in &lt;strong&gt;%n&lt;/strong&gt; note file(s). Would you like to refactor that filename everywhere? This will update &lt;strong&gt;%n&lt;/strong&gt; note file(s).</numerusform>
+<numerusform>The %1 &lt;strong&gt;%2&lt;/strong&gt; is used in &lt;strong&gt;%n&lt;/strong&gt; note file(s). Would you like to refactor that filename everywhere? This will update &lt;strong&gt;%n&lt;/strong&gt; note file(s).</numerusform>
+<numerusform>The %1 &lt;strong&gt;%2&lt;/strong&gt; is used in &lt;strong&gt;%n&lt;/strong&gt; note file(s). Would you like to refactor that filename everywhere? This will update &lt;strong&gt;%n&lt;/strong&gt; note file(s).</numerusform>
+</translation>
+</message>
+<message>
+<source>&amp;Open file externally</source>
+<translation type="unfinished">&amp;Open file externally</translation>
+</message>
+<message>
+<source>&amp;Delete file</source>
+<translation type="unfinished">&amp;Delete file</translation>
+</message>
+</context>
+<context>
 <name>FontColorWidget</name>
 <message>
 <source>Text font</source>
@@ -1112,6 +2148,22 @@
 <message>
 <source>Link</source>
 <translation>Poveznica</translation>
+</message>
+<message>
+<source>Link hover</source>
+<translation type="unfinished">Link hover</translation>
+</message>
+<message>
+<source>Link (internal)</source>
+<translation type="unfinished">Link (internal)</translation>
+</message>
+<message>
+<source>Wiki link</source>
+<translation type="unfinished">Wiki link</translation>
+</message>
+<message>
+<source>Wiki link (broken)</source>
+<translation type="unfinished">Wiki link (broken)</translation>
 </message>
 <message>
 <source>Image</source>
@@ -1245,18 +2297,743 @@
 </message>
 </context>
 <context>
-<name>HtmlPreviewWidget</name>
+<name>GeneralSettingsWidget</name>
+<message>
+<source>Notes</source>
+<translation type="unfinished">Notes</translation>
+</message>
+<message>
+<source>Check this if you want to accept all external modifications while you are editing the current note.</source>
+<translation type="unfinished">Check this if you want to accept all external modifications while you are editing the current note.</translation>
+</message>
+<message>
+<source>Accept all external modifications of the current note</source>
+<translation type="unfinished">Accept all external modifications of the current note</translation>
+</message>
+<message>
+<source>note save interval time [sec]</source>
+<translation type="unfinished">note save interval time [sec]</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked you will always be notified about external modifications, even if current note wasn't edited in the last minute. Recommended is &lt;span style=" font-style:italic;"&gt;unchecked&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked you will always be notified about external modifications, even if current note wasn't edited in the last minute. Recommended is &lt;span style=" font-style:italic;"&gt;unchecked&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>Notify about all external modifications of the current note</source>
+<translation type="unfinished">Notify about all external modifications of the current note</translation>
+</message>
+<message>
+<source>By default the headline will generated automatically</source>
+<translation type="unfinished">By default the headline will generated automatically</translation>
+</message>
+<message>
+<source>The shortcut to create a new note asks for a headline</source>
+<translation type="unfinished">The shortcut to create a new note asks for a headline</translation>
+</message>
+<message>
+<source>Do this at your own risk!</source>
+<translation type="unfinished">Do this at your own risk!</translation>
+</message>
+<message>
+<source>Ignore all external note folder changes</source>
+<translation type="unfinished">Ignore all external note folder changes</translation>
+</message>
+<message>
+<source>Maximum width:</source>
+<translation type="unfinished">Maximum width:</translation>
+</message>
+<message>
+<source>Maximum height:</source>
+<translation type="unfinished">Maximum height:</translation>
+</message>
+<message>
+<source>You might run into sync troubles with older versions of Nextcloud / ownCloud sync when going far below 10 sec.
+Just test yourself if you get sync conflicts and set a higher value if so.</source>
+<translation type="unfinished">You might run into sync troubles with older versions of Nextcloud / ownCloud sync when going far below 10 sec.
+Just test yourself if you get sync conflicts and set a higher value if so.</translation>
+</message>
+<message>
+<source>Use Setext style headings for generated new note titles instead of ATX style headings</source>
+<translation type="unfinished">Use Setext style headings for generated new note titles instead of ATX style headings</translation>
+</message>
+<message>
+<source>Use Setext headings for new notes</source>
+<translation type="unfinished">Use Setext headings for new notes</translation>
+</message>
+<message>
+<source>You can use this for example under Windows if you have troubles with newlines in the Nextcloud / ownCloud notes app</source>
+<translation type="unfinished">You can use this for example under Windows if you have troubles with newlines in the Nextcloud / ownCloud notes app</translation>
+</message>
+<message>
+<source>Use UNIX newline instead of native newline characters</source>
+<translation type="unfinished">Use UNIX newline instead of native newline characters</translation>
+</message>
+<message>
+<source>Check this if you want to ignore all external modifications while you are editing the current note.</source>
+<translation type="unfinished">Check this if you want to ignore all external modifications while you are editing the current note.</translation>
+</message>
+<message>
+<source>Ignore all external modifications of the current note</source>
+<translation type="unfinished">Ignore all external modifications of the current note</translation>
+</message>
+<message>
+<source>Use legacy way to link to notes, images and attachments</source>
+<translation type="unfinished">Use legacy way to link to notes, images and attachments</translation>
+</message>
+<message>
+<source>When the note title starts with an emoji, the emoji will not be stored in the note filename</source>
+<translation type="unfinished">When the note title starts with an emoji, the emoji will not be stored in the note filename</translation>
+</message>
+<message>
+<source>Don't use leading emojis in note filename</source>
+<translation type="unfinished">Don't use leading emojis in note filename</translation>
+</message>
+<message>
+<source>When opening notes the cursor position inside the note will now be restored to the position when the note was last visited in the current session</source>
+<translation type="unfinished">When opening notes the cursor position inside the note will now be restored to the position when the note was last visited in the current session</translation>
+</message>
+<message>
+<source>Restore cursor position when opening a note</source>
+<translation type="unfinished">Restore cursor position when opening a note</translation>
+</message>
+<message>
+<source>Automatically close the note folder database to prevent problems with sync tools</source>
+<translation type="unfinished">Automatically close the note folder database to prevent problems with sync tools</translation>
+</message>
+<message>
+<source>Automatically close the note folder database</source>
+<translation type="unfinished">Automatically close the note folder database</translation>
+</message>
+<message>
+<source>Scale images down when inserted into notes</source>
+<translation type="unfinished">Scale images down when inserted into notes</translation>
+</message>
+<message>
+<source>Disable this if you want to launch the application without opening a note</source>
+<translation type="unfinished">Disable this if you want to launch the application without opening a note</translation>
+</message>
+<message>
+<source>Open last accessed note at application startup</source>
+<translation type="unfinished">Open last accessed note at application startup</translation>
+</message>
+<message>
+<source>Use checksums to detect external modifications to unsaved notes</source>
+<translation type="unfinished">Use checksums to detect external modifications to unsaved notes</translation>
+</message>
+<message>
+<source>Read-only mode</source>
+<translation type="unfinished">Read-only mode</translation>
+</message>
+<message>
+<source>Enable or disable the read-only mode feature</source>
+<translation type="unfinished">Enable or disable the read-only mode feature</translation>
+</message>
+<message>
+<source>Enable read-only mode</source>
+<translation type="unfinished">Enable read-only mode</translation>
+</message>
+<message>
+<source>Start application in read-only mode</source>
+<translation type="unfinished">Start application in read-only mode</translation>
+</message>
+<message>
+<source>When inactive, enter read-only mode automatically after:</source>
+<translation type="unfinished">When inactive, enter read-only mode automatically after:</translation>
+</message>
+<message>
+<source> sec</source>
+<extracomment>short for seconds</extracomment>
+<translation type="unfinished"> sec</translation>
+</message>
+<message>
+<source>App instance</source>
+<translation type="unfinished">App instance</translation>
+</message>
+<message>
+<source>Only allow one app instance at the same time</source>
+<translation type="unfinished">Only allow one app instance at the same time</translation>
+</message>
+<message>
+<source>Keychain</source>
+<translation type="unfinished">Keychain</translation>
+</message>
+<message>
+<source>Maximum time to wait for the system keychain before falling back to SimpleCrypt legacy encryption</source>
+<translation type="unfinished">Maximum time to wait for the system keychain before falling back to SimpleCrypt legacy encryption</translation>
+</message>
+<message>
+<source>Keychain access timeout:</source>
+<translation type="unfinished">Keychain access timeout:</translation>
+</message>
+<message>
+<source>Update dialog</source>
+<translation type="unfinished">Update dialog</translation>
+</message>
+<message>
+<source>Don't show the update dialog automatically</source>
+<translation type="unfinished">Don't show the update dialog automatically</translation>
+</message>
+<message>
+<source>Search engine</source>
+<translation type="unfinished">Search engine</translation>
+</message>
+<message>
+<source>Note file extensions</source>
+<translation type="unfinished">Note file extensions</translation>
+</message>
+<message>
+<source>Files with the listed file extensions will be recognized as notes, the selected file extension will be used for new notes.</source>
+<translation type="unfinished">Files with the listed file extensions will be recognized as notes, the selected file extension will be used for new notes.</translation>
+</message>
+<message>
+<source>Add a new note file extension</source>
+<translation type="unfinished">Add a new note file extension</translation>
+</message>
+<message>
+<source>Remove selected note file extension</source>
+<translation type="unfinished">Remove selected note file extension</translation>
+</message>
+<message>
+<source>External tools</source>
+<translation type="unfinished">External tools</translation>
+</message>
+<message>
+<source>Path to external editor, leave empty for default</source>
+<translation type="unfinished">Path to external editor, leave empty for default</translation>
+</message>
+<message>
+<source>Path to external editor:</source>
+<translation type="unfinished">Path to external editor:</translation>
+</message>
+<message>
+<source>Dialog preferences</source>
+<translation type="unfinished">Dialog preferences</translation>
+</message>
+<message>
+<source>QOwnNotes remembers answers selected with "Don't ask again" and warnings hidden with "Don't show again". Reset these preferences to show those dialogs again.</source>
+<translation type="unfinished">QOwnNotes remembers answers selected with "Don't ask again" and warnings hidden with "Don't show again". Reset these preferences to show those dialogs again.</translation>
+</message>
+<message>
+<source>Forget all "Don't ask again" and "Don't show again" choices</source>
+<translation type="unfinished">Forget all "Don't ask again" and "Don't show again" choices</translation>
+</message>
+<message>
+<source>Reset dialog preferences</source>
+<translation type="unfinished">Reset dialog preferences</translation>
+</message>
+<message>
+<source>set external editor</source>
+<translation type="unfinished">set external editor</translation>
+</message>
+<message>
+<source>Path to external diff tool:</source>
+<translation type="unfinished">Path to external diff tool:</translation>
+</message>
+<message>
+<source>Path to external diff tool, leave empty for default</source>
+<translation type="unfinished">Path to external diff tool, leave empty for default</translation>
+</message>
+<message>
+<source>set external diff tool</source>
+<translation type="unfinished">set external diff tool</translation>
+</message>
+<message>
+<source>Clear application data and exit</source>
+<translation type="unfinished">Clear application data and exit</translation>
+</message>
+<message>
+<source>This button allows you to clear all settings, remove the local todo database and exit QOwnNotes.</source>
+<translation type="unfinished">This button allows you to clear all settings, remove the local todo database and exit QOwnNotes.</translation>
+</message>
+<message>
+<source>Clear app data and exit</source>
+<translation type="unfinished">Clear app data and exit</translation>
+</message>
+<message>
+<source>Settings</source>
+<translation type="unfinished">Settings</translation>
+</message>
+<message>
+<source>Import settings</source>
+<translation type="unfinished">Import settings</translation>
+</message>
+<message>
+<source>Export settings</source>
+<translation type="unfinished">Export settings</translation>
+</message>
+<message>
+<source>Database</source>
+<translation type="unfinished">Database</translation>
+</message>
+<message>
+<source>Reinitialize Database</source>
+<translation type="unfinished">Reinitialize Database</translation>
+</message>
+<message>
+<source>Checks the disk database integrity and fixes problems</source>
+<translation type="unfinished">Checks the disk database integrity and fixes problems</translation>
+</message>
+<message>
+<source>Check integrity</source>
+<translation type="unfinished">Check integrity</translation>
+</message>
+<message>
+<source>Be warned that reinitializing the database will also remove your cached todo items and configured note folders and scripts!</source>
+<translation type="unfinished">Be warned that reinitializing the database will also remove your cached todo items and configured note folders and scripts!</translation>
+</message>
+<message>
+<source>Do you really want to clear the local database? This will also remove your configured note folders and your cached todo items!</source>
+<translation type="unfinished">Do you really want to clear the local database? This will also remove your configured note folders and your cached todo items!</translation>
+</message>
+<message>
+<source>The Database was reinitialized. Please restart the application now!</source>
+<translation type="unfinished">The Database was reinitialized. Please restart the application now!</translation>
+</message>
+<message>
+<source>The integrity of the disk database is valid.</source>
+<translation type="unfinished">The integrity of the disk database is valid.</translation>
+</message>
+<message>
+<source>The integrity of the disk database is not valid!</source>
+<translation type="unfinished">The integrity of the disk database is not valid!</translation>
+</message>
+<message>
+<source>Do you really want to clear all settings, remove the database and exit QOwnNotes?
+
+Your notes will stay intact!</source>
+<translation type="unfinished">Do you really want to clear all settings, remove the database and exit QOwnNotes?
+
+Your notes will stay intact!</translation>
+</message>
+<message>
+<source>Select editor application</source>
+<translation type="unfinished">Select editor application</translation>
+</message>
+<message>
+<source>Select diff tool application</source>
+<translation type="unfinished">Select diff tool application</translation>
+</message>
+<message>
+<source>File extension</source>
+<translation type="unfinished">File extension</translation>
+</message>
+<message>
+<source>Please enter a new note file extension:</source>
+<translation type="unfinished">Please enter a new note file extension:</translation>
+</message>
+<message>
+<source>Markdown file</source>
+<translation type="unfinished">Markdown file</translation>
+</message>
+<message>
+<source>Plain text file</source>
+<translation type="unfinished">Plain text file</translation>
+</message>
+<message>
+<source>Remove note file extension</source>
+<translation type="unfinished">Remove note file extension</translation>
+</message>
+<message>
+<source>Do you really want to remove the note file extension &lt;strong&gt;%1&lt;/strong&gt;? You will not see files with this extension in the note list any more!</source>
+<translation type="unfinished">Do you really want to remove the note file extension &lt;strong&gt;%1&lt;/strong&gt;? You will not see files with this extension in the note list any more!</translation>
+</message>
+<message>
+<source>Do you really want to forget all saved dialog choices and show suppressed dialogs again?</source>
+<translation type="unfinished">Do you really want to forget all saved dialog choices and show suppressed dialogs again?</translation>
+</message>
+<message>
+<source>INI files</source>
+<translation type="unfinished">INI files</translation>
+</message>
+<message>
+<source>Do you really want to import settings? Your current settings will get removed and not every setting may get restored, like the note folder settings and which scripts you were using. You also will need to adjust some settings, especially across platforms, but your notes will stay intact!</source>
+<translation type="unfinished">Do you really want to import settings? Your current settings will get removed and not every setting may get restored, like the note folder settings and which scripts you were using. You also will need to adjust some settings, especially across platforms, but your notes will stay intact!</translation>
+</message>
+<message>
+<source>The application will be restarted after the import.</source>
+<translation type="unfinished">The application will be restarted after the import.</translation>
+</message>
+</context>
+<context>
+<name>GitSettingsWidget</name>
+<message>
+<source>Commit interval</source>
+<translation type="unfinished">Commit interval</translation>
+</message>
+<message>
+<source>sec</source>
+<extracomment>seconds</extracomment>
+<translation type="unfinished">sec</translation>
+</message>
+<message>
+<source>You might run into sync troubles with older versions of Nextcloud / ownCloud sync when going far below 10 sec.
+Just test yourself if you get sync conflicts and set a higher value if so.</source>
+<translation type="unfinished">You might run into sync troubles with older versions of Nextcloud / ownCloud sync when going far below 10 sec.
+Just test yourself if you get sync conflicts and set a higher value if so.</translation>
+</message>
+<message>
+<source>git commit interval time [sec]</source>
+<translation type="unfinished">git commit interval time [sec]</translation>
+</message>
+<message>
+<source>External git log command to show the git versions of a note</source>
+<translation type="unfinished">External git log command to show the git versions of a note</translation>
+</message>
+<message>
+<source>Enter a command to be used to show a git log (like for example "gitk")</source>
+<extracomment>Please don't translate "%notePath%"</extracomment>
+<translation type="unfinished">Enter a command to be used to show a git log (like for example "gitk")</translation>
+</message>
+<message>
+<source>You optionally can use "%notePath%" for the path of the note.</source>
+<extracomment>Please don't translate "%notePath%"</extracomment>
+<translation type="unfinished">You optionally can use "%notePath%" for the path of the note.</translation>
+</message>
+<message>
+<source>If you use this setting you will get a new menu entry to show the git versions if you right-click a note.</source>
+<extracomment>Please don't translate "%notePath%"</extracomment>
+<translation type="unfinished">If you use this setting you will get a new menu entry to show the git versions if you right-click a note.</translation>
+</message>
+<message>
+<source>Git client</source>
+<translation type="unfinished">Git client</translation>
+</message>
+<message>
+<source>Path to git client, leave empty for default</source>
+<translation type="unfinished">Path to git client, leave empty for default</translation>
+</message>
+<message>
+<source>Path to git executable:</source>
+<translation type="unfinished">Path to git executable:</translation>
+</message>
+<message>
+<source>Select the path of the git binary</source>
+<translation type="unfinished">Select the path of the git binary</translation>
+</message>
+<message>
+<source>Don't forget to enable git support for your note folders and to configure your name and email address for your git client, for example with these terminal commands:</source>
+<translation type="unfinished">Don't forget to enable git support for your note folders and to configure your name and email address for your git client, for example with these terminal commands:</translation>
+</message>
+<message>
+<source>Git library</source>
+<translation type="unfinished">Git library</translation>
+</message>
+<message>
+<source>Support for the git library libgit2 is activated.</source>
+<translation type="unfinished">Support for the git library libgit2 is activated.</translation>
+</message>
+<message>
+<source>Don't forget to enable git support for your note folders.</source>
+<translation type="unfinished">Don't forget to enable git support for your note folders.</translation>
+</message>
+<message>
+<source>You can download your git client here: &lt;a href="%url"&gt;Git for Windows&lt;/a&gt;</source>
+<translation type="unfinished">You can download your git client here: &lt;a href="%url"&gt;Git for Windows&lt;/a&gt;</translation>
+</message>
+<message>
+<source>Executable files</source>
+<translation type="unfinished">Executable files</translation>
+</message>
+<message>
+<source>All files</source>
+<translation type="unfinished">All files</translation>
+</message>
+<message>
+<source>Please select the path of your git executable</source>
+<translation type="unfinished">Please select the path of your git executable</translation>
+</message>
+</context>
+<context>
+<name>HarperChecker</name>
+<message>
+<source>Harper is unavailable: %1</source>
+<translation type="unfinished">Harper is unavailable: %1</translation>
+</message>
+</context>
+<context>
+<name>HarperClient</name>
+<message>
+<source>Harper request timed out</source>
+<translation type="unfinished">Harper request timed out</translation>
+</message>
+<message>
+<source>Harper service stopped unexpectedly</source>
+<translation type="unfinished">Harper service stopped unexpectedly</translation>
+</message>
+<message>
+<source>Harper transport is not configured</source>
+<translation type="unfinished">Harper transport is not configured</translation>
+</message>
+<message>
+<source>Waiting before retrying the Harper TCP connection</source>
+<translation type="unfinished">Waiting before retrying the Harper TCP connection</translation>
+</message>
+<message>
+<source>Unsupported Harper request: %1</source>
+<translation type="unfinished">Unsupported Harper request: %1</translation>
+</message>
+<message>
+<source>Harper initialization failed</source>
+<translation type="unfinished">Harper initialization failed</translation>
+</message>
+</context>
+<context>
+<name>HarperSettingsWidget</name>
+<message>
+<source>Harper</source>
+<translation type="unfinished">Harper</translation>
+</message>
+<message>
+<source>Enable offline grammar and style checking with Harper</source>
+<translation type="unfinished">Enable offline grammar and style checking with Harper</translation>
+</message>
+<message>
+<source>Transport:</source>
+<translation type="unfinished">Transport:</translation>
+</message>
+<message>
+<source>Connection:</source>
+<translation type="unfinished">Connection:</translation>
+</message>
+<message>
+<source>Command / binary path:</source>
+<translation type="unfinished">Command / binary path:</translation>
+</message>
+<message>
+<source>Browse</source>
+<translation type="unfinished">Browse</translation>
+</message>
+<message>
+<source>Auto-detect</source>
+<translation type="unfinished">Auto-detect</translation>
+</message>
+<message>
+<source>Server address:</source>
+<translation type="unfinished">Server address:</translation>
+</message>
+<message>
+<source>Port:</source>
+<translation type="unfinished">Port:</translation>
+</message>
+<message>
+<source>Dialect:</source>
+<translation type="unfinished">Dialect:</translation>
+</message>
+<message>
+<source>Check delay:</source>
+<translation type="unfinished">Check delay:</translation>
+</message>
+<message>
+<source> ms</source>
+<translation type="unfinished"> ms</translation>
+</message>
+<message>
+<source>Linters:</source>
+<translation type="unfinished">Linters:</translation>
+</message>
+<message>
+<source>Spell Check</source>
+<translation type="unfinished">Spell Check</translation>
+</message>
+<message>
+<source>Sentence Capitalization</source>
+<translation type="unfinished">Sentence Capitalization</translation>
+</message>
+<message>
+<source>Repeated Words</source>
+<translation type="unfinished">Repeated Words</translation>
+</message>
+<message>
+<source>Long Sentences</source>
+<translation type="unfinished">Long Sentences</translation>
+</message>
+<message>
+<source>An vs A</source>
+<translation type="unfinished">An vs A</translation>
+</message>
+<message>
+<source>Unclosed Quotes</source>
+<translation type="unfinished">Unclosed Quotes</translation>
+</message>
+<message>
+<source>Correct Number Suffix</source>
+<translation type="unfinished">Correct Number Suffix</translation>
+</message>
+<message>
+<source>Spaces</source>
+<translation type="unfinished">Spaces</translation>
+</message>
+<message>
+<source>Quote Spacing</source>
+<translation type="unfinished">Quote Spacing</translation>
+</message>
+<message>
+<source>No French Spaces</source>
+<translation type="unfinished">No French Spaces</translation>
+</message>
+<message>
+<source>Wrong Apostrophe</source>
+<translation type="unfinished">Wrong Apostrophe</translation>
+</message>
+<message>
+<source>Not tested yet.</source>
+<translation type="unfinished">Not tested yet.</translation>
+</message>
+<message>
+<source>Spelled Numbers</source>
+<translation type="unfinished">Spelled Numbers</translation>
+</message>
+<message>
+<source>Ignored:</source>
+<translation type="unfinished">Ignored:</translation>
+</message>
+<message>
+<source>Reset ignored rules</source>
+<translation type="unfinished">Reset ignored rules</translation>
+</message>
+<message>
+<source>Reset ignored words</source>
+<translation type="unfinished">Reset ignored words</translation>
+</message>
+<message>
+<source>Status:</source>
+<translation type="unfinished">Status:</translation>
+</message>
+<message>
+<source>Test Connection</source>
+<translation type="unfinished">Test Connection</translation>
+</message>
+<message>
+<source>Stdio (recommended)</source>
+<translation type="unfinished">Stdio (recommended)</translation>
+</message>
+<message>
+<source>TCP</source>
+<translation type="unfinished">TCP</translation>
+</message>
+<message>
+<source>American</source>
+<translation type="unfinished">American</translation>
+</message>
+<message>
+<source>British</source>
+<translation type="unfinished">British</translation>
+</message>
+<message>
+<source>Australian</source>
+<translation type="unfinished">Australian</translation>
+</message>
+<message>
+<source>Canadian</source>
+<translation type="unfinished">Canadian</translation>
+</message>
+<message>
+<source>Indian</source>
+<translation type="unfinished">Indian</translation>
+</message>
+<message>
+<source>Harper support is not available in this build.</source>
+<translation type="unfinished">Harper support is not available in this build.</translation>
+</message>
+<message>
+<source>harper-ls was not found.</source>
+<translation type="unfinished">harper-ls was not found.</translation>
+</message>
+<message>
+<source>Found Harper at %1</source>
+<translation type="unfinished">Found Harper at %1</translation>
+</message>
+<message>
+<source>Found Harper %1 at %2</source>
+<translation type="unfinished">Found Harper %1 at %2</translation>
+</message>
+<message>
+<source>TCP target %1:%2</source>
+<translation type="unfinished">TCP target %1:%2</translation>
+</message>
+<message>
+<source>Select Harper binary</source>
+<translation type="unfinished">Select Harper binary</translation>
+</message>
+<message>
+<source>Could not find harper-ls in PATH.</source>
+<translation type="unfinished">Could not find harper-ls in PATH.</translation>
+</message>
+<message>
+<source>Harper connection successful.</source>
+<translation type="unfinished">Harper connection successful.</translation>
+</message>
+<message>
+<source>Harper connection failed: %1</source>
+<translation type="unfinished">Harper connection failed: %1</translation>
+</message>
+<message>
+<source>There are no ignored rules to reset.</source>
+<translation type="unfinished">There are no ignored rules to reset.</translation>
+</message>
+<message numerus="yes">
+<source>Reset %n ignored rule(s)?</source>
+<translation type="unfinished">
+<numerusform>Reset %n ignored rule(s)?</numerusform>
+<numerusform>Reset %n ignored rule(s)?</numerusform>
+<numerusform>Reset %n ignored rule(s)?</numerusform>
+</translation>
+</message>
+<message>
+<source>All ignored rules have been reset.</source>
+<translation type="unfinished">All ignored rules have been reset.</translation>
+</message>
+<message>
+<source>There are no ignored words to reset.</source>
+<translation type="unfinished">There are no ignored words to reset.</translation>
+</message>
+<message numerus="yes">
+<source>Reset %n ignored word(s)?</source>
+<translation type="unfinished">
+<numerusform>Reset %n ignored word(s)?</numerusform>
+<numerusform>Reset %n ignored word(s)?</numerusform>
+<numerusform>Reset %n ignored word(s)?</numerusform>
+</translation>
+</message>
+<message>
+<source>All ignored words have been reset.</source>
+<translation type="unfinished">All ignored words have been reset.</translation>
+</message>
+</context>
+<context>
+<name>HtmlPreviewWidgetInternal</name>
 <message>
 <source>Copy</source>
 <translation>Kopiraj</translation>
 </message>
 <message>
-<source>Copy link</source>
-<translation>Kopiraj link</translation>
+<source>Copy image file path</source>
+<translation type="unfinished">Copy image file path</translation>
+</message>
+<message>
+<source>Copy image to clipboard</source>
+<translation type="unfinished">Copy image to clipboard</translation>
+</message>
+<message>
+<source>Copy link location</source>
+<translation>Kopiraj lokaciju poveznice</translation>
+</message>
+<message>
+<source>Export generated raw HTML</source>
+<translation>Izvezi generirani HTML</translation>
 </message>
 <message>
 <source>Reset zoom</source>
-<translation>Poništi zumiranje</translation>
+<translation>Resetiraj zumiranje</translation>
+</message>
+<message>
+<source>HTML files</source>
+<translation>HTML datoteke</translation>
+</message>
+<message>
+<source>Export preview as raw HTML file</source>
+<comment>"Raw" means that actually the html that was fed to the preview will be stored (the QTextBrowser modifies the html that it is showing)</comment>
+<translation>Izvezi pregled kao HTML datoteku</translation>
 </message>
 </context>
 <context>
@@ -1316,6 +3093,401 @@
 <message>
 <source>Select image to insert</source>
 <translation>Odaberite sliku za umetanje</translation>
+</message>
+</context>
+<context>
+<name>InterfaceSettingsWidget</name>
+<message>
+<source>Interface language</source>
+<translation type="unfinished">Interface language</translation>
+</message>
+<message>
+<source>If you want to help to translate QOwnNotes or update an existing translation please read: &lt;a href="%1"&gt;How can I help to translate QOwnNotes?&lt;/a&gt;</source>
+<translation type="unfinished">If you want to help to translate QOwnNotes or update an existing translation please read: &lt;a href="%1"&gt;How can I help to translate QOwnNotes?&lt;/a&gt;</translation>
+</message>
+<message>
+<source>If you change the language you have to restart the application for the changes to take action.</source>
+<translation type="unfinished">If you change the language you have to restart the application for the changes to take action.</translation>
+</message>
+<message>
+<source>Automatic</source>
+<translation type="unfinished">Automatic</translation>
+</message>
+<message>
+<source>Indonesian</source>
+<translation type="unfinished">Indonesian</translation>
+</message>
+<message>
+<source>Malay</source>
+<translation type="unfinished">Malay</translation>
+</message>
+<message>
+<source>Bengali</source>
+<translation type="unfinished">Bengali</translation>
+</message>
+<message>
+<source>Bosnian</source>
+<translation type="unfinished">Bosnian</translation>
+</message>
+<message>
+<source>Bulgarian</source>
+<translation type="unfinished">Bulgarian</translation>
+</message>
+<message>
+<source>Catalan</source>
+<translation type="unfinished">Catalan</translation>
+</message>
+<message>
+<source>Cebuano</source>
+<translation type="unfinished">Cebuano</translation>
+</message>
+<message>
+<source>Czech</source>
+<translation type="unfinished">Czech</translation>
+</message>
+<message>
+<source>Danish</source>
+<translation type="unfinished">Danish</translation>
+</message>
+<message>
+<source>German</source>
+<translation type="unfinished">German</translation>
+</message>
+<message>
+<source>Basque</source>
+<translation type="unfinished">Basque</translation>
+</message>
+<message>
+<source>English</source>
+<translation type="unfinished">English</translation>
+</message>
+<message>
+<source>English (British)</source>
+<translation type="unfinished">English (British)</translation>
+</message>
+<message>
+<source>Spanish</source>
+<translation type="unfinished">Spanish</translation>
+</message>
+<message>
+<source>Estonian</source>
+<translation type="unfinished">Estonian</translation>
+</message>
+<message>
+<source>Filipino</source>
+<translation type="unfinished">Filipino</translation>
+</message>
+<message>
+<source>Finnish</source>
+<translation type="unfinished">Finnish</translation>
+</message>
+<message>
+<source>French</source>
+<translation type="unfinished">French</translation>
+</message>
+<message>
+<source>Irish</source>
+<translation type="unfinished">Irish</translation>
+</message>
+<message>
+<source>Galician</source>
+<translation type="unfinished">Galician</translation>
+</message>
+<message>
+<source>Greek</source>
+<translation type="unfinished">Greek</translation>
+</message>
+<message>
+<source>Hausa</source>
+<translation type="unfinished">Hausa</translation>
+</message>
+<message>
+<source>Hebrew</source>
+<translation type="unfinished">Hebrew</translation>
+</message>
+<message>
+<source>Hindi</source>
+<translation type="unfinished">Hindi</translation>
+</message>
+<message>
+<source>Croatian</source>
+<translation type="unfinished">Croatian</translation>
+</message>
+<message>
+<source>Hiligaynon</source>
+<translation type="unfinished">Hiligaynon</translation>
+</message>
+<message>
+<source>Icelandic</source>
+<translation type="unfinished">Icelandic</translation>
+</message>
+<message>
+<source>Italian</source>
+<translation type="unfinished">Italian</translation>
+</message>
+<message>
+<source>Korean</source>
+<translation type="unfinished">Korean</translation>
+</message>
+<message>
+<source>Kurdish</source>
+<translation type="unfinished">Kurdish</translation>
+</message>
+<message>
+<source>Khmer</source>
+<translation type="unfinished">Khmer</translation>
+</message>
+<message>
+<source>Latvian</source>
+<translation type="unfinished">Latvian</translation>
+</message>
+<message>
+<source>Lithuanian</source>
+<translation type="unfinished">Lithuanian</translation>
+</message>
+<message>
+<source>Macedonian</source>
+<translation type="unfinished">Macedonian</translation>
+</message>
+<message>
+<source>Māori</source>
+<translation type="unfinished">Māori</translation>
+</message>
+<message>
+<source>Hungarian</source>
+<translation type="unfinished">Hungarian</translation>
+</message>
+<message>
+<source>Norwegian</source>
+<translation type="unfinished">Norwegian</translation>
+</message>
+<message>
+<source>Japanese</source>
+<translation type="unfinished">Japanese</translation>
+</message>
+<message>
+<source>Dutch</source>
+<translation type="unfinished">Dutch</translation>
+</message>
+<message>
+<source>Persian</source>
+<translation type="unfinished">Persian</translation>
+</message>
+<message>
+<source>Uzbek</source>
+<translation type="unfinished">Uzbek</translation>
+</message>
+<message>
+<source>Polish</source>
+<translation type="unfinished">Polish</translation>
+</message>
+<message>
+<source>Brazilian Portuguese</source>
+<translation type="unfinished">Brazilian Portuguese</translation>
+</message>
+<message>
+<source>Portuguese</source>
+<translation type="unfinished">Portuguese</translation>
+</message>
+<message>
+<source>Punjabi</source>
+<translation type="unfinished">Punjabi</translation>
+</message>
+<message>
+<source>Romanian</source>
+<translation type="unfinished">Romanian</translation>
+</message>
+<message>
+<source>Russian</source>
+<translation type="unfinished">Russian</translation>
+</message>
+<message>
+<source>Serbian</source>
+<translation type="unfinished">Serbian</translation>
+</message>
+<message>
+<source>Albanian</source>
+<translation type="unfinished">Albanian</translation>
+</message>
+<message>
+<source>Shona</source>
+<translation type="unfinished">Shona</translation>
+</message>
+<message>
+<source>Sinhala</source>
+<translation type="unfinished">Sinhala</translation>
+</message>
+<message>
+<source>Slovak</source>
+<translation type="unfinished">Slovak</translation>
+</message>
+<message>
+<source>Slovenian</source>
+<translation type="unfinished">Slovenian</translation>
+</message>
+<message>
+<source>Swedish</source>
+<translation type="unfinished">Swedish</translation>
+</message>
+<message>
+<source>Tagalog</source>
+<translation type="unfinished">Tagalog</translation>
+</message>
+<message>
+<source>Thai</source>
+<translation type="unfinished">Thai</translation>
+</message>
+<message>
+<source>Vietnamese</source>
+<translation type="unfinished">Vietnamese</translation>
+</message>
+<message>
+<source>Turkish</source>
+<translation type="unfinished">Turkish</translation>
+</message>
+<message>
+<source>Xhosa</source>
+<translation type="unfinished">Xhosa</translation>
+</message>
+<message>
+<source>Ukrainian</source>
+<translation type="unfinished">Ukrainian</translation>
+</message>
+<message>
+<source>Urdu</source>
+<translation type="unfinished">Urdu</translation>
+</message>
+<message>
+<source>Yiddish</source>
+<translation type="unfinished">Yiddish</translation>
+</message>
+<message>
+<source>Zulu</source>
+<translation type="unfinished">Zulu</translation>
+</message>
+<message>
+<source>Chinese Simplified</source>
+<translation type="unfinished">Chinese Simplified</translation>
+</message>
+<message>
+<source>Chinese Traditional</source>
+<translation type="unfinished">Chinese Traditional</translation>
+</message>
+<message>
+<source>Arabic</source>
+<translation type="unfinished">Arabic</translation>
+</message>
+<message>
+<source>Search for language</source>
+<translation type="unfinished">Search for language</translation>
+</message>
+<message>
+<source>System tray</source>
+<translation type="unfinished">System tray</translation>
+</message>
+<message>
+<source>You need to restart the application to let this setting take effect</source>
+<translation type="unfinished">You need to restart the application to let this setting take effect</translation>
+</message>
+<message>
+<source>Show system tray icon</source>
+<translation type="unfinished">Show system tray icon</translation>
+</message>
+<message>
+<source>Start application hidden</source>
+<translation type="unfinished">Start application hidden</translation>
+</message>
+<message>
+<source>Interface style</source>
+<translation type="unfinished">Interface style</translation>
+</message>
+<message>
+<source>Icons</source>
+<translation type="unfinished">Icons</translation>
+</message>
+<message>
+<source>Hide icons in menus as well as the "Find action" dialog. Requires restart to take effect</source>
+<translation type="unfinished">Hide icons in menus as well as the "Find action" dialog. Requires restart to take effect</translation>
+</message>
+<message>
+<source>Hide menu icons</source>
+<translation type="unfinished">Hide menu icons</translation>
+</message>
+<message>
+<source>Item sizes in the main window</source>
+<translation type="unfinished">Item sizes in the main window</translation>
+</message>
+<message>
+<source>List and tree item height:</source>
+<translation type="unfinished">List and tree item height:</translation>
+</message>
+<message>
+<source>Toolbar icon size:</source>
+<translation type="unfinished">Toolbar icon size:</translation>
+</message>
+<message>
+<source>Reset the icon size</source>
+<translation type="unfinished">Reset the icon size</translation>
+</message>
+<message>
+<source>Reset the item height</source>
+<translation type="unfinished">Reset the item height</translation>
+</message>
+<message>
+<source>Override interface font size</source>
+<translation type="unfinished">Override interface font size</translation>
+</message>
+<message>
+<source>Interface font size:</source>
+<translation type="unfinished">Interface font size:</translation>
+</message>
+<message>
+<source>Override interface scaling factor</source>
+<translation type="unfinished">Override interface scaling factor</translation>
+</message>
+<message>
+<source>Interface scaling factor:</source>
+<translation type="unfinished">Interface scaling factor:</translation>
+</message>
+<message>
+<source>Status bar</source>
+<translation type="unfinished">Status bar</translation>
+</message>
+<message>
+<source>Show note path</source>
+<translation type="unfinished">Show note path</translation>
+</message>
+<message>
+<source>Only show relative note path</source>
+<translation type="unfinished">Only show relative note path</translation>
+</message>
+<message>
+<source>Distraction free mode</source>
+<translation type="unfinished">Distraction free mode</translation>
+</message>
+<message>
+<source>Open distraction free mode in full-screen</source>
+<translation type="unfinished">Open distraction free mode in full-screen</translation>
+</message>
+<message>
+<source>Hide status bar in distraction free mode</source>
+<translation type="unfinished">Hide status bar in distraction free mode</translation>
+</message>
+<message>
+<source>Menu bar</source>
+<translation type="unfinished">Menu bar</translation>
+</message>
+<message>
+<source>Show menu bar item</source>
+<translation type="unfinished">Show menu bar item</translation>
+</message>
+<message>
+<source>Automatic (needs restart)</source>
+<translation type="unfinished">Automatic (needs restart)</translation>
+</message>
+<message>
+<source>If you had this setting enabled, you now need to restart the application manually so the previous environment variable that overrides the scale factor is not in your environment again.</source>
+<translation type="unfinished">If you had this setting enabled, you now need to restart the application manually so the previous environment variable that overrides the scale factor is not in your environment again.</translation>
 </message>
 </context>
 <context>
@@ -1385,93 +3557,371 @@
 </message>
 </context>
 <context>
-<name>LayoutWidget</name>
+<name>LanguageToolChecker</name>
 <message>
-<source>Use layout</source>
-<translation>Koristi izgled</translation>
+<source>LanguageTool is unavailable: %1</source>
+<translation type="unfinished">LanguageTool is unavailable: %1</translation>
+</message>
+</context>
+<context>
+<name>LanguageToolClient</name>
+<message>
+<source>Invalid LanguageTool server URL</source>
+<translation type="unfinished">Invalid LanguageTool server URL</translation>
+</message>
+</context>
+<context>
+<name>LanguageToolSettingsWidget</name>
+<message>
+<source>LanguageTool</source>
+<translation type="unfinished">LanguageTool</translation>
 </message>
 <message>
-<source>Keep in mind that workspaces that demand that there is no central widget will not work properly if the central widget is enabled.</source>
-<translation>Imajte na umu da radni prostori koji zahtijevaju nepostojanje središnjeg widgeta neće raditi ispravno ako je središnji widget omogućen.</translation>
+<source>Enable grammar and style checking with LanguageTool</source>
+<translation type="unfinished">Enable grammar and style checking with LanguageTool</translation>
 </message>
 <message>
-<source>Use new layout</source>
-<translation>Koristi novi izgled</translation>
+<source>Server URL:</source>
+<translation type="unfinished">Server URL:</translation>
 </message>
 <message>
-<source>Do you want to use the selected layout?</source>
-<translation>Želite li koristiti izabrani raspored?</translation>
+<source>Test Connection</source>
+<translation type="unfinished">Test Connection</translation>
 </message>
 <message>
-<source>The application will be restarted afterward.</source>
-<translation>Nakon toga aplikacija će se ponovno pokrenuti.</translation>
+<source>Language:</source>
+<translation type="unfinished">Language:</translation>
+</message>
+<message>
+<source>API key:</source>
+<translation type="unfinished">API key:</translation>
+</message>
+<message>
+<source>Optional premium or cloud API key</source>
+<translation type="unfinished">Optional premium or cloud API key</translation>
+</message>
+<message>
+<source>Check delay:</source>
+<translation type="unfinished">Check delay:</translation>
+</message>
+<message>
+<source> ms</source>
+<translation type="unfinished"> ms</translation>
+</message>
+<message>
+<source>Categories:</source>
+<translation type="unfinished">Categories:</translation>
+</message>
+<message>
+<source>Spelling</source>
+<translation type="unfinished">Spelling</translation>
+</message>
+<message>
+<source>Grammar</source>
+<translation type="unfinished">Grammar</translation>
+</message>
+<message>
+<source>Style</source>
+<translation type="unfinished">Style</translation>
+</message>
+<message>
+<source>Punctuation</source>
+<translation type="unfinished">Punctuation</translation>
+</message>
+<message>
+<source>Typography</source>
+<translation type="unfinished">Typography</translation>
+</message>
+<message>
+<source>Ignored:</source>
+<translation type="unfinished">Ignored:</translation>
+</message>
+<message>
+<source>Reset all ignored LanguageTool rules so they are checked again</source>
+<translation type="unfinished">Reset all ignored LanguageTool rules so they are checked again</translation>
+</message>
+<message>
+<source>Reset ignored rules</source>
+<translation type="unfinished">Reset ignored rules</translation>
+</message>
+<message>
+<source>Reset all ignored words so they are checked by LanguageTool again</source>
+<translation type="unfinished">Reset all ignored words so they are checked by LanguageTool again</translation>
+</message>
+<message>
+<source>Reset ignored words</source>
+<translation type="unfinished">Reset ignored words</translation>
+</message>
+<message>
+<source>Auto-detect</source>
+<translation type="unfinished">Auto-detect</translation>
+</message>
+<message>
+<source>LanguageTool connection successful.</source>
+<translation type="unfinished">LanguageTool connection successful.</translation>
+</message>
+<message>
+<source>LanguageTool connection failed: %1</source>
+<translation type="unfinished">LanguageTool connection failed: %1</translation>
+</message>
+<message>
+<source>There are no ignored rules to reset.</source>
+<translation type="unfinished">There are no ignored rules to reset.</translation>
+</message>
+<message numerus="yes">
+<source>Reset %n ignored rule(s)?</source>
+<translation type="unfinished">
+<numerusform>Reset %n ignored rule(s)?</numerusform>
+<numerusform>Reset %n ignored rule(s)?</numerusform>
+<numerusform>Reset %n ignored rule(s)?</numerusform>
+</translation>
+</message>
+<message>
+<source>All ignored rules have been reset.</source>
+<translation type="unfinished">All ignored rules have been reset.</translation>
+</message>
+<message>
+<source>There are no ignored words to reset.</source>
+<translation type="unfinished">There are no ignored words to reset.</translation>
+</message>
+<message numerus="yes">
+<source>Reset %n ignored word(s)?</source>
+<translation type="unfinished">
+<numerusform>Reset %n ignored word(s)?</numerusform>
+<numerusform>Reset %n ignored word(s)?</numerusform>
+<numerusform>Reset %n ignored word(s)?</numerusform>
+</translation>
+</message>
+<message>
+<source>All ignored words have been reset.</source>
+<translation type="unfinished">All ignored words have been reset.</translation>
+</message>
+</context>
+<context>
+<name>LayoutManager</name>
+<message>
+<source>Layouts</source>
+<translation type="unfinished">Layouts</translation>
+</message>
+<message>
+<source>full</source>
+<comment>full layout</comment>
+<translation type="unfinished">full</translation>
+</message>
+<message>
+<source>minimal</source>
+<comment>minimal layout</comment>
+<translation type="unfinished">minimal</translation>
+</message>
+<message>
+<source>Create new layout</source>
+<translation type="unfinished">Create new layout</translation>
+</message>
+<message>
+<source>Layout name:</source>
+<translation type="unfinished">Layout name:</translation>
+</message>
+<message>
+<source>Remove current layout</source>
+<translation type="unfinished">Remove current layout</translation>
+</message>
+<message>
+<source>Remove the current layout?</source>
+<translation type="unfinished">Remove the current layout?</translation>
+</message>
+<message>
+<source>Rename layout</source>
+<translation type="unfinished">Rename layout</translation>
+</message>
+</context>
+<context>
+<name>LayoutPresetWidget</name>
+<message>
+<source>Use preset</source>
+<translation type="unfinished">Use preset</translation>
+</message>
+<message>
+<source>Use new layout preset</source>
+<translation type="unfinished">Use new layout preset</translation>
+</message>
+<message>
+<source>Do you want to use the selected layout preset?</source>
+<translation type="unfinished">Do you want to use the selected layout preset?</translation>
 </message>
 <message>
 <source>Minimal</source>
-<comment>Layout name</comment>
-<translation>Minimalno</translation>
+<comment>Layout preset name</comment>
+<translation type="unfinished">Minimal</translation>
 </message>
 <message>
 <source>Full</source>
-<comment>Layout name</comment>
-<translation>Potpuno</translation>
+<comment>Layout preset name</comment>
+<translation type="unfinished">Full</translation>
 </message>
 <message>
 <source>Preview only</source>
-<comment>Layout name</comment>
-<translation>Samo pregled</translation>
+<comment>Layout preset name</comment>
+<translation type="unfinished">Preview only</translation>
 </message>
 <message>
 <source>Full vertical</source>
-<comment>Layout name</comment>
-<translation>Potpuno vertikalno</translation>
+<comment>Layout preset name</comment>
+<translation type="unfinished">Full vertical</translation>
 </message>
 <message>
 <source>Single column</source>
-<comment>Layout name</comment>
-<translation>Jedan stupac</translation>
+<comment>Layout preset name</comment>
+<translation type="unfinished">Single column</translation>
 </message>
 <message>
 <source>The note edit panel is the central widget that will be resized automatically.</source>
-<comment>Layout description</comment>
-<translation>Ploča za uređivanje bilješki je središnji widget koji će se automatski promijeniti.</translation>
+<comment>Layout preset description</comment>
+<translation type="unfinished">The note edit panel is the central widget that will be resized automatically.</translation>
 </message>
 <message>
 <source>Because of this there is no central widget that will be resized automatically.</source>
-<comment>Layout description</comment>
-<translation>Zato ne postoji središnji widget koji se automatski mijenja.</translation>
+<comment>Layout preset description</comment>
+<translation type="unfinished">Because of this there is no central widget that will be resized automatically.</translation>
+</message>
+<message>
+<source>The note preview panel is the central widget that will be resized automatically.</source>
+<comment>Layout preset description</comment>
+<translation type="unfinished">The note preview panel is the central widget that will be resized automatically.</translation>
 </message>
 <message>
 <source>Just the note list on the left and the note edit panel on the right are enabled by default.</source>
-<comment>Layout description</comment>
-<translation>Samo su popis bilješki s lijeve strane i ploča za uređivanje bilješke s desne strane omogućeni prema zadanim postavkama.</translation>
+<comment>Layout preset description</comment>
+<translation type="unfinished">Just the note list on the left and the note edit panel on the right are enabled by default.</translation>
 </message>
 <message>
 <source>Most of the panels, like the note list on the left, the tagging panels, the note edit panel in the center and the preview panel on the right are enabled by default.</source>
-<comment>Layout description</comment>
-<translation>Većina panela, poput popisa bilješki s lijeve strane, ploče za označavanje, ploče za uređivanje bilješki u sredini i ploče za pregled s desne strane omogućene su prema zadanim postavkama.</translation>
+<comment>Layout preset description</comment>
+<translation type="unfinished">Most of the panels, like the note list on the left, the tagging panels, the note edit panel in the center and the preview panel on the right are enabled by default.</translation>
 </message>
 <message>
-<source>Most of the panels, like the note list on the left, the tagging panels, and only the preview panel on the right are enabled by default. You will need another workspace to actually edit notes!</source>
-<comment>Layout description</comment>
-<translation>Većina ploča, poput popisa bilješki s lijeve strane, ploče za označavanje i ploče za pregled s desne strane omogućena je prema zadanim postavkama. Za uređivanje bilješki potreban je drugi radni prostor!</translation>
+<source>Most of the panels, like the note list on the left, the tagging panels, and only the preview panel on the right are enabled by default. You will need another layout to actually edit notes!</source>
+<comment>Layout preset description</comment>
+<translation type="unfinished">Most of the panels, like the note list on the left, the tagging panels, and only the preview panel on the right are enabled by default. You will need another layout to actually edit notes!</translation>
 </message>
 <message>
 <source>Most of the panels, like the note list on the left, the tagging panels, the note edit panel on the right and the preview panel on top of the note edit panel are enabled by default.</source>
-<comment>Layout description</comment>
-<translation>Većina panela, poput popisa bilješki s lijeve strane, ploča za označavanje, ploče za uređivanje bilješki s desne strane i ploče za pregled na vrhu ploče za uređivanje omogućena je prema zadanim postavkama.</translation>
+<comment>Layout preset description</comment>
+<translation type="unfinished">Most of the panels, like the note list on the left, the tagging panels, the note edit panel on the right and the preview panel on top of the note edit panel are enabled by default.</translation>
 </message>
 <message>
 <source>Tiny one column layout with note search, note list and note edit on top of each other.</source>
-<comment>Layout description</comment>
-<translation>Maleni izgled jednog stupca za pretraživanje, popisa bilješki i uređivanja bilješki jednih nad drugima.</translation>
+<comment>Layout preset description</comment>
+<translation type="unfinished">Tiny one column layout with note search, note list and note edit on top of each other.</translation>
+</message>
+</context>
+<context>
+<name>LayoutsSettingsWidget</name>
+<message>
+<source>Layouts</source>
+<translation type="unfinished">Layouts</translation>
+</message>
+<message>
+<source>Create, rename, remove, and order layouts. Changes on this page are applied immediately.</source>
+<translation type="unfinished">Create, rename, remove, and order layouts. Changes on this page are applied immediately.</translation>
+</message>
+<message>
+<source>Add from current</source>
+<translation type="unfinished">Add from current</translation>
+</message>
+<message>
+<source>Creates a new layout by copying the current panel and toolbar arrangement, panel visibility, and central-widget setting. The new layout becomes active immediately.</source>
+<translation type="unfinished">Creates a new layout by copying the current panel and toolbar arrangement, panel visibility, and central-widget setting. The new layout becomes active immediately.</translation>
+</message>
+<message>
+<source>Add from preset...</source>
+<translation type="unfinished">Add from preset...</translation>
+</message>
+<message>
+<source>Opens the layout preset selector in a new dialog</source>
+<translation type="unfinished">Opens the layout preset selector in a new dialog</translation>
+</message>
+<message>
+<source>Switch to selected</source>
+<translation type="unfinished">Switch to selected</translation>
+</message>
+<message>
+<source>Switches to the selected layout</source>
+<translation type="unfinished">Switches to the selected layout</translation>
+</message>
+<message>
+<source>Remove</source>
+<translation type="unfinished">Remove</translation>
+</message>
+<message>
+<source>Rename</source>
+<translation type="unfinished">Rename</translation>
+</message>
+<message>
+<source>Move up</source>
+<translation type="unfinished">Move up</translation>
+</message>
+<message>
+<source>Move down</source>
+<translation type="unfinished">Move down</translation>
+</message>
+<message>
+<source>Selected layout</source>
+<translation type="unfinished">Selected layout</translation>
+</message>
+<message>
+<source>Create layout from preset</source>
+<translation type="unfinished">Create layout from preset</translation>
+</message>
+<message>
+<source>Create a new layout from a built-in preset. Panel positions can be changed after unlocking panels.</source>
+<translation type="unfinished">Create a new layout from a built-in preset. Panel positions can be changed after unlocking panels.</translation>
+</message>
+<message>
+<source>Add layout</source>
+<translation type="unfinished">Add layout</translation>
+</message>
+<message>
+<source>Central widget:</source>
+<translation type="unfinished">Central widget:</translation>
+</message>
+<message>
+<source>Note edit</source>
+<translation type="unfinished">Note edit</translation>
+</message>
+<message>
+<source>Note preview</source>
+<translation type="unfinished">Note preview</translation>
+</message>
+<message>
+<source>No central widget</source>
+<translation type="unfinished">No central widget</translation>
+</message>
+<message>
+<source>The central widget automatically uses the space left by the surrounding panels</source>
+<translation type="unfinished">The central widget automatically uses the space left by the surrounding panels</translation>
+</message>
+<message>
+<source>Layout name:</source>
+<translation type="unfinished">Layout name:</translation>
+</message>
+<message>
+<source>Remove layout</source>
+<translation type="unfinished">Remove layout</translation>
+</message>
+<message>
+<source>Remove the selected layout?</source>
+<translation type="unfinished">Remove the selected layout?</translation>
+</message>
+<message>
+<source>Rename layout</source>
+<translation type="unfinished">Rename layout</translation>
 </message>
 </context>
 <context>
 <name>LinkDialog</name>
 <message>
-<source>Link an url or note</source>
-<translation>Povezivanje sa URL ili bilješkom</translation>
+<source>Link to a URL or note</source>
+<translation>Poveznica na URL ili bilješku</translation>
 </message>
 <message>
 <source>Enter URL</source>
@@ -1486,12 +3936,36 @@
 <translation>Odaberite lokalnu datoteku ili direktorij s poveznicom</translation>
 </message>
 <message>
+<source>Clear link name and fetch title of webpage again</source>
+<translation>Izbriši ime poveznice i ponovo dohvati naslov web stranice</translation>
+</message>
+<message>
 <source>Note</source>
 <translation>Bilješka</translation>
 </message>
 <message>
+<source>Folder</source>
+<translation>Mapa</translation>
+</message>
+<message>
+<source>Tags</source>
+<translation type="unfinished">Tags</translation>
+</message>
+<message>
+<source>Modified</source>
+<translation>Promijenjeno</translation>
+</message>
+<message>
 <source>Search for a heading to link to</source>
 <translation>Potražite naslov za povezivanje</translation>
+</message>
+<message>
+<source>Insert the link as a wiki-style link ([[Note Name]]) instead of a Markdown link</source>
+<translation type="unfinished">Insert the link as a wiki-style link ([[Note Name]]) instead of a Markdown link</translation>
+</message>
+<message>
+<source>Create wiki-style link ([[...]])</source>
+<translation type="unfinished">Create wiki-style link ([[...]])</translation>
 </message>
 <message>
 <source>Enter the name of the link (optional)</source>
@@ -1520,6 +3994,22 @@
 <message>
 <source>Select directory to link to</source>
 <translation>Odaberite direktorij koji želite povezati</translation>
+</message>
+<message>
+<source>Select file to link to (relative)</source>
+<translation>Odaberi datoteku na koju poveznica ukazuje (relativno)</translation>
+</message>
+<message>
+<source>Select file to link to (absolute)</source>
+<translation>Odaberi datoteku na koju poveznica ukazuje (apsolutno)</translation>
+</message>
+<message>
+<source>Select directory to link to (relative)</source>
+<translation>Odaberi direktorij na koju poveznica ukazuje (relativno)</translation>
+</message>
+<message>
+<source>Select directory to link to (absolute)</source>
+<translation>Odaberi direktorij na koju poveznica ukazuje (apsolutno)</translation>
 </message>
 </context>
 <context>
@@ -1554,7 +4044,7 @@
 </message>
 <message>
 <source>Remove selected notes</source>
-<translation>Obriši odabrane bilješke</translation>
+<translation>Ukloni odabrane bilješke</translation>
 </message>
 <message>
 <source>File will be restored to: %1</source>
@@ -1569,7 +4059,7 @@
 <translation>
 <numerusform>Vrati &lt;strong&gt;%n&lt;/strong&gt; odabranu bilješku?</numerusform>
 <numerusform>Želite li vratiti &lt;strong&gt;%n &lt;/strong&gt; odabrane bilješke?</numerusform>
-<numerusform>Želite li vratiti &lt;strong&gt;%n &lt;/strong&gt; odabrane bilješke?</numerusform>
+<numerusform>Obnoviti &lt;strong&gt;%n &lt;/strong&gt; odabranih bilješki?</numerusform>
 </translation>
 </message>
 <message>
@@ -1579,17 +4069,17 @@
 <message numerus="yes">
 <source>&lt;strong&gt;%n&lt;/strong&gt; note(s) were restored</source>
 <translation>
-<numerusform>&lt;strong&gt;%n &lt;/strong&gt; bilješki je vraćeno</numerusform>
-<numerusform>&lt;strong&gt;%n &lt;/strong&gt; bilješki je vraćeno</numerusform>
-<numerusform>&lt;strong&gt;%n &lt;/strong&gt; bilješki je vraćeno</numerusform>
+<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješka je obnovljena</numerusform>
+<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješke su obnovljene</numerusform>
+<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješki je obnovljeno</numerusform>
 </translation>
 </message>
 <message numerus="yes">
 <source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?</source>
 <translation>
-<numerusform>Obriši &lt;strong&gt;%n&lt;/strong&gt; odabranu bilješku?</numerusform>
+<numerusform>Ukloniti &lt;strong&gt;%n&lt;/strong&gt; odabranu bilješku?</numerusform>
 <numerusform>Ukloniti &lt;strong&gt;%n&lt;/strong&gt; odabrane bilješke?</numerusform>
-<numerusform>Ukloniti &lt;strong&gt;%n&lt;/strong&gt; odabrane bilješke?</numerusform>
+<numerusform>Ukloniti &lt;strong&gt;%n&lt;/strong&gt; odabranih bilješki?</numerusform>
 </translation>
 </message>
 <message>
@@ -1599,10 +4089,56 @@
 <message numerus="yes">
 <source>&lt;strong&gt;%n&lt;/strong&gt; note(s) were removed</source>
 <translation>
-<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješki je uklonjeno</numerusform>
-<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješke uklonjene su</numerusform>
-<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješke uklonjene su</numerusform>
+<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješka je uklonjena</numerusform>
+<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješke su uklonjene</numerusform>
+<numerusform>&lt;strong&gt;%n&lt;/strong&gt; bilješki su uklonjene</numerusform>
 </translation>
+</message>
+</context>
+<context>
+<name>LocalTrashSettingsWidget</name>
+<message>
+<source>Trash</source>
+<translation>Bacanje u smeće</translation>
+</message>
+<message>
+<source>Local trash settings</source>
+<translation type="unfinished">Local trash settings</translation>
+</message>
+<message>
+<source>You might run into sync troubles with older versions of Nextcloud / ownCloud sync when going far below 10 sec.
+Just test yourself if you get sync conflicts and set a higher value if so.</source>
+<translation type="unfinished">You might run into sync troubles with older versions of Nextcloud / ownCloud sync when going far below 10 sec.
+Just test yourself if you get sync conflicts and set a higher value if so.</translation>
+</message>
+<message>
+<source>Remove trashed notes after:</source>
+<translation type="unfinished">Remove trashed notes after:</translation>
+</message>
+<message>
+<source> days</source>
+<extracomment>seconds</extracomment>
+<translation type="unfinished"> days</translation>
+</message>
+<message>
+<source>Automatically remove trashed notes after a certain time</source>
+<translation type="unfinished">Automatically remove trashed notes after a certain time</translation>
+</message>
+<message>
+<source>No trashing</source>
+<translation>Bez bacanja u smeće</translation>
+</message>
+<message>
+<source>System trash</source>
+<translation>Smeće sustava</translation>
+</message>
+<message>
+<source>Local trash</source>
+<translation>Lokalno smeće</translation>
+</message>
+<message>
+<source>Enable local trash to keep a copy of trashed notes</source>
+<translation type="unfinished">Enable local trash to keep a copy of trashed notes</translation>
 </message>
 </context>
 <context>
@@ -1667,6 +4203,18 @@
 <translation>Pronađi navigacijsku stavku</translation>
 </message>
 <message>
+<source>Headings</source>
+<translation>Naslovi</translation>
+</message>
+<message>
+<source>Files</source>
+<translation type="unfinished">Files</translation>
+</message>
+<message>
+<source>Backlinks</source>
+<translation>Poveznice</translation>
+</message>
+<message>
 <source>Add a tag to the current note</source>
 <translation>Dodaj oznaku trenutnoj bilješci</translation>
 </message>
@@ -1695,6 +4243,14 @@
 <translation>Širina urednika</translation>
 </message>
 <message>
+<source>Layouts</source>
+<translation type="unfinished">Layouts</translation>
+</message>
+<message>
+<source>Layout</source>
+<translation type="unfinished">Layout</translation>
+</message>
+<message>
 <source>Custom actions</source>
 <translation>Korisničke akcije</translation>
 </message>
@@ -1705,10 +4261,6 @@
 <message>
 <source>&amp;Quit</source>
 <translation>&amp;Završi</translation>
-</message>
-<message>
-<source>&amp;Find note</source>
-<translation>&amp;Nađi bilješku</translation>
 </message>
 <message>
 <source>&amp;Remove current note</source>
@@ -1795,10 +4347,6 @@
 <translation>Nađi ili stvori bilješku</translation>
 </message>
 <message>
-<source>Add a tag to the selected notes</source>
-<translation>Dodaj oznaku odabranim bilješkama</translation>
-</message>
-<message>
 <source>New tag</source>
 <translation>Nova oznaka</translation>
 </message>
@@ -1809,6 +4357,14 @@
 <message>
 <source>Import</source>
 <translation>Import</translation>
+</message>
+<message>
+<source>Store note bookmark</source>
+<translation type="unfinished">Store note bookmark</translation>
+</message>
+<message>
+<source>Go to note bookmark</source>
+<translation type="unfinished">Go to note bookmark</translation>
 </message>
 <message>
 <source>Print</source>
@@ -1833,6 +4389,10 @@
 <message>
 <source>Format</source>
 <translation>Oblikuj</translation>
+</message>
+<message>
+<source>Select</source>
+<translation type="unfinished">Select</translation>
 </message>
 <message>
 <source>Extra</source>
@@ -1860,7 +4420,19 @@
 </message>
 <message>
 <source>AI model</source>
-<translation type="unfinished">AI model</translation>
+<translation>Model UI-a</translation>
+</message>
+<message>
+<source>Note text edit</source>
+<translation type="unfinished">Note text edit</translation>
+</message>
+<message>
+<source>List operations</source>
+<translation type="unfinished">List operations</translation>
+</message>
+<message>
+<source>Markdown operations</source>
+<translation type="unfinished">Markdown operations</translation>
 </message>
 <message>
 <source>To&amp;do</source>
@@ -1869,10 +4441,6 @@
 <message>
 <source>&amp;Window</source>
 <translation>&amp;Prozor</translation>
-</message>
-<message>
-<source>Workspaces</source>
-<translation>Radne površine</translation>
 </message>
 <message>
 <source>Panels</source>
@@ -1886,10 +4454,6 @@
 <source>Show</source>
 <extracomment>To show or hide stuff</extracomment>
 <translation>Prikaži</translation>
-</message>
-<message>
-<source>Workspace</source>
-<translation>Radna površina</translation>
 </message>
 <message>
 <source>Jump to</source>
@@ -1908,6 +4472,10 @@
 <translation>Postavi mape/podmape za bilješke</translation>
 </message>
 <message>
+<source>&amp;Find text in notes</source>
+<translation>&amp;Pronađi tekst u bilješkama</translation>
+</message>
+<message>
 <source>About &amp;QOwnNotes…</source>
 <translation>O &amp;QOwnNotes-u…</translation>
 </message>
@@ -1918,6 +4486,14 @@
 <message>
 <source>Show remote trash</source>
 <translation>Prikaži vanjsko smeće</translation>
+</message>
+<message>
+<source>Select enclosed &amp;text</source>
+<translation type="unfinished">Select enclosed &amp;text</translation>
+</message>
+<message>
+<source>Select the innermost text around the current cursor position</source>
+<translation type="unfinished">Select the innermost text around the current cursor position</translation>
 </message>
 <message>
 <source>Insert text &amp;link</source>
@@ -1934,6 +4510,30 @@
 <message>
 <source>Forward in note history</source>
 <translation>Naprijed u povijesti bilješke</translation>
+</message>
+<message>
+<source>Previous &amp;heading</source>
+<translation>Prethodni &amp;naslov</translation>
+</message>
+<message>
+<source>Next heading</source>
+<translation>Sljedeći naslov</translation>
+</message>
+<message>
+<source>Fold all headings</source>
+<translation type="unfinished">Fold all headings</translation>
+</message>
+<message>
+<source>Fold all headings in the current note</source>
+<translation type="unfinished">Fold all headings in the current note</translation>
+</message>
+<message>
+<source>Unfold all headings</source>
+<translation type="unfinished">Unfold all headings</translation>
+</message>
+<message>
+<source>Unfold all headings in the current note</source>
+<translation type="unfinished">Unfold all headings in the current note</translation>
 </message>
 <message>
 <source>Show shortcuts</source>
@@ -2084,16 +4684,16 @@
 <translation>Otvorite #qownnotes IRC (Kiwi) kanal, morate ostati online da biste dobili odgovor</translation>
 </message>
 <message>
+<source>Use softwrap in note editor</source>
+<translation type="unfinished">Use softwrap in note editor</translation>
+</message>
+<message>
 <source>Cycle text case</source>
 <translation>Promijeni verzal teksta</translation>
 </message>
 <message>
 <source>Show note list under tag panel</source>
 <translation>Prikaži popis bilješki ispod ploče s oznakama</translation>
-</message>
-<message>
-<source>Find notes in all tags / subfolders</source>
-<translation>Pronađi bilješke u svim oznakama / podmapama</translation>
 </message>
 <message>
 <source>Import notes from text files</source>
@@ -2113,20 +4713,32 @@
 <translation>Otključaj kontrolnu ploču</translation>
 </message>
 <message>
-<source>Remove current workspace</source>
-<translation>Ukloni izabrani radni prostor</translation>
+<source>Reattach floating panels</source>
+<translation>Ponovo prikvači plutajuće ploče</translation>
 </message>
 <message>
-<source>Add new workspace</source>
-<translation>Dodaj novi radni prostor</translation>
+<source>Reattaches all floating panels</source>
+<translation>Ponovo prikvače sve plutajuće ploče</translation>
 </message>
 <message>
-<source>Rename current workspace</source>
-<translation>Preimenuj izabrani radni prostor</translation>
+<source>Remove current layout</source>
+<translation type="unfinished">Remove current layout</translation>
 </message>
 <message>
-<source>Switch to previous workspace</source>
-<translation>Prebaci na prethodni radni prostor</translation>
+<source>Add new layout</source>
+<translation type="unfinished">Add new layout</translation>
+</message>
+<message>
+<source>Rename current layout</source>
+<translation type="unfinished">Rename current layout</translation>
+</message>
+<message>
+<source>Switch to previous layout</source>
+<translation type="unfinished">Switch to previous layout</translation>
+</message>
+<message>
+<source>Manage layouts</source>
+<translation type="unfinished">Manage layouts</translation>
 </message>
 <message>
 <source>Show all panels</source>
@@ -2141,12 +4753,24 @@
 <translation>Pronađi akciju na izborniku</translation>
 </message>
 <message>
+<source>Redo last action</source>
+<translation>Ponovi zadnju radnju</translation>
+</message>
+<message>
+<source>Redo the last action</source>
+<translation>Ponovi zadnju radnju</translation>
+</message>
+<message>
 <source>Insert table</source>
 <translation>Umetni tablicu</translation>
 </message>
 <message>
 <source>Insert block &amp;quote</source>
 <translation>Umetni &amp;citat blok</translation>
+</message>
+<message>
+<source>Insert checkbox list item</source>
+<translation type="unfinished">Insert checkbox list item</translation>
 </message>
 <message>
 <source>Search selected text on the web</source>
@@ -2183,6 +4807,10 @@
 <message>
 <source>Show note git versions</source>
 <translation>Prikaži git verzije bilješke</translation>
+</message>
+<message>
+<source>Show note git versions externally</source>
+<translation>Prikaži git verzije bilješki eksterno</translation>
 </message>
 <message>
 <source>Find scripts in script repository</source>
@@ -2253,6 +4881,14 @@
 <translation>Upravljajte rječnicima</translation>
 </message>
 <message>
+<source>Check grammar with LanguageTool</source>
+<translation type="unfinished">Check grammar with LanguageTool</translation>
+</message>
+<message>
+<source>Check grammar with Harper</source>
+<translation type="unfinished">Check grammar with Harper</translation>
+</message>
+<message>
 <source>Custom</source>
 <translation>Prilagođeno</translation>
 </message>
@@ -2281,8 +4917,84 @@
 <translation>Nova bilješka u novoj kartici</translation>
 </message>
 <message>
-<source>Toggle note stickiness of current tab</source>
-<translation>Uključite ljepljivost bilješke trenutne kartice</translation>
+<source>Toggle note pinning of current tab</source>
+<translation type="unfinished">Toggle note pinning of current tab</translation>
+</message>
+<message>
+<source>Store bookmark at slot 1</source>
+<translation type="unfinished">Store bookmark at slot 1</translation>
+</message>
+<message>
+<source>Store bookmark at slot 2</source>
+<translation type="unfinished">Store bookmark at slot 2</translation>
+</message>
+<message>
+<source>Store bookmark at slot 3</source>
+<translation type="unfinished">Store bookmark at slot 3</translation>
+</message>
+<message>
+<source>Store bookmark at slot 4</source>
+<translation type="unfinished">Store bookmark at slot 4</translation>
+</message>
+<message>
+<source>Store bookmark at slot 5</source>
+<translation type="unfinished">Store bookmark at slot 5</translation>
+</message>
+<message>
+<source>Store bookmark at slot 6</source>
+<translation type="unfinished">Store bookmark at slot 6</translation>
+</message>
+<message>
+<source>Store bookmark at slot 7</source>
+<translation type="unfinished">Store bookmark at slot 7</translation>
+</message>
+<message>
+<source>Store bookmark at slot 8</source>
+<translation type="unfinished">Store bookmark at slot 8</translation>
+</message>
+<message>
+<source>Store bookmark at slot 9</source>
+<translation type="unfinished">Store bookmark at slot 9</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 1</source>
+<translation type="unfinished">Go to bookmark at slot 1</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 2</source>
+<translation type="unfinished">Go to bookmark at slot 2</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 3</source>
+<translation type="unfinished">Go to bookmark at slot 3</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 4</source>
+<translation type="unfinished">Go to bookmark at slot 4</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 5</source>
+<translation type="unfinished">Go to bookmark at slot 5</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 6</source>
+<translation type="unfinished">Go to bookmark at slot 6</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 7</source>
+<translation type="unfinished">Go to bookmark at slot 7</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 8</source>
+<translation type="unfinished">Go to bookmark at slot 8</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 9</source>
+<translation type="unfinished">Go to bookmark at slot 9</translation>
+</message>
+<message>
+<source>Note bookmarks</source>
+<translation type="unfinished">Note bookmarks</translation>
 </message>
 <message>
 <source>Format text underline</source>
@@ -2314,7 +5026,7 @@
 </message>
 <message>
 <source>Insert Nextcloud Deck card link</source>
-<translation type="unfinished">Insert Nextcloud Deck card link</translation>
+<translation>Umetni poveznicu za Nextcloud Deck karticu</translation>
 </message>
 <message>
 <source>Copy absolute path of note</source>
@@ -2339,6 +5051,62 @@
 <message>
 <source>Enable AI support</source>
 <translation>Aktiviraj podršku za UI</translation>
+</message>
+<message>
+<source>Manage Nextcloud Deck cards</source>
+<translation>Upravljaj Nextcloud Deck karticama</translation>
+</message>
+<message>
+<source>Ctrl+Alt+D</source>
+<translation>Ctrl+Alt+D</translation>
+</message>
+<message>
+<source>Send clipboard</source>
+<translation>Pošalji međuspremnik</translation>
+</message>
+<message>
+<source>Send clipboard as text</source>
+<translation>Pošalji međuspremnik kao tekst</translation>
+</message>
+<message>
+<source>Toggle checkbox(es)</source>
+<translation type="unfinished">Toggle checkbox(es)</translation>
+</message>
+<message>
+<source>1. 2. 3. list</source>
+<translation type="unfinished">1. 2. 3. list</translation>
+</message>
+<message>
+<source>a. b. c. list</source>
+<translation type="unfinished">a. b. c. list</translation>
+</message>
+<message>
+<source>- list</source>
+<translation type="unfinished">- list</translation>
+</message>
+<message>
+<source>Create checkbox list</source>
+<translation type="unfinished">Create checkbox list</translation>
+</message>
+<message>
+<source>Clear list formatting</source>
+<translation type="unfinished">Clear list formatting</translation>
+</message>
+<message>
+<source>Order checkboxes</source>
+<translation type="unfinished">Order checkboxes</translation>
+</message>
+<message>
+<source>Increase heading depth</source>
+<translation type="unfinished">Increase heading depth</translation>
+</message>
+<message>
+<source>Decrease heading depth</source>
+<translation type="unfinished">Decrease heading depth</translation>
+</message>
+<message>
+<source>Copy code block</source>
+<translation type="unfinished">Copy code block</translation>
 </message>
 <message>
 <source>Use &amp;vertical preview layout</source>
@@ -2366,7 +5134,7 @@
 </message>
 <message>
 <source>Reload scripting engine</source>
-<translation>Ponovno učitaj skripting modul</translation>
+<translation>Ponovo učitaj sustav za implementiranje skripata</translation>
 </message>
 <message>
 <source>Manage stored image files</source>
@@ -2405,10 +5173,6 @@
 <translation>Umetni naslov iz naziva datoteke bilješke</translation>
 </message>
 <message>
-<source>Use softwrap in note editor and preview</source>
-<translation>Koristi prijelom u uređivaču bilješki i pregledu</translation>
-</message>
-<message>
 <source>Show status bar</source>
 <translation>Prikaži traku statusa</translation>
 </message>
@@ -2445,17 +5209,12 @@
 <translation>Donirajte</translation>
 </message>
 <message>
+<source>Find text in notes in all tags / subfolders</source>
+<translation>Pronađi tekst u bilješkama u svim oznakama / podmapama</translation>
+</message>
+<message>
 <source>Import notes from Evernote</source>
 <translation>Importiraj bilješke iz Evernote-a</translation>
-</message>
-<message>
-<source>Note was removed externally!</source>
-<translation>Bilješka je obrisana izvana!</translation>
-</message>
-<message>
-<source>Current note was removed outside of this application!
-Restore current note?</source>
-<translation>Odabrana bilješka je izbrisana izvan ovog programa! Povrat izabrane bilješke?</translation>
 </message>
 <message>
 <source>&amp;Cancel</source>
@@ -2474,84 +5233,12 @@ Restore current note?</source>
 <translation>nova verzija %1 dostupna</translation>
 </message>
 <message>
-<source>Abort</source>
-<translation>Otkaži</translation>
-</message>
-<message>
-<source>Loading notes…</source>
-<translation>Učitavanje bilješki…</translation>
-</message>
-<message>
-<source>Removed duplicate conflicted database: %1</source>
-<translation>Uklonjena je duplicirana konfliktna baza podataka: %1</translation>
-</message>
-<message>
-<source>Could not remove duplicate conflicted database: %1</source>
-<translation>Nemoguće ukloniti duplicirane konfliktne baze podataka: %1</translation>
-</message>
-<message>
-<source>Removed merged conflicted database: %1</source>
-<translation>Uklonjena spojena konfliktna baza podataka: %1</translation>
-</message>
-<message>
-<source>Could not remove merged conflicted database: %1</source>
-<translation>Nemoguće ukloniti spojene sukobljene baze podataka: %1</translation>
-</message>
-<message>
-<source>Delete conflicted database copies</source>
-<translation>Izbriši sukobljene kopije baze podataka</translation>
-</message>
-<message numerus="yes">
-<source>Removed %n conflicted database copies</source>
-<translation>
-<numerusform>Uklonjena je %n konfliktna kopija baze podataka</numerusform>
-<numerusform>Uklonjene su %n sukobljene kopije baze podataka</numerusform>
-<numerusform>Uklonjene su %n sukobljene kopije baze podataka</numerusform>
-</translation>
-</message>
-<message>
 <source>Please select the folder where your notes will get stored</source>
 <translation>Odaberite mapu u koju će bilješke biti spremljene</translation>
 </message>
 <message>
 <source>No folder was selected</source>
 <translation>Mapa nije izabrana</translation>
-</message>
-<message>
-<source>You have to select your ownCloud notes folder to make this software work!</source>
-<translation>Morate odabrati mapu ownCloud bilješki kako bi program radio!</translation>
-</message>
-<message>
-<source>&amp;Retry</source>
-<translation>&amp;Ponovi</translation>
-</message>
-<message>
-<source>&amp;Exit</source>
-<translation>&amp;Izlaz</translation>
-</message>
-<message>
-<source>Remove current note</source>
-<translation>&amp;Izbriši izabranu bilješku</translation>
-</message>
-<message>
-<source>Remove current note: &lt;strong&gt;%1&lt;/strong&gt;?</source>
-<translation>Izbriši izabranu bilješku: &lt;strong&gt;%1&lt;/strong&gt;?</translation>
-</message>
-<message>
-<source>Please enter the &lt;strong&gt;password&lt;/strong&gt; of this encrypted note.</source>
-<translation>Unesi &lt;strong&gt;lozinku&lt;/strong&gt; za enkriptiranu bilješku.</translation>
-</message>
-<message>
-<source>Note can't be decrypted!</source>
-<translation>Bilješku nije moguće dekodirati!</translation>
-</message>
-<message>
-<source>It seems that your password is not valid!</source>
-<translation>Čini se da lozinka nije valjana!</translation>
-</message>
-<message>
-<source>Remove selected notes</source>
-<translation>Izbriši odabrane bilješke</translation>
 </message>
 <message numerus="yes">
 <source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
@@ -2565,22 +5252,6 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <numerusform>Izbrisati izabrane bilješke &lt;strong&gt;%n&lt;/strong&gt;? Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali bi biti u mogućnosti povratiti ih odande.</numerusform>
 </translation>
 </message>
-<message>
-<source>Remove selected tags</source>
-<translation>Izbriši odabrane oznake</translation>
-</message>
-<message numerus="yes">
-<source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected tag(s)? No notes will be removed in this process.</source>
-<translation>
-<numerusform>Izbrisati &lt;strong&gt;%n&lt;/strong&gt; oznaku ? Nijedna bilješka neće biti uklonjena.</numerusform>
-<numerusform>&lt;strong&gt;%n&lt;/strong&gt; oznake ukloniti? Nijedna bilješka pritom neće biti uklonjena.</numerusform>
-<numerusform>&lt;strong&gt;%n&lt;/strong&gt; oznaku/oznake ukloniti? Nijedna bilješka pritom neće biti uklonjena.</numerusform>
-</translation>
-</message>
-<message>
-<source>Move selected notes</source>
-<translation>Premjesti odabrane bilješke</translation>
-</message>
 <message numerus="yes">
 <source>Move %n selected note(s) to &lt;strong&gt;%2&lt;/strong&gt;?</source>
 <translation>
@@ -2588,10 +5259,6 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <numerusform>Premjestiti %n odabrane bilješke u &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
 <numerusform>Premjestiti %n odabranih bilješki u &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
 </translation>
-</message>
-<message>
-<source>Copy selected notes</source>
-<translation>Kopiraj odabrane bilješke</translation>
 </message>
 <message numerus="yes">
 <source>Copy %n selected note(s) to &lt;strong&gt;%2&lt;/strong&gt;?</source>
@@ -2601,28 +5268,12 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <numerusform>Kopirati odabrane bilješke %n &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
 </translation>
 </message>
-<message>
-<source>Done</source>
-<translation>Gotovo</translation>
-</message>
 <message numerus="yes">
 <source>%n note(s) were copied to &lt;strong&gt;%2&lt;/strong&gt;.</source>
 <translation>
 <numerusform>%n bilješka kopirana na &lt;strong&gt;%2&lt;/strong&gt;.</numerusform>
 <numerusform>%n bilješke kopirane na &lt;strong&gt;%2&lt;/strong&gt;.</numerusform>
 <numerusform>%n bilješke kopirane na &lt;strong&gt;%2&lt;/strong&gt;.</numerusform>
-</translation>
-</message>
-<message>
-<source>Tag selected notes</source>
-<translation>Označi odabrane bilježke</translation>
-</message>
-<message numerus="yes">
-<source>Tag %n selected note(s) with &lt;strong&gt;%2&lt;/strong&gt;?</source>
-<translation>
-<numerusform>Označi %n odabranu bilješku s &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-<numerusform>Označiti %n odabrane bilješke s &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-<numerusform>Označiti %n odabrane bilješke s &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
 </translation>
 </message>
 <message>
@@ -2634,14 +5285,6 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>Da aktivirate promjene ponovno pokrenite aplikaciju.</translation>
 </message>
 <message>
-<source>Restart</source>
-<translation>Ponovno pokretanje</translation>
-</message>
-<message>
-<source>PDF files</source>
-<translation>PDF datoteke</translation>
-</message>
-<message>
 <source>Todo lists disabled!</source>
 <translation>Popisi zadataka onemogućeni!</translation>
 </message>
@@ -2649,45 +5292,30 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <source>You have disabled the todo lists.&lt;br /&gt;Please check your &lt;strong&gt;Todo&lt;/strong&gt; configuration in the settings!</source>
 <translation>Onemogućili ste popise zadataka. &lt;br /&gt; Provjerite svoju &lt;strong&gt; Zadatci&lt;/strong&gt; konfiguraciju u postavkama!</translation>
 </message>
-<message numerus="yes">
-<source>Found &lt;strong&gt;%n&lt;/strong&gt; occurrence(s) of any term of &lt;strong&gt;%1&lt;/strong&gt;</source>
-<translation>
-<numerusform>Pronađeno je &lt;strong&gt;%n&lt;/strong&gt; pojava bilo kojeg pojma &lt;strong&gt;%1 &lt;/strong&gt;</numerusform>
-<numerusform>Pronađeno je &lt;strong&gt;%n&lt;/strong&gt; pojave bilo kojeg pojma &lt;strong&gt;%1 &lt;/strong&gt;</numerusform>
-<numerusform>Pronađeno je &lt;strong&gt;%n&lt;/strong&gt; pojave bilo kojeg pojma &lt;strong&gt;%1 &lt;/strong&gt;</numerusform>
-</translation>
+<message>
+<source>File extension</source>
+<translation>Sufiks datoteke</translation>
 </message>
 <message>
-<source>Note folders</source>
-<translation>Mape s bilješkama</translation>
+<source>Extension of file attachment:</source>
+<translation>Sufiks priložene datoteke:</translation>
 </message>
 <message>
-<source>Note versions are currently loaded from your ownCloud server</source>
-<translation>Verzije bilješki se trenutno učitavaju s poslužitelja ownCloud</translation>
+<source>File base name</source>
+<translation>Osnovno ime datoteke</translation>
 </message>
 <message>
-<source>Trashed notes are currently loaded from your ownCloud server</source>
-<translation>Izbrisane bilješke trenutno se učitavaju s poslužitelja ownCloud</translation>
+<source>Base name of file attachment:</source>
+<translation>Osnovno ime priložene datoteke:</translation>
+</message>
+<message>
+<source>Leave empty for automatic name</source>
+<comment>Leave the base name empty for automatic name</comment>
+<translation>Ostavi prazno za automatsko ime</translation>
 </message>
 <message>
 <source>Inserted text as text attachment file</source>
 <translation>Umetnut je tekst kao tekstualni privitak</translation>
-</message>
-<message>
-<source>Your note will be decrypted and stored as plain text again. Keep in mind that the unencrypted note will possibly be synced to your server and sensitive text may be exposed!&lt;br /&gt;Do you want to decrypt your note?</source>
-<translation>Bilješka će biti dešifrirana i pohranjena kao čisti tekst. Imajte na umu da će dešifrirana bilješka vjerojatno biti sinkronizirana na poslužitelju i važan teskt možda bude izložen!&lt;br /&gt;Želite li dešifrirati bilješku?</translation>
-</message>
-<message>
-<source>Markdown files</source>
-<translation>Datoteke oznaka</translation>
-</message>
-<message>
-<source>Export attached files</source>
-<translation>Izvezi priložene datoteke</translation>
-</message>
-<message>
-<source>Do you also want to export media files and attachments of the note? Files may be overwritten in the destination folder!</source>
-<translation>Želiš li izvesti medijske datoteke i priložene bilješke? Datoteke će se možda prepisati u odredišnoj mapi!</translation>
 </message>
 <message>
 <source>Bookmarked note position at slot %1</source>
@@ -2696,6 +5324,10 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <message>
 <source>Jumped to bookmark position at slot %1</source>
 <translation>Skoči na oznaku na mjestu %1</translation>
+</message>
+<message>
+<source>Redo action: %1</source>
+<translation>Ponovi radnju: %1</translation>
 </message>
 <message>
 <source>Inserting image</source>
@@ -2729,55 +5361,69 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <numerusform>Neuspjelo kopiranje %n bilješki (vjerojatno već postoje)</numerusform>
 </translation>
 </message>
+<message numerus="yes">
+<source>Skipped inserting %n file(s) because the current note is read-only</source>
+<translation type="unfinished">
+<numerusform>Skipped inserting %n file(s) because the current note is read-only</numerusform>
+<numerusform>Skipped inserting %n file(s) because the current note is read-only</numerusform>
+<numerusform>Skipped inserting %n file(s) because the current note is read-only</numerusform>
+</translation>
+</message>
 <message>
 <source>Saving temporary image</source>
 <translation>Spremanje privremene slike</translation>
 </message>
 <message>
-<source>Ln %1, Col %2</source>
-<comment>Line / Column</comment>
-<translation type="unfinished">Ln %1, Col %2</translation>
+<source>Note folder does not exist!</source>
+<translation>Mapa bilješki ne postoji!</translation>
 </message>
 <message>
-<source>Line %1, Column %2</source>
-<translation type="unfinished">Line %1, Column %2</translation>
+<source>Note folder &lt;b&gt;%1&lt;/b&gt; with path &lt;b&gt;%2&lt;/b&gt; does not exist anymore!</source>
+<translation>Napomena: mapa &lt;b&gt;%1&lt;/b&gt; sa stazom &lt;b&gt;%2&lt;/b&gt; više ne postoji!</translation>
+</message>
+<message>
+<source>Git support is not enabled for the current note folder, do you want to enable it in the settings?</source>
+<translation>Git podrška nije uključena za trenutačnu mapu bilješki. Želiš li je uključiti u postavkama?</translation>
+</message>
+<message>
+<source>No versions available</source>
+<translation>Nijedna verzija nije dostupna</translation>
+</message>
+<message>
+<source>No versions are available for this note.</source>
+<translation>Nijedna verzija nije dostupna za ovu bilješku.</translation>
 </message>
 <message numerus="yes">
-<source>%n selected</source>
-<comment>Characters selected</comment>
+<source>%n script update(s) were installed</source>
 <translation type="unfinished">
-<numerusform>%n selected</numerusform>
-<numerusform>%n selected</numerusform>
-<numerusform>%n selected</numerusform>
+<numerusform>%n script update(s) were installed</numerusform>
+<numerusform>%n script update(s) were installed</numerusform>
+<numerusform>%n script update(s) were installed</numerusform>
 </translation>
-</message>
-<message>
-<source>Nextcloud Deck support disabled!</source>
-<translation type="unfinished">Nextcloud Deck support disabled!</translation>
-</message>
-<message>
-<source>Nextcloud Deck support is not enabled or the settings are invalid.&lt;br /&gt;Please check your &lt;strong&gt;Nextcloud&lt;/strong&gt; configuration in the settings!</source>
-<translation type="unfinished">Nextcloud Deck support is not enabled or the settings are invalid.&lt;br /&gt;Please check your &lt;strong&gt;Nextcloud&lt;/strong&gt; configuration in the settings!</translation>
 </message>
 <message>
 <source>Note path '%1' was copied to the clipboard</source>
 <translation>Putanja bilješke „%1” je kopirana u međuspremnik</translation>
 </message>
 <message>
-<source>AI backends</source>
-<translation type="unfinished">AI backends</translation>
+<source>Note filename '%1' was copied to the clipboard</source>
+<translation>Ime datoteke bilješke „%1” je kopirana u međuspremnik</translation>
 </message>
 <message>
-<source>AI models</source>
-<translation type="unfinished">AI models</translation>
+<source>Clipboard sent successfully</source>
+<translation>Međuspremnik je uspješno poslan</translation>
 </message>
 <message>
-<source>AI backend selector</source>
-<translation type="unfinished">AI backend selector</translation>
+<source>Failed to send clipboard</source>
+<translation>Neuspjelo slanje međuspremnika</translation>
 </message>
 <message>
-<source>AI model selector</source>
-<translation type="unfinished">AI model selector</translation>
+<source>Clipboard text sent successfully</source>
+<translation>Tekst međuspremnika je uspješno poslan</translation>
+</message>
+<message>
+<source>Failed to send clipboard text</source>
+<translation>Neuspjelo slanje teksta međuspremnika</translation>
 </message>
 <message>
 <source>Temporary file can't be opened</source>
@@ -2793,50 +5439,8 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>Vrati veličinu fonta na %1 pt</translation>
 </message>
 <message>
-<source>Remove tag '%1' from the current note</source>
-<translation>Ukloni oznaku "%1" iz trenutačne bilješke</translation>
-</message>
-<message>
-<source>Remove tag '%1' from the selected notes</source>
-<translation>Ukloni oznaku "%1" iz odabranih bilješki</translation>
-</message>
-<message>
-<source>Rename tag</source>
-<translation>Preimenuj oznaku</translation>
-</message>
-<message>
-<source>Assign color</source>
-<translation>Dodijeli boju</translation>
-</message>
-<message>
-<source>Disable color</source>
-<translation>Isključi boju</translation>
-</message>
-<message>
-<source>&amp;Move tags to…</source>
-<translation>&amp;Premjesti oznake u…</translation>
-</message>
-<message>
-<source>Move to the root</source>
-<comment>to move a tag to the current tag in the tag context menu</comment>
-<translation>Premjesti u izvor</translation>
-</message>
-<message>
 <source>The scripting engine was reloaded</source>
-<translation>Mehanizam skriptiranja je ponovno učitan</translation>
-</message>
-<message>
-<source>HTML files</source>
-<translation>HTML datoteke</translation>
-</message>
-<message>
-<source>Jump to the note's subfolder</source>
-<translation>Skoči u podmapu bilješke
-</translation>
-</message>
-<message>
-<source>Open selected notes in tabs</source>
-<translation>Otvori odabrane bilješke u karticama</translation>
+<translation>Sustav za implementiranje skripata je ponovo učitan</translation>
 </message>
 <message>
 <source>A script update was found!</source>
@@ -2855,16 +5459,16 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>Nisu pronađena ažuriranja skripte</translation>
 </message>
 <message>
-<source>Toggle note stickiness</source>
-<translation>Uključi ljepljivost bilješki</translation>
+<source>Layout selector</source>
+<translation type="unfinished">Layout selector</translation>
 </message>
 <message>
-<source>Close other note tabs</source>
-<translation>Zatvori ostale kartice bilješki</translation>
+<source>AI toolbar disabled</source>
+<translation type="unfinished">AI toolbar disabled</translation>
 </message>
 <message>
-<source>Rename note</source>
-<translation>Preimenuj bilješku</translation>
+<source>An AI backend is configured, but the AI toolbar is currently disabled. Do you want to turn it on?</source>
+<translation type="unfinished">An AI backend is configured, but the AI toolbar is currently disabled. Do you want to turn it on?</translation>
 </message>
 <message numerus="yes">
 <source>Skipped copying of %n note(s) (no Markdown or text file or not readable)</source>
@@ -2878,75 +5482,25 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <source>Paste &amp;HTML as Markdown</source>
 <translation>Umetni &amp;HTML kao Markdown</translation>
 </message>
-<message>
-<source>Show all notes (%1)</source>
-<translation>Prikaži sve bilješke (%1)</translation>
+<message numerus="yes">
+<source>Latest %n note versions are currently gathered from your local git repository</source>
+<translation>
+<numerusform>Najnovije verzije od %n bilješke se trenutačno prikupljaju iz tvog lokalnog git repozitorija</numerusform>
+<numerusform>Najnovije verzije od %n bilješke se trenutačno prikupljaju iz tvog lokalnog git repozitorija</numerusform>
+<numerusform>Najnovije verzije od %n bilješki se trenutačno prikupljaju iz tvog lokalnog git repozitorija</numerusform>
+</translation>
 </message>
 <message>
-<source>Show all notes tagged with '%1' (%2)</source>
-<translation>Prikaži sve bilješke označene s '%1' (%2)</translation>
+<source>Done with gathering note versions from git</source>
+<translation>Prikupljanje verzija bilješki s gita je završeno</translation>
 </message>
-<message>
-<source>Allows you to rename the filename of the note</source>
-<translation>Omogućuje vam preimenovanje imena bilješke</translation>
-</message>
-<message>
-<source>&amp;Move notes to…</source>
-<translation>&amp;Premjesti bilješke u…</translation>
-</message>
-<message>
-<source>&amp;Copy notes to…</source>
-<translation>&amp;Kopiraj bilješke u…</translation>
-</message>
-<message>
-<source>Move notes to subfolder…</source>
-<translation>Premjesti bilješke u podmapu…</translation>
-</message>
-<message>
-<source>Copy notes to subfolder…</source>
-<translation>Kopiraj bilješke u podmapu…</translation>
-</message>
-<message>
-<source>&amp;Tag selected notes with…</source>
-<translation>&amp;Označi odabrane bilješke s…</translation>
-</message>
-<message>
-<source>&amp;Remove tag from selected notes…</source>
-<translation>&amp;Ukloni oznaku s odabranih bilješki…</translation>
-</message>
-<message>
-<source>Name:</source>
-<translation>Ime:</translation>
-</message>
-<message>
-<source>Note renaming not enabled!</source>
-<translation>Promjena naziva bilješki nije aktivirana!</translation>
-</message>
-<message>
-<source>Create new workspace</source>
-<translation>Stvori novu radnu površinu</translation>
-</message>
-<message>
-<source>Workspace name:</source>
-<translation>Naziv radne površine:</translation>
-</message>
-<message>
-<source>full</source>
-<comment>full workspace</comment>
-<translation>potpuno</translation>
-</message>
-<message>
-<source>minimal</source>
-<comment>minimal workspace</comment>
-<translation>minimalno</translation>
-</message>
-<message>
-<source>Remove the current workspace?</source>
-<translation>Obriši trenutnu radnu površinu?</translation>
-</message>
-<message>
-<source>Rename workspace</source>
-<translation>Preimenuj radnu površinu</translation>
+<message numerus="yes">
+<source>Latest %n git versions of note: %1</source>
+<translation>
+<numerusform>Najnovija %n git verzija bilješke: %1</numerusform>
+<numerusform>Najnovije %n git verzije bilješke: %1</numerusform>
+<numerusform>Najnovije %n git verzije bilješke: %1</numerusform>
+</translation>
 </message>
 <message>
 <source>Disallow all note editing</source>
@@ -2973,52 +5527,12 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>Bilješka naslov "%1" kopirana je u međuspremnik</translation>
 </message>
 <message>
-<source>Leave full-screen mode</source>
-<translation>Napustite način rada preko cijelog zaslona</translation>
-</message>
-<message>
-<source>Custom editor width</source>
-<translation>Prilagođena širina uređivača</translation>
-</message>
-<message>
-<source>Characters:</source>
-<translation>Znakovi:</translation>
-</message>
-<message numerus="yes">
-<source>%n notes selected</source>
-<translation>
-<numerusform>Odabrane %n bilješke</numerusform>
-<numerusform>Odabrane %n bilješke</numerusform>
-<numerusform>Odabrane su %n bilješke</numerusform>
-</translation>
-</message>
-<message>
 <source>Allow all note editing</source>
 <translation>Dopusti uređivanje svih bilješki</translation>
 </message>
 <message>
 <source>&amp;Tag</source>
 <translation>&amp;Oznaka</translation>
-</message>
-<message>
-<source>Remove tag from selected notes</source>
-<translation>Ukloni oznaku iz odabranih bilješki</translation>
-</message>
-<message numerus="yes">
-<source>Remove tag &lt;strong&gt;%1&lt;/strong&gt; from %n selected note(s)?</source>
-<translation>
-<numerusform>Ukloni oznaku &lt;strong&gt;%1&lt;/strong&gt; %n iz odabrane bilješke?</numerusform>
-<numerusform>Ukloniti oznake &lt;strong&gt;%1&lt;/strong&gt; %n s izabranih bilježki?</numerusform>
-<numerusform>Ukloniti oznake &lt;strong&gt;%1&lt;/strong&gt; %n s izabranih bilježki?</numerusform>
-</translation>
-</message>
-<message numerus="yes">
-<source>Tag &lt;strong&gt;%1&lt;/strong&gt; was removed from %n note(s)</source>
-<translation>
-<numerusform>Oznaka &lt;strong&gt;%1&lt;/strong&gt; je uklonjena iz %n bilješke</numerusform>
-<numerusform>Oznake &lt;strong&gt;%1&lt;/strong&gt; su uklonjene iz %n bilješki</numerusform>
-<numerusform>Oznake &lt;strong&gt;%1&lt;/strong&gt; su uklonjene iz %n bilješki</numerusform>
-</translation>
 </message>
 <message>
 <source>Current notes folder: </source>
@@ -3029,128 +5543,16 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>Postavljanje mape bilješke. Trenutačna mapa bilješki: </translation>
 </message>
 <message>
-<source>Print note</source>
-<translation>Ispis bilješke</translation>
-</message>
-<message>
-<source>Letter</source>
-<translation>Pismo</translation>
-</message>
-<message>
-<source>Portrait</source>
-<translation>Portret</translation>
-</message>
-<message>
-<source>Landscape</source>
-<translation>Horizontalno</translation>
-</message>
-<message>
-<source>Orientation</source>
-<translation>Orijentacija</translation>
-</message>
-<message>
-<source>Orientation:</source>
-<translation>Orijentacija:</translation>
-</message>
-<message>
-<source>Export current note as PDF</source>
-<translation>Izvezi odabranu bilješku kao PDF</translation>
-</message>
-<message>
 <source>You have not selected any todo lists.&lt;br /&gt;Please check your &lt;strong&gt;Todo&lt;/strong&gt; configuration in the settings!</source>
 <translation>Niste odabrali nijedan popis zadataka.&lt;br /&gt;Provjerite konfiguraciju &lt;strong&gt;zadataka&lt;/strong&gt; u postavkama!</translation>
-</message>
-<message>
-<source>Open QOwnNotes</source>
-<translation>Otvori QOwnNotes</translation>
-</message>
-<message>
-<source>New note</source>
-<translation>Nova bilješka</translation>
-</message>
-<message>
-<source>Recent notes</source>
-<translation>Nedavne bilješke</translation>
-</message>
-<message>
-<source>Show todo lists</source>
-<translation>Prikaži popise zadataka</translation>
-</message>
-<message>
-<source>Recent tasks</source>
-<translation>Nedavni zadatci</translation>
-</message>
-<message>
-<source>Quit</source>
-<translation>Izlaz</translation>
 </message>
 <message>
 <source>Note folder</source>
 <translation>Mapa bilješki</translation>
 </message>
 <message>
-<source>Copy to note folder</source>
-<translation>Kopiraj u mapu bilješki</translation>
-</message>
-<message>
-<source>Move to note folder</source>
-<translation>Premjesti u mapu bilješki</translation>
-</message>
-<message>
-<source>Copy to this subfolder</source>
-<translation>Kopiraj u ovu podmapu</translation>
-</message>
-<message>
-<source>Move to this subfolder</source>
-<translation>Premjesti u ovu podmapu</translation>
-</message>
-<message numerus="yes">
-<source>Move %n selected note(s) to note subfolder &lt;strong&gt;%2&lt;/strong&gt;?</source>
-<translation>
-<numerusform>Premjesti %n odabranu bilješku u &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-<numerusform>Premjestiti %n odabranih bilješki u &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-<numerusform>Premjestiti %n odabranih bilješki u &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-</translation>
-</message>
-<message>
 <source>Cancel</source>
 <translation>Odustani</translation>
-</message>
-<message numerus="yes">
-<source>%n note(s) were moved to note subfolder "%2"</source>
-<translation>
-<numerusform>%n bilješka preseljena u podmapu "%2"</numerusform>
-<numerusform>%n bilješki preseljeno u podmapu "%2"</numerusform>
-<numerusform>%n bilješki preseljeno u podmapu "%2"</numerusform>
-</translation>
-</message>
-<message numerus="yes">
-<source>Copy %n selected note(s) to note subfolder &lt;strong&gt;%2&lt;/strong&gt;?</source>
-<translation>
-<numerusform>Kopiraj %n odabranu bilješku u podmapu &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-<numerusform>Kopiraj %n odabrane bilješke u podmapu &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-<numerusform>Kopiraj %n odabrane bilješke u podmapu &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-</translation>
-</message>
-<message numerus="yes">
-<source>%n note(s) were copied to note subfolder "%2"</source>
-<translation>
-<numerusform>%n bilješka kopirana u podmapu "%2"</numerusform>
-<numerusform>%n bilješke kopirane u podmapu "%2"</numerusform>
-<numerusform>%n bilješke kopirane u podmapu "%2"</numerusform>
-</translation>
-</message>
-<message>
-<source>Open note in external editor</source>
-<translation>Otvori bilješku u vanjskom uredniku</translation>
-</message>
-<message>
-<source>Show note in file manager</source>
-<translation>Prikaži bilješku u upravljaču datoteka</translation>
-</message>
-<message>
-<source>If you want to rename your note you have to enable the option to allow the note filename to be different from the headline.</source>
-<translation>Ako želite preimenovati bilješku morate aktivirati opciju koja omogućuje da se ime datoteke i naslov razlikuju.</translation>
 </message>
 <message>
 <source>Create a new folder</source>
@@ -3161,28 +5563,8 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>Naziv mape:</translation>
 </message>
 <message>
-<source>show all untagged notes (%1)</source>
-<translation>pokaži sve neoznačene bilješke (%1)</translation>
-</message>
-<message>
-<source>Untagged notes</source>
-<translation>Neoznačene bilješke</translation>
-</message>
-<message>
-<source>Export current note as HTML file</source>
-<translation>Eksportiraj izabranu bilješku kao HTML datoteku</translation>
-</message>
-<message>
-<source>Page size</source>
-<translation>Veličina stranice</translation>
-</message>
-<message>
 <source>quit toolbar</source>
 <translation>zatvori alatnu traku</translation>
-</message>
-<message>
-<source>Page size:</source>
-<translation>Veličina stranice:</translation>
 </message>
 <message>
 <source>QOwnNotes will track anonymous usage data, that helps to decide what parts of QOwnNotes to improve next and to find and fix bugs. You can disable that behaviour in the settings.</source>
@@ -3193,68 +5575,8 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>&amp;U redu</translation>
 </message>
 <message>
-<source>&amp;Remove notes</source>
-<translation>&amp;Izbriši bilješke</translation>
-</message>
-<message>
 <source>Your tasks are being loaded from your server</source>
 <translation>Zadatci se preuzimaju s poslužitelja</translation>
-</message>
-<message>
-<source>Current note was modified externally</source>
-<translation>Izabrana bilješka je promijenjena izvana</translation>
-</message>
-<message>
-<source>Stored current note to disk</source>
-<translation>Izabrana bilješka spremljena na disk</translation>
-</message>
-<message>
-<source>Note was modified externally: %1</source>
-<translation>Bilješka je promijenjena izvana: %1</translation>
-</message>
-<message>
-<source>Notes directory was modified externally</source>
-<translation>Mapa s bilješkama je promijenjena izvana</translation>
-</message>
-<message numerus="yes">
-<source>Stored %n note(s) to disk</source>
-<translation>
-<numerusform>Bilješka %n pohranjena na disk</numerusform>
-<numerusform>Bilješke %n pohranjene na disk</numerusform>
-<numerusform>Bilješke %n pohranjene na disk</numerusform>
-</translation>
-</message>
-<message>
-<source>All notes</source>
-<translation>Sve bilješke</translation>
-</message>
-<message>
-<source>&amp;Add tag</source>
-<translation>&amp;Dodaj oznaku</translation>
-</message>
-<message>
-<source>Tag could not be created!</source>
-<translation>Oznaka ne može biti stvorena!</translation>
-</message>
-<message>
-<source>Move to this tag</source>
-<translation>Premjesti u ovu oznaku</translation>
-</message>
-<message>
-<source>Tag this</source>
-<translation>Označi</translation>
-</message>
-<message>
-<source>Cannot move tag '%1' to this tag</source>
-<translation>Nemoguće premjestiti oznaku '%1' u ovu oznaku</translation>
-</message>
-<message>
-<source>Moved tag '%1' to new tag</source>
-<translation>Oznaka '%1' pomaknuta u novu oznaku</translation>
-</message>
-<message>
-<source>&amp;Remove tags</source>
-<translation>&amp;Ukloni oznake</translation>
 </message>
 <message>
 <source>No selected todo lists!</source>
@@ -3297,6 +5619,10 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>Pregled bilješke</translation>
 </message>
 <message>
+<source>Note relations</source>
+<translation>Odnosi bilješke</translation>
+</message>
+<message>
 <source>Log</source>
 <translation>Protokol</translation>
 </message>
@@ -3329,10 +5655,6 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>prilagođena alatna traka</translation>
 </message>
 <message>
-<source>Workspace selector</source>
-<translation>Odabir radnog prostora</translation>
-</message>
-<message>
 <source>Show %1 panel</source>
 <translation>Prikaz %1 ploče</translation>
 </message>
@@ -3341,29 +5663,21 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>Pokaži %1</translation>
 </message>
 <message>
-<source>Leave distraction free mode</source>
-<translation>Napusti način rada bez ometanja</translation>
-</message>
-<message>
 <source>Switch to note folder</source>
 <translation>Prebaci se u mapu bilješki
 </translation>
 </message>
 <message>
+<source>Could not switch note folder</source>
+<translation type="unfinished">Could not switch note folder</translation>
+</message>
+<message>
+<source>Modified notes could not be written to disk. Please resolve the problem and try switching note folders again.</source>
+<translation type="unfinished">Modified notes could not be written to disk. Please resolve the problem and try switching note folders again.</translation>
+</message>
+<message>
 <source>Toolbar could not be loaded without name</source>
 <translation>Alatna traka ne može se učitati bez imena</translation>
-</message>
-<message>
-<source>Overwriting external changes of: %1</source>
-<translation>Prekrivanje vanjskih promjena: %1</translation>
-</message>
-<message>
-<source>Loading external changes from: %1</source>
-<translation>Učitavanje vanjskih promjena iz: %1</translation>
-</message>
-<message>
-<source>Current note could not be stored to disk</source>
-<translation>Trenutna bilješka nije mogla biti spremljena na disk</translation>
 </message>
 <message>
 <source>Read-only</source>
@@ -3381,33 +5695,45 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <source>Click here to see what has changed and to be able to update to the latest version</source>
 <translation>Kliknite ovdje da biste vidjeli promjene te da ažurirate na najnoviju inačicu</translation>
 </message>
-<message numerus="yes">
-<source>Proceed with automatic deletion of &lt;strong&gt;%n&lt;/strong&gt; conflicted database copies that may block your ownCloud sync process?</source>
-<translation>
-<numerusform>Nastavi s automatskim brisanjem &lt;strong&gt;%n&lt;/strong&gt; konfliktne kopije baze podataka koja može blokirati ownCloud postupak sinkronizacije?</numerusform>
-<numerusform>Nastavi s automatskim brisanjem &lt;strong&gt;%n&lt;/strong&gt; sukobljene kopije baze podataka koje može blokirati ownCloud postupak sinkronizacije?</numerusform>
-<numerusform>Nastavite s automatskim brisanjem &lt;strong&gt;%n&lt;/strong&gt; sukobljene kopije baze podataka koje mogu blokirati vaš ownCloud postupak sinkronizacije?</numerusform>
-</translation>
-</message>
-<message numerus="yes">
-<source>%n note(s) were tagged with "%2"</source>
-<translation>
-<numerusform>%n bilješki označeno sa "%2"</numerusform>
-<numerusform>%n bilješke označene sa "%2"</numerusform>
-<numerusform>%n bilješke označene sa "%2"</numerusform>
-</translation>
-</message>
-<message numerus="yes">
-<source>Found &lt;strong&gt;%n&lt;/strong&gt; occurrence(s) of &lt;strong&gt;%1&lt;/strong&gt;</source>
-<translation>
-<numerusform>Pronađeno je &lt;strong&gt;%n&lt;/strong&gt; pojava &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
-<numerusform>Pronađeno je &lt;strong&gt;%n&lt;/strong&gt; pojave &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
-<numerusform>Pronađeno je &lt;strong&gt;%n&lt;/strong&gt; pojave &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
-</translation>
+<message>
+<source>Web</source>
+<translation type="unfinished">Web</translation>
 </message>
 <message>
-<source>Note headline</source>
-<translation>Naslov bilješke</translation>
+<source>Web app is connected</source>
+<translation type="unfinished">Web app is connected</translation>
+</message>
+<message>
+<source>Web app is not connected</source>
+<translation type="unfinished">Web app is not connected</translation>
+</message>
+<message>
+<source>Web app connected</source>
+<translation type="unfinished">Web app connected</translation>
+</message>
+<message>
+<source>Web app disconnected</source>
+<translation type="unfinished">Web app disconnected</translation>
+</message>
+<message>
+<source>Connected systems</source>
+<translation type="unfinished">Connected systems</translation>
+</message>
+<message>
+<source>No connected systems</source>
+<translation type="unfinished">No connected systems</translation>
+</message>
+<message>
+<source>You have to select your Nextcloud / ownCloud notes folder to make this software work!</source>
+<translation type="unfinished">You have to select your Nextcloud / ownCloud notes folder to make this software work!</translation>
+</message>
+<message>
+<source>Note versions are currently loaded from your Nextcloud / ownCloud server</source>
+<translation type="unfinished">Note versions are currently loaded from your Nextcloud / ownCloud server</translation>
+</message>
+<message>
+<source>Trashed notes are currently loaded from your Nextcloud / ownCloud server</source>
+<translation type="unfinished">Trashed notes are currently loaded from your Nextcloud / ownCloud server</translation>
 </message>
 <message>
 <source>Paste as &amp;text file attachment</source>
@@ -3421,29 +5747,426 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <source>Open &amp;settings</source>
 <translation>Otvori &amp;postavke</translation>
 </message>
+</context>
+<context>
+<name>MarkdownLspClient</name>
 <message>
-<source>leave</source>
-<translation>izlaz</translation>
+<source>Markdown LSP server command is empty</source>
+<translation>Naredba Markdown LSP servera je prazna</translation>
 </message>
 <message>
-<source>Please enter your &lt;strong&gt;password&lt;/strong&gt; to encrypt the note.&lt;br /&gt;Keep in mind that you have to &lt;strong&gt;remember&lt;/strong&gt; your password to read the content of the note&lt;br /&gt; and that you can &lt;strong&gt;only&lt;/strong&gt; do that &lt;strong&gt;in QOwnNotes&lt;/strong&gt;!</source>
-<translation>Unesi &lt;strong&gt;zaporku&lt;/strong&gt; za šifriranje bilješke. &lt;br /&gt;&lt;strong&gt;Zapamti&lt;/strong&gt; zaporku za čitanje sadržaja poruke.&lt;br /&gt;Šifrirana poruka može biti dešifrirana &lt;strong&gt;isključivo u QOwnNotes&lt;/strong&gt;!</translation>
+<source>Failed to start Markdown LSP server: %1</source>
+<translation>Neuspjelo pokretanje Markdown LSP servera: %1</translation>
+</message>
+</context>
+<context>
+<name>MarkdownLspSettingsWidget</name>
+<message>
+<source>Markdown language server</source>
+<translation type="unfinished">Markdown language server</translation>
 </message>
 <message>
-<source>Decrypt note and store it as plain text</source>
-<translation>Dešifriraj bilješku i spremi kao čisti tekst</translation>
+<source>Enable Markdown language server (LSP)</source>
+<translation type="unfinished">Enable Markdown language server (LSP)</translation>
 </message>
 <message>
-<source>&amp;Decrypt</source>
-<translation>&amp;Dešifriraj</translation>
+<source>Command:</source>
+<translation type="unfinished">Command:</translation>
 </message>
 <message>
-<source>&lt;br /&gt;You will be able to edit your encrypted note.</source>
-<translation>&lt;br /&gt;Moći ćete urediti šifriranu bilješku.</translation>
+<source>Auto-detect</source>
+<translation type="unfinished">Auto-detect</translation>
 </message>
 <message>
-<source>Export current note as Markdown file</source>
-<translation>Izvezi izabranu bilješku kao datoteku oznake</translation>
+<source>Arguments:</source>
+<translation type="unfinished">Arguments:</translation>
+</message>
+<message>
+<source>Optional arguments separated by spaces.</source>
+<translation type="unfinished">Optional arguments separated by spaces.</translation>
+</message>
+<message>
+<source>Optional arguments</source>
+<translation type="unfinished">Optional arguments</translation>
+</message>
+<message>
+<source>Log all LSP server output (stderr) to the debug log. Useful for troubleshooting LSP server issues.</source>
+<translation type="unfinished">Log all LSP server output (stderr) to the debug log. Useful for troubleshooting LSP server issues.</translation>
+</message>
+<message>
+<source>Show all LSP server log output in debug log</source>
+<translation type="unfinished">Show all LSP server log output in debug log</translation>
+</message>
+<message>
+<source>Ignored:</source>
+<translation type="unfinished">Ignored:</translation>
+</message>
+<message>
+<source>Reset ignored rules</source>
+<translation type="unfinished">Reset ignored rules</translation>
+</message>
+<message>
+<source>Status:</source>
+<translation type="unfinished">Status:</translation>
+</message>
+<message>
+<source>Not tested yet.</source>
+<translation type="unfinished">Not tested yet.</translation>
+</message>
+<message>
+<source>Test Connection</source>
+<translation type="unfinished">Test Connection</translation>
+</message>
+<message>
+<source>No Markdown LSP server configured.</source>
+<translation type="unfinished">No Markdown LSP server configured.</translation>
+</message>
+<message>
+<source>Command: %1</source>
+<translation type="unfinished">Command: %1</translation>
+</message>
+<message>
+<source> | Arguments: %1</source>
+<translation type="unfinished"> | Arguments: %1</translation>
+</message>
+<message>
+<source> | Currently disabled</source>
+<translation type="unfinished"> | Currently disabled</translation>
+</message>
+<message>
+<source>Configured %1 at %2</source>
+<translation type="unfinished">Configured %1 at %2</translation>
+</message>
+<message>
+<source> with arguments: %1</source>
+<translation type="unfinished"> with arguments: %1</translation>
+</message>
+<message>
+<source>Markdown LSP</source>
+<translation type="unfinished">Markdown LSP</translation>
+</message>
+<message>
+<source>Could not find a supported Markdown LSP server in PATH. Checked: marksman, rumdl.</source>
+<translation type="unfinished">Could not find a supported Markdown LSP server in PATH. Checked: marksman, rumdl.</translation>
+</message>
+<message>
+<source>There are no ignored rules to reset.</source>
+<translation type="unfinished">There are no ignored rules to reset.</translation>
+</message>
+<message numerus="yes">
+<source>Reset %n ignored Markdown LSP rule(s)?</source>
+<translation type="unfinished">
+<numerusform>Reset %n ignored Markdown LSP rule(s)?</numerusform>
+<numerusform>Reset %n ignored Markdown LSP rule(s)?</numerusform>
+<numerusform>Reset %n ignored Markdown LSP rule(s)?</numerusform>
+</translation>
+</message>
+<message>
+<source>All ignored Markdown LSP rules have been reset.</source>
+<translation type="unfinished">All ignored Markdown LSP rules have been reset.</translation>
+</message>
+<message>
+<source>Please enter a Markdown LSP server command first.</source>
+<translation type="unfinished">Please enter a Markdown LSP server command first.</translation>
+</message>
+<message>
+<source>Timed out waiting for the Markdown LSP server to initialize.</source>
+<translation type="unfinished">Timed out waiting for the Markdown LSP server to initialize.</translation>
+</message>
+<message>
+<source>Failed to start Markdown LSP server: %1</source>
+<translation type="unfinished">Failed to start Markdown LSP server: %1</translation>
+</message>
+<message>
+<source>Markdown LSP connection successful: %1</source>
+<translation type="unfinished">Markdown LSP connection successful: %1</translation>
+</message>
+<message>
+<source>Markdown LSP connection failed.</source>
+<translation type="unfinished">Markdown LSP connection failed.</translation>
+</message>
+</context>
+<context>
+<name>MarkdownTableDialog</name>
+<message>
+<source>Edit Markdown table</source>
+<translation>Uredi Markdown tablicu</translation>
+</message>
+<message>
+<source>Row</source>
+<translation>Redak</translation>
+</message>
+<message>
+<source>Add row</source>
+<translation>Dodaj redak</translation>
+</message>
+<message>
+<source>Remove row</source>
+<translation>Ukloni redak</translation>
+</message>
+<message>
+<source>Column</source>
+<translation>Stupac</translation>
+</message>
+<message>
+<source>Add column</source>
+<translation>Dodaj stupac</translation>
+</message>
+<message>
+<source>Remove column</source>
+<translation>Ukloni stupac</translation>
+</message>
+<message>
+<source>Alignment:</source>
+<translation>Poravnanje:</translation>
+</message>
+<message>
+<source>Alignment of the selected column. Click a column header to select it.</source>
+<translation>Poravnanje odabranog stupca. Za biranje stupca klikni na zaglavlje stupca.</translation>
+</message>
+<message>
+<source>Default (left)</source>
+<translation>Zadano (lijevo)</translation>
+</message>
+<message>
+<source>Left</source>
+<translation>Lijevo</translation>
+</message>
+<message>
+<source>Center</source>
+<translation>Centrirano</translation>
+</message>
+<message>
+<source>Right</source>
+<translation>Desno</translation>
+</message>
+<message>
+<source>Apply alignment</source>
+<translation>Primijeni poravnanje</translation>
+</message>
+<message>
+<source>Apply the selected alignment to the currently selected column(s). Click a column header first to select it.</source>
+<translation>Primijeni odabrano poravnanje na trenutačno odabrane stupce. Za biranje stupaca najprije klikni na nhihova zaglavlje.</translation>
+</message>
+<message>
+<source>Cannot remove header</source>
+<translation>Nije moguće ukloniti zaglavlje</translation>
+</message>
+<message>
+<source>The header row cannot be removed.</source>
+<translation>Redak zaglavlja se ne može ukloniti.</translation>
+</message>
+<message>
+<source>Cannot remove row</source>
+<translation>Nije moguće ukloniti redak</translation>
+</message>
+<message>
+<source>The table must have at least one data row.</source>
+<translation>Tablica mora imati barem jedan redak s podacima.</translation>
+</message>
+<message>
+<source>Cannot remove column</source>
+<translation>Nije moguće ukloniti stupac</translation>
+</message>
+<message>
+<source>The table must have at least one column.</source>
+<translation>Tablica mora imati barem jedan stupac s podacima.</translation>
+</message>
+</context>
+<context>
+<name>McpServerSettingsWidget</name>
+<message>
+<source>MCP server</source>
+<translation type="unfinished">MCP server</translation>
+</message>
+<message>
+<source>Enable MCP server for AI agent access to notes</source>
+<translation type="unfinished">Enable MCP server for AI agent access to notes</translation>
+</message>
+<message>
+<source>Server port:</source>
+<translation type="unfinished">Server port:</translation>
+</message>
+<message>
+<source>Reset the MCP server port</source>
+<translation type="unfinished">Reset the MCP server port</translation>
+</message>
+<message>
+<source>Security token:</source>
+<translation type="unfinished">Security token:</translation>
+</message>
+<message>
+<source>If this is empty when saved, a new security token will be generated automatically.</source>
+<translation type="unfinished">If this is empty when saved, a new security token will be generated automatically.</translation>
+</message>
+<message>
+<source>Show security token</source>
+<translation type="unfinished">Show security token</translation>
+</message>
+<message>
+<source>Copy security token to clipboard</source>
+<translation type="unfinished">Copy security token to clipboard</translation>
+</message>
+<message>
+<source>Generate new security token</source>
+<translation type="unfinished">Generate new security token</translation>
+</message>
+</context>
+<context>
+<name>McpService</name>
+<message>
+<source>MCP server listening on port %1</source>
+<translation type="unfinished">MCP server listening on port %1</translation>
+</message>
+</context>
+<context>
+<name>MediaInsertionManager</name>
+<message>
+<source>File extension</source>
+<translation type="unfinished">File extension</translation>
+</message>
+<message>
+<source>Extension of file attachment:</source>
+<translation type="unfinished">Extension of file attachment:</translation>
+</message>
+<message>
+<source>File base name</source>
+<translation type="unfinished">File base name</translation>
+</message>
+<message>
+<source>Base name of file attachment:</source>
+<translation type="unfinished">Base name of file attachment:</translation>
+</message>
+<message>
+<source>Leave empty for automatic name</source>
+<comment>Leave the base name empty for automatic name</comment>
+<translation type="unfinished">Leave empty for automatic name</translation>
+</message>
+<message>
+<source>Temporary file can't be opened</source>
+<translation type="unfinished">Temporary file can't be opened</translation>
+</message>
+<message>
+<source>Inserted text as text attachment file</source>
+<translation type="unfinished">Inserted text as text attachment file</translation>
+</message>
+<message>
+<source>Inserting image</source>
+<translation type="unfinished">Inserting image</translation>
+</message>
+<message>
+<source>Done inserting image</source>
+<translation type="unfinished">Done inserting image</translation>
+</message>
+<message>
+<source>Inserting attachment</source>
+<translation type="unfinished">Inserting attachment</translation>
+</message>
+<message>
+<source>Done inserting attachment</source>
+<translation type="unfinished">Done inserting attachment</translation>
+</message>
+<message numerus="yes">
+<source>Copied %n note(s) to %1</source>
+<translation type="unfinished">
+<numerusform>Copied %n note(s) to %1</numerusform>
+<numerusform>Copied %n note(s) to %1</numerusform>
+<numerusform>Copied %n note(s) to %1</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Failed to copy %n note(s) (most likely already existing)</source>
+<translation type="unfinished">
+<numerusform>Failed to copy %n note(s) (most likely already existing)</numerusform>
+<numerusform>Failed to copy %n note(s) (most likely already existing)</numerusform>
+<numerusform>Failed to copy %n note(s) (most likely already existing)</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Skipped copying of %n note(s) (no Markdown or text file or not readable)</source>
+<translation type="unfinished">
+<numerusform>Skipped copying of %n note(s) (no Markdown or text file or not readable)</numerusform>
+<numerusform>Skipped copying of %n note(s) (no Markdown or text file or not readable)</numerusform>
+<numerusform>Skipped copying of %n note(s) (no Markdown or text file or not readable)</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Skipped inserting %n file(s) because the current note is read-only</source>
+<translation type="unfinished">
+<numerusform>Skipped inserting %n file(s) because the current note is read-only</numerusform>
+<numerusform>Skipped inserting %n file(s) because the current note is read-only</numerusform>
+<numerusform>Skipped inserting %n file(s) because the current note is read-only</numerusform>
+</translation>
+</message>
+<message>
+<source>Saving temporary image</source>
+<translation type="unfinished">Saving temporary image</translation>
+</message>
+<message>
+<source>Paste &amp;HTML as Markdown</source>
+<translation type="unfinished">Paste &amp;HTML as Markdown</translation>
+</message>
+<message>
+<source>Paste as &amp;text file attachment</source>
+<translation type="unfinished">Paste as &amp;text file attachment</translation>
+</message>
+<message>
+<source>Downloading %1</source>
+<translation type="unfinished">Downloading %1</translation>
+</message>
+<message>
+<source>Downloading images finished</source>
+<translation type="unfinished">Downloading images finished</translation>
+</message>
+</context>
+<context>
+<name>NavigationManager</name>
+<message>
+<source>Update backlinks</source>
+<translation type="unfinished">Update backlinks</translation>
+</message>
+<message numerus="yes">
+<source>The heading "%1" is referenced in %n note(s). Do you want to update the link to use the new heading "%2"?</source>
+<translation type="unfinished">
+<numerusform>The heading "%1" is referenced in %n note(s). Do you want to update the link to use the new heading "%2"?</numerusform>
+<numerusform>The heading "%1" is referenced in %n note(s). Do you want to update the link to use the new heading "%2"?</numerusform>
+<numerusform>The heading "%1" is referenced in %n note(s). Do you want to update the link to use the new heading "%2"?</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Updated heading links in %n note(s)</source>
+<translation type="unfinished">
+<numerusform>Updated heading links in %n note(s)</numerusform>
+<numerusform>Updated heading links in %n note(s)</numerusform>
+<numerusform>Updated heading links in %n note(s)</numerusform>
+</translation>
+</message>
+<message>
+<source>Ln %1, Col %2</source>
+<comment>Line / Column</comment>
+<translation type="unfinished">Ln %1, Col %2</translation>
+</message>
+<message>
+<source>Line %1, Column %2</source>
+<translation type="unfinished">Line %1, Column %2</translation>
+</message>
+<message numerus="yes">
+<source>%n selected</source>
+<comment>Characters selected</comment>
+<translation type="unfinished">
+<numerusform>%n selected</numerusform>
+<numerusform>%n selected</numerusform>
+<numerusform>%n selected</numerusform>
+</translation>
+</message>
+<message>
+<source>Ch %1, W %2, L %3</source>
+<comment>Characters / Words / Lines</comment>
+<translation type="unfinished">Ch %1, W %2, L %3</translation>
+</message>
+<message>
+<source>Characters %1, Words %2, Lines %3</source>
+<translation type="unfinished">Characters %1, Words %2, Lines %3</translation>
 </message>
 </context>
 <context>
@@ -3451,6 +6174,117 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <message>
 <source>headline %1</source>
 <translation>naslov %1</translation>
+</message>
+<message>
+<source>Expand all</source>
+<translation type="unfinished">Expand all</translation>
+</message>
+<message>
+<source>Collapse all</source>
+<translation type="unfinished">Collapse all</translation>
+</message>
+<message>
+<source>&amp;Rename heading</source>
+<translation>&amp;Preimenuj naslov</translation>
+</message>
+</context>
+<context>
+<name>NetworkSettingsWidget</name>
+<message>
+<source>Proxy Settings</source>
+<translation type="unfinished">Proxy Settings</translation>
+</message>
+<message>
+<source>No Proxy</source>
+<translation type="unfinished">No Proxy</translation>
+</message>
+<message>
+<source>Use system proxy</source>
+<translation type="unfinished">Use system proxy</translation>
+</message>
+<message>
+<source>Specify proxy manually as</source>
+<translation type="unfinished">Specify proxy manually as</translation>
+</message>
+<message>
+<source>Host</source>
+<translation type="unfinished">Host</translation>
+</message>
+<message>
+<source>Proxy server requires authentication</source>
+<translation type="unfinished">Proxy server requires authentication</translation>
+</message>
+<message>
+<source>SSL Settings</source>
+<translation type="unfinished">SSL Settings</translation>
+</message>
+<message>
+<source>Ignore SSL errors</source>
+<translation type="unfinished">Ignore SSL errors</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You might want to consider getting a free SSL certificate from &lt;a href="https://letsencrypt.org/"&gt;Let's encrypt&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You might want to consider getting a free SSL certificate from &lt;a href="https://letsencrypt.org/"&gt;Let's encrypt&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>App metrics</source>
+<translation type="unfinished">App metrics</translation>
+</message>
+<message>
+<source>Anonymous usage data helps to decide what parts of QOwnNotes to improve next and to find and fix bugs. Please disable it only if you really can't live with it.</source>
+<translation type="unfinished">Anonymous usage data helps to decide what parts of QOwnNotes to improve next and to find and fix bugs. Please disable it only if you really can't live with it.</translation>
+</message>
+<message>
+<source>Disable tracking of usage data</source>
+<translation type="unfinished">Disable tracking of usage data</translation>
+</message>
+<message>
+<source>This data includes anonymous information about what features of the app are used.</source>
+<translation type="unfinished">This data includes anonymous information about what features of the app are used.</translation>
+</message>
+<message>
+<source>Usage tracking is done on a private Piwik server.</source>
+<translation type="unfinished">Usage tracking is done on a private Piwik server.</translation>
+</message>
+<message>
+<source>App heartbeat</source>
+<translation type="unfinished">App heartbeat</translation>
+</message>
+<message>
+<source>A small heartbeat request is sent periodically while QOwnNotes is running. Make a developer happy by letting him know that someone is using QOwnNotes.</source>
+<translation type="unfinished">A small heartbeat request is sent periodically while QOwnNotes is running. Make a developer happy by letting him know that someone is using QOwnNotes.</translation>
+</message>
+<message>
+<source>Disable heartbeat</source>
+<translation type="unfinished">Disable heartbeat</translation>
+</message>
+<message>
+<source>hostname of proxy server</source>
+<translation type="unfinished">hostname of proxy server</translation>
+</message>
+<message>
+<source>username for proxy server</source>
+<translation type="unfinished">username for proxy server</translation>
+</message>
+<message>
+<source>password for proxy server</source>
+<translation type="unfinished">password for proxy server</translation>
+</message>
+<message>
+<source>HTTP(S) proxy</source>
+<translation type="unfinished">HTTP(S) proxy</translation>
+</message>
+<message>
+<source>SOCKS5 proxy</source>
+<translation type="unfinished">SOCKS5 proxy</translation>
+</message>
+<message>
+<source>Disable usage tracking</source>
+<translation type="unfinished">Disable usage tracking</translation>
+</message>
+<message>
+<source>Anonymous usage data helps to decide what parts of QOwnNotes to improve next and to find and fix bugs.&lt;br /&gt;Please disable it only if you really can't live with it.&lt;br /&gt;&lt;br /&gt;Really disable usage tracking?</source>
+<translation type="unfinished">Anonymous usage data helps to decide what parts of QOwnNotes to improve next and to find and fix bugs.&lt;br /&gt;Please disable it only if you really can't live with it.&lt;br /&gt;&lt;br /&gt;Really disable usage tracking?</translation>
 </message>
 </context>
 <context>
@@ -3472,12 +6306,56 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>−1 dan</translation>
 </message>
 <message>
-<source>Insert Nextcloud Deck card link</source>
-<translation type="unfinished">Insert Nextcloud Deck card link</translation>
+<source>Archive card</source>
+<translation>Arhiviraj karticu</translation>
+</message>
+<message>
+<source>Archive</source>
+<translation>Arhiviraj</translation>
+</message>
+<message>
+<source>Delete card</source>
+<translation>Izbriši karticu</translation>
+</message>
+<message>
+<source>Delete</source>
+<translation>Izbriši</translation>
+</message>
+<message>
+<source>Show archived cards</source>
+<translation>Prikaži arhivirane kartice</translation>
+</message>
+<message>
+<source>This doesn't work for sub-items, because they may be hidden by the parent item!</source>
+<translation>Ovo ne funkcionira za podstavke jer su one možda skrivene od nadređene stavke!</translation>
+</message>
+<message>
+<source>Show only items due today</source>
+<translation type="unfinished">Show only items due today</translation>
+</message>
+<message>
+<source>Summary</source>
+<translation>Sažetak</translation>
+</message>
+<message>
+<source>Reload the card item list from server</source>
+<translation type="unfinished">Reload the card item list from server</translation>
+</message>
+<message>
+<source>Reload…</source>
+<translation>Učitaj ponovo …</translation>
+</message>
+<message>
+<source>Search or create card</source>
+<translation>Traži ili stvori karticu</translation>
+</message>
+<message>
+<source>Select the board and stack to work with</source>
+<translation type="unfinished">Select the board and stack to work with</translation>
 </message>
 <message>
 <source>Create card and insert link into current note</source>
-<translation type="unfinished">Create card and insert link into current note</translation>
+<translation>Stvori karticu i umetni poveznicu u trenutačnu bilješku</translation>
 </message>
 <message>
 <source>&amp;Save</source>
@@ -3503,16 +6381,112 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <source>Due date</source>
 <translation>Datum dospijeća</translation>
 </message>
+<message>
+<source>Manage Nextcloud Deck Cards</source>
+<translation>Upravljaj Nextcloud Deck karticama</translation>
+</message>
+<message>
+<source>Save and insert into note</source>
+<translation>Spremi i umetni u bilješku</translation>
+</message>
+<message>
+<source>Save the current card item and insert a link to it into the current note</source>
+<translation type="unfinished">Save the current card item and insert a link to it into the current note</translation>
+</message>
+<message>
+<source>Reload from server</source>
+<translation>Ponovo učitaj sa servera</translation>
+</message>
+<message>
+<source>Reload boards, stacks and cards from server</source>
+<translation type="unfinished">Reload boards, stacks and cards from server</translation>
+</message>
+<message>
+<source>Do you want to delete the selected Nextcloud Deck card?</source>
+<translation type="unfinished">Do you want to delete the selected Nextcloud Deck card?</translation>
+</message>
+<message numerus="yes">
+<source>Do you want to delete %n Nextcloud Deck card(s)?</source>
+<translation type="unfinished">
+<numerusform>Do you want to delete %n Nextcloud Deck card(s)?</numerusform>
+<numerusform>Do you want to delete %n Nextcloud Deck card(s)?</numerusform>
+<numerusform>Do you want to delete %n Nextcloud Deck card(s)?</numerusform>
+</translation>
+</message>
+<message>
+<source>Delete card(s)</source>
+<translation type="unfinished">Delete card(s)</translation>
+</message>
+<message>
+<source>%1 / %2</source>
+<translation type="unfinished">%1 / %2</translation>
+</message>
+<message>
+<source>No due date</source>
+<translation type="unfinished">No due date</translation>
+</message>
+<message>
+<source>Do you want to delete the current Nextcloud Deck card?</source>
+<translation>Želiš li izbrisati trenutačnu Nextcloud Deck karticu?</translation>
+</message>
+<message>
+<source>Do you want to archive the current Nextcloud Deck card?</source>
+<translation>Želiš li arhivirati trenutačnu Nextcloud Deck karticu?</translation>
+</message>
+<message>
+<source>&amp;Open card in browser</source>
+<translation>&amp;Otvori karticu u pregledniku</translation>
+</message>
+<message>
+<source>&amp;Add card link to note</source>
+<translation>&amp;Dodaj poveznicu kartice u bilješku</translation>
+</message>
+<message>
+<source>&amp;Search for card link in notes</source>
+<translation>&amp;Traži poveznicu za karticu u bilješkama</translation>
+</message>
+<message numerus="yes">
+<source>&amp;Delete %n card(s)</source>
+<translation type="unfinished">
+<numerusform/>
+<numerusform/>
+<numerusform/>
+</translation>
+</message>
 </context>
 <context>
 <name>NextcloudDeckService</name>
 <message>
-<source>Error while creating card</source>
-<translation>Greška kod izrade kartice</translation>
+<source>Error while updating card</source>
+<translation>Greška tijekom aktualiziranja kartice</translation>
 </message>
 <message>
-<source>Creating a card failed with status code %1 and message: %2</source>
-<translation>Izrada kartice nije uspjela as oznakom statusa %1 i porukom: %2</translation>
+<source>Updating card failed with status code %1 and message: %2</source>
+<translation type="unfinished">Updating card failed with status code %1 and message: %2</translation>
+</message>
+<message>
+<source>Error while creating card</source>
+<translation>Greška tijekom stvaranja kartice</translation>
+</message>
+<message>
+<source>Creating card failed with status code %1 and message: %2</source>
+<translation type="unfinished">Creating card failed with status code %1 and message: %2</translation>
+</message>
+<message>
+<source>Error while archiving card</source>
+<translation>Greška tijekom arhiviranja kartice</translation>
+</message>
+<message>
+<source>Error while deleting card</source>
+<translation>Greška tijekom brisanja kartice</translation>
+</message>
+<message>
+<source>Archiving the card failed with status code %1 and message: %2</source>
+<translation type="unfinished">Archiving the card failed with status code %1 and message: %2</translation>
+</message>
+<message>
+<source>Deleting the card failed with status code %1 and message: %2</source>
+<translation type="unfinished">Deleting the card failed with status code %1 and message: %2</translation>
 </message>
 <message>
 <source>Error while loading boards</source>
@@ -3521,6 +6495,69 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <message>
 <source>Loading the boards failed with status code %1 and message: %2</source>
 <translation>Učitavanje ploča nije uspjelo s kodom stanja %1 i porukom: %2</translation>
+</message>
+<message>
+<source>Error while loading cards</source>
+<translation>Greška tijekom učitavanja kartice</translation>
+</message>
+<message>
+<source>Loading the cards failed with status code %1 and message: %2</source>
+<translation type="unfinished">Loading the cards failed with status code %1 and message: %2</translation>
+</message>
+<message>
+<source>Error while loading archived cards</source>
+<translation>Greška tijekom učitavanja arhiviranih kartica</translation>
+</message>
+<message>
+<source>Loading the archived cards failed with status code %1 and message: %2</source>
+<translation type="unfinished">Loading the archived cards failed with status code %1 and message: %2</translation>
+</message>
+</context>
+<context>
+<name>NoteBookmarkDialog</name>
+<message>
+<source>Note Bookmarks</source>
+<translation type="unfinished">Note Bookmarks</translation>
+</message>
+<message>
+<source>Slot</source>
+<translation type="unfinished">Slot</translation>
+</message>
+<message>
+<source>Note</source>
+<translation type="unfinished">Note</translation>
+</message>
+<message>
+<source>Position</source>
+<translation type="unfinished">Position</translation>
+</message>
+<message>
+<source>Jump to bookmark</source>
+<translation type="unfinished">Jump to bookmark</translation>
+</message>
+<message>
+<source>Jump to the selected bookmark in the main window</source>
+<translation type="unfinished">Jump to the selected bookmark in the main window</translation>
+</message>
+<message>
+<source>Delete bookmark</source>
+<translation type="unfinished">Delete bookmark</translation>
+</message>
+<message>
+<source>Delete the selected bookmark</source>
+<translation type="unfinished">Delete the selected bookmark</translation>
+</message>
+<message>
+<source>Reload</source>
+<translation>Učitaj ponovo</translation>
+</message>
+<message>
+<source>Reload the bookmark list</source>
+<translation>Ponovno učitaj popis oznaka</translation>
+</message>
+<message>
+<source>Are you sure you want to delete the bookmark at slot %1?</source>
+<translation type="unfinished">Are you sure you want to delete the bookmark at slot %1?</translation>
 </message>
 </context>
 <context>
@@ -3536,6 +6573,22 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <message>
 <source>Preview</source>
 <translation>Pregled</translation>
+</message>
+<message>
+<source>Reload</source>
+<translation>Učitaj ponovo</translation>
+</message>
+<message>
+<source>Reload the note text</source>
+<translation>Ponovo učitaj tekst bilješke</translation>
+</message>
+<message>
+<source>Jump to note</source>
+<translation>Skoči na bilješku</translation>
+</message>
+<message>
+<source>Jump to the note in the main window</source>
+<translation>Skoči na bilješku u glavnom prozoru</translation>
 </message>
 </context>
 <context>
@@ -3574,6 +6627,61 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 </message>
 </context>
 <context>
+<name>NoteEncryptionManager</name>
+<message>
+<source>Please enter the &lt;strong&gt;password&lt;/strong&gt; of this encrypted note.</source>
+<translation type="unfinished">Please enter the &lt;strong&gt;password&lt;/strong&gt; of this encrypted note.</translation>
+</message>
+<message>
+<source>Note can't be decrypted!</source>
+<translation type="unfinished">Note can't be decrypted!</translation>
+</message>
+<message>
+<source>It seems that your password is not valid!</source>
+<translation type="unfinished">It seems that your password is not valid!</translation>
+</message>
+<message>
+<source>Please enter your &lt;strong&gt;password&lt;/strong&gt; to encrypt the note.&lt;br /&gt;Keep in mind that you have to &lt;strong&gt;remember&lt;/strong&gt; your password to read the content of the note&lt;br /&gt; and that you can &lt;strong&gt;only&lt;/strong&gt; do that &lt;strong&gt;in QOwnNotes&lt;/strong&gt;!</source>
+<translation type="unfinished">Please enter your &lt;strong&gt;password&lt;/strong&gt; to encrypt the note.&lt;br /&gt;Keep in mind that you have to &lt;strong&gt;remember&lt;/strong&gt; your password to read the content of the note&lt;br /&gt; and that you can &lt;strong&gt;only&lt;/strong&gt; do that &lt;strong&gt;in QOwnNotes&lt;/strong&gt;!</translation>
+</message>
+<message>
+<source>Decrypt note and store it as plain text</source>
+<translation type="unfinished">Decrypt note and store it as plain text</translation>
+</message>
+<message>
+<source>Your note will be decrypted and stored as plain text again. Keep in mind that the unencrypted note will possibly be synced to your server and sensitive text may be exposed!&lt;br /&gt;Do you want to decrypt your note?</source>
+<translation type="unfinished">Your note will be decrypted and stored as plain text again. Keep in mind that the unencrypted note will possibly be synced to your server and sensitive text may be exposed!&lt;br /&gt;Do you want to decrypt your note?</translation>
+</message>
+<message>
+<source>&amp;Decrypt</source>
+<translation type="unfinished">&amp;Decrypt</translation>
+</message>
+<message>
+<source>&amp;Cancel</source>
+<translation type="unfinished">&amp;Cancel</translation>
+</message>
+<message>
+<source>&lt;br /&gt;You will be able to edit your encrypted note.</source>
+<translation type="unfinished">&lt;br /&gt;You will be able to edit your encrypted note.</translation>
+</message>
+<message>
+<source>Markdown files</source>
+<translation type="unfinished">Markdown files</translation>
+</message>
+<message>
+<source>Export current note as Markdown file</source>
+<translation type="unfinished">Export current note as Markdown file</translation>
+</message>
+<message>
+<source>Export attached files</source>
+<translation type="unfinished">Export attached files</translation>
+</message>
+<message>
+<source>Do you also want to export media files and attachments of the note? Files may be overwritten in the destination folder!</source>
+<translation type="unfinished">Do you also want to export media files and attachments of the note? Files may be overwritten in the destination folder!</translation>
+</message>
+</context>
+<context>
 <name>NoteFilePathLabel</name>
 <message>
 <source>Relative path of note, right-click to open context menu</source>
@@ -3588,12 +6696,533 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>Kopiraj apsolutnu putanju bilješke</translation>
 </message>
 <message>
+<source>Copy note filename</source>
+<translation>Kopiraj ime datoteke bilješke</translation>
+</message>
+<message>
 <source>Copy absolute path of note subfolder</source>
 <translation>Kopiraj apsolutnu putanju podmape bilješke</translation>
 </message>
 <message>
 <source>Copy absolute path of note folder</source>
 <translation>Kopiraj apsolutnu putanju mape bilješke</translation>
+</message>
+</context>
+<context>
+<name>NoteFolderSettingsWidget</name>
+<message>
+<source>Your note folders</source>
+<translation type="unfinished">Your note folders</translation>
+</message>
+<message>
+<source>&amp;Add folder</source>
+<translation type="unfinished">&amp;Add folder</translation>
+</message>
+<message>
+<source>&amp;Remove folder</source>
+<translation type="unfinished">&amp;Remove folder</translation>
+</message>
+<message>
+<source>Click here to use the selected folder from your server as note folder</source>
+<translation type="unfinished">Click here to use the selected folder from your server as note folder</translation>
+</message>
+<message>
+<source>path</source>
+<translation type="unfinished">path</translation>
+</message>
+<message>
+<source>Cloud connection:</source>
+<translation type="unfinished">Cloud connection:</translation>
+</message>
+<message>
+<source>&amp;Use as Nextcloud / ownCloud path</source>
+<translation type="unfinished">&amp;Use as Nextcloud / ownCloud path</translation>
+</message>
+<message>
+<source>Please select your note folder on your Nextcloud / ownCloud server:</source>
+<translation type="unfinished">Please select your note folder on your Nextcloud / ownCloud server:</translation>
+</message>
+<message>
+<source>Select the cloud connection to use for this note folder. Select "None" if this note folder should not be synced to a server. Cloud versioning, trash and sharing will then be disabled for this note folder.</source>
+<translation type="unfinished">Select the cloud connection to use for this note folder. Select "None" if this note folder should not be synced to a server. Cloud versioning, trash and sharing will then be disabled for this note folder.</translation>
+</message>
+<message>
+<source>Path on your Nextcloud / ownCloud server:</source>
+<translation type="unfinished">Path on your Nextcloud / ownCloud server:</translation>
+</message>
+<message>
+<source>Note folder path:</source>
+<translation type="unfinished">Note folder path:</translation>
+</message>
+<message>
+<source>Subfolder visibility</source>
+<translation type="unfinished">Subfolder visibility</translation>
+</message>
+<message>
+<source>If checked, all subfolders will be shown. If unchecked, you can select which subfolders to show.</source>
+<translation type="unfinished">If checked, all subfolders will be shown. If unchecked, you can select which subfolders to show.</translation>
+</message>
+<message>
+<source>All subfolders</source>
+<translation type="unfinished">All subfolders</translation>
+</message>
+<message>
+<source>Select which subfolders to show. Unchecked subfolders and their children will be ignored.</source>
+<translation type="unfinished">Select which subfolders to show. Unchecked subfolders and their children will be ignored.</translation>
+</message>
+<message>
+<source>You need to have git installed to make this work!</source>
+<translation type="unfinished">You need to have git installed to make this work!</translation>
+</message>
+<message>
+<source>Use git to keep a local history of your notes</source>
+<translation type="unfinished">Use git to keep a local history of your notes</translation>
+</message>
+<message>
+<source>Use as active note folder</source>
+<translation type="unfinished">Use as active note folder</translation>
+</message>
+<message>
+<source>Be aware that the Nextcloud / ownCloud notes app doesn't support subfolders!</source>
+<translation type="unfinished">Be aware that the Nextcloud / ownCloud notes app doesn't support subfolders!</translation>
+</message>
+<message>
+<source>Click here to select your remote note path on your Nextcloud / ownCloud server</source>
+<translation type="unfinished">Click here to select your remote note path on your Nextcloud / ownCloud server</translation>
+</message>
+<message>
+<source>Set the Nextcloud / ownCloud path where the note folder path will be synced to on your Nextcloud / ownCloud server.</source>
+<translation type="unfinished">Set the Nextcloud / ownCloud path where the note folder path will be synced to on your Nextcloud / ownCloud server.</translation>
+</message>
+<message>
+<source>Use note subfolders</source>
+<translation type="unfinished">Use note subfolders</translation>
+</message>
+<message>
+<source>Path where your notes are stored locally</source>
+<translation type="unfinished">Path where your notes are stored locally</translation>
+</message>
+<message>
+<source>This name will be viewed in all the menus.</source>
+<translation type="unfinished">This name will be viewed in all the menus.</translation>
+</message>
+<message>
+<source>Note folder name</source>
+<translation type="unfinished">Note folder name</translation>
+</message>
+<message>
+<source>Name:</source>
+<translation type="unfinished">Name:</translation>
+</message>
+<message>
+<source>Click here to select your local note path</source>
+<translation type="unfinished">Click here to select your local note path</translation>
+</message>
+<message>
+<source>"Notes" path on your server</source>
+<extracomment>"Notes" should not be translated</extracomment>
+<translation type="unfinished">"Notes" path on your server</translation>
+</message>
+<message>
+<source>This also allows note files to be renamed</source>
+<translation type="unfinished">This also allows note files to be renamed</translation>
+</message>
+<message>
+<source>Allow note file name to be different from headline</source>
+<translation type="unfinished">Allow note file name to be different from headline</translation>
+</message>
+<message>
+<source>None</source>
+<translation type="unfinished">None</translation>
+</message>
+<message>
+<source>new folder</source>
+<translation type="unfinished">new folder</translation>
+</message>
+<message>
+<source>Remove note folder</source>
+<translation type="unfinished">Remove note folder</translation>
+</message>
+<message>
+<source>Remove the current note folder &lt;strong&gt;%1&lt;/strong&gt;?</source>
+<translation type="unfinished">Remove the current note folder &lt;strong&gt;%1&lt;/strong&gt;?</translation>
+</message>
+<message>
+<source>Please select the folder where your notes will get stored to</source>
+<translation type="unfinished">Please select the folder where your notes will get stored to</translation>
+</message>
+<message>
+<source>Loading folders from server</source>
+<translation type="unfinished">Loading folders from server</translation>
+</message>
+<message>
+<source>No more folders were found in the current folder</source>
+<translation type="unfinished">No more folders were found in the current folder</translation>
+</message>
+<message>
+<source>Loading folders in '%1' from server</source>
+<translation type="unfinished">Loading folders in '%1' from server</translation>
+</message>
+</context>
+<context>
+<name>NoteIndexManager</name>
+<message>
+<source>Loading notes…</source>
+<translation type="unfinished">Loading notes…</translation>
+</message>
+<message>
+<source>Abort</source>
+<translation type="unfinished">Abort</translation>
+</message>
+<message>
+<source>Note folder</source>
+<translation type="unfinished">Note folder</translation>
+</message>
+<message>
+<source>Removed duplicate conflicted database: %1</source>
+<translation type="unfinished">Removed duplicate conflicted database: %1</translation>
+</message>
+<message>
+<source>Could not remove duplicate conflicted database: %1</source>
+<translation type="unfinished">Could not remove duplicate conflicted database: %1</translation>
+</message>
+<message>
+<source>Removed merged conflicted database: %1</source>
+<translation type="unfinished">Removed merged conflicted database: %1</translation>
+</message>
+<message>
+<source>Could not remove merged conflicted database: %1</source>
+<translation type="unfinished">Could not remove merged conflicted database: %1</translation>
+</message>
+<message>
+<source>Delete conflicted database copies</source>
+<translation type="unfinished">Delete conflicted database copies</translation>
+</message>
+<message numerus="yes">
+<source>Proceed with automatic deletion of &lt;strong&gt;%n&lt;/strong&gt; conflicted database copies that may block your Nextcloud / ownCloud sync process?</source>
+<translation type="unfinished">
+<numerusform>Proceed with automatic deletion of &lt;strong&gt;%n&lt;/strong&gt; conflicted database copies that may block your Nextcloud / ownCloud sync process?</numerusform>
+<numerusform>Proceed with automatic deletion of &lt;strong&gt;%n&lt;/strong&gt; conflicted database copies that may block your Nextcloud / ownCloud sync process?</numerusform>
+<numerusform>Proceed with automatic deletion of &lt;strong&gt;%n&lt;/strong&gt; conflicted database copies that may block your Nextcloud / ownCloud sync process?</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Removed %n conflicted database copies</source>
+<translation type="unfinished">
+<numerusform>Removed %n conflicted database copies</numerusform>
+<numerusform>Removed %n conflicted database copies</numerusform>
+<numerusform>Removed %n conflicted database copies</numerusform>
+</translation>
+</message>
+<message>
+<source>Current note was modified externally</source>
+<translation type="unfinished">Current note was modified externally</translation>
+</message>
+<message>
+<source>Overwriting external changes of: %1</source>
+<translation type="unfinished">Overwriting external changes of: %1</translation>
+</message>
+<message>
+<source>Loading external changes from: %1</source>
+<translation type="unfinished">Loading external changes from: %1</translation>
+</message>
+<message>
+<source>Note was removed externally!</source>
+<translation type="unfinished">Note was removed externally!</translation>
+</message>
+<message>
+<source>Current note was removed outside of this application!
+Restore current note?</source>
+<translation type="unfinished">Current note was removed outside of this application!
+Restore current note?</translation>
+</message>
+<message>
+<source>Stored current note to disk</source>
+<translation type="unfinished">Stored current note to disk</translation>
+</message>
+<message>
+<source>Current note could not be stored to disk</source>
+<translation type="unfinished">Current note could not be stored to disk</translation>
+</message>
+<message>
+<source>Note was modified externally: %1</source>
+<translation type="unfinished">Note was modified externally: %1</translation>
+</message>
+<message>
+<source>Notes directory was modified externally</source>
+<translation type="unfinished">Notes directory was modified externally</translation>
+</message>
+<message numerus="yes">
+<source>Stored %n note(s) to disk</source>
+<translation type="unfinished">
+<numerusform>Stored %n note(s) to disk</numerusform>
+<numerusform>Stored %n note(s) to disk</numerusform>
+<numerusform>Stored %n note(s) to disk</numerusform>
+</translation>
+</message>
+</context>
+<context>
+<name>NoteOperationsManager</name>
+<message>
+<source>Note has backlinks</source>
+<translation type="unfinished">Note has backlinks</translation>
+</message>
+<message numerus="yes">
+<source>The note &lt;strong&gt;%1&lt;/strong&gt; is linked from %n other note(s). Deleting it will leave those links broken. Do you still want to remove it?</source>
+<translation type="unfinished">
+<numerusform>The note &lt;strong&gt;%1&lt;/strong&gt; is linked from %n other note(s). Deleting it will leave those links broken. Do you still want to remove it?</numerusform>
+<numerusform>The note &lt;strong&gt;%1&lt;/strong&gt; is linked from %n other note(s). Deleting it will leave those links broken. Do you still want to remove it?</numerusform>
+<numerusform>The note &lt;strong&gt;%1&lt;/strong&gt; is linked from %n other note(s). Deleting it will leave those links broken. Do you still want to remove it?</numerusform>
+</translation>
+</message>
+<message>
+<source>Remove current note</source>
+<translation type="unfinished">Remove current note</translation>
+</message>
+<message>
+<source>Remove current note: &lt;strong&gt;%1&lt;/strong&gt;?</source>
+<translation type="unfinished">Remove current note: &lt;strong&gt;%1&lt;/strong&gt;?</translation>
+</message>
+<message>
+<source>Notes have backlinks</source>
+<translation type="unfinished">Notes have backlinks</translation>
+</message>
+<message numerus="yes">
+<source>%n of the selected note(s) are linked from other notes (%1 link(s) in total). Deleting them will leave those links broken. Do you still want to remove them?</source>
+<translation type="unfinished">
+<numerusform>%n of the selected note(s) are linked from other notes (%1 link(s) in total). Deleting them will leave those links broken. Do you still want to remove them?</numerusform>
+<numerusform>%n of the selected note(s) are linked from other notes (%1 link(s) in total). Deleting them will leave those links broken. Do you still want to remove them?</numerusform>
+<numerusform>%n of the selected note(s) are linked from other notes (%1 link(s) in total). Deleting them will leave those links broken. Do you still want to remove them?</numerusform>
+</translation>
+</message>
+<message>
+<source>Remove selected notes and folders</source>
+<translation type="unfinished">Remove selected notes and folders</translation>
+</message>
+<message>
+<source>Remove selected folders</source>
+<translation type="unfinished">Remove selected folders</translation>
+</message>
+<message numerus="yes">
+<source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected folder(s)?&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!</source>
+<translation type="unfinished">
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected folder(s)?&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected folder(s)?&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected folder(s)?&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!</numerusform>
+</translation>
+</message>
+<message>
+<source>Remove selected notes</source>
+<translation type="unfinished">Remove selected notes</translation>
+</message>
+<message numerus="yes">
+<source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
+
+If the trash is enabled on your ownCloud server you should be able to restore them from there.</source>
+<translation type="unfinished">
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
+
+If the trash is enabled on your ownCloud server you should be able to restore them from there.</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
+
+If the trash is enabled on your ownCloud server you should be able to restore them from there.</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
+
+If the trash is enabled on your ownCloud server you should be able to restore them from there.</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s) and &lt;strong&gt;%1&lt;/strong&gt; folder(s)?&lt;ul&gt;&lt;li&gt;%2&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore the notes from there.</source>
+<translation type="unfinished">
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s) and &lt;strong&gt;%1&lt;/strong&gt; folder(s)?&lt;ul&gt;&lt;li&gt;%2&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore the notes from there.</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s) and &lt;strong&gt;%1&lt;/strong&gt; folder(s)?&lt;ul&gt;&lt;li&gt;%2&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore the notes from there.</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s) and &lt;strong&gt;%1&lt;/strong&gt; folder(s)?&lt;ul&gt;&lt;li&gt;%2&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore the notes from there.</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore them from there.</source>
+<translation type="unfinished">
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore them from there.</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore them from there.</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore them from there.</numerusform>
+</translation>
+</message>
+<message>
+<source>Removed note subfolder: %1</source>
+<translation type="unfinished">Removed note subfolder: %1</translation>
+</message>
+<message>
+<source>Move selected notes</source>
+<translation type="unfinished">Move selected notes</translation>
+</message>
+<message numerus="yes">
+<source>Move %n selected note(s) to &lt;strong&gt;%2&lt;/strong&gt;?</source>
+<translation type="unfinished">
+<numerusform>Move %n selected note(s) to &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Move %n selected note(s) to &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Move %n selected note(s) to &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+</translation>
+</message>
+<message>
+<source>Copy selected notes</source>
+<translation type="unfinished">Copy selected notes</translation>
+</message>
+<message numerus="yes">
+<source>Copy %n selected note(s) to &lt;strong&gt;%2&lt;/strong&gt;?</source>
+<translation type="unfinished">
+<numerusform>Copy %n selected note(s) to &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Copy %n selected note(s) to &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Copy %n selected note(s) to &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+</translation>
+</message>
+<message>
+<source>Done</source>
+<translation type="unfinished">Done</translation>
+</message>
+<message numerus="yes">
+<source>%n note(s) were copied to &lt;strong&gt;%2&lt;/strong&gt;.</source>
+<translation type="unfinished">
+<numerusform>%n note(s) were copied to &lt;strong&gt;%2&lt;/strong&gt;.</numerusform>
+<numerusform>%n note(s) were copied to &lt;strong&gt;%2&lt;/strong&gt;.</numerusform>
+<numerusform>%n note(s) were copied to &lt;strong&gt;%2&lt;/strong&gt;.</numerusform>
+</translation>
+</message>
+<message>
+<source>Note</source>
+<comment>name for new note</comment>
+<translation type="unfinished">Note</translation>
+</message>
+<message numerus="yes">
+<source>Move %n selected note(s) to note subfolder &lt;strong&gt;%2&lt;/strong&gt;?</source>
+<translation type="unfinished">
+<numerusform>Move %n selected note(s) to note subfolder &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Move %n selected note(s) to note subfolder &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Move %n selected note(s) to note subfolder &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>%n note(s) were moved to note subfolder "%2"</source>
+<translation type="unfinished">
+<numerusform>%n note(s) were moved to note subfolder "%2"</numerusform>
+<numerusform>%n note(s) were moved to note subfolder "%2"</numerusform>
+<numerusform>%n note(s) were moved to note subfolder "%2"</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Copy %n selected note(s) to note subfolder &lt;strong&gt;%2&lt;/strong&gt;?</source>
+<translation type="unfinished">
+<numerusform>Copy %n selected note(s) to note subfolder &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Copy %n selected note(s) to note subfolder &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Copy %n selected note(s) to note subfolder &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>%n note(s) were copied to note subfolder "%2"</source>
+<translation type="unfinished">
+<numerusform>%n note(s) were copied to note subfolder "%2"</numerusform>
+<numerusform>%n note(s) were copied to note subfolder "%2"</numerusform>
+<numerusform>%n note(s) were copied to note subfolder "%2"</numerusform>
+</translation>
+</message>
+<message>
+<source>Copy to note folder</source>
+<translation type="unfinished">Copy to note folder</translation>
+</message>
+<message>
+<source>Move to note folder</source>
+<translation type="unfinished">Move to note folder</translation>
+</message>
+<message>
+<source>Copy to this subfolder</source>
+<translation type="unfinished">Copy to this subfolder</translation>
+</message>
+<message>
+<source>Move to this subfolder</source>
+<translation type="unfinished">Move to this subfolder</translation>
+</message>
+<message>
+<source>Split note</source>
+<translation type="unfinished">Split note</translation>
+</message>
+<message>
+<source>Split note at current cursor position? The text after the cursor will be moved to a new note. The new note will be linked to the old note.</source>
+<translation type="unfinished">Split note at current cursor position? The text after the cursor will be moved to a new note. The new note will be linked to the old note.</translation>
+</message>
+<message>
+<source>New note</source>
+<translation type="unfinished">New note</translation>
+</message>
+<message>
+<source>Note headline</source>
+<translation type="unfinished">Note headline</translation>
+</message>
+<message>
+<source>The deleted note(s) had &lt;strong&gt;%1 image(s)&lt;/strong&gt; and &lt;strong&gt;%2 attachment(s)&lt;/strong&gt; that are not used in any other note.
+
+Do you want to delete those files as well?</source>
+<translation type="unfinished">The deleted note(s) had &lt;strong&gt;%1 image(s)&lt;/strong&gt; and &lt;strong&gt;%2 attachment(s)&lt;/strong&gt; that are not used in any other note.
+
+Do you want to delete those files as well?</translation>
+</message>
+<message numerus="yes">
+<source>The deleted note(s) had &lt;strong&gt;%n image(s)&lt;/strong&gt; that are not used in any other note.
+
+Do you want to delete those files as well?</source>
+<translation type="unfinished">
+<numerusform>The deleted note(s) had &lt;strong&gt;%n image(s)&lt;/strong&gt; that are not used in any other note.
+
+Do you want to delete those files as well?</numerusform>
+<numerusform>The deleted note(s) had &lt;strong&gt;%n image(s)&lt;/strong&gt; that are not used in any other note.
+
+Do you want to delete those files as well?</numerusform>
+<numerusform>The deleted note(s) had &lt;strong&gt;%n image(s)&lt;/strong&gt; that are not used in any other note.
+
+Do you want to delete those files as well?</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>The deleted note(s) had &lt;strong&gt;%n attachment(s)&lt;/strong&gt; that are not used in any other note.
+
+Do you want to delete those files as well?</source>
+<translation type="unfinished">
+<numerusform>The deleted note(s) had &lt;strong&gt;%n attachment(s)&lt;/strong&gt; that are not used in any other note.
+
+Do you want to delete those files as well?</numerusform>
+<numerusform>The deleted note(s) had &lt;strong&gt;%n attachment(s)&lt;/strong&gt; that are not used in any other note.
+
+Do you want to delete those files as well?</numerusform>
+<numerusform>The deleted note(s) had &lt;strong&gt;%n attachment(s)&lt;/strong&gt; that are not used in any other note.
+
+Do you want to delete those files as well?</numerusform>
+</translation>
+</message>
+<message>
+<source>Delete orphaned images and attachments</source>
+<translation type="unfinished">Delete orphaned images and attachments</translation>
+</message>
+<message numerus="yes">
+<source>Removed %n orphaned file(s)</source>
+<translation type="unfinished">
+<numerusform>Removed %n orphaned file(s)</numerusform>
+<numerusform>Removed %n orphaned file(s)</numerusform>
+<numerusform>Removed %n orphaned file(s)</numerusform>
+</translation>
 </message>
 </context>
 <context>
@@ -3627,16 +7256,16 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <context>
 <name>NoteSubFolderTree</name>
 <message>
-<source>show notes in folder '%1' (%2)</source>
-<translation>prikaži bilješke u mapi '%1' (%2)</translation>
-</message>
-<message>
 <source>All notes</source>
 <translation>Sve bilješke</translation>
 </message>
 <message>
 <source>Show notes from all note subfolders (%1)</source>
 <translation>Pokaži bilješke iz svih podmapa bilješki (%1)</translation>
+</message>
+<message>
+<source>Show notes in folder '%1' (%2)</source>
+<translation>Prikaži bilješke u mapi „%1” (%2)</translation>
 </message>
 <message>
 <source>Show notes in note root folder (%1)</source>
@@ -3656,11 +7285,23 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 </message>
 <message>
 <source>Remove selected folders</source>
-<translation>Izbriši odabrane mape</translation>
+<translation>Ukloni odabrane mape</translation>
+</message>
+<message>
+<source>Move selected folders to...</source>
+<translation>Premjesti odabrane mape u …</translation>
+</message>
+<message>
+<source>Move to note folder</source>
+<translation>Premjesti u mapu bilješke</translation>
 </message>
 <message>
 <source>Show folder in file manager</source>
 <translation>Prikaži mapu u upravljaču datoteka</translation>
+</message>
+<message>
+<source>Move to this subfolder</source>
+<translation>Premjesti u ovu podmapu</translation>
 </message>
 <message numerus="yes">
 <source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected folder(s)?&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!</source>
@@ -3674,138 +7315,380 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <source>Removed note subfolder: %1</source>
 <translation>Izbriši podmapu bilješki: %1</translation>
 </message>
+<message>
+<source>note folder</source>
+<translation>mapa bilješki</translation>
+</message>
+<message>
+<source>Move selected folders</source>
+<translation>Premjesti odabrane mape</translation>
+</message>
+<message numerus="yes">
+<source>Move &lt;strong&gt;%n&lt;/strong&gt; selected folder(s) to &lt;strong&gt;%1&lt;/strong&gt;?</source>
+<translation>
+<numerusform>Premjestiti &lt;strong&gt;%n&lt;/strong&gt; odabranu mapu u &lt;strong&gt;%1&lt;/strong&gt;?</numerusform>
+<numerusform>Premjestiti &lt;strong&gt;%n&lt;/strong&gt; odabrane mape u &lt;strong&gt;%1&lt;/strong&gt;?</numerusform>
+<numerusform>Premjestiti &lt;strong&gt;%n&lt;/strong&gt; odabranih mapa u &lt;strong&gt;%1&lt;/strong&gt;?</numerusform>
+</translation>
+</message>
+<message>
+<source>Migrate relative links</source>
+<translation>Migriraj relativne veze</translation>
+</message>
+<message>
+<source>Do you want to migrate relative note links, media file links and attachment links for moved notes?&lt;br /&gt;&lt;br /&gt;If you choose &lt;strong&gt;No&lt;/strong&gt;, those relative links may break after moving the folders.</source>
+<translation>Želiš li migrirati relativne poveznice bilješki, poveznice medijskih datoteka i poveznice privitaka za premještene bilješke?&lt;br /&gt;&lt;br /&gt;Ako odabereš &lt;strong&gt;Ne&lt;/strong&gt;, te relativne poveznice neće ispravno raditi nakon premještanja mapa.</translation>
+</message>
+<message numerus="yes">
+<source>Moved &lt;strong&gt;%n&lt;/strong&gt; note subfolder(s) to &lt;strong&gt;%1&lt;/strong&gt;</source>
+<translation>
+<numerusform>Premještena je &lt;strong&gt;%n&lt;/strong&gt; podmapa bilješki u &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+<numerusform>Premještene su &lt;strong&gt;%n&lt;/strong&gt; podmape bilješki u &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+<numerusform>Premješteno je &lt;strong&gt;%n&lt;/strong&gt; podmapa bilješki u &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+</translation>
+</message>
+</context>
+<context>
+<name>NoteTabManager</name>
+<message>
+<source>Toggle note pinning</source>
+<translation type="unfinished">Toggle note pinning</translation>
+</message>
+<message>
+<source>Close other note tabs</source>
+<translation type="unfinished">Close other note tabs</translation>
+</message>
+<message>
+<source>Close note tab</source>
+<translation type="unfinished">Close note tab</translation>
+</message>
+</context>
+<context>
+<name>NoteTreeManager</name>
+<message>
+<source>External diff tool</source>
+<translation type="unfinished">External diff tool</translation>
+</message>
+<message>
+<source>Please select at least two notes to diff.</source>
+<translation type="unfinished">Please select at least two notes to diff.</translation>
+</message>
+<message>
+<source>The external diff tool &lt;strong&gt;%1&lt;/strong&gt; could not be started.</source>
+<translation type="unfinished">The external diff tool &lt;strong&gt;%1&lt;/strong&gt; could not be started.</translation>
+</message>
+<message>
+<source>New note</source>
+<translation type="unfinished">New note</translation>
+</message>
+<message>
+<source>Rename note</source>
+<translation type="unfinished">Rename note</translation>
+</message>
+<message>
+<source>Allows you to rename the filename of the note</source>
+<translation type="unfinished">Allows you to rename the filename of the note</translation>
+</message>
+<message>
+<source>&amp;Remove notes and folders</source>
+<translation type="unfinished">&amp;Remove notes and folders</translation>
+</message>
+<message>
+<source>&amp;Remove folders</source>
+<translation type="unfinished">&amp;Remove folders</translation>
+</message>
+<message>
+<source>&amp;Remove notes</source>
+<translation type="unfinished">&amp;Remove notes</translation>
+</message>
+<message>
+<source>&amp;Move notes to…</source>
+<translation type="unfinished">&amp;Move notes to…</translation>
+</message>
+<message>
+<source>&amp;Copy notes to…</source>
+<translation type="unfinished">&amp;Copy notes to…</translation>
+</message>
+<message>
+<source>Jump to the note's subfolder</source>
+<translation type="unfinished">Jump to the note's subfolder</translation>
+</message>
+<message>
+<source>Move notes to subfolder…</source>
+<translation type="unfinished">Move notes to subfolder…</translation>
+</message>
+<message>
+<source>Copy notes to subfolder…</source>
+<translation type="unfinished">Copy notes to subfolder…</translation>
+</message>
+<message>
+<source>&amp;Tag selected notes with…</source>
+<translation type="unfinished">&amp;Tag selected notes with…</translation>
+</message>
+<message>
+<source>&amp;Remove tag from selected notes…</source>
+<translation>&amp;Ukloni oznaku iz odabranih bilješki …</translation>
+</message>
+<message>
+<source>Open selected notes in tabs</source>
+<translation type="unfinished">Open selected notes in tabs</translation>
+</message>
+<message>
+<source>Diff selected notes</source>
+<translation type="unfinished">Diff selected notes</translation>
+</message>
+<message>
+<source>Open note in external editor</source>
+<translation type="unfinished">Open note in external editor</translation>
+</message>
+<message>
+<source>Open note in different window</source>
+<translation type="unfinished">Open note in different window</translation>
+</message>
+<message>
+<source>Open note in Nextcloud Files</source>
+<translation type="unfinished">Open note in Nextcloud Files</translation>
+</message>
+<message>
+<source>Open note in Nextcloud Notes</source>
+<translation type="unfinished">Open note in Nextcloud Notes</translation>
+</message>
+<message>
+<source>Show note in file manager</source>
+<translation type="unfinished">Show note in file manager</translation>
+</message>
+<message>
+<source>Copy absolute path of note</source>
+<translation type="unfinished">Copy absolute path of note</translation>
+</message>
+<message>
+<source>Copy note filename</source>
+<translation type="unfinished">Copy note filename</translation>
+</message>
+<message>
+<source>Show note git versions</source>
+<translation type="unfinished">Show note git versions</translation>
+</message>
+<message>
+<source>Unmark as favorite</source>
+<translation type="unfinished">Unmark as favorite</translation>
+</message>
+<message>
+<source>Mark as favorite</source>
+<translation type="unfinished">Mark as favorite</translation>
+</message>
+<message>
+<source>Select &amp;all notes</source>
+<translation type="unfinished">Select &amp;all notes</translation>
+</message>
+<message>
+<source>Name:</source>
+<translation type="unfinished">Name:</translation>
+</message>
+<message>
+<source>Note renaming not enabled!</source>
+<translation type="unfinished">Note renaming not enabled!</translation>
+</message>
+<message>
+<source>If you want to rename your note you have to enable the option to allow the note filename to be different from the headline.</source>
+<translation type="unfinished">If you want to rename your note you have to enable the option to allow the note filename to be different from the headline.</translation>
+</message>
+<message>
+<source>Open &amp;settings</source>
+<translation type="unfinished">Open &amp;settings</translation>
+</message>
+<message>
+<source>&amp;Cancel</source>
+<translation type="unfinished">&amp;Cancel</translation>
+</message>
 </context>
 <context>
 <name>OpenAiCompleter</name>
 <message>
 <source>Timeout, while waiting for the AI response</source>
-<translation type="unfinished">Timeout, while waiting for the AI response</translation>
+<translation>Prekoračeno vrijeme tijekom čekanja na odgovor od umjetne inteligencije</translation>
 </message>
 </context>
 <context>
 <name>OpenAiService</name>
 <message>
 <source>AI system is disabled. Please enable it in the main menu or the AI toolbar.</source>
-<translation type="unfinished">AI system is disabled. Please enable it in the main menu or the AI toolbar.</translation>
+<translation>UI sustav je deaktiviran. Aktiviraj ga u glavnom izborniku ili UI alatnoj traci.</translation>
 </message>
 </context>
 <context>
-<name>OwnCloudService</name>
+<name>PanelsSettingsWidget</name>
 <message>
-<source>incorrect</source>
-<translation>neispravno</translation>
+<source>Note search panel</source>
+<translation type="unfinished">Note search panel</translation>
 </message>
 <message>
-<source>not connected</source>
-<translation>nepovezano</translation>
+<source>Disable auto-completion of previous searches</source>
+<translation type="unfinished">Disable auto-completion of previous searches</translation>
 </message>
 <message>
-<source>Username / password error</source>
-<translation>Greška u korisničkom imenu / zaporki</translation>
+<source>Show the number of matches in each note</source>
+<translation type="unfinished">Show the number of matches in each note</translation>
 </message>
 <message>
-<source>Your calendar username or password is incorrect!</source>
-<translation>Korisničko ime ili zaporka za kalendar nisu ispravni!</translation>
+<source>Open newly created notes in a new tab</source>
+<translation type="unfinished">Open newly created notes in a new tab</translation>
 </message>
 <message>
-<source>ok</source>
-<translation>u redu</translation>
+<source>Note folder panel</source>
+<translation type="unfinished">Note folder panel</translation>
 </message>
 <message>
-<source>not correct</source>
-<translation>nije ispravno</translation>
+<source>Show note folders as buttons instead of in a select box</source>
+<translation type="unfinished">Show note folders as buttons instead of in a select box</translation>
 </message>
 <message>
-<source>not detected</source>
-<translation>nije prepoznato</translation>
+<source>Note list panel</source>
+<translation type="unfinished">Note list panel</translation>
 </message>
 <message>
-<source>not found</source>
-<translation>nije pronađeno</translation>
+<source>Show all notes in a folder including their subfolders (only works if subfolders are turned on)</source>
+<translation type="unfinished">Show all notes in a folder including their subfolders (only works if subfolders are turned on)</translation>
 </message>
 <message>
-<source>unknown</source>
-<translation>nepoznato</translation>
+<source>Show all notes of a tag including the notes of their children-tags</source>
+<translation type="unfinished">Show all notes of a tag including the notes of their children-tags</translation>
 </message>
 <message>
-<source>version %1 too low</source>
-<translation>verzija %1 preniska</translation>
+<source>Instead of a note list use a note tree with all the subfolders (if they are turned on for the note folder)</source>
+<translation type="unfinished">Instead of a note list use a note tree with all the subfolders (if they are turned on for the note folder)</translation>
 </message>
 <message>
-<source>not enabled</source>
-<translation>nije aktivirano</translation>
+<source>Show notes in the note list with preview</source>
+<translation type="unfinished">Show notes in the note list with preview</translation>
 </message>
 <message>
-<source>API app version too low</source>
-<translation>API verzija aplikacije preniska</translation>
+<source>Allow empty note files</source>
+<translation type="unfinished">Allow empty note files</translation>
 </message>
 <message>
-<source>Please consider updating your QOwnNotesAPI app on your server, your app version %1 is too low and may cause troubles in QOwnNotes.</source>
-<translation>Molimo razmislite o ažuriranju vaše QOwnNotesAPI aplikacije na vašem serveru, vaša verzija aplikacije %1 je preniska i može uzrokovati probleme u QOwnNotes.</translation>
+<source>When enabled, a leading emoji in the note title will be used as the icon in the note list instead of the standard document icon</source>
+<translation type="unfinished">When enabled, a leading emoji in the note title will be used as the icon in the note list instead of the standard document icon</translation>
 </message>
 <message>
-<source>ownCloud server connection error</source>
-<translation>greška u povezivanju sa ownCloud poslužiteljom</translation>
+<source>Show leading emoji from note title as icon in the note list</source>
+<translation type="unfinished">Show leading emoji from note title as icon in the note list</translation>
 </message>
 <message>
-<source>ownCloud server error: &lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;Please check your ownCloud configuration.</source>
-<translation>greška na ownCloud poslužitelju: &lt;strong&gt;%1&lt;/strong&gt; &lt;br /&gt; molimo provjerite vašu ownCloud konfiguraciju.</translation>
+<source>Notes larger than this will not be shown in the note list</source>
+<translation type="unfinished">Notes larger than this will not be shown in the note list</translation>
 </message>
 <message>
-<source>You need to setup your ownCloud server!</source>
-<translation>ownCloud poslužitelj mora bili konfiguriran!</translation>
+<source>Maximum note file size:</source>
+<translation type="unfinished">Maximum note file size:</translation>
 </message>
 <message>
-<source>Open &amp;settings</source>
-<translation>Otvori &amp;postavke</translation>
+<source>Regular expressions of note files to ignore, separated by ";"</source>
+<translation type="unfinished">Regular expressions of note files to ignore, separated by ";"</translation>
 </message>
 <message>
-<source>&amp;Cancel</source>
-<translation>&amp;Odustani</translation>
+<source>Ignored note files</source>
+<translation type="unfinished">Ignored note files</translation>
 </message>
 <message>
-<source>Done with loading note versions</source>
-<translation>Završeno učitavanje verzija bilješki</translation>
+<source>Sort</source>
+<translation type="unfinished">Sort</translation>
 </message>
 <message>
-<source>No versions found</source>
-<translation>Verzije nisu nađene</translation>
+<source>Alphabetical</source>
+<translation type="unfinished">Alphabetical</translation>
 </message>
 <message>
-<source>There are no versions for this note or the note wasn't found on the server.</source>
-<translation>Verzije ove bilješke ne postoje ili bilješka nije pronađena na poslužitelju.</translation>
+<source>By last change</source>
+<translation type="unfinished">By last change</translation>
 </message>
 <message>
-<source>Done with loading trashed notes</source>
-<translation>Završeno učitavanje obrisanih bilješki</translation>
+<source>Order</source>
+<translation type="unfinished">Order</translation>
 </message>
 <message>
-<source>No trashed notes</source>
-<translation>Nema obrisanih bilješki</translation>
+<source>Ascending</source>
+<translation type="unfinished">Ascending</translation>
 </message>
 <message>
-<source>No trashed notes were found on the server.</source>
-<translation>Nema obrisanih bilješki na poslužitelju.</translation>
+<source>Descending</source>
+<translation type="unfinished">Descending</translation>
 </message>
 <message>
-<source>Error while loading todo lists!</source>
-<translation>Pogreška tijekom učitavanja liste zadataka!</translation>
+<source>Note edit panel</source>
+<translation type="unfinished">Note edit panel</translation>
 </message>
 <message>
-<source>Your CalDAV server didn't reply anything!</source>
-<translation>Vaš CalDAV poslužitelj nije odgovorio!</translation>
+<source>Restore open note tabs at application startup and when note folders are switched</source>
+<translation type="unfinished">Restore open note tabs at application startup and when note folders are switched</translation>
 </message>
 <message>
-<source>Error message from your CalDAV server: &lt;strong&gt;%1&lt;/strong&gt;</source>
-<translation>Pogreška na vašem CalDAV poslužitelju: &lt;strong&gt; %1 &lt;/strong&gt;</translation>
+<source>Hide tab close button</source>
+<translation type="unfinished">Hide tab close button</translation>
 </message>
 <message>
-<source>No bookmarks</source>
-<translation>Nema oznaka</translation>
+<source>Note subfolders panel</source>
+<translation type="unfinished">Note subfolders panel</translation>
 </message>
 <message>
-<source>No bookmarks were found on the server.</source>
-<translation>Na poslužitelju nisu pronađene oznake.</translation>
+<source>Hide 'Find or create note subfolder' search</source>
+<translation type="unfinished">Hide 'Find or create note subfolder' search</translation>
+</message>
+<message>
+<source>Display note subfolders as full tree</source>
+<translation type="unfinished">Display note subfolders as full tree</translation>
+</message>
+<message>
+<source>Show root folder name</source>
+<translation type="unfinished">Show root folder name</translation>
+</message>
+<message>
+<source>Show with full path</source>
+<translation type="unfinished">Show with full path</translation>
+</message>
+<message>
+<source>Clicking a note tab unsets 'All notes' selection</source>
+<translation type="unfinished">Clicking a note tab unsets 'All notes' selection</translation>
+</message>
+<message>
+<source>Regular expressions of note subfolders to ignore, separated by ";"</source>
+<translation type="unfinished">Regular expressions of note subfolders to ignore, separated by ";"</translation>
+</message>
+<message>
+<source>Ignored subfolders</source>
+<translation type="unfinished">Ignored subfolders</translation>
+</message>
+<message>
+<source>Reset ignored subfolders</source>
+<translation type="unfinished">Reset ignored subfolders</translation>
+</message>
+<message>
+<source>Tags panel</source>
+<translation type="unfinished">Tags panel</translation>
+</message>
+<message>
+<source>Hide 'Find or create tag' search</source>
+<translation type="unfinished">Hide 'Find or create tag' search</translation>
+</message>
+<message>
+<source>Hide 'Note count' with tags (increases performance)</source>
+<translation type="unfinished">Hide 'Note count' with tags (increases performance)</translation>
+</message>
+<message>
+<source>By last change / use</source>
+<translation type="unfinished">By last change / use</translation>
+</message>
+<message>
+<source>Navigation panel</source>
+<translation type="unfinished">Navigation panel</translation>
+</message>
+<message>
+<source>Hide navigation item search bar</source>
+<translation type="unfinished">Hide navigation item search bar</translation>
+</message>
+<message>
+<source>Auto-select items in navigation panel when changing cursor position</source>
+<translation type="unfinished">Auto-select items in navigation panel when changing cursor position</translation>
 </message>
 </context>
 <context>
@@ -3843,6 +7726,69 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 </message>
 </context>
 <context>
+<name>PreviewFontSettingsWidget</name>
+<message>
+<source>Rendering</source>
+<translation type="unfinished">Rendering</translation>
+</message>
+<message>
+<source>Time to wait before refreshing the preview after typing:</source>
+<translation type="unfinished">Time to wait before refreshing the preview after typing:</translation>
+</message>
+<message>
+<source>Reset the debounce time</source>
+<translation type="unfinished">Reset the debounce time</translation>
+</message>
+<message>
+<source>0ms means don't wait for the typing to stop</source>
+<translation type="unfinished">0ms means don't wait for the typing to stop</translation>
+</message>
+<message>
+<source>Use editor highlighting styles also for the preview</source>
+<translation type="unfinished">Use editor highlighting styles also for the preview</translation>
+</message>
+<message>
+<source>Enable underline rendering</source>
+<translation type="unfinished">Enable underline rendering</translation>
+</message>
+<message>
+<source>View text right to left (RTL)</source>
+<translation type="unfinished">View text right to left (RTL)</translation>
+</message>
+<message>
+<source>Ignore code font size to allow zooming</source>
+<translation type="unfinished">Ignore code font size to allow zooming</translation>
+</message>
+<message>
+<source>Exporting</source>
+<translation type="unfinished">Exporting</translation>
+</message>
+<message>
+<source>Use internal export styling for the PDF export and printing of the preview</source>
+<translation type="unfinished">Use internal export styling for the PDF export and printing of the preview</translation>
+</message>
+<message>
+<source>Fonts</source>
+<translation type="unfinished">Fonts</translation>
+</message>
+<message>
+<source>Code font:</source>
+<translation type="unfinished">Code font:</translation>
+</message>
+<message>
+<source>Set a new font</source>
+<translation type="unfinished">Set a new font</translation>
+</message>
+<message>
+<source>Reset font</source>
+<translation type="unfinished">Reset font</translation>
+</message>
+<message>
+<source>Default font:</source>
+<translation type="unfinished">Default font:</translation>
+</message>
+</context>
+<context>
 <name>QHotkey</name>
 <message>
 <source>Failed to register %1. Error: %2</source>
@@ -3854,10 +7800,281 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 </message>
 </context>
 <context>
+<name>QKeychain::DeletePasswordJobPrivate</name>
+<message>
+<source>Could not open keystore</source>
+<translation type="unfinished">Could not open keystore</translation>
+</message>
+<message>
+<source>Could not remove private key from keystore</source>
+<translation type="unfinished">Could not remove private key from keystore</translation>
+</message>
+<message>
+<source>Unknown error</source>
+<translation type="unfinished">Unknown error</translation>
+</message>
+<message>
+<source>Could not open wallet: %1; %2</source>
+<translation type="unfinished">Could not open wallet: %1; %2</translation>
+</message>
+<message>
+<source>Password entry not found</source>
+<translation type="unfinished">Password entry not found</translation>
+</message>
+<message>
+<source>Could not delete password</source>
+<translation type="unfinished">Could not delete password</translation>
+</message>
+</context>
+<context>
+<name>QKeychain::Job</name>
+<message>
+<source>Both service name and key are empty</source>
+<translation type="unfinished">Both service name and key are empty</translation>
+</message>
+</context>
+<context>
+<name>QKeychain::JobPrivate</name>
+<message>
+<source>Unknown error</source>
+<translation type="unfinished">Unknown error</translation>
+</message>
+<message>
+<source>Access to keychain denied</source>
+<translation type="unfinished">Access to keychain denied</translation>
+</message>
+</context>
+<context>
+<name>QKeychain::PlainTextStore</name>
+<message>
+<source>Could not store data in settings: access error</source>
+<translation type="unfinished">Could not store data in settings: access error</translation>
+</message>
+<message>
+<source>Could not store data in settings: format error</source>
+<translation type="unfinished">Could not store data in settings: format error</translation>
+</message>
+<message>
+<source>Could not delete data from settings: access error</source>
+<translation type="unfinished">Could not delete data from settings: access error</translation>
+</message>
+<message>
+<source>Could not delete data from settings: format error</source>
+<translation type="unfinished">Could not delete data from settings: format error</translation>
+</message>
+<message>
+<source>Entry not found</source>
+<translation type="unfinished">Entry not found</translation>
+</message>
+</context>
+<context>
+<name>QKeychain::ReadPasswordJobPrivate</name>
+<message>
+<source>Entry not found</source>
+<translation type="unfinished">Entry not found</translation>
+</message>
+<message>
+<source>Could not open keystore</source>
+<translation type="unfinished">Could not open keystore</translation>
+</message>
+<message>
+<source>Could not retrieve private key from keystore</source>
+<translation type="unfinished">Could not retrieve private key from keystore</translation>
+</message>
+<message>
+<source>Encrypted data is too short</source>
+<translation type="unfinished">Encrypted data is too short</translation>
+</message>
+<message>
+<source>Could not create RSA decryption cipher</source>
+<translation type="unfinished">Could not create RSA decryption cipher</translation>
+</message>
+<message>
+<source>Could not decrypt AES key: %1</source>
+<translation type="unfinished">Could not decrypt AES key: %1</translation>
+</message>
+<message>
+<source>Could not create AES decryption cipher</source>
+<translation type="unfinished">Could not create AES decryption cipher</translation>
+</message>
+<message>
+<source>Could not create decryption cipher</source>
+<translation type="unfinished">Could not create decryption cipher</translation>
+</message>
+<message>
+<source>D-Bus is not running</source>
+<translation type="unfinished">D-Bus is not running</translation>
+</message>
+<message>
+<source>Unknown error</source>
+<translation type="unfinished">Unknown error</translation>
+</message>
+<message>
+<source>No keychain service available</source>
+<translation type="unfinished">No keychain service available</translation>
+</message>
+<message>
+<source>Could not open wallet: %1; %2</source>
+<translation type="unfinished">Could not open wallet: %1; %2</translation>
+</message>
+<message>
+<source>Access to keychain denied</source>
+<translation type="unfinished">Access to keychain denied</translation>
+</message>
+<message>
+<source>Could not determine data type: %1; %2</source>
+<translation type="unfinished">Could not determine data type: %1; %2</translation>
+</message>
+<message>
+<source>Unknown kwallet entry type '%1'</source>
+<translation type="unfinished">Unknown kwallet entry type '%1'</translation>
+</message>
+<message>
+<source>Password entry not found</source>
+<translation type="unfinished">Password entry not found</translation>
+</message>
+<message>
+<source>Could not decrypt data</source>
+<translation type="unfinished">Could not decrypt data</translation>
+</message>
+<message>
+<source>Could not decrypt data: %1</source>
+<translation type="unfinished">Could not decrypt data: %1</translation>
+</message>
+</context>
+<context>
+<name>QKeychain::WritePasswordJobPrivate</name>
+<message>
+<source>Could not open keystore</source>
+<translation type="unfinished">Could not open keystore</translation>
+</message>
+<message>
+<source>Could not create private key generator</source>
+<translation type="unfinished">Could not create private key generator</translation>
+</message>
+<message>
+<source>Could not generate new private key</source>
+<translation type="unfinished">Could not generate new private key</translation>
+</message>
+<message>
+<source>Could not retrieve private key from keystore</source>
+<translation type="unfinished">Could not retrieve private key from keystore</translation>
+</message>
+<message>
+<source>Could not generate AES key</source>
+<translation type="unfinished">Could not generate AES key</translation>
+</message>
+<message>
+<source>Could not generate IV</source>
+<translation type="unfinished">Could not generate IV</translation>
+</message>
+<message>
+<source>Could not create AES encryption cipher</source>
+<translation type="unfinished">Could not create AES encryption cipher</translation>
+</message>
+<message>
+<source>Could not encrypt data: %1</source>
+<translation type="unfinished">Could not encrypt data: %1</translation>
+</message>
+<message>
+<source>Could not create RSA encryption cipher</source>
+<translation type="unfinished">Could not create RSA encryption cipher</translation>
+</message>
+<message>
+<source>Could not encrypt AES key: %1</source>
+<translation type="unfinished">Could not encrypt AES key: %1</translation>
+</message>
+<message>
+<source>D-Bus is not running</source>
+<translation type="unfinished">D-Bus is not running</translation>
+</message>
+<message>
+<source>Unknown error</source>
+<translation type="unfinished">Unknown error</translation>
+</message>
+<message>
+<source>Could not open wallet: %1; %2</source>
+<translation type="unfinished">Could not open wallet: %1; %2</translation>
+</message>
+<message>
+<source>Encryption failed: %1</source>
+<translation type="unfinished">Encryption failed: %1</translation>
+</message>
+<message>
+<source>Credential size exceeds maximum size of %1: %2</source>
+<translation type="unfinished">Credential size exceeds maximum size of %1: %2</translation>
+</message>
+<message>
+<source>Credential key exceeds maximum size of %1</source>
+<translation type="unfinished">Credential key exceeds maximum size of %1</translation>
+</message>
+<message>
+<source>Writing credentials failed: %1</source>
+<translation type="unfinished">Writing credentials failed: %1</translation>
+</message>
+</context>
+<context>
+<name>QLiteHtmlSearchWidget</name>
+<message>
+<source>Close search</source>
+<translation>Zatvori pretragu</translation>
+</message>
+<message>
+<source>Find:</source>
+<translation>Pronađi:</translation>
+</message>
+<message>
+<source>Find in text</source>
+<translation>Pronađi u tekstu</translation>
+</message>
+<message>
+<source>Search forward</source>
+<translation>Traži prema naprijed</translation>
+</message>
+<message>
+<source>Search backward</source>
+<translation>Traži unatrag</translation>
+</message>
+<message>
+<source>Plain text</source>
+<translation>Neformatirani tekst</translation>
+</message>
+<message>
+<source>Whole words</source>
+<translation>Cijele riječi</translation>
+</message>
+<message>
+<source>Regular expression</source>
+<translation>Regularni izraz</translation>
+</message>
+<message>
+<source>Match case sensitive</source>
+<translation>Razlikuj velika i mala slova</translation>
+</message>
+</context>
+<context>
 <name>QObject</name>
 <message>
 <source>default</source>
 <translation>standard</translation>
+</message>
+<message>
+<source>Note file was modified externally</source>
+<translation>Bilješka je eksterno promijenjena</translation>
+</message>
+<message>
+<source>The note file '%1' was modified externally while you had unsaved changes.
+
+The editor below shows YOUR version. The differences view shows changes between the external file (in red) and your version (in green).
+
+Click 'OK' to save YOUR version and overwrite the external changes.
+Click 'Cancel' to discard your changes and keep the external version.</source>
+<translation type="unfinished">The note file '%1' was modified externally while you had unsaved changes.
+
+The editor below shows YOUR version. The differences view shows changes between the external file (in red) and your version (in green).
+
+Click 'OK' to save YOUR version and overwrite the external changes.
+Click 'Cancel' to discard your changes and keep the external version.</translation>
 </message>
 <message>
 <source>Could not store note file: %1 - Error message: %2</source>
@@ -3891,6 +8108,26 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <numerusform>Otkrivena je promjena staze bilješke. Želite li zamijeniti sve pojave veza &lt;strong&gt;%1 &lt;/strong&gt; s &lt;strong&gt;%2 &lt;/strong&gt; i veze s imenom datoteke %3 &lt;/strong&gt; s &lt;strong&gt;%4 &lt;/strong&gt; &gt; u &lt;strong&gt;%n &lt;/strong&gt; datotekama s napomenama?</numerusform>
 </translation>
 </message>
+<message numerus="yes">
+<source>A change of the note path was detected. Would you like to replace all outgoing links to &lt;strong&gt;%n&lt;/strong&gt; note file(s)?</source>
+<translation>
+<numerusform>Otkrivena je promjena putanje bilješke. Želiš li zamijeniti sve odlazne poveznice u &lt;strong&gt;%n&lt;/strong&gt; datoteku bilješki?</numerusform>
+<numerusform>Otkrivena je promjena putanje bilješke. Želiš li zamijeniti sve odlazne poveznice u &lt;strong&gt;%n&lt;/strong&gt; datoteke bilješki?</numerusform>
+<numerusform>Otkrivena je promjena putanje bilješke. Želiš li zamijeniti sve odlazne poveznice u &lt;strong&gt;%n&lt;/strong&gt; datoteka bilješki?</numerusform>
+</translation>
+</message>
+<message>
+<source>Subfolder path changed</source>
+<translation type="unfinished">Subfolder path changed</translation>
+</message>
+<message numerus="yes">
+<source>The subfolder was renamed from &lt;strong&gt;%1&lt;/strong&gt; to &lt;strong&gt;%2&lt;/strong&gt;. Would you like to update all relative Markdown links that point into this subfolder in &lt;strong&gt;%n&lt;/strong&gt; note file(s)?</source>
+<translation type="unfinished">
+<numerusform>The subfolder was renamed from &lt;strong&gt;%1&lt;/strong&gt; to &lt;strong&gt;%2&lt;/strong&gt;. Would you like to update all relative Markdown links that point into this subfolder in &lt;strong&gt;%n&lt;/strong&gt; note file(s)?</numerusform>
+<numerusform>The subfolder was renamed from &lt;strong&gt;%1&lt;/strong&gt; to &lt;strong&gt;%2&lt;/strong&gt;. Would you like to update all relative Markdown links that point into this subfolder in &lt;strong&gt;%n&lt;/strong&gt; note file(s)?</numerusform>
+<numerusform>The subfolder was renamed from &lt;strong&gt;%1&lt;/strong&gt; to &lt;strong&gt;%2&lt;/strong&gt;. Would you like to update all relative Markdown links that point into this subfolder in &lt;strong&gt;%n&lt;/strong&gt; note file(s)?</numerusform>
+</translation>
+</message>
 <message>
 <source>Image file exists</source>
 <translation>Slikovna datoteka postoji</translation>
@@ -3912,8 +8149,8 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>Nepoznata akcija %1</translation>
 </message>
 <message>
-<source>Workspace selector</source>
-<translation>Odabir radnog prostora</translation>
+<source>Layout selector</source>
+<translation type="unfinished">Layout selector</translation>
 </message>
 <message>
 <source>Don't ask again!</source>
@@ -3924,16 +8161,8 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>Ne prikazuj ponovno!</translation>
 </message>
 <message>
-<source>Double-click to unstick note from tab</source>
-<translation>Dvaput kliknite da biste uklonili oznaku s bilješke</translation>
-</message>
-<message>
-<source>Double-click to stick note to tab</source>
-<translation>Dvaput kliknite da biste zalijepili bilješku na karticu</translation>
-</message>
-<message>
-<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2</source>
-<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;zadnja promjena: %2</translation>
+<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %3&lt;br /&gt;created: %2&lt;br /&gt;file size: %4</source>
+<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;zadnja promjena: %3&lt;br /&gt;stvoreno: %2&lt;br /&gt;veličina datoteke: %4</translation>
 </message>
 <message>
 <source>&lt;br /&gt;path: %1</source>
@@ -3945,15 +8174,47 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 </message>
 <message>
 <source>Your Windows system seems to be in dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
-<translation type="unfinished">Your Windows system seems to be in dark mode. Do you also want to turn on dark mode in QOwnNotes?</translation>
+<translation>Čini se da tvoj Windows sustav koristi tamni način rada. Želiš li također uključiti tamni način rada u QOwnNotes?</translation>
 </message>
 <message>
 <source>Your Windows system seems to be in light mode. Do you also want to turn off dark mode in QOwnNotes?</source>
-<translation type="unfinished">Your Windows system seems to be in light mode. Do you also want to turn off dark mode in QOwnNotes?</translation>
+<translation>Čini se da tvoj Windows sustav koristi svijetli način rada. Želiš li isključiti tamni način rada u QOwnNotes?</translation>
 </message>
 <message>
 <source>Light mode detected</source>
 <translation>Otkriven je svjetlosni način rada</translation>
+</message>
+<message>
+<source>Your system switched to dark mode. Do you also want to turn on dark mode in QOwnNotes?
+
+Updating the interface takes a short while.</source>
+<translation type="unfinished">Your system switched to dark mode. Do you also want to turn on dark mode in QOwnNotes?
+
+Updating the interface takes a short while.</translation>
+</message>
+<message>
+<source>Your system seems to be in dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
+<translation type="unfinished">Your system seems to be in dark mode. Do you also want to turn on dark mode in QOwnNotes?</translation>
+</message>
+<message>
+<source>Your system switched to light mode. Do you also want to turn off dark mode in QOwnNotes?
+
+Updating the interface takes a short while.</source>
+<translation type="unfinished">Your system switched to light mode. Do you also want to turn off dark mode in QOwnNotes?
+
+Updating the interface takes a short while.</translation>
+</message>
+<message>
+<source>Your system seems to be in light mode. Do you also want to turn off dark mode in QOwnNotes?</source>
+<translation type="unfinished">Your system seems to be in light mode. Do you also want to turn off dark mode in QOwnNotes?</translation>
+</message>
+<message>
+<source>Double-click to unpin note from tab</source>
+<translation type="unfinished">Double-click to unpin note from tab</translation>
+</message>
+<message>
+<source>Double-click to pin note to tab</source>
+<translation type="unfinished">Double-click to pin note to tab</translation>
 </message>
 <message>
 <source>Your Linux system seems to use the dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
@@ -4001,7 +8262,7 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 </message>
 <message>
 <source>Your note folder &lt;b&gt;%1&lt;/b&gt; was not found any more! Do you want to select a new one?</source>
-<translation type="unfinished">Your note folder &lt;b&gt;%1&lt;/b&gt; was not found any more! Do you want to select a new one?</translation>
+<translation>Tvoja mapa bilješki &lt;b&gt;%1&lt;/b&gt; više nije pronađena! Želiš li odabrati novu?</translation>
 </message>
 <message>
 <source>Please select the folder where your notes will get stored to</source>
@@ -4061,6 +8322,14 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>Koristite način rada jedne instance aplikacije, koji sprječava da se aplikacija pokrene drugi put. Za sljedeće pokretanje aplikacije način rada jedne instance aplikacije bit će onemogućen, tako da se aplikacija može ponovno pokrenuti prije napuštanja ove instance.</translation>
 </message>
 <message>
+<source>Note '%1' does not exist. Create it?</source>
+<translation type="unfinished">Note '%1' does not exist. Create it?</translation>
+</message>
+<message>
+<source>Note '%1' does not exist in '%2'. Create it?</source>
+<translation type="unfinished">Note '%1' does not exist in '%2'. Create it?</translation>
+</message>
+<message>
 <source>Note was not found</source>
 <translation>Bilješka nije pronađena</translation>
 </message>
@@ -4083,6 +8352,90 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <message>
 <source>Note creation failed</source>
 <translation>Neuspjela izrada bilješke</translation>
+</message>
+<message>
+<source>Double-click to open note</source>
+<translation>Dvoklik za otvaranje bilješke</translation>
+</message>
+<message>
+<source>Nextcloud Deck support disabled!</source>
+<translation>Podrška za Nextcloud Deck je isključena!</translation>
+</message>
+<message>
+<source>Nextcloud Deck support is not enabled or the settings are invalid.&lt;br /&gt;Please check your &lt;strong&gt;Nextcloud&lt;/strong&gt; configuration in the settings!</source>
+<translation>Podrška za Nextcloud Deck nije uključena ili postavke ne valjaju.&lt;br /&gt;Provjeri &lt;strong&gt;Nextcloud&lt;/strong&gt; konfiguraciju u postavkama!</translation>
+</message>
+<message>
+<source>media file</source>
+<translation type="unfinished">media file</translation>
+</message>
+<message>
+<source>attachment</source>
+<translation type="unfinished">attachment</translation>
+</message>
+<message>
+<source>System</source>
+<translation type="unfinished">System</translation>
+</message>
+<message>
+<source>Dark</source>
+<translation type="unfinished">Dark</translation>
+</message>
+<message>
+<source>Harper command is empty</source>
+<translation type="unfinished">Harper command is empty</translation>
+</message>
+<message>
+<source>Failed to start Harper command: %1</source>
+<translation type="unfinished">Failed to start Harper command: %1</translation>
+</message>
+<message>
+<source>Failed to connect to Harper at %1:%2</source>
+<translation type="unfinished">Failed to connect to Harper at %1:%2</translation>
+</message>
+<message>
+<source>Access to keychain denied</source>
+<translation type="unfinished">Access to keychain denied</translation>
+</message>
+<message>
+<source>No keyring daemon</source>
+<translation type="unfinished">No keyring daemon</translation>
+</message>
+<message>
+<source>Already unlocked</source>
+<translation type="unfinished">Already unlocked</translation>
+</message>
+<message>
+<source>No such keyring</source>
+<translation type="unfinished">No such keyring</translation>
+</message>
+<message>
+<source>Bad arguments</source>
+<translation type="unfinished">Bad arguments</translation>
+</message>
+<message>
+<source>I/O error</source>
+<translation type="unfinished">I/O error</translation>
+</message>
+<message>
+<source>Cancelled</source>
+<translation type="unfinished">Cancelled</translation>
+</message>
+<message>
+<source>Keyring already exists</source>
+<translation type="unfinished">Keyring already exists</translation>
+</message>
+<message>
+<source>No match</source>
+<translation type="unfinished">No match</translation>
+</message>
+<message>
+<source>Unknown error</source>
+<translation type="unfinished">Unknown error</translation>
+</message>
+<message>
+<source>Entry not found</source>
+<translation type="unfinished">Entry not found</translation>
 </message>
 </context>
 <context>
@@ -4125,8 +8478,48 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>Umetni &amp;citat blok</translation>
 </message>
 <message>
+<source>List operations</source>
+<translation type="unfinished">List operations</translation>
+</message>
+<message>
+<source>Markdown operations</source>
+<translation type="unfinished">Markdown operations</translation>
+</message>
+<message>
 <source>Copy code block</source>
 <translation>Kopiraj blok koda</translation>
+</message>
+<message>
+<source>Markdown LSP</source>
+<translation>Markdown LSP</translation>
+</message>
+<message>
+<source>Format document</source>
+<translation>Formatiraj dokument</translation>
+</message>
+<message>
+<source>Format selection</source>
+<translation>Formatiraj odabir</translation>
+</message>
+<message>
+<source>Add table column left</source>
+<translation>Dodaj stupac tablice lijevo</translation>
+</message>
+<message>
+<source>Add table column right</source>
+<translation>Dodaj stupac tablice desno</translation>
+</message>
+<message>
+<source>Add table row above</source>
+<translation>Dodaj redak tablice iznad</translation>
+</message>
+<message>
+<source>Add table row below</source>
+<translation>Dodaj redak tablice ispod</translation>
+</message>
+<message>
+<source>Edit table</source>
+<translation>Uredi tablicu</translation>
 </message>
 <message>
 <source>Print</source>
@@ -4153,6 +8546,10 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <translation>Izvezi odabrani tekst kao PDF (pregled)</translation>
 </message>
 <message>
+<source>Select</source>
+<translation type="unfinished">Select</translation>
+</message>
+<message>
 <source>Custom actions</source>
 <translation>Korisničke akcije</translation>
 </message>
@@ -4171,6 +8568,46 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <message>
 <source>Spelling</source>
 <translation>Pravopis</translation>
+</message>
+<message>
+<source>Ignore this rule globally</source>
+<translation type="unfinished">Ignore this rule globally</translation>
+</message>
+<message>
+<source>Ignore rule %1 globally</source>
+<translation type="unfinished">Ignore rule %1 globally</translation>
+</message>
+<message>
+<source>LanguageTool</source>
+<translation type="unfinished">LanguageTool</translation>
+</message>
+<message>
+<source>No suggestions</source>
+<translation type="unfinished">No suggestions</translation>
+</message>
+<message>
+<source>More info...</source>
+<translation type="unfinished">More info...</translation>
+</message>
+<message>
+<source>Ignore this rule</source>
+<translation type="unfinished">Ignore this rule</translation>
+</message>
+<message>
+<source>Ignore word "%1"</source>
+<translation type="unfinished">Ignore word "%1"</translation>
+</message>
+<message>
+<source>Harper</source>
+<translation type="unfinished">Harper</translation>
+</message>
+<message>
+<source>Markdown LSP server connected</source>
+<translation>Markdown LSP server je povezan</translation>
+</message>
+<message>
+<source>Filter completions</source>
+<translation>Filtriraj dovršavanja</translation>
 </message>
 </context>
 <context>
@@ -4206,6 +8643,10 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <message>
 <source>Replace:</source>
 <translation>Zamijeni:</translation>
+</message>
+<message>
+<source>Search in the selection only</source>
+<translation type="unfinished">Search in the selection only</translation>
 </message>
 <message>
 <source>Plain text</source>
@@ -4247,32 +8688,32 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 <context>
 <name>QTextEditSearchWidget</name>
 <message>
-<source>replace text</source>
-<translation>zamjeni tekst</translation>
-</message>
-<message>
 <source>Find:</source>
 <translation>Pronađi:</translation>
 </message>
 <message>
-<source>close search</source>
-<translation>zatvori pretragu</translation>
+<source>Replace text</source>
+<translation>Zamjeni tekst</translation>
 </message>
 <message>
-<source>find in text</source>
-<translation>pronađi u tekstu</translation>
+<source>Close search</source>
+<translation>Zatvori pretragu</translation>
 </message>
 <message>
-<source>search forward</source>
-<translation>pretraži prema naprijed</translation>
+<source>Find in text</source>
+<translation>Pronađi u tekstu</translation>
 </message>
 <message>
-<source>search backward</source>
-<translation>pretraži prema natrag</translation>
+<source>Search forward</source>
+<translation>Traži prema naprijed</translation>
 </message>
 <message>
-<source>replace with</source>
-<translation>zamijeni s</translation>
+<source>Search backward</source>
+<translation>Traži unatrag</translation>
+</message>
+<message>
+<source>Replace with</source>
+<translation>Zamijeni s</translation>
 </message>
 <message>
 <source>Replace:</source>
@@ -4323,8 +8764,15 @@ Ako je kanta za smeće aktivirana na poslužitelju ownCloud trebali biste ju mo�
 </message>
 <message>
 <source>Unable to establish a database connection with file '%1'.
-Are the folder and the file writeable?</source>
-<translation>Ne mogu povezati bazu podataka s datotekom '%1'. Može li se snimati u mapu i datoteku?</translation>
+Are the folder and the file writable?</source>
+<translation type="unfinished">Unable to establish a database connection with file '%1'.
+Are the folder and the file writable?</translation>
+</message>
+<message>
+<source>Unable to establish a database connection with note folder database to merge '%1'.
+Are the folder and the file writable?</source>
+<translation>Nije moguće uspostaviti vezu s bazom podataka s bazom podataka mapa bilješki zaapajanje „%1”.
+Postoje li dozvoe za čitanje i pisanje u mapu i datoteku?</translation>
 </message>
 <message>
 <source>Cannot open note folder database</source>
@@ -4333,12 +8781,6 @@ Are the folder and the file writeable?</source>
 <message>
 <source>Cannot open database</source>
 <translation>Nemoguće otvoriti bazu podataka</translation>
-</message>
-<message>
-<source>Unable to establish a database connection with note folder database to merge '%1'.
-Are the folder and the file writeable?</source>
-<translation>Nemoguće uspostaviti vezu s bazom podataka s bazom podataka mape bilješki za spajanje '%1'.
-Mogu li se mapa i datoteka zapisati?</translation>
 </message>
 </context>
 <context>
@@ -4352,12 +8794,32 @@ Mogu li se mapa i datoteka zapisati?</translation>
 <translation>Trenutačno instalirana verzija:</translation>
 </message>
 <message>
+<source>Changelog:</source>
+<translation type="unfinished">Changelog:</translation>
+</message>
+<message>
 <source>Installs the script</source>
 <translation>Instalira skriptu</translation>
 </message>
 <message>
 <source>Install</source>
 <translation>Instaliraj</translation>
+</message>
+<message>
+<source>Updates all scripts that have updates</source>
+<translation type="unfinished">Updates all scripts that have updates</translation>
+</message>
+<message>
+<source>Update all</source>
+<translation type="unfinished">Update all</translation>
+</message>
+<message>
+<source>Automatically install available updates for scripts installed from the script repository during the startup update check</source>
+<translation type="unfinished">Automatically install available updates for scripts installed from the script repository during the startup update check</translation>
+</message>
+<message>
+<source>Automatically update scripts</source>
+<translation type="unfinished">Automatically update scripts</translation>
 </message>
 <message>
 <source>Version:</source>
@@ -4369,7 +8831,7 @@ Mogu li se mapa i datoteka zapisati?</translation>
 </message>
 <message>
 <source>To search for a script please enter your query text.</source>
-<translation type="unfinished">To search for a script please enter your query text.</translation>
+<translation>Za pretraživanje skripta upiši tekst upita.</translation>
 </message>
 <message>
 <source>Minimum app version:</source>
@@ -4432,6 +8894,14 @@ Mogu li se mapa i datoteka zapisati?</translation>
 <translation>Ponovno instalira skriptu</translation>
 </message>
 <message>
+<source>Open changelog</source>
+<translation type="unfinished">Open changelog</translation>
+</message>
+<message>
+<source>Changes from version %1 to %2:</source>
+<translation type="unfinished">Changes from version %1 to %2:</translation>
+</message>
+<message>
 <source>Platform not supported!</source>
 <translation>Platforma nije podržana!</translation>
 </message>
@@ -4440,10 +8910,6 @@ Mogu li se mapa i datoteka zapisati?</translation>
 Do you want to install it anyway?</source>
 <translation>Vaša platforma ne podržava ovu skriptu!
 Želite li je ipak instalirati?</translation>
-</message>
-<message>
-<source>Cancel</source>
-<translation>Odustani</translation>
 </message>
 <message>
 <source>Update app</source>
@@ -4469,6 +8935,14 @@ Do you want to install it anyway?</source>
 <source>The script could not be downloaded!</source>
 <translation>Nije moguće preuzeti skriptu!</translation>
 </message>
+<message numerus="yes">
+<source>%n script update(s) were installed.</source>
+<translation type="unfinished">
+<numerusform>%n script update(s) were installed.</numerusform>
+<numerusform>%n script update(s) were installed.</numerusform>
+<numerusform>%n script update(s) were installed.</numerusform>
+</translation>
+</message>
 </context>
 <context>
 <name>ScriptSettingWidget</name>
@@ -4490,6 +8964,166 @@ Do you want to install it anyway?</source>
 <message>
 <source>file doesn't exist</source>
 <translation>datoteka ne postoji</translation>
+</message>
+</context>
+<context>
+<name>ScriptingSettingsWidget</name>
+<message>
+<source>Your scripts</source>
+<translation type="unfinished">Your scripts</translation>
+</message>
+<message>
+<source>&amp;Add script…</source>
+<translation type="unfinished">&amp;Add script…</translation>
+</message>
+<message>
+<source>&amp;Remove script</source>
+<translation>&amp;Ukloni skriptu</translation>
+</message>
+<message>
+<source>Search scripts</source>
+<translation type="unfinished">Search scripts</translation>
+</message>
+<message>
+<source>Description:</source>
+<translation type="unfinished">Description:</translation>
+</message>
+<message>
+<source>Author(s):</source>
+<translation type="unfinished">Author(s):</translation>
+</message>
+<message>
+<source>Repository:</source>
+<translation type="unfinished">Repository:</translation>
+</message>
+<message>
+<source>Version:</source>
+<translation type="unfinished">Version:</translation>
+</message>
+<message>
+<source>Name:</source>
+<translation type="unfinished">Name:</translation>
+</message>
+<message>
+<source>Script name</source>
+<translation type="unfinished">Script name</translation>
+</message>
+<message>
+<source>Script path:</source>
+<translation type="unfinished">Script path:</translation>
+</message>
+<message>
+<source>Validate script</source>
+<translation type="unfinished">Validate script</translation>
+</message>
+<message>
+<source>You need to reload the scripting engine if you modify a script file</source>
+<translation type="unfinished">You need to reload the scripting engine if you modify a script file</translation>
+</message>
+<message>
+<source>Reload scripting engine</source>
+<translation type="unfinished">Reload scripting engine</translation>
+</message>
+<message>
+<source>Click here to select your QML script</source>
+<translation type="unfinished">Click here to select your QML script</translation>
+</message>
+<message>
+<source>Path to your QML file</source>
+<translation type="unfinished">Path to your QML file</translation>
+</message>
+<message>
+<source>The name</source>
+<translation type="unfinished">The name</translation>
+</message>
+<message>
+<source>New script</source>
+<translation type="unfinished">New script</translation>
+</message>
+<message>
+<source>Take a look at the &lt;a href="%1"&gt;Scripting documentation&lt;/a&gt; to get started fast.</source>
+<translation type="unfinished">Take a look at the &lt;a href="%1"&gt;Scripting documentation&lt;/a&gt; to get started fast.</translation>
+</message>
+<message>
+<source>If you need access to a certain functionality in QOwnNotes please open an issue on the &lt;a href="%1"&gt; QOwnNotes issue page&lt;/a&gt;.</source>
+<translation type="unfinished">If you need access to a certain functionality in QOwnNotes please open an issue on the &lt;a href="%1"&gt; QOwnNotes issue page&lt;/a&gt;.</translation>
+</message>
+<message>
+<source>Search script repository</source>
+<translation type="unfinished">Search script repository</translation>
+</message>
+<message>
+<source>Find a script in the script repository</source>
+<translation type="unfinished">Find a script in the script repository</translation>
+</message>
+<message>
+<source>Check for script updates</source>
+<translation type="unfinished">Check for script updates</translation>
+</message>
+<message>
+<source>Add local script</source>
+<translation type="unfinished">Add local script</translation>
+</message>
+<message>
+<source>Add an existing, local script</source>
+<translation type="unfinished">Add an existing, local script</translation>
+</message>
+<message>
+<source>Remove script</source>
+<translation>Ukloni skriptu</translation>
+</message>
+<message>
+<source>Remove the current script &lt;strong&gt;%1&lt;/strong&gt;?</source>
+<translation>Ukloniti trenutačnu skriptu &lt;strong&gt; %1 &lt;/strong&gt;?</translation>
+</message>
+<message>
+<source>QML files</source>
+<translation type="unfinished">QML files</translation>
+</message>
+<message>
+<source>Please select your QML file</source>
+<translation type="unfinished">Please select your QML file</translation>
+</message>
+<message>
+<source>Open repository</source>
+<translation type="unfinished">Open repository</translation>
+</message>
+<message>
+<source>Your script seems to be valid</source>
+<translation type="unfinished">Your script seems to be valid</translation>
+</message>
+<message>
+<source>There were script errors:
+%1</source>
+<translation type="unfinished">There were script errors:
+%1</translation>
+</message>
+</context>
+<context>
+<name>SearchFilterManager</name>
+<message numerus="yes">
+<source>Found &lt;strong&gt;%n&lt;/strong&gt; occurrence(s) of &lt;strong&gt;%1&lt;/strong&gt;</source>
+<translation type="unfinished">
+<numerusform>Found &lt;strong&gt;%n&lt;/strong&gt; occurrence(s) of &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+<numerusform>Found &lt;strong&gt;%n&lt;/strong&gt; occurrence(s) of &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+<numerusform>Found &lt;strong&gt;%n&lt;/strong&gt; occurrence(s) of &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Found &lt;strong&gt;%n&lt;/strong&gt; occurrence(s) of any term of &lt;strong&gt;%1&lt;/strong&gt;</source>
+<translation type="unfinished">
+<numerusform>Found &lt;strong&gt;%n&lt;/strong&gt; occurrence(s) of any term of &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+<numerusform>Found &lt;strong&gt;%n&lt;/strong&gt; occurrence(s) of any term of &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+<numerusform>Found &lt;strong&gt;%n&lt;/strong&gt; occurrence(s) of any term of &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+</translation>
+</message>
+<message>
+<source>Stored current note to disk</source>
+<translation type="unfinished">Stored current note to disk</translation>
+</message>
+<message>
+<source>Current note could not be stored to disk</source>
+<translation type="unfinished">Current note could not be stored to disk</translation>
 </message>
 </context>
 <context>
@@ -4522,418 +9156,56 @@ Do you want to install it anyway?</source>
 <translation>Mape s bilješkama</translation>
 </message>
 <message>
-<source>Your note folders</source>
-<translation>Vaše mape s bilješkama</translation>
-</message>
-<message>
-<source>&amp;Add folder</source>
-<translation>&amp;Dodavanje mape</translation>
-</message>
-<message>
-<source>&amp;Remove folder</source>
-<translation>&amp;Brisanje mape</translation>
-</message>
-<message>
-<source>This name will be viewed in all the menus.</source>
-<translation>Ovaj naziv će biti prikazan u svim izbornicima.</translation>
-</message>
-<message>
-<source>Set the ownCloud path where the note folder path will be synced to on your ownCloud server.</source>
-<translation>Podesi ownCloud put s kojim će put mape bilješki biti sinkroniziran na poslužitelju ownCloud.</translation>
-</message>
-<message>
-<source>Use as active note folder</source>
-<translation>Koristi kao aktivna mapu bilješke</translation>
-</message>
-<message>
-<source>Your ownCloud server</source>
-<translation>Vaš ownCloud poslužitelj</translation>
-</message>
-<message>
-<source>ownCloud server url:</source>
-<translation>url ownCloud poslužitelja:</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the URL of your ownCloud server, for example: &lt;span style=" font-style:italic;"&gt;https://cloud.yourserver.com&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt; &lt;body&gt;&lt;p&gt;Unesite URL ownCloud poslužitelja, na primjer: &lt;span style="font-style:italic;"&gt; https://cloud.yourserver.com&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the username on your ownCloud server.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt; &lt;body&gt;&lt;p&gt;Unesite korisničko ime na ownCloud poslužitelju.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the password for your username.&lt;br/&gt;Currently the password will be stored encrypted with the other settings, but is not very secure.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt; &lt;body&gt;&lt;p&gt;Unesite zaporku za svoje korisničko ime. &lt;br/&gt;Zaporka će biti kodirana i pohranjena s drugim postavkama, to nije vrlo sigurno.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>connection to web server</source>
-<translation>veza s web-poslužiteljom</translation>
-</message>
-<message>
-<source>ownCloud server detected</source>
-<translation>ownCloud poslužitelj pronađen</translation>
-</message>
-<message>
-<source>connection to QOwnNotesAPI</source>
-<translation>veza s QOwnNotesAPI</translation>
-</message>
-<message>
-<source>username and password correct</source>
-<translation>korisničko ime i zaporka ispravni</translation>
-</message>
-<message>
-<source>unknown</source>
-<translation>nepoznato</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click here to test the connection to your ownCloud server.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt; &lt;body&gt;&lt;p&gt;Kliknite ovdje za provjeru veze s ownCloud poslužiteljem.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>versions app enabled on server</source>
-<translation>aplikacija verzioniranja aktivirana na poslužitelju</translation>
-</message>
-<message>
-<source>trash app enabled on server</source>
-<translation>aplikacija za brisanje na poslužitelju aktivirana</translation>
-</message>
-<message>
-<source>notes path found on server</source>
-<translation>pronađena staza do bilješki na poslužitelju</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Opens your ownCloud server &lt;span style=" font-weight:600;"&gt;App configuration&lt;/span&gt; page in your webbrowser to install or update QOwnNotesAPI and to enable the core apps &lt;span style=" font-weight:600;"&gt;Versions&lt;/span&gt; and &lt;span style=" font-weight:600;"&gt;Deleted files&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt; &lt;body&gt;&lt;p&gt;Otvara stranicu &lt;span style="font-weight:600;"&gt;konfiguracija aplikacija&lt;/span&gt; na vašem ownCloud poslužitelju u pregledniku da instalirate ili ažurirate QOwnNotesAPI te omogućite ključne aplikacije &lt;span style="font-weight:600;"&gt; verzioniranje&lt;/span&gt; i &lt;span style="font-weight:600;"&gt;izbrisane datoteke&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>path</source>
-<translation>put</translation>
-</message>
-<message>
-<source>Click here to select your local note path</source>
-<translation>Klikni ovdje za odabir lokalnog puta bilješki</translation>
-</message>
-<message>
-<source>Click here to select your remote note path on your ownCloud server</source>
-<translation>Klikni ovdje za odabir puta bilješki na ownCloud poslužitelju</translation>
-</message>
-<message>
-<source>Click here to use the selected folder from your server as note folder</source>
-<translation>Klikni ovdje za korištenje odabrane mape s vašeg poslužitelja kao mape bilješki</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You also need to have the two ownCloud core apps &lt;span style=" font-weight:600;"&gt;Versions&lt;/span&gt; and &lt;span style=" font-weight:600;"&gt;Deleted files&lt;/span&gt; enabled on your ownCloud server (that should be the default).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt; &lt;p&gt; Trebate imati i dvije temeljne aplikacije ownCloud &lt;span style = "font-weight: 600;"&gt; Verzije &lt;/span&gt; i &lt;span style = "font-weight: 600; "&gt; Izbrisane datoteke &lt;/span&gt; omogućene na poslužitelju ownCloud (to bi trebalo biti zadano). &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
-</message>
-<message>
-<source>Error Message</source>
-<translation>Poruka o pogrešci</translation>
-</message>
-<message>
 <source>Network</source>
 <translation>Mreža</translation>
-</message>
-<message>
-<source>Proxy Settings</source>
-<translation>Postavke proxy poslužitelja</translation>
-</message>
-<message>
-<source>No Proxy</source>
-<translation>Nema Proxy poslužitelja</translation>
-</message>
-<message>
-<source>Use system proxy</source>
-<translation>Koristi proxy sustava</translation>
-</message>
-<message>
-<source>Specify proxy manually as</source>
-<translation>Definiraj proxy ručno kao</translation>
-</message>
-<message>
-<source>Host</source>
-<translation>Domaćin</translation>
-</message>
-<message>
-<source>Proxy server requires authentication</source>
-<translation>Proxy poslužitelj zahtijeva provjeru autentičnosti</translation>
-</message>
-<message>
-<source>SSL Settings</source>
-<translation>Postavke SSL-a</translation>
-</message>
-<message>
-<source>Ignore SSL errors</source>
-<translation>Zanemari pogreške SSL</translation>
 </message>
 <message>
 <source>Todo</source>
 <translation>Zadaci</translation>
 </message>
 <message>
-<source>Default ownCloud calendar</source>
-<translation>Osnovni ownCloud kalendar</translation>
-</message>
-<message>
 <source>Interface</source>
 <translation>Sučelje</translation>
 </message>
 <message>
-<source>Other CalDAV server</source>
-<translation>Drugi CalDAV poslužitelj</translation>
+<source>Layouts</source>
+<translation type="unfinished">Layouts</translation>
 </message>
 <message>
-<source>Only some colors will be adapted, your desktop theme will control the rest. You need to restart the application to let these changes take action.</source>
-<translation>Samo će neke boje biti prilagođene, ostatak će kontrolirati tema radne površine. Morate ponovno pokrenuti aplikaciju da biste omogućili da se izmjene poduzmu.</translation>
+<source>Harper</source>
+<translation type="unfinished">Harper</translation>
 </message>
 <message>
-<source>Optimize preview colors for dark mode desktop themes</source>
-<translation>Optimiziraj boje pretpregleda za teme tamnog načina rada</translation>
-</message>
-<message>
-<source>This enables the dark mode, interface and icons will be modified. You need to restart the application to let these changes take action.</source>
-<translation>To omogućuje tamni način rada, sučelje i ikone će se mijenjati. Morate ponovno pokrenuti aplikaciju da biste omogućili da se izmjene poduzmu.</translation>
-</message>
-<message>
-<source>Enable dark mode</source>
-<translation>Aktiviraj tamni način rada</translation>
-</message>
-<message>
-<source>You need to restart the application to let this setting take effect</source>
-<translation>Morate ponovno pokrenuti aplikaciju kako bi ova postavka stupila na snagu</translation>
-</message>
-<message>
-<source>Item sizes in the main window</source>
-<translation>Veličine stavke u glavnom prozoru</translation>
-</message>
-<message>
-<source>Markdown highlighting</source>
-<translation>Istaknuto označavanje</translation>
-</message>
-<message>
-<source>Enable markdown highlighting</source>
-<translation>Omogući istaknuto označavanje</translation>
-</message>
-<message>
-<source>Interface language</source>
-<translation>Jezik sučelja</translation>
-</message>
-<message>
-<source>Automatic</source>
-<translation>Automatski</translation>
-</message>
-<message>
-<source>English</source>
-<translation>Engleski</translation>
+<source>Markdown LSP</source>
+<translation type="unfinished">Markdown LSP</translation>
 </message>
 <message>
 <source>Shortcuts</source>
 <translation>Kratice</translation>
 </message>
 <message>
-<source>Default font:</source>
-<translation>Zadani font:</translation>
+<source>Trash</source>
+<translation>Smeće</translation>
 </message>
 <message>
-<source>Code font:</source>
-<translation>Font koda</translation>
+<source>Loading shortcuts: %v / %m</source>
+<translation type="unfinished">Loading shortcuts: %v / %m</translation>
 </message>
 <message>
 <source>Main window shortcuts</source>
 <translation>Prečice glavnog prozora</translation>
 </message>
 <message>
-<source>Do this at your own risk!</source>
-<translation>Učini to na vlastiti rizik!</translation>
-</message>
-<message>
-<source>Ignore all external note folder changes</source>
-<translation>Zanemari sve vanjske promjene mapa bilješki</translation>
-</message>
-<message>
-<source>Use GitHub line breaks</source>
-<translation>Koristi GitHub prijelaze redaka</translation>
-</message>
-<message>
-<source>German</source>
-<translation>Njemački</translation>
-</message>
-<message>
-<source>French</source>
-<translation>Francuski</translation>
-</message>
-<message>
-<source>Polish</source>
-<translation>Poljski</translation>
-</message>
-<message>
-<source>Portuguese</source>
-<translation>Portugalski</translation>
-</message>
-<message>
-<source>Dutch</source>
-<translation>Nizozemski</translation>
-</message>
-<message>
-<source>Hungarian</source>
-<translation>Mađarski</translation>
-</message>
-<message>
-<source>Spanish</source>
-<translation>Španjolski</translation>
-</message>
-<message>
-<source>Dark mode</source>
-<translation>Tamni način rada</translation>
-</message>
-<message>
-<source>Disable tracking of usage data</source>
-<translation>Onemogući praćenje podataka o upotrebi</translation>
-</message>
-<message>
-<source>Usage tracking is done on a private Piwik server.</source>
-<translation>Praćenje korištenja se obavlja na privatnom Piwik poslužitelju.</translation>
-</message>
-<message>
-<source>Disable heartbeat</source>
-<translation>Onemogući otkucaje srca</translation>
-</message>
-<message>
-<source>Russian</source>
-<translation>Ruski</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You might want to consider getting a free SSL certificate from &lt;a href="https://letsencrypt.org/"&gt;Let's encrypt&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt; &lt;p&gt; Razmislite o dobivanju besplatnog SSL certifikata iz &lt;a href="https://letsencrypt.org/"&gt; Šifriraj &lt;/a&gt;. &lt;/p&gt; &lt;/ body&gt; &lt;/ html&gt;</translation>
-</message>
-<message>
-<source>If you change the language you have to restart the application for the changes to take action.</source>
-<translation>Ako promijenite jezik, morate ponovno pokrenuti aplikaciju kako bi se promjene poduzele.</translation>
-</message>
-<message>
-<source>You need to reload the scripting engine if you modify a script file</source>
-<translation>Morate ponovno učitati skriptni pogon ako izmijenite datoteku skripte</translation>
-</message>
-<message>
-<source>Reload scripting engine</source>
-<translation>Učitaj mehanizam za skriptiranje</translation>
-</message>
-<message>
-<source>Validate script</source>
-<translation>Potvrdi skriptu</translation>
-</message>
-<message>
 <source>General</source>
 <translation>Opće</translation>
-</message>
-<message>
-<source>Notes</source>
-<translation>Bilješke</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked you will always be notified about external modifications, even if current note wasn't edited in the last minute. Recommended is &lt;span style=" font-style:italic;"&gt;unchecked&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt; &lt;p&gt; Ako je označeno, uvijek ćete biti obaviješteni o vanjskim izmjenama, čak i ako trenutna bilješka nije uređena u posljednjoj minuti. Preporučeno je &lt;span style = "font-style: italic;"&gt; neprovjereno &lt;/span&gt;. &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
-</message>
-<message>
-<source>You might run into sync troubles with older versions of ownCloud sync when going far below 10 sec.
-Just test yourself if you get sync conflicts and set a higher value if so.</source>
-<translation>Možda ćete se suočiti s poteškoćama pri sinkronizaciji sa starijim verzijama sinkronizacije ownCloud kad prijeđete 10 sekundi.
-Samo se testirajte ako dobijete sukobe pri sinkronizaciji i postavite višu vrijednost ako je tako.</translation>
-</message>
-<message>
-<source>Japanese</source>
-<translation>Japanski</translation>
-</message>
-<message>
-<source>note save interval time [sec]</source>
-<translation>vrijeme intervala spremanja bilješke [sec]</translation>
-</message>
-<message>
-<source>Notify about all external modifications of the current note</source>
-<translation>Obavijesti o svim vanjskim izmjenama trenutne bilješke</translation>
-</message>
-<message>
-<source>Database</source>
-<translation>Baza podataka</translation>
-</message>
-<message>
-<source>Reinitialize Database</source>
-<translation>Reiniciraj bazu podataka</translation>
-</message>
-<message>
-<source>Clear application data and exit</source>
-<translation>Brisanje podataka aplikacije i izlaz</translation>
-</message>
-<message>
-<source>This button allows you to clear all settings, remove the local todo database and exit QOwnNotes.</source>
-<translation>Ovaj gumb omogućuje brisanje svih postavki, uklanjanje lokalne baze zadataka i izlaz iz QOwnNotes-a.</translation>
-</message>
-<message>
-<source>Clear app data and exit</source>
-<translation>Brisanje podataka aplikacije i izlaz</translation>
-</message>
-<message>
-<source>Update dialog</source>
-<translation>Ažuriraj dijalog</translation>
-</message>
-<message>
-<source>External editor</source>
-<translation>Vanjski editor</translation>
-</message>
-<message>
-<source>path to external editor, leave empty for default</source>
-<translation>put do vanjskog urednika, ostavite prazno za zadane</translation>
-</message>
-<message>
-<source>set external editor</source>
-<translation>postavi vanjskog urednika</translation>
-</message>
-<message>
-<source>App metrics</source>
-<translation>Mjerenja aplikacija</translation>
-</message>
-<message>
-<source>Anonymous usage data helps to decide what parts of QOwnNotes to improve next and to find and fix bugs. Please disable it only if you really can't live with it.</source>
-<translation>Anonimni podaci o korištenju pomažu u odlučivanju koje će dijelove QOwnNotes poboljšati sljedeće te pronaći i ispraviti greške. Isključite ih samo ako doista ne možete živjeti s njima.</translation>
-</message>
-<message>
-<source>This data includes anonymous information about what features of the app are used.</source>
-<translation>Ti podaci uključuju anonimne informacije o značajkama aplikacije.</translation>
-</message>
-<message>
-<source>App heartbeat</source>
-<translation>Aplikacija otkucaja</translation>
-</message>
-<message>
-<source>A small heartbeat request is sent periodically while QOwnNotes is running. Make a developer happy by letting him know that someone is using QOwnNotes.</source>
-<translation>Povremeno se šalje zahtjev za otkucaje srca dok je QOwnNotes pokrenut. Usrećite razvojnog programera tako da mu javite da netko koristi QOwnNotes.</translation>
-</message>
-<message>
-<source>Italian</source>
-<translation>Talijanski</translation>
 </message>
 <message>
 <source>Scripting</source>
 <translation>Skriptiranje</translation>
 </message>
 <message>
-<source>Your scripts</source>
-<translation>Vaše skripte</translation>
-</message>
-<message>
-<source>&amp;Remove script</source>
-<translation>&amp;Ukloni skriptu</translation>
-</message>
-<message>
-<source>Click here to select your QML script</source>
-<translation>Kliknite ovdje da biste odabrali QML skriptu</translation>
-</message>
-<message>
 <source>Find setting</source>
 <translation>Nađi postavku</translation>
-</message>
-<message>
-<source>Layout</source>
-<translation>Raspored</translation>
 </message>
 <message>
 <source>Editor</source>
@@ -4960,447 +9232,16 @@ Samo se testirajte ako dobijete sukobe pri sinkronizaciji i postavite višu vrij
 <translation>Git verzija</translation>
 </message>
 <message>
-<source>Local trash</source>
-<translation>Lokalna kanta za smeće</translation>
-</message>
-<message>
 <source>Debug options</source>
 <translation>Debug mogućnosti</translation>
 </message>
 <message>
-<source>Path where your notes are stored locally</source>
-<translation>Put gdje se bilješke pohranjuju lokalno</translation>
+<source>Color modes</source>
+<translation type="unfinished">Color modes</translation>
 </message>
 <message>
-<source>"Notes" path on your server</source>
-<extracomment>"Notes" should not be translated</extracomment>
-<translation>"Bilješke" put na vašem serveru</translation>
-</message>
-<message>
-<source>&amp;Use as ownCloud path</source>
-<translation>&amp;Koristi kao ownCloud put</translation>
-</message>
-<message>
-<source>Please select your note folder on your ownCloud server:</source>
-<translation>Odaberite mapu s bilješkama na svom ownCloud serveru:</translation>
-</message>
-<message>
-<source>Path on your ownCloud server:</source>
-<translation>Put na poslužitelju ownCloud:</translation>
-</message>
-<message>
-<source>Name:</source>
-<translation>Ime:</translation>
-</message>
-<message>
-<source>Note folder path:</source>
-<translation>Put do mape s bilješkama:</translation>
-</message>
-<message>
-<source>You need to have git installed to make this work!</source>
-<translation>Morate imati instaliran git kako bi ovo funkcioniralo!</translation>
-</message>
-<message>
-<source>Use git to keep a local history of your notes</source>
-<translation>Upotrijebite git da biste zadržali lokalnu povijest bilješki</translation>
-</message>
-<message>
-<source>ownCloud support</source>
-<translation>Podrška za ownCloud</translation>
-</message>
-<message>
-<source>Enable ownCloud support</source>
-<translation>Uključi ownCloud podršku</translation>
-</message>
-<message>
-<source>Please install the latest version of &lt;a href="https://github.com/pbek/qownnotesapi"&gt;&lt;span style=" font-weight:600;"&gt;QOwnNotesAPI&lt;/span&gt;&lt;/a&gt; (at least version QOWNNOTESAPI_MIN_VERSION) on your ownCloud server if you want QOwnNotes to be able to access note versions and trashed notes.</source>
-<translation>Instalirajte najnoviju verziju &lt;a href="https://github.com/pbek/qownnotesapi"&gt; &lt;span style = "font-weight: 600;"&gt; QOwnNotesAPI &lt;/span&gt; &lt;/a&gt; (barem verziju QOWNNOTESAPI_MIN_VERSION) na poslužitelju ownCloud ako želite da QOwnNotes može pristupiti verzijama bilješki i izbrisanim bilješkama.</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You will still need the &lt;a href="https://owncloud.org/"&gt;&lt;span style=" font-weight:600"&gt;ownCloud sync client&lt;/span&gt;&lt;/a&gt; (or another desktop sync client) to sync your notes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;I dalje će vam trebati klijent za sinkronizaciju&lt;a href="https://owncloud.org/"&gt;&lt;span style=" font-weight:600"&gt; 'ownCloud' &lt;/span&gt;&lt;/a&gt;(ili drugi klijent za sinkronizaciju na radnoj površini) za sinkronizaciju bilješki!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>Select a connection to edit</source>
-<translation>Odaberite vezu koju želite urediti</translation>
-</message>
-<message>
-<source>Add connection</source>
-<translation>Dodaj vezu</translation>
-</message>
-<message>
-<source>Remove connection</source>
-<translation>Ukloni vezu</translation>
-</message>
-<message>
-<source>Username:</source>
-<translation>Korisničko ime:</translation>
-</message>
-<message>
-<source>Your ownCloud username</source>
-<translation>Korisničko ime na ownCloud poslužitelju</translation>
-</message>
-<message>
-<source>Password:</source>
-<translation>Zaporka:</translation>
-</message>
-<message>
-<source>Your ownCloud password</source>
-<translation>Zaporka na OwnCloud poslužitelju</translation>
-</message>
-<message>
-<source>&amp;Connect to ownCloud server</source>
-<translation>&amp;povezivanje s ownCloud poslužiteljom</translation>
-</message>
-<message>
-<source>Connection status</source>
-<translation>Stanje veze</translation>
-</message>
-<message>
-<source>Connection name:</source>
-<translation>Naziv veze:</translation>
-</message>
-<message>
-<source>Be aware that the ownCloud notes app doesn't support subfolders!</source>
-<translation>Imajte na umu da app ownCloud Notes ne podržava podmape!
-</translation>
-</message>
-<message>
-<source>Use note subfolders</source>
-<translation>Upotrijebite podmape bilješki
-</translation>
-</message>
-<message>
-<source>The login flow v2 only works with Nextcloud, not with ownCloud. If you have troubles you need to create an app password by hand.</source>
-<translation>Tijek prijave v2 radi samo s Nextcloudom, ne i s ownCloudom. Ako imate problema, morate ručno izraditi lozinku za aplikaciju.</translation>
-</message>
-<message>
-<source>Login to Nextcloud to grant access</source>
-<translation>Prijavite se na Nextcloud da biste odobrili pristup</translation>
-</message>
-<message>
-<source>Stack:</source>
-<translation type="unfinished">Stack:</translation>
-</message>
-<message>
-<source>Todo settings</source>
-<translation>Postavke Zadataka</translation>
-</message>
-<message>
-<source>Enable todo calendar support</source>
-<translation>Omogući podršku za kalendar zadataka</translation>
-</message>
-<message>
-<source>Which cloud connection do you want to use?</source>
-<translation>Koju vezu u oblaku želite koristiti?</translation>
-</message>
-<message>
-<source>Select the calendars you want to use for the Todo list</source>
-<translation>Odaberite kalendare koje želite koristiti za popis zadataka</translation>
-</message>
-<message>
-<source>Todo list settings</source>
-<translation>Postavke popisa zadataka</translation>
-</message>
-<message>
-<source>Saving an item also closes the Todo list</source>
-<translation>Spremanje stavke također zatvara popis zadataka</translation>
-</message>
-<message>
-<source>Indonesian</source>
-<translation>Indonezijski</translation>
-</message>
-<message>
-<source>Bengali</source>
-<translation>Bengalski</translation>
-</message>
-<message>
-<source>Bosnian</source>
-<translation>Bosanski</translation>
-</message>
-<message>
-<source>Bulgarian</source>
-<translation>Bugarski</translation>
-</message>
-<message>
-<source>Catalan</source>
-<translation>Katalonski</translation>
-</message>
-<message>
-<source>Cebuano</source>
-<translation>Cebuano</translation>
-</message>
-<message>
-<source>Danish</source>
-<translation>danski</translation>
-</message>
-<message>
-<source>Basque</source>
-<translation>Baskijski</translation>
-</message>
-<message>
-<source>Estonian</source>
-<translation>Estonski</translation>
-</message>
-<message>
-<source>Filipino</source>
-<translation>Filipinski</translation>
-</message>
-<message>
-<source>Finnish</source>
-<translation>Finski</translation>
-</message>
-<message>
-<source>Irish</source>
-<translation>Irski</translation>
-</message>
-<message>
-<source>Galician</source>
-<translation>Galicijski</translation>
-</message>
-<message>
-<source>Greek</source>
-<translation>Grčki</translation>
-</message>
-<message>
-<source>Hausa</source>
-<translation>Hausa</translation>
-</message>
-<message>
-<source>Hebrew</source>
-<translation>Hebrejski</translation>
-</message>
-<message>
-<source>Hindi</source>
-<translation>Hindski</translation>
-</message>
-<message>
-<source>Hiligaynon</source>
-<translation>Hiligaynon</translation>
-</message>
-<message>
-<source>Icelandic</source>
-<translation>Islandski</translation>
-</message>
-<message>
-<source>Korean</source>
-<translation>Korejski</translation>
-</message>
-<message>
-<source>Kurdish</source>
-<translation>Kurdski</translation>
-</message>
-<message>
-<source>Latvian</source>
-<translation>Letonski</translation>
-</message>
-<message>
-<source>Lithuanian</source>
-<translation>Litavski</translation>
-</message>
-<message>
-<source>Macedonian</source>
-<translation>Makedonski</translation>
-</message>
-<message>
-<source>Norwegian</source>
-<translation>Norveški</translation>
-</message>
-<message>
-<source>Uzbek</source>
-<translation>Uzbečki</translation>
-</message>
-<message>
-<source>Punjabi</source>
-<translation>Punjabi</translation>
-</message>
-<message>
-<source>Persian</source>
-<translation>Perzijski</translation>
-</message>
-<message>
-<source>Romanian</source>
-<translation>Rumunjski</translation>
-</message>
-<message>
-<source>Serbian</source>
-<translation>Srpski</translation>
-</message>
-<message>
-<source>Albanian</source>
-<translation>Albanski</translation>
-</message>
-<message>
-<source>Slovak</source>
-<translation>Slovački</translation>
-</message>
-<message>
-<source>Slovenian</source>
-<translation>Slovenski</translation>
-</message>
-<message>
-<source>Swedish</source>
-<translation>Švedski</translation>
-</message>
-<message>
-<source>Tagalog</source>
-<translation>Tagaloški</translation>
-</message>
-<message>
-<source>Turkish</source>
-<translation>Turski</translation>
-</message>
-<message>
-<source>Urdu</source>
-<translation>Urdu</translation>
-</message>
-<message>
-<source>Chinese Simplified</source>
-<translation>Pojednostavljeni kineski</translation>
-</message>
-<message>
-<source>Chinese Traditional</source>
-<translation>Tradicionalni kineski</translation>
-</message>
-<message>
-<source>Enable dark mode application icon and tray icon</source>
-<translation>Omogući tamne ikone aplikacija i traku s ikonama</translation>
-</message>
-<message>
-<source>You might also want to choose another editor color schema in the editor settings in dark mode.</source>
-<translation>Možda biste željeli odabrati i drugu shemu boja u uređivačima u tamnom načinu rada.</translation>
-</message>
-<message>
-<source>Enable dark mode icon theme</source>
-<translation>Omogući temu ikone tamnog načina rada</translation>
-</message>
-<message>
-<source>System tray</source>
-<translation>Sistemska traka</translation>
-</message>
-<message>
-<source>Show system tray icon</source>
-<translation>Pokaži ikonu sistemske trake</translation>
-</message>
-<message>
-<source>Start application hidden</source>
-<translation>Započni sa skrivenom aplikacijom</translation>
-</message>
-<message>
-<source>Interface style</source>
-<translation>Stil sučelja</translation>
-</message>
-<message>
-<source>Enforce system icon theme</source>
-<translation>Provedi temu ikone sustava</translation>
-</message>
-<message>
-<source>Override interface font size</source>
-<translation>Promijeni veličinu fonta sučelja</translation>
-</message>
-<message>
-<source>Interface font size:</source>
-<translation>Veličina fonta sučelja:</translation>
-</message>
-<message>
-<source>&amp;Add script…</source>
-<translation>&amp;Dodavanje skripte…</translation>
-</message>
-<message>
-<source>Use legacy way to link to notes, images and attachments</source>
-<translation>Upotrijebite naslijeđeni način za povezivanje s bilješkama, slikama i prilozima</translation>
-</message>
-<message>
-<source>When opening notes the cursor position inside the note will now be restored to the position when the note was last visited in the current session</source>
-<translation>Prilikom otvaranja bilješki položaj pokazivača unutar bilješke sada će se vratiti na mjesto kada je bilješka posljednji put posjećena u trenutnoj sesiji</translation>
-</message>
-<message>
-<source>By default the headline will generated automatically</source>
-<translation>Prema zadanim postavkama naslov će se automatski generirati</translation>
-</message>
-<message>
-<source>The shortcut to create a new note asks for a headline</source>
-<translation>Prečac da biste stvorili novu bilješku traži naslov</translation>
-</message>
-<message>
-<source>Automatically close the note folder database to prevent problems with sync tools</source>
-<translation>Automatski zatvorite bazu podataka mapa s bilješkama kako biste spriječili probleme s alatima za sinkronizaciju</translation>
-</message>
-<message>
-<source>Automatically close the note folder database</source>
-<translation>Automatsko zatvaranje baze podataka mapa s bilješkama</translation>
-</message>
-<message>
-<source>Search engine</source>
-<translation>Pretraživač</translation>
-</message>
-<message>
-<source>Message boxes</source>
-<translation>Okviri za poruke</translation>
-</message>
-<message>
-<source>Reset message boxes</source>
-<translation>Poništi okvire poruka</translation>
-</message>
-<message>
-<source>Import settings</source>
-<translation>Uvezi postavke</translation>
-</message>
-<message>
-<source>Export settings</source>
-<translation>Izvezi postavke</translation>
-</message>
-<message>
-<source>Open issue assistant</source>
-<translation>Otvori pomoćnik za probleme</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The best way to post issues is to use the issue assistant by pressing the &lt;span style=" font-weight:600;"&gt;Open issue assistant&lt;/span&gt; button on the bottom.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt; &lt;p&gt; Najbolji način objavljivanja problema je korištenje pomoćnika za probleme pritiskom na gumb &lt;span style = "font-weight: 600;"&gt; gumb Otvori pomoćnika za izdavanje &lt;/span&gt; na na dnu. &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
-</message>
-<message>
-<source>Ignore code font size to allow zooming</source>
-<translation>Zanemarite veličinu fonta koda kako bi se omogućilo zumiranje</translation>
-</message>
-<message>
-<source>Rendering</source>
-<translation>Iscrtavanje</translation>
-</message>
-<message>
-<source>Enable underline rendering</source>
-<translation>Omogući iscrtavanje podcrtavanja</translation>
-</message>
-<message>
-<source>Fully highlight blockquotes</source>
-<translation>Potpuno osvijetlite blockquotes</translation>
-</message>
-<message>
-<source>Note-edit cursor width:</source>
-<translation>Napomena - uredi širinu kursora:</translation>
-</message>
-<message>
-<source>Enable Vim mode (some QOwnNotes shortcuts will not work)</source>
-<translation>Omogući Vim način rada (neki prečaci QOwnNotes neće funkcionirati)</translation>
-</message>
-<message>
-<source>Cloud connection:</source>
-<translation>Veza u oblaku:</translation>
-</message>
-<message>
-<source>Opens your ownCloud server App Password page in your webbrowser to create a new app password for the application</source>
-<translation>Otvara vašu stranicu zaporke aplikacije na ownCloud serveru kako biste stvorili novu zaporku za aplikaciju</translation>
-</message>
-<message>
-<source>Open your ownCloud server App Password page</source>
-<translation>Otvorite svoju vlastitu stranicu lozinke ownCloud server</translation>
-</message>
-<message>
-<source>Māori</source>
-<translation>Maorski</translation>
-</message>
-<message>
-<source>Malay</source>
-<translation>Malajski</translation>
+<source>MCP server</source>
+<translation type="unfinished">MCP server</translation>
 </message>
 <message>
 <source>Browser extension / command snippets</source>
@@ -5419,90 +9260,6 @@ Samo se testirajte ako dobijete sukobe pri sinkronizaciji i postavite višu vrij
 <translation>Eksperimentalno</translation>
 </message>
 <message>
-<source>This also allows note files to be renamed</source>
-<translation>To također omogućuje preimenovanje datoteka bilješki</translation>
-</message>
-<message>
-<source>You can access your ownCloud server from inside the application for example to manage trashed notes and note versions or to share notes. This integration doesn't do note file syncing. You still need to install the ownCloud sync client for syncing the files.</source>
-<translation>Možete pristupiti svom ownCloud poslužitelju iz aplikacije, na primjer za upravljanje otpadnim bilješkama i verzijama bilješki ili za dijeljenje bilješki. Ova integracija ne bilježi sinkronizaciju datoteka. Još uvijek morate instalirati ownCloud klijent za sinkronizaciju za sinkronizaciju datoteka.</translation>
-</message>
-<message>
-<source>You will find this path in the &lt;i&gt;Nextcloud / ownCloud&lt;/i&gt; settings</source>
-<translation>Ovu stazu ćeš pronaći u postavkama &lt;i&gt;Nextcloud / ownCloud&lt;/i&gt;</translation>
-</message>
-<message>
-<source>Enable QOwnNotesAPI app support</source>
-<translation>Aktiviraj podršku za QOwnNotesAPI aplikaciju</translation>
-</message>
-<message>
-<source>If your password doesn't work, create an app password (button on the right)</source>
-<translation>Ako vaša zaporka ne funkcionira, izradite zaporku aplikacije (gumb s desne strane)</translation>
-</message>
-<message>
-<source>Cancel Nextcloud login</source>
-<translation>Otkažite prijavu na Nextcloud</translation>
-</message>
-<message>
-<source>Enable Nextcloud Deck support</source>
-<translation type="unfinished">Enable Nextcloud Deck support</translation>
-</message>
-<message>
-<source>You can access your ownCloud server or a generic CalDAV server to manage your todo lists.</source>
-<translation>Možete pristupiti svom ownCloud poslužitelju ili generičkom CalDAV poslužitelju za upravljanje svojim popisima zadataka.</translation>
-</message>
-<message>
-<source>If you want to help to translate QOwnNotes or update an existing translation please read: &lt;a href="%1"&gt;How can I help to translate QOwnNotes?&lt;/a&gt;</source>
-<translation>Ako želite pomoći u prijevodu QOwnNotes ili ažurirati postojeći prijevod, pročitajte: &lt;a href="%1"&gt; Kako mogu pomoći u prijevodu QOwnNotes? &lt;/a&gt;</translation>
-</message>
-<message>
-<source>Khmer</source>
-<translation>Kmerski</translation>
-</message>
-<message>
-<source>Shona</source>
-<translation>Shona</translation>
-</message>
-<message>
-<source>Sinhala</source>
-<translation>Singalski</translation>
-</message>
-<message>
-<source>Thai</source>
-<translation>Tajlandski</translation>
-</message>
-<message>
-<source>Vietnamese</source>
-<translation>Vijetnamski</translation>
-</message>
-<message>
-<source>Xhosa</source>
-<translation>Xhosa</translation>
-</message>
-<message>
-<source>Yiddish</source>
-<translation>Jidiš</translation>
-</message>
-<message>
-<source>Zulu</source>
-<translation>Zulu</translation>
-</message>
-<message>
-<source>Search for language</source>
-<translation>Traži jezik</translation>
-</message>
-<message>
-<source>Status bar</source>
-<translation>Traka stanja</translation>
-</message>
-<message>
-<source>Show note path</source>
-<translation>Prikaži putanju bilješke</translation>
-</message>
-<message>
-<source>Only show relative note path</source>
-<translation>Prikaži samo relativnu putanju bilješke</translation>
-</message>
-<message>
 <source>Action name</source>
 <translation>Naziv radnje</translation>
 </message>
@@ -5515,691 +9272,24 @@ Samo se testirajte ako dobijete sukobe pri sinkronizaciji i postavite višu vrij
 <translation>Globalna prečica</translation>
 </message>
 <message>
-<source>Disable this if you want to launch the application without opening a note</source>
-<translation>To onemogućite ako želite pokrenuti aplikaciju bez otvaranja bilješke</translation>
+<source>LanguageTool</source>
+<translation type="unfinished">LanguageTool</translation>
 </message>
 <message>
-<source>Open last accessed note at application startup</source>
-<translation>Otvori posljednju bilješku pri pokretanju aplikacije</translation>
+<source>AI autocomplete</source>
+<translation>UI automatsko dovršavanje</translation>
 </message>
 <message>
-<source>Start application in read-only mode</source>
-<translation>Pokreni aplikaciju u modusu samo-za-čitanje</translation>
+<source>Enable AI-powered text autocomplete suggestions in the note editor. Suggestions can be accepted with Tab or dismissed with Escape.</source>
+<translation type="unfinished">Enable AI-powered text autocomplete suggestions in the note editor. Suggestions can be accepted with Tab or dismissed with Escape.</translation>
 </message>
 <message>
-<source>When inactive, enter read-only mode automatically after:</source>
-<translation type="unfinished">When inactive, enter read-only mode automatically after:</translation>
-</message>
-<message>
-<source> sec</source>
-<extracomment>short for seconds</extracomment>
-<translation> s</translation>
-</message>
-<message>
-<source>Forget all "Don't ask again" choices in message boxes</source>
-<translation>Zaboravite sve opcije "Ne pitaj više" u okvirima za poruke</translation>
-</message>
-<message>
-<source>Note file extensions</source>
-<translation>Napomena ekstenzije datoteka</translation>
-</message>
-<message>
-<source>Files with the listed file extensions will be recognized as notes, the selected file extension will be used for new notes.</source>
-<translation>Datoteke s navedenim nastavcima datoteke bit će prepoznate kao bilješke, a odabrana ekstenzija datoteke će se koristiti za nove bilješke.</translation>
-</message>
-<message>
-<source>Add a new note file extension</source>
-<translation>Dodajte novu ekstenziju datoteke bilješki</translation>
-</message>
-<message>
-<source>Remove selected note file extension</source>
-<translation>Uklonite odabrani nastavak datoteke bilješke</translation>
-</message>
-<message>
-<source>Checks the disk database integrity and fixes problems</source>
-<translation>Provjerava integritet baze podataka diska i rješava probleme</translation>
-</message>
-<message>
-<source>Check integrity</source>
-<translation>Provjeri integritet</translation>
-</message>
-<message>
-<source>Be warned that reinitializing the database will also remove your cached todo items and configured note folders and scripts!</source>
-<translation>Budite upozoreni da će ponovna inicijalizacija baze podataka također ukloniti vaše predmemorirane stavke zadataka i konfigurirane mape bilješki i skripte!</translation>
-</message>
-<message>
-<source>GitHub doesn't need two spaces at the end of the line to do a line break</source>
-<translation>GitHubu ne trebaju dva razmaka na kraju retka da bi napravio prijelaz linije</translation>
-</message>
-<message>
-<source>This is the best way to open an issue</source>
-<translation>Ovo je najbolji način za prijavu problema</translation>
-</message>
-<message>
-<source>Please use this in the issue tracker</source>
-<translation>Upotrijebi ovo u alatu za praćenje problema</translation>
-</message>
-<message>
-<source>&amp;Copy debug information to clipboard</source>
-<translation>&amp;Kopiraj podatke o pogrešci u međuspremnik</translation>
-</message>
-<message>
-<source>Please don't use this in the issue tracker</source>
-<translation>Nemoj upotrebljavati ovo u alatu za praćenje problema</translation>
-</message>
-<message>
-<source>Time to wait before refreshing the preview after typing:</source>
-<translation>Vrijeme za čekanje prije osvježavanja pregleda nakon upisa:</translation>
-</message>
-<message>
-<source>Reset the debounce time</source>
-<translation>Poništi vrijeme odbijanja</translation>
-</message>
-<message>
-<source>0ms means don't wait for the typing to stop</source>
-<translation>0ms znači nemojte čekati da tipkanje prestane</translation>
-</message>
-<message>
-<source>Use editor highlighting styles also for the preview</source>
-<translation>Koristi stilove isticanja urednika i za pregled</translation>
-</message>
-<message>
-<source>Exporting</source>
-<translation>Izvoz</translation>
-</message>
-<message>
-<source>Use internal export styling for the PDF export and printing of the preview</source>
-<translation>Koristi unutarnji izvoz za izvoz PDF-a i ispis pregleda</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You might want to take a look at all available &lt;a href="http://docs.qownnotes.org/en/latest/editor/time-formats/"&gt;time formats&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Možda želite pogledati sve dostupne &lt;a href="http://docs.qownnotes.org/en/latest/editor/time-formats/"&gt;vremenske formate&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>Note that disabling this will also disable the navigation panel!</source>
-<translation>Imajte na umu da će onemogućavanje ovoga također onemogućiti navigacijsku ploču!</translation>
-</message>
-<message>
-<source>Disable cursor blinking</source>
-<translation>Onemogući treptanje kursora</translation>
-</message>
-<message>
-<source>Automatically remove trailing spaces in the note text</source>
-<translation>Automatski ukloni zaostale prostore u tekstu bilješke</translation>
-</message>
-<message>
-<source>Search script repository for AI integration scripts</source>
-<translation type="unfinished">Search script repository for AI integration scripts</translation>
-</message>
-<message>
-<source>API keys</source>
-<translation>API ključevi</translation>
-</message>
-<message>
-<source>OpenAI API key:</source>
-<translation>OpenAI API ključ:</translation>
-</message>
-<message>
-<source>Create Groq API key</source>
-<translation>Stvori Groq API ključ</translation>
-</message>
-<message>
-<source>Create OpenAI API key</source>
-<translation>Stvori OpenAI API ključ</translation>
-</message>
-<message>
-<source>Test connection</source>
-<comment>"Test" as verb</comment>
-<translation type="unfinished">Test connection</translation>
-</message>
-<message>
-<source>AI backends added via the scripting engine</source>
-<translation type="unfinished">AI backends added via the scripting engine</translation>
-</message>
-<message>
-<source>To make use of the AI backends, you can either use the scripting command &lt;a href="%1"&gt;aiComplete&lt;/a&gt;, or look in the script repository for already-written scripts.</source>
-<translation type="unfinished">To make use of the AI backends, you can either use the scripting command &lt;a href="%1"&gt;aiComplete&lt;/a&gt;, or look in the script repository for already-written scripts.</translation>
-</message>
-<message>
-<source>You can use the scripting hook &lt;a href="%1"&gt;openAiBackendsHook&lt;/a&gt; to add more OpenAI API compatible backends.</source>
-<translation type="unfinished">You can use the scripting hook &lt;a href="%1"&gt;openAiBackendsHook&lt;/a&gt; to add more OpenAI API compatible backends.</translation>
-</message>
-<message>
-<source>Alternatively, you can also look in the script repository for already created AI integration scripts.</source>
-<translation type="unfinished">Alternatively, you can also look in the script repository for already created AI integration scripts.</translation>
-</message>
-<message>
-<source>Groq API key:</source>
-<translation>Groq API ključ:</translation>
-</message>
-<message>
-<source>API key</source>
-<translation>API ključ</translation>
-</message>
-<message>
-<source>Show line numbers</source>
-<translation>Pokaži brojeve redaka</translation>
-</message>
-<message>
-<source>Tabs and Indents</source>
-<translation>Kartice i uvlake</translation>
-</message>
-<message>
-<source>Use tab character instead of spaces</source>
-<translation>Koristi znak tablice umjesto razmaka</translation>
-</message>
-<message>
-<source>Indent:</source>
-<translation>Uvlačenje:</translation>
-</message>
-<message>
-<source>Regular expressions of note subfolders to ignore, separated by ";"</source>
-<translation>Redovni izrazi podmapa s notama koje treba zanemariti, odvojeni s ";"
-</translation>
-</message>
-<message>
-<source>Ignored note files</source>
-<translation>Zanemarene datoteke bilješki</translation>
-</message>
-<message>
-<source>Select the path of the git binary</source>
-<translation type="unfinished">Select the path of the git binary</translation>
-</message>
-<message>
-<source>Regular expressions of note files to ignore, separated by ";"</source>
-<translation>Regularni izrazi datoteka bilješki koje treba zanemariti, odvojeni znakom ";"</translation>
-</message>
-<message>
-<source>Ignored subfolders</source>
-<translation>Zanemarene podmape
-</translation>
-</message>
-<message>
-<source>Reset ignored subfolders</source>
-<translation>Poništi zanemarene podmape
-</translation>
-</message>
-<message>
-<source>Clicking a note tab unsets 'All notes' selection</source>
-<translation type="unfinished">Clicking a note tab unsets 'All notes' selection</translation>
-</message>
-<message>
-<source>Restore open note tabs at application startup and when note folders are switched</source>
-<translation>Vrati otvorene kartice bilješki pri pokretanju aplikacije i kad se prebace bilješke</translation>
-</message>
-<message>
-<source>Auto-select items in navigation panel when changing cursor position</source>
-<translation>Automatski odabir stavki na navigacijskoj ploči prilikom promjene položaja kursora</translation>
-</message>
-<message>
-<source>Hide 'Note count' with tags (increases performance)</source>
-<translation>Sakrij "broj bilješki" s ključnim riječima (povećava izvedbu)</translation>
-</message>
-<message>
-<source>Show the number of matches in each note</source>
-<translation>Pokaži broj podudaranja u svakoj bilješci</translation>
-</message>
-<message>
-<source>Command snippets</source>
-<translation>Isječci naredbi</translation>
-</message>
-<message>
-<source>Tag name for commands notes</source>
-<translation>Naziv oznake za bilješke o naredbama</translation>
-</message>
-<message>
-<source>Commands tag:</source>
-<translation>Oznaka naredbi:</translation>
-</message>
-<message>
-<source>Commands note name:</source>
-<translation>Naziv bilješke naredbi:</translation>
-</message>
-<message>
-<source>Note name for adding new commands</source>
-<translation>Zabilježite naziv za dodavanje novih naredbi</translation>
-</message>
-<message>
-<source>You can use the &lt;a href="%1"&gt;QOwnNotes Web App&lt;/a&gt; to be able to insert photos into QOwnNotes on your desktop from your mobile phone over the internet.</source>
-<translation>Možete koristiti &lt;a href="%1"&gt;web-aplikaciju QOwnNotes&lt;/a&gt; da biste mogli umetati fotografije u QOwnNotes na radnoj površini s mobilnog telefona putem interneta.</translation>
-</message>
-<message>
-<source>QOwnNotes web application</source>
-<translation>Internetski program QOwnNotes</translation>
-</message>
-<message>
-<source>A web socket connection to this server will be opened to act as bridge between the QOwnNotes web application and the QOwnNotes desktop application.</source>
-<translation>Otvorit će se websocket veza s ovim poslužiteljem da djeluje kao most između QOwnNotes web aplikacije i QOwnNotes desktop aplikacije.</translation>
-</message>
-<message>
-<source>Server URL:</source>
-<translation>URL poslužitelja:</translation>
-</message>
-<message>
-<source>Show QR code</source>
-<translation>Pokaži QR kod</translation>
-</message>
-<message>
-<source>Security token:</source>
-<translation>Sigurnosni token:</translation>
-</message>
-<message>
-<source>Install the &lt;a href="%1"&gt;Web Companion browser extension&lt;/a&gt; from the &lt;a href="%2"&gt;Chrome Web Store&lt;/a&gt; or &lt;a href="%3"&gt;Firefox Add-ons page&lt;/a&gt; to use QOwnNotes as web clipper or for bookmark management.</source>
-<translation>Instalirajte &lt;a href="%1"&gt;proširenje preglednika Web Companion&lt;/a&gt; iz &lt;a href="%2"&gt;Chrome web trgovine&lt;/a&gt; ili &lt;a href="%3"&gt;Firefox Add- ons page&lt;/a&gt; za korištenje QOwnNotes kao web clipper ili za upravljanje oznakama.</translation>
-</message>
-<message>
-<source>Download the &lt;a href="%1"&gt;Command-line snippet manager&lt;/a&gt; to execute command snippets stored in notes in QOwnNotes from the command line.</source>
-<translation>Preuzmite &lt;a href="%1"&gt;upravitelj isječaka naredbenog retka&lt;/a&gt; za izvršavanje isječaka naredbi pohranjenih u bilješkama u QOwnNotes iz naredbenog retka.</translation>
-</message>
-<message>
-<source>You can use notes with a special tag to store command snippets, which you can execute from the command-line snippet manager. For more information about the command snippet syntax click &lt;a href="%1"&gt;here&lt;/a&gt;.</source>
-<translation>Možete koristiti bilješke s posebnom oznakom za pohranu isječaka naredbi, koje možete izvršiti iz upravitelja isječaka naredbenog retka. Za više informacija o sintaksi naredbenog isječka kliknite &lt;a href="%1"&gt;ovdje&lt;/a&gt;.</translation>
-</message>
-<message>
-<source>You need to enter this token in the QOwnNotes web application to be able to talk to your QOwnNotes desktop application.</source>
-<translation>Morate unijeti ovaj token u web-aplikaciju QOwnNotes da biste mogli razgovarati sa svojom QOwnNotes aplikacijom za stolno računalo.</translation>
-</message>
-<message>
-<source>Copy security token to clipboard</source>
-<translation>Kopiraj sigurnosni token u međuspremnik</translation>
-</message>
-<message>
-<source>Generate new security token</source>
-<translation>Generirajte novi sigurnosni token</translation>
-</message>
-<message>
-<source>Reset the URL to default</source>
-<translation>Vrati URL adresu na standardnu</translation>
-</message>
-<message>
-<source>QOwnNotes web application support</source>
-<translation>Podrška za QOwnNotes web aplikaciju</translation>
-</message>
-<message>
-<source>Enable web application support</source>
-<translation>Omogućite podršku za web aplikacije</translation>
-</message>
-<message>
-<source>Note list panel</source>
-<translation>Ploča popisa bilješki</translation>
-</message>
-<message>
-<source>Show notes in the note list with preview</source>
-<translation>Prikaži bilješke na popisu bilješki uz pregled</translation>
-</message>
-<message>
-<source>Instead of a note list use a note tree with all the subfolders (if they are turned on for the note folder)</source>
-<translation>Umjesto popisa bilješki, koristi stablo bilješki sa svim podmapama (ako su uključene za mapu bilješki)</translation>
-</message>
-<message>
-<source>Note folder panel</source>
-<translation>Ploča mape bilješke
-</translation>
-</message>
-<message>
-<source>Show note folders as buttons instead of in a select box</source>
-<translation>Prikaži mape bilješki kao gumbe umjesto u odabranom okviru</translation>
-</message>
-<message>
-<source>Enable local trash to keep a copy of trashed notes</source>
-<translation>Omogućite lokalni otpad da zadržite kopiju bilješki u otpadu</translation>
-</message>
-<message>
-<source>Panels can be turned on and off in the &lt;i&gt;Window / Panels&lt;/i&gt; main menu and you can also configure different &lt;i&gt;Workspaces&lt;/i&gt; for different panel configurations.</source>
-<translation>Ploče se mogu uključiti ​​i isključiti u glavnom izborniku &lt;i&gt; Prozor / Ploče &lt;/i&gt;, a možete konfigurirati i različite &lt;i&gt; Radne prostore &lt;/i&gt; za različite konfiguracije panela.</translation>
-</message>
-<message>
-<source>Bookmarks</source>
-<translation>Oznake</translation>
-</message>
-<message>
-<source>Notes with this tag will be used for fetching bookmarks</source>
-<translation>Bilješke s ovom oznakom koristit će se za dohvaćanje oznaka</translation>
-</message>
-<message>
-<source>Tag name for bookmarks notes</source>
-<translation>Naziv oznake za napomene oznaka</translation>
-</message>
-<message>
-<source>Bookmarks tag:</source>
-<translation>Oznaka oznaka:</translation>
-</message>
-<message>
-<source>By default the browser extension will show all links of the current note. You can also make it show special bookmark links of notes with a certain tag. For more information about the bookmark link syntax click &lt;a href="%1"&gt;here&lt;/a&gt;.</source>
-<translation>Prema zadanim postavkama proširenje preglednika prikazat će sve veze trenutne bilješke. Također može prikazivati posebne oznake bilješki s određenom oznakom. Za više informacija o sintaksi veza knjižnih oznaka kliknite &lt;a href="%1"&gt; ovdje &lt;/a&gt;.</translation>
-</message>
-<message>
-<source>Bookmarks note name:</source>
-<translation>Naziv bilješke oznaka:</translation>
-</message>
-<message>
-<source>This note will be used for adding new bookmarks from the browser extension</source>
-<translation>Ova će se bilješka koristiti za dodavanje novih oznaka iz proširenja preglednika</translation>
-</message>
-<message>
-<source>Note name for adding new bookmarks</source>
-<translation>Naziv bilješke za dodavanje novih oznaka</translation>
-</message>
-<message>
-<source>Web socket server</source>
-<translation>Web poslužitelj utičnice </translation>
-</message>
-<message>
-<source>Socket server port:</source>
-<translation>Port socket poslužitelja:</translation>
-</message>
-<message>
-<source>Reset the socket server port</source>
-<translation>Poništite priključak poslužitelja utičnice</translation>
-</message>
-<message>
-<source>Show security token</source>
-<translation>Prikaži sigurnosni token</translation>
-</message>
-<message>
-<source>Web socket server support</source>
-<translation>Podrška za poslužitelj web socket</translation>
-</message>
-<message>
-<source>Enable socket server</source>
-<translation>Omogući poslužitelj socket</translation>
-</message>
-<message>
-<source>Note edit panel</source>
-<translation>Ploča uređivanja bilješke</translation>
-</message>
-<message>
-<source>If this is disabled you are able to create more complex panel layouts, but all panels will be resized if the window is resized</source>
-<translation>Ako je ovo onemogućeno, možete stvoriti složenije rasporede ploča, ali će se sve ploče mijenjati ako se promijeni prozor</translation>
-</message>
-<message>
-<source>Use the note edit panel as fixed central widget to be resized if the window or other panels are resized</source>
-<translation>Koristi ploču za uređivanje bilješki kao fiksni središnji widget za promjenu veličine ako se promijene veličina prozora ili drugih ploča</translation>
-</message>
-<message>
-<source>Note search panel</source>
-<translation>Ploča za pretraživanje bilješki</translation>
-</message>
-<message>
-<source>Disable auto-completion of previous searches</source>
-<translation>Onemogući automatsko dovršavanje prethodnih pretraživanja</translation>
-</message>
-<message>
-<source>Navigation panel</source>
-<translation>Ploča za navigaciju</translation>
-</message>
-<message>
-<source>Hide navigation item search bar</source>
-<translation>Sakrij traku za pretraživanje navigacijske stavke</translation>
-</message>
-<message>
-<source>Local trash settings</source>
-<translation>Postavke lokalne kante za smeće</translation>
-</message>
-<message>
-<source>Remove trashed notes after:</source>
-<translation>Ukloni bilješke u otpadu nakon:</translation>
-</message>
-<message>
-<source> days</source>
-<extracomment>seconds</extracomment>
-<translation> dana</translation>
-</message>
-<message>
-<source>Automatically remove trashed notes after a certain time</source>
-<translation>Automatski ukloni bačene bilješke nakon određenog vremena</translation>
-</message>
-<message>
-<source>Local trash support</source>
-<translation>Lokalna podrška za smeće</translation>
-</message>
-<message>
-<source>Layout selector</source>
-<translation>Izbornik izgleda</translation>
-</message>
-<message>
-<source>You can set a new layout here. Keep in mind that you always can modify the position of the panels with the &lt;i&gt;Unlock panels&lt;/i&gt; button.</source>
-<translation>Ovdje možete postaviti novi izgled. Imajte na umu da položaj ploča uvijek možete mijenjati pomoću gumba &lt;i&gt; Otključaj ploče &lt;/i&gt;.</translation>
-</message>
-<message>
-<source>Reset the cursor width</source>
-<translation>Ponovno postavite širinu pokazivača</translation>
-</message>
-<message>
-<source>External git log command to show the git versions of a note</source>
-<translation>Vanjska naredba log git za prikaz git verzija bilješke</translation>
-</message>
-<message>
-<source>Enter a command to be used to show a git log (like for example "gitk")</source>
-<extracomment>Please don't translate "%notePath%"</extracomment>
-<translation>Unesite naredbu koja će se koristiti za prikazivanje git dnevnika (kao na primjer "gitk")</translation>
-</message>
-<message>
-<source>If you use this setting you will get a new menu entry to show the git versions if you right-click a note.</source>
-<extracomment>Please don't translate "%notePath%"</extracomment>
-<translation>Ako koristite ovu postavku, dobit ćete novi unos u izborniku za prikaz git verzija ako desnom tipkom miša kliknete na bilješku.</translation>
-</message>
-<message>
-<source>Show all notes of a tag including the notes of their children-tags</source>
-<translation>Prikaži sve bilješke oznake, uključujući bilješke njihovih dječjih oznaka</translation>
-</message>
-<message>
-<source>Show all notes in a folder including their subfolders (only works if subfolders are turned on)</source>
-<translation>Prikaži sve bilješke u mapi uključujući i njihove podmape (radi samo ako su uključene podmape)</translation>
-</message>
-<message>
-<source>Highlight the current line</source>
-<translation>Označi trenutačni redak</translation>
-</message>
-<message>
-<source>Don't forget to enable git support for your note folders and to configure your name and email address for your git client, for example with these terminal commands:</source>
-<translation>Ne zaboravite omogućiti git podršku za mape s bilješkama i konfigurirati svoje ime i adresu e-pošte za Git klijenta, na primjer s ovim terminalnim naredbama:</translation>
-</message>
-<message>
-<source>Tags panel</source>
-<translation>Ploča s oznakama</translation>
-</message>
-<message>
-<source>Order</source>
-<translation>Redoslijed</translation>
-</message>
-<message>
-<source>Ascending</source>
-<translation>Uzlazno</translation>
-</message>
-<message>
-<source>Descending</source>
-<translation>Silazno</translation>
-</message>
-<message>
-<source>Sort</source>
-<translation>Sortiranje</translation>
-</message>
-<message>
-<source>Only use editor width setting in distraction free mode</source>
-<translation>Koristi samo postavku širine urednika u načinu rada koji ne odvlači pozornost</translation>
-</message>
-<message>
-<source>Alphabetical</source>
-<translation>Abecedno</translation>
-</message>
-<message>
-<source>By last change / use</source>
-<translation>Po zadnjoj izmjeni / korištenju</translation>
-</message>
-<message>
-<source>Hide 'Find or create tag' search</source>
-<translation>Sakrij pretraživanje "Traži ili izradi oznaku"</translation>
-</message>
-<message>
-<source>Note subfolders panel</source>
-<translation>Ploča podmapa bilješki</translation>
-</message>
-<message>
-<source>Show with full path</source>
-<translation>Prikaži s punom stazom</translation>
-</message>
-<message>
-<source>By last change</source>
-<translation>Po zadnjoj izmjeni</translation>
-</message>
-<message>
-<source>Show root folder name</source>
-<translation>Prikaži naziv korijenske mape</translation>
-</message>
-<message>
-<source>Hide 'Find or create note subfolder' search</source>
-<translation>Sakrij pretraživanje "Traži ili izradi podmape bilješki"</translation>
-</message>
-<message>
-<source>Display note subfolders as full tree</source>
-<translation>Prikaži podmape bilješki kao cijelo stablo</translation>
-</message>
-<message>
-<source>Search script repository</source>
-<translation>Skladište pretraživanja skripti</translation>
-</message>
-<message>
-<source>You optionally can use "%notePath%" for the path of the note.</source>
-<extracomment>Please don't translate "%notePath%"</extracomment>
-<translation>Možete upotrijebiti "% notePath%" za put bilješke.</translation>
-</message>
-<message>
-<source>Git client</source>
-<translation>Git klijent</translation>
-</message>
-<message>
-<source>Path to git executable:</source>
-<translation>Put do izvršne datoteke git:</translation>
-</message>
-<message>
-<source>Path to git client, leave empty for default</source>
-<translation>Put do klijenta git, ostavi prazno za zadano</translation>
-</message>
-<message>
-<source>Commit interval</source>
-<translation>Počini interval</translation>
-</message>
-<message>
-<source>sec</source>
-<extracomment>seconds</extracomment>
-<translation>sekunda</translation>
-</message>
-<message>
-<source>git commit interval time [sec]</source>
-<translation>vrijeme intervala git comm [sec]</translation>
-</message>
-<message>
-<source>Open your ownCloud server &amp;Apps page</source>
-<translation>Otvorite stranicu vlastitog kluba i aplikacije &amp;Apps</translation>
+<source>Enable AI autocomplete in note editor</source>
+<translation>Uključi UI automatsko dovršavanje u uređivaču bilješki</translation>
 </message>
 <message>
 <source>Preview</source>
 <translation>Pregled</translation>
-</message>
-<message>
-<source>Which calendar backend do you want to use?</source>
-<translation>Koji pozadinski kalendar želite koristiti?</translation>
-</message>
-<message>
-<source>For most current ownCloud and Nextcloud installations</source>
-<translation>Za većinu trenutnih instalacija za vlastiti i sljedeći sustav</translation>
-</message>
-<message>
-<source>For older versions of ownCloud where the default setting doesn't work</source>
-<translation>Za starije verzije ownCloud gdje zadana postavka ne radi</translation>
-</message>
-<message>
-<source>Legacy ownCloud calendar</source>
-<translation>Naslijeđeni ownCloud kalendar</translation>
-</message>
-<message>
-<source>CalDAV server settings</source>
-<translation>Postavke CalDAV poslužitelja</translation>
-</message>
-<message>
-<source>Calendar base url:</source>
-<translation>Url baze kalendara:</translation>
-</message>
-<message>
-<source>Please enter the CalDAV base url to your calendar.</source>
-<translation>U kalendar unesite osnovni Url usluge CalDAV.</translation>
-</message>
-<message>
-<source>Please enter the password for your CalDAV username.&lt;br/&gt;Currently the password will be stored encrypted with the other settings, but is not very secure.</source>
-<translation>Unesite lozinku za svoje korisničko ime CalDAV. &lt;br/&gt; Trenutačno će se lozinka pohraniti kodirana s ostalim postavkama, ali nije sigurna.</translation>
-</message>
-<message>
-<source>Czech</source>
-<translation>Češki</translation>
-</message>
-<message>
-<source>Brazilian Portuguese</source>
-<translation>Brazilski portugalski</translation>
-</message>
-<message>
-<source>Ukrainian</source>
-<translation>Ukrajinski</translation>
-</message>
-<message>
-<source>The name</source>
-<translation>Ime</translation>
-</message>
-<message>
-<source>Maximum height:</source>
-<translation>Maksimalna visina:</translation>
-</message>
-<message>
-<source>Maximum width:</source>
-<translation>Maksimalna širina:</translation>
-</message>
-<message>
-<source>Scale images down when inserted into notes</source>
-<translation>Skaliranje slika prema dolje kada se umetnu u bilješke</translation>
-</message>
-<message>
-<source>Croatian</source>
-<translation>Hrvatski</translation>
-</message>
-<message>
-<source>Path to your QML file</source>
-<translation>Put do vaše QML datoteke</translation>
-</message>
-<message>
-<source>Script name</source>
-<translation>Naziv skripte</translation>
-</message>
-<message>
-<source>Description:</source>
-<translation>Opis:</translation>
-</message>
-<message>
-<source>Version:</source>
-<translation>Verzija:</translation>
-</message>
-<message>
-<source>Repository:</source>
-<translation>Repozitorij:</translation>
-</message>
-<message>
-<source>Author(s):</source>
-<translation>Autor(i):</translation>
-</message>
-<message>
-<source>Check this if you want to accept all external modifications while you are editing the current note.</source>
-<translation>Označite ovo ako želite prihvatiti sve vanjske izmjene dok uređujete trenutnu bilješku.</translation>
-</message>
-<message>
-<source>Accept all external modifications of the current note</source>
-<translation>Prihvatite sve vanjske izmjene trenutne bilješke</translation>
-</message>
-<message>
-<source>Use UNIX newline instead of native newline characters</source>
-<translation>Koristi UNIX novi red umjesto izvornih znakova novog reda</translation>
-</message>
-<message>
-<source>Restore cursor position when opening a note</source>
-<translation>Vrati položaj pokazivača prilikom otvaranja bilješke</translation>
 </message>
 <message>
 <source>Apply toolbar configuration</source>
@@ -6210,399 +9300,16 @@ Samo se testirajte ako dobijete sukobe pri sinkronizaciji i postavite višu vrij
 <translation>Poništi alatne trake</translation>
 </message>
 <message>
-<source>Enable logging to file</source>
-<translation>Omogući zapisivanje u datoteku</translation>
-</message>
-<message>
-<source>Clear log file</source>
-<translation>Očisti log datoteku </translation>
-</message>
-<message>
-<source>Fake old version number to trigger update</source>
-<translation>Lažni stari broj verzije za pokretanje ažuriranja</translation>
-</message>
-<message>
-<source>Log file path:</source>
-<translation>Put log datoteke:</translation>
-</message>
-<message>
-<source>Here you can set your own time format for inserting the current time into a note.</source>
-<translation>Ovdje možete postaviti vlastiti format vremena za umetanje trenutnog vremena u bilješku.</translation>
-</message>
-<message>
-<source>Insert current time</source>
-<translation>Umetni trenutno &amp;vrijeme</translation>
-</message>
-<message>
-<source>Time format:</source>
-<translation>Format vremena:</translation>
-</message>
-<message>
-<source>Enter your custom time format, like "dd.MM.yyyy hh:mm"</source>
-<translation>Unesite prilagođeni format vremena, npr. "dd. MM.yyyy hh: mm"</translation>
-</message>
-<message>
-<source>Editor options</source>
-<translation>Opcije editora</translation>
-</message>
-<message>
-<source>Enable automatic closing of brackets and markdown formatting characters</source>
-<translation>Omogući automatsko zatvaranje zagrada i znakova za oblikovanje označavanja</translation>
-</message>
-<message>
-<source>You have to use the backspace key to remove the opening character</source>
-<translation>Morate upotrijebiti tipku backspace da biste uklonili znak za otvaranje</translation>
-</message>
-<message>
-<source>Enable automatic removal of matching closing characters</source>
-<translation>Omogući automatsko uklanjanje odgovarajućih znakova za zatvaranje</translation>
-</message>
-<message>
-<source>Your CalDAV calendar base url</source>
-<translation>Url CalDAV kalendarske baze </translation>
-</message>
-<message>
-<source>Please enter the username of your CalDAV server.</source>
-<translation>Unesite korisničko ime svog CalDAV poslužitelja.</translation>
-</message>
-<message>
-<source>Your CalDAV username</source>
-<translation>CalDAV korisničko ime</translation>
-</message>
-<message>
-<source>Your CalDAV password</source>
-<translation>CalDAV zaporka</translation>
-</message>
-<message>
-<source>This causes all todo list items to be reloaded from your server the next time you open your todo dialog.</source>
-<translation>Ovo uzrokuje da se sve stavke popisa zadataka ponovo učitaju s vašeg poslužitelja sljedeći put kada otvorite  okvir zadataka.</translation>
-</message>
-<message>
-<source>Empty calendar item cache</source>
-<translation>Isprazni predmemoriju stavki kalendara</translation>
-</message>
-<message>
-<source>Click here to reload the list of calendars from your calendar server.</source>
-<translation>Kliknite ovdje da biste ponovno učitali popis kalendara s poslužitelja kalendara.</translation>
-</message>
-<message>
-<source>&amp;Reload calendar list</source>
-<translation>&amp;Ponovno učitaj popis kalendara</translation>
-</message>
-<message>
-<source>You may need to restart the application to let these changes take effect</source>
-<translation>Možda ćete morati ponovno pokrenuti aplikaciju kako biste omogućili promjene</translation>
-</message>
-<message>
-<source>Toolbar icon size:</source>
-<translation>Veličina ikone alatne trake:</translation>
-</message>
-<message>
-<source>List and tree item height:</source>
-<translation>Visina popisa i stavke stabla:</translation>
-</message>
-<message>
-<source>Reset the icon size</source>
-<translation>Ponovno postavite veličinu ikone</translation>
-</message>
-<message>
-<source>Reset the item height</source>
-<translation>Poništite visinu stavke</translation>
-</message>
-<message>
-<source>View text right to left (RTL)</source>
-<translation>Prikaz teksta desno na lijevo (RTL)</translation>
-</message>
-<message>
 <source>Search for shortcut</source>
 <translation>Potraži prečicu</translation>
-</message>
-<message>
-<source>Ignore calendars that don't support todo items</source>
-<translation>Zanemari kalendare koji ne podržavaju zadane stavke</translation>
-</message>
-<message>
-<source>Arabic</source>
-<translation>Arapski</translation>
-</message>
-<message>
-<source>Icons</source>
-<translation>Ikone</translation>
-</message>
-<message>
-<source>Use internal icon theme instead of system icon theme</source>
-<translation>Koristi unutarnju temu ikone umjesto teme ikone sustava</translation>
-</message>
-<message>
-<source>Script path:</source>
-<translation>Put skripte:</translation>
-</message>
-<message>
-<source>Note folder name</source>
-<translation>Naziv mape bilješki</translation>
-</message>
-<message>
-<source>Allow note file name to be different from headline</source>
-<translation>Dopusti da se naziv datoteke bilješke razlikuje od naslova</translation>
-</message>
-<message>
-<source>Check this if you want to ignore all external modifications while you are editing the current note.</source>
-<translation>Označite ovo ako želite zanemariti sve vanjske izmjene dok uređujete trenutnu bilješku.</translation>
-</message>
-<message>
-<source>Ignore all external modifications of the current note</source>
-<translation>Zanemari sve vanjske izmjene trenutne bilješke</translation>
-</message>
-<message>
-<source>You can use this for example under Windows if you have troubles with newlines in the ownCloud / Nextcloud notes app</source>
-<translation>Možete ga koristiti u sustavu Windows ako imate problema s novim redovima u aplikaciji za bilješke ownCloud / Nextcloud</translation>
-</message>
-<message>
-<source>App instance</source>
-<translation>Primjer aplikacije</translation>
-</message>
-<message>
-<source>Only allow one app instance at the same time</source>
-<translation>Dopusti samo jedan primjer aplikacije istodobno</translation>
-</message>
-<message>
-<source>Path to external editor:</source>
-<translation>Put do vanjskog urednika:</translation>
-</message>
-<message>
-<source>Don't show the update dialog automatically</source>
-<translation>Nemoj automatski prikazivati dijalog ažuriranja</translation>
-</message>
-<message>
-<source>Fonts</source>
-<translation>Fontovi</translation>
-</message>
-<message>
-<source>Set a new font</source>
-<translation>Postavi novi font</translation>
-</message>
-<message>
-<source>Reset font</source>
-<translation>Ponovno postavi font</translation>
 </message>
 <message>
 <source>Debug</source>
 <translation>Ispravljanje pogrešaka</translation>
 </message>
 <message>
-<source>Debug information</source>
-<translation>Informacije za ispravljanje pogrešaka</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You can &lt;span style=" font-weight:600;"&gt;copy and paste&lt;/span&gt; this text (or parts of this text) in an &lt;span style=" font-weight:600;"&gt;issue&lt;/span&gt; on the &lt;a href="https://github.com/pbek/QOwnNotes/issues"&gt;QOwnNotes issues page&lt;/a&gt; if you have &lt;span style=" font-weight:600;"&gt;questions or troubles&lt;/span&gt; with QOwnNotes. Data that is too sensitive is hidden in this information.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt; &lt;p&gt; Možete &lt;span style = "font-weight: 600;"&gt; kopirati i zalijepiti &lt;/span&gt; ovaj tekst (ili dijelove ovog teksta) u &lt;span style = "font-weight: 600;"&gt; izdanje &lt;/span&gt; na &lt;a href="https://github.com/pbek/QOwnNotes/isissue"&gt; stranici s pitanjima QOwnNotes &lt;/a&gt; ako imate &lt;span style = "font-weight: 600;"&gt; pitanja ili problem &lt;/span&gt; s QOwnNotes. Podaci koji su preosjetljivi u ovim podacima su skriveni. &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
-</message>
-<message>
-<source>&amp;Save debug information</source>
-<translation>&amp;Spremite informacije za otklanjanje pogrešaka</translation>
-</message>
-<message>
-<source>hostname of proxy server</source>
-<translation>naziv hosta proxy poslužitelja</translation>
-</message>
-<message>
-<source>username for proxy server</source>
-<translation>korisničko ime za proxy poslužitelj</translation>
-</message>
-<message>
-<source>password for proxy server</source>
-<translation>zaporka za proxy poslužitelj</translation>
-</message>
-<message>
-<source>HTTP(S) proxy</source>
-<translation>HTTP(S) Proxy</translation>
-</message>
-<message>
-<source>SOCKS5 proxy</source>
-<translation>SOCKS5 proxy</translation>
-</message>
-<message>
-<source>notes path &lt;b&gt;%1&lt;/b&gt; found on server</source>
-<translation>staza bilješke &lt;b&gt;%1&lt;/b&gt; je pronađena na poslužitelju</translation>
-</message>
-<message>
-<source>Automatic (needs restart)</source>
-<translation>Automatski (ponovno pokretanje)</translation>
-</message>
-<message>
 <source>Shortcut already assigned</source>
 <translation>Prečac je već dodijeljen</translation>
-</message>
-<message>
-<source>The connection was made successfully!
-Server version: %1
-QOwnNotesAPI version: %2</source>
-<translation>Veza je uspješno uspostavljena!
-Verzija poslužitelja: %1
-Verzija QOwnNotesAPI: %2</translation>
-</message>
-<message>
-<source>There was an error connecting to the ownCloud Server!
-You also need to have the QOwnNotesAPI app installed and enabled!
-
-Connection error message: </source>
-<translation>Došlo je do pogreške prilikom povezivanja na poslužitelj ownCloud!
-Također morate instalirati i omogućiti aplikaciju QOwnNotesAPI!
-
-Poruka o pogrešci veze: </translation>
-</message>
-<message>
-<source>The Database was reinitialized. Please restart the application now!</source>
-<translation>Baza podataka je ponovno inicijalizirana. Ponovo pokrenite aplikaciju sada!</translation>
-</message>
-<message>
-<source>Please don't use this in the issue tracker, copy the debug information text directly into the issue.</source>
-<translation>Nemojte upotrebljavati ovo u alatu za praćenje problema, kopirajte tekst informacija o pogrešci izravno u problem.</translation>
-</message>
-<message>
-<source>Markdown files</source>
-<translation>Datoteke oznaka</translation>
-</message>
-<message>
-<source>Disable usage tracking</source>
-<translation>Onemogući praćenje korištenja</translation>
-</message>
-<message>
-<source>Anonymous usage data helps to decide what parts of QOwnNotes to improve next and to find and fix bugs.&lt;br /&gt;Please disable it only if you really can't live with it.&lt;br /&gt;&lt;br /&gt;Really disable usage tracking?</source>
-<translation>Anonimni podaci o korištenju pomažu u poboljšanju QOwnNotes-a te u pronalaženju i otklanjanju grešaka. &lt;br/&gt; Isključite ga samo ako zaista ne možete živjeti s tim. &lt;br/&gt; &lt;br/&gt; Stvarno onemogućiti praćenje korištenja?</translation>
-</message>
-<message>
-<source>new folder</source>
-<translation>nova mapa</translation>
-</message>
-<message>
-<source>Remove note folder</source>
-<translation>Ukloni mapu s bilješkama</translation>
-</message>
-<message>
-<source>Remove the current note folder &lt;strong&gt;%1&lt;/strong&gt;?</source>
-<translation>Ukloniti trenutnu mapu s bilješkama &lt;strong&gt; %1 &lt;/strong&gt;?</translation>
-</message>
-<message>
-<source>Please select the folder where your notes will get stored to</source>
-<translation>Molim odaberi mapu gdje će bilješke biti spremljene</translation>
-</message>
-<message>
-<source>Loading folders from server</source>
-<translation>Učitavanje mapa s poslužitelja</translation>
-</message>
-<message>
-<source>No more folders were found in the current folder</source>
-<translation>U trenutnoj mapi nije pronađeno više mapa</translation>
-</message>
-<message>
-<source>Loading folders in '%1' from server</source>
-<translation>Učitavanje mapa u '%1' s poslužitelja</translation>
-</message>
-<message>
-<source>Take a look at the &lt;a href="%1"&gt;Scripting documentation&lt;/a&gt; to get started fast.</source>
-<translation>Da biste brzo počeli, pogledajte &lt;a href="%1"&gt; dokumentaciju za skriptiranje &lt;/a&gt;.</translation>
-</message>
-<message>
-<source>If you need access to a certain functionality in QOwnNotes please open an issue on the &lt;a href="%1"&gt; QOwnNotes issue page&lt;/a&gt;.</source>
-<translation>Ako vam je potreban pristup određenoj funkciji u usluzi QOwnNotes, otvorite problem na &lt;a href="%1"&gt; stranici problema QOwnNotes &lt;/a&gt;.</translation>
-</message>
-<message>
-<source>Check for script updates</source>
-<translation>Provjeri ažuriranja skripti</translation>
-</message>
-<message>
-<source>Add local script</source>
-<translation>Dodaj lokalnu skriptu</translation>
-</message>
-<message>
-<source>Add an existing, local script</source>
-<translation>Dodaj postojeću, lokalnu skriptu</translation>
-</message>
-<message>
-<source>Please enter a new note file extension:</source>
-<translation>Unesite novu ekstenziju datoteke bilješki:</translation>
-</message>
-<message>
-<source>Markdown file</source>
-<translation>Markdown datoteka</translation>
-</message>
-<message>
-<source>Plain text file</source>
-<translation>Obična tekstualna datoteka</translation>
-</message>
-<message>
-<source>Remove note file extension</source>
-<translation>Uklonite ekstenziju datoteke bilješke</translation>
-</message>
-<message>
-<source>INI files</source>
-<translation>INI datoteke</translation>
-</message>
-<message>
-<source>Do you really want to import settings? Your current settings will get removed and not every setting may get restored, like the note folder settings and which scripts you were using. You also will need to adjust some settings, especially across platforms, but your notes will stay intact!</source>
-<translation>Doista želite uvesti postavke? Vaše trenutne postavke bit će uklonjene, a neće se obnoviti sve postavke, kao što su postavke mape s bilješkama i korištene skripte. Također ćete morati prilagoditi neke postavke, posebno na svim platformama, ali vaše bilješke ostaju netaknute!</translation>
-</message>
-<message>
-<source>The application will be restarted after the import.</source>
-<translation>Aplikacija će se ponovno pokrenuti nakon uvoza.</translation>
-</message>
-<message>
-<source>The debug information was copied to the clipboard.</source>
-<translation>Podaci o pogrešci kopirani su u međuspremnik.</translation>
-</message>
-<message>
-<source>The integrity of the disk database is valid.</source>
-<translation>Integritet baze podataka diska je valjan.</translation>
-</message>
-<message>
-<source>The integrity of the disk database is not valid!</source>
-<translation>Integritet disk baze podataka nije valjan!</translation>
-</message>
-<message>
-<source>Board Id: %1</source>
-<translation>ID ploče: %1</translation>
-</message>
-<message>
-<source>Stack Id: %1</source>
-<translation type="unfinished">Stack Id: %1</translation>
-</message>
-<message>
-<source>API test result for %1 (%2)</source>
-<translation type="unfinished">API test result for %1 (%2)</translation>
-</message>
-<message>
-<source>AI backend: %1</source>
-<translation type="unfinished">AI backend: %1</translation>
-</message>
-<message>
-<source>API base URL</source>
-<translation type="unfinished">API base URL</translation>
-</message>
-<message>
-<source>AI model: %1</source>
-<translation type="unfinished">AI model: %1</translation>
-</message>
-<message>
-<source>Test</source>
-<comment>verb</comment>
-<translation type="unfinished">Test</translation>
-</message>
-<message>
-<source>Test connection to %1 (%2)</source>
-<translation type="unfinished">Test connection to %1 (%2)</translation>
-</message>
-<message>
-<source>Find a script in the script repository</source>
-<translation>Pronađi skriptu u spremištu skripti</translation>
-</message>
-<message>
-<source>Menu bar</source>
-<translation>Traka izbornika</translation>
-</message>
-<message>
-<source>Show menu bar item</source>
-<translation>Pokaži stavku trake izbornika</translation>
 </message>
 <message>
 <source>Undefined shortcut</source>
@@ -6628,94 +9335,12 @@ Poruka o pogrešci veze: </translation>
 <translation>Prečac &lt;strong&gt; %1 &lt;/strong&gt; već je dodijeljen &lt;strong&gt; %2 &lt;/strong&gt;! Želite li skočiti na prečac?</translation>
 </message>
 <message>
-<source>Remove script</source>
-<translation>Ukloni skriptu</translation>
-</message>
-<message>
-<source>Remove the current script &lt;strong&gt;%1&lt;/strong&gt;?</source>
-<translation>Ukloniti trenutnu skriptu &lt;strong&gt; %1 &lt;/strong&gt;?</translation>
-</message>
-<message>
-<source>QML files</source>
-<translation>QML datoteke</translation>
-</message>
-<message>
-<source>Please select your QML file</source>
-<translation>Odaberite svoju QML datoteku</translation>
-</message>
-<message>
-<source>Open repository</source>
-<translation>Otvori repozitorij</translation>
-</message>
-<message>
-<source>Your script seems to be valid</source>
-<translation>Čini se da je vaša skripta valjana</translation>
-</message>
-<message>
-<source>There were script errors:
-%1</source>
-<translation>Bilo je pogrešaka skripte:
-%1</translation>
-</message>
-<message>
-<source>File extension</source>
-<translation>Ekstenzija datoteke</translation>
-</message>
-<message>
-<source>Do you really want to remove the note file extension &lt;strong&gt;%1&lt;/strong&gt;? You will not see files with this extension in the note list any more!</source>
-<translation>Želite li stvarno ukloniti ekstenziju datoteke bilješki &lt;strong&gt;%1&lt;/strong&gt;? Više nećete vidjeti datoteke s ovim nastavkom na popisu bilješki!</translation>
-</message>
-<message>
-<source>Calendar cache emptied</source>
-<translation>Cache kalendara je ispražnjen</translation>
-</message>
-<message>
-<source>Your calendar cache was emptied.</source>
-<translation>Vaš je cache kalendara ispražnjen.</translation>
-</message>
-<message>
 <source>Reset toolbars and exit</source>
 <translation>Poništi alatne trake i izađi</translation>
 </message>
 <message>
 <source>Do you really want to reset all toolbars? The application will be closed in the process, the default toolbars will be restored when you start it again.</source>
 <translation>Želite li zaista resetirati sve alatne trake? Aplikacija će biti zatvorena u procesu, zadane alatne trake bit će vraćene kada ga ponovno pokrenete.</translation>
-</message>
-<message>
-<source>Reset and &amp;exit</source>
-<translation>Resetiraj i &amp;izađi</translation>
-</message>
-<message>
-<source>Log file cleared</source>
-<translation>Log datoteka je izbrisana</translation>
-</message>
-<message>
-<source>The log file &lt;strong&gt;%1&lt;/strong&gt; was cleared.</source>
-<translation>Log datoteka &lt;strong&gt; %1 &lt;/strong&gt; je izbrisana.</translation>
-</message>
-<message>
-<source>Executable files</source>
-<translation>Izvršne datoteke</translation>
-</message>
-<message>
-<source>All files</source>
-<translation>Sve datoteke</translation>
-</message>
-<message>
-<source>Please select the path of your git executable</source>
-<translation>Odaberi put izvršne datoteke za Git</translation>
-</message>
-<message>
-<source>Do you really want to reset the overrides of all message boxes?</source>
-<translation>Želite li zaista poništiti poništavanje svih okvira s porukama?</translation>
-</message>
-<message>
-<source>New script</source>
-<translation>Nova skripta</translation>
-</message>
-<message>
-<source>You can download your git client here: &lt;a href="%url"&gt;Git for Windows&lt;/a&gt;</source>
-<translation>Git klijent možete preuzeti ovdje: &lt;a href="%url"&gt; Git za Windows &lt;/a&gt;</translation>
 </message>
 <message>
 <source>enabled</source>
@@ -6750,40 +9375,8 @@ Poruka o pogrešci veze: </translation>
 <translation>Aktivirat će se ako pokrenete QOwnNotes s parametrom &lt;code&gt; --portable &lt;/code&gt;.</translation>
 </message>
 <message>
-<source>Save debug information</source>
-<translation>Spremi informacije za otklanjanje pogrešaka</translation>
-</message>
-<message>
-<source>Do you really want to clear all settings, remove the database and exit QOwnNotes?
-
-Your notes will stay intact!</source>
-<translation>Želite li zaista izbrisati sve postavke, ukloniti bazu podataka i izaći iz QOwnNotes-a?
-
-Vaše bilješke će ostati netaknute!</translation>
-</message>
-<message>
-<source>Clear and &amp;exit</source>
-<translation>Obriši i izađi</translation>
-</message>
-<message>
-<source>&amp;Cancel</source>
-<translation>&amp;Odustani</translation>
-</message>
-<message>
 <source>You will find a &lt;code&gt;QOwnNotesPortable.bat&lt;/code&gt; in your release path to start QOwnNotes in portable mode.</source>
 <translation>Pronaći ćete &lt;code&gt; QOwnNotesPortable.bat &lt;/code&gt; u vašoj stazi za oslobađanje za pokretanje QOwnNotes-a u prijenosnom načinu rada.</translation>
-</message>
-<message>
-<source>Do you really want to clear the local database? This will also remove your configured note folders and your cached todo items!</source>
-<translation>Želite li zaista izbrisati lokalnu bazu podataka? Tako ćete ukloniti i konfigurirane mape bilješki i predmemorirane predmete u programu!</translation>
-</message>
-<message>
-<source>Clear &amp;database</source>
-<translation>Obriši &amp;bazu podataka</translation>
-</message>
-<message>
-<source>Select editor application</source>
-<translation>Odaberi program za uređivanje</translation>
 </message>
 </context>
 <context>
@@ -6793,8 +9386,12 @@ Vaše bilješke će ostati netaknute!</translation>
 <translation>Dijeli bilješku</translation>
 </message>
 <message>
-<source>Share note on ownCloud</source>
-<translation>Dijelit bilješku na ownCloud-u</translation>
+<source>Share note on Nextcloud / ownCloud</source>
+<translation type="unfinished">Share note on Nextcloud / ownCloud</translation>
+</message>
+<message>
+<source>Publicly share the current note file on your Nextcloud / ownCloud server. You can send the generated link to others so they can view or download the file.</source>
+<translation type="unfinished">Publicly share the current note file on your Nextcloud / ownCloud server. You can send the generated link to others so they can view or download the file.</translation>
 </message>
 <message>
 <source>Allow note editing</source>
@@ -6805,12 +9402,8 @@ Vaše bilješke će ostati netaknute!</translation>
 <translation>Javni Url vaše bilješke</translation>
 </message>
 <message>
-<source>Publicly share the current note file on your ownCloud server. You can send the generated link to others so they can view or download the file.</source>
-<translation>Javno dijeli trenutnu datoteku bilješke na poslužitelju ownCloud. Generiranu vezu možete poslati drugima kako bi mogli pregledati ili preuzeti datoteku.</translation>
-</message>
-<message>
-<source>Keep in mind that you still have to sync your notes with your server by using the ownCloud desktop sync tool to be able to share notes with others!</source>
-<translation>Imajte na umu da i dalje morate sinkronizirati bilješke sa svojim poslužiteljem pomoću alata za sinkronizaciju na radnoj površini ownCloud da biste mogli dijeliti bilješke s drugima!</translation>
+<source>Keep in mind that you still have to sync your notes with your server by using the Nextcloud / ownCloud desktop sync tool to be able to share notes with others!</source>
+<translation type="unfinished">Keep in mind that you still have to sync your notes with your server by using the Nextcloud / ownCloud desktop sync tool to be able to share notes with others!</translation>
 </message>
 </context>
 <context>
@@ -6937,6 +9530,13 @@ Vaše bilješke će ostati netaknute!</translation>
 </message>
 </context>
 <context>
+<name>SpellCheckManager</name>
+<message>
+<source>Automatically detect</source>
+<translation type="unfinished">Automatically detect</translation>
+</message>
+</context>
+<context>
 <name>StoredAttachmentsDialog</name>
 <message>
 <source>Delete selected attachments</source>
@@ -6965,6 +9565,14 @@ Vaše bilješke će ostati netaknute!</translation>
 <message>
 <source>Only show orphaned attachments</source>
 <translation>Prikaži samo samostalne privitke</translation>
+</message>
+<message>
+<source>Only show attachments that are used in the current note</source>
+<translation>Prikaži samo priloge koji se koriste u trenutačnoj bilješci</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation>Prikaži samo od trenutačne bilješke</translation>
 </message>
 <message>
 <source>Add selected attachments to the current note</source>
@@ -7114,6 +9722,14 @@ Vaše bilješke će ostati netaknute!</translation>
 <translation>Aktualiziraj</translation>
 </message>
 <message>
+<source>Only show images that are used in the current note</source>
+<translation>Prikaži samo slike koje se koriste u trenutačnoj bilješci</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation>Prikaži samo od trenutačne bilješke</translation>
+</message>
+<message>
 <source>Used in notes:</source>
 <translation>Koristi se u bilješkama:</translation>
 </message>
@@ -7188,6 +9804,37 @@ Vaše bilješke će ostati netaknute!</translation>
 <message>
 <source>&amp;Open note</source>
 <translation>&amp;Otvori bilješku</translation>
+</message>
+</context>
+<context>
+<name>SystemTrayManager</name>
+<message>
+<source>Open QOwnNotes</source>
+<translation type="unfinished">Open QOwnNotes</translation>
+</message>
+<message>
+<source>Note folders</source>
+<translation type="unfinished">Note folders</translation>
+</message>
+<message>
+<source>New note</source>
+<translation type="unfinished">New note</translation>
+</message>
+<message>
+<source>Recent notes</source>
+<translation type="unfinished">Recent notes</translation>
+</message>
+<message>
+<source>Show todo lists</source>
+<translation type="unfinished">Show todo lists</translation>
+</message>
+<message>
+<source>Recent tasks</source>
+<translation type="unfinished">Recent tasks</translation>
+</message>
+<message>
+<source>Quit</source>
+<translation type="unfinished">Quit</translation>
 </message>
 </context>
 <context>
@@ -7290,6 +9937,197 @@ Vaše bilješke će ostati netaknute!</translation>
 <message>
 <source>New tag</source>
 <translation>Nova oznaka</translation>
+</message>
+</context>
+<context>
+<name>TagManager</name>
+<message>
+<source>Show all notes (%1)</source>
+<translation type="unfinished">Show all notes (%1)</translation>
+</message>
+<message>
+<source>All notes</source>
+<translation type="unfinished">All notes</translation>
+</message>
+<message>
+<source>show all untagged notes (%1)</source>
+<translation type="unfinished">show all untagged notes (%1)</translation>
+</message>
+<message>
+<source>Untagged notes</source>
+<translation type="unfinished">Untagged notes</translation>
+</message>
+<message>
+<source>Show all notes tagged with '%1' (%2)</source>
+<translation type="unfinished">Show all notes tagged with '%1' (%2)</translation>
+</message>
+<message>
+<source>Add a tag to the current note</source>
+<translation type="unfinished">Add a tag to the current note</translation>
+</message>
+<message>
+<source>Add a tag to the selected notes</source>
+<translation type="unfinished">Add a tag to the selected notes</translation>
+</message>
+<message>
+<source>%1 and %2</source>
+<translation type="unfinished">%1 and %2</translation>
+</message>
+<message numerus="yes">
+<source>%n note(s) selected</source>
+<translation type="unfinished">
+<numerusform>%n note(s) selected</numerusform>
+<numerusform>%n note(s) selected</numerusform>
+<numerusform>%n note(s) selected</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>%n folder(s) selected</source>
+<translation type="unfinished">
+<numerusform>%n folder(s) selected</numerusform>
+<numerusform>%n folder(s) selected</numerusform>
+<numerusform>%n folder(s) selected</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>%n notes selected</source>
+<translation type="unfinished">
+<numerusform>%n notes selected</numerusform>
+<numerusform>%n notes selected</numerusform>
+<numerusform>%n notes selected</numerusform>
+</translation>
+</message>
+<message>
+<source>Remove tag '%1' from the current note</source>
+<translation>Ukloni oznaku „%1” iz trenutačne bilješke</translation>
+</message>
+<message>
+<source>Remove tag '%1' from the selected notes</source>
+<translation>Ukloni oznaku „%1” iz odabranih bilješki</translation>
+</message>
+<message>
+<source>&amp;Add tag</source>
+<translation type="unfinished">&amp;Add tag</translation>
+</message>
+<message>
+<source>Rename tag</source>
+<translation type="unfinished">Rename tag</translation>
+</message>
+<message>
+<source>Assign color</source>
+<translation type="unfinished">Assign color</translation>
+</message>
+<message>
+<source>Disable color</source>
+<translation type="unfinished">Disable color</translation>
+</message>
+<message>
+<source>&amp;Remove tags</source>
+<translation>&amp;Ukloni oznake</translation>
+</message>
+<message>
+<source>&amp;Move tags to…</source>
+<translation type="unfinished">&amp;Move tags to…</translation>
+</message>
+<message>
+<source>Tag could not be created!</source>
+<translation type="unfinished">Tag could not be created!</translation>
+</message>
+<message>
+<source>Move to the root</source>
+<comment>to move a tag to the current tag in the tag context menu</comment>
+<translation type="unfinished">Move to the root</translation>
+</message>
+<message>
+<source>Move to this tag</source>
+<translation type="unfinished">Move to this tag</translation>
+</message>
+<message>
+<source>Tag this</source>
+<translation type="unfinished">Tag this</translation>
+</message>
+<message>
+<source>Cannot move tag '%1' to this tag</source>
+<translation type="unfinished">Cannot move tag '%1' to this tag</translation>
+</message>
+<message>
+<source>Moved tag '%1' to new tag</source>
+<translation type="unfinished">Moved tag '%1' to new tag</translation>
+</message>
+<message>
+<source>Tag selected notes</source>
+<translation type="unfinished">Tag selected notes</translation>
+</message>
+<message numerus="yes">
+<source>Tag %n selected note(s) with &lt;strong&gt;%2&lt;/strong&gt;?</source>
+<translation type="unfinished">
+<numerusform>Tag %n selected note(s) with &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Tag %n selected note(s) with &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Tag %n selected note(s) with &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>%n note(s) were tagged with "%2"</source>
+<translation type="unfinished">
+<numerusform>%n note(s) were tagged with "%2"</numerusform>
+<numerusform>%n note(s) were tagged with "%2"</numerusform>
+<numerusform>%n note(s) were tagged with "%2"</numerusform>
+</translation>
+</message>
+<message>
+<source>Remove tag from selected notes</source>
+<translation>Ukloni oznaku iz odabranih bilješki</translation>
+</message>
+<message numerus="yes">
+<source>Remove tag &lt;strong&gt;%1&lt;/strong&gt; from %n selected note(s)?</source>
+<translation type="unfinished">
+<numerusform>Ukloniti oznaku &lt;strong&gt;%1&lt;/strong&gt; %n iz odabranih bilješki?</numerusform>
+<numerusform>Remove tag &lt;strong&gt;%1&lt;/strong&gt; from %n selected note(s)?</numerusform>
+<numerusform>Ukloniti oznaku &lt;strong&gt;%1&lt;/strong&gt; %n iz odabranih bilješki?</numerusform>
+</translation>
+</message>
+<message>
+<source>Done</source>
+<translation type="unfinished">Done</translation>
+</message>
+<message numerus="yes">
+<source>Tag &lt;strong&gt;%1&lt;/strong&gt; was removed from %n note(s)</source>
+<translation type="unfinished">
+<numerusform>Tag &lt;strong&gt;%1&lt;/strong&gt; was removed from %n note(s)</numerusform>
+<numerusform>Tag &lt;strong&gt;%1&lt;/strong&gt; was removed from %n note(s)</numerusform>
+<numerusform>Oznaka &lt;strong&gt;%1&lt;/strong&gt; je uklonjena iz %n bilješki</numerusform>
+</translation>
+</message>
+<message>
+<source>Remove selected tags</source>
+<translation>Ukloni odabrane oznake</translation>
+</message>
+<message numerus="yes">
+<source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected tag(s)? No notes will be removed in this process.</source>
+<translation type="unfinished">
+<numerusform>Ukloniti &lt;strong&gt;%n&lt;/strong&gt; odabranu oznaku? U ovom procesu se neće ukloniti jedna bilješka.</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected tag(s)? No notes will be removed in this process.</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected tag(s)? No notes will be removed in this process.</numerusform>
+</translation>
+</message>
+</context>
+<context>
+<name>TextDiffDialog</name>
+<message>
+<source>Text difference</source>
+<translation>Razlike u tekstu</translation>
+</message>
+<message>
+<source>Differences:</source>
+<translation>Razlike:</translation>
+</message>
+<message>
+<source>Don't show dialog again</source>
+<translation>Dijalog više nemoj prikazivati</translation>
+</message>
+<message>
+<source>Accept change?</source>
+<translation>Prihvatiti promjene?</translation>
 </message>
 </context>
 <context>
@@ -7433,6 +10271,129 @@ This cannot be undone!</source>
 </message>
 </context>
 <context>
+<name>TodoSettingsWidget</name>
+<message>
+<source>Todo settings</source>
+<translation type="unfinished">Todo settings</translation>
+</message>
+<message>
+<source>Enable todo calendar support</source>
+<translation type="unfinished">Enable todo calendar support</translation>
+</message>
+<message>
+<source>Which calendar backend do you want to use?</source>
+<translation type="unfinished">Which calendar backend do you want to use?</translation>
+</message>
+<message>
+<source>Other CalDAV server</source>
+<translation type="unfinished">Other CalDAV server</translation>
+</message>
+<message>
+<source>For older versions of ownCloud where the default setting doesn't work</source>
+<translation type="unfinished">For older versions of ownCloud where the default setting doesn't work</translation>
+</message>
+<message>
+<source>Legacy ownCloud calendar</source>
+<translation type="unfinished">Legacy ownCloud calendar</translation>
+</message>
+<message>
+<source>You can access your Nextcloud / ownCloud server or a generic CalDAV server to manage your todo lists.</source>
+<translation type="unfinished">You can access your Nextcloud / ownCloud server or a generic CalDAV server to manage your todo lists.</translation>
+</message>
+<message>
+<source>For most current Nextcloud / ownCloud installations</source>
+<translation type="unfinished">For most current Nextcloud / ownCloud installations</translation>
+</message>
+<message>
+<source>Default Nextcloud / ownCloud calendar</source>
+<translation type="unfinished">Default Nextcloud / ownCloud calendar</translation>
+</message>
+<message>
+<source>CalDAV server settings</source>
+<translation type="unfinished">CalDAV server settings</translation>
+</message>
+<message>
+<source>Calendar base url:</source>
+<translation type="unfinished">Calendar base url:</translation>
+</message>
+<message>
+<source>Please enter the CalDAV base url to your calendar.</source>
+<translation type="unfinished">Please enter the CalDAV base url to your calendar.</translation>
+</message>
+<message>
+<source>Your CalDAV calendar base url</source>
+<translation type="unfinished">Your CalDAV calendar base url</translation>
+</message>
+<message>
+<source>Username:</source>
+<translation type="unfinished">Username:</translation>
+</message>
+<message>
+<source>Please enter the username of your CalDAV server.</source>
+<translation type="unfinished">Please enter the username of your CalDAV server.</translation>
+</message>
+<message>
+<source>Your CalDAV username</source>
+<translation type="unfinished">Your CalDAV username</translation>
+</message>
+<message>
+<source>Password:</source>
+<translation type="unfinished">Password:</translation>
+</message>
+<message>
+<source>Please enter the password for your CalDAV username.&lt;br/&gt;Currently the password will be stored encrypted with the other settings, but is not very secure.</source>
+<translation type="unfinished">Please enter the password for your CalDAV username.&lt;br/&gt;Currently the password will be stored encrypted with the other settings, but is not very secure.</translation>
+</message>
+<message>
+<source>Your CalDAV password</source>
+<translation type="unfinished">Your CalDAV password</translation>
+</message>
+<message>
+<source>Which cloud connection do you want to use?</source>
+<translation type="unfinished">Which cloud connection do you want to use?</translation>
+</message>
+<message>
+<source>Select the calendars you want to use for the Todo list</source>
+<translation type="unfinished">Select the calendars you want to use for the Todo list</translation>
+</message>
+<message>
+<source>This causes all todo list items to be reloaded from your server the next time you open your todo dialog.</source>
+<translation type="unfinished">This causes all todo list items to be reloaded from your server the next time you open your todo dialog.</translation>
+</message>
+<message>
+<source>Empty calendar item cache</source>
+<translation type="unfinished">Empty calendar item cache</translation>
+</message>
+<message>
+<source>Click here to reload the list of calendars from your calendar server.</source>
+<translation type="unfinished">Click here to reload the list of calendars from your calendar server.</translation>
+</message>
+<message>
+<source>&amp;Reload calendar list</source>
+<translation type="unfinished">&amp;Reload calendar list</translation>
+</message>
+<message>
+<source>Ignore calendars that don't support todo items</source>
+<translation type="unfinished">Ignore calendars that don't support todo items</translation>
+</message>
+<message>
+<source>Todo list settings</source>
+<translation type="unfinished">Todo list settings</translation>
+</message>
+<message>
+<source>Saving an item also closes the Todo list</source>
+<translation type="unfinished">Saving an item also closes the Todo list</translation>
+</message>
+<message>
+<source>Calendar cache emptied</source>
+<translation type="unfinished">Calendar cache emptied</translation>
+</message>
+<message>
+<source>Your calendar cache was emptied.</source>
+<translation type="unfinished">Your calendar cache was emptied.</translation>
+</message>
+</context>
+<context>
 <name>Toolbar_Editor</name>
 <message>
 <source>Select a menu</source>
@@ -7554,16 +10515,16 @@ This cannot be undone!</source>
 <translation>&amp;Vraćanje odabrane bilješke na poslužitelj</translation>
 </message>
 <message>
-<source>&lt;h3&gt;Slower, but with note versions&lt;/h3&gt;&lt;p&gt;The note will be restored on your ownCloud server with all versions.&lt;/p&gt;&lt;p&gt;You will have to wait until it is synced to QOwnNotes by ownCloud sync.&lt;/p&gt;</source>
-<translation>&lt;h3&gt; Sporije, ali s verzijama bilješki &lt;/h3&gt; &lt;p&gt; Bilješka će biti vraćena na vašem poslužitelju ownCloud sa svim verzijama. &lt;/p&gt; &lt;p&gt; Morat ćete pričekati dok se ne sinkronizira s QOwnNotes vlastitom sinkronizacijom. &lt;/p&gt;</translation>
-</message>
-<message>
 <source>&amp;Download selected note</source>
 <translation>&amp;Skini odabranu bilješku</translation>
 </message>
 <message>
-<source>&lt;h3&gt;Faster, but without versions&lt;/h3&gt;&lt;p&gt;The note will be created with the text from the preview.&lt;/p&gt;&lt;p&gt;The note versions on your ownCloud server will not be restored and the note will remain in the trash.&lt;/p&gt;&lt;p&gt;You can always restore the note and its versions later.&lt;/p&gt;</source>
-<translation>&lt;h3&gt; Brže, ali bez verzija &lt;/h3&gt; &lt;p&gt; Bilješka će se stvoriti s tekstom iz pregleda. &lt;/p&gt; &lt;p&gt; Verzije bilješki na vašem poslužitelju ownCloud neće biti obnovljene i bilješka će ostati u otpadu. &lt;/p&gt; &lt;p&gt; Bilješku i njezine verzije uvijek možete vratiti kasnije. &lt;/p&gt;</translation>
+<source>&lt;h3&gt;Slower, but with note versions&lt;/h3&gt;&lt;p&gt;The note will be restored on your Nextcloud / ownCloud server with all versions.&lt;/p&gt;&lt;p&gt;You will have to wait until it is synced to QOwnNotes by Nextcloud / ownCloud sync.&lt;/p&gt;</source>
+<translation type="unfinished">&lt;h3&gt;Slower, but with note versions&lt;/h3&gt;&lt;p&gt;The note will be restored on your Nextcloud / ownCloud server with all versions.&lt;/p&gt;&lt;p&gt;You will have to wait until it is synced to QOwnNotes by Nextcloud / ownCloud sync.&lt;/p&gt;</translation>
+</message>
+<message>
+<source>&lt;h3&gt;Faster, but without versions&lt;/h3&gt;&lt;p&gt;The note will be created with the text from the preview.&lt;/p&gt;&lt;p&gt;The note versions on your Nextcloud / ownCloud server will not be restored and the note will remain in the trash.&lt;/p&gt;&lt;p&gt;You can always restore the note and its versions later.&lt;/p&gt;</source>
+<translation type="unfinished">&lt;h3&gt;Faster, but without versions&lt;/h3&gt;&lt;p&gt;The note will be created with the text from the preview.&lt;/p&gt;&lt;p&gt;The note versions on your Nextcloud / ownCloud server will not be restored and the note will remain in the trash.&lt;/p&gt;&lt;p&gt;You can always restore the note and its versions later.&lt;/p&gt;</translation>
 </message>
 <message>
 <source>&amp;Delete</source>
@@ -7705,10 +10666,6 @@ This cannot be undone!</source>
 <translation>Greška dozvole</translation>
 </message>
 <message>
-<source>Your QOwnNotes executable '%1' is not writeable! It must be writeable by the current user in order to be updated.</source>
-<translation>Vaš QOwnNotes izvršni '%1' ne može se pisati! Trenutačni korisnik mora moći pisati da bi se mogao ažurirati.</translation>
-</message>
-<message>
 <source>The temporary file '%1' could not be made executable! You need to replace '%2' yourself.</source>
 <translation>Privremenu datoteku '%1' nije moguće učiniti izvršnom! Morate sami zamijeniti '%2'.</translation>
 </message>
@@ -7723,14 +10680,6 @@ This cannot be undone!</source>
 <message>
 <source>You now can restart the application to complete the update process.</source>
 <translation>Za završavanje aktualiziranja sada možeš ponovo pokrenuti program.</translation>
-</message>
-<message>
-<source>Restart</source>
-<translation>Ponovno pokretanje</translation>
-</message>
-<message>
-<source>Cancel</source>
-<translation>Odustani</translation>
 </message>
 <message>
 <source>Updater script '%1' doesn't exist!</source>
@@ -7755,6 +10704,10 @@ This cannot be undone!</source>
 <message>
 <source>Proceed with update</source>
 <translation>Nastavi s ažuriranjem</translation>
+</message>
+<message>
+<source>Your QOwnNotes executable '%1' is not writable! It must be writable by the current user in order to be updated.</source>
+<translation type="unfinished">Your QOwnNotes executable '%1' is not writable! It must be writable by the current user in order to be updated.</translation>
 </message>
 <message>
 <source>Your old QOwnNotes executable '%1' could not be replaced by the new file '%2'! You need to replace it yourself.</source>
@@ -7797,10 +10750,21 @@ This cannot be undone!</source>
 </message>
 </context>
 <context>
+<name>Utils::Misc</name>
+<message>
+<source>Open folder in file manager</source>
+<translation>Otvori mapu u upravljaču datoteka</translation>
+</message>
+<message>
+<source>Do you want to show this item in your file manager?</source>
+<translation>Želiš li prikazati ovu stavku u upravljaču datoteka?</translation>
+</message>
+</context>
+<context>
 <name>VersionDialog</name>
 <message>
-<source>Note versions on your ownCloud server</source>
-<translation>Verije bilješki na vašem poslužitelju</translation>
+<source>Note versions on your Nextcloud / ownCloud server</source>
+<translation type="unfinished">Note versions on your Nextcloud / ownCloud server</translation>
 </message>
 <message>
 <source>Diff</source>
@@ -7830,16 +10794,242 @@ This cannot be undone!</source>
 <translation>QOwnNotes je sada isključen s websocketa na %1</translation>
 </message>
 <message>
-<source>Web app warning</source>
-<translation>Upozorenje internetskog programa</translation>
-</message>
-<message>
 <source>Image received</source>
 <translation>Slika je primljena</translation>
 </message>
 <message>
 <source>Insert image received from QOwnNotes web application?</source>
 <translation>Umetnuti sliku primljenu iz web programa QOwnNotes?</translation>
+</message>
+<message>
+<source>Text received from web app and copied to clipboard</source>
+<translation>Primljeni tekst od web aplikacije i kopiran u međuspremnik</translation>
+</message>
+<message>
+<source>HTML received from web app and copied to clipboard</source>
+<translation>Primljeni HTML od web aplikacije i kopiran u međuspremnik</translation>
+</message>
+<message>
+<source>Image received from web app and copied to clipboard</source>
+<translation>Primljena slika od web aplikacije i kopirana u međuspremnik</translation>
+</message>
+</context>
+<context>
+<name>WebApplicationSettingsWidget</name>
+<message>
+<source>QOwnNotes web application support</source>
+<translation type="unfinished">QOwnNotes web application support</translation>
+</message>
+<message>
+<source>Enable web application support</source>
+<translation type="unfinished">Enable web application support</translation>
+</message>
+<message>
+<source>You can use the &lt;a href="%1"&gt;QOwnNotes Web App&lt;/a&gt; to be able to insert photos into QOwnNotes on your desktop from your mobile phone over the internet.</source>
+<translation type="unfinished">You can use the &lt;a href="%1"&gt;QOwnNotes Web App&lt;/a&gt; to be able to insert photos into QOwnNotes on your desktop from your mobile phone over the internet.</translation>
+</message>
+<message>
+<source>QOwnNotes web application</source>
+<translation type="unfinished">QOwnNotes web application</translation>
+</message>
+<message>
+<source>Test the connection to the server</source>
+<translation type="unfinished">Test the connection to the server</translation>
+</message>
+<message>
+<source>Test connection</source>
+<translation type="unfinished">Test connection</translation>
+</message>
+<message>
+<source>A web socket connection to this server will be opened to act as bridge between the QOwnNotes web application and the QOwnNotes desktop application.</source>
+<translation type="unfinished">A web socket connection to this server will be opened to act as bridge between the QOwnNotes web application and the QOwnNotes desktop application.</translation>
+</message>
+<message>
+<source>Connection name:</source>
+<translation type="unfinished">Connection name:</translation>
+</message>
+<message>
+<source>The name used to identify this QOwnNotes instance to other connected devices</source>
+<translation type="unfinished">The name used to identify this QOwnNotes instance to other connected devices</translation>
+</message>
+<message>
+<source>Reset to default connection name</source>
+<translation type="unfinished">Reset to default connection name</translation>
+</message>
+<message>
+<source>Security token:</source>
+<translation type="unfinished">Security token:</translation>
+</message>
+<message>
+<source>Show security token</source>
+<translation type="unfinished">Show security token</translation>
+</message>
+<message>
+<source>Generate new security token</source>
+<translation type="unfinished">Generate new security token</translation>
+</message>
+<message>
+<source>Connected devices</source>
+<translation type="unfinished">Connected devices</translation>
+</message>
+<message>
+<source>Refresh</source>
+<translation type="unfinished">Refresh</translation>
+</message>
+<message>
+<source>Server URL:</source>
+<translation type="unfinished">Server URL:</translation>
+</message>
+<message>
+<source>You need to enter this token in the QOwnNotes web application to be able to talk to your QOwnNotes desktop application.</source>
+<translation type="unfinished">You need to enter this token in the QOwnNotes web application to be able to talk to your QOwnNotes desktop application.</translation>
+</message>
+<message>
+<source>Copy security token to clipboard</source>
+<translation type="unfinished">Copy security token to clipboard</translation>
+</message>
+<message>
+<source>Reset the URL to default</source>
+<translation type="unfinished">Reset the URL to default</translation>
+</message>
+<message>
+<source>Show QR code</source>
+<translation type="unfinished">Show QR code</translation>
+</message>
+<message>
+<source>Connection test</source>
+<translation type="unfinished">Connection test</translation>
+</message>
+<message>
+<source>Successfully connected to the web application server.</source>
+<translation type="unfinished">Successfully connected to the web application server.</translation>
+</message>
+<message>
+<source>Not connected to the web application server. Please check the server URL and your network connection.</source>
+<translation type="unfinished">Not connected to the web application server. Please check the server URL and your network connection.</translation>
+</message>
+</context>
+<context>
+<name>WebCompanionSettingsWidget</name>
+<message>
+<source>Command snippets</source>
+<translation type="unfinished">Command snippets</translation>
+</message>
+<message>
+<source>Notes with this tag will be used for fetching bookmarks</source>
+<translation type="unfinished">Notes with this tag will be used for fetching bookmarks</translation>
+</message>
+<message>
+<source>Tag name for commands notes</source>
+<translation type="unfinished">Tag name for commands notes</translation>
+</message>
+<message>
+<source>Commands tag:</source>
+<translation type="unfinished">Commands tag:</translation>
+</message>
+<message>
+<source>You can use notes with a special tag to store command snippets, which you can execute from the command-line snippet manager. For more information about the command snippet syntax click &lt;a href="%1"&gt;here&lt;/a&gt;.</source>
+<translation type="unfinished">You can use notes with a special tag to store command snippets, which you can execute from the command-line snippet manager. For more information about the command snippet syntax click &lt;a href="%1"&gt;here&lt;/a&gt;.</translation>
+</message>
+<message>
+<source>Commands note name:</source>
+<translation type="unfinished">Commands note name:</translation>
+</message>
+<message>
+<source>This note will be used for adding new bookmarks from the browser extension</source>
+<translation type="unfinished">This note will be used for adding new bookmarks from the browser extension</translation>
+</message>
+<message>
+<source>Note name for adding new commands</source>
+<translation type="unfinished">Note name for adding new commands</translation>
+</message>
+<message>
+<source>Web socket server</source>
+<translation type="unfinished">Web socket server</translation>
+</message>
+<message>
+<source>Socket server port:</source>
+<translation type="unfinished">Socket server port:</translation>
+</message>
+<message>
+<source>Reset the socket server port</source>
+<translation type="unfinished">Reset the socket server port</translation>
+</message>
+<message>
+<source>Show security token</source>
+<translation type="unfinished">Show security token</translation>
+</message>
+<message>
+<source>Bookmarks</source>
+<translation type="unfinished">Bookmarks</translation>
+</message>
+<message>
+<source>Bookmarks tag:</source>
+<translation type="unfinished">Bookmarks tag:</translation>
+</message>
+<message>
+<source>Tag name for bookmarks notes</source>
+<translation type="unfinished">Tag name for bookmarks notes</translation>
+</message>
+<message>
+<source>Bookmarks note name:</source>
+<translation type="unfinished">Bookmarks note name:</translation>
+</message>
+<message>
+<source>Note name for adding new bookmarks</source>
+<translation type="unfinished">Note name for adding new bookmarks</translation>
+</message>
+<message>
+<source>By default the browser extension will show all links of the current note. You can also make it show special bookmark links of notes with a certain tag. For more information about the bookmark link syntax click &lt;a href="%1"&gt;here&lt;/a&gt;.</source>
+<translation type="unfinished">By default the browser extension will show all links of the current note. You can also make it show special bookmark links of notes with a certain tag. For more information about the bookmark link syntax click &lt;a href="%1"&gt;here&lt;/a&gt;.</translation>
+</message>
+<message>
+<source>Bookmark suggestion API</source>
+<translation type="unfinished">Bookmark suggestion API</translation>
+</message>
+<message>
+<source>Enable Homepage-compatible bookmark suggestions API</source>
+<translation type="unfinished">Enable Homepage-compatible bookmark suggestions API</translation>
+</message>
+<message>
+<source>Suggestion API port:</source>
+<translation type="unfinished">Suggestion API port:</translation>
+</message>
+<message>
+<source>Reset the suggestion API port</source>
+<translation type="unfinished">Reset the suggestion API port</translation>
+</message>
+<message>
+<source>Security token:</source>
+<translation type="unfinished">Security token:</translation>
+</message>
+<message>
+<source>If this is empty when saved, a new security token will be generated automatically.</source>
+<translation type="unfinished">If this is empty when saved, a new security token will be generated automatically.</translation>
+</message>
+<message>
+<source>Copy security token to clipboard</source>
+<translation type="unfinished">Copy security token to clipboard</translation>
+</message>
+<message>
+<source>Generate new security token</source>
+<translation type="unfinished">Generate new security token</translation>
+</message>
+<message>
+<source>Web socket server support</source>
+<translation type="unfinished">Web socket server support</translation>
+</message>
+<message>
+<source>Enable socket server</source>
+<translation type="unfinished">Enable socket server</translation>
+</message>
+<message>
+<source>Install the &lt;a href="%1"&gt;Web Companion browser extension&lt;/a&gt; from the &lt;a href="%2"&gt;Chrome Web Store&lt;/a&gt; or &lt;a href="%3"&gt;Firefox Add-ons page&lt;/a&gt; to use QOwnNotes as web clipper or for bookmark management.</source>
+<translation type="unfinished">Install the &lt;a href="%1"&gt;Web Companion browser extension&lt;/a&gt; from the &lt;a href="%2"&gt;Chrome Web Store&lt;/a&gt; or &lt;a href="%3"&gt;Firefox Add-ons page&lt;/a&gt; to use QOwnNotes as web clipper or for bookmark management.</translation>
+</message>
+<message>
+<source>Download the &lt;a href="%1"&gt;Command-line snippet manager&lt;/a&gt; to execute command snippets stored in notes in QOwnNotes from the command line.</source>
+<translation type="unfinished">Download the &lt;a href="%1"&gt;Command-line snippet manager&lt;/a&gt; to execute command snippets stored in notes in QOwnNotes from the command line.</translation>
 </message>
 </context>
 <context>
@@ -7851,6 +11041,30 @@ This cannot be undone!</source>
 <message>
 <source>Could not start QOwnNotes server on port %1!</source>
 <translation>Nemoguće pokrenuti poslužitelj QOwnNotes na portu %1!</translation>
+</message>
+<message>
+<source>Could not start bookmark suggestion API on port %1!</source>
+<translation type="unfinished">Could not start bookmark suggestion API on port %1!</translation>
+</message>
+<message>
+<source>Please check if the port is already in use.</source>
+<translation type="unfinished">Please check if the port is already in use.</translation>
+</message>
+<message>
+<source>Bookmark suggestion API listening on port %1</source>
+<translation type="unfinished">Bookmark suggestion API listening on port %1</translation>
+</message>
+<message>
+<source>Bookmark suggestion API received malformed HTTP request line.</source>
+<translation type="unfinished">Bookmark suggestion API received malformed HTTP request line.</translation>
+</message>
+<message>
+<source>Bookmark suggestion API request from %1:%2</source>
+<translation type="unfinished">Bookmark suggestion API request from %1:%2</translation>
+</message>
+<message>
+<source>Bookmark suggestion API couldn't load suggestions because no main window instance is available.</source>
+<translation type="unfinished">Bookmark suggestion API couldn't load suggestions because no main window instance is available.</translation>
 </message>
 <message>
 <source>%1 connected to QOwnNotes server!</source>
@@ -7866,10 +11080,18 @@ This cannot be undone!</source>
 </message>
 <message numerus="yes">
 <source>Bookmark deleted from %n note(s)</source>
-<translation type="unfinished">
-<numerusform>Bookmark deleted from %n note(s)</numerusform>
-<numerusform>Bookmark deleted from %n note(s)</numerusform>
-<numerusform>Bookmark deleted from %n note(s)</numerusform>
+<translation>
+<numerusform>Oznaka je izbrisana iz %n bilješke</numerusform>
+<numerusform>Oznaka je izbrisana iz %n bilješke</numerusform>
+<numerusform>Oznaka je izbrisana iz %n bilješki</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Bookmark edited in %n note(s)</source>
+<translation>
+<numerusform>Oznaka uređena u %n bilješci</numerusform>
+<numerusform>Oznaka uređena u %n bilješke</numerusform>
+<numerusform>Oznaka uređena u %n bilješki</numerusform>
 </translation>
 </message>
 <message>
@@ -7901,6 +11123,10 @@ This cannot be undone!</source>
 <message>
 <source>Welcome to QOwnNotes</source>
 <translation>Dobrodošli u QOwnNotes</translation>
+</message>
+<message>
+<source>Plain-text file Markdown note-taking with Nextcloud / ownCloud integration</source>
+<translation type="unfinished">Plain-text file Markdown note-taking with Nextcloud / ownCloud integration</translation>
 </message>
 <message>
 <source>&amp;Back</source>
@@ -7935,12 +11161,16 @@ This cannot be undone!</source>
 <translation>Odaberi mapu</translation>
 </message>
 <message>
-<source>Panel layout</source>
-<translation>Raspored ploča</translation>
+<source>If you want to be able to access your note versions and your trashed notes on your Nextcloud / ownCloud server, you can configure QOwnNotes for it now. You can also do it at a later time.</source>
+<translation type="unfinished">If you want to be able to access your note versions and your trashed notes on your Nextcloud / ownCloud server, you can configure QOwnNotes for it now. You can also do it at a later time.</translation>
 </message>
 <message>
-<source>Open ownCloud settings</source>
-<translation>Otvori ownCloud postavke</translation>
+<source>Open cloud settings</source>
+<translation type="unfinished">Open cloud settings</translation>
+</message>
+<message>
+<source>In any case, you need the Nextcloud / ownCloud sync client (or any other sync client) to sync your notes with your Nextcloud / ownCloud server.</source>
+<translation type="unfinished">In any case, you need the Nextcloud / ownCloud sync client (or any other sync client) to sync your notes with your Nextcloud / ownCloud server.</translation>
 </message>
 <message>
 <source>Open network settings</source>
@@ -7951,20 +11181,12 @@ This cannot be undone!</source>
 <translation>Odaberite gdje želite pohraniti svoje bilješke:</translation>
 </message>
 <message>
-<source>Plain-text file Markdown note-taking with ownCloud integration</source>
-<translation type="unfinished">Plain-text file Markdown note-taking with ownCloud integration</translation>
-</message>
-<message>
 <source>Show subfolders</source>
 <translation>Prikaži podmape</translation>
 </message>
 <message>
-<source>If you want to be able to access your note versions and your trashed notes on your ownCloud server, you can configure QOwnNotes for it now. You can also do it at a later time.</source>
-<translation>Ako želite pristupiti verzijama bilješki i bilješkama u otpadu na poslužitelju ownCloud, sada možete konfigurirati QOwnNotes. To možete učiniti i kasnije.</translation>
-</message>
-<message>
-<source>In any case, you need the ownCloud sync client (or any other sync client) to sync your notes with your ownCloud server.</source>
-<translation>U svakom slučaju, potreban vam je ownCloud klijent za sinkronizaciju (ili bilo koji drugi klijent za sinkronizaciju) za sinkronizaciju bilješki s poslužiteljem ownCloud.</translation>
+<source>Layout preset</source>
+<translation type="unfinished">Layout preset</translation>
 </message>
 <message>
 <source>QOwnNotes will track anonymous usage data, that helps to decide what parts of QOwnNotes to improve next and to find and fix bugs. You can disable that behaviour in the settings.</source>
@@ -7993,6 +11215,10 @@ This cannot be undone!</source>
 </context>
 <context>
 <name>main</name>
+<message>
+<source>Displays help on commandline options.</source>
+<translation>Prikazuje pomoć za opcije u naredbenom retku.</translation>
+</message>
 <message>
 <source>Runs the application in portable mode.</source>
 <translation>Pokreće aplikaciju u prijenosnom načinu rada.</translation>
@@ -8023,7 +11249,15 @@ This cannot be undone!</source>
 </message>
 <message>
 <source>Generate shell completion code. Supports `fish`, `bash`.</source>
-<translation type="unfinished">Generate shell completion code. Supports `fish`, `bash`.</translation>
+<translation>Generiraj kod ljuske. Podržava `fish`, `bash`.</translation>
+</message>
+<message>
+<source>Prints the decrypted text of an encrypted note file.</source>
+<translation type="unfinished">Prints the decrypted text of an encrypted note file.</translation>
+</message>
+<message>
+<source>Password for --decrypt-note.</source>
+<translation type="unfinished">Password for --decrypt-note.</translation>
 </message>
 <message>
 <source>Single application mode is not supported on your system!</source>

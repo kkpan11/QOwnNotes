@@ -1,19 +1,26 @@
 name: Build Webpage
 on:
+  workflow_dispatch:
   push:
-    branches: [ main ]
+    branches-ignore: [release, main]
+    tags-ignore:
+      - "**"
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-including-paths
     # if [[ ${changed_file} == "CHANGELOG.md" ]] || [[ ${changed_file} = screenshots* ]] || [[ ${changed_file} = webpage* ]] || [[ ${changed_file} = ".github/workflows/build-webpage.yml" ]] ;
     paths:
-      - '.github/workflows/build-webpage.yml'
+      - "CHANGELOG.md"
+      - "screenshots/**"
+      - "webpage/**"
+      - ".github/workflows/build-webpage.yml"
   pull_request:
-    branches: [ main ]
+    branches-ignore: [release]
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-including-paths
     # if [[ ${changed_file} == "CHANGELOG.md" ]] || [[ ${changed_file} = screenshots* ]] || [[ ${changed_file} = webpage* ]] || [[ ${changed_file} = ".github/workflows/build-webpage.yml" ]] ;
     paths:
-      - 'CHANGELOG.md'
-      - 'screenshots/**'
-      - 'webpage/**'
+      - "CHANGELOG.md"
+      - "screenshots/**"
+      - "webpage/**"
+      - ".github/workflows/build-webpage.yml"
 
 defaults:
   run:
@@ -21,18 +28,13 @@ defaults:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - id: files
-      uses: masesgroup/retrieve-changed-files@v3
-      with:
-        format: 'csv'
-    - name: Use Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-    - run: npm install
-    - run: npm run build
+      - uses: actions/checkout@v7
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "20"
+      - run: npm install
+      - run: npm run build

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2024 Patrizio Bekerle -- <patrizio@bekerle.com>
+ * Copyright (c) 2014-2026 Patrizio Bekerle -- <patrizio@bekerle.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,7 +14,9 @@
 
 #include "script.h"
 
+#include <libraries/md4c/src/md4c-html.h>
 #include <libraries/versionnumber/versionnumber.h>
+#include <services/cryptoservice.h>
 #include <services/metricsservice.h>
 #include <services/updateservice.h>
 #include <utils/misc.h>
@@ -23,6 +25,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QJsonDocument>
+#include <QRegularExpression>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
@@ -30,7 +33,13 @@
 #include <QtCore/QJsonArray>
 
 const QString Script::ScriptRepositoryRawContentUrlPrefix =
-    QStringLiteral("https://raw.githubusercontent.com/qownnotes/scripts/master/");
+    QStringLiteral("https://raw.githubusercontent.com/qownnotes/scripts/main/");
+
+static void captureScriptChangelogHtml(const MD_CHAR *data, MD_SIZE dataSize, void *userData) {
+    if (dataSize > 0) {
+        static_cast<QByteArray *>(userData)->append(data, int(dataSize));
+    }
+}
 
 Script::Script()
     : id{0}, name(QLatin1String("")), scriptPath(QLatin1String("")), priority{0}, enabled{true} {}
@@ -217,10 +226,23 @@ bool Script::remove() const {
     QSqlDatabase db = QSqlDatabase::database(QStringLiteral("disk"));
     QSqlQuery query(db);
     QString path;
+    QStringList keychainReferences;
     bool isFromRepository = isScriptFromRepository();
 
     if (isFromRepository) {
         path = scriptRepositoryPath();
+    }
+
+    QJsonObject settingsVariablesObject =
+        QJsonDocument::fromJson(settingsVariablesJson.toUtf8()).object();
+
+    for (auto it = settingsVariablesObject.constBegin(); it != settingsVariablesObject.constEnd();
+         ++it) {
+        const QString value = it.value().toString();
+
+        if (it.key().startsWith(QStringLiteral("!")) && CryptoService::isKeychainReference(value)) {
+            keychainReferences.append(value);
+        }
     }
 
     query.prepare(QStringLiteral("DELETE FROM script WHERE id = :id"));
@@ -230,6 +252,8 @@ bool Script::remove() const {
         qWarning() << __func__ << ": " << query.lastError();
         return false;
     } else {
+        CryptoService::instance()->deleteSecrets(keychainReferences);
+
         // if the script was from the script repository remove also the
         // local path
         if (isFromRepository && !path.isEmpty()) {
@@ -268,9 +292,13 @@ bool Script::fillFromQuery(const QSqlQuery &query) {
 
 QList<Script> Script::fetchAll(bool enabledOnly) {
     QSqlDatabase db = QSqlDatabase::database(QStringLiteral("disk"));
-    QSqlQuery query(db);
-
     QList<Script> scriptList;
+
+    if (!db.tables().contains(QStringLiteral("script"), Qt::CaseInsensitive)) {
+        return scriptList;
+    }
+
+    QSqlQuery query(db);
     query.prepare(QStringLiteral("SELECT * FROM script %1 ORDER BY priority ASC, id ASC")
                       .arg(enabledOnly ? QStringLiteral("WHERE enabled = 1") : QLatin1String("")));
 
@@ -376,7 +404,24 @@ QJsonObject Script::getSettingsVariablesJsonObject() const {
  *
  * @return
  */
-QString Script::getSettingsVariablesJson() const { return settingsVariablesJson; }
+QString Script::getSettingsVariablesJson(bool hideSecrets = false) const {
+    // Iterate settingsVariablesJson and hide secrets if hideSecrets is true
+    // Secrets are keys that start with "!"
+    if (hideSecrets) {
+        QJsonObject json = getSettingsVariablesJsonObject();
+        QJsonObject::iterator i = json.begin();
+        while (i != json.end()) {
+            if (i.key().startsWith(QStringLiteral("!"))) {
+                i.value() = QStringLiteral("********");
+            }
+            ++i;
+        }
+        QJsonDocument jsonResponse(json);
+        return jsonResponse.toJson();
+    }
+
+    return settingsVariablesJson;
+}
 
 /**
  * Returns the path where the script repositories will be stored locally
@@ -449,8 +494,70 @@ QUrl Script::remoteFileUrl(const QString &fileName) const {
         return QUrl();
     }
 
-    return QUrl(QStringLiteral("https://raw.githubusercontent.com/qownnotes/scripts/master/") +
-                identifier + QStringLiteral("/") + fileName);
+    return QUrl(ScriptRepositoryRawContentUrlPrefix + identifier + QStringLiteral("/") + fileName);
+}
+
+QUrl Script::remoteChangelogUrl() const { return remoteFileUrl(QStringLiteral("CHANGELOG.md")); }
+
+QUrl Script::repositoryChangelogUrl() const {
+    if (identifier.isEmpty()) {
+        return {};
+    }
+
+    return QUrl(QStringLiteral("https://github.com/qownnotes/scripts/blob/main/") + identifier +
+                QStringLiteral("/CHANGELOG.md"));
+}
+
+QString Script::changelogForVersionRange(const QString &changelog, const QString &installedVersion,
+                                         const QString &targetVersion) {
+    const QRegularExpression headingExpression(
+        QStringLiteral("^##[\\t ]+([0-9][^\\t \\r\\n]*)[^\\r\\n]*\\r?$"),
+        QRegularExpression::MultilineOption);
+    QRegularExpressionMatchIterator iterator = headingExpression.globalMatch(changelog);
+    QList<QRegularExpressionMatch> headings;
+
+    while (iterator.hasNext()) {
+        headings.append(iterator.next());
+    }
+
+    const VersionNumber localVersion(installedVersion);
+    const VersionNumber remoteVersion(targetVersion);
+    QStringList sections;
+
+    for (int i = 0; i < headings.count(); ++i) {
+        const QRegularExpressionMatch &heading = headings.at(i);
+        const VersionNumber entryVersion(heading.captured(1));
+
+        if (!(localVersion < entryVersion && entryVersion <= remoteVersion)) {
+            continue;
+        }
+
+        const int start = heading.capturedStart();
+        const int end =
+            i + 1 < headings.count() ? headings.at(i + 1).capturedStart() : changelog.length();
+        sections.append(changelog.mid(start, end - start).trimmed());
+    }
+
+    return sections.join(QStringLiteral("\n\n"));
+}
+
+QString Script::changelogHtmlForVersionRange(const QString &changelog,
+                                             const QString &installedVersion,
+                                             const QString &targetVersion) {
+    const QByteArray markdown =
+        changelogForVersionRange(changelog, installedVersion, targetVersion).toUtf8();
+    if (markdown.isEmpty()) {
+        return {};
+    }
+
+    QByteArray html;
+    if (md_html(markdown.constData(), MD_SIZE(markdown.size()), &captureScriptChangelogHtml, &html,
+                MD_DIALECT_GITHUB, 0) != 0) {
+        qWarning() << "Could not render the script changelog";
+        return {};
+    }
+
+    return QString::fromUtf8(html);
 }
 
 /**

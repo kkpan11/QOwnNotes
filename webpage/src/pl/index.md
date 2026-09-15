@@ -1,11 +1,14 @@
 ---
-title: QOwnNotes
 description: Tworzenie notatek z otwartym kodem źródłowym dla systemów Linux, macOS i Windows, które współpracują z Nextcloud Notes
 home: prawda
 heroImage: /screenshots/screenshot.png
+heroText: QOwnNotes
 tagline: Bezpłatna notatka z otwartym kodem tekstowym w postaci zwykłego tekstu z integracją Nextcloud / ownCloud
-actionText: Szybki start →
-actionLink: getting-started/overview
+actions:
+  - 
+    text: Quick Start →
+    link: /getting-started/overview
+    type: primary
 features:
   - 
     title: Posiadaj swoje notatki
@@ -19,13 +22,6 @@ features:
 footer: Wykonane przez Patrizio Bekerle z ❤️
 ---
 
-<div class="rss-block">
-    <v-chip outlined><v-icon left>mdi-rss</v-icon> <a href="https://feeds.feedburner.com/QOwnNotesBlog">Blog RSS</a></v-chip>
-    <v-chip outlined><v-icon left>mdi-rss</v-icon> <a href="https://feeds.feedburner.com/QOwnNotesReleases">Publikacje RSS</a></v-chip>
-</div>
+<RssBlock />
 
 <Poll />
-
-<style>
-    .rss-block { text-align: center; margin-bottom: 20px; }
-</style>

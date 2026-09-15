@@ -5,15 +5,18 @@
 # Stop on error
 $ErrorActionPreference = "Stop"
 
-#dir -s ..\..\Qt
 Write-Host $Env:QT_VERSION
+
+Write-Host "Print content of $Env:QT_ROOT_DIR"
+dir -s $Env:QT_ROOT_DIR
+
 Write-Output "#define RELEASE ""GitHub Actions""" > release.h
 qmake6 CONFIG+=release QOwnNotes.pro -r
 lrelease QOwnNotes.pro
 set CL=/MP
 nmake
-# Create release directory
-New-Item -Path '..\release' -ItemType 'Directory'
+# Create release directory and languages subdirectory
+New-Item -Path '..\release\languages' -ItemType 'Directory' -Force
 # copy the binary to our release path
 Copy-Item release\QOwnNotes.exe ..\release
 # copy Win64 OpenSSL v1.1.1g DLLs to the release path
@@ -25,18 +28,20 @@ Copy-Item ..\appveyor\unzip.exe ..\release
 Copy-Item ..\appveyor\update.bat ..\release
 # copy portable mode launcher to the release path
 Copy-Item ..\appveyor\QOwnNotesPortable.bat ..\release
-# copy translation files
-Copy-Item languages\*.qm ..\release
+# copy translation files into languages subdirectory
+Copy-Item languages\*.qm ..\release\languages
 Set-Location ..\release
-# fetching dependencies of QT app
-# http://doc.qt.io/qt-5/windows-deployment.html
-# Bug in Qt 5.14+: https://stackoverflow.com/questions/61045959/windeployqt-error-unable-to-find-the-platform-plugin
-windeployqt -core -gui -widgets -sql -svg -network -xml -printsupport -qml -websockets -concurrent QOwnNotes.exe
+# Fetching dependencies of QT app
+# https://doc.qt.io/qt-6/windows-deployment.html
+# Note: Library "qmltooling" and "declarative" are not existing anymore
+windeployqt --no-compiler-runtime -core -gui -widgets -sql -svg -network -xml -printsupport -qml -quick -quickwidgets -websockets -concurrent QOwnNotes.exe
+
+# Remove icuuc.dll as it causes issues if the other ICU DLLs are not installed
+# https://github.com/pbek/QOwnNotes/issues/3445#issuecomment-3777501835
+Remove-Item icuuc.dll
 
 # Create zip archive
 Get-ChildItem
-Get-ChildItem D:\a\QOwnNotes\QOwnNotes\release
-tree D:\a\QOwnNotes\QOwnNotes\release
 Compress-Archive -Path * -DestinationPath ..\QOwnNotes.zip
 # Get sha256 checksum
 $Checksum = [string] (Get-FileHash -Path '..\QOwnNotes.zip' -Algorithm 'SHA256').'Hash'.ToLower()

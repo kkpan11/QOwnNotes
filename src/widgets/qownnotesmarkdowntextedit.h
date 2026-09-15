@@ -1,9 +1,23 @@
 #pragma once
 
+#include <QHash>
+#include <QTextBlock>
+#include <QTextEdit>
+
 #include "helpers/qownnotesmarkdownhighlighter.h"
 #include "libraries/qmarkdowntextedit/qmarkdowntextedit.h"
+#include "services/markdownlspclient.h"
+class MarkdownLspDocumentTracker;
 class MainWindow;
+class QDragEnterEvent;
+class QDragMoveEvent;
+class QDropEvent;
+class MarkdownLspIgnoredRules;
 class QOwnSpellChecker;
+
+#ifdef LANGUAGETOOL_ENABLED
+class QAction;
+#endif
 
 #define QOWNNOTESMARKDOWNTEXTEDIT_OVERRIDE_FONT_SIZE_STYLESHEET_PRE_STRING \
     "/* BEGIN FONT SIZE OVERRIDE STYLESHEET */"
@@ -21,19 +35,23 @@ class QOwnNotesMarkdownTextEdit : public QMarkdownTextEdit {
     Q_ENUMS(FontModificationMode)
 
     explicit QOwnNotesMarkdownTextEdit(QWidget *parent = nullptr);
+    ~QOwnNotesMarkdownTextEdit() override;
 
     void setStyles();
-    void openUrl(const QString &urlString) override;
+    void openUrl(const QString &urlString, bool openInNewTab) override;
     //    void setViewportMargins(int left, int top, int right, int bottom);
     void setPaperMargins(int width = -1);
     int modifyFontSize(FontModificationMode mode);
     void updateSettings();
     QMargins viewportMargins();
     void setText(const QString &text);
+    void setCurrentNoteReference(const QString &noteReference);
     static void setSpellCheckingEnabled(bool enabled);
     bool isSpellCheckingEnabled();
     void disableSpellChecking();
     bool usesMonospacedFont();
+    void foldAllHeadings();
+    void unfoldAllHeadings();
 
     /**
      * Toggles the case of the word under the Cursor or the selected text
@@ -41,9 +59,34 @@ class QOwnNotesMarkdownTextEdit : public QMarkdownTextEdit {
     void toggleCase();
 
     /**
+     * Selects the innermost text enclosed by surrounding delimiters
+     */
+    void selectEnclosedText();
+
+    /**
+     * Register this editor as the active one for AI autocomplete
+     */
+    void registerAsActiveEditor();
+
+    /**
+     * Unregister this editor from receiving AI autocomplete
+     */
+    void unregisterAsActiveEditor();
+
+    /**
+     * Get the currently active editor for AI autocomplete
+     */
+    static QOwnNotesMarkdownTextEdit *getActiveEditorForAutocomplete();
+
+    QTextCursor fullLineSelectionCursor() const;
+    bool replaceFullLineSelection(const QString &text);
+    bool changeHeadingDepthOfSelection(int levelDelta);
+
+    /**
      * Inserts an empty code block
      */
     void insertCodeBlock();
+    void insertWikiLink();
 
     /**
      * Handles auto completion
@@ -60,6 +103,13 @@ class QOwnNotesMarkdownTextEdit : public QMarkdownTextEdit {
      * Inserts a block quote character or formats the selected text as block quote
      */
     void insertBlockQuote();
+
+    /**
+     * Inserts a footnote reference with a free number at the current cursor
+     * position and adds a footnote definition at the end of the note, where
+     * the cursor is moved to enter the footnote text
+     */
+    void insertFootnote();
 
     /**
      * Returns the text from the current cursor to the start of the word in the
@@ -79,10 +129,29 @@ class QOwnNotesMarkdownTextEdit : public QMarkdownTextEdit {
      * @return
      */
     bool autoComplete(QStringList &resultList) const;
+    bool wikiLinkAutoComplete(QStringList &resultList, QString &filterText,
+                              int &replaceLength) const;
 
     QString currentBlock() const;
 
     QSize minimumSizeHint() const;
+
+    void updateIgnoredClickUrlRegexps();
+
+    void initializeMarkdownLsp();
+    void setMarkdownLspDocumentPath(const QString &filePath, const QString &text);
+    void closeMarkdownLspDocument();
+
+   public slots:
+    /**
+     * Called when AI autocomplete is completed
+     */
+    void onAiAutocompleteCompleted(const QString &result);
+
+    /**
+     * Called when AI autocomplete request times out or errors
+     */
+    void onAiAutocompleteTimeout(const QString &errorString);
 
    protected:
     // we must not override _highlighter or Windows will create a
@@ -90,11 +159,28 @@ class QOwnNotesMarkdownTextEdit : public QMarkdownTextEdit {
     //    QOwnNotesMarkdownHighlighter *_highlighter;
     bool canInsertFromMimeData(const QMimeData *source) const override;
     void insertFromMimeData(const QMimeData *source) override;
+    void dragEnterEvent(QDragEnterEvent *event) override;
+    void dragMoveEvent(QDragMoveEvent *event) override;
+    void dropEvent(QDropEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
     bool eventFilter(QObject *obj, QEvent *event) override;
+    void keyPressEvent(QKeyEvent *e) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void leaveEvent(QEvent *event) override;
+    void focusInEvent(QFocusEvent *e) override;
+    void focusOutEvent(QFocusEvent *e) override;
+    int sidebarAdditionalWidth() const override;
+    void paintSidebar(QPainter *painter, const QRect &eventRect) override;
+    bool sidebarMousePressEvent(QMouseEvent *event) override;
+    QVariant inputMethodQuery(Qt::InputMethodQuery property) const override;
 
    private:
-    bool _isSpellCheckingDisabled = false;
+    struct FoldRegion {
+        QTextBlock headerBlock;
+        QTextBlock firstContentBlock;
+        QTextBlock lastContentBlock;
+    };
 
     /// @param in is true if zoom-in, false otherwise
     void onZoom(bool in);
@@ -104,6 +190,106 @@ class QOwnNotesMarkdownTextEdit : public QMarkdownTextEdit {
     void onContextMenu(QPoint pos);
 
     void overrideFontSizeStyle(int fontSize);
-
     QMenu *spellCheckContextMenu(QPoint pos);
+    QMenu *markdownLspContextMenu(const QTextCursor &cursorAtMouse);
+#ifdef LANGUAGETOOL_ENABLED
+    void addLanguageToolMenuSection(QMenu *menu, const QTextCursor &cursorAtMouse,
+                                    const QTextCursor &selectedCursor, bool &hasEntries);
+    void applyLanguageToolReplacement(const QTextCursor &cursor, const QString &replacement);
+#endif
+#ifdef HARPER_ENABLED
+    void addHarperMenuSection(QMenu *menu, const QTextCursor &cursorAtMouse,
+                              const QTextCursor &selectedCursor, bool &hasEntries);
+    void applyHarperReplacement(const QTextCursor &cursor, const QString &replacement);
+#endif
+
+    /**
+     * Requests AI autocomplete for the current text
+     */
+    void requestAiAutocomplete();
+
+    /**
+     * Shows the AI autocomplete suggestion
+     */
+    void showAiAutocompleteSuggestion(const QString &suggestion);
+
+    /**
+     * Hides/clears the AI autocomplete suggestion
+     */
+    void clearAiAutocompleteSuggestion();
+
+    /**
+     * Accepts the current AI autocomplete suggestion
+     */
+    void acceptAiAutocompleteSuggestion();
+
+    void applyMarkdownLspSettings();
+    void scheduleMarkdownLspChange();
+    void sendMarkdownLspChange();
+    void showMarkdownLspCompletions(int requestId, const QStringList &items);
+    void showMarkdownLspDiagnostics(const QString &uri,
+                                    const QVector<MarkdownLspClient::Diagnostic> &diagnostics);
+    QVector<MarkdownLspClient::Diagnostic> filteredMarkdownLspDiagnostics(
+        const QVector<MarkdownLspClient::Diagnostic> &diagnostics) const;
+    void applyMarkdownLspDiagnostics(const QVector<MarkdownLspClient::Diagnostic> &diagnostics);
+    void refreshMarkdownLspDiagnostics();
+    void applyMarkdownLspTextEdits(const QVector<MarkdownLspClient::TextEdit> &edits);
+    void applyMarkdownLspFormatting(int requestId,
+                                    const QVector<MarkdownLspClient::TextEdit> &edits);
+    void requestMarkdownLspFormatting(bool useSelection);
+    void paintMarkdownImagePreviews();
+    void refreshFoldingSidebar();
+    bool hoveredMarkdownLink(const QPoint &position, QTextCursor *linkCursor,
+                             bool includeLinkLabel = false);
+    void updateHoveredLink(const QPoint &position, bool enabled);
+    void clearHoveredLink();
+    static bool isHeadingBlock(const QTextBlock &block, int *level = nullptr);
+    bool foldRegionForHeaderBlock(const QTextBlock &headerBlock, FoldRegion &region) const;
+    bool setHeadingFolded(const QTextBlock &headerBlock, bool folded);
+    bool setFoldRegionFolded(const FoldRegion &region, bool folded);
+    bool isHeadingFolded(const QTextBlock &headerBlock) const;
+    static QString headingStateKey(const QTextBlock &headerBlock,
+                                   QHash<QString, int> &headingOccurrences);
+    bool hasFoldableHeadings() const;
+    bool headerBlockAtSidebarPosition(const QPoint &pos, QTextBlock &headerBlock) const;
+    void storeCurrentFoldedHeadingState();
+    void scheduleRestoreCurrentFoldedHeadingState();
+    void restoreCurrentFoldedHeadingState();
+
+    bool _isSpellCheckingDisabled = false;
+    bool _showMarkdownImagePreviews = true;
+    bool _headingFoldingEnabled = true;
+    bool _hasFoldableHeadings = false;
+    QString _currentNoteReference;
+    bool _foldingStateRestorePending = false;
+    bool _isApplyingStoredFoldingState = false;
+    int _foldingStateRestoreAttempts = 0;
+    QString _aiAutocompleteSuggestion;
+    int _aiAutocompletePosition = -1;
+    QTimer *_aiAutocompleteTimer = nullptr;
+    bool _isInsertingAiSuggestion = false;
+    QChar _pendingDeadKey;
+
+    MarkdownLspClient *_markdownLspClient = nullptr;
+    MarkdownLspDocumentTracker *_markdownLspTracker = nullptr;
+    QTimer *_markdownLspChangeTimer = nullptr;
+    QString _markdownLspUri;
+    QString _markdownLspCommand;
+    QStringList _markdownLspArguments;
+    QString _markdownLspPendingText;
+    int _markdownLspVersion = 0;
+    int _markdownLspCompletionRequestId = -1;
+    int _markdownLspFormattingRequestId = -1;
+    int _markdownLspRangeFormattingRequestId = -1;
+    int _markdownLspCodeActionRequestId = -1;
+    bool _markdownLspApplyingEdits = false;
+    QVector<MarkdownLspClient::Diagnostic> _markdownLspAllDiagnostics;
+    QVector<MarkdownLspClient::Diagnostic> _markdownLspDiagnostics;
+    bool _markdownLspEnabled = false;
+    bool _markdownLspInitialized = false;
+    int _hoveredLinkStart = -1;
+    int _hoveredLinkEnd = -1;
+
+    // Static pointer to the currently active editor for AI autocomplete
+    static QOwnNotesMarkdownTextEdit *_activeAutocompleteEditor;
 };

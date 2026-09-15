@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditorSettingsWidget</class>
+ <widget class="QWidget" name="EditorSettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox_17">
+     <property name="title">
+      <string>Markdown highlighting</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_35">
+      <item row="0" column="1" colspan="2">
+       <widget class="QCheckBox" name="markdownHighlightingCheckBox">
+        <property name="toolTip">
+         <string>Note that disabling this will also disable the navigation panel!</string>
+        </property>
+        <property name="text">
+         <string>Enable markdown highlighting</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" colspan="2">
+       <widget class="QCheckBox" name="fullyHighlightedBlockquotesCheckBox">
+        <property name="text">
+         <string>Fully highlight blockquotes</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" colspan="2">
+       <widget class="QCheckBox" name="multilineInlineHighlightingCheckBox">
+        <property name="toolTip">
+         <string>Allows emphasis, strong, underline and strikeout formatting to span multiple lines in the note editor</string>
+        </property>
+        <property name="text">
+         <string>Highlight and apply Markdown text formatting across multiple lines</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="title">
+      <string>Editor options</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_59">
+      <item row="0" column="0" colspan="4">
+       <widget class="QCheckBox" name="autoBracketClosingCheckBox">
+        <property name="text">
+         <string>Enable automatic closing of brackets and markdown formatting characters</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="4">
+       <widget class="QCheckBox" name="autoBracketRemovalCheckBox">
+        <property name="toolTip">
+         <string>You have to use the backspace key to remove the opening character</string>
+        </property>
+        <property name="text">
+         <string>Enable automatic removal of matching closing characters</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" rowspan="2" colspan="4">
+       <widget class="QCheckBox" name="highlightCurrentLineCheckBox">
+        <property name="text">
+         <string>Highlight the current line</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="4">
+       <widget class="QCheckBox" name="editorWidthInDFMOnlyCheckBox">
+        <property name="text">
+         <string>Only use editor width setting in distraction free mode</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" colspan="4">
+       <widget class="QCheckBox" name="vimModeCheckBox">
+        <property name="text">
+         <string>Enable Vim mode (some QOwnNotes shortcuts will not work)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0" colspan="4">
+       <widget class="QCheckBox" name="disableCursorBlinkingCheckBox">
+        <property name="text">
+         <string>Disable cursor blinking</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="cursorWidthLabel">
+        <property name="text">
+         <string>Note-edit cursor width:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QSpinBox" name="cursorWidthSpinBox">
+        <property name="suffix">
+         <string notr="true">px</string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="2">
+       <widget class="QToolButton" name="cursorWidthResetButton">
+        <property name="toolTip">
+         <string>Reset the cursor width</string>
+        </property>
+        <property name="text">
+         <string notr="true">…</string>
+        </property>
+        <property name="icon">
+         <iconset theme="edit-clear" resource="../../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/edit-clear.svg</normaloff>:/icons/breeze-qownnotes/16x16/edit-clear.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="3">
+       <spacer name="horizontalSpacer_13">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="8" column="0" colspan="4">
+       <widget class="QCheckBox" name="removeTrailingSpacesCheckBox">
+        <property name="text">
+         <string>Automatically remove trailing spaces in the note text</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0" colspan="4">
+       <widget class="QCheckBox" name="ensureEmptyLastLineCheckBox">
+        <property name="text">
+         <string>Ensure an empty last line in the note text</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0" colspan="4">
+       <widget class="QCheckBox" name="showLineNumbersInEditorCheckBox">
+        <property name="text">
+         <string>Show line numbers and bookmark markers (1-9)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="0" colspan="4">
+       <widget class="QCheckBox" name="showWhitespaceMarkersCheckBox">
+        <property name="toolTip">
+         <string>Show visible markers for spaces and tabs in the note editor</string>
+        </property>
+        <property name="text">
+         <string>Show whitespace markers</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="0" colspan="4">
+       <widget class="QCheckBox" name="showLineEndingMarkersCheckBox">
+        <property name="toolTip">
+         <string>Show visible markers for line endings in the note editor</string>
+        </property>
+        <property name="text">
+         <string>Show line ending markers</string>
+        </property>
+       </widget>
+      </item>
+      <item row="13" column="0" colspan="4">
+       <widget class="QCheckBox" name="showNoteTextStatsCheckBox">
+        <property name="text">
+         <string>Show character, word and line count in the status bar</string>
+        </property>
+       </widget>
+      </item>
+      <item row="14" column="0" colspan="4">
+       <widget class="QCheckBox" name="showMarkdownImagePreviewsCheckBox">
+        <property name="text">
+         <string>Show small Markdown preview images in the editor, if there is no text after the image</string>
+        </property>
+       </widget>
+      </item>
+      <item row="15" column="0" colspan="4">
+       <widget class="QCheckBox" name="headingFoldingCheckBox">
+        <property name="toolTip">
+         <string>Shows fold buttons for Markdown headings and allows collapsing their contents</string>
+        </property>
+        <property name="text">
+         <string>Enable heading folding in the editor</string>
+        </property>
+       </widget>
+      </item>
+      <item row="16" column="0" colspan="4">
+       <widget class="QCheckBox" name="hideFormattingSyntaxCheckBox">
+        <property name="toolTip">
+         <string>Hides markdown formatting syntax (like **, *, #) on lines that are not being edited</string>
+        </property>
+        <property name="text">
+         <string>Hide markdown formatting syntax on inactive lines</string>
+        </property>
+       </widget>
+      </item>
+      <item row="17" column="0" colspan="4">
+       <widget class="QCheckBox" name="enableWikiLinkSupportCheckBox">
+        <property name="text">
+         <string>Enable wiki-style link support [[note name]]</string>
+        </property>
+       </widget>
+      </item>
+       <item row="18" column="0" colspan="4">
+        <widget class="QCheckBox" name="wikiLinkFileNameAutoSelectCheckBox">
+         <property name="toolTip">
+          <string>Show the note filename selection when [[ is typed</string>
+         </property>
+         <property name="text">
+          <string>Show note filename selection when [[ is typed</string>
+         </property>
+        </widget>
+       </item>
+       <item row="19" column="0" colspan="4">
+        <widget class="QCheckBox" name="autocompleteSingleResultCheckBox">
+         <property name="toolTip">
+          <string>Applies to word, wiki-link, equation, script and Markdown LSP completions</string>
+         </property>
+         <property name="text">
+          <string>Insert autocompletion directly if there is only one result</string>
+         </property>
+        </widget>
+       </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QGroupBox" name="groupBox_36">
+     <property name="title">
+      <string>Tabs and Indents</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_74">
+      <item row="0" column="0">
+       <layout class="QGridLayout" name="gridLayout_73">
+        <item row="0" column="0" colspan="3">
+         <widget class="QCheckBox" name="useTabIndentCheckBox">
+          <property name="text">
+           <string>Use tab character instead of spaces</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_32">
+          <property name="text">
+           <string>Indent:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QSpinBox" name="indentSizeSpinBox">
+          <property name="minimum">
+           <number>2</number>
+          </property>
+          <property name="maximum">
+           <number>5</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <spacer name="horizontalSpacer_16">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="0" colspan="3">
+         <widget class="QCheckBox" name="hangingIndentCheckBox">
+          <property name="text">
+           <string>Enable hanging indentation for Markdown lists</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+    <item row="3" column="0">
+     <widget class="QGroupBox" name="groupBox_21">
+     <property name="toolTip">
+      <string>Here you can set your own time format for inserting the current time into a note.</string>
+     </property>
+     <property name="title">
+      <string>Insert current time</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_49">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Time format:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="timeFormatLineEdit">
+        <property name="placeholderText">
+         <string>Enter your custom time format, like &quot;dd.MM.yyyy hh:mm&quot;</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="Label" name="label_14">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You might want to take a look at all available &lt;a href=&quot;http://docs.qownnotes.org/en/latest/editor/time-formats/&quot;&gt;time formats&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+    <item row="4" column="0">
+     <spacer name="verticalSpacer_12">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>561</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Label</class>
+   <extends>QLabel</extends>
+   <header location="global">widgets/label.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../breeze-qownnotes.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2024 Patrizio Bekerle -- <patrizio@bekerle.com>
+ * Copyright (c) 2014-2026 Patrizio Bekerle -- <patrizio@bekerle.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,8 +16,10 @@
 
 #include <QObject>
 #include <QSslError>
+#include <QStringList>
 #include <QTimer>
 
+class QClipboard;
 class QWebSocket;
 class QSslError;
 class QString;
@@ -25,14 +27,28 @@ class QString;
 class WebAppClientService : public QObject {
     Q_OBJECT
    public:
+    void initClipboardService();
     explicit WebAppClientService(QObject *parent = nullptr);
     ~WebAppClientService() override;
+
+    static WebAppClientService *instance();
 
     static QString getServerUrl();
     static QString getDefaultServerUrl();
     static QString getOrGenerateToken();
+    static QString getOrGenerateConnectionName();
+    static QString generateDefaultConnectionName();
+    bool checkIsConnected() const;
+    void sendRequestConnectedDevices() const;
+    void sendRegister() const;
     void open();
     void close();
+    bool sendClipboard() const;
+    bool sendClipboardAsText() const;
+
+   signals:
+    void connectionStateChanged(bool connected);
+    void connectedDevicesUpdated(const QStringList &deviceNames);
 
    private slots:
     void onConnected();
@@ -43,7 +59,12 @@ class WebAppClientService : public QObject {
     void onReconnect();
 
    private:
+    static WebAppClientService *_instance;
+
     QWebSocket *_webSocket{};
+    QString _clipboardMimeType;
+    QString _clipboardContent;
+    QString _clipboardTextContent;
     QString _url;
     const int _heartbeatTime = 600000;    // heartbeat data transmission time interval in ms
     const int _reconnectHeartbeatTimerCount =
@@ -53,4 +74,10 @@ class WebAppClientService : public QObject {
     int _reconnectFailedCount = 0;       // reconnection failures
     QTimer _timerHeartbeat;              // send heartbeat timer
     QTimer _timerReconnect;              // reconnection timer
+    QString _heartbeatText;
+    QString _sessionId;
+
+    void generateSessionId();
+    void sendInsertIntoClipboard(const QString &mimeType, const QString &content) const;
+    bool keepClipboard();
 };

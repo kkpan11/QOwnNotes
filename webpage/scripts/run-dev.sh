@@ -2,13 +2,21 @@
 
 set -e
 
-# Fix Date RangeError in dependencies after NodeJS 12
-./scripts/fix-date-range-error.sh
+#echo "🔧 Fixing HTML issues in markdown files..."
+#python3 ./scripts/fix-markdown-html.py
 
-# Copy missing assets
-cp ../screenshots src/.vuepress/public -R
-cp ../CHANGELOG.md src/changelog.md
+echo ""
+echo "📦 Copying assets..."
+cp -R ../screenshots src/.vuepress/public 2>/dev/null || echo "⚠️  Screenshots not found, skipping"
+cp ../CHANGELOG.md src/changelog.md 2>/dev/null || echo "⚠️  CHANGELOG.md not found, skipping"
 
-# Fix "Error: error:0308010C:digital envelope routines::unsupported" with "--openssl-legacy-provider"
-# Fix https://github.com/vuejs/vuepress/issues/966 with "--max_old_space_size=8192"
-NODE_OPTIONS=--openssl-legacy-provider node --max_old_space_size=8192 ./node_modules/vuepress/cli.js dev src
+echo ""
+echo "📝 Generating blog index data..."
+node scripts/generate-blog-data.js
+
+echo ""
+echo "🚀 Starting VuePress dev server..."
+echo ""
+
+# VuePress 2 uses the vuepress CLI directly
+npx vuepress dev src

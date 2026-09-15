@@ -4,7 +4,6 @@
 
 <!-- <Content :page-key="getPageKey($site.pages, '/installation/ubuntu.md')" /> -->
 
-
 ## جميع نسخ أوبن سوزي
 
 يمكنك تثبيت QOwnNotes باستخدام أداة [مثبت حزم OBS](https://github.com/openSUSE/opi).
@@ -30,6 +29,18 @@ opi qownnotes
 ::: tip
 تحتاج إلى تحديد خيار الإبقاء على المستودع بعد التثبيت للحصول على التحديثات.
 :::
+
+## openSUSE Leap 16.0
+
+نفّذ الأوامر التالية في الطرفية بصلاحيات الجذر لإضافة المستودع وتثبيت QOwnNotes منه.
+
+```bash
+zypper addrepo -f http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/16.0/home:pbek:QOwnNotes.repo
+zypper refresh
+zypper install qownnotes
+```
+
+[تنزيل مباشر](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/16.0)
 
 ## openSUSE Leap 15.6
 
@@ -103,27 +114,20 @@ zypper install qownnotes
 
 [تنزيل مباشر](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/openSUSE_Tumbleweed)
 
+::: tip
+If QOwnNotes logs `Could not write secret to keychain`, install the missing Secret Service packages and restart your desktop session.
 
-## SLE 12 SP3 Backports
-
-نفّذ الأوامر التالية في الطرفية بصلاحيات الجذر لإضافة المستودع وتثبيت QOwnNotes منه.
-
-```bash
-zypper addrepo -f http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/SLE_12_SP3_Backports/home:pbek:QOwnNotes.repo
-zypper refresh
-zypper install qownnotes
-```
-
-[تنزيل مباشر](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/SLE_12_SP3_Backports)
-
-## SLE 15
-
-نفّذ الأوامر التالية في الطرفية بصلاحيات الجذر لإضافة المستودع وتثبيت QOwnNotes منه.
+For GNOME and other Secret Service based desktops:
 
 ```bash
-zypper addrepo -f http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/SLE_15/home:pbek:QOwnNotes.repo
-zypper refresh
-zypper install qownnotes
+sudo zypper install gnome-keyring libsecret-1-0 seahorse
 ```
 
-[تنزيل مباشر](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/SLE_15)
+For KDE Plasma:
+
+```bash
+sudo zypper install kwalletmanager
+```
+
+QOwnNotes will fall back to legacy encryption if the desktop keychain is unavailable.
+:::

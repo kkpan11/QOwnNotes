@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Open source Markdown note taking for Linux, macOS and Windows, that works together with Nextcloud Notes",
   "main": "index.js",
+  "type": "module",
   "authors": {
     "name": "Patrizio Bekerle",
     "email": "patrizio@bekerle.com"
@@ -10,26 +11,43 @@
   "repository": "/qownnotes-webpage",
   "scripts": {
     "dev": "./scripts/run-dev.sh",
-    "build": "./scripts/run-build.sh"
+    "build": "./scripts/run-build.sh",
+    "playwright:test": "TEST_ENV=prod playwright test",
+    "playwright:test:ui": "TEST_ENV=prod playwright test --ui",
+    "playwright:test:next": "TEST_ENV=next playwright test",
+    "playwright:test:next:ui": "TEST_ENV=next playwright test --ui",
+    "playwright:test:local": "TEST_ENV=local playwright test",
+    "playwright:test:local:ui": "TEST_ENV=local playwright test --ui",
+    "playwright:test:local-docker": "TEST_ENV=local-docker playwright test",
+    "playwright:test:local-docker:ui": "TEST_ENV=local-docker playwright test --ui"
   },
   "license": "MIT",
   "devDependencies": {
-    "@vuejs-community/vue-filter-date-format": "^1.6.2",
-    "@vuejs-community/vue-filter-date-parse": "^1.2.0",
-    "@vuepress/plugin-back-to-top": "^1.6.0",
-    "@vuepress/plugin-medium-zoom": "^1.6.0",
-    "markdown-it": "^12.3.2",
+    "@playwright/test": "1.57.0",
+    "@vuepress/bundler-vite": "next",
+    "@vuepress/plugin-docsearch": "next",
+    "@vuepress/plugin-feed": "next",
+    "@vuepress/plugin-markdown-chart": "next",
+    "@vuepress/plugin-markdown-container": "next",
+    "@vuepress/plugin-markdown-ext": "next",
+    "@vuepress/plugin-markdown-hint": "next",
+    "@vuepress/plugin-markdown-stylize": "next",
+    "@vuepress/plugin-seo": "next",
+    "@vuepress/plugin-sitemap": "next",
+    "@vuepress/theme-default": "next",
+    "playwright-core": "1.57.0",
+    "glob": "^10.3.10",
+    "lodash-es": "^4.18.1",
+    "markdown-it": "^14.2.0",
     "markdown-it-meta": "^0.0.1",
-    "vuepress": "^1.8.0",
-    "vuepress-plugin-canonical": "^1.0.0",
-    "vuepress-plugin-feed": "^0.1.8",
-    "vuepress-plugin-matomo": "^1.0.2",
-    "vuepress-plugin-mermaidjs": "^1.8.0",
-    "vuepress-plugin-seo": "^0.1.4",
-    "vuepress-plugin-sitemap": "^2.3.1"
+    "mermaid": "^11.16.1",
+    "sass": "^1.83.0",
+    "vuepress": "next",
+    "vuepress-plugin-md-enhance": "^2.0.0-rc.99"
   },
   "dependencies": {
-    "vuepress-plugin-code-copy": "^1.0.6",
-    "vuetify": "^2.6.10"
+    "@mdi/font": "^7.4.47",
+    "date-fns": "^3.0.0",
+    "vuetify": "3.11.5"
   }
 }

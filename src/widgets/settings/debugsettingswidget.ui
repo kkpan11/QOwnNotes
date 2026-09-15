@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DebugSettingsWidget</class>
+ <widget class="QWidget" name="DebugSettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_9">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox_5">
+     <property name="title">
+      <string>Debug information</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_8">
+      <item row="0" column="0" colspan="7">
+       <widget class="Label" name="label">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You can &lt;span style=&quot; font-weight:600;&quot;&gt;copy and paste&lt;/span&gt; this text (or parts of this text) in an &lt;span style=&quot; font-weight:600;&quot;&gt;issue&lt;/span&gt; on the &lt;a href=&quot;https://github.com/pbek/QOwnNotes/issues&quot;&gt;QOwnNotes issues page&lt;/a&gt; if you have &lt;span style=&quot; font-weight:600;&quot;&gt;questions or troubles&lt;/span&gt; with QOwnNotes. Data that is too sensitive is hidden in this information.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="7">
+       <widget class="QOwnNotesMarkdownTextEdit" name="debugInfoTextEdit">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="plainText">
+         <string/>
+        </property>
+        <property name="textInteractionFlags">
+         <set>Qt::TextInteractionFlag::TextSelectableByKeyboard|Qt::TextInteractionFlag::TextSelectableByMouse</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="7">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The best way to post issues is to use the issue assistant by pressing the &lt;span style=&quot; font-weight:600;&quot;&gt;Open issue assistant&lt;/span&gt; button on the bottom.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" colspan="7">
+       <widget class="QCheckBox" name="gitHubLineBreaksCheckBox">
+        <property name="toolTip">
+         <string>GitHub doesn't need two spaces at the end of the line to do a line break</string>
+        </property>
+        <property name="text">
+         <string>Use GitHub line breaks</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0" colspan="7">
+       <widget class="QCheckBox" name="debugInfoAnonymizeCheckBox">
+        <property name="toolTip">
+         <string>Hide usernames in paths and anonymize other personal identifiers in the generated debug information</string>
+        </property>
+        <property name="text">
+         <string>Anonymize personal information</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="7">
+       <widget class="QFrame" name="debugInfoTextEditSearchFrame">
+        <property name="frameShape">
+         <enum>QFrame::Shape::NoFrame</enum>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QPushButton" name="issueAssistantPushButton">
+        <property name="toolTip">
+         <string>This is the best way to open an issue</string>
+        </property>
+        <property name="text">
+         <string>Open issue assistant</string>
+        </property>
+        <property name="icon">
+         <iconset theme="face-smile" resource="../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/face-smile.svg</normaloff>:/icons/breeze-qownnotes/16x16/face-smile.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QPushButton" name="copyDebugInfoButton">
+        <property name="toolTip">
+         <string>Please use this in the issue tracker</string>
+        </property>
+        <property name="text">
+         <string>&amp;Copy debug information to clipboard</string>
+        </property>
+        <property name="icon">
+         <iconset theme="edit-copy" resource="../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/edit-copy.svg</normaloff>:/icons/breeze-qownnotes/16x16/edit-copy.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="2">
+       <widget class="QPushButton" name="saveDebugInfoButton">
+        <property name="toolTip">
+         <string>Please don't use this in the issue tracker</string>
+        </property>
+        <property name="text">
+         <string>&amp;Save debug information</string>
+        </property>
+        <property name="icon">
+         <iconset theme="document-save" resource="../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/document-save.svg</normaloff>:/icons/breeze-qownnotes/16x16/document-save.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="3">
+       <widget class="QPushButton" name="openSettingsFileButton">
+        <property name="toolTip">
+         <string>Open settings file in external editor</string>
+        </property>
+        <property name="text">
+         <string>Open settings file</string>
+        </property>
+        <property name="icon">
+         <iconset theme="document-open" resource="../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/document-open.svg</normaloff>:/icons/breeze-qownnotes/16x16/document-open.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="4" colspan="3">
+       <spacer name="horizontalSpacer_14">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QOwnNotesMarkdownTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">widgets/qownnotesmarkdowntextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Label</class>
+   <extends>QLabel</extends>
+   <header location="global">widgets/label.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../breeze-qownnotes.qrc"/>
+ </resources>
+</ui>

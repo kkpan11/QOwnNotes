@@ -2,6 +2,8 @@
 
 #include <utils/misc.h>
 
+#include <QApplication>
+#include <QCoreApplication>
 #include <QDateTime>
 #include <QDebug>
 #include <QFile>
@@ -9,15 +11,24 @@
 #include <QMenu>
 #include <QPointer>
 #include <QScrollBar>
-#include <QSettings>
 
 #include "mainwindow.h"
+#include "services/settingsservice.h"
 
 #ifndef INTEGRATION_TESTS
 #include "ui_logwidget.h"
 #endif
 
 static QPointer<LogWidget> s_logWidget = nullptr;
+#ifndef INTEGRATION_TESTS
+static bool s_appIsShuttingDown = false;
+
+static bool shouldSkipWidgetLogging() {
+    // Avoid updating the log widget while the application is tearing down, see #3546.
+    return s_appIsShuttingDown || QCoreApplication::closingDown() ||
+           (qApp && qApp->property("appIsShuttingDown").toBool());
+}
+#endif
 
 LogWidget::LogWidget(QWidget *parent)
     : QFrame(parent)
@@ -30,6 +41,11 @@ LogWidget::LogWidget(QWidget *parent)
 
     // static reference to us for use in the message handler
     s_logWidget = this;
+
+    connect(qApp, &QCoreApplication::aboutToQuit, this, [] {
+        s_appIsShuttingDown = true;
+        qApp->setProperty("appIsShuttingDown", true);
+    });
 
     ui->setupUi(this);
 
@@ -51,7 +67,7 @@ LogWidget::LogWidget(QWidget *parent)
             &LogWidget::on_logTextEdit_customContextMenuRequested);
 
     ui->buttonFrame->hide();
-    const QSettings settings;
+    const SettingsService settings;
 
     // init the log text edit search frame
     const bool darkMode = settings.value(QStringLiteral("darkMode")).toBool();
@@ -93,6 +109,11 @@ LogWidget::LogWidget(QWidget *parent)
 
 LogWidget::~LogWidget() {
 #ifndef INTEGRATION_TESTS
+    s_appIsShuttingDown = true;
+    if (qApp) {
+        qApp->setProperty("appIsShuttingDown", true);
+    }
+    s_logWidget = nullptr;
     delete ui;
 #endif
 }
@@ -113,7 +134,7 @@ QString LogWidget::getLogText() const {
  */
 void LogWidget::storeSettings() const {
 #ifndef INTEGRATION_TESTS
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("LogWidget/debugLog"), ui->debugCheckBox->isChecked());
     settings.setValue(QStringLiteral("LogWidget/infoLog"), ui->infoCheckBox->isChecked());
     settings.setValue(QStringLiteral("LogWidget/warningLog"), ui->warningCheckBox->isChecked());
@@ -136,11 +157,18 @@ void LogWidget::log(LogWidget::LogType logType, const QString &text) {
          text.contains(QLatin1String("QXcbConnection: XCB error:")) ||
          text.contains(QLatin1String("failed to create compose table")) ||
          text.contains(QLatin1String("OpenType support missing for")) ||
+         text.contains(QLatin1String("Could not find accessible on path:")) ||
+         text.contains(QLatin1String("Accessible invalid: QAccessibleInterface")) ||
          text.contains(QLatin1String("Using QCharRef with an index pointing outside")) ||
          text.contains(QLatin1String("load glyph failed err=")) ||
          text.contains(QLatin1String("[Botan Error]  Invalid CBC padding")) ||
          text.contains(QLatin1String("Invalid version or not a cyphertext")) ||
          text.contains(QLatin1String("QTextCursor::setPosition: Position")) ||
+         text.contains(QLatin1String("which does not match the current topmost grabbing popup,")) ||
+         text.contains(QLatin1String(
+             "QObject::disconnect: wildcard call disconnects from destroyed signal of")) ||
+         text.contains(
+             QLatin1String("This plugin supports grabbing the mouse only for popup windows")) ||
          text.contains(
              QLatin1String("QFont::setPointSizeF: Point size <= 0")) ||    // we don't even use that
                                                                            // method directly
@@ -152,6 +180,10 @@ void LogWidget::log(LogWidget::LogType logType, const QString &text) {
     }
 
 #ifndef INTEGRATION_TESTS
+    if (shouldSkipWidgetLogging()) {
+        return;
+    }
+
     // log to the log file
     logToFileIfAllowed(logType, text);
 
@@ -162,7 +194,14 @@ void LogWidget::log(LogWidget::LogType logType, const QString &text) {
 
     QString type = logTypeText(logType);
     QColor color = QColor(Qt::black);
+
+#ifdef Q_OS_MAC
+    // Try to fix crash when quitting the app with turned on log panel on macOS with Qt6 on Apple
+    // Silicon https://github.com/pbek/QOwnNotes/issues/2912#issuecomment-3066625378
     const bool darkMode = QSettings().value(QStringLiteral("darkMode")).toBool();
+#else
+    const bool darkMode = SettingsService().value(QStringLiteral("darkMode")).toBool();
+#endif
 
     switch (logType) {
         case DebugLogType:
@@ -303,6 +342,13 @@ QString LogWidget::logTypeText(LogType logType) {
  */
 void LogWidget::logMessageOutput(QtMsgType type, const QMessageLogContext &context,
                                  const QString &msg) {
+    // Suppress harmless portal registration warning on Qt 6.10+ in AppImage/non-Flatpak
+    // environments where no matching .desktop file is installed system-wide
+    if (type == QtWarningMsg &&
+        msg.contains(QStringLiteral("Failed to register with host portal"))) {
+        return;
+    }
+
     QByteArray localMsg = msg.toLocal8Bit();
     LogType logType = LogType::DebugLogType;
 
@@ -338,6 +384,9 @@ void LogWidget::logMessageOutput(QtMsgType type, const QMessageLogContext &conte
     }
 
 #ifndef INTEGRATION_TESTS
+    if (shouldSkipWidgetLogging()) {
+        return;
+    }
 
     if (s_logWidget) {
         // Use auto connection to handle the case if a message is coming in from a different thread.
@@ -362,7 +411,14 @@ void LogWidget::logMessageOutput(QtMsgType type, const QMessageLogContext &conte
  * @param msg
  */
 void LogWidget::logToFileIfAllowed(LogType logType, const QString &msg) {
+    // There was a segmentation fault when quitting the application on ARM macOS
+    // when using SettingsService, see https://github.com/pbek/QOwnNotes/issues/3290
+#if defined(Q_OS_MACOS) && defined(Q_PROCESSOR_ARM)
     QSettings settings;
+#else
+    SettingsService settings;
+#endif
+
     if (settings.value(QStringLiteral("Debug/fileLogging")).toBool()) {
         QFile logFile(Utils::Misc::logFilePath());
         if (logFile.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) {

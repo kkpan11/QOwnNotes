@@ -1,8 +1,62 @@
 # التثبيت على دبيان
 
+## Debian Unstable
+
+Run the following shell commands to trust the repository. You might need to repeat this step when the key expires.
+
+```bash
+SIGNED_BY='/etc/apt/keyrings/qownnotes.gpg'
+sudo mkdir -p "$(dirname "${SIGNED_BY}")"
+curl --silent --show-error --location http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_Unstable/Release.key | gpg --dearmor | sudo tee "${SIGNED_BY}" > /dev/null
+sudo chmod u=rw,go=r "${SIGNED_BY}"
+```
+
+نفّذ الأوامر التالية في الطرفية لإضافة المستودع وتثبيت QOwnNotes منه.
+
+```bash
+SIGNED_BY='/etc/apt/keyrings/qownnotes.gpg'
+ARCHITECTURE="$(dpkg --print-architecture)"
+echo "deb [arch=${ARCHITECTURE} signed-by=${SIGNED_BY}] http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_Unstable/ /" | sudo tee /etc/apt/sources.list.d/qownnotes.list > /dev/null
+sudo apt update
+sudo apt install qownnotes
+```
+
+::: tip
+This package is built with Qt6.
+:::
+
+[تنزيل مباشر](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_Unstable)
+
+## Debian 13.0
+
+نفّذ الأوامر التالية في الطرفية لاستيثاق المستودع. You might need to repeat this step when the key expires.
+
+```bash
+SIGNED_BY='/etc/apt/keyrings/qownnotes.gpg'
+sudo mkdir -p "$(dirname "${SIGNED_BY}")"
+curl --silent --show-error --location http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_13/Release.key | gpg --dearmor | sudo tee "${SIGNED_BY}" > /dev/null
+sudo chmod u=rw,go=r "${SIGNED_BY}"
+```
+
+نفّذ الأوامر التالية في الطرفية لإضافة المستودع وتثبيت QOwnNotes منه.
+
+```bash
+SIGNED_BY='/etc/apt/keyrings/qownnotes.gpg'
+ARCHITECTURE="$(dpkg --print-architecture)"
+echo "deb [arch=${ARCHITECTURE} signed-by=${SIGNED_BY}] http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_13/ /" | sudo tee /etc/apt/sources.list.d/qownnotes.list > /dev/null
+sudo apt update
+sudo apt install qownnotes
+```
+
+::: tip
+This package is built with Qt6.
+:::
+
+[تنزيل مباشر](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_13)
+
 ## دبيان 12.0
 
-نفّذ الأوامر التالية في الطرفية لاستيثاق المستودع.
+نفّذ الأوامر التالية في الطرفية لاستيثاق المستودع. You might need to repeat this step when the key expires.
 
 ```bash
 SIGNED_BY='/etc/apt/keyrings/qownnotes.gpg'
@@ -22,14 +76,14 @@ sudo apt install qownnotes
 ```
 
 ::: tip
-إذا استخدمت هذا المستودع مع نسخة أخرى من دبيان، فنرجو التأكد من أن **Qt** **النسخة 5.15** على الأقل مثبتة لديك.
+This package is built with Qt6.
 :::
 
 [تنزيل مباشر](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_12)
 
 ## دبيان 11.0
 
-نفّذ الأوامر التالية في الطرفية لاستيثاق المستودع.
+نفّذ الأوامر التالية في الطرفية لاستيثاق المستودع. You might need to repeat this step when the key expires.
 
 ```bash
 SIGNED_BY='/etc/apt/keyrings/qownnotes.gpg'
@@ -56,13 +110,13 @@ sudo apt install qownnotes
 
 ## دبيان 10.0
 
-نفّذ الأوامر التالية في الطرفية لاستيثاق المستودع.
+Run the following shell commands to trust the repository. You might need to repeat this step when the key expires.
 
 ```bash
 wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_10/Release.key -O - | sudo apt-key add -
 ```
 
-نفّذ الأوامر التالية في الطرفية لإضافة المستودع وتثبيت QOwnNotes منه.
+Run the following shell commands to add the repository and install QOwnNotes from there.
 
 ```bash
 sudo bash -c "echo 'deb http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_10/ /' >> /etc/apt/sources.list.d/qownnotes.list"
@@ -74,26 +128,22 @@ sudo apt-get install qownnotes
 إذا استخدمت هذا المستودع مع نسخة أخرى من دبيان، فنرجو التأكد من أن **Qt** **النسخة 5.8** على الأقل مثبتة لديك.
 :::
 
-[تنزيل مباشر](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_10)
-
-## دبيان 9.0
-
-نفّذ الأوامر التالية في الطرفية لاستيثاق المستودع.
-
-```bash
-wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_9.0/Release.key -O - | sudo apt-key add -
-```
-
-نفّذ الأوامر التالية في الطرفية لإضافة المستودع وتثبيت QOwnNotes منه.
-
-```bash
-sudo bash -c "echo 'deb http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_9.0/ /' >> /etc/apt/sources.list.d/qownnotes.list"
-sudo apt-get update
-sudo apt-get install qownnotes
-```
+[Direct Download](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_10)
 
 ::: tip
-إذا استخدمت هذا المستودع مع نسخة أخرى من دبيان، فنرجو التأكد من أن **Qt** **النسخة 5.5** على الأقل مثبتة لديك.
-:::
+If QOwnNotes logs `Could not write secret to keychain`, install the missing Secret Service packages and restart your desktop session.
 
-[تنزيل مباشر](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Debian_9.0)
+For GNOME and other Secret Service based desktops:
+
+```bash
+sudo apt install gnome-keyring libsecret-1-0 seahorse
+```
+
+For KDE Plasma:
+
+```bash
+sudo apt install kwalletmanager
+```
+
+QOwnNotes will fall back to legacy encryption if the desktop keychain is unavailable.
+:::

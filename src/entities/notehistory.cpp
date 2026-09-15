@@ -5,11 +5,11 @@
 #include <QDebug>
 #include <QPlainTextEdit>
 #include <QScrollBar>
-#include <QSettings>
 #include <utility>
 
 #include "note.h"
 #include "notesubfolder.h"
+#include "services/settingsservice.h"
 
 /*
  * NoteHistoryItem implementation
@@ -314,7 +314,7 @@ void NoteHistory::clear() {
  * Stores the note history for the current note folder
  */
 void NoteHistory::storeForCurrentNoteFolder() {
-    QSettings settings;
+    SettingsService settings;
     int currentNoteFolderId = NoteFolder::currentNoteFolderId();
     QVariantList noteHistoryVariantItems;
     const QList<NoteHistoryItem> &noteHistoryItems = getNoteHistoryItems();
@@ -354,7 +354,7 @@ void NoteHistory::storeForCurrentNoteFolder() {
  * Restores the note history for the current note folder
  */
 void NoteHistory::restoreForCurrentNoteFolder() {
-    QSettings settings;
+    SettingsService settings;
     int currentNoteFolderId = NoteFolder::currentNoteFolderId();
     clear();
 

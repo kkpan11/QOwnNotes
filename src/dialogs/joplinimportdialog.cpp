@@ -4,13 +4,18 @@
 #include <entities/notefolder.h>
 #include <entities/tag.h>
 
+#include <QDateTime>
 #include <QDebug>
+#include <QDir>
+#include <QFile>
 #include <QFileDialog>
+#include <QFileInfo>
+#include <QMessageBox>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
-#include <QSettings>
 
 #include "filedialog.h"
+#include "services/settingsservice.h"
 #include "ui_joplinimportdialog.h"
 
 JoplinImportDialog::JoplinImportDialog(QWidget* parent)
@@ -23,7 +28,7 @@ JoplinImportDialog::JoplinImportDialog(QWidget* parent)
     ui->progressBar->setValue(0);
     _importCount = 0;
 
-    QSettings settings;
+    SettingsService settings;
     bool showFolders = NoteFolder::isCurrentShowSubfolders();
 
     if (!showFolders) {
@@ -46,10 +51,19 @@ JoplinImportDialog::JoplinImportDialog(QWidget* parent)
     ui->attachmentImportCheckBox->setChecked(
         settings.value(QStringLiteral("JoplinImport/AttachmentImportCheckBoxChecked"), true)
             .toBool());
+
+    // Load the last selected directory
+    QString lastDirectory = settings.value(QStringLiteral("JoplinImport/LastDirectory")).toString();
+    if (!lastDirectory.isEmpty()) {
+        QDir dir(lastDirectory);
+        if (dir.exists()) {
+            ui->directoryLineEdit->setText(lastDirectory);
+        }
+    }
 }
 
 JoplinImportDialog::~JoplinImportDialog() {
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("JoplinImport/FolderImportCheckBoxChecked"),
                       ui->folderImportCheckBox->isChecked());
     settings.setValue(QStringLiteral("JoplinImport/TagImportCheckBoxChecked"),
@@ -60,6 +74,12 @@ JoplinImportDialog::~JoplinImportDialog() {
                       ui->imageImportCheckBox->isChecked());
     settings.setValue(QStringLiteral("JoplinImport/AttachmentImportCheckBoxChecked"),
                       ui->attachmentImportCheckBox->isChecked());
+
+    // Save the last selected directory
+    QString currentDirectory = ui->directoryLineEdit->text();
+    if (!currentDirectory.isEmpty()) {
+        settings.setValue(QStringLiteral("JoplinImport/LastDirectory"), currentDirectory);
+    }
 
     delete ui;
 }
@@ -97,6 +117,7 @@ void JoplinImportDialog::on_importButton_clicked() {
     _attachmentData.clear();
     _folderData.clear();
     _importedFolders.clear();
+    _importedAttachmentFileNames.clear();
 
     auto directoryName = ui->directoryLineEdit->text();
     QDir dir(directoryName);
@@ -104,6 +125,19 @@ void JoplinImportDialog::on_importButton_clicked() {
     if (directoryName.isEmpty() || !dir.exists()) {
         return;
     }
+
+    // A Joplin resource referenced by more than one image tag (e.g. the same
+    // picture used twice) would otherwise pop up a "use existing file?"
+    // dialog once per repeat, or -- unanswered -- fall back to writing a
+    // byte-identical "<id>-1.ext" duplicate (see
+    // Note::getInsertMediaMarkdown()). Force it to reuse the existing file
+    // for the duration of this import, then restore whatever the user had
+    // configured.
+    SettingsService importSettings;
+    const QString reuseImageOverrideKey =
+        QStringLiteral("MessageBoxOverride/insert-media-use-existing-image");
+    const QVariant previousReuseImageOverride = importSettings.value(reuseImageOverrideKey);
+    importSettings.setValue(reuseImageOverrideKey, QMessageBox::Yes);
 
     QStringList files = dir.entryList(QStringList() << "*.md", QDir::Files);
     _dirPath = dir.path();
@@ -197,6 +231,12 @@ void JoplinImportDialog::on_importButton_clicked() {
     }
 
     ui->importButton->setEnabled(true);
+
+    if (previousReuseImageOverride.isValid()) {
+        importSettings.setValue(reuseImageOverrideKey, previousReuseImageOverride);
+    } else {
+        importSettings.remove(reuseImageOverrideKey);
+    }
 }
 
 bool JoplinImportDialog::importFolders() {
@@ -347,7 +387,60 @@ bool JoplinImportDialog::importNote(const QString& id, const QString& text,
         note.storeNoteTextFileToDisk();
     }
 
+    // Joplin's raw export carries the note's real creation/modification
+    // history in its metadata block, but everything above this point wrote
+    // the note file "now", so file_last_modified would otherwise reflect
+    // the moment the import ran instead of the note's actual history
+    // (breaking Note -> Sort by -> By date). Restore the real timestamps as
+    // the last step, after every storeNoteTextFileToDisk() call above.
+    applyJoplinTimestamps(text, note);
+
     return true;
+}
+
+/**
+ * Applies a Joplin note's original updated_time metadata to the file
+ * already written to disk for that note, so the app's file_last_modified
+ * sorting reflects the note's real history instead of the moment the
+ * import ran.
+ *
+ * @param text the raw Joplin note text, still containing its metadata block
+ * @param note the already-stored, already-written-to-disk imported note
+ */
+void JoplinImportDialog::applyJoplinTimestamps(const QString& text, Note& note) {
+// QFile::setFileTime() was added in Qt 5.10; this project's floor is Qt 5.5,
+// so skip the correction gracefully on older Qt5 instead of failing to build.
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+    auto match =
+        QRegularExpression("^updated_time: (.+)$", QRegularExpression::MultilineOption).match(text);
+
+    if (!match.hasMatch()) {
+        return;
+    }
+
+    // Joplin writes timestamps like "2019-11-15T16:16:34.302Z"
+    const QDateTime updatedTime =
+        QDateTime::fromString(match.captured(1).trimmed(), Qt::ISODateWithMs);
+
+    if (!updatedTime.isValid()) {
+        return;
+    }
+
+    // QFile::setFileTime silently fails unless the file is open
+    QFile noteFile(note.fullNoteFilePath());
+    if (noteFile.open(QIODevice::ReadWrite)) {
+        noteFile.setFileTime(updatedTime, QFileDevice::FileModificationTime);
+        noteFile.close();
+    }
+
+    // re-read the corrected mtime from disk into the note and persist it to
+    // the DB's file_last_modified column, which is what sort-by-date reads
+    note.updateNoteTextFromDisk();
+    note.store();
+#else
+    Q_UNUSED(text)
+    Q_UNUSED(note)
+#endif
 }
 
 int JoplinImportDialog::getImportCount() const { return _importCount; }
@@ -385,67 +478,175 @@ void JoplinImportDialog::tagNote(const QString& id, const Note& note) {
  */
 void JoplinImportDialog::handleImages(Note& note, const QString& dirPath) {
     QString noteText = note.getNoteText();
-    auto i = QRegularExpression(R"(!\[([^\]]*)\]\(:\/([\w\d]+)\))").globalMatch(noteText);
 
-    while (i.hasNext()) {
-        QRegularExpressionMatch match = i.next();
-        QString imageTag = match.captured(0);
-        QString imageName = match.captured(1);
-        QString imageId = match.captured(2);
+    // Handle format: [![](:/imageId "hover text")]
+    //
+    // The label uses `(?:\\.|[^\]])*` instead of `[^\]]*` so that an escaped
+    // bracket (`\]`) inside the alt text -- common in web-clipped or OCR'd
+    // content -- doesn't prematurely end the capture and make the whole
+    // pattern fail to match.
+    //
+    // Each block below re-searches noteText from a moving offset and
+    // replaces only the specific occurrence just matched (by position), then
+    // resumes searching from right after the replacement. Matching against a
+    // one-time globalMatch() snapshot while mutating noteText as we go (the
+    // previous approach) breaks whenever the exact same image tag text
+    // appears more than once in a note: QString::replace(needle, replacement)
+    // replaces every occurrence of the needle at once, so the first match's
+    // replacement also silently consumes every later match's tag text,
+    // leaving their imported files orphaned (imported, but never linked).
+    {
+        const QRegularExpression re(
+            R"regex(!\[((?:\\.|[^\]])*)\]\(:\/([\w\d]+)\s+"([^"]*)"\))regex");
+        int searchOffset = 0;
+        QRegularExpressionMatch match = re.match(noteText, searchOffset);
 
-        importImage(note, dirPath, noteText, imageTag, imageId, imageName);
+        while (match.hasMatch()) {
+            QString imageName = match.captured(1);
+            QString imageId = match.captured(2);
+            QString hoverText = match.captured(3);
+
+            // Use hover text as image name if no alt text is provided
+            QString finalImageName = imageName.isEmpty() ? hoverText : imageName;
+            searchOffset = importImage(note, dirPath, noteText, match.capturedStart(0),
+                                       match.capturedLength(0), imageId, finalImageName);
+            match = re.match(noteText, searchOffset);
+        }
     }
 
-    i = QRegularExpression(R"(<img src=\":\/([\w\d]+)\"\/>)").globalMatch(noteText);
+    // Handle format: ![alt text](:/imageId)
+    {
+        const QRegularExpression re(R"(!\[((?:\\.|[^\]])*)\]\(:\/([\w\d]+)\))");
+        int searchOffset = 0;
+        QRegularExpressionMatch match = re.match(noteText, searchOffset);
 
-    while (i.hasNext()) {
-        QRegularExpressionMatch match = i.next();
-        QString imageTag = match.captured(0);
-        QString imageId = match.captured(1);
+        while (match.hasMatch()) {
+            QString imageName = match.captured(1);
+            QString imageId = match.captured(2);
 
-        importImage(note, dirPath, noteText, imageTag, imageId);
+            searchOffset = importImage(note, dirPath, noteText, match.capturedStart(0),
+                                       match.capturedLength(0), imageId, imageName);
+            match = re.match(noteText, searchOffset);
+        }
+    }
+
+    // Handle format: <img src=":/imageId" ... />
+    {
+        const QRegularExpression re(R"(<img\s+(?:[^>]*\s+)?src=\":\/([\w\d]+)\"[^>]*\/?>)");
+        int searchOffset = 0;
+        QRegularExpressionMatch match = re.match(noteText, searchOffset);
+
+        while (match.hasMatch()) {
+            QString imageId = match.captured(1);
+
+            searchOffset = importImage(note, dirPath, noteText, match.capturedStart(0),
+                                       match.capturedLength(0), imageId);
+            match = re.match(noteText, searchOffset);
+        }
     }
 
     note.setNoteText(noteText);
 }
 
-void JoplinImportDialog::importImage(Note& note, const QString& dirPath, QString& noteText,
-                                     const QString& imageTag, const QString& imageId,
-                                     const QString& imageName) {
+/**
+ * Imports the image/resource for a single matched image tag and replaces
+ * just that occurrence (identified by position, not by tag text) with the
+ * generated Markdown.
+ *
+ * @return the offset handleImages() should resume searching from
+ */
+int JoplinImportDialog::importImage(Note& note, const QString& dirPath, QString& noteText,
+                                    int matchStart, int matchLength, const QString& imageId,
+                                    const QString& imageName) {
     QString imageData = _imageData[imageId];
+
+    // Joplin resources are classified as image vs. attachment purely by their
+    // "mime:" field, but an `<img src=":/id">` tag can still point at a
+    // resource that wasn't classified as an image (e.g. a saved web-clipper
+    // page snapshot with `mime: text/html`). Fall back to the attachment
+    // data so we can still find and import the underlying file.
+    if (imageData.isEmpty()) {
+        imageData = _attachmentData[imageId];
+    }
 
     qDebug() << __func__ << " - 'imageName': " << imageName;
     qDebug() << __func__ << " - 'imageId': " << imageId;
     // qDebug() << __func__ << " - 'imageData': " << imageData;
 
-    QString fileExtension;
-    auto fileExtensionMatch =
-        QRegularExpression("^file_extension: (.+)$", QRegularExpression::MultilineOption)
-            .match(imageData);
-
-    if (fileExtensionMatch.hasMatch()) {
-        fileExtension = fileExtensionMatch.captured(1);
-    } else {
-        // if the extension wasn't set we'll try to get it from the original file
-        auto imageDataLines =
-            imageData.split(QRegularExpression(QStringLiteral(R"((\r\n)|(\n\r)|\r|\n)")));
-        auto originalFileName = imageDataLines[0];
-        auto fileInfo = QFileInfo(originalFileName);
-        fileExtension = fileInfo.suffix();
-    }
-
-    auto* mediaFile = new QFile(dirPath + "/resources/" + imageId + "." + fileExtension);
+    auto* mediaFile = findResourceFile(dirPath, imageId, imageData);
 
     qDebug() << __func__ << " - 'mediaFile': " << mediaFile;
 
-    if (!mediaFile->exists()) {
-        return;
+    if (mediaFile == nullptr) {
+        // Nothing to import -- leave the tag as-is and just skip past it, so
+        // the caller doesn't re-match this exact spot forever.
+        return matchStart + matchLength;
     }
 
     QString mediaMarkdown = note.getInsertMediaMarkdown(mediaFile, false, false, imageName);
 
     qDebug() << __func__ << " - 'mediaMarkdown': " << mediaMarkdown;
-    noteText.replace(imageTag, mediaMarkdown);
+    noteText.replace(matchStart, matchLength, mediaMarkdown);
+
+    return matchStart + mediaMarkdown.length();
+}
+
+/**
+ * Resolves the on-disk resource file for a Joplin resource id.
+ *
+ * Joplin's raw export doesn't always populate the "file_extension:" field (or a
+ * usable original filename to derive it from) in a resource's metadata note --
+ * this is common for resources created by older Joplin versions or imported
+ * from other apps. When that happens we can't build the "<id>.<ext>" path from
+ * metadata alone, so as a last resort we look directly in the resources/
+ * directory for a file starting with the resource id.
+ *
+ * @param dirPath the Joplin export directory
+ * @param id the resource id
+ * @param metaData the resource's metadata note text (may be empty if the id
+ *                 wasn't found in either the image or attachment data at all)
+ * @return a QFile pointing at the resource, or nullptr if it can't be found
+ */
+QFile* JoplinImportDialog::findResourceFile(const QString& dirPath, const QString& id,
+                                            const QString& metaData) {
+    QString fileExtension;
+    auto fileExtensionMatch =
+        QRegularExpression("^file_extension: (.+)$", QRegularExpression::MultilineOption)
+            .match(metaData);
+
+    if (fileExtensionMatch.hasMatch()) {
+        fileExtension = fileExtensionMatch.captured(1);
+    } else if (!metaData.isEmpty()) {
+        // if the extension wasn't set we'll try to get it from the original file
+        auto metaDataLines =
+            metaData.split(QRegularExpression(QStringLiteral(R"((\r\n)|(\n\r)|\r|\n)")));
+        auto originalFileName = metaDataLines[0];
+        auto fileInfo = QFileInfo(originalFileName);
+        fileExtension = fileInfo.suffix();
+    }
+
+    if (!fileExtension.isEmpty()) {
+        auto* mediaFile = new QFile(dirPath + "/resources/" + id + "." + fileExtension);
+
+        if (mediaFile->exists()) {
+            return mediaFile;
+        }
+
+        delete mediaFile;
+    }
+
+    // Last resort: search the resources directory for a file that starts
+    // with the resource id, regardless of extension. Some resources (seen in
+    // the wild with an empty "mime:"/"file_extension:" combination) are
+    // exported with no extension at all, so the glob can't require a ".".
+    QDir resourceDir(dirPath + "/resources");
+    const QStringList matches = resourceDir.entryList(QStringList() << id + "*", QDir::Files);
+
+    if (!matches.isEmpty()) {
+        return new QFile(resourceDir.filePath(matches.first()));
+    }
+
+    return nullptr;
 }
 
 /**
@@ -456,7 +657,19 @@ void JoplinImportDialog::importImage(Note& note, const QString& dirPath, QString
  */
 void JoplinImportDialog::handleAttachments(Note& note, const QString& dirPath) {
     QString noteText = note.getNoteText();
-    auto i = QRegularExpression(R"([^!](\[([^\]]*)\]\(:\/([\w\d]+)\)))").globalMatch(noteText);
+
+    // Use a zero-width negative lookbehind `(?<!!)` instead of a consuming
+    // `[^!]` character class. The consuming version eats whatever character
+    // precedes the link -- which is harmless for an isolated link, but when
+    // attachment links are packed back-to-back with no separator, e.g.
+    // `[a.pdf](:/id1)[b.pdf](:/id2)`, the closing `)` of the first link's
+    // match gets consumed as the "not an image" check for the first link,
+    // leaving no character left for the second link's check to consume, so
+    // every other link in the chain silently fails to match. The label also
+    // uses `(?:\\.|[^\]])*` instead of `[^\]]*` so an escaped bracket in the
+    // link text doesn't prematurely end the capture (see handleImages()).
+    auto i =
+        QRegularExpression(R"((?<!!)(\[((?:\\.|[^\]])*)\]\(:\/([\w\d]+)\)))").globalMatch(noteText);
 
     while (i.hasNext()) {
         QRegularExpressionMatch match = i.next();
@@ -465,34 +678,57 @@ void JoplinImportDialog::handleAttachments(Note& note, const QString& dirPath) {
         QString attachmentId = match.captured(3);
         QString attachmentData = _attachmentData[attachmentId];
 
+        // The attachment may actually be classified as an image (e.g. an
+        // image resource referenced via a plain `[label](:/id)` link instead
+        // of `![](:/id)`) -- fall back to the image data so we can still
+        // find and import the underlying file.
+        if (attachmentData.isEmpty()) {
+            attachmentData = _imageData[attachmentId];
+        }
+
         qDebug() << __func__ << " - 'attachmentName': " << attachmentName;
         qDebug() << __func__ << " - 'attachmentId': " << attachmentId;
 
-        QString fileExtension;
-        auto fileExtensionMatch =
-            QRegularExpression("^file_extension: (.+)$", QRegularExpression::MultilineOption)
-                .match(attachmentData);
+        QString mediaMarkdown;
 
-        if (fileExtensionMatch.hasMatch()) {
-            fileExtension = fileExtensionMatch.captured(1);
+        // This resource was already copied into the attachments folder
+        // earlier in this import (the same resource referenced more than
+        // once, e.g. linked twice in one note, or shared across notes) --
+        // reuse that copy instead of writing another byte-identical
+        // "<id>-1.ext" duplicate.
+        const auto existingFileNameIt = _importedAttachmentFileNames.constFind(attachmentId);
+        if (existingFileNameIt != _importedAttachmentFileNames.constEnd()) {
+            const QString title = attachmentName.isEmpty() ? *existingFileNameIt : attachmentName;
+            mediaMarkdown = QStringLiteral("[") + title + QStringLiteral("](") +
+                            note.attachmentUrlStringForFileName(*existingFileNameIt) +
+                            QStringLiteral(")");
         } else {
-            // if the extension wasn't set we'll try to get it from the original file
-            auto attachmentDataLines =
-                attachmentData.split(QRegularExpression(QStringLiteral(R"((\r\n)|(\n\r)|\r|\n)")));
-            auto originalFileName = attachmentDataLines[0];
-            auto fileInfo = QFileInfo(originalFileName);
-            fileExtension = fileInfo.suffix();
+            auto* mediaFile = findResourceFile(dirPath, attachmentId, attachmentData);
+
+            qDebug() << __func__ << " - 'mediaFile': " << mediaFile;
+
+            if (mediaFile == nullptr) {
+                continue;
+            }
+
+            // The destination filename getInsertAttachmentMarkdown() is
+            // about to use is derived from mediaFile's own (source) file
+            // name, which findResourceFile() always sets to "<id>.<ext>" --
+            // unique per resource id, so no other note/resource can already
+            // occupy it. Capturing it here (rather than parsing it back out
+            // of the returned Markdown) is exact and avoids re-deriving
+            // Note's URL-encoding/collision-suffix logic independently.
+            const QString destinationFileName = QFileInfo(mediaFile->fileName()).fileName();
+
+            mediaMarkdown = note.getInsertAttachmentMarkdown(mediaFile, attachmentName);
+
+            // getInsertAttachmentMarkdown() silently no-ops (empty return)
+            // for a zero-byte resource, in which case nothing was actually
+            // copied -- don't cache a filename that was never written.
+            if (!mediaMarkdown.isEmpty()) {
+                _importedAttachmentFileNames.insert(attachmentId, destinationFileName);
+            }
         }
-
-        auto* mediaFile = new QFile(dirPath + "/resources/" + attachmentId + "." + fileExtension);
-
-        qDebug() << __func__ << " - 'mediaFile': " << mediaFile;
-
-        if (!mediaFile->exists()) {
-            continue;
-        }
-
-        QString mediaMarkdown = note.getInsertAttachmentMarkdown(mediaFile, attachmentName);
 
         qDebug() << __func__ << " - 'mediaMarkdown': " << mediaMarkdown;
         noteText.replace(attachmentTag, mediaMarkdown);

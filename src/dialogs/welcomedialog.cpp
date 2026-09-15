@@ -5,30 +5,22 @@
 #include <QFileDialog>
 #include <QGraphicsScene>
 #include <QMessageBox>
-#include <QSettings>
 
 #include "QDebug"
 #include "services/metricsservice.h"
+#include "services/settingsservice.h"
 #include "settingsdialog.h"
 #include "ui_welcomedialog.h"
 
 WelcomeDialog::WelcomeDialog(QWidget *parent) : MasterDialog(parent), ui(new Ui::WelcomeDialog) {
     ui->setupUi(this);
     afterSetupUI();
-    ui->layoutWidget->setManualSettingsStoring(false);
-
-    // replace ownCloud text
-    ui->subHeadlineLabel->setText(Utils::Misc::replaceOwnCloudText(ui->subHeadlineLabel->text()));
-    ui->groupBox_2->setTitle(Utils::Misc::replaceOwnCloudText(ui->groupBox_2->title()));
-    ui->label->setText(Utils::Misc::replaceOwnCloudText(ui->label->text()));
-    ui->label_4->setText(Utils::Misc::replaceOwnCloudText(ui->label_4->text()));
-    ui->ownCloudSettingsButton->setText(
-        Utils::Misc::replaceOwnCloudText(ui->ownCloudSettingsButton->text()));
+    ui->layoutPresetWidget->setManualSettingsStoring(false);
 
     // if note layout has already been set, we can finish settings in the first
     // step
-    QSettings settings;
-    _allowFinishButton = settings.contains(QStringLiteral("workspace-initial/windowState"));
+    SettingsService settings;
+    _allowFinishButton = settings.contains(QStringLiteral("layout-initial/windowState"));
     ui->finishButton->setEnabled(_allowFinishButton);
 
     ui->backButton->setEnabled(false);
@@ -67,12 +59,12 @@ void WelcomeDialog::on_nextButton_clicked() {
     }
 
     if (index == WelcomePages::MetricsPage) {
-        QSettings settings;
+        SettingsService settings;
         settings.setValue(QStringLiteral("appMetrics/notificationShown"), true);
     }
 
-    if (index == WelcomePages::LayoutPage) {
-        ui->layoutWidget->resizeLayoutImage();
+    if (index == WelcomePages::LayoutPresetPage) {
+        ui->layoutPresetWidget->resizeLayoutPresetImage();
     }
 
     ui->finishButton->setEnabled(_allowFinishButton);
@@ -94,8 +86,8 @@ bool WelcomeDialog::handleNoteFolderSetup() {
         Utils::Misc::printInfo(QStringLiteral("Note path '%1' exists.").arg(_notesPath));
     } else {
         if (ui->createNoteFolderCheckBox->isChecked()) {
-            Utils::Misc::printInfo(QString("Note path '%1' doesn't exist yet and will "
-                                           "be created.")
+            Utils::Misc::printInfo(QStringLiteral("Note path '%1' doesn't exist yet and will "
+                                                  "be created.")
                                        .arg(_notesPath));
 
             // mkpath should only return true if the path was created, but we
@@ -151,7 +143,7 @@ void WelcomeDialog::storeNoteFolderSettings() {
     MetricsService::instance()->sendVisitIfEnabled(
         QStringLiteral("welcome-dialog/note-folder/stored"));
 
-    QSettings settings;
+    SettingsService settings;
 
     // make the path relative to the portable data path if we are in
     // portable mode
@@ -180,7 +172,7 @@ void WelcomeDialog::on_finishButton_clicked() {
     if (ui->stackedWidget->currentIndex() == WelcomePages::NoteFolderPage) {
         if (!handleNoteFolderSetup()) return;
     } else {
-        ui->layoutWidget->storeSettings();
+        ui->layoutPresetWidget->storeLayoutPreset();
     }
     storeNoteFolderSettings();
     done(QDialog::Accepted);
@@ -216,11 +208,11 @@ void WelcomeDialog::on_noteFolderButton_clicked() {
     }
 }
 
-void WelcomeDialog::on_ownCloudSettingsButton_clicked() {
+void WelcomeDialog::on_cloudSettingsButton_clicked() {
     MetricsService::instance()->sendVisitIfEnabled(
         QStringLiteral("welcome-dialog/owncloud-settings"));
 
-    auto *dialog = new SettingsDialog(SettingsDialog::OwnCloudPage, this);
+    auto *dialog = new SettingsDialog(SettingsDialog::CloudPage, this);
     dialog->exec();
 }
 

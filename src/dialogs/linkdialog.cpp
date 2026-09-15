@@ -1,22 +1,62 @@
 #include "linkdialog.h"
 
 #include <entities/note.h>
+#include <entities/tag.h>
 #include <utils/gui.h>
 #include <utils/misc.h>
 
 #include <QClipboard>
 #include <QDebug>
 #include <QFileDialog>
+#include <QHeaderView>
 #include <QKeyEvent>
+#include <QLocale>
 #include <QMenu>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QRegularExpression>
-#include <QSettings>
 #include <QTimer>
+#include <QTreeWidget>
 
+#include "entities/notefolder.h"
+#include "mainwindow.h"
+#include "services/scriptingservice.h"
+#include "services/settingsservice.h"
 #include "ui_linkdialog.h"
+#include "widgets/navigationwidget.h"
+
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+#include <memory>
+#endif
+
+namespace {
+enum NoteListDataRoles {
+    NoteIdRole = Qt::UserRole,
+    NoteNameRole,
+    NoteModifiedRole,
+};
+
+QString noteTagLookupKey(const QString &subFolderPath, const QString &noteName) {
+    return subFolderPath + QStringLiteral("/") + noteName;
+}
+
+class NoteListTreeWidgetItem : public QTreeWidgetItem {
+   public:
+    using QTreeWidgetItem::QTreeWidgetItem;
+
+    bool operator<(const QTreeWidgetItem &other) const override {
+        if (treeWidget() != nullptr && treeWidget()->sortColumn() == 3) {
+            const QDateTime thisModified = data(3, NoteModifiedRole).toDateTime();
+            const QDateTime otherModified = other.data(3, NoteModifiedRole).toDateTime();
+
+            return thisModified < otherModified;
+        }
+
+        return QTreeWidgetItem::operator<(other);
+    }
+};
+}    // namespace
 
 LinkDialog::LinkDialog(int page, const QString &dialogTitle, QWidget *parent)
     : MasterDialog(parent), ui(new Ui::LinkDialog) {
@@ -25,9 +65,13 @@ LinkDialog::LinkDialog(int page, const QString &dialogTitle, QWidget *parent)
     ui->tabWidget->setCurrentIndex(page);
     on_tabWidget_currentChanged(page);
     ui->downloadProgressBar->hide();
+    _markdownTextEdit = new QOwnNotesMarkdownTextEdit();
     _networkManager = new QNetworkAccessManager(this);
     QObject::connect(_networkManager, SIGNAL(finished(QNetworkReply *)), this,
                      SLOT(slotReplyFinished(QNetworkReply *)));
+
+    // Show the wiki-link checkbox only when wiki-link support is enabled
+    ui->wikiLinkCheckBox->setVisible(Note::isWikiLinkSupportEnabled());
 
     // disallow ] characters, because they will break Markdown links
     ui->nameLineEdit->setValidator(
@@ -38,18 +82,69 @@ LinkDialog::LinkDialog(int page, const QString &dialogTitle, QWidget *parent)
         this->setWindowTitle(dialogTitle);
     }
 
-    QStringList nameList = Note::fetchNoteNames();
     ui->searchLineEdit->installEventFilter(this);
     ui->headingSearchLineEdit->installEventFilter(this);
     ui->notesListWidget->installEventFilter(this);
+    ui->notesListWidget->setRootIsDecorated(false);
+
+    // Change the search icon between dark and light mode
+    const QString searchIconFileName =
+        SettingsService().value(QStringLiteral("darkModeColors")).toBool()
+            ? QStringLiteral("search-notes-dark.svg")
+            : QStringLiteral("search-notes.svg");
+    static const QRegularExpression searchIconRegex(
+        QStringLiteral("background-image: url\\(:.+\\);"));
+
+    QString searchLineEditStyleSheet = ui->searchLineEdit->styleSheet();
+    searchLineEditStyleSheet.replace(
+        searchIconRegex,
+        QStringLiteral("background-image: url(:/images/%1);").arg(searchIconFileName));
+    ui->searchLineEdit->setStyleSheet(searchLineEditStyleSheet);
+
+    QString headingSearchLineEditStyleSheet = ui->headingSearchLineEdit->styleSheet();
+    headingSearchLineEditStyleSheet.replace(
+        searchIconRegex,
+        QStringLiteral("background-image: url(:/images/%1);").arg(searchIconFileName));
+    ui->headingSearchLineEdit->setStyleSheet(headingSearchLineEditStyleSheet);
+
+    const bool showSubfolders = NoteFolder::isCurrentShowSubfolders();
+    ui->notesListWidget->setColumnHidden(1, !showSubfolders);
+    ui->notesListWidget->setSortingEnabled(true);
+    ui->notesListWidget->sortByColumn(3, Qt::DescendingOrder);
+    ui->notesListWidget->header()->setSortIndicatorShown(true);
+    ui->notesListWidget->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+    ui->notesListWidget->header()->setSectionResizeMode(1, QHeaderView::Interactive);
+    ui->notesListWidget->header()->setSectionResizeMode(2, QHeaderView::Interactive);
+    ui->notesListWidget->header()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
+    ui->notesListWidget->header()->setStretchLastSection(false);
+    ui->notesListWidget->setColumnWidth(1, 180);
+    ui->notesListWidget->setColumnWidth(2, 180);
+    Utils::Gui::initTreeWidgetHeaderOrderPersistence(
+        ui->notesListWidget, QStringLiteral("LinkDialog/notesListWidgetHeaderOrder"));
+    const auto tagNamesByNoteFilePath = Tag::fetchAllNamesByNoteFilePath();
 
     Q_FOREACH (Note note, Note::fetchAll()) {
-        auto *item = new QListWidgetItem(note.getName());
-        item->setData(Qt::UserRole, note.getId());
-        ui->notesListWidget->addItem(item);
+        const QString noteName = note.getName();
+        const QString subFolderPath = note.relativeNoteSubFolderPath();
+        const QString tagText =
+            tagNamesByNoteFilePath.value(noteTagLookupKey(subFolderPath, noteName))
+                .join(QStringLiteral(", "));
+        const QDateTime modified = note.getFileLastModified();
+        const QString modifiedDisplay = QLocale().toString(modified, QLocale::ShortFormat);
+        auto *item = new NoteListTreeWidgetItem(ui->notesListWidget);
+        item->setText(0, noteName);
+        item->setText(1, subFolderPath);
+        item->setText(2, tagText);
+        item->setText(3, modifiedDisplay);
+        item->setToolTip(2, tagText);
+        item->setData(0, NoteIdRole, note.getId());
+        item->setData(0, NoteNameRole, noteName);
+        item->setData(3, NoteModifiedRole, modified);
     }
 
-    ui->notesListWidget->setCurrentRow(0);
+    if (ui->notesListWidget->topLevelItemCount() > 0) {
+        ui->notesListWidget->setCurrentItem(ui->notesListWidget->topLevelItem(0));
+    }
 
     if (page == LinkDialog::TextLinkPage) {
         QClipboard *clipboard = QApplication::clipboard();
@@ -65,17 +160,20 @@ LinkDialog::LinkDialog(int page, const QString &dialogTitle, QWidget *parent)
     setupFileUrlMenu();
 }
 
-LinkDialog::~LinkDialog() { delete ui; }
+LinkDialog::~LinkDialog() {
+    delete ui;
+    delete _markdownTextEdit;
+}
 
 void LinkDialog::on_searchLineEdit_textChanged(const QString &arg1) {
     // search notes when at least 2 characters were entered
-    if (arg1.count() >= 2) {
+    if (arg1.size() >= 2) {
         QVector<QString> noteNameList = Note::searchAsNameList(arg1, true);
         this->firstVisibleNoteListRow = -1;
 
-        for (int i = 0; i < this->ui->notesListWidget->count(); ++i) {
-            QListWidgetItem *item = this->ui->notesListWidget->item(i);
-            if (noteNameList.indexOf(item->text()) < 0) {
+        for (int i = 0; i < this->ui->notesListWidget->topLevelItemCount(); ++i) {
+            QTreeWidgetItem *item = this->ui->notesListWidget->topLevelItem(i);
+            if (noteNameList.indexOf(item->data(0, NoteNameRole).toString()) < 0) {
                 item->setHidden(true);
             } else {
                 if (this->firstVisibleNoteListRow < 0) {
@@ -87,49 +185,59 @@ void LinkDialog::on_searchLineEdit_textChanged(const QString &arg1) {
     } else {    // show all items otherwise
         this->firstVisibleNoteListRow = 0;
 
-        for (int i = 0; i < this->ui->notesListWidget->count(); ++i) {
-            QListWidgetItem *item = this->ui->notesListWidget->item(i);
+        for (int i = 0; i < this->ui->notesListWidget->topLevelItemCount(); ++i) {
+            QTreeWidgetItem *item = this->ui->notesListWidget->topLevelItem(i);
             item->setHidden(false);
         }
     }
 }
 
 QString LinkDialog::getSelectedNoteName() const {
-    return ui->notesListWidget->currentRow() > -1 ? ui->notesListWidget->currentItem()->text()
-                                                  : QString();
+    return ui->notesListWidget->currentItem() != nullptr
+               ? ui->notesListWidget->currentItem()->data(0, NoteNameRole).toString()
+               : QString();
 }
 
 Note LinkDialog::getSelectedNote() const {
-    if (ui->notesListWidget->currentRow() == -1) {
+    if (ui->notesListWidget->currentItem() == nullptr) {
         return {};
     }
 
-    const int noteId = ui->notesListWidget->currentItem()->data(Qt::UserRole).toInt();
+    const int noteId = ui->notesListWidget->currentItem()->data(0, NoteIdRole).toInt();
 
     return Note::fetch(noteId);
 }
 
 QString LinkDialog::getSelectedHeading() const {
+    // Trim the heading text, in case there are trailing carriage return characters leaking in
+    // Windows
     return ui->headingListWidget->selectedItems().isEmpty()
                ? ""
-               : ui->headingListWidget->currentItem()->text();
+               : ui->headingListWidget->currentItem()->text().trimmed();
 }
 
 QString LinkDialog::getURL() const {
     QString url = ui->urlEdit->text().trimmed();
 
-    if (!url.isEmpty() && !url.contains(QStringLiteral("://"))) {
-        url = QStringLiteral("http://") + url;
+    if (!url.isEmpty() && !url.contains(QStringLiteral("://")) &&
+        !url.startsWith(QStringLiteral("./"))) {
+        url = QStringLiteral("https://") + url;
     }
 
     return url;
 }
+
+void LinkDialog::setURL(const QString &text) { ui->urlEdit->setText(text); }
 
 QString LinkDialog::getLinkName() const { return ui->nameLineEdit->text().trimmed(); }
 
 void LinkDialog::setLinkName(const QString &text) { ui->nameLineEdit->setText(text); }
 
 QString LinkDialog::getLinkDescription() const { return ui->descriptionLineEdit->text().trimmed(); }
+
+bool LinkDialog::isWikiLink() const {
+    return Note::isWikiLinkSupportEnabled() && ui->wikiLinkCheckBox->isChecked();
+}
 
 //
 // Event filters on the NoteSearchDialog
@@ -146,7 +254,8 @@ bool LinkDialog::eventFilter(QObject *obj, QEvent *event) {
                 auto item = ui->notesListWidget->currentItem();
                 if ((item != nullptr) && ui->notesListWidget->currentItem()->isHidden() &&
                     (this->firstVisibleNoteListRow >= 0)) {
-                    ui->notesListWidget->setCurrentRow(this->firstVisibleNoteListRow);
+                    ui->notesListWidget->setCurrentItem(
+                        ui->notesListWidget->topLevelItem(this->firstVisibleNoteListRow));
                 }
 
                 // give the keyboard focus to the notes list widget
@@ -227,8 +336,6 @@ QString LinkDialog::getTitleFromHtml(const QString &html) {
     // replace some other characters we don't want
     title.replace(QStringLiteral("["), QStringLiteral("("))
         .replace(QStringLiteral("]"), QStringLiteral(")"))
-        .replace(QStringLiteral("<"), QStringLiteral("("))
-        .replace(QStringLiteral(">"), QStringLiteral(")"))
         .replace(QStringLiteral("&#8211;"), QStringLiteral("-"))
         .replace(QStringLiteral("&#124;"), QStringLiteral("-"))
         .replace(QStringLiteral("&#038;"), QStringLiteral("&"))
@@ -284,8 +391,8 @@ void LinkDialog::slotReplyFinished(QNetworkReply *reply) {
 /**
  * Selects a local file to link to
  */
-void LinkDialog::addFileUrl() {
-    QSettings settings;
+void LinkDialog::addFileUrl(bool relative) {
+    SettingsService settings;
     // load last url
     QUrl fileUrl = settings.value(QStringLiteral("LinkDialog/lastSelectedFileUrl")).toUrl();
 
@@ -310,6 +417,20 @@ void LinkDialog::addFileUrl() {
         // store url for the next time
         settings.setValue(QStringLiteral("LinkDialog/lastSelectedFileUrl"), fileUrlString);
 
+        fileUrl = QUrl(fileUrlString);
+        if (relative && fileUrl.isLocalFile()) {
+            auto note = MainWindow::instance()->getCurrentNote();
+            // Make path relative to the current note
+            QString relativePath = note.relativeFilePath(fileUrl.toLocalFile());
+            fileUrlString = QStringLiteral("./") + relativePath;
+
+            // Also set the link name if it's empty
+            if (ui->nameLineEdit->text().isEmpty()) {
+                QFileInfo fileInfo(relativePath);
+                ui->nameLineEdit->setText(fileInfo.fileName());
+            }
+        }
+
         // write the file-url to the url text-edit
         ui->urlEdit->setText(fileUrlString);
     }
@@ -318,8 +439,8 @@ void LinkDialog::addFileUrl() {
 /**
  * Selects a local directory to link to
  */
-void LinkDialog::addDirectoryUrl() {
-    QSettings settings;
+void LinkDialog::addDirectoryUrl(bool relative) {
+    SettingsService settings;
     // load last url
     QUrl directoryUrl =
         settings.value(QStringLiteral("LinkDialog/lastSelectedDirectoryUrl")).toUrl();
@@ -348,6 +469,20 @@ void LinkDialog::addDirectoryUrl() {
         settings.setValue(QStringLiteral("LinkDialog/lastSelectedDirectoryUrl"),
                           directoryUrlString);
 
+        directoryUrl = QUrl(directoryUrlString);
+        if (relative && directoryUrl.isLocalFile()) {
+            auto note = MainWindow::instance()->getCurrentNote();
+            // Make path relative to the current note
+            QString relativePath = note.relativeFilePath(directoryUrl.toLocalFile());
+            directoryUrlString = QStringLiteral("./") + relativePath;
+
+            // Also set the link name if it's empty
+            if (ui->nameLineEdit->text().isEmpty()) {
+                QFileInfo directoryInfo(directoryUrl.toLocalFile());
+                ui->nameLineEdit->setText(directoryInfo.fileName());
+            }
+        }
+
         // write the directory-url to the url text-edit
         ui->urlEdit->setText(directoryUrlString);
     }
@@ -367,21 +502,37 @@ void LinkDialog::on_urlEdit_textChanged(const QString &arg1) {
 }
 
 void LinkDialog::setupFileUrlMenu() {
-    auto *addMenu = new QMenu(this);
+    // std::make_unique needs C++14
+    auto addMenu = std::unique_ptr<QMenu>(new QMenu(this));
 
-    QAction *addFileAction = addMenu->addAction(tr("Select file to link to"));
-    addFileAction->setIcon(
+    QAction *addFileRelativeAction = addMenu->addAction(tr("Select file to link to (relative)"));
+    addFileRelativeAction->setIcon(
         QIcon::fromTheme(QStringLiteral("document-open"),
                          QIcon(QStringLiteral(":icons/breeze-qownnotes/16x16/document-open.svg"))));
-    connect(addFileAction, SIGNAL(triggered()), this, SLOT(addFileUrl()));
+    connect(addFileRelativeAction, &QAction::triggered, this, [this]() { addFileUrl(true); });
 
-    QAction *addDirectoryAction = addMenu->addAction(tr("Select directory to link to"));
-    addDirectoryAction->setIcon(
+    QAction *addFileAbsoluteAction = addMenu->addAction(tr("Select file to link to (absolute)"));
+    addFileAbsoluteAction->setIcon(
+        QIcon::fromTheme(QStringLiteral("document-open"),
+                         QIcon(QStringLiteral(":icons/breeze-qownnotes/16x16/document-open.svg"))));
+    connect(addFileAbsoluteAction, SIGNAL(triggered()), this, SLOT(addFileUrl()));
+
+    QAction *addDirectoryRelativeAction =
+        addMenu->addAction(tr("Select directory to link to (relative)"));
+    addDirectoryRelativeAction->setIcon(
         QIcon::fromTheme(QStringLiteral("folder"),
                          QIcon(QStringLiteral(":icons/breeze-qownnotes/16x16/folder.svg"))));
-    connect(addDirectoryAction, SIGNAL(triggered()), this, SLOT(addDirectoryUrl()));
+    connect(addDirectoryRelativeAction, &QAction::triggered, this,
+            [this]() { addDirectoryUrl(true); });
 
-    ui->fileUrlButton->setMenu(addMenu);
+    QAction *addDirectoryAbsoluteAction =
+        addMenu->addAction(tr("Select directory to link to (absolute)"));
+    addDirectoryAbsoluteAction->setIcon(
+        QIcon::fromTheme(QStringLiteral("folder"),
+                         QIcon(QStringLiteral(":icons/breeze-qownnotes/16x16/folder.svg"))));
+    connect(addDirectoryAbsoluteAction, SIGNAL(triggered()), this, SLOT(addDirectoryUrl()));
+
+    ui->fileUrlButton->setMenu(addMenu.release());
 }
 
 void LinkDialog::on_buttonBox_accepted() {
@@ -396,13 +547,18 @@ void LinkDialog::on_headingSearchLineEdit_textChanged(const QString &arg1) {
 
 void LinkDialog::loadNoteHeadings() const {
     auto note = getSelectedNote();
+    _markdownTextEdit->setPlainText(note.getNoteText());
+    auto nodes = NavigationWidget::parseDocument(_markdownTextEdit->document());
+    QStringList headingTexts;
+    std::transform(nodes.begin(), nodes.end(), std::back_inserter(headingTexts),
+                   [](const Node &node) { return node.text; });
 
     ui->headingListWidget->clear();
-    ui->headingListWidget->addItems(note.getHeadingList());
+    ui->headingListWidget->addItems(headingTexts);
 }
 
-void LinkDialog::on_notesListWidget_currentItemChanged(QListWidgetItem *current,
-                                                       QListWidgetItem *previous) {
+void LinkDialog::on_notesListWidget_currentItemChanged(QTreeWidgetItem *current,
+                                                       QTreeWidgetItem *previous) {
     Q_UNUSED(current)
     Q_UNUSED(previous)
 
@@ -418,6 +574,14 @@ void LinkDialog::on_tabWidget_currentChanged(int index) {
 }
 
 void LinkDialog::startTitleFetchRequest(const QUrl &url) {
+    const QString title =
+        ScriptingService::instance()->callFetchUrlTitleHook(url.toString(QUrl::FullyEncoded));
+
+    if (!title.isEmpty()) {
+        setLinkName(title);
+        return;
+    }
+
     ui->downloadProgressBar->show();
     QNetworkRequest networkRequest(url);
 
@@ -436,4 +600,9 @@ void LinkDialog::startTitleFetchRequest(const QUrl &url) {
 
     connect(reply, SIGNAL(downloadProgress(qint64, qint64)), this,
             SLOT(downloadProgress(qint64, qint64)));
+}
+
+void LinkDialog::on_refreshButton_clicked() {
+    ui->nameLineEdit->clear();
+    on_urlEdit_textChanged(ui->urlEdit->text());
 }

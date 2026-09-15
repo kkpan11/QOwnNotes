@@ -1,13 +1,34 @@
 # التثبيت عبر Nix
 
-يمكنك تثبيت QOwnNotes عبر [مدير الحزم Nix](https://nixos.wiki/wiki/Nix_package_manager) على [NixOS](https://nixos.org/) وأنظمة أخرى؛ اسم الحزمة [qownnotes](https://search.nixos.org/packages?channel=unstable&show=qownnotes).
+يمكنك تثبيت QOwnNotes عبر [مدير الحزم Nix](https://wiki.nixos.org/wiki/Nix_package_manager) على [NixOS](https://nixos.org/)، وعلى توزيعات **لينكس** الأخرى، وعلى **ماك&nbsp;أو&nbsp;إس**، وعلى **ويندوز**. اسم الحزمة هو [qownnotes](https://search.nixos.org/packages?channel=unstable&show=qownnotes).
+
+::: tip
+Best use the NixOS Unstable channel to get the latest version of QOwnNotes!
+:::
+
+The package is built with Qt6, uses the system botan3 library and libgit2 and provides shell integration for fish and bash.
 
 انظر [QOwnNotes على nix](https://search.nixos.org/packages?channel=unstable&show=qownnotes) للمزيد من المعلومات.
 
-بعدئذٍ يمكنك تشغيل QOwnNotes بالأمر `qownnotes`.
+بعدئذٍ يمكنك تشغيل QOwnNotes بالأمر `qownnotes` أو الأمر `QOwnNotes`.
 
 ::: tip
 يمكن أيضا تثبيت مدير قصاصات QOwnNotes لسطر الأوامر ([qc](https://github.com/qownnotes/qc)) عبر [متجر Nix](https://search.nixos.org/packages?channel=unstable&show=qc).
 
-لتجربته، يمكنك استخدام الأمر`nix-shell -p qc --run qc`.
+يمكنك تجربته بالأمر <code dir="ltr">nix-shell -p qc --run "qc exec".
+:::
+
+::: tip
+Info
+On **macOS** the package works natively on **x86 and Apple Silicon**!
+:::
+
+::: tip
+If QOwnNotes logs `Could not write secret to keychain` on Linux, install a Secret Service implementation and restart your desktop session.
+
+For GNOME and other Secret Service based desktops, add packages such as `gnome-keyring`, `libsecret` and `seahorse` to your environment.
+
+For KDE Plasma, add KWallet support such as `kdePackages.kwalletmanager` and `kdePackages.kwallet`.
+
+QOwnNotes will fall back to legacy encryption if the desktop keychain is unavailable.
 :::

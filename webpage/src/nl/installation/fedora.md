@@ -3,10 +3,22 @@
 Er zijn QOwnNotes-repositories voor **Fedora 28 and higher**.
 
 ::: tip
-QOwnNotes is beschikbaar in de [Fedora repositories](https://packages.fedoraproject.org/pkgs/qownnotes/qownnotes/). Die versie loopt in het algemeen een of twee patch-versies achter de masterrepository beschikbaar via de onderstaande instructies.
+QOwnNotes is provided upstream in the [Fedora repositories](https://packages.fedoraproject.org/pkgs/qownnotes/qownnotes/). But that version is generally a lot behind the latest release of QOwnNotes.
 
-Voor de meeste gebruikers, voer gewoon `dnf install qownnotes` in in een terminalvenster. Als je de **meest recente versie** wenst, lees dan verder.
+For most users you can just use `dnf install qownnotes` in a terminal window to install the upstream version. Als je de **meest recente versie** wenst, lees dan verder.
 :::
+
+## On systems with Fedora 41 and higher
+
+Starting with [Fedora 41](https://fedoraproject.org/wiki/Changes/SwitchToDnf5), dnf5 is the default package manager and includes the config-manager plugin by default. Run the following commands as root to add the repository and install QOwnNotes:
+
+```bash
+dnf config-manager addrepo --from-repofile=https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Fedora_42/home:pbek:QOwnNotes.repo
+
+dnf install qownnotes
+```
+
+Change the portion `Fedora_42` in the above code with the version of Fedora you are using (i.e. `Fedora_41`, `Fedora_Rawhide` etc.).
 
 ## Op systemen met config-manager dnf plugin
 
@@ -25,9 +37,10 @@ Mogelijk moet u de repo-sleutel accepteren voordat u deze kunt downloaden.
 Als u problemen heeft, importeert u de sleutel handmatig met:
 
 ```bash
-rpm --import http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Fedora_40/repodata/repomd.xml.key
+rpm --import http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Fedora_42/repodata/repomd.xml.key
 ```
-Houd er rekening mee dat het gedeelte "Fedora_40" in de bovenstaande code uw gebruikte versie van Fedora moet weerspiegelen (d.w.z. "Fedora_39", "Fedora_38" enz.)
+
+Please note that the portion `Fedora_42` in the above code should reflect the version of Fedora you are using (i.e. `Fedora_39`, `Fedora_38` etc.)
 :::
 
 ## Verouderde installatiemethode
@@ -37,9 +50,10 @@ Gebruik deze methode als je Fedora-versie de `config-manager` dnf-plug-in niet o
 Voer de volgende shell-opdracht uit als root om de opslagplaats te vertrouwen.
 
 ```bash
-rpm --import http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Fedora_40/repodata/repomd.xml.key
+rpm --import http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Fedora_42/repodata/repomd.xml.key
 ```
-Nogmaals: merk op dat het gedeelte "Fedora_40" in de bovenstaande code uw gebruikte versie van Fedora moet weerspiegelen (d.w.z. "Fedora_39", "Fedora_38" enz.)
+
+Again: note that the portion `Fedora_42` in the above code should reflect the version of Fedora you are using (i.e. `Fedora_39`, `Fedora_38` etc.)
 
 Voer vervolgens de volgende shell-opdrachten uit als root om de repository toe te voegen en vanaf daar QOwnNotes te installeren.
 
@@ -58,13 +72,13 @@ dnf clean expire-cache
 dnf install qownnotes
 ```
 
-[Directe download](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Fedora_40) (deze voorbeeldlink is voor Fedora 40)
+[Direct Download](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Fedora_42) (this example link is for Fedora 42)
 
 ## QOwnNotes versie-updating notities voor Fedora
 
 ### Problemen met GPG-keys?
 
-Veranderingen in het cryptografische beleid van Fedora kunnen betekenen dat "oude" (verlopen) repositorysleutels niet *automatisch* uitgebreid zijn. Dit kan tot problemen leiden bij het *updaten* van QOwnNotes.
+Changes in Fedora's cryptographic policies can mean "old" (expired) repository keys are not _automatically_ extended. This can lead to problems _updating_ QOwnNotes.
 
 **Detail:** Als u een probleem heeft met ongeldige sleutels (d.w.z. GPG-fouten) zoalss `certificaat is niet geldig` en/of `sleutel is niet geldig` vanwege het verstrijken van de sleutel, moet deze opdracht op de terminal de verlopen sleutel verwijderen:
 
@@ -74,4 +88,22 @@ sudo rpm -e $(rpm -q --qf "%{NAME}-%{VERSION}-%{RELEASE}\t%{SUMMARY}\n" gpg-pubk
 
 Gedetailleerde uitleg van de opdracht is beschikbaar op GitHub in een [onderwerp](https://github.com/pbek/QOwnNotes/issues/3008#issuecomment-2197827084) gerelateerd aan dit exacte probleem.
 
-Zodra de verlopen sleutel is verwijderd, moet u opnieuw *importeren* de ** huidige ** sleutel handmatig zoals beschreven in het begin van deze installatie-instructies.
+Once the expired key has been deleted, you must then newly _import_ the **current** key manually as described in the beginning of these installation instructions.
+
+::: tip
+If QOwnNotes logs `Could not write secret to keychain`, install the missing Secret Service packages and restart your desktop session.
+
+For GNOME and other Secret Service based desktops:
+
+```bash
+sudo dnf install gnome-keyring libsecret seahorse
+```
+
+For KDE Plasma:
+
+```bash
+sudo dnf install kwalletmanager kf6-kwallet
+```
+
+QOwnNotes will fall back to legacy encryption if the desktop keychain is unavailable.
+:::

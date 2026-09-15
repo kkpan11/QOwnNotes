@@ -8,9 +8,19 @@ QT       += core gui widgets sql svg network xml printsupport qml websockets con
 
 # quick is enabled for more scripting options
 # Windows and macOS seem to ignore that
-#QT       += quick
+# It looks like it is needed for Qt 6 for macOS, see https://github.com/pbek/QOwnNotes/issues/2912#issuecomment-3094868110
+greaterThan(QT_MAJOR_VERSION, 5) {
+QT       += quick
+}
 
 CONFIG += with_aspell
+DEFINES += LANGUAGETOOL_ENABLED
+DEFINES += HARPER_ENABLED
+
+# QLiteHtml requires Qt 6+
+greaterThan(QT_MAJOR_VERSION, 5) {
+    CONFIG += USE_QLITEHTML
+}
 
 # enable pch for DEV_MODE
 # put any dev specific options here
@@ -25,6 +35,13 @@ CONFIG(USE_QLITEHTML) {
     message("QLiteHtml usage enabled")
     DEFINES += USE_QLITEHTML=1
     include(libraries/qlitehtml/src/qlitehtml.pri)
+}
+
+include(libraries/qtkeychain/qtkeychain.pri)
+INCLUDEPATH += $$PWD/libraries/qtkeychain
+lessThan(QT_VERSION, 5.15.0) {
+    # qtkeychain references QDataStream::Qt_5_15, which is unavailable in legacy Qt 5 builds.
+    DEFINES += Qt_5_15=Qt_5_0
 }
 
 TARGET = QOwnNotes
@@ -95,7 +112,8 @@ TRANSLATIONS = languages/QOwnNotes_en.ts \
     languages/QOwnNotes_mk.ts \
     languages/QOwnNotes_ko.ts \
     languages/QOwnNotes_et.ts \
-    languages/QOwnNotes_sq.ts
+    languages/QOwnNotes_sq.ts \
+    languages/QOwnNotes_en_GB.ts
 
 CODECFORTR = UTF-8
 lessThan(QT_MAJOR_VERSION, 6) {
@@ -115,6 +133,7 @@ lessThan(QT_MAJOR_VERSION, 6) {
 INCLUDEPATH += $$PWD/libraries $$PWD/libraries/diff_match_patch
 
 SOURCES += main.cpp\
+    helpers/nomenuiconstyle.cpp \
     dialogs/attachmentdialog.cpp \
     dialogs/nextclouddeckdialog.cpp \
     entities/cloudconnection.cpp \
@@ -128,9 +147,11 @@ SOURCES += main.cpp\
     libraries/md4c/src/md4c.c \
     libraries/md4c/src/md4c-html.c \
     libraries/md4c/src/entity.c \
+    libraries/qtwaitingspinner/waitingspinnerwidget.cpp \
     dialogs/aboutdialog.cpp \
     dialogs/linkdialog.cpp \
     dialogs/notediffdialog.cpp \
+    dialogs/textdiffdialog.cpp \
     dialogs/settingsdialog.cpp \
     dialogs/tododialog.cpp \
     dialogs/trashdialog.cpp \
@@ -142,12 +163,13 @@ SOURCES += main.cpp\
     entities/trashitem.cpp \
     entities/notesubfolder.cpp \
     entities/notehistory.cpp \
-    entities/notefolder.cpp \
+     entities/notefolder.cpp \
+    entities/colormode.cpp \
     entities/tag.cpp \
     entities/script.cpp \
     entities/bookmark.cpp \
     entities/commandsnippet.cpp \
-    services/owncloudservice.cpp \
+    services/cloudservice.cpp \
     services/nextclouddeckservice.cpp \
     services/updateservice.cpp \
     helpers/htmlentities.cpp \
@@ -156,7 +178,12 @@ SOURCES += main.cpp\
     helpers/qownnotesmarkdownhighlighter.cpp \
     helpers/fakevimproxy.cpp \
     helpers/flowlayout.cpp \
+    services/languagetoolclient.cpp \
+    services/languagetoolchecker.cpp \
+    services/harperclient.cpp \
+    services/harperchecker.cpp \
     services/databaseservice.cpp \
+    services/markdownlspignoredrules.cpp \
     threads/scriptthread.cpp \
     widgets/graphicsview.cpp \
     widgets/qownnotesmarkdowntextedit.cpp \
@@ -166,17 +193,24 @@ SOURCES += main.cpp\
     services/scriptingservice.cpp \
     services/websocketserverservice.cpp \
     services/webappclientservice.cpp \
-    services/openaiservice.cpp \
+     services/openaiservice.cpp \
+    services/markdownlspclient.cpp \
+    services/markdownlspdocumenttracker.cpp \
+    services/mcpservice.cpp \
+    services/settingsservice.cpp \
     dialogs/masterdialog.cpp \
     utils/misc.cpp \
     utils/git.cpp \
     utils/gui.cpp \
     utils/cli.cpp \
+    utils/listutils.cpp \
     utils/schema.cpp \
     dialogs/welcomedialog.cpp \
     dialogs/issueassistantdialog.cpp \
     dialogs/tagadddialog.cpp \
     widgets/navigationwidget.cpp \
+    widgets/filenavigationwidget.cpp \
+    widgets/backlinkwidget.cpp \
     widgets/notepreviewwidget.cpp \
     api/noteapi.cpp \
     api/notesubfolderapi.cpp \
@@ -191,8 +225,10 @@ SOURCES += main.cpp\
     dialogs/storedattachmentsdialog.cpp \
     dialogs/actiondialog.cpp \
     dialogs/tabledialog.cpp \
+    dialogs/markdowntabledialog.cpp \
     libraries/qtcsv/src/sources/reader.cpp \
     dialogs/notedialog.cpp \
+    dialogs/notebookmarkdialog.cpp \
     dialogs/filedialog.cpp \
     dialogs/scriptrepositorydialog.cpp \
     dialogs/dictionarymanagerdialog.cpp \
@@ -208,8 +244,32 @@ SOURCES += main.cpp\
     widgets/notefolderlistwidget.cpp \
     widgets/notetreewidgetitem.cpp \
     widgets/todoitemtreewidget.cpp \
-    widgets/layoutwidget.cpp \
+    widgets/layoutpresetwidget.cpp \
     widgets/htmlpreviewwidget.cpp \
+    widgets/settings/colormodesettingswidget.cpp \
+    widgets/settings/layoutssettingswidget.cpp \
+    widgets/settings/gitsettingswidget.cpp \
+    widgets/settings/localtrashsettingswidget.cpp \
+    widgets/settings/debugoptionsettingswidget.cpp \
+    widgets/settings/editorfontcolorsettingswidget.cpp \
+    widgets/settings/previewfontsettingswidget.cpp \
+    widgets/settings/debugsettingswidget.cpp \
+    widgets/settings/languagetoolsettingswidget.cpp \
+    widgets/settings/harpersettingswidget.cpp \
+    widgets/settings/markdownlspsettingswidget.cpp \
+     widgets/settings/networksettingswidget.cpp \
+     widgets/settings/cloudsettingswidget.cpp \
+     widgets/settings/todosettingswidget.cpp \
+    widgets/settings/aisettingswidget.cpp \
+    widgets/settings/webcompanionsettingswidget.cpp \
+    widgets/settings/editorsettingswidget.cpp \
+    widgets/settings/webapplicationsettingswidget.cpp \
+    widgets/settings/mcpserversettingswidget.cpp \
+    widgets/settings/notefoldersettingswidget.cpp \
+     widgets/settings/panelssettingswidget.cpp \
+     widgets/settings/interfacesettingswidget.cpp \
+     widgets/settings/generalsettingswidget.cpp \
+     widgets/settings/scriptingsettingswidget.cpp \
     dialogs/serverbookmarksimportdialog.cpp \
     dialogs/websockettokendialog.cpp \
     dialogs/imagedialog.cpp \
@@ -218,9 +278,26 @@ SOURCES += main.cpp\
     libraries/fuzzy/kfuzzymatcher.cpp \
     libraries/qr-code-generator/QrCode.cpp \
     widgets/notesubfoldertree.cpp \
+    widgets/noterelationscene.cpp \
+    managers/spellcheckmanager.cpp \
+    managers/systemtraymanager.cpp \
+    managers/exportprintmanager.cpp \
+    managers/noteencryptionmanager.cpp \
+    managers/distractionfreemanager.cpp \
+    managers/notetabmanager.cpp \
+    managers/aitoolbarmanager.cpp \
+    managers/layoutmanager.cpp \
+    managers/tagmanager.cpp \
+    managers/noteoperationsmanager.cpp \
+    managers/noteindexmanager.cpp \
+    managers/searchfiltermanager.cpp \
+    managers/mediainsertionmanager.cpp \
+    managers/navigationmanager.cpp \
+    managers/notetreemanager.cpp \
     utils/urlhandler.cpp
 
 HEADERS  += mainwindow.h \
+    helpers/nomenuiconstyle.h \
     build_number.h \
     dialogs/attachmentdialog.h \
     dialogs/nextclouddeckdialog.h \
@@ -243,6 +320,7 @@ HEADERS  += mainwindow.h \
     entities/notesubfolder.h \
     entities/calendaritem.h \
     entities/notefolder.h \
+    entities/colormode.h \
     entities/tag.h \
     entities/script.h \
     entities/bookmark.h \
@@ -250,18 +328,25 @@ HEADERS  += mainwindow.h \
     dialogs/aboutdialog.h \
     dialogs/linkdialog.h \
     dialogs/notediffdialog.h \
+    dialogs/textdiffdialog.h \
     dialogs/settingsdialog.h \
     dialogs/tododialog.h \
     dialogs/trashdialog.h \
     dialogs/localtrashdialog.h \
     dialogs/updatedialog.h \
     dialogs/versiondialog.h \
-    services/owncloudservice.h \
+    services/cloudservice.h \
     services/nextclouddeckservice.h \
     services/updateservice.h \
     services/scriptingservice.h \
     services/websocketserverservice.h \
     services/webappclientservice.h \
+    services/languagetoolclient.h \
+    services/languagetoolchecker.h \
+    services/languagetooltypes.h \
+    services/harperclient.h \
+    services/harperchecker.h \
+    services/harpertypes.h \
     helpers/htmlentities.h \
     helpers/clientproxy.h \
     helpers/toolbarcontainer.h \
@@ -275,17 +360,25 @@ HEADERS  += mainwindow.h \
     dialogs/passworddialog.h \
     services/metricsservice.h \
     services/cryptoservice.h \
-    services/openaiservice.h \
+     services/openaiservice.h \
+    services/markdownlspignoredrules.h \
+    services/markdownlspclient.h \
+    services/markdownlspdocumenttracker.h \
+    services/mcpservice.h \
+    services/settingsservice.h \
     dialogs/masterdialog.h \
     utils/misc.h \
     utils/git.h \
     utils/gui.h \
     utils/cli.h \
+    utils/listutils.h \
     utils/schema.h \
     dialogs/welcomedialog.h \
     dialogs/issueassistantdialog.h \
     dialogs/tagadddialog.h \
     widgets/navigationwidget.h \
+    widgets/filenavigationwidget.h \
+    widgets/backlinkwidget.h \
     widgets/notepreviewwidget.h \
     api/noteapi.h \
     api/notesubfolderapi.h \
@@ -300,12 +393,14 @@ HEADERS  += mainwindow.h \
     dialogs/storedattachmentsdialog.h \
     dialogs/actiondialog.h \
     dialogs/tabledialog.h \
+    dialogs/markdowntabledialog.h \
     libraries/qtcsv/src/include/qtcsv_global.h \
     libraries/qtcsv/src/include/abstractdata.h \
     libraries/qtcsv/src/include/reader.h \
     libraries/qtcsv/src/sources/filechecker.h \
     libraries/qtcsv/src/sources/symbols.h \
     dialogs/notedialog.h \
+    dialogs/notebookmarkdialog.h \
     dialogs/filedialog.h \
     dialogs/scriptrepositorydialog.h \
     dialogs/dictionarymanagerdialog.h \
@@ -321,8 +416,32 @@ HEADERS  += mainwindow.h \
     widgets/notefolderlistwidget.h \
     widgets/notetreewidgetitem.h \
     widgets/todoitemtreewidget.h \
-    widgets/layoutwidget.h \
+    widgets/layoutpresetwidget.h \
     widgets/htmlpreviewwidget.h \
+    widgets/settings/colormodesettingswidget.h \
+    widgets/settings/layoutssettingswidget.h \
+    widgets/settings/gitsettingswidget.h \
+    widgets/settings/localtrashsettingswidget.h \
+    widgets/settings/debugoptionsettingswidget.h \
+    widgets/settings/editorfontcolorsettingswidget.h \
+    widgets/settings/previewfontsettingswidget.h \
+    widgets/settings/debugsettingswidget.h \
+    widgets/settings/languagetoolsettingswidget.h \
+    widgets/settings/harpersettingswidget.h \
+    widgets/settings/markdownlspsettingswidget.h \
+     widgets/settings/networksettingswidget.h \
+     widgets/settings/cloudsettingswidget.h \
+     widgets/settings/todosettingswidget.h \
+    widgets/settings/aisettingswidget.h \
+    widgets/settings/webcompanionsettingswidget.h \
+    widgets/settings/editorsettingswidget.h \
+    widgets/settings/webapplicationsettingswidget.h \
+    widgets/settings/mcpserversettingswidget.h \
+    widgets/settings/notefoldersettingswidget.h \
+     widgets/settings/panelssettingswidget.h \
+     widgets/settings/interfacesettingswidget.h \
+     widgets/settings/generalsettingswidget.h \
+     widgets/settings/scriptingsettingswidget.h \
     dialogs/serverbookmarksimportdialog.h \
     dialogs/websockettokendialog.h \
     dialogs/imagedialog.h \
@@ -330,7 +449,24 @@ HEADERS  += mainwindow.h \
     models/commandmodel.h \
     libraries/fuzzy/kfuzzymatcher.h \
     libraries/qr-code-generator/QrCode.hpp \
+    libraries/qtwaitingspinner/waitingspinnerwidget.h \
     widgets/notesubfoldertree.h \
+    widgets/noterelationscene.h \
+    managers/spellcheckmanager.h \
+    managers/systemtraymanager.h \
+    managers/exportprintmanager.h \
+    managers/noteencryptionmanager.h \
+    managers/distractionfreemanager.h \
+    managers/notetabmanager.h \
+    managers/aitoolbarmanager.h \
+    managers/layoutmanager.h \
+    managers/tagmanager.h \
+    managers/noteoperationsmanager.h \
+    managers/noteindexmanager.h \
+    managers/searchfiltermanager.h \
+    managers/mediainsertionmanager.h \
+    managers/navigationmanager.h \
+    managers/notetreemanager.h \
     utils/urlhandler.h \
 
 FORMS    += mainwindow.ui \
@@ -338,6 +474,7 @@ FORMS    += mainwindow.ui \
     dialogs/imagedialog.ui \
     dialogs/nextclouddeckdialog.ui \
     dialogs/notediffdialog.ui \
+    dialogs/textdiffdialog.ui \
     dialogs/aboutdialog.ui \
     dialogs/updatedialog.ui \
     dialogs/settingsdialog.ui \
@@ -359,13 +496,38 @@ FORMS    += mainwindow.ui \
     dialogs/storedattachmentsdialog.ui \
     dialogs/actiondialog.ui \
     dialogs/tabledialog.ui \
+    dialogs/markdowntabledialog.ui \
     dialogs/notedialog.ui \
+   dialogs/notebookmarkdialog.ui \
     dialogs/scriptrepositorydialog.ui \
     dialogs/dictionarymanagerdialog.ui \
     widgets/qtexteditsearchwidget.ui \
     widgets/scriptsettingwidget.ui \
     widgets/notetreewidgetitem.ui \
-    widgets/layoutwidget.ui \
+    widgets/layoutpresetwidget.ui \
+    widgets/settings/colormodesettingswidget.ui \
+    widgets/settings/gitsettingswidget.ui \
+    widgets/settings/localtrashsettingswidget.ui \
+    widgets/settings/debugoptionsettingswidget.ui \
+    widgets/settings/editorfontcolorsettingswidget.ui \
+    widgets/settings/previewfontsettingswidget.ui \
+    widgets/settings/debugsettingswidget.ui \
+    widgets/settings/languagetoolsettingswidget.ui \
+    widgets/settings/harpersettingswidget.ui \
+    widgets/settings/markdownlspsettingswidget.ui \
+     widgets/settings/networksettingswidget.ui \
+     widgets/settings/cloudsettingswidget.ui \
+     widgets/settings/todosettingswidget.ui \
+    widgets/settings/aisettingswidget.ui \
+    widgets/settings/webcompanionsettingswidget.ui \
+    widgets/settings/editorsettingswidget.ui \
+    widgets/settings/webapplicationsettingswidget.ui \
+    widgets/settings/mcpserversettingswidget.ui \
+    widgets/settings/notefoldersettingswidget.ui \
+     widgets/settings/panelssettingswidget.ui \
+     widgets/settings/interfacesettingswidget.ui \
+     widgets/settings/generalsettingswidget.ui \
+     widgets/settings/scriptingsettingswidget.ui \
     dialogs/serverbookmarksimportdialog.ui \
     dialogs/websockettokendialog.ui
 
@@ -388,6 +550,13 @@ include(libraries/fakevim/fakevim.pri)
 include(libraries/singleapplication/singleapplication.pri)
 include(libraries/sonnet/src/core/sonnet-core.pri)
 include(libraries/qhotkey/qhotkey.pri)
+
+# XDG Desktop Portal global shortcuts support for Wayland on Linux
+unix:!mac {
+    QT += dbus
+    SOURCES += services/xdgglobalshortcutmanager.cpp
+    HEADERS += services/xdgglobalshortcutmanager.h
+}
 
 unix {
   isEmpty(PREFIX) {
@@ -414,6 +583,8 @@ unix {
       desktop.files += PBE.QOwnNotes.desktop
   }
 
+  # The qt5/qt6 paths qre needed by the Fedora and openSUSE builds on OBS
+  # Keep in mind that Debian and Ubuntu don't work with those paths with cmake and Qt6
   lessThan(QT_MAJOR_VERSION, 6) {
       i18n.path = $$DATADIR/qt5/translations
   } else {
@@ -432,6 +603,16 @@ CONFIG(DEV_MODE) {
     unix:!mac {
         message("Werror enabled")
         QMAKE_CXXFLAGS += "-Wno-error=deprecated-declarations -Werror -pedantic"
+
+        # Suppress specific warnings-as-errors for 3rdparty litehtml/gumbo code
+        # These must come AFTER -Werror to take effect
+        CONFIG(USE_QLITEHTML) {
+            QMAKE_CXXFLAGS += -Wno-error=unused-parameter -Wno-error=missing-field-initializers \
+                -Wno-error=sign-compare -Wno-error=unused-but-set-variable
+        }
+
+        # Suppress warnings-as-errors from bundled qtkeychain sources
+        QMAKE_CXXFLAGS += -Wno-error=cast-function-type -Wno-error=switch
     }
 }
 

@@ -4,24 +4,32 @@
 #include <services/metricsservice.h>
 #include <utils/gui.h>
 #include <utils/misc.h>
+#include <widgets/qtexteditsearchwidget.h>
 
 #include <QDebug>
 #include <QDesktopServices>
 #include <QDir>
+#include <QKeyEvent>
+#include <QLayout>
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QProcessEnvironment>
 #include <QPushButton>
-#include <QSettings>
 #include <QTemporaryFile>
 #include <QUrl>
 
+#include "services/settingsservice.h"
 #include "ui_updatedialog.h"
 
 UpdateDialog::UpdateDialog(QWidget *parent, const QString &changesHtml, const QString &releaseUrl,
                            const QString &releaseVersionString)
-    : MasterDialog(parent), ui(new Ui::UpdateDialog) {
+    : MasterDialog(parent),
+      ui(new Ui::UpdateDialog),
+      _networkManager(nullptr),
+      _updateButton(nullptr),
+      _changeLogSearchWidget(nullptr),
+      _changeLogEditViewport(nullptr) {
     ui->setupUi(this);
     afterSetupUI();
     ui->downloadProgressBar->hide();
@@ -37,6 +45,23 @@ UpdateDialog::UpdateDialog(QWidget *parent, const QString &changesHtml, const QS
     ui->changeLogEdit->document()->setDefaultStyleSheet(Utils::Misc::genericCSS());
     //    ui->label_4->setText("<style>" + Utils::Misc::genericCSS() +
     //                                 "</style>" + ui->label_4->text());
+
+    _changeLogSearchWidget = new QTextEditSearchWidget(ui->changeLogEdit);
+    _changeLogSearchWidget->setReplaceEnabled(false);
+    _changeLogSearchWidget->setDarkMode(
+        SettingsService().value(QStringLiteral("darkMode")).toBool());
+
+    auto *searchLayout = new QVBoxLayout(ui->searchFrame);
+    searchLayout->setSpacing(0);
+    searchLayout->setContentsMargins(0, 0, 0, 0);
+    searchLayout->addWidget(_changeLogSearchWidget);
+    ui->searchFrame->setLayout(searchLayout);
+
+    ui->changeLogEdit->installEventFilter(this);
+    // Cache the viewport pointer here, where construction is complete and safe,
+    // so eventFilter() never needs to call viewport() itself (issue #3518)
+    _changeLogEditViewport = ui->changeLogEdit->viewport();
+    _changeLogEditViewport->installEventFilter(this);
 
     ui->changeLogEdit->setHtml(changesHtml);
     ui->versionLabel->setText("Version " + releaseVersionString);
@@ -121,18 +146,46 @@ void UpdateDialog::show() {
     MasterDialog::show();
 }
 
+bool UpdateDialog::eventFilter(QObject *obj, QEvent *event) {
+    // Use the cached viewport pointer instead of calling viewport() here;
+    // calling viewport() inside eventFilter() can crash when an event fires
+    // during setupUi before QAbstractScrollArea has fully initialized its
+    // internal viewport widget (issue #3518)
+    if (((obj == ui->changeLogEdit) || (obj == _changeLogEditViewport)) &&
+        (event->type() == QEvent::KeyPress)) {
+        auto *keyEvent = static_cast<QKeyEvent *>(event);
+
+        if ((keyEvent->key() == Qt::Key_Escape) && _changeLogSearchWidget->isVisible()) {
+            _changeLogSearchWidget->deactivate();
+            return true;
+        }
+
+        if ((keyEvent->key() == Qt::Key_F) && keyEvent->modifiers().testFlag(Qt::ControlModifier)) {
+            _changeLogSearchWidget->activate();
+            return true;
+        }
+
+        if (keyEvent->key() == Qt::Key_F3) {
+            _changeLogSearchWidget->doSearch(!keyEvent->modifiers().testFlag(Qt::ShiftModifier));
+            return true;
+        }
+    }
+
+    return MasterDialog::eventFilter(obj, event);
+}
+
 void UpdateDialog::dialogButtonClicked(QAbstractButton *button) {
     int actionRole = button->property("ActionRole").toInt();
 
     switch (actionRole) {
         case Skip: {
-            QSettings settings;
+            SettingsService settings;
             settings.setValue(QStringLiteral("skipVersion"), this->releaseVersionString);
             qDebug() << "skip version";
             break;
         }
         case Disable: {
-            QSettings settings;
+            SettingsService settings;
             settings.setValue(QStringLiteral("disableAutomaticUpdateDialog"), true);
             qDebug() << "disable dialog";
             break;
@@ -305,7 +358,7 @@ void UpdateDialog::slotReplyFinished(QNetworkReply *reply) {
  */
 bool UpdateDialog::initializeUpdateProcess(const QString &filePath) {
 #if defined(Q_OS_MAC)
-    // the OS X updater initializeMacOSUpdateProcess will be started
+    // the macOS updater initializeMacOSUpdateProcess will be started
     // from dialogButtonClicked
     Q_UNUSED(filePath);
 #elif defined(Q_OS_WIN)
@@ -352,7 +405,11 @@ bool UpdateDialog::initializeMacOSUpdateProcess(const QString &releaseUrl) {
     }
 
     // read the content of the updater script
-    f.open(QFile::ReadOnly | QFile::Text);
+    if (!f.open(QFile::ReadOnly | QFile::Text)) {
+        qWarning() << "Failed to open file:" << f.fileName();
+        return false;
+    }
+
     QTextStream ts(&f);
     QString scriptContent = ts.readAll();
     f.close();
@@ -376,11 +433,12 @@ bool UpdateDialog::initializeMacOSUpdateProcess(const QString &releaseUrl) {
         return false;
     }
 
+    // Set restrictive permissions before writing content to prevent other users
+    // from reading or replacing the script between creation and execution
+    tempFile->setPermissions(QFile::ExeOwner | QFile::ReadOwner | QFile::WriteOwner);
+
     // write the script content
     tempFile->write(scriptContent.toLatin1());
-
-    // setting executable permissions to the updater script
-    tempFile->setPermissions(QFile::ExeUser | QFile::ReadUser | QFile::WriteUser);
 
     // file->fileName() only holds a value after file->open()
     QString updaterFilePath = tempFile->fileName();
@@ -424,11 +482,11 @@ bool UpdateDialog::initializeLinuxUpdateProcess(const QString &filePath) {
     QFileInfo fileInfo(appPath);
 
     if (!fileInfo.isWritable()) {
-        qCritical() << __func__ << " - 'appPath' is not writeable: " << appPath;
+        qCritical() << __func__ << " - 'appPath' is not writable: " << appPath;
 
         QMessageBox::critical(nullptr, tr("Permission error"),
-                              tr("Your QOwnNotes executable '%1' is not writeable! It must be "
-                                 "writeable by the current user in order to be updated.")
+                              tr("Your QOwnNotes executable '%1' is not writable! It must be "
+                                 "writable by the current user in order to be updated.")
                                   .arg(appPath));
 
         return false;
@@ -487,11 +545,11 @@ bool UpdateDialog::initializeLinuxUpdateProcess(const QString &filePath) {
         return false;
     }
 
-    if (QMessageBox::information(
+    if (QMessageBox::question(
             this, tr("Restart application"),
             tr("You now can restart the application to complete the update process.") +
                 Utils::Misc::appendSingleAppInstanceTextIfNeeded(),
-            tr("Restart"), tr("Cancel"), QString(), 0, 1) == 0) {
+            QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Yes) == QMessageBox::Yes) {
         Utils::Misc::restartApplication();
     }
 

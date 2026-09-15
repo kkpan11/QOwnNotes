@@ -36,11 +36,15 @@ class ScriptingService : public QObject {
    public:
     explicit ScriptingService(QObject *parent = 0);
     static ScriptingService *instance();
+    static ScriptingService *instanceOrNull();
     static ScriptingService *createInstance(QObject *parent);
     QQmlEngine *engine() const;
     void initComponents();
     QString callInsertMediaHook(QFile *file, QString markdownText);
     QString callInsertAttachmentHook(QFile *file, QString markdownText);
+    QString callFetchUrlTitleHook(const QString &url) const;
+    void callLayoutSwitchedHook(const QString &oldUuid, const QString &newUuid);
+    QT_DEPRECATED_X("Use callLayoutSwitchedHook() instead")
     void callWorkspaceSwitchedHook(const QString &oldUuid, const QString &newUuid);
     QVariant callNoteTaggingHook(const Note &note, const QString &action,
                                  const QString &tagName = QString(),
@@ -162,12 +166,22 @@ class ScriptingService : public QObject {
     Q_INVOKABLE QString inputDialogGetMultiLineText(const QString &title, const QString &label,
                                                     const QString &text = QString());
 
+    Q_INVOKABLE QString textDiffDialog(const QString &title, const QString &label, QString text1,
+                                       QString text2);
+
     Q_INVOKABLE void setPersistentVariable(const QString &key, const QVariant &value);
 
     Q_INVOKABLE void addHighlightingRule(const QString &pattern, const QString &shouldContain,
                                          int state, int capturingGroup = 0, int maskedGroup = 0);
 
-    QVector<QOwnNotesMarkdownHighlighter::ScriptingHighlightingRule> getHighlightingRules();
+    Q_INVOKABLE void addHighlightingRule(const QString &pattern, const QString &shouldContain,
+                                         int state, int capturingGroup, int maskedGroup,
+                                         const QVariantMap &formatStyle);
+
+    QVector<QOwnNotesMarkdownHighlighter::ScriptingHighlightingRule> getHighlightingRules() const;
+    bool hasHighlightingRules() const;
+    QVariantList callHighlightingHook(const QString &text, int previousBlockState) const;
+    bool highlightingHookExists() const;
 
     Q_INVOKABLE QVariant getPersistentVariable(const QString &key,
                                                const QVariant &defaultValue = QVariant());
@@ -207,6 +221,10 @@ class ScriptingService : public QObject {
     QMap<int, ScriptComponent> _scriptComponents;
     QHash<int, QList<QVariant>> _settingsVariables;
     QVector<QOwnNotesMarkdownHighlighter::ScriptingHighlightingRule> _highlightingRules;
+    bool _highlightingHookExists = false;
+    bool _isInitializingComponents = false;
+    bool _isReloadingEngine = false;
+    bool _reloadEngineRequested = false;
     bool methodExistsForObject(QObject *object, const QString &method) const;
     QString callNoteToMarkdownHtmlHookForObject(ScriptComponent *scriptComponent, Note *note,
                                                 const QString &html, const bool forExport);
@@ -215,6 +233,7 @@ class ScriptingService : public QObject {
     void reloadScriptComponents();
     void clearCustomStyleSheets();
     QList<QVariant> registerSettingsVariables(QObject *object, const Script &script);
+    static void addBundledImportPaths(QQmlEngine *engine);
 
    signals:
     void noteStored(QVariant note);

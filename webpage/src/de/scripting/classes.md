@@ -1,9 +1,9 @@
 # Exponierte Klassen
 
-Notiz
-----
+## Notiz
 
 ### Eigenschaften und Methoden
+
 ```cpp
 class NoteApi {
     Q_PROPERTY(int id)
@@ -26,12 +26,15 @@ class NoteApi {
     Q_INVOKABLE QString toMarkdownHtml(bool forExport = true)
     Q_INVOKABLE QString getFileURLFromFileName(QString localFileName)
     Q_INVOKABLE bool allowDifferentFileName()
+    // Returns the Markdown note url for linking to the note with noteId
+    Q_INVOKABLE QString getNoteUrlForLinkingToNoteId(int noteId)
 };
 ```
 
 Sie können die Methoden von [Datum](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) verwenden, um mit `fileCreated` oder `fileLastModified` zu arbeiten.
 
 ### Beispiel
+
 ```js
 script.log (note.fileCreated.toISOString ());
 script.log (note.fileLastModified.getFullYear ());
@@ -43,10 +46,10 @@ note.renameNoteFile ("new name");
 script.log (note.allowDifferentFileName());
 ```
 
-NoteSubFolder
-----
+## NoteSubFolder
 
 ### Eigenschaften und Methoden
+
 ```cpp
 class NoteSubFolderApi {
     Q_PROPERTY(int id)
@@ -61,34 +64,41 @@ class NoteSubFolderApi {
 ```
 
 ### Beispiel
+
 ```js
-var noteSubFolderQmlObj = Qt.createQmlObject("import QOwnNotesTypes 1.0; NoteSubFolder{}", mainWindow, "noteSubFolder");
+var noteSubFolderQmlObj = Qt.createQmlObject(
+  "import QOwnNotesTypes 1.0; NoteSubFolder{}",
+  mainWindow,
+  "noteSubFolder",
+);
 
-// gib alle Unterordnernamen aus
-noteSubFolderQmlObj.fetchNoteSubFoldersByParentId(parentId).forEach(function(nsf) {
+// print all subfolder names
+noteSubFolderQmlObj
+  .fetchNoteSubFoldersByParentId(parentId)
+  .forEach(function (nsf) {
     script.log(nsf.name);
-});
+  });
 
-// hole den aktuellen Notiz-Unterordner
+// get the active note subfolder
 var noteSubFolder = noteSubFolderQmlObj.activeNoteSubFolder();
 
-// gib den vollständigen und relativen Pfad des aktuellen Notiz-Unterordners aus
+// print the full and relative path of the active note subfolder
 script.log(noteSubFolder.fullPath());
 script.log(noteSubFolder.relativePath());
 
 script.log(noteSubFolder.id);
 script.log(noteSubFolder.name);
 
-// iteriere durch die Notizen im Notizen-Unterordner
+// iterate through notes in note subfolder
 for (var idx in noteSubFolder.notes) {
-    var note = noteSubFolder.notes[idx];
+  var note = noteSubFolder.notes[idx];
 }
 ```
 
-Schlagwort
----
+## Schlagwort
 
 ### Eigenschaften und Methoden
+
 ```cpp
 class TagApi {
     Q_PROPERTY(int id)
@@ -101,27 +111,28 @@ class TagApi {
 ```
 
 ### Beispiel
+
 ```js
 // Vergessen Sie nicht, "import QOwnNotesTypes 1.0" am Anfang Ihres Skripts zu verwenden!
 
-// hole das Schlagwort "home"
+// Fetch tag "home"
 var tag = script.getTagByNameBreadcrumbList(["home"]);
-// hole alle Notizen mit dem Schlagwort
+// Fetch all notes tagged with the tag
 var notes = tag.notes;
 
-// iteriere durch die Notizen des Schlagwortes
+// Iterate through notes of the tag
 for (var idx in notes) {
-    var note = notes[idx];
-    script.log(note.name);
+  var note = notes[idx];
+  script.log(note.name);
 }
 ```
 
 Sie können weitere Beispiele unter [note-tagging-by-object.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/note-tagging-by-object.qml) finden, wo die TagApi benutzt wird.
 
-HauptFenster
-----------
+## HauptFenster
 
 ### Eigenschaften und Methoden
+
 ```cpp
 class MainWindow {
     Q_INVOKABLE void reloadTagTree();
@@ -129,55 +140,56 @@ class MainWindow {
     Q_INVOKABLE void buildNotesIndexAndLoadNoteDirectoryList(
             bool forceBuild = false, bool forceLoad = false);
     Q_INVOKABLE void focusNoteTextEdit();
-    // Erstellt einen neuen Notiz-Unterordner im aktuellen Unterordner
+    // Creates a new note subfolder in the current subfolder
     Q_INVOKABLE bool createNewNoteSubFolder(QString folderName = "");
-    // Fügt HTML in die aktuelle Notiz als Markdown ein
-    // Diese Methode läd auch remote Bilder herunter und transformiert "data:image"
-    // URLs zu lokalen Bildern, die im Medienverzeichnis gespeichert sind
+    // Inserts html in the current note as markdown
+    // This method also downloads remote images and transforms "data:image"
+    // urls to local images stored in the media directory
     Q_INVOKABLE void insertHtmlAsMarkdownIntoCurrentNote(QString html);
-    // Lädt die aktuelle Notiz per ID neu
-    // Das ist sinnvoll, wenn der Pfad oder der Dateiname der aktuellen Notiz geändert wurde
+    // Reloads the current note by id
+    // This is useful when the path or filename of the current note changed
     Q_INVOKABLE void reloadCurrentNoteByNoteId();
-    // Gibt die List der Arbeitsumgebungs UUIDs aus
-    Q_INVOKABLE QStringList getWorkspaceUuidList();
-    // Gibt die UUID einer Arbeitsumgebung aus, indem der Name der Arbeitsumgebung eingegeben wird
-    Q_INVOKABLE QString getWorkspaceUuid(const QString &workspaceName);
-    // Legt die aktuelle Arbeitsumgebung per UUID fest
-    Q_INVOKABLE void setCurrentWorkspace(const QString &uuid);
-    // Schließt einen Notiz-Tab mit einem speziellen Index (gibt bei Erfolg true aus)
+    // Returns the list of layout UUIDs
+    Q_INVOKABLE QStringList getLayoutUuidList();
+    // Returns the UUID of a layout, passing in the layout name
+    Q_INVOKABLE QString getLayoutUuid(const QString &layoutName);
+    // Sets the current layout by UUID
+    Q_INVOKABLE void setCurrentLayout(const QString &uuid);
+    // Closes a note tab on a specific index (returns true if successful)
     Q_INVOKABLE bool removeNoteTab(int index);
-    // Gibt eine Liste von Notiz-IDs aus, die in Tabs geöffnet werden
+    // Returns a list of note ids that are opened in tabs
     Q_INVOKABLE QList<int> getNoteTabNoteIdList();
-    // Springt zu einem Schlagwort im Schlagwortbaum
+    // Jumps to a tag in the tag tree
     Q_INVOKABLE bool jumpToTag(int tagId);
 };
 ```
 
 ### Beispiel
+
 ```js
-// Erzwinge das Neuladen der Notizliste
+// Force a reload of the note list
 mainWindow.buildNotesIndexAndLoadNoteDirectoryList(true, true);
 
-// Erstellt einen neuen Unterordner "My fancy folder" im aktuellen Unterordner
+// Creates a new note subfolder "My fancy folder" in the current subfolder
 mainWindow.createNewNoteSubFolder("My fancy folder");
 
-// Fügt HTML in die aktuelle Notiz als Markdown ein
-mainWindow.insertHtmlAsMarkdownIntoCurrentNote("<h2>my headline</h2>some text");
+// Inserts html in the current note as markdown
+mainWindow.insertHtmlAsMarkdownIntoCurrentNote("<h2>my headline
+some text");
 
-// Legt "Edit"-Arbeitsumgebung als aktuelle Arbeitsumgebung fest
-mainWindow.setCurrentWorkspace(mainWindow.getWorkspaceUuid("Edit"));
+// Set 'Edit' layout as current layout
+mainWindow.setCurrentLayout(mainWindow.getLayoutUuid("Edit"));
 
-// Springt zum Schlagwort "test" im Schlagwortbaum
-// Es gibt ein Beispiel auf https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/custom-actions.qml
+// Jump to the tag "test" in the tag tree
+// There is an example in https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/custom-actions.qml
 var tag = script.getTagByNameBreadcrumbList(["test"]);
 mainWindow.jumpToTag(tag.id);
 
-// Erhalte alle Notizen, die in Tabs geöffnet sind
+// Get all notes that are opened in tabs
 var noteIds = mainWindow.getNoteTabNoteIdList();
-noteIds.forEach(function (noteId){
-    var note = script.fetchNoteById(noteId);
+noteIds.forEach(function (noteId) {
+  var note = script.fetchNoteById(noteId);
 
-    // mach was mit der Notiz
+  // do something with the note
 });
-
 ```

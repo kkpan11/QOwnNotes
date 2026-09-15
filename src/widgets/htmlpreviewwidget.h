@@ -5,23 +5,68 @@
 #include <libraries/qlitehtml/src/qlitehtmlwidget.h>
 
 #include <QNetworkAccessManager>
+#include <QWidget>
 
-class HtmlPreviewWidget final : public QLiteHtmlWidget {
+class QLiteHtmlSearchWidget;
+class QScrollBar;
+
+// Internal widget that handles the actual HTML rendering
+class HtmlPreviewWidgetInternal final : public QLiteHtmlWidget {
     Q_OBJECT
    public:
-    HtmlPreviewWidget(QWidget *parent);
+    explicit HtmlPreviewWidgetInternal(QWidget *parent);
 
    Q_SIGNALS:
     void anchorClicked(const QUrl &url);
 
    private:
     QByteArray resourceLoadCallBack(const QUrl &);
-    void onContextMenuRequested(QPoint pos, const QUrl &url);
+    void onContextMenuRequested(QPoint pos, const QUrl &linkUrl, const QUrl &imageUrl);
+    void copyImageToClipboard(const QUrl &imageUrl);
 
     void wheelEvent(QWheelEvent *) override;
     bool eventFilter(QObject *src, QEvent *e) override;
 
     QNetworkAccessManager m_nam;
+
+    void exportAsHTMLFile();
+};
+
+// Container widget that holds the HTML preview and search bar
+class HtmlPreviewWidget final : public QWidget {
+    Q_OBJECT
+   public:
+    HtmlPreviewWidget(QWidget *parent);
+    void setHtml(const QString &text);
+    QLiteHtmlSearchWidget *searchWidget();
+
+    // Expose QLiteHtmlWidget methods
+    void setZoomFactor(qreal scale);
+    qreal zoomFactor() const;
+    QString selectedText() const;
+    void setDefaultFont(const QFont &font);
+    QFont defaultFont() const;
+    bool findText(const QString &text, QTextDocument::FindFlags flags, bool incremental,
+                  bool *wrapped = nullptr);
+    void scrollToAnchor(const QString &name);
+
+    // Update background color and dark mode after a theme change
+    void updateBackground();
+
+    // Expose QAbstractScrollArea methods
+    QWidget *viewport() const;
+    QScrollBar *verticalScrollBar() const;
+    QScrollBar *horizontalScrollBar() const;
+
+   Q_SIGNALS:
+    void anchorClicked(const QUrl &url);
+
+   protected:
+    void keyPressEvent(QKeyEvent *event) override;
+
+   private:
+    HtmlPreviewWidgetInternal *_htmlWidget;
+    QLiteHtmlSearchWidget *_searchWidget;
 };
 
 #endif

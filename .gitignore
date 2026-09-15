@@ -26,4 +26,15 @@ ui_*.h
 /src/Makefile
 /src/QOwnNotes
 secrets/*
+.shared
+__pycache__
 
+# Devenv
+.devenv*
+devenv.local.nix
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml

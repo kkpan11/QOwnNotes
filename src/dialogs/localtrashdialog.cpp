@@ -6,9 +6,9 @@
 #include <QDebug>
 #include <QDialogButtonBox>
 #include <QPushButton>
-#include <QSettings>
 #include <QSplitter>
 
+#include "services/settingsservice.h"
 #include "ui_localtrashdialog.h"
 
 class LocalTrashTreeWidgetItem : public QTreeWidgetItem {
@@ -21,7 +21,8 @@ class LocalTrashTreeWidgetItem : public QTreeWidgetItem {
 
         // allow sorting for the date column
         if (column == 1) {
-            return data(column, Qt::UserRole).toInt() < other.data(column, Qt::UserRole).toInt();
+            return data(column, Qt::UserRole).toLongLong() <
+                   other.data(column, Qt::UserRole).toLongLong();
         }
 
         return text(column).toLower() < other.text(column).toLower();
@@ -69,6 +70,8 @@ LocalTrashDialog::LocalTrashDialog(QWidget *parent)
     connect(this->ui->buttonBox, SIGNAL(clicked(QAbstractButton *)),
             SLOT(dialogButtonClicked(QAbstractButton *)));
     connect(this, SIGNAL(finished(int)), this, SLOT(storeSettings()));
+    Utils::Gui::initTreeWidgetHeaderOrderPersistence(
+        ui->trashTreeWidget, QStringLiteral("LocalTrashDialog/trashTreeWidgetHeaderOrder"));
 
     loadTrashedNotes();
 }
@@ -112,7 +115,12 @@ void LocalTrashDialog::loadTrashedNotes() {
     }
 
     ui->trashTreeWidget->sortItems(1, Qt::SortOrder::DescendingOrder);
-    ui->trashTreeWidget->resizeColumnToContents(0);
+
+    if (Utils::Gui::hasTreeWidgetHeaderLayout(ui->trashTreeWidget)) {
+        Utils::Gui::restoreTreeWidgetHeaderLayout(ui->trashTreeWidget);
+    } else {
+        ui->trashTreeWidget->resizeColumnToContents(0);
+    }
 }
 
 void LocalTrashDialog::setupMainSplitter() {
@@ -122,7 +130,7 @@ void LocalTrashDialog::setupMainSplitter() {
     trashSplitter->addWidget(ui->noteBrowserFrame);
 
     // restore splitter sizes
-    QSettings settings;
+    SettingsService settings;
     QByteArray state = settings.value(QStringLiteral("localTrashSplitterSizes")).toByteArray();
     trashSplitter->restoreState(state);
 
@@ -132,7 +140,7 @@ void LocalTrashDialog::setupMainSplitter() {
 
 void LocalTrashDialog::storeSettings() {
     // store the splitter sizes
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("localTrashSplitterSizes"), trashSplitter->saveState());
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2024 Patrizio Bekerle -- <patrizio@bekerle.com>
+ * Copyright (c) 2014-2026 Patrizio Bekerle -- <patrizio@bekerle.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,16 +14,18 @@
 
 #pragma once
 
+#include <QFile>
 #include <QHash>
+#include <QIODevice>
 #include <QMetaType>
 #include <QString>
 #include <QStringList>
 #include <QVector>
 
 struct TerminalCmd;
-class QFile;
 class QDataStream;
 class QPrinter;
+class QJSValue;
 
 /*  Miscellaneous functions that can be useful */
 namespace Utils {
@@ -60,7 +62,8 @@ struct SearchEngine {
 };
 
 void openPath(const QString &absolutePath);
-void openFolderSelect(const QString &absolutePath);
+void openFolderSelect(const QString &absolutePath,
+                      const QString &questionDialogIdentifier = QString());
 QString removeIfStartsWith(QString text, const QString &removeString);
 QString removeIfEndsWith(QString text, const QString &removeString);
 QString prependIfDoesNotStartWith(QString text, const QString &startString);
@@ -78,7 +81,7 @@ QString toStartCase(const QString &text);
 QString defaultNotesPath();
 char dirSeparator();
 void waitMsecs(int msecs);
-QString portableDataPath();
+QString portableDataPath(const QString &earlyArgv0Path = QString());
 bool isInPortableMode();
 bool isAppImage();
 QString applicationPath();
@@ -94,7 +97,6 @@ QList<QObject *> getParents(QObject *object);
 QString appDataPath();
 QString logFilePath();
 QString transformLineFeeds(QString text);
-QString replaceOwnCloudText(QString text, bool useShortText = false);
 void restartApplication();
 QString appendSingleAppInstanceTextIfNeeded(QString text = "");
 void needRestart();
@@ -112,6 +114,8 @@ QDataStream &dataStreamRead(QDataStream &is, QPrinter &printer);
 void storePrinterSettings(QPrinter *printer, const QString &settingsKey);
 void loadPrinterSettings(QPrinter *printer, const QString &settingsKey);
 bool isNoteEditingAllowed();
+bool isReadOnlyModeEnabled();
+bool areMenuIconsHidden();
 bool useInternalExportStylingForPreview();
 bool isSocketServerEnabled();
 bool isWebAppSupportEnabled();
@@ -122,13 +126,15 @@ void printInfo(const QString &text);
 bool doAutomaticNoteFolderDatabaseClosing();
 bool isNoteListPreview();
 bool isEnableNoteTree();
+bool isDetectLeadingEmojiInNoteTitle();
+bool isStripLeadingEmojiFromNoteFilename();
 QString indentCharacters();
 int indentSize();
 QString toHumanReadableByteSize(qint64 size);
 QString prepareDebugInformationLine(const QString &headline, QString data,
                                     bool withGitHubLineBreaks = true,
                                     const QString &typeText = QString());
-QString generateDebugInformation(bool withGitHubLineBreaks = true);
+QString generateDebugInformation(bool withGitHubLineBreaks = true, bool anonymize = false);
 bool regExpInListMatches(const QString &text, const QStringList &regExpList);
 bool isDarkModeIconTheme();
 void transformNextcloudPreviewImages(QString &html, int maxImageWidth,
@@ -157,6 +163,7 @@ QByteArray friendlyUserAgentString();
 QLatin1String platform();
 void switchToDarkOrLightMode(bool darkMode);
 void switchToDarkMode();
+QFile::OpenMode getNoteFileOpenFlags(QFile::OpenMode baseFlags = QIODevice::ReadOnly);
 void switchToLightMode();
 void unescapeEvernoteImportText(QString &content);
 void transformEvernoteImportText(QString &content, bool withCleanup = false);
@@ -168,6 +175,10 @@ bool isSimilar(const QString &str1, const QString &str2, int threshold = 3);
 QString getBaseUrlFromUrlString(const QString &urlString, bool withBasePath = false);
 QString createAbsolutePathsInHtml(const QString &html, const QString &url);
 int getPreviewRefreshDebounceTime();
+int getMaximumNoteFileSize();
+QString encodeFilePath(const QString &filePath);
+QString detectFileFormat(const QString &text);
+QString jsValueToJsonString(const QJSValue &value);
 }    // namespace Misc
 }    // namespace Utils
 

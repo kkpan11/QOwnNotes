@@ -1,13 +1,34 @@
-# Install via Nix
+# Instalar mediante Nix
 
-You can install QOwnNotes with the [Nix package manager](https://wiki.nixos.org/wiki/Nix_package_manager) on [NixOS](https://nixos.org/) and other platforms, the package name is [qownnotes](https://search.nixos.org/packages?channel=unstable&show=qownnotes).
-
-Para mayor información mira [QOwnNotes](https://search.nixos.org/packages?channel=unstable&show=qownnotes).
-
-Después será capaz de ejecutar QOwnNotes con la orden `qownnotes`.
+Puede instalar QOwnNotes con el [gestor de paquetes de Nix](https://nixos.org/download/) en [NixOS](https://nixos.org/), otras distribuciones **Linux**, **macOS** y **Windows**. El nombre del paquete es [qownnotes](https://search.nixos.org/packages?channel=unstable&show=qownnotes).
 
 ::: tip
-El gestor de snippets de línea de comandos QOwnNotes [qc](https://github.com/qownnotes/qc) también puede instalarse a través de [Nix Store](https://search.nixos.org/packages?channel=unstable&show=qc).
+¡Lo mejor es utilizar el canal inestable de NixOS para obtener la última versión de QOwnNotes!
+:::
 
-Usando el comando `nix-shell -p qc --run qc`.
+El paquete está construido con Qt6, utiliza la biblioteca del sistema botan3 y libgit2, y proporciona integración de la consola para fish y bash.
+
+Véase [QOwnNotes en Nix](https://search.nixos.org/packages?channel=unstable&show=qownnotes) para mayor información.
+
+Posteriormente, debería ser capaz de abrir QOwnNotes con el comando `qownnotes` o `QOwnNotes`.
+
+::: tip
+El gestor de fragmentos de comandos de terminal de QOwnNotes [qc](https://github.com/qownnotes/qc) también puede instalarse a través de [Nix Store](https://search.nixos.org/packages?channel=unstable&show=qc).
+
+Puede usar `nix-shell -p qc --run "qc exec"` para probarlo.
+:::
+
+::: tip
+Info
+¡En **macOS** el paquete funciona de forma nativa en **x86 y Apple Silicon**!
+:::
+
+::: tip
+Si QOwnNotes registra el mensaje `Could not write secret to keychain` en Linux, instale una implementación de Secret Service y reinicie su sesión de escritorio.
+
+Para GNOME y otros ordenadores de escritorio basados en Servicio Secreto, añada paquetes como `gnome-keyring`, `libsecret` y `seahorse` a su entorno.
+
+Para KDE Plasma, añada soporte para KWallet como `kdePackages.kwalletmanager` y `kdePackages.kwallet`.
+
+QOwnNotes recurrirá al cifrado heredado si el llavero del escritorio no está disponible.
 :::

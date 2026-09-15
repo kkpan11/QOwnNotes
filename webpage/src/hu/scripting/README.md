@@ -8,8 +8,8 @@ import QOwnNotesTypes 1.0
 
 Script {
     /**
-        * Futtatásra kerül, amikor a parancsfájlmotor inicializálódik
-        */
+     * Will be run when the scripting engine initializes
+     */
     function init() {
         script.log("Hello world!");
     }
@@ -33,5 +33,5 @@ Ha javaslatot akarsz tenni egy szkriptre a **parancsfájl-adattár**hoz, kérjü
 Ha hozzáférésre van szüksége a QOwnNotes bizonyos funkcióihoz, vagy kérdései vagy ötletei vannak, kérjük, nyisson meg egy problémát a [QOwnNotes probléma oldalán](https://github.com/pbek/QOwnNotes/issues).
 
 ::: tip
-Naplózáshoz a ` script.log () ` paranccsal jelentkezhet be a napló widgetbe.
+For logging, you can use the `script.log()` command to log to the _Log panel_, which you can turn on in the _Window / Panels_ menu.
 :::

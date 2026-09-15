@@ -17,14 +17,26 @@ class UrlHandler {
    public:
     UrlHandler();
 
-    static bool isUrlSchemeLocal(const QUrl &url);
+    static bool isUrlSchemeLocal(const QUrl& url);
+    static bool isInternalFragmentUrl(const QUrl& url) {
+        return url.isRelative() && !url.fragment().isEmpty() &&
+               (url.path().isEmpty() || url.path() == QStringLiteral("/"));
+    }
+    static QUrl localFileUrlForDesktopOpen(const QString& urlString) {
+        const QUrl url(urlString);
+        const QString localFilePath = url.toLocalFile();
+        return localFilePath.isEmpty() ? url : QUrl::fromLocalFile(localFilePath);
+    }
 
-    void openUrl(QString urlString);
+    void openUrl(QString urlString, bool openInNewTab = false);
 
    private:
-    void handleNoteIdUrl(QString urlString);
-    void handleNoteUrl(QString urlString, const QString &fragment);
-    void handleCheckboxUrl(QString urlString);
-    void handleFileUrl(QString urlString);
-    void handleFileAttachmentUrl(QString urlString);
+    static void handleWikiLinkUrl(const QString& urlString, bool openInNewTab = false);
+    static void handleNoteIdUrl(const QString& urlString, bool openInNewTab = false);
+    static void handleNoteUrl(const QString& urlString, const QString& fragment,
+                              bool openInNewTab = false);
+    void handleCheckboxUrl(const QString& urlString);
+    static void handleNextcloudDeckUrl(const QString& urlString);
+    static void handleFileUrl(QString urlString);
+    static void handleFileAttachmentUrl(QString urlString);
 };

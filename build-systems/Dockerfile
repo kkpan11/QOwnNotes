@@ -1,31 +1,64 @@
 # Local release environment
-FROM ubuntu:latest
+# Pin to 24.04 because newer Ubuntu CDBS packages no longer ship the qmake/makefile
+# classes required by the Qt5 Launchpad source package.
+FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update
-RUN apt-get -y install bash \
+ENV PIPX_HOME=/opt/pipx
+ENV PIPX_BIN_DIR=/usr/local/bin
+
+# Prepare install of gh
+RUN (type -p wget >/dev/null || (apt update && apt-get install wget -y)) \
+    && mkdir -p -m 755 /etc/apt/keyrings \
+    && wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+    && chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+
+# osc needs m2crypto:
+RUN apt-get update \
+    && apt-get -y install bash \
          build-essential autoconf automake autotools-dev dh-make debhelper \
          devscripts fakeroot xutils lintian pbuilder cdbs gnupg \
          python3 python3-pip osc xz-utils git rsync qttools5-dev-tools \
          qt5-qmake qtbase5-dev libqt5svg5-dev qtdeclarative5-dev \
          libqt5websockets5-dev libqt5x11extras5-dev \
-         qt6-base-dev qt6-declarative-dev libqt6svg6-dev libqt6websockets6-dev \
+         libsecret-1-dev \
+         qt6-base-dev qt6-declarative-dev libqt6svg6-dev qt6-websockets-dev \
          libqt6svg6 libqt6svgwidgets6 libqt6websockets6 libqt6core5compat6 \
-         libqt6core5compat6-dev gh
+         libqt6core5compat6-dev gh curl python3-m2crypto \
+         cmake pkg-config qt6-l10n-tools qt6-tools-dev qt6-tools-dev-tools \
+         pipx python3-venv \
+    && rm -rf /var/lib/apt/lists/*
+
+# The Qt5 Launchpad source package runs debian/rules clean locally via CDBS.
+RUN test -f /usr/share/cdbs/1/class/makefile.mk
 
 # Download and extract zellij
-RUN curl -L https://github.com/zellij-org/zellij/releases/download/v0.39.2/zellij-x86_64-unknown-linux-musl.tar.gz -o zellij.tar.gz \
+RUN curl -L https://github.com/zellij-org/zellij/releases/download/v0.42.2/zellij-x86_64-unknown-linux-musl.tar.gz -o zellij.tar.gz \
     && tar -xzvf zellij.tar.gz \
     && rm zellij.tar.gz \
     && chmod +x zellij \
     && mv zellij /usr/local/bin
 
-# QOwnNotes repo is supposed to be mounted to /QOwnNotes
-RUN useradd -ms /bin/bash release
-USER release
-WORKDIR /home/release
+# Try to fix https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1074680
+RUN sed -i 's/^import imp$/import importlib/' /usr/lib/python3/dist-packages/osc/commandline.py
 
-# osc needs m2crypto:
-RUN pip3 install m2crypto
-RUN mkdir /home/release/.ssh -m 0700
+# Ubuntu 24.04's osc package emits Python 3.12 SyntaxWarnings for invalid escape
+# sequences in regex strings. They are harmless, but make release logs noisy.
+ENV PYTHONWARNINGS=ignore::SyntaxWarning
+
+# Ubuntu 24.04 no longer ships a snapcraft apt package. Installing the snap
+# during a Docker build would require a running snapd daemon, so use pipx with
+# an upstream git tag; the PyPI source archive lacks the git metadata Snapcraft
+# currently expects while building.
+COPY snapcraft-constraints.txt /tmp/snapcraft-constraints.txt
+RUN pipx install --system-site-packages --pip-args="--constraint /tmp/snapcraft-constraints.txt" git+https://github.com/canonical/snapcraft.git@8.14.5 \
+    && chmod -R a+rX /opt/pipx \
+    && snapcraft --version
+
+# QOwnNotes repo is supposed to be mounted to /QOwnNotes
+USER ubuntu
+WORKDIR /home/ubuntu
+
+RUN mkdir /home/ubuntu/.ssh -m 0700
 RUN git config --global user.email "patrizio@bekerle.com" && git config --global user.name "Patrizio Bekerle"

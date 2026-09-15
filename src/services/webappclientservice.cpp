@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2024 Patrizio Bekerle -- <patrizio@bekerle.com>
+ * Copyright (c) 2014-2026 Patrizio Bekerle -- <patrizio@bekerle.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,24 +21,40 @@
 
 #include <utils/misc.h>
 
+#include <QApplication>
+#include <QBuffer>
+#include <QClipboard>
+#include <QDir>
+#include <QJsonArray>
 #include <QJsonDocument>
-#include <QSettings>
 #include <QSslError>
+#include <QSysInfo>
 #include <QWebSocket>
 #include <QtWebSockets>
+#include <memory>
 
 #include "metricsservice.h"
+#include "services/cryptoservice.h"
+#include "services/settingsservice.h"
 
 using namespace std;
 
 QT_USE_NAMESPACE
 
+WebAppClientService *WebAppClientService::_instance = nullptr;
+
+WebAppClientService *WebAppClientService::instance() { return _instance; }
+
 WebAppClientService::WebAppClientService(QObject *parent) : QObject(parent) {
+    _instance = this;
+
     if (!Utils::Misc::isWebAppSupportEnabled()) {
         return;
     }
 
     _webSocket = new QWebSocket();
+    _heartbeatText = "qon-ping";
+    generateSessionId();
 
     connect(_webSocket, &QWebSocket::connected, this, &WebAppClientService::onConnected);
     connect(_webSocket, &QWebSocket::disconnected, this, &WebAppClientService::onDisconnected);
@@ -49,6 +65,8 @@ WebAppClientService::WebAppClientService(QObject *parent) : QObject(parent) {
     connect(&_timerReconnect, SIGNAL(timeout()), this, SLOT(onReconnect()));
 
     open();
+
+    initClipboardService();
 }
 
 void WebAppClientService::open() {
@@ -63,22 +81,189 @@ void WebAppClientService::close() {
     _url = "";
 }
 
+/**
+ * Keeps the current clipboard content
+ *
+ * @return true if something was kept
+ */
+bool WebAppClientService::keepClipboard() {
+    QClipboard *clipboard = QApplication::clipboard();
+    _clipboardTextContent = clipboard->text();
+    const QMimeData *mimeData = clipboard->mimeData();
+    const QPixmap pixmap = clipboard->pixmap();
+    if (!pixmap.isNull()) {
+        QByteArray byteArray;
+        QBuffer buffer(&byteArray);
+        buffer.open(QIODevice::WriteOnly);
+        pixmap.save(&buffer, "PNG");
+
+        _clipboardMimeType = "image/png";
+        _clipboardContent = byteArray.toBase64();
+    } else if (mimeData->hasHtml()) {
+        _clipboardMimeType = "text/html";
+        _clipboardContent = mimeData->html();
+    } else if (mimeData->hasText()) {
+        _clipboardMimeType = "text/plain";
+        _clipboardContent = clipboard->text();
+        // qDebug() << __func__ << "_clipboardContent: " << _clipboardContent;
+    } else {
+        return false;
+    }
+
+    return true;
+}
+
+bool WebAppClientService::sendClipboard() const {
+    if (_clipboardContent == "" || _clipboardMimeType == "") {
+        return false;
+    }
+
+    qDebug() << __func__ << "_clipboardMimeType: " << _clipboardMimeType;
+    qDebug() << __func__ << "_clipboardContent: " << _clipboardContent;
+
+    sendInsertIntoClipboard(_clipboardMimeType, _clipboardContent);
+    return true;
+}
+
+bool WebAppClientService::sendClipboardAsText() const {
+    if (_clipboardTextContent == "") {
+        return false;
+    }
+
+    qDebug() << __func__ << "_clipboardTextContent: " << _clipboardTextContent;
+
+    sendInsertIntoClipboard(QStringLiteral("text/plain"), _clipboardTextContent);
+    return true;
+}
+
+void WebAppClientService::initClipboardService() {
+    QClipboard *clipboard = QApplication::clipboard();
+
+    // React to clipboard changes
+    connect(clipboard, &QClipboard::dataChanged, this, [this]() {
+        // We need to store the clipboard ourselves to preserve external clipboard changes we would
+        // not catch otherwise
+        keepClipboard();
+    });
+}
+
+void WebAppClientService::sendInsertIntoClipboard(const QString &mimeType,
+                                                  const QString &content) const {
+    if (!_webSocket->isValid()) {
+        return;
+    }
+
+    QJsonObject jsonObject;
+    jsonObject["command"] = "insertIntoClipboard";
+    jsonObject["mimeType"] = mimeType;
+    jsonObject["sessionId"] = _sessionId;
+    jsonObject["content"] = content;
+
+    QJsonDocument jsonDoc(jsonObject);
+    _webSocket->sendTextMessage(jsonDoc.toJson(QJsonDocument::Compact));
+}
+
+/**
+ * Sends a register message with the connection name to the server
+ */
+void WebAppClientService::sendRegister() const {
+    if (_webSocket == nullptr || !_webSocket->isValid()) {
+        return;
+    }
+
+    QJsonObject jsonObject;
+    jsonObject["command"] = "register";
+    jsonObject["connectionName"] = getOrGenerateConnectionName();
+    jsonObject["sessionId"] = _sessionId;
+
+    QJsonDocument jsonDoc(jsonObject);
+    _webSocket->sendTextMessage(jsonDoc.toJson(QJsonDocument::Compact));
+}
+
+/**
+ * Sends a request to the server to get the list of connected devices
+ */
+void WebAppClientService::sendRequestConnectedDevices() const {
+    if (_webSocket == nullptr || !_webSocket->isValid()) {
+        return;
+    }
+
+    QJsonObject jsonObject;
+    jsonObject["command"] = "getConnectedDevices";
+
+    QJsonDocument jsonDoc(jsonObject);
+    _webSocket->sendTextMessage(jsonDoc.toJson(QJsonDocument::Compact));
+}
+
+/**
+ * Returns true if the WebSocket is currently connected
+ */
+bool WebAppClientService::checkIsConnected() const {
+    return _webSocket != nullptr && _webSocket->state() == QAbstractSocket::ConnectedState;
+}
+
 QString WebAppClientService::getServerUrl() {
-    return QSettings()
+    return SettingsService()
         .value(QStringLiteral("webAppClientService/serverUrl"), getDefaultServerUrl())
         .toString();
 }
 
 QString WebAppClientService::getOrGenerateToken() {
-    QString token = QSettings().value(QStringLiteral("webAppClientService/token")).toString();
+    SettingsService settings;
+    const QString key = QStringLiteral("webAppClientService/token");
+    const QString stored = settings.value(key).toString();
+    QString token = CryptoService::instance()->decryptToStringWithPlaintextFallback(stored);
+
+    if (!token.isEmpty() && token == stored && !CryptoService::isKeychainReference(stored)) {
+        settings.setValue(key, CryptoService::instance()->encryptToString(
+                                   token, QStringLiteral("settings/") + key));
+    }
 
     // if not token was set
     if (token.isEmpty()) {
         token = Utils::Misc::generateRandomString(32);
-        QSettings().setValue(QStringLiteral("webAppClientService/token"), token);
+        settings.setValue(key, CryptoService::instance()->encryptToString(
+                                   token, QStringLiteral("settings/") + key));
     }
 
     return token;
+}
+
+/**
+ * Generates the default connection name using the QOwnNotes session name,
+ * the current user/home dir name, and the hostname
+ */
+QString WebAppClientService::generateDefaultConnectionName() {
+    const QString session = qApp->property("session").toString();
+    const QString userName = QDir::home().dirName();
+    const QString hostName = QSysInfo::machineHostName();
+
+    // Build: qownnotes[-session]-username-hostname
+    QString name = QStringLiteral("qownnotes");
+    if (!session.isEmpty()) {
+        name += QStringLiteral("-") + session;
+    }
+    name += QStringLiteral("-") + userName + QStringLiteral("-") + hostName;
+    return name;
+}
+
+/**
+ * Gets the stored connection name or generates and stores the default one
+ */
+QString WebAppClientService::getOrGenerateConnectionName() {
+    QString name =
+        SettingsService().value(QStringLiteral("webAppClientService/connectionName")).toString();
+
+    if (name.isEmpty()) {
+        name = generateDefaultConnectionName();
+        SettingsService().setValue(QStringLiteral("webAppClientService/connectionName"), name);
+    }
+
+    return name;
+}
+
+void WebAppClientService::generateSessionId() {
+    _sessionId = Utils::Misc::generateRandomString(20);
 }
 
 QString WebAppClientService::getDefaultServerUrl() {
@@ -92,7 +277,17 @@ QString WebAppClientService::getDefaultServerUrl() {
 WebAppClientService::~WebAppClientService() {
     _timerHeartbeat.stop();
     _timerReconnect.stop();
-    _webSocket->close();
+
+    if (_webSocket != nullptr) {
+        _webSocket->disconnect(this);
+        _webSocket->close();
+        delete _webSocket;
+        _webSocket = nullptr;
+    }
+
+    if (_instance == this) {
+        _instance = nullptr;
+    }
 }
 
 void WebAppClientService::onConnected() {
@@ -103,6 +298,12 @@ void WebAppClientService::onConnected() {
 
     Utils::Misc::printInfo(
         tr("QOwnNotes is now connected via websocket to %1").arg(getServerUrl()));
+
+    // Send registration with connection name to the server
+    sendRegister();
+    sendRequestConnectedDevices();
+
+    emit connectionStateChanged(true);
 }
 
 void WebAppClientService::onDisconnected() {
@@ -112,6 +313,9 @@ void WebAppClientService::onDisconnected() {
 
     Utils::Misc::printInfo(
         tr("QOwnNotes is now disconnected from websocket to %1").arg(getServerUrl()));
+
+    emit connectionStateChanged(false);
+    emit connectedDevicesUpdated(QStringList());
 }
 
 void WebAppClientService::onTextMessageReceived(const QString &message) {
@@ -119,14 +323,27 @@ void WebAppClientService::onTextMessageReceived(const QString &message) {
     QJsonObject jsonObject = jsonResponse.object();
     const QString command = jsonObject.value(QStringLiteral("command")).toString();
     MetricsService::instance()->sendVisitIfEnabled("webapp/command/" + command);
+    qDebug() << __func__ << "message: " << message;
+    qDebug() << __func__ << "command: " << command;
+
+    if (message == _heartbeatText) {
+        // Ignore heartbeat messages
+        return;
+    }
 
     if (command == "showWarning") {
+        // Ignore the multiple-devices warning; it is no longer shown to the user
+        // since connected devices are now shown in the settings dialog instead
         const QString msg = jsonObject.value(QStringLiteral("msg")).toString();
-        qWarning() << "Web app warning: " << msg;
-
-#ifndef INTEGRATION_TESTS
-        Utils::Gui::warning(nullptr, tr("Web app warning"), msg, "wepappclientservice-warning");
-#endif
+        qDebug() << "Web app server message (suppressed warning): " << msg;
+    } else if (command == "connectedDevices") {
+        // Receive the list of connected devices from the server
+        const QJsonArray devicesArray = jsonObject.value(QStringLiteral("devices")).toArray();
+        QStringList deviceNames;
+        for (const QJsonValue &val : devicesArray) {
+            deviceNames << val.toString();
+        }
+        emit connectedDevicesUpdated(deviceNames);
     } else if (command == "insertFile") {
 #ifndef INTEGRATION_TESTS
         MainWindow *mainWindow = MainWindow::instance();
@@ -143,7 +360,52 @@ void WebAppClientService::onTextMessageReceived(const QString &message) {
             mainWindow->insertDataUrlAsFileIntoCurrentNote(fileDataUrl);
         }
 
-        _webSocket->sendTextMessage("{\"command\": \"confirmInsert\"}");
+        _webSocket->sendTextMessage(R"({"command": "confirmInsert"})");
+#endif
+    } else if (command == "insertIntoClipboard") {
+        const QString sessionId = jsonObject.value(QStringLiteral("sessionId")).toString();
+
+        // Skip messages from our own session to prevent clipboard loops
+        if (sessionId == _sessionId) {
+            qDebug() << "Skipping insertIntoClipboard from own session";
+            return;
+        }
+
+        QClipboard *clipboard = QApplication::clipboard();
+        const QString mimeType = jsonObject.value(QStringLiteral("mimeType")).toString();
+        const QString content = jsonObject.value(QStringLiteral("content")).toString();
+        qDebug() << __func__ << "mimeType: " << mimeType;
+        qDebug() << __func__ << "content: " << content.left(200);
+
+#ifndef INTEGRATION_TESTS
+        MainWindow *mainWindow = MainWindow::instance();
+
+        if (mimeType == "text/plain") {
+            clipboard->setText(content, QClipboard::Clipboard);
+            mainWindow->showStatusBarMessage(
+                tr("Text received from web app and copied to clipboard"), QStringLiteral("📋"),
+                5000);
+        } else if (mimeType == "text/html") {
+            std::unique_ptr<QMimeData> mimeData(new QMimeData());
+            mimeData->setHtml(content);
+            // clipboard->setText(content, QClipboard::Clipboard);
+            // clipboard->setText(mimeData->text(), QClipboard::Clipboard);
+            // TODO: This doesn't seem to get into the global clipboard yet
+            clipboard->setMimeData(mimeData.release(), QClipboard::Clipboard);
+            mainWindow->showStatusBarMessage(
+                tr("HTML received from web app and copied to clipboard"), QStringLiteral("📋"),
+                5000);
+        } else if (mimeType == "image/png") {
+            const QByteArray imageData = QByteArray::fromBase64(content.toUtf8());
+            QImage image;
+            image.loadFromData(imageData);
+            clipboard->setImage(image, QClipboard::Clipboard);
+            mainWindow->showStatusBarMessage(
+                tr("Image received from web app and copied to clipboard"), QStringLiteral("📋"),
+                5000);
+        } else {
+            qWarning() << "Unknown mime data type from web app: " << mimeType;
+        }
 #endif
     } else {
         qWarning() << "Unknown message from web app: " << message;
@@ -153,10 +415,9 @@ void WebAppClientService::onTextMessageReceived(const QString &message) {
 void WebAppClientService::onSslErrors(const QList<QSslError> &errors) { qCritical() << errors; }
 
 void WebAppClientService::onSendHeartbeatText() {
-    const QString &heartbeatText = "qon-ping";
-    auto sendByte = _webSocket->sendTextMessage(heartbeatText);
+    auto sendByte = _webSocket->sendTextMessage(_heartbeatText);
 
-    if (sendByte != heartbeatText.toLocal8Bit().length()) {
+    if (sendByte != _heartbeatText.toLocal8Bit().length()) {
         _heartbeatFailedCount++;
         qDebug() << "WebAppClientService heartbeat failed";
 

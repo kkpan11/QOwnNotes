@@ -21,7 +21,6 @@
 #include <QPair>
 #include <QPlainTextEdit>
 #include <QRegularExpression>
-#include <QSettings>
 #include <QString>
 #include <QStringList>
 #include <QSyntaxHighlighter>
@@ -31,6 +30,8 @@
 #include <QWidget>
 #include <string>
 #include <utility>
+
+#include "services/settingsservice.h"
 
 #endif
 

@@ -93,8 +93,9 @@ QVector<CommandSnippet> CommandSnippet::parseCommandSnippets(const QString &text
     }
 
     regex = QRegularExpression(
-        QStringLiteral(R"(## ([^\n]+)\n(.*?)^```(bash|sh)\n(.+?)^```)"),
-        QRegularExpression::MultilineOption | QRegularExpression::DotMatchesEverythingOption);
+        QStringLiteral(
+            R"(^(?:#{2,})\s+([^\n]+)\n((?:(?!^[ \t]{0,3}#{2,}\s).*(?:\n|$))*?)^[ \t]{0,3}```(?:bash|sh)\n([\s\S]+?)^[ \t]{0,3}```[ \t]*$)"),
+        QRegularExpression::MultilineOption);
 
     // parse snippets that are in a "bash" or "sh" code block,
     // preceded by a heading 2 or higher as a description
@@ -104,7 +105,7 @@ QVector<CommandSnippet> CommandSnippet::parseCommandSnippets(const QString &text
         QRegularExpressionMatch match = i.next();
         QString description = match.captured(1);
         QString additionalText = match.captured(2).trimmed();
-        QString command = match.captured(4);
+        QString command = match.captured(3);
         QStringList tags;
 
         if (!additionalText.isEmpty()) {

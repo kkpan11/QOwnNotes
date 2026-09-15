@@ -16,7 +16,8 @@
 #include "qownspellchecker.h"
 
 #include <QDebug>
-#include <QSettings>
+
+#include "services/settingsservice.h"
 
 QOwnSpellChecker::QOwnSpellChecker() : _spellchecker{new Sonnet::Speller()} {
     _languageFilter = new Sonnet::LanguageFilter(new Sonnet::SentenceTokenizer());

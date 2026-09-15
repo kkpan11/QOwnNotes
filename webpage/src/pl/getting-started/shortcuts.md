@@ -8,7 +8,7 @@
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>N</kbd> tworzy nową notatkę w nowej karcie
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>F</kbd> umożliwia wyszukiwanie notatek (w nazwie notatki i jej treści)
 - <kbd>Alt</kbd> + <kbd>F</kbd> umożliwia wyszukiwanie notatek we wszystkich tagach / podfolderach
-- <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> przełącza do poprzedniego obszaru roboczego
+- <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> switches to the previous layout
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>E</kbd> edytuje zaszyfrowaną notatkę
 - <kbd>Alt</kbd> + <kbd>R</kbd> usuwa bieżącą notatkę
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>U</kbd> sprawdza dostępność aktualizacji
@@ -17,15 +17,13 @@
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>O</kbd> otwiera bieżącą notatkę w widoku
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>F</kbd> pokazuje bieżącą notatkę w menedżerze plików
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>E</kbd> włącza lub wyłącza edycję notatek
-- <kbd>Alt</kbd> + <kbd>W górę</kbd> przeskakuje do poprzedniej widocznej notatki
-    - alternatywny skrót to <kbd>Ctrl</kbd> + <kbd>Page Up</kbd>
+- <kbd>Alt</kbd> + <kbd>Up</kbd> jumps to the previous visible note
 - <kbd>Alt</kbd> + <kbd>W dół</kbd> przeskakuje do następnej widocznej nuty
-    - alternatywny skrót to <kbd>Ctrl</kbd> + <kbd>Page Down</kbd>
 - <kbd>Alt</kbd> + <kbd>Page Up</kbd> przeskakuje do poprzedniej zakładki notatki
 - <kbd>Alt</kbd> + <kbd>Page Down</kbd> przeskakuje do następnej zakładki notatki
 - <kbd>Ctrl</kbd> + <kbd>W</kbd> zamyka bieżącą kartę notatek
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>D</kbd> przełącza tryb bez rozpraszania uwagi
-    - możesz go również zamknąć za pomocą <kbd>Esc</kbd>
+  - możesz go również zamknąć za pomocą <kbd>Esc</kbd>
 - <kbd>Ctrl</kbd> + <kbd>P</kbd> drukuje bieżącą notatkę jako tekst
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> drukuje bieżącą notatkę jako przecenę
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>V</kbd> wkleja notatki, obrazy i html ze schowka
@@ -36,6 +34,7 @@
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>S</kbd> ponownie ładuje silnik skryptów
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>M</kbd> ukrywa lub pokazuje pasek menu głównego
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>A</kbd> umożliwia wyszukiwanie działań
+- <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>A</kbd> lets you redo the last action
 - <kbd>Ctrl</kbd> + <kbd>S</kbd> ręcznie zapisuje zmodyfikowane notatki
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>I</kbd> otwiera okno dialogowe repozytorium skryptów
 - <kbd>F4</kbd> przeskakuje do panelu edycji notatki
@@ -50,7 +49,7 @@
 ### W pasku wyszukiwania notatek
 
 - <kbd>Down</kbd> lub <kbd>Tab</kbd> ustawia fokus na listę notatek
-- <kbd>Return</kbd> tworzy nową notatkę z tekstem z paska wyszukiwania jako nagłówek
+- <kbd>Return</kbd> creates a new note with the text from the search bar as headline
 
 ### Na liście notatek
 
@@ -62,11 +61,11 @@
 
 - <kbd>Ctrl</kbd> + <kbd>klik</kbd> na linku aby go otworzyć
 - <kbd>Ctrl</kbd> + <kbd>F</kbd> umożliwia wyszukiwanie w bieżącej notatce
-    - użyj klawiszy <kbd>w górę</kbd> i <kbd>w dół</kbd> lub <kbd>F3</kbd> i <kbd>⇧ Shift</kbd> + <kbd>F3</kbd>, aby przejść do poprzedniego i następnego dopasowania
-    - <kbd>Esc</kbd> zamyka pasek wyszukiwania
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> zamyka pasek wyszukiwania
 - <kbd>Ctrl</kbd> + <kbd>R</kbd> pozwala wyszukiwać i zamieniać w bieżącej notatce
 - <kbd>Ctrl</kbd> + <kbd>D</kbd> duplikuje bieżącą linię lub wybrany tekst
-    - <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>W dół</kbd> robi to samo
+  - <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>W dół</kbd> robi to samo
 - <kbd>Alt</kbd> + <kbd>Backspace</kbd> usuwa bieżącą linię
 - <kbd>Ctrl</kbd> + <kbd>Backspace</kbd> usuwa bieżące słowo
 - <kbd>Ctrl</kbd> + <kbd>L</kbd> otwiera okno dialogowe dodawania linku tekstowego (działa również na zaznaczonym tekście)
@@ -83,12 +82,12 @@
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>S</kbd> przekreśla zaznaczony tekst
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>U</kbd> przełącza wielkości liter wybranego tekstu
 - <kbd>Tab</kbd> wcina zaznaczony tekst (działa również na wielu liniach)
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> usuwa wcięcie zaznaczonego tekstu
-- <kbd>Tab</kbd> po nieuporządkowanym znaku listy wcina element listy
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> po nieuporządkowanym znaku listy wcina element listy
-- <kbd>Return</kbd> na listach tworzy nowy element listy
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> usuwa wcięcie zaznaczonego tekstu
+- <kbd>Tab</kbd> after an unordered list character indents the list item
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> after an unordered list character un-indents the list item
+- <kbd>Return</kbd> in lists creates a new list item
 - <kbd>Alt</kbd> + <kbd>Ctrl</kbd> + <kbd>W lewo</kbd> przeskakuje z powrotem w historii notatek
-    - <kbd>Alt</kbd> + <kbd>W prawo</kbd> przeskakuje do przodu w historii notatek
+  - <kbd>Alt</kbd> + <kbd>W prawo</kbd> przeskakuje do przodu w historii notatek
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>1..9</kbd> ustawia zakładkę notatki w gnieździe zakładek 1..9
 - <kbd>Ctrl</kbd> + <kbd>0..9</kbd> przeskakuje do zakładki notatki w gnieździe zakładek 0..9
 - <kbd>Ctrl</kbd> + <kbd>+</kbd> zwiększa rozmiar czcionki tekstu notatki o jeden punkt
@@ -107,15 +106,14 @@
 ### W panelu podglądu notatek
 
 - <kbd>Ctrl</kbd> + <kbd>F</kbd> umożliwia wyszukiwanie w bieżącej notatce
-    - użyj klawiszy <kbd>w górę</kbd> i <kbd>w dół</kbd> lub <kbd>F3</kbd> i <kbd>⇧ Shift</kbd> + <kbd>F3</kbd>, aby przejść do poprzedniego i następnego dopasowania
-    - <kbd>Esc</kbd> zamyka pasek wyszukiwania
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> zamyka pasek wyszukiwania
 
 ### Na liście rzeczy do zrobienia
 
 - <kbd>Ctrl</kbd> + <kbd>S</kbd> zapisuje bieżący element do zrobienia
 - <kbd>Ctrl</kbd> + <kbd>I</kbd> zapisuje bieżący element do zrobienia i wstawia do bieżącej notatki
 - <kbd>Ctrl</kbd> + <kbd>R</kbd> usuwa bieżący element do zrobienia
-
 
 ## macOS
 
@@ -125,7 +123,7 @@
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>N</kbd> tworzy nową notatkę w nowej karcie
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>F</kbd> umożliwia wyszukiwanie notatek (w nazwie notatki i jej treści)
 - <kbd>⌃ Ctrl</kbd> + <kbd>F</kbd> umożliwia wyszukiwanie notatek we wszystkich tagach / podfolderach
-- <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> przełącza do poprzedniego obszaru roboczego
+- <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> switches to the previous layout
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>E</kbd> edytuje zaszyfrowaną notatkę
 - <kbd>⌃ Ctrl</kbd> + <kbd>R</kbd> usuwa bieżącą notatkę
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>U</kbd> sprawdza dostępność aktualizacji
@@ -135,14 +133,12 @@
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧</kbd> + <kbd>F</kbd> otwiera folder bieżącej notatki w Finderze
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>E</kbd> włącza lub wyłącza edycję notatek
 - <kbd>⌃ Ctrl</kbd> + <kbd>W górę</kbd> przeskakuje do poprzedniej widocznej notatki
-    - alternatywny skrót to <kbd>⌘ Cmd</kbd> + <kbd>Page Up</kbd>
 - <kbd>⌃ Ctrl</kbd> + <kbd>W dół</kbd> przeskakuje do następnej widocznej notatki
-    - alternatywny skrót to <kbd>⌘ Cmd</kbd> + <kbd>Page Down</kbd>
 - <kbd>⌥ Alt</kbd> + <kbd>Page Up</kbd> przeskakuje do poprzedniej zakładki notatki
 - <kbd>⌥ Alt</kbd> + <kbd>Page Down</kbd> przeskakuje do następnej zakładki notatki
 - <kbd>⌘ Cmd</kbd> + <kbd>W</kbd> zamyka bieżącą kartę notatek
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>D</kbd> przełącza tryb bez rozpraszania uwagi
-    - możesz go również zamknąć za pomocą <kbd>Esc</kbd>
+  - możesz go również zamknąć za pomocą <kbd>Esc</kbd>
 - <kbd>⌘ Cmd</kbd> + <kbd>P</kbd> drukuje bieżącą notatkę jako tekst
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> drukuje bieżącą notatkę jako przecenę
 - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>V</kbd> wkleja notatki, obrazy i html ze schowka
@@ -153,6 +149,7 @@
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>S</kbd> ponownie ładuje silnik skryptów
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>M</kbd> ukrywa lub pokazuje pasek menu głównego
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>A</kbd> umożliwia wyszukiwanie działań
+- <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>A</kbd> lets you redo the last action
 - <kbd>⌘ Cmd</kbd> + <kbd>S</kbd> ręcznie zapisuje zmodyfikowane notatki
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>I</kbd> otwiera okno dialogowe repozytorium skryptów
 - <kbd>F4</kbd> przeskakuje do panelu edycji notatki
@@ -167,7 +164,7 @@
 ### Na pasku wyszukiwania notatek
 
 - <kbd>W dół</kbd> lub <kbd>Tab</kbd> ustawia fokus na liście notatek
-- <kbd>Return</kbd> tworzy nową notatkę z tekstem z paska wyszukiwania jako nagłówek
+- <kbd>Return</kbd> creates a new note with the text from the search bar as headline
 
 ### Na liście notatek
 
@@ -179,11 +176,11 @@
 
 - <kbd>⌘ Cmd</kbd> + <kbd>Kliknij</kbd> link, aby go otworzyć
 - <kbd>⌘ Cmd</kbd> + <kbd>F</kbd> umożliwia wyszukiwanie w bieżącej notatce
-    - użyj klawiszy <kbd>w górę</kbd> i <kbd>w dół</kbd> lub <kbd>F3</kbd> i <kbd>⇧ Shift</kbd> + <kbd>F3</kbd>, aby przejść do poprzedniego i następnego dopasowania
-    - <kbd>Esc</kbd> zamyka pasek wyszukiwania
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> zamyka pasek wyszukiwania
 - <kbd>⌘ Cmd</kbd> + <kbd>R</kbd> umożliwia wyszukiwanie i zamienianie w bieżącej notatce
 - <kbd>⌘ Cmd</kbd> + <kbd>D</kbd> duplikuje bieżącą linię lub zaznaczony tekst
-    - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>W dół</kbd> robi to samo
+  - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>W dół</kbd> robi to samo
 - <kbd>⌘ Cmd</kbd> + <kbd>Backspace</kbd> usuwa bieżącą linię
 - <kbd>⌃ Ctrl</kbd> + <kbd>Backspace</kbd> usuwa bieżące słowo
 - <kbd>⌘ Cmd</kbd> + <kbd>L</kbd> otwiera okno dialogowe dodawania linku tekstowego (działa również na zaznaczonym tekście)
@@ -194,18 +191,18 @@
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>T</kbd> wstawia tabelę
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>C</kbd> wstawia blok kodu w bieżącej pozycji
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>B</kbd> wstawia cytat blokowy w bieżącej pozycji
-- <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <0>B</0> wstawia cytat blokowy w bieżącej pozycji
+- <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + B wstawia cytat blokowy w bieżącej pozycji
 - <kbd>⌘ Cmd</kbd> + <kbd>I</kbd> formatuje zaznaczony tekst kursywą
 - <kbd>⌘ Cmd</kbd> + <kbd>U</kbd> formatuje podkreślenie zaznaczonego tekstu
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>S</kbd> przekreśla zaznaczony tekst
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>U</kbd> przełącza wielkości liter w wybranym tekście
 - <kbd>Tab</kbd> wcina zaznaczony tekst (działa również na wielu liniach)
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> usuwa wcięcie zaznaczonego tekstu
-- <kbd>Tab</kbd> po nieuporządkowanym znaku listy wcina element listy
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> po nieuporządkowanym znaku listy wcina element listy
-- <kbd>Powrót</kbd> na listach tworzy nowy element listy
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> usuwa wcięcie zaznaczonego tekstu
+- <kbd>Tab</kbd> after an unordered list character indents the list item
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> after an unordered list character un-indents the list item
+- <kbd>Return</kbd> in lists creates a new list item
 - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>W lewo</kbd> przeskakuje z powrotem w historii notatek
-    - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>W prawo</kbd> przeskakuje do przodu w historii notatek
+  - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>W prawo</kbd> przeskakuje do przodu w historii notatek
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>1..9</kbd> ustawia zakładkę notatki w gnieździe zakładek 1..9
 - <kbd>⌘</kbd> + <kbd>0..9</kbd> przeskakuje do zakładki notatki w gnieździe zakładek 0..9
 - <kbd>⌘ Cmd</kbd> + <kbd>+</kbd> zwiększa rozmiar czcionki tekstu notatki o jeden punkt
@@ -224,8 +221,8 @@
 ### W panelu podglądu notatek
 
 - <kbd>⌘ Cmd</kbd> + <kbd>F</kbd> umożliwia wyszukiwanie w bieżącej notatce
-    - użyj klawiszy <kbd>w górę</kbd> i <kbd>w dół</kbd> lub <kbd>F3</kbd> i <kbd>⇧ Shift</kbd> + <kbd>F3</kbd>, aby przejść do poprzedniego i następnego dopasowania
-    - <kbd>Esc</kbd> zamyka pasek wyszukiwania
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> zamyka pasek wyszukiwania
 
 ### Na liście rzeczy do zrobienia
 

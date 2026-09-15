@@ -1,5 +1,5 @@
 # Installer sur FreeBSD
 
-Il existe un package créé par la communauté pour **FreeBSD** par *Matthew Stobbs* sur le [port FreeBSD de QOwnNotes](https://svnweb.freebsd.org/ports/head/deskutils/qownnotes).
+Il existe un paquet créé par la communauté pour **FreeBSD** par _Matthew Stobbs_ sur le [port FreeBSD de QOwnNotes](https://www.freshports.org/deskutils/qownnotes).
 
-Un grand merci à Matthew !
+Un grand merci à Matthew !

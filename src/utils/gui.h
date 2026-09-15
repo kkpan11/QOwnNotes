@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2024 Patrizio Bekerle -- <patrizio@bekerle.com>
+ * Copyright (c) 2014-2026 Patrizio Bekerle -- <patrizio@bekerle.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -65,6 +65,9 @@ void searchForTextInTreeWidget(QTreeWidget *treeWidget, const QString &text,
                                TreeWidgetSearchFlags searchFlags = None);
 void searchForTextInListWidget(QListWidget *listWidget, const QString &text,
                                bool searchAddProps = false);
+void initTreeWidgetHeaderOrderPersistence(QTreeWidget *treeWidget, const QString &settingsKey);
+bool hasTreeWidgetHeaderLayout(QTreeWidget *treeWidget, const QString &settingsKey = QString());
+void restoreTreeWidgetHeaderLayout(QTreeWidget *treeWidget, const QString &settingsKey = QString());
 
 QMessageBox::StandardButton showMessageBox(
     QWidget *parent, QMessageBox::Icon icon, const QString &title, const QString &text,
@@ -118,7 +121,13 @@ QFont fontDialogGetFont(bool *ok, const QFont &initial, QWidget *parent = nullpt
 void copyCodeBlockText(const QTextBlock &initialBlock);
 
 bool toggleCheckBoxAtCursor(QPlainTextEdit *textEdit);
+bool isCheckBoxAtCursor(const QPlainTextEdit *textEdit);
 bool autoFormatTableAtCursor(QPlainTextEdit *textEdit);
+bool isTableAtCursor(QPlainTextEdit *textEdit, int *cursorColumn = nullptr);
+bool insertTableColumnLeft(QPlainTextEdit *textEdit);
+bool insertTableColumnRight(QPlainTextEdit *textEdit);
+bool insertTableRowAbove(QPlainTextEdit *textEdit);
+bool insertTableRowBelow(QPlainTextEdit *textEdit);
 
 void updateInterfaceFontSize(int fontSize = -1);
 
@@ -136,12 +145,15 @@ void updateTabWidgetTabData(QTabWidget *tabWidget, int index, const Note &note);
 void reloadNoteTabs(QTabWidget *tabWidget);
 void setTreeWidgetItemToolTipForNote(QTreeWidgetItem *item, const Note &note,
                                      QDateTime *overrideFileLastModified = nullptr);
-bool doWindowsDarkModeCheck();
-bool doLinuxDarkModeCheck();
+bool doWindowsDarkModeCheck(bool systemChangeDetected = false);
+bool doLinuxDarkModeCheck(bool systemChangeDetected = false);
+bool doSystemDarkModeCheck(bool systemChangeDetected = false);
 
 QIcon folderIcon();
 QIcon noteIcon();
+QIcon favoriteNoteIcon();
 QIcon tagIcon();
+QIcon emojiIcon(const QString &emoji, int size = 16);
 
 /**
  * Reads the color from a tag and sets the background color of a tree widget
@@ -154,6 +166,8 @@ void handleTreeWidgetItemTagColor(QTreeWidgetItem *item, const Tag &tag);
 void handleTreeWidgetItemTagColor(QTreeWidgetItem *item, int tag);
 bool enableDockWidgetQuestion(QDockWidget *dockWidget);
 void fixDarkModeIcons(QWidget *widget);
+void applyDarkModeSettings();
 QAction *findActionByData(QMenu *menu, const QVariant &data);
+void applyInterfaceStyle(QString interfaceStyle = QString());
 }    // namespace Gui
 }    // namespace Utils

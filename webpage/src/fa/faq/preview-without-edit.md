@@ -1,12 +1,9 @@
 # چطور می توانم پنل پیش نمایش را دقیقاً بدون پنل ویرایش یادداشت نشان دهم؟
 
-می‌توانید این کار را با خاتمه دادن این نکته انجام دهید که ** پنل ویرایش یادداشت ** در ** تنظیمات پنل ** ** ابزارک مرکزی ** است.
+Open **Settings > Interface > Layouts**, select the layout, and choose **Note preview** as its **central widget**.
 
-سپس به بهترین شکل `فقط پیش نمایش
-` یک فضای کاری جدید را با کلیک بر روی ** پنجره / فضای کاری / افزودن فضای کاری جدید ** در منوی اصلی ایجاد نمایید. شما قادر خواهید بود بین طرح بندی پنل های مختلف جابجا شوید.
+You can create a new layout first with **Add from current**, or use **Add from preset...** and select the **Preview only** preset.
 
-Afterward you can turn off the note edit panel in the **Window / Panels menu**.
+Afterward, turn off the note edit panel in the **Window > Panels** menu. The preview will automatically use the available central area.
 
 به خاطر داشته باشید که می توانید همه پنل ها را همانگونه که دوست دارید با کلیک کردن روی **پنجره / گشودن پنل ها** در منوی اصلی جابجا کنید. همچنین به تناسب نیازتان می توانید اندازه همه پنل ها را تغییر دهید.
-
-از سوی دیگر می‌توانید در **تنظیمات طرح بندی** به طرح بندی **فقط پیش نمایش** جابجا شوید.

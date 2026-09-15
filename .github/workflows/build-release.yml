@@ -6,7 +6,7 @@ on:
     branches:
       - release
     tags-ignore:
-      - '*'
+      - "*"
 
 defaults:
   run:
@@ -24,26 +24,45 @@ env:
   PUBLISHER: "Patrizio Bekerle"
   REPO_DIR: "/home/runner/work/QOwnNotes"
   QT_MODULES: ""
+  QT6_MODULES: "qtwebsockets"
   QMAKE: qmake
   CORES: 16
 
 jobs:
   create_release:
-    name: '🗃️️ Prepare release'
+    name: "🗃️️ Prepare release"
     permissions:
-      contents: write  # for actions/create-release to create a release
+      contents: write # for actions/create-release to create a release
     runs-on: ubuntu-latest
     outputs:
       upload_url: ${{ steps.create_release.outputs.upload_url }}
       release_id: ${{ steps.create_release.outputs.id }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Set Env
         run: |
           export VERSION=$(cat version.h | sed 's/[^0-9,.]//g')
           #export TAG=v${VERSION}.${GITHUB_RUN_ID}.${GITHUB_RUN_NUMBER}
           export TAG=v${VERSION}
-          export RELEASE_TEXT=$(grep -Pzo "## ${VERSION}\n(\n|.)+?\n##" ../CHANGELOG.md | sed '$ d')
+          export RELEASE_NOTES=$(grep -Pzo "## ${VERSION}\n(\n|.)+?\n##" ../CHANGELOG.md | sed '$ d')
+          export RELEASE_TEXT=$(cat <<EOF
+          ${RELEASE_NOTES}
+
+          ## Released files
+
+          - QOwnNotes-x86_64.AppImage: Portable Linux AppImage build with Qt 6
+          - QOwnNotes-x86_64.AppImage.sha256sum: SHA-256 checksum for the AppImage
+          - QOwnNotes-amd64.snap: Linux Snap build with Qt 6
+          - QOwnNotes-amd64.snap.sha256sum: SHA-256 checksum for the Qt 6 Snap package
+          - QOwnNotes-Qt5-amd64.snap: Linux Snap build with Qt 5 for older environments
+          - QOwnNotes-Qt5-amd64.snap.sha256sum: SHA-256 checksum for the Qt 5 Snap package
+          - QOwnNotes.zip: Windows ZIP package built with Qt 6
+          - QOwnNotes.zip.sha256: SHA-256 checksum for the Qt 6 Windows ZIP package
+          - QOwnNotes.zip.sha256sum: Alternative SHA-256 checksum file for the Qt 6 Windows ZIP package
+          - QOwnNotes.dmg: macOS disk image built with Qt 6
+          - QOwnNotesQt5.dmg: macOS disk image built with Qt 5 for older systems
+          EOF
+          )
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
           echo "TAG=${TAG}" >> $GITHUB_ENV
           # add multiline release text
@@ -58,94 +77,173 @@ jobs:
           printenv
       - name: Create release
         id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ env.TAG }}
-          release_name: Release v${{ env.VERSION }}
+          name: Release v${{ env.VERSION }}
           body: ${{ env.RELEASE_TEXT }}
           # we want other build systems to immediately use this release after we uploaded the source archive
           draft: false
           prerelease: false
+          generate_release_notes: false
 
-#--------------------------------------------------------------------------------
-# Workflow jobs (GNU/Linux, macOS & Windows)
-#--------------------------------------------------------------------------------
+  #--------------------------------------------------------------------------------
+  # Workflow jobs (GNU/Linux, macOS & Windows)
+  #--------------------------------------------------------------------------------
 
   #
-  # AppImage build
+  # AppImage Qt6 build
   #
   build-appimage:
     needs: create_release
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     env:
-      QT_VERSION: 5.15.2
+      # aqt Qt versions: https://ddalcino.github.io/aqt-list-server/
+      # Qt 6.10.0, 6.9.1, 6.8.3, 6.7.3, 6.6.3: ERROR: Could not find dependency: libmimerapi.so
+      QT_VERSION: 6.10.2
+      # qtwaylandcompositor provides the Wayland platform plugins (libqwayland.so)
+      QT_MODULES: "qtwebsockets qtwaylandcompositor"
       BUILD_DIR: build
-    name: '🐧 AppImage Qt 5.15.2'
+    name: "🐧 AppImage Qt 6.10.2"
     steps:
-
-      - name: '🧰 Checkout'
-        uses: actions/checkout@v4
+      - name: "🧰 Checkout"
+        uses: actions/checkout@v7
         with:
           submodules: recursive
 
-      - name: '⚙️ Install Qt'
+      - name: "⚙️ Install Qt"
         uses: jurplel/install-qt-action@v4
         with:
           version: ${{env.QT_VERSION}}
-          modules: ${{env.QT_MODULES}}
-          aqtversion: '==2.0.0'
-          setup-python: false
+          modules: ${{env.QT6_MODULES}}
           cache: true
 
-      - name: '⚙️ Install dependencies'
+      - name: "⚙️ Install dependencies"
         run: |
           sudo apt-get update
-          sudo apt install desktop-file-utils libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libxcb-composite0 libxcb-cursor0 libxcb-damage0 libxcb-dpms0 libxcb-dri2-0 libxcb-dri3-0 libxcb-ewmh2 libxcb-glx0 libxcb-present0 libxcb-randr0 libxcb-record0 libxcb-render0 libxcb-res0 libxcb-screensaver0 libxcb-shape0 libxcb-shm0 libxcb-sync1 libxcb-util1 libxkbcommon-x11-0
-      - name: '🚧 Compile application'
+          sudo apt install libfuse2 desktop-file-utils libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libxcb-composite0 libxcb-cursor0 libxcb-damage0 libxcb-dpms0 libxcb-dri2-0 libxcb-dri3-0 libxcb-ewmh2 libxcb-glx0 libxcb-present0 libxcb-randr0 libxcb-record0 libxcb-render0 libxcb-res0 libxcb-screensaver0 libxcb-shape0 libxcb-shm0 libxcb-sync1 libxcb-util1 libxkbcommon-x11-0
+      - name: "🚧 Compile application"
         run: |
           echo "#define RELEASE \"AppImage\"" > release.h
           ${{env.QMAKE}} ${{env.QMAKE_PROJECT}} CONFIG+=release PREFIX=/usr
           lrelease QOwnNotes.pro
           make -j${{env.CORES}}
-      - name: '⚙️ Install linuxdeploy'
+      - name: "⚙️ Install linuxdeploy"
         run: |
-          wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
-          wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
+          export LINUXDEPLOY_VERSION=1-alpha-20240109-1
+          export APPIMAGE_RUNTIME_SHA256=1cc49bcf1e2ccd593c379adb17c9f85a36d619088296504de95b1d06215aebbf
+          wget https://github.com/linuxdeploy/linuxdeploy/releases/download/${LINUXDEPLOY_VERSION}/linuxdeploy-x86_64.AppImage
+          wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/${LINUXDEPLOY_VERSION}/linuxdeploy-plugin-qt-x86_64.AppImage
+          wget https://github.com/AppImage/type2-runtime/releases/download/continuous/runtime-x86_64
+          echo "${APPIMAGE_RUNTIME_SHA256}  runtime-x86_64" | sha256sum --check --strict
           chmod +x linuxdeploy-x86_64.AppImage
           chmod +x linuxdeploy-plugin-qt-x86_64.AppImage
-      - name: '📦 Create AppImage'
+      - name: "📦 Create AppImage"
         run: |
           export QMAKE=${{env.REPO_DIR}}/Qt/${{env.QT_VERSION}}/gcc_64/bin/${{env.QMAKE}}
           export PATH=${{env.REPO_DIR}}/Qt/${{env.QT_VERSION}}/gcc_64/libexec:$PATH
-          export EXTRA_QT_PLUGINS="svg;"
+          QT_DIR=${{env.REPO_DIR}}/Qt/${{env.QT_VERSION}}/gcc_64
+          # Qt 6.10+ unified the Wayland platform plugins into a single libqwayland.so
+          # (older versions shipped libqwayland-egl.so and libqwayland-generic.so separately)
+          export EXTRA_PLATFORM_PLUGINS="libqwayland.so"
+
+          copy_qt_plugin_dir() {
+            local plugin_dir="$1"
+            if [ -d "${QT_DIR}/plugins/${plugin_dir}" ]; then
+              mkdir -p "${{env.BUILD_DIR}}/usr/plugins/${plugin_dir}"
+              cp -a "${QT_DIR}/plugins/${plugin_dir}/." "${{env.BUILD_DIR}}/usr/plugins/${plugin_dir}/"
+            fi
+          }
+
+          assert_wayland_platform_plugins() {
+            test -f "${{env.BUILD_DIR}}/usr/plugins/platforms/libqwayland.so"
+          }
+
+          # Set the extra Qt modules to include (Quick is needed by the Qt6 build's script engine)
+          export EXTRA_QT_MODULES="Qml;QmlWorkerScript;QmlModels;Quick"
+
+          # Tell linuxdeploy-plugin-qt where to find QML files so it scans and
+          # bundles the QML import modules (QtQml, QtQuick, etc.) that the
+          # QQmlEngine needs at runtime for user scripts.
+          # We point it at our example scripts which all do "import QtQml 2.0".
+          export QML_SOURCES_PATHS="../docs/scripting/examples"
+          export QML_MODULES_PATHS="${QT_DIR}/qml"
+
           cp ../icons/icon.png QOwnNotes.png
-          ./linuxdeploy-x86_64.AppImage --appdir ${{env.BUILD_DIR}} -e ${{env.UNIXNAME}} -i ${{env.UNIXNAME}}.png -d PBE.QOwnNotes.desktop --plugin qt
+
+          # Remove SQL driver plugins that require external client libraries
+          # (Oracle, MySQL, PostgreSQL, etc.) which are not available in the
+          # build environment. QOwnNotes only needs the SQLite driver.
+          find "${QT_DIR}/plugins/sqldrivers" -name '*.so' ! -name '*sqlite*' -delete || true
+
+          # Copy additional resources
+          mkdir -p ${{env.BUILD_DIR}}/usr/plugins/iconengines && cp -r ${QT_DIR}/plugins/iconengines/libqsvgicon.so ${{env.BUILD_DIR}}/usr/plugins/iconengines
           mkdir -p ${{env.BUILD_DIR}}/usr/languages && cp -r languages/*.qm ${{env.BUILD_DIR}}/usr/languages
+
+          ./linuxdeploy-x86_64.AppImage \
+            --appdir ${{env.BUILD_DIR}} \
+            -e ${{env.UNIXNAME}} \
+            -i ${{env.UNIXNAME}}.png \
+            -d PBE.QOwnNotes.desktop \
+            --plugin qt
+
+          # linuxdeploy-plugin-qt only deploys xcb by default, so copy the Wayland
+          # platform and helper plugins explicitly for Wayland-only systems.
+          copy_qt_plugin_dir platforms
+          copy_qt_plugin_dir wayland-decoration-client
+          copy_qt_plugin_dir wayland-graphics-integration-client
+          copy_qt_plugin_dir wayland-shell-integration
+          assert_wayland_platform_plugins
+
+          # Ensure QML import directories are present in the AppImage.
+          # linuxdeploy-plugin-qt should deploy them via QML_SOURCES_PATHS,
+          # but we copy them explicitly as a safety net so "import QtQml 2.0"
+          # always resolves from within the bundle instead of the host system.
+          QML_DEST=${{env.BUILD_DIR}}/usr/qml
+          for mod in QtQml QtQuick QtQml/WorkerScript; do
+            if [ -d "${QT_DIR}/qml/${mod}" ] && [ ! -d "${QML_DEST}/${mod}" ]; then
+              mkdir -p "${QML_DEST}/${mod}"
+              cp -a "${QT_DIR}/qml/${mod}/." "${QML_DEST}/${mod}/"
+            fi
+          done
+
+          # Write qt.conf AFTER linuxdeploy to ensure it is not overwritten.
+          # This forces Qt to load plugins and QML imports from the AppImage bundle
+          # instead of from the host system (e.g. Nix store paths).
+          cat > ${{env.BUILD_DIR}}/usr/bin/qt.conf <<'QTCONF'
+          [Paths]
+          Prefix = ..
+          Plugins = plugins
+          Qml2Imports = qml
+          QmlImports = qml
+          QTCONF
+
+          # Strip leading whitespace that YAML indentation adds to the heredoc
+          sed -i 's/^[[:space:]]*//' ${{env.BUILD_DIR}}/usr/bin/qt.conf
+
+          # Bundle OpenSSL libraries explicitly so QtNetwork keeps working in the AppImage
+          # even when the target system exposes a different OpenSSL runtime.
+          mkdir -p ${{env.BUILD_DIR}}/usr/lib
+          cp -L /usr/lib/x86_64-linux-gnu/libssl.so.3 ${{env.BUILD_DIR}}/usr/lib/
+          cp -L /usr/lib/x86_64-linux-gnu/libcrypto.so.3 ${{env.BUILD_DIR}}/usr/lib/
+
           find ${{env.BUILD_DIR}}
-          ./linuxdeploy-x86_64.AppImage --appdir ${{env.BUILD_DIR}} --output appimage
-          rm linuxdeploy-x86_64.AppImage
-          rm linuxdeploy-plugin-qt-x86_64.AppImage
-          ls -hal *.AppImage
-          find -iname "*.AppImage"
-          mv *.AppImage ${{env.EXECUTABLE}}-x86_64.AppImage || true
+
+          LDAI_RUNTIME_FILE="$PWD/runtime-x86_64" \
+            ./linuxdeploy-x86_64.AppImage --appdir ${{env.BUILD_DIR}} --output appimage
+
+          # Cleanup
+          rm linuxdeploy-x86_64.AppImage linuxdeploy-plugin-qt-x86_64.AppImage runtime-x86_64
+          # Keep the same asset name as the old Qt5 AppImage so the update process can find it
+          mv *.AppImage ${{env.EXECUTABLE}}-x86_64.AppImage ||:
+          if strings ${{env.EXECUTABLE}}-x86_64.AppImage | grep -F 'libfuse.so.2' > /dev/null; then
+            echo "The AppImage still contains the legacy dynamic FUSE runtime" >&2
+            exit 1
+          fi
           sha256sum ${{env.EXECUTABLE}}-x86_64.AppImage > ${{env.EXECUTABLE}}-x86_64.AppImage.sha256sum
           ls -hal *.AppImage
-          find -iname "*.AppImage"
-          pwd
 
-#      - name: '📤 Upload artifact: AppImage'
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: ${{env.EXECUTABLE}}-x86_64.AppImage
-#          path: src/${{env.EXECUTABLE}}-x86_64.AppImage
-#      - name: '📤 Upload artifact: AppImage sha256sum'
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: ${{env.EXECUTABLE}}-x86_64.AppImage.sha256sum
-#          path: src/${{env.EXECUTABLE}}-x86_64.AppImage.sha256sum
-      - name: '📤 Release AppImage for Linux'
+      - name: "📤 Release AppImage for Linux"
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -154,7 +252,7 @@ jobs:
           asset_path: ./src/QOwnNotes-x86_64.AppImage
           asset_name: QOwnNotes-x86_64.AppImage
           asset_content_type: application/vnd.appimage
-      - name: '📤 Release AppImage sha256sum'
+      - name: "📤 Release AppImage sha256sum"
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -165,209 +263,262 @@ jobs:
           asset_content_type: text/plain
 
   #
-  # AppImage Qt6 build
-  #
-  build-appimage-qt6:
-    needs: create_release
-    runs-on: ubuntu-20.04
-    env:
-      QT_VERSION: 6.5.0
-      BUILD_DIR: build
-    name: '🐧 AppImage Qt 6.5.0'
-    steps:
-
-      - name: '🧰 Checkout'
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - name: '⚙️ Install Qt'
-        uses: jurplel/install-qt-action@v4
-        with:
-          version: ${{env.QT_VERSION}}
-          modules: ${{env.QT_MODULES}}
-          aqtversion: '==2.0.0'
-          cache: true
-
-      - name: '⚙️ Install dependencies'
-        run: |
-          sudo apt-get update
-          # sudo apt-get install libgl1-mesa-dev libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libzstd-dev
-          sudo apt install desktop-file-utils libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libxcb-composite0 libxcb-cursor0 libxcb-damage0 libxcb-dpms0 libxcb-dri2-0 libxcb-dri3-0 libxcb-ewmh2 libxcb-glx0 libxcb-present0 libxcb-randr0 libxcb-record0 libxcb-render0 libxcb-res0 libxcb-screensaver0 libxcb-shape0 libxcb-shm0 libxcb-sync1 libxcb-util1 libxkbcommon-x11-0
-      - name: '🚧 Compile application'
-        run: |
-          echo "#define RELEASE \"AppImage\"" > release.h
-          ${{env.QMAKE}} ${{env.QMAKE_PROJECT}} CONFIG+=release PREFIX=/usr
-          lrelease QOwnNotes.pro
-          make -j${{env.CORES}}
-      - name: '⚙️ Install linuxdeploy'
-        run: |
-          wget https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20240109-1/linuxdeploy-x86_64.AppImage
-          wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/1-alpha-20240109-1/linuxdeploy-plugin-qt-x86_64.AppImage
-          chmod +x linuxdeploy-x86_64.AppImage
-          chmod +x linuxdeploy-plugin-qt-x86_64.AppImage
-      - name: '📦 Create AppImage'
-        run: |
-          export QMAKE=${{env.REPO_DIR}}/Qt/${{env.QT_VERSION}}/gcc_64/bin/${{env.QMAKE}}
-          export PATH=${{env.REPO_DIR}}/Qt/${{env.QT_VERSION}}/gcc_64/libexec:$PATH
-          cp ../icons/icon.png QOwnNotes.png
-          ./linuxdeploy-x86_64.AppImage --appdir ${{env.BUILD_DIR}} -e ${{env.UNIXNAME}} -i ${{env.UNIXNAME}}.png -d PBE.QOwnNotes.desktop --plugin qt
-          mkdir -p ${{env.BUILD_DIR}}/usr/plugins/iconengines && cp -r ${{env.REPO_DIR}}/Qt/${{env.QT_VERSION}}/gcc_64/plugins/iconengines/libqsvgicon.so ${{env.BUILD_DIR}}/usr/plugins/iconengines
-          mkdir -p ${{env.BUILD_DIR}}/usr/languages && cp -r languages/*.qm ${{env.BUILD_DIR}}/usr/languages
-          cp -rL ${{env.REPO_DIR}}/Qt/${{env.QT_VERSION}}/gcc_64/lib/libQt6QmlWorkerScript.so.6 ${{env.BUILD_DIR}}/usr/lib
-          find ${{env.BUILD_DIR}}
-          ./linuxdeploy-x86_64.AppImage --appdir ${{env.BUILD_DIR}} --output appimage
-          rm linuxdeploy-x86_64.AppImage
-          rm linuxdeploy-plugin-qt-x86_64.AppImage
-          ls -hal *.AppImage
-          find -iname "*.AppImage"
-          # It's ok if no file needs to be renamed
-          mv *.AppImage ${{env.EXECUTABLE}}-x86_64.AppImage ||:
-          sha256sum ${{env.EXECUTABLE}}-x86_64.AppImage > ${{env.EXECUTABLE}}-x86_64.AppImage.sha256sum
-          ls -hal *.AppImage
-          find -iname "*.AppImage"
-          pwd
-
-      - name: '📤 Release AppImage Qt6 for Linux'
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./src/QOwnNotes-x86_64.AppImage
-          asset_name: QOwnNotes-x86_64-Qt6.AppImage
-          asset_content_type: application/vnd.appimage
-      - name: '📤 Release AppImage Qt6 sha256sum'
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./src/QOwnNotes-x86_64.AppImage.sha256sum
-          asset_name: QOwnNotes-x86_64-Qt6.AppImage.sha256sum
-          asset_content_type: text/plain
-
-  #
-  # Snap build
+  # Snap Qt6 build
   #
   build-snap:
     needs: create_release
     runs-on: ubuntu-latest
     env:
-      QT_VERSION: 5.15.2
-    name: '🐧 Snap Qt 5.15.2'
+      QT_VERSION: 6.10.2
+    name: "🐧 Snap Qt 6.10.2"
     steps:
-
-      - name: '🧰 Checkout'
-        uses: actions/checkout@v4
+      - name: "🧰 Checkout"
+        uses: actions/checkout@v7
         with:
           submodules: recursive
 
-      - name: '⚙️ Set Env'
+      - name: "⚙️ Set Env"
         shell: bash
         run: |
           export VERSION=$(cat version.h | sed 's/[^0-9,.]//g')
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
-      - name: '⚙️ Install Qt'
+      - name: "⚙️ Install Qt"
         uses: jurplel/install-qt-action@v4
         with:
           version: ${{env.QT_VERSION}}
-          modules: ${{env.QT_MODULES}}
+          modules: ${{env.QT6_MODULES}}
           cache: true
 
-      - name: '⚙️ Printenv'
+      - name: "⚙️ Printenv"
         shell: bash
         run: |
           echo "VERSION=${VERSION}"
           printenv
 
-      - name: '🚧 Compile application'
-        uses: snapcore/action-build@v1
+      - name: "🚧 Compile application"
+        uses: ./.github/actions/build-snap
         id: snapcraft
+        with:
+          path: build-systems/github/snap.qt6
 
-      - name: '📤 Release Snap for Linux'
+      - name: "🔎 Verify snap artifact"
+        shell: bash
+        run: |
+          SNAP_PATH="${{ steps.snapcraft.outputs.snap }}"
+
+          if [ -z "${SNAP_PATH}" ]; then
+            echo "::error::build-snap action did not return a snap artifact path"
+            exit 1
+          fi
+
+          case "${SNAP_PATH}" in
+            /*) ;;
+            *) SNAP_PATH="${GITHUB_WORKSPACE}/${SNAP_PATH}" ;;
+          esac
+
+          if [ ! -f "${SNAP_PATH}" ]; then
+            echo "::error::Built snap not found at ${SNAP_PATH}"
+            echo "::group::Available snap files"
+            find "$GITHUB_WORKSPACE" -name '*.snap' -print || true
+            echo "::endgroup::"
+            exit 1
+          fi
+
+          SNAP_NAME="$(basename "${SNAP_PATH}")"
+          SNAP_SHA256_PATH="${SNAP_PATH}.sha256sum"
+
+          echo "SNAP_PATH=${SNAP_PATH}" >> "$GITHUB_ENV"
+          echo "SNAP_NAME=${SNAP_NAME}" >> "$GITHUB_ENV"
+
+          sha256sum "${SNAP_PATH}" > "${SNAP_SHA256_PATH}"
+          echo "SNAP_SHA256_PATH=${SNAP_SHA256_PATH}" >> "$GITHUB_ENV"
+
+          ls -hal "${SNAP_PATH}" "${SNAP_SHA256_PATH}"
+
+      - name: "📤 Release Snap for Linux"
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./qownnotes_${{ env.VERSION }}_amd64.snap
+          asset_path: ${{ env.SNAP_PATH }}
           asset_name: QOwnNotes-amd64.snap
           asset_content_type: application/octet-stream
 
-      - name: '📤 Deploy Snap'
-        uses: snapcore/action-publish@v1
-        continue-on-error: true
+      - name: "📤 Release Snap sha256sum"
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          asset_path: ${{ env.SNAP_SHA256_PATH }}
+          asset_name: QOwnNotes-amd64.snap.sha256sum
+          asset_content_type: text/plain
+
+      - name: "📤 Deploy Snap"
         env:
           # `snapcraft export-login --snaps=qownnotes --acls package_access,package_push,package_update,package_release -`, token valid for one year
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAP_TOKEN_GH }}
+        uses: snapcore/action-publish@v1
+        continue-on-error: true
         with:
-          snap: /home/runner/work/QOwnNotes/QOwnNotes/qownnotes_${{ env.VERSION }}_amd64.snap
+          snap: ${{ env.SNAP_PATH }}
           release: stable
 
-#      - name: '📤 Upload artifact: Snap'
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: qownnotes_${{ env.VERSION }}_amd64.snap
-#          path: /home/runner/work/QOwnNotes/QOwnNotes/qownnotes_${{ env.VERSION }}_amd64.snap
-
   #
-  # Windows build
+  # Snap Qt5 build
   #
-  build-windows:
-    name: '🧊 Windows Qt 5.15.2'
+  build-snap-qt5:
     needs: create_release
-    # https://github.com/pbek/QOwnNotes/issues/2558 error on windows-2022!
-    runs-on: windows-2019
+    runs-on: ubuntu-latest
     env:
       QT_VERSION: 5.15.2
-    continue-on-error: true
+    name: "🐧 Snap Qt 5.15.2"
     steps:
-
-      - name: '🧰 Checkout'
-        uses: actions/checkout@v4
+      - name: "🧰 Checkout"
+        uses: actions/checkout@v7
         with:
           submodules: recursive
 
-      - name: '⚙️ Install Qt'
-        uses: jurplel/install-qt-action@v4
-        with:
-          aqtversion: '==2.0.0'
-          version: ${{env.QT_VERSION}}
-          # https://aqtinstall.readthedocs.io/en/latest/getting_started.html
-          # https://ddalcino.github.io/aqt-list-server/
-          arch: win64_mingw81
-          modules: ${{env.QT_MODULES}}
-          cache: true
-
-      - name: '⚙️ Set Env'
+      - name: "⚙️ Set Env"
         shell: bash
         run: |
           export VERSION=$(cat version.h | sed 's/[^0-9,.]//g')
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
-      - name: '⚙️ Printenv'
+      - name: "⚙️ Install Qt"
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{env.QT_VERSION}}
+          modules: ${{env.QT_MODULES}}
+          aqtversion: "==2.0.0"
+          cache: true
+
+      - name: "⚙️ Printenv"
         shell: bash
         run: |
           echo "VERSION=${VERSION}"
           printenv
 
-      - name: '🚧 Compile application'
-        run: '& ..\build-systems\github\windows\build-zip.ps1'
+      - name: "🚧 Compile application"
+        uses: ./.github/actions/build-snap
+        id: snapcraft
 
-#      - name: '📤 Upload artifact: Windows'
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: QOwnNotes.zip
-#          path: QOwnNotes.zip
-#      - name: '📤 Upload artifact: Windows sha256sum'
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: QOwnNotes.zip.sha256
-#          path: QOwnNotes.zip.sha256
+      - name: "🔎 Verify snap artifact"
+        shell: bash
+        run: |
+          SNAP_PATH="${{ steps.snapcraft.outputs.snap }}"
 
-      - name: '📤 Release ZIP'
+          if [ -z "${SNAP_PATH}" ]; then
+            echo "::error::build-snap action did not return a snap artifact path"
+            exit 1
+          fi
+
+          case "${SNAP_PATH}" in
+            /*) ;;
+            *) SNAP_PATH="${GITHUB_WORKSPACE}/${SNAP_PATH}" ;;
+          esac
+
+          if [ ! -f "${SNAP_PATH}" ]; then
+            echo "::error::Built snap not found at ${SNAP_PATH}"
+            echo "::group::Available snap files"
+            find "$GITHUB_WORKSPACE" -name '*.snap' -print || true
+            echo "::endgroup::"
+            exit 1
+          fi
+
+          SNAP_SHA256_PATH="${SNAP_PATH}.sha256sum"
+
+          echo "SNAP_PATH=${SNAP_PATH}" >> "$GITHUB_ENV"
+
+          sha256sum "${SNAP_PATH}" > "${SNAP_SHA256_PATH}"
+          echo "SNAP_SHA256_PATH=${SNAP_SHA256_PATH}" >> "$GITHUB_ENV"
+
+          ls -hal "${SNAP_PATH}" "${SNAP_SHA256_PATH}"
+
+      - name: "📤 Release Qt5 Snap for Linux"
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          asset_path: ${{ env.SNAP_PATH }}
+          asset_name: QOwnNotes-Qt5-amd64.snap
+          asset_content_type: application/octet-stream
+
+      - name: "📤 Release Qt5 Snap sha256sum"
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          asset_path: ${{ env.SNAP_SHA256_PATH }}
+          asset_name: QOwnNotes-Qt5-amd64.snap.sha256sum
+          asset_content_type: text/plain
+
+  #      - name: '📤 Upload artifact: Snap'
+  #        uses: actions/upload-artifact@v4
+  #        with:
+  #          name: qownnotes_${{ env.VERSION }}_amd64.snap
+  #          path: /home/runner/work/QOwnNotes/QOwnNotes/qownnotes_${{ env.VERSION }}_amd64.snap
+
+  #
+  # Windows build
+  #
+  build-windows:
+    name: "🧊 Windows Qt6"
+    needs: create_release
+    # https://github.com/pbek/QOwnNotes/issues/2558 error on windows-2022!
+    runs-on: windows-2025
+    env:
+      QT_VERSION: 6.10.1
+    steps:
+      - name: "🧰 Checkout"
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: "⚙️ Install Qt"
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{env.QT_VERSION}}
+          # https://download.qt.io/online/qtsdkrepository/windows_x86/desktop/qt6_650/qt.qt6.650.win64_mingw/
+          # https://aqtinstall.readthedocs.io/en/latest/getting_started.html
+          # https://ddalcino.github.io/aqt-list-server/
+          modules: ${{env.QT6_MODULES}}
+          cache: true
+
+      - name: "⚙️ Set Env"
+        shell: bash
+        run: |
+          export VERSION=$(cat version.h | sed 's/[^0-9,.]//g')
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+
+      - name: Make sure MSVC is found
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: "⚙️ Printenv"
+        shell: bash
+        run: |
+          echo "VERSION=${VERSION}"
+          printenv
+
+      - name: "🚧 Compile application"
+        run: '& ..\build-systems\github\windows\build-zip-qt6.ps1'
+
+      #      - name: '📤 Upload artifact: Windows'
+      #        uses: actions/upload-artifact@v4
+      #        with:
+      #          name: QOwnNotes.zip
+      #          path: QOwnNotes.zip
+      #      - name: '📤 Upload artifact: Windows sha256sum'
+      #        uses: actions/upload-artifact@v4
+      #        with:
+      #          name: QOwnNotes.zip.sha256
+      #          path: QOwnNotes.zip.sha256
+
+      - name: "📤 Release ZIP"
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -376,7 +527,7 @@ jobs:
           asset_path: QOwnNotes.zip
           asset_name: QOwnNotes.zip
           asset_content_type: application/zip
-      - name: '📤 Release sha256 sum'
+      - name: "📤 Release sha256 sum"
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -385,7 +536,7 @@ jobs:
           asset_path: QOwnNotes.zip.sha256
           asset_name: QOwnNotes.zip.sha256
           asset_content_type: text/plain
-      - name: '📤 Release clickable sha256 sum'
+      - name: "📤 Release clickable sha256 sum"
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -395,63 +546,52 @@ jobs:
           asset_name: QOwnNotes.zip.sha256sum
           asset_content_type: text/plain
 
-
-
   #
-  # macOS build
+  # macOS Qt6 build
   #
   build-macos:
-    name: '🍎 macOS Qt 5.15.2'
+    name: "🍎 macOS Qt6"
     needs: create_release
-    runs-on: macos-latest
+    runs-on: macos-15
     env:
-      QT_VERSION: 5.15.2
+      # Qt 6.5 doesn't support macOS 10 anymore!
+      QT_VERSION: 6.10.1
     steps:
-
-      - name: '🧰 Checkout'
-        uses: actions/checkout@v4
+      - name: "🧰 Checkout"
+        uses: actions/checkout@v7
         with:
           submodules: recursive
 
       # https://download.qt.io/online/qtsdkrepository/mac_x64/desktop/
-      - name: '⚙️ Install Qt'
+      - name: "⚙️ Install Qt"
         uses: jurplel/install-qt-action@v4
         with:
           version: ${{env.QT_VERSION}}
-          modules: ${{env.QT_MODULES}}
-          aqtversion: '==2.0.0'
+          modules: ${{env.QT6_MODULES}}
           cache: true
 
-      - name: '⚙️ Set Env'
+      - name: "⚙️ Set Env"
         shell: bash
         run: |
           export VERSION=$(cat version.h | sed 's/[^0-9,.]//g')
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
-      - name: '⚙️ Printenv'
+      - name: "⚙️ Printenv"
         shell: bash
         run: |
           echo "VERSION=${VERSION}"
           printenv
 
-      # qmake workaround: https://bugreports.qt.io/browse/QTBUG-117225?focusedId=754625&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-754625
-      # See https://github.com/pbek/QOwnNotes/issues/3018
-      - name: '🚧 Compile application'
+      - name: "🚧 Compile application"
         run: |
           echo "#define RELEASE \"GitHub Actions\"" > release.h
           lrelease QOwnNotes.pro
           #ls ${Qt5_Dir}/bin
-          ${{env.QMAKE}} -early QMAKE_DEFAULT_LIBDIRS=$(xcrun -show-sdk-path)/usr/lib
+          ${{env.QMAKE}} QOwnNotes.pro CONFIG+=release QMAKE_APPLE_DEVICE_ARCHS="x86_64 arm64"
           make -j ${{env.CORES}}
-          ../build-systems/github/macos/create-dmg.sh
+          ../build-systems/github/macos/create-dmg-qt6.sh
 
-#      - name: '📤 Upload artifact: macOS'
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: QOwnNotes.dmg
-#          path: src/QOwnNotes.dmg
-
-      - name: '📤 Release DMG'
+      - name: "📤 Release DMG"
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -461,10 +601,72 @@ jobs:
           asset_name: QOwnNotes.dmg
           asset_content_type: application/x-apple-diskimage
 
+  #
+  # macOS Qt5 build
+  #
+  build-macos-qt5:
+    name: "🍎 macOS Qt5"
+    needs: create_release
+    runs-on: macos-15
+    env:
+      QT_VERSION: 5.15.2
+    steps:
+      - name: "🧰 Checkout"
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      # https://download.qt.io/online/qtsdkrepository/mac_x64/desktop/
+      - name: "⚙️ Install Qt"
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{env.QT_VERSION}}
+          modules: ${{env.QT_MODULES}}
+          aqtversion: "==2.0.0"
+          cache: true
+
+      - name: "⚙️ Set Env"
+        shell: bash
+        run: |
+          export VERSION=$(cat version.h | sed 's/[^0-9,.]//g')
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+
+      - name: "⚙️ Printenv"
+        shell: bash
+        run: |
+          echo "VERSION=${VERSION}"
+          printenv
+
+      # qmake workaround: https://bugreports.qt.io/browse/QTBUG-117225?focusedId=754625&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-754625
+      # See https://github.com/pbek/QOwnNotes/issues/3018
+      - name: "🚧 Compile application"
+        run: |
+          echo "#define RELEASE \"GitHub Actions\"" > release.h
+          lrelease QOwnNotes.pro
+          #ls ${Qt5_Dir}/bin
+          ${{env.QMAKE}} -early QMAKE_DEFAULT_LIBDIRS=$(xcrun -show-sdk-path)/usr/lib
+          make -j ${{env.CORES}}
+          ../build-systems/github/macos/create-dmg.sh
+
+      #      - name: '📤 Upload artifact: macOS'
+      #        uses: actions/upload-artifact@v4
+      #        with:
+      #          name: QOwnNotes.dmg
+      #          path: src/QOwnNotes.dmg
+
+      - name: "📤 Release DMG"
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          asset_path: src/QOwnNotes.dmg
+          asset_name: QOwnNotesQt5.dmg
+          asset_content_type: application/x-apple-diskimage
 #  publish_release:
 #    name: 📣 Publish release
 #    runs-on: ubuntu-latest
-#    needs: [create_release, build-appimage, build-windows, build-macos, build-snap]
+#    needs: [create_release, build-appimage, build-windows, build-macos, build-macos-qt5, build-snap]
 #    steps:
 #      - name: 📣 Publish draft release
 #        uses: eregon/publish-release@v1

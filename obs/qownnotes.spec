@@ -14,6 +14,7 @@ BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Concurrent)
 BuildRequires:  pkgconfig(Qt5WebSockets)
 BuildRequires:  pkgconfig(Qt5X11Extras)
+BuildRequires:  pkgconfig(libsecret-1)
 
 # This is for all Fedora CentOS 7
 %if 0%{?fedora} || 0%{?rhel} >= 7 || 0%{?centos} >= 7
@@ -67,7 +68,7 @@ You are able to write down your thoughts with QOwnNotes and edit or search for t
 
 The notes are stored as plain text files and are synced with ownCloud's/Nextcloud's file sync functionality. Of course other software, like Dropbox can be used too.
 
-I like the concept of having notes accessible in plain text files, like it is done in the ownCloud notes app, to gain a maximum of freedom, but I was not able to find a decent desktop note taking tool or a text editor, that handles them well. Out of this need QOwnNotes was born.
+I like the concept of having notes accessible in plain text files, like it is done in the Nextcloud notes app, to gain a maximum of freedom, but I was not able to find a decent desktop note taking tool or a text editor, that handles them well. Out of this need QOwnNotes was born.
 
 www.qownnotes.org
 

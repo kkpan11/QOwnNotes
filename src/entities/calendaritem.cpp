@@ -1,19 +1,23 @@
 #include "calendaritem.h"
 
 #include <qregularexpression.h>
-#include <services/owncloudservice.h>
+#include <services/cloudservice.h>
 #include <utils/misc.h>
 
 #include <QApplication>
 #include <QDebug>
 #include <QMessageBox>
 #include <QRegularExpression>
-#include <QSettings>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QUuid>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QTimeZone>
+#endif
+
+#include "services/settingsservice.h"
 
 CalendarItem::CalendarItem() {
     id = 0;
@@ -286,9 +290,13 @@ QList<CalendarItem> CalendarItem::fetchAllByCalendar(const QString &calendar) {
 
 QList<CalendarItem> CalendarItem::fetchAll() {
     QSqlDatabase db = QSqlDatabase::database(QStringLiteral("disk"));
-    QSqlQuery query(db);
-
     QList<CalendarItem> calendarItemList;
+
+    if (!db.tables().contains(QStringLiteral("calendarItem"), Qt::CaseInsensitive)) {
+        return calendarItemList;
+    }
+
+    QSqlQuery query(db);
 
     query.prepare(QStringLiteral("SELECT * FROM calendarItem"));
     if (!query.exec()) {
@@ -796,7 +804,11 @@ QDateTime CalendarItem::getDateTimeFromString(const QString &dateString) {
     // see: https://github.com/pbek/QOwnNotes/issues/1966
     if (!dateTime.isValid()) {
         dateTime = QDateTime::fromString(dateString, ICS_DATETIME_FORMAT_UTC);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        dateTime = QDateTime(dateTime.date(), dateTime.time(), QTimeZone::utc()).toLocalTime();
+#else
         dateTime = QDateTime(dateTime.date(), dateTime.time(), Qt::UTC).toLocalTime();
+#endif
     }
 
     return dateTime;
@@ -1092,7 +1104,7 @@ CalendarItem CalendarItem::createNewTodoItem(const QString &summary, const QStri
  * @return
  */
 int CalendarItem::getCurrentCalendarIndex() {
-    QSettings settings;
+    SettingsService settings;
 
     QString todoListSelectorSelectedItem =
         settings.value(QStringLiteral("TodoDialog/todoListSelectorSelectedItem")).toString();
@@ -1117,7 +1129,7 @@ int CalendarItem::getCurrentCalendarIndex() {
  * @return
  */
 QString CalendarItem::getCurrentCalendarUrl() {
-    QSettings settings;
+    SettingsService settings;
 
     int index = getCurrentCalendarIndex();
 
@@ -1134,7 +1146,7 @@ QString CalendarItem::getCurrentCalendarUrl() {
  * Shows alerts for calendar items with an alarm date in the current minute
  */
 void CalendarItem::alertTodoReminders() {
-    if (!OwnCloudService::isTodoCalendarSupportEnabled()) {
+    if (!CloudService::isTodoCalendarSupportEnabled()) {
         return;
     }
 

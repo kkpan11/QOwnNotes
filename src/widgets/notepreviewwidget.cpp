@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2024 Patrizio Bekerle -- <patrizio@bekerle.com>
+ * Copyright (c) 2014-2026 Patrizio Bekerle -- <patrizio@bekerle.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,11 +21,17 @@
 #include <QDebug>
 #include <QLayout>
 #include <QMenu>
+#include <QMouseEvent>
 #include <QMovie>
 #include <QProxyStyle>
 #include <QRegularExpression>
 
 #include "utils/misc.h"
+#include "utils/schema.h"
+
+namespace {
+constexpr int HoveredLinkProperty = QTextFormat::UserProperty + 0x514f;
+}
 
 class NoDottedOutlineForLinksStyle : public QProxyStyle {
    public:
@@ -50,10 +56,97 @@ NotePreviewWidget::NotePreviewWidget(QWidget *parent) : QTextBrowser(parent) {
 
     installEventFilter(this);
     viewport()->installEventFilter(this);
+    viewport()->setMouseTracking(true);
 
     auto proxyStyle = new NoDottedOutlineForLinksStyle;
     proxyStyle->setParent(this);
     setStyle(proxyStyle);
+}
+
+void NotePreviewWidget::clearHoveredLink() {
+    if (_hoveredLinkStart < 0) {
+        return;
+    }
+
+    QList<QTextEdit::ExtraSelection> selections = extraSelections();
+    for (auto it = selections.begin(); it != selections.end();) {
+        if (it->format.property(HoveredLinkProperty).toBool()) {
+            it = selections.erase(it);
+        } else {
+            ++it;
+        }
+    }
+
+    _hoveredLinkStart = -1;
+    _hoveredLinkEnd = -1;
+    setExtraSelections(selections);
+}
+
+void NotePreviewWidget::mouseMoveEvent(QMouseEvent *event) {
+    QTextBrowser::mouseMoveEvent(event);
+
+    const QString href = anchorAt(event->pos());
+    viewport()->setCursor(href.isEmpty() ? Qt::IBeamCursor : Qt::PointingHandCursor);
+    if (href.isEmpty()) {
+        clearHoveredLink();
+        return;
+    }
+
+    QTextCursor cursor = cursorForPosition(event->pos());
+    int start = cursor.position();
+    int end = start;
+    auto anchorHrefAt = [this](int position) {
+        if (position < 0 || position >= document()->characterCount() - 1) {
+            return QString();
+        }
+        QTextCursor character(document());
+        character.setPosition(position);
+        character.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+        return character.charFormat().anchorHref();
+    };
+
+    if (anchorHrefAt(start) != href && start > 0 && anchorHrefAt(start - 1) == href) {
+        --start;
+    }
+    end = start + 1;
+    while (start > 0 && anchorHrefAt(start - 1) == href) {
+        --start;
+    }
+    while (end < document()->characterCount() - 1 && anchorHrefAt(end) == href) {
+        ++end;
+    }
+
+    if (start == _hoveredLinkStart && end == _hoveredLinkEnd) {
+        const auto selections = extraSelections();
+        for (const auto &selection : selections) {
+            if (selection.format.property(HoveredLinkProperty).toBool()) {
+                return;
+            }
+        }
+    }
+
+    clearHoveredLink();
+    cursor.setPosition(start);
+    cursor.setPosition(end, QTextCursor::KeepAnchor);
+
+    QTextEdit::ExtraSelection selection;
+    selection.cursor = cursor;
+    selection.format.setForeground(
+        Utils::Schema::schemaSettings->getForegroundColor(Utils::Schema::LinkHoverPresetIndex));
+    selection.format.setFontUnderline(true);
+    selection.format.setProperty(HoveredLinkProperty, true);
+
+    QList<QTextEdit::ExtraSelection> selections = extraSelections();
+    selections.append(selection);
+    _hoveredLinkStart = start;
+    _hoveredLinkEnd = end;
+    setExtraSelections(selections);
+}
+
+void NotePreviewWidget::leaveEvent(QEvent *event) {
+    clearHoveredLink();
+    viewport()->setCursor(Qt::IBeamCursor);
+    QTextBrowser::leaveEvent(event);
 }
 
 void NotePreviewWidget::resizeEvent(QResizeEvent *event) {
@@ -356,7 +449,8 @@ void NotePreviewWidget::exportAsHTMLFile() {
             out << _html;
             file.flush();
             file.close();
-            Utils::Misc::openFolderSelect(fileName);
+            Utils::Misc::openFolderSelect(
+                fileName, QStringLiteral("show-exported-preview-html-in-file-manager"));
         }
     }
 }

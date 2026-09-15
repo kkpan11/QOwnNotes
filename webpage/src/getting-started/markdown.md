@@ -1,25 +1,30 @@
-# Markdown
+# Markdown Cheatsheet
 
-This Markdown cheatsheet is intended as a quick reference and showcase of the markdown syntax in QOwnNotes.
+This Markdown cheatsheet is intended as a quick reference and showcase of the Markdown syntax in QOwnNotes.
 
-## Headers
+## Headings
 
-Use headings to structure your texts.
+Use ATX headings to structure your texts.
 
 ```markdown
 # H1
+
 ## H2
+
 ### H3
+
 #### H4
+
 ##### H5
+
 ###### H6
 ```
 
 ::: tip
-The **Navigation panel** shows the structure of your headings. 
+The **Navigation panel** shows the structure of your headings.
 :::
 
-Alternatively, for H1 and H2, an underline-ish style:
+Alternatively, for H1 and H2, you can also use Setext headings:
 
 ```markdown
 Alt-H1
@@ -30,15 +35,17 @@ Alt-H2
 ```
 
 ::: tip
-By default QOwnNotes creates the **filename of a note** from the **heading 1** (h1). 
+By default QOwnNotes creates the **filename of a note** from the **heading 1** (h1).
 :::
 
 ## Emphasis
 
 ```markdown
-Emphasis, aka italics, with *asterisks*.
+Emphasis, aka italics, with *asterisks* or _underscores_.
 
-Strong emphasis, aka bold, with **asterisks**.
+Strong emphasis, aka bold, with **asterisks** or __underscores__.
+
+Combined emphasis with **asterisks and _underscores_**.
 ```
 
 ::: tip
@@ -48,7 +55,7 @@ and <kbd>Ctrl + I</kbd> for making it italic.
 
 ## Underline
 
-There also is an optional setting to enable underline rendering in the *Preview settings*.
+There also is an optional setting to enable underline rendering in the _Preview settings_.
 
 ```markdown
 _underline_
@@ -75,13 +82,16 @@ There are many ways to create lists.
 ```markdown
 1. First ordered list item
 2. Another item
-  * Unordered sub-list.
+
+- Unordered sub-list.
+
 1. Actual numbers don't matter, just that it's a number
-  1. Ordered sub-list (only works in the editor, not the preview)
-4. And another item.
+1. And another item.
 
 * Unordered list can use asterisks
+
 - Or minuses
+
 + Or pluses
 ```
 
@@ -102,13 +112,15 @@ Two of the simpler uses for links are pointing to webpages or other notes. There
 
 [You can use numbers for reference-style link definitions][1]
 
-Plain URLs and URLs in angle brackets will automatically get turned into links in the preview. 
+Plain URLs and URLs in angle brackets will automatically get turned into links in the preview.
 http://www.example.com or <http://www.example.com>
 
 [1]: https://www.qownnotes.org
 ```
 
 ### Internal links
+
+You can link to other notes or attachments like this:
 
 ```markdown
 [I link to the Journal.md note](Journal.md)
@@ -127,6 +139,33 @@ You can press <kbd>Ctrl + Space</kbd> while the cursor in on a link in the
 note edit to follow the link.
 :::
 
+::: warning Info
+Internal links with a title are not supported:
+
+```markdown
+[I link to the Journal.md note](Journal.md "Title not supported")
+```
+
+:::
+
+### Footnotes
+
+You can add numeric or named footnotes to link to another position in the same note:
+
+```markdown
+Here is some text with a footnote.[^1]
+
+[^1]: This is the footnote text.
+
+This is a statement with a named footnote.[^source]
+
+[^source]: The source or additional explanation.
+```
+
+Footnote references and definitions are shown as links. Hold <kbd>Ctrl</kbd> and click
+a footnote in the note editor to jump between its reference and definition. You can
+also click footnotes in the preview.
+
 ### Bookmarks
 
 The bookmarks used by the [QOwnNotes Web Companion browser extension](./browser-extension.md)
@@ -144,6 +183,23 @@ Images can be embedded into QOwnNotes. They will be shown in the preview.
 ![alt text](media/my-image.jpg)
 ```
 
+### Image dimensions
+
+You can optionally specify a `width` and/or `height` for an image using
+curly-brace attribute syntax right after the closing parenthesis:
+
+```markdown
+![alt text](media/my-image.jpg){ width=300 }
+
+![alt text](media/my-image.jpg){ height=200 }
+
+![alt text](media/my-image.jpg){ width=300 height=200 }
+```
+
+The dimension attributes are displayed with masked (grayed-out) syntax in the
+editor and are applied in the preview, where they take precedence over the
+automatic image width sizing.
+
 ::: tip
 You can use the [shortcut](./shortcuts.md) <kbd>Ctrl + Shift + I</kbd> to insert an image into a note.
 The image can also be in the clipboard, the dialog will detect it and show a preview.
@@ -151,6 +207,14 @@ The image can also be in the clipboard, the dialog will detect it and show a pre
 You can also directly paste an image from the clipboard into your note with <kbd>Ctrl + Shift + V</kbd>.
 :::
 
+::: warning Info
+Image links with a title are not supported:
+
+```markdown
+![alt text](media/my-image.jpg "Title not supported")
+```
+
+:::
 
 ## Inline code and code blocks
 
@@ -160,7 +224,7 @@ Inline `code` has `backticks around` it.
 
 ::: tip
 You can use the [shortcut](./shortcuts.md) <kbd>Ctrl + Shift + C</kbd> on
-selected inline text or just inside of text to create an inline code block. 
+selected inline text or just inside of text to create an inline code block.
 :::
 
 Blocks of code are either fenced by lines with three backticks, or are indented with four spaces.
@@ -170,99 +234,108 @@ Blocks of code are either fenced by lines with three backticks, or are indented 
 Add four spaces in front of your code to mark it as code block.
 
 ```markdown
-	s = "Code with space indent"
-	print s
+    s = "Code with space indent"
+    print s
 ```
 
 ### Backtick fence
 
 You can also use three backticks to create a code block.
 
-~~~markdown
+````markdown
 ```
 Code goes here
 Code goes here
 ```
-~~~
+````
 
 ::: tip
 You can use the [shortcut](./shortcuts.md) <kbd>Ctrl + Shift + C</kbd> on
-multiple selected lines of text or in an empty line to create a code block. 
+multiple selected lines of text or in an empty line to create a code block.
 :::
 
 ### Backtick fence with code highlighting
 
 There also is some syntax highlighting with code blocks in QOwnNotes.
 
-~~~markdown
+````markdown
 ```bash
 # I am a comment
 cd Notes
 ```
-~~~
+````
 
 Currently, supported languages (and code block identifiers) are:
 
-* BASh scripting, `bash`
-* C, `c`
-* C++, `cpp`
-* C++, `cxx`
-* C++, `c++`
-* C#, `c#`
-* CMake, `cmake`
-* C#, `csharp`
-* CSS, `css`
-* Go, `go`
-* HTML, `html`
-* INI, `ini`
-* Java, `java`
-* JavaScript, `javascript`
-* JavaScript, `js`
-* JSON, `json`
-* Makefile, `make`
-* PHP, `php`
-* Python, `py`
-* Python, `python`
-* QML, `qml`
-* Rust, `rust`
-* Shell scripting, `sh`
-* SQL, `sql`
-* TypeScript, `ts`
-* TypeScript, `typescript`
-* V, `v`
-* Vex, `vex`
-* XML, `xml`
-* YAML, `yml`
-* YAML, `yaml`
+- BASh scripting, `bash`
+- C, `c`
+- C++, `cpp`
+- C++, `cxx`
+- C++, `c++`
+- C#, `c#`
+- CMake, `cmake`
+- C#, `csharp`
+- Console, `console`
+- CSS, `css`
+- Forth, `forth`
+- GDScript, `gdscript`
+- Go, `go`
+- HTML, `html`
+- INI, `ini`
+- Java, `java`
+- JavaScript, `javascript`
+- JavaScript, `js`
+- JSON, `json`
+- Makefile, `make`
+- Nix, `nix`
+- PHP, `php`
+- Python, `py`
+- Python, `python`
+- QML, `qml`
+- R, `r`
+- Rust, `rust`
+- Shell scripting, `sh`
+- Shell session, `shell-session`
+- SQL, `sql`
+- SystemVerilog, `systemverilog`
+- TaggerScript, `taggerscript`
+- TOML, `toml`
+- TypeScript, `ts`
+- TypeScript, `typescript`
+- V, `v`
+- Vex, `vex`
+- XML, `xml`
+- YAML, `yml`
+- YAML, `yaml`
 
 ## Tables
 
-Tables aren't part of the core Markdown spec, but the QOwnNotes preview supports them. 
+Tables aren't part of the core Markdown spec, but the QOwnNotes preview supports them.
 
-~~~markdown
+```markdown
 Colons can be used to align columns.
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
+| Tables        |      Are      |  Cool |
+| ------------- | :-----------: | ----: |
 | col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| col 2 is      |   centered    |   $12 |
+| zebra stripes |   are neat    |    $1 |
 
 There must be at least 3 dashes separating each header cell.
 
 You can also use inline Markdown.
 
-| Markdown | Less | Pretty |
-| --- | --- | --- |
-| *Still* | `renders` | **nicely** |
-| 1 | 2 | 3 |
-~~~
+| Markdown | Less      | Pretty     |
+| -------- | --------- | ---------- |
+| _Still_  | `renders` | **nicely** |
+| 1        | 2         | 3          |
+```
 
 ::: tip
 Press <kbd>Alt + Shift + T</kbd> to activate a dialog that can help you to create tables.
 You can even import CSV files in that dialog.
 
-Use <kbd>Ctrl + Space</kbd> inside a markdown table to automatically format it.
+Use <kbd>Ctrl + Space</kbd> inside a Markdown table to automatically format it.
 :::
 
 ## Blockquotes
@@ -273,12 +346,12 @@ Use <kbd>Ctrl + Space</kbd> inside a markdown table to automatically format it.
 
 Quote break.
 
-> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can *put* **Markdown** into a blockquote. 
+> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can _put_ **Markdown** into a blockquote.
 ```
 
 ::: tip
 You can tell QOwnNotes to fully highlight blockquotes or just the blockquote character
-in the *Editor settings*
+in the _Editor settings_
 
 You can use the [shortcut](./shortcuts.md) <kbd>Ctrl + Shift + B</kbd> for marking text as blockquote.
 :::
@@ -317,10 +390,10 @@ You can enter two spaces and a newline with <kbd>⇧ Shift</kbd> + <kbd>Return</
 ```markdown
 Here's a line for us to start with.
 
-This line is separated from the one above by two newlines, so it will be a *separate paragraph*.
+This line is separated from the one above by two newlines, so it will be a _separate paragraph_.
 
-This line is also begins a separate paragraph, but...  
-This line is only separated by two trailing spaces and a single newline, so it's a separate line in the *same paragraph*.
+This line also begins a separate paragraph, but...  
+This line is only separated by two trailing spaces and a single newline, so it's a separate line in the _same paragraph_.
 ```
 
 ::: tip
@@ -332,7 +405,7 @@ Trailing spaces are highlighted by default in the editor.
 Comments are not shown in the preview.
 
 ```markdown
-[comment]: # (This comment will not appear in the preview)
+[comment]: # "This comment will not appear in the preview"
 
 <!-- HTML comments are also hidden -->
 ```
@@ -358,7 +431,7 @@ You can check/un-check checkboxes in the preview.
 
 In QOwnNotes you can use a frontmatter (e.g. YAML) to add some extra meta information.
 It will **not be shown in the preview** and will
-**not disturb the automatic note filename generation**. 
+**not disturb the automatic note filename generation**.
 
 ```markdown
 ---

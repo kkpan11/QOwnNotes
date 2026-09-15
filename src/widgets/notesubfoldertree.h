@@ -1,12 +1,15 @@
 #pragma once
 
 #include <QTreeWidget>
+#include <QVector>
 
 class NoteSubFolder;
 class Note;
+class QMenu;
 
 class NoteSubFolderTree : public QTreeWidget {
     Q_OBJECT
+
    public:
     NoteSubFolderTree(QWidget *parent = nullptr);
 
@@ -20,6 +23,9 @@ class NoteSubFolderTree : public QTreeWidget {
     void reload();
 
     static QMenu *contextMenu(QTreeWidget *parent);
+    static void removeSelectedNoteSubFolders(QTreeWidget *treeWidget);
+    static void moveSelectedNoteSubFoldersToParent(QTreeWidget *treeWidget,
+                                                   int destinationParentId);
 
    public Q_SLOTS:
     void onItemExpanded(QTreeWidgetItem *item);
@@ -30,8 +36,6 @@ class NoteSubFolderTree : public QTreeWidget {
     void onItemChanged(QTreeWidgetItem *item, int column);
     void onItemSelectionChanged();
 
-    static void removeSelectedNoteSubFolders(QTreeWidget *treeWidget);
-
    Q_SIGNALS:
     void currentSubFolderChanged();
     void multipleSubfoldersSelected();
@@ -40,4 +44,10 @@ class NoteSubFolderTree : public QTreeWidget {
     void initConnections();
     QTreeWidgetItem *addNoteSubFolder(QTreeWidgetItem *parentItem,
                                       const NoteSubFolder &noteSubFolder);
+    static QMenu *buildMoveDestinationMenuTree(QTreeWidget *treeWidget, QMenu *parentMenu,
+                                               int parentNoteSubFolderId,
+                                               const QVector<int> &forbiddenDestinationIds);
+
+   protected:
+    bool eventFilter(QObject *obj, QEvent *event) override;
 };

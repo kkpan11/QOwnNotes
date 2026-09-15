@@ -1,191 +1,75 @@
-# Visión de conjunto
+# Descripción general
 
-<template>
-<v-carousel cycle show-arrows-on-hover>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot.png" alt="Captura de pantalla de QOwnNotes" />
-    <div class="sheet">
-      Edite sus notas con resaltado de rebajas, etiquetas de colores y subcarpetas
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-minimal.png" alt="Vista mínima" />
-    <div class="sheet">
-      Interfaz de usuario mínima predeterminada que se puede quitar aún más
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-vertical.png" alt="Vista vertical" />
-    <div class="sheet">
-      Vea sus notas en una vista de rebaja vertical moviendo los paneles
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-portable-mode.png" alt="Modo portátil" />
-    <div class="sheet">
-      Modo portátil para memorias USB
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-1col.png" alt="Una columna" />
-    <div class="sheet">
-      Todos los paneles se pueden colocar donde quieras
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-darkmode.png" alt="captura de pantalla modo oscuro" />
-    <div class="sheet">
-      Modo oscuro
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-distraction-free-mode.png" alt="screenshot-distraction-free-mode" />
-    <div class="sheet">
-      Modo sin distracciones
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-encrypted-note-decrypted.png" alt="Cifrado de notas" />
-    <div class="sheet">
-      Cifrado de notas AES opcional (también programable)
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-encrypted-note.png" alt="Nota cifrada" />
-    <div class="sheet">
-      Las notas cifradas siguen siendo texto
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-diff.png" alt="screenshot diff" />
-    <div class="sheet">
-      Muestre la diferencia entre notas cuando se cambió externamente
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-export-print.png" alt="screenshot-export-print" />
-    <div class="sheet">
-      Nota Exportación e impresión de PDF
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-freedesktop-theme.png" alt="screenshot-freedesktop-theme" />
-    <div class="sheet">
-      Iconos a través del tema Freedesktop
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-other-workspace.png" alt="screenshot-other-workspace" />
-    <div class="sheet">
-      Puedes tener diferentes espacios de trabajo
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-qml.png" alt="screenshot-qml" />
-    <div class="sheet">
-      Scriptable
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-russian.png" alt="screenshot-russian" />
-    <div class="sheet">
-      Traducido a muchos idiomas
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-search-in-all-notes.png" alt="screenshot-search-in-all-notes" />
-    <div class="sheet">
-      Buscar en todas las notas
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-search-in-current-note.png" alt="screenshot-search-in-current-note" />
-    <div class="sheet">
-      Buscar en la nota actual
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-settings-note-folders.png" alt="screenshot-settings-note-folders" />
-    <div class="sheet">
-      Capaz de usar múltiples carpetas de notas
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-todo.png" alt="screenshot-todo" />
-    <div class="sheet">
-      Administre sus listas de Todo a través de CalDAV
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-trash.png" alt="screenshot-trash" />
-    <div class="sheet">
-      Administre las notas enviadas a la papelera en su servidor Nextcloud
-    </div>
-  </v-carousel-item>
-  <v-carousel-item>
-    <img src="/screenshots/screenshot-versioning.png" alt="screenshot-versioning" />
-    <div class="sheet">
-      Administre las versiones de sus notas en su servidor Nextcloud
-    </div>
-  </v-carousel-item>
-</v-carousel>
-</template>
+<ScreenshotCarousel />
 
 <v-divider />
 
-**Q** para el [marco Qt](https://www.qt.io/) que se utiliza  
-**Posee** porque eres dueño de tus propias notas  
-**Notas** para las notas que toma
+**Q** es por el [framework Qt](https://www.qt.io/) que se utiliza  
+**Own** es debido a que es dueño de sus propias notas  
+**Notes** es por las notas que redacta
 
 <v-divider />
 
-[QOwnNotes](https://www.qownnotes.org/) es el archivo de texto sin formato de **código abierto** (GPL) **aplicación de toma de notas de rebajas** para **GNU / Linux**, **macOS** y **Windows**, que (opcionalmente) funciona junto con la [**aplicación de notas**](https://github.com/nextcloud/notes) de [Nextcloud](https://nextcloud.com/) y [ownCloud](https://owncloud.org/).
+[QOwnNotes](https://www.qownnotes.org/) es la aplicación de **bloc de notas en formato Markdown** en archivos de texto plano de **código abierto** (GPL) para **GNU/Linux**, **macOS** y **Windows**, que (opcionalmente) funciona junto a las [**aplicaciones de notas**](https://github.com/nextcloud/notes) de [Nextcloud](https://nextcloud.com/) y [ownCloud](https://owncloud.org/).
 
 ::: tip
-Únase a nuestro [Telegram Group](https://t.me/QOwnNotes) para discutir, aprender y conectarse con la comunidad QOwnNotes.
+Únase a nuestro [grupo de Telegram](https://t.me/QOwnNotes) para discutir, aprender y conectarse con la comunidad de QOwnNotes.
 :::
 
 [Comprender el concepto de QOwnNotes](concept.md)
 
 ## Características
-- You can use your **existing text or markdown files**, no need for an import
+
+- Puede usar sus **archivos de texto o markdown existentes**, sin necesidad de importarlos
 - QOwnNotes está escrito en C ++ y optimizado para **bajo consumo de recursos** (sin CPU y aplicación de Electron que consume mucha memoria)
 - **Importación de Evernote y Joplin**
-- **Compatible** with the [Notes](https://apps.nextcloud.com/apps/notes) application of **Nextcloud / ownCloud** and **mobile** and Nextcloud Text
-- Create **[Nextcloud Deck](https://apps.nextcloud.com/apps/deck) cards** and link to them in your notes
-- Support for **sharing notes** on your **ownCloud** / **Nextcloud** server
-- Manage your Nextcloud / ownCloud **todo lists** (**Nextcloud tasks** or **Tasks Plus** / **Calendar Plus**) or use another **CalDAV server** to sync your tasks to
-- Older **versions** of your notes can be **restored** from your **Nextcloud / ownCloud** server
-- **Trashed notes** can be **restored** from your **Nextcloud / ownCloud** server
-- **External changes** of note files are **watched** (notes or note list are reloaded)
-- Support for **hierarchical note tagging** and **note subfolders**
-- Optional **encryption** of notes, AES-256 is built in, or you can use custom encryption methods like **[Keybase.io](https://keybase.io/)** ([encryption-keybase.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/encryption-keybase.qml)) or **PGP** ([encryption-pgp.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/encryption-pgp.qml))
-- The **notes folder** can be **freely chosen** (multiple note folders can be used)
-- **Searching parts of words** in notes is possible and search results are highlighted in the notes
-- [**Browser extension**](browser-extension.md) to **add notes from the selected text**, **make screenshots** or **manage your bookmarks**
-- Compatibilidad con [**revisores ortográficos**](../editor/spellchecking.md)
-- **Modo portátil** para llevarse consigo QOwnNotes en memorias USB
-- **Scripting support** and an online [**script repository**](https://github.com/qownnotes/scripts) where you can install scripts inside the application
-- Implementation of the **[OpenAI completion API](https://www.qownnotes.org/blog/2024-05-17-AI-support-was-added-to-QOwnNotes.html)** to be used in scripts
+- **Compatible** con la aplicación de [notas](https://apps.nextcloud.com/apps/notes) de **Nextcloud / ownCloud**, las versiones **móviles** y Nextcloud Text
+- Cree **tarjetas de [Nextcloud Deck](https://apps.nextcloud.com/apps/deck)** y enlácelas a sus notas
+- Soporte para **compartir notas** en su servidor de **ownCloud** / **Nextcloud**
+- Administre sus **listas de elementos pendientes** de Nextcloud / ownCloud (**Nextcloud tasks** o **Tasks Plus** / **Calendar Plus**) o use otro servidor de **CalDAV** con el cual sincronizar sus tareas
+- Las versiones **antiguas** de sus notas pueden ser **restauradas** desde su servidor de **Nextcloud / ownCloud**
+- **Las notas en la papelera** pueden **restauradas** desde su servidor de **Nextcloud/ownCloud**
+  - También existen modos de **papelera local** y **papelera del sistema**
+- **Los cambios externos** de los archivos de notas son **supervisados** (las notas o la lista de notas se vuelven a cargar)
+- Soporte para **etiquetado jerárquico de notas** y **subcarpetas de notas**
+  - Incluye la posibilidad de mover y reorganizar subcarpetas con actualizaciones de enlaces y visibilidad selectiva de las mismas
+- Enlaces **opcionales al estilo de wiki** para notas, como `[[Note]]`. Completado automático, anclajes de encabezado, alias, enlaces entrantes y soporte para refactorización
+- **Cifrado** opcional de notas, AES-256 está integrado, o puede utilizar métodos de cifrado personalizados como **[Keybase.io](https://keybase.io/)** ([encryption-keybase.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/encryption-keybase.qml)) o **PGP** ([encryption-pgp.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/encryption-pgp.qml))
+- La **carpeta de notas** se puede **elegir libremente** (se pueden utilizar múltiples carpetas de notas)
+- Es posible **buscar partes de palabras** en las notas. Los resultados de la búsqueda se resaltan en las notas
+- [**Extensión del navegador**](browser-extension.md) para **agregar notas a partir del texto seleccionado**, **hacer capturas de pantalla** o **administrar sus marcadores**
+- Compatibilidad con [**corrector ortográfico**](../editor/spellchecking.md), [**LanguageTool**](../editor/languagetool.md) opcional, [**Harper**](../editor/harper.md) opcional, y [**Markdown LSP**](../editor/markdownlsp.md) opcional (por ejemplo, [Marksman](https://github.com/artempyanykh/marksman) para completado y diagnósticos, o [Rumdl](https://github.com/rvben/rumdl) para linting)
+- **Modo portátil** para llevar consigo QOwnNotes en memorias USB
+- **Soporte de secuencias de órdenes** y un [**repositorio de scripts**](https://github.com/qownnotes/scripts) en línea desde el que puede instalar scripts dentro de la aplicación
+- Soporte de **IA** integrado con integración de scripts para proveedores como **OpenAI** y **Groq**
+  - Incluye un servidor **MCP** integrado para que los agentes de IA externos puedan buscar y recuperar notas de forma segura
 - **Modo Vim**
-- **[Web application](web-app.md)** to **insert photos from your mobile phone** into the current note in QOwnNotes on your desktop
-
+- **[Aplicación web](web-app.md)** para **insertar fotos desde su teléfono móvil** en la nota actual en QOwnNotes en su escritorio
 
 ## Apariencia
-- **Markdown resaltando** de notas y un **modo de vista previa de Markdown**
-- **Soporte de tema de modo oscuro**
-- **Theming support** for the **Markdown syntax highlighting**
+
+- **Resaltado de Markdown** de notas y un **modo de vista previa de Markdown**
+  - Incluye **vistas previas de imágenes en línea**, **plegado de encabezados de Markdown** y ocultación opcional de la sintaxis de formato Markdown
+- **Compatibilidad con tema de modo oscuro** con cambio en vivo y modos de color personalizados</strong>
+- **Soporte de temas** para el **resaltador de sintáxis de Markdown**
 - Todos los paneles **pueden colocarse donde desee**, incluso pueden **flotar** o **apilar** (totalmente acoplables)
 - Soporte para **iconos de tema de escritorio gratuito**, puede usar QOwnNotes con sus **iconos de escritorio nativos** y con su **tema de escritorio oscuro favorito**
 - **Modo sin distracciones**, **Modo de pantalla completa** y **Modo de máquina de escribir**
 - **Números de línea**
+- **Selección de bloque** y otros flujos de trabajo de editor para usuarios avanzados
+- Compatibilidad con **atajos de teclado globales en Wayland**
 - **Las diferencias** entre la nota actual y la nota modificada externamente se **se muestran** en un diálogo
 
-## Lenguajes
+## Idioma
+
 - **Disponible en más de 60 idiomas diferentes** como inglés, alemán, francés, polaco, chino, japonés, ruso, portugués, húngaro, holandés y español
   - [Su ayuda](../contributing/translation.md) es muy apreciada para mejorar estas traducciones o para traducir QOwnNotes en más idiomas.
 
 <style>
+.v-divider {
+  margin: 20px;
+}
+
 .sheet {
   position: absolute;
   bottom: 50px;

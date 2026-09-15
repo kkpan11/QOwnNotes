@@ -42,11 +42,27 @@ void StoredAttachmentsDialog::refreshAttachmentFiles() {
         return;
     }
 
-    QStringList attachmentFiles =
-        attachmentsDir.entryList(QStringList(QStringLiteral("*")), QDir::Files, QDir::Time);
-    attachmentFiles.removeDuplicates();
+    QStringList attachmentFiles;
+    QVector<Note> noteList;
 
-    QVector<Note> noteList = Note::fetchAll();
+    if (_currentNoteOnly) {
+        MainWindow *mainWindow = MainWindow::instance();
+        if (mainWindow == nullptr) {
+            return;
+        }
+
+        const auto note = mainWindow->getCurrentNote();
+        if (note.isFetched()) {
+            attachmentFiles = note.getAttachmentsFileList();
+            noteList = {note};
+        }
+    } else {
+        attachmentFiles =
+            attachmentsDir.entryList(QStringList(QStringLiteral("*")), QDir::Files, QDir::Time);
+        noteList = Note::fetchAll();
+    }
+
+    attachmentFiles.removeDuplicates();
     int noteListCount = noteList.count();
     _fileNoteList.clear();
 
@@ -100,6 +116,9 @@ void StoredAttachmentsDialog::refreshAttachmentFiles() {
     if (attachmentFiles.count() > 0) {
         auto *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Home, Qt::NoModifier);
         QApplication::postEvent(ui->fileTreeWidget, event);
+    } else {
+        // Clear the file details when the list is empty
+        loadCurrentFileDetails();
     }
 }
 
@@ -282,7 +301,8 @@ void StoredAttachmentsDialog::on_openFolderButton_clicked() {
     }
 
     QString filePath = getFilePath(item);
-    Utils::Misc::openFolderSelect(filePath);
+    Utils::Misc::openFolderSelect(filePath,
+                                  QStringLiteral("show-stored-attachment-in-file-manager"));
 }
 
 void StoredAttachmentsDialog::on_fileTreeWidget_customContextMenuRequested(const QPoint &pos) {
@@ -330,10 +350,8 @@ void StoredAttachmentsDialog::refreshAndJumpToFileName(const QString &fileName) 
     // look for the item to jump back to
     auto item = Utils::Gui::getTreeWidgetItemWithUserData(ui->fileTreeWidget, fileName);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
     // set the previous item with a timer (didn't work without timer)
     QTimer::singleShot(0, this, [this, item]() { ui->fileTreeWidget->setCurrentItem(item); });
-#endif
 }
 
 void StoredAttachmentsDialog::on_searchLineEdit_textChanged(const QString &arg1) {
@@ -372,11 +390,6 @@ void StoredAttachmentsDialog::on_noteTreeWidget_itemDoubleClicked(QTreeWidgetIte
     Q_UNUSED(item)
     Q_UNUSED(column)
     openCurrentNote();
-}
-
-void StoredAttachmentsDialog::on_checkBox_toggled(bool checked) {
-    _orphanedAttachmentsOnly = checked;
-    refreshAttachmentFiles();
 }
 
 void StoredAttachmentsDialog::on_refreshButton_clicked() { refreshAttachmentFiles(); }
@@ -489,4 +502,26 @@ void StoredAttachmentsDialog::on_noteTreeWidget_customContextMenuRequested(const
     if (selectedItem == openAction) {
         openCurrentNote();
     }
+}
+
+void StoredAttachmentsDialog::on_orphanedCheckBox_toggled(bool checked) {
+    if (checked) {
+        const QSignalBlocker blocker(ui->fileTreeWidget);
+        Q_UNUSED(blocker)
+        ui->currentNoteCheckBox->setChecked(false);
+    }
+
+    _orphanedAttachmentsOnly = checked;
+    refreshAttachmentFiles();
+}
+
+void StoredAttachmentsDialog::on_currentNoteCheckBox_toggled(bool checked) {
+    if (checked) {
+        const QSignalBlocker blocker(ui->fileTreeWidget);
+        Q_UNUSED(blocker)
+        ui->orphanedCheckBox->setChecked(false);
+    }
+
+    _currentNoteOnly = checked;
+    refreshAttachmentFiles();
 }

@@ -24,7 +24,9 @@ class ScriptRepositoryDialog : public MasterDialog {
 
     void searchForUpdates();
     void searchForUpdatesForScripts(const QList<Script> &scripts);
+    int updateAllScripts(bool showMessage = true);
     static void checkForScriptUpdates(QWidget *parent = nullptr);
+    static int updateAllScriptUpdates(QWidget *parent = nullptr);
 
    signals:
     void updateFound();
@@ -38,6 +40,10 @@ class ScriptRepositoryDialog : public MasterDialog {
 
     void on_searchScriptEdit_textChanged(const QString &arg1);
 
+    void on_updateAllButton_clicked();
+
+    void on_automaticScriptUpdatesCheckBox_toggled(bool checked);
+
    private:
     Ui::ScriptRepositoryDialog *ui;
     QString _codeSearchUrl;
@@ -48,6 +54,7 @@ class ScriptRepositoryDialog : public MasterDialog {
     Script _lastInstalledScript;
     QHash<QString, ScriptInfoJson> _scriptMetaDataCache;
     QHash<QString, QString> _scriptMetaDataJsonTextCache;
+    QHash<QString, QString> _scriptChangelogCache;
     QDateTime _lastScriptMetaDataCacheUpdateTime;
 
     void searchScript();
@@ -63,9 +70,14 @@ class ScriptRepositoryDialog : public MasterDialog {
     QString getCurrentInfoJsonString();
 
     void reloadCurrentScriptInfo();
+    QString loadScriptChangelog(const ScriptInfoJson &infoJson);
+    void updateScriptChangelog(const ScriptInfoJson &infoJson, const Script &script);
 
     bool isScriptCacheExpired();
     bool loadScriptRepositoryMetaData();
     void parseScriptRepositoryMetaData(const QByteArray &arr);
     void addScriptTreeWidgetItem(const ScriptInfoJson &scriptInfoJson);
+    bool hasScriptUpdate(const Script &script) const;
+    QList<Script> scriptsWithUpdates(const QList<Script> &scripts) const;
+    bool installScript(const ScriptInfoJson &infoJson, bool showMessages, bool refreshAfterInstall);
 };

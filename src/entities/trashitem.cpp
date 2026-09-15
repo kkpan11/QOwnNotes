@@ -5,8 +5,9 @@
 
 #include <QDebug>
 #include <QDir>
-#include <QSettings>
 #include <QSqlError>
+
+#include "services/settingsservice.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 #include <QRandomGenerator>
@@ -263,9 +264,13 @@ bool TrashItem::fillFromQuery(const QSqlQuery &query) {
  */
 QList<TrashItem> TrashItem::fetchAll(int limit) {
     QSqlDatabase db = DatabaseService::getNoteFolderDatabase();
-    QSqlQuery query(db);
-
     QList<TrashItem> trashItemList;
+
+    if (!db.isValid() || !db.tables().contains(QStringLiteral("trashItem"), Qt::CaseInsensitive)) {
+        return trashItemList;
+    }
+
+    QSqlQuery query(db);
     QString sql = QStringLiteral("SELECT * FROM trashItem ORDER BY created DESC");
 
     if (limit >= 0) {
@@ -299,7 +304,7 @@ QList<TrashItem> TrashItem::fetchAll(int limit) {
 QList<TrashItem> TrashItem::fetchAllExpired() {
     QSqlDatabase db = DatabaseService::getNoteFolderDatabase();
     QSqlQuery query(db);
-    QSettings settings;
+    SettingsService settings;
     QList<TrashItem> trashItemList;
     int days = settings.value(QStringLiteral("localTrash/autoCleanupDays"), 30).toInt();
     QDateTime dateTime = QDateTime::currentDateTime().addDays(-1 * days);
@@ -512,9 +517,37 @@ int TrashItem::countAll() {
     return 0;
 }
 
-bool TrashItem::isLocalTrashEnabled() {
-    QSettings settings;
-    return settings.value(QStringLiteral("localTrash/supportEnabled"), true).toBool();
+TrashItem::TrashMode TrashItem::trashMode() {
+    SettingsService settings;
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+    if (settings.contains(QStringLiteral("localTrash/mode"))) {
+        switch (settings.value(QStringLiteral("localTrash/mode")).toInt()) {
+            case static_cast<int>(TrashMode::NoTrashing):
+                return TrashMode::NoTrashing;
+            case static_cast<int>(TrashMode::SystemTrash):
+                return TrashMode::SystemTrash;
+            case static_cast<int>(TrashMode::LocalTrash):
+                return TrashMode::LocalTrash;
+            default:
+                break;
+        }
+    }
+#endif
+
+    return settings.value(QStringLiteral("localTrash/supportEnabled"), true).toBool()
+               ? TrashMode::LocalTrash
+               : TrashMode::NoTrashing;
+}
+
+bool TrashItem::isLocalTrashEnabled() { return trashMode() == TrashMode::LocalTrash; }
+
+bool TrashItem::isSystemTrashEnabled() {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+    return trashMode() == TrashMode::SystemTrash;
+#else
+    return false;
+#endif
 }
 
 /**
@@ -523,7 +556,7 @@ bool TrashItem::isLocalTrashEnabled() {
  * @return
  */
 bool TrashItem::expireItems() {
-    QSettings settings;
+    SettingsService settings;
 
     if (!TrashItem::isLocalTrashEnabled() ||
         !settings.value(QStringLiteral("localTrash/autoCleanupEnabled"), true).toBool()) {

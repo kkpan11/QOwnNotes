@@ -10,9 +10,14 @@ class JoplinImportDialog;
 
 class Note;
 class QTreeWidgetItem;
+class QFile;
 
 class JoplinImportDialog : public MasterDialog {
     Q_OBJECT
+
+    // Lets the unit test suite exercise handleImages() directly against a
+    // crafted note/resource, instead of only via a full interactive import.
+    friend class TestNotes;
 
     struct MediaFileData {
         QString data;
@@ -41,13 +46,22 @@ class JoplinImportDialog : public MasterDialog {
     QHash<QString, QString> _imageData;
     QHash<QString, QString> _attachmentData;
     QHash<QString, NoteSubFolder> _importedFolders;
+    // Resource id -> attachments-folder filename already written for it this
+    // import run, so a resource referenced more than once (e.g. once as an
+    // inline attachment link and again elsewhere in the same or a later
+    // note) reuses the existing copy instead of writing another
+    // byte-identical "<id>-1.ext" duplicate.
+    QHash<QString, QString> _importedAttachmentFileNames;
 
     bool importNote(const QString& id, const QString& text, const QString& dirPath);
+    static void applyJoplinTimestamps(const QString& text, Note& note);
     void tagNote(const QString& id, const Note& note);
     void handleImages(Note& note, const QString& dirPath);
     void handleAttachments(Note& note, const QString& dirPath);
     bool importFolders();
     NoteSubFolder importFolder(const QString& id, const QString& text);
-    void importImage(Note& note, const QString& dirPath, QString& noteText, const QString& imageTag,
-                     const QString& imageId, const QString& imageName = "");
+    int importImage(Note& note, const QString& dirPath, QString& noteText, int matchStart,
+                    int matchLength, const QString& imageId, const QString& imageName = "");
+    static QFile* findResourceFile(const QString& dirPath, const QString& id,
+                                   const QString& metaData);
 };

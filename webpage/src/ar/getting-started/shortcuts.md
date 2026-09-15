@@ -8,7 +8,7 @@
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>N</kbd> يُنشئ ملاحظة جديدة في علامة تبويب جديدة
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>F</kbd> يتيح لك البحث عن الملاحظات (بالاسم والمحتوى)
 - <kbd>Alt</kbd> + <kbd>F</kbd> يتيح لك البحث عن الملاحظات في جميع الوسوم والمجلدات الفرعية
-- <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> ينتقل إلى مساحة العمل السابقة
+- <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> switches to the previous layout
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>E</kbd> يحرر ملاحظة مشفرة
 - <kbd>Alt</kbd> + <kbd>R</kbd> يزيل الملاحظة الحالية
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>U</kbd> يتحقق من وجود تحديثات
@@ -17,15 +17,13 @@
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>O</kbd> يفتح الملاحظة الحالية بنافذة جديدة
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>F</kbd> يُظهر الملاحظة الحالية في مدير الملفات
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>E</kbd> يُفعّل أو يُعطّل تحرير الملاحظات
-- <kbd>Alt</kbd> + <kbd>الأعلى</kbd> ينتقل إلى الملاحظة الظاهرة السابقة
-    - اختصار بديل هو <kbd>Ctrl</kbd> + <kbd>PageUp</kbd>
+- <kbd>Alt</kbd> + <kbd>Up</kbd> jumps to the previous visible note
 - <kbd>Alt</kbd> + <kbd>الأسفل</kbd> ينتقل إلى الملاحظة الظاهرة التالية
-    - اختصار بديل هو <kbd>Ctrl</kbd> + <kbd>PageDown</kbd>
 - <kbd>Alt</kbd> + <kbd>PageUp</kbd> ينتقل إلى علامة تبويب الملاحظة السابقة
 - <kbd>Alt</kbd> + <kbd>PageDown</kbd> ينتقل إلى علامة تبويب الملاحظة التالية
 - <kbd>Ctrl</kbd> + <kbd>W</kbd> يُغلق علامة التبويب الحالية
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>D</kbd> يُبدّل الوضع الخالي من المشوشات
-    - يمكنك أيضا مغادرته بزر <kbd>Esc</kbd>
+  - يمكنك أيضا مغادرته بزر <kbd>Esc</kbd>
 - <kbd>Ctrl</kbd> + <kbd>P</kbd> يطبع نص الملاحظة الحالية
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> يطبع معاينة الملاحظة الحالية
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>V</kbd> يلصق ملاحظات أو صور أو HTML من الحافظة
@@ -36,6 +34,7 @@
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>S</kbd> يعيد تحميل محرك البرمجة
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>M</kbd> يُخفي أو يُظهر شريط القوائم الرئيسي
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>A</kbd> يتيح لك البحث عن الإجراءات
+- <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>A</kbd> lets you redo the last action
 - <kbd>Ctrl</kbd> + <kbd>S</kbd> يحفظ يدويًا الملاحظات المعدَّلة
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>I</kbd> يفتح حوار مستودع البُريمِجات
 - <kbd>F4</kbd> ينتقل إلى لوحة تحرير الملاحظات
@@ -50,7 +49,7 @@
 ### في شريط بحث الملاحظات
 
 - <kbd>الأسفل</kbd> أو <kbd>Tab</kbd> ينقل التركيز إلى قائمة الملاحظات
-- <kbd>Enter</kbd> يُنشئ ملاحظة جديدة عنوانها هو النص الذي في شريط البحث
+- <kbd>Return</kbd> creates a new note with the text from the search bar as headline
 
 ### في قائمة الملاحظات
 
@@ -62,11 +61,11 @@
 
 - <kbd>Ctrl</kbd> + <kbd>النقر</kbd> على رابط لفتحه
 - <kbd>Ctrl</kbd> + <kbd>F</kbd> يتيح لك البحث في الملاحظة الحالية
-    - استخدم زرّي الأسهم <kbd>الأعلى</kbd> و<kbd>الأسفل</kbd> أو الأزرار <kbd>F3</kbd> و&nbsp; <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> للانتقال إلى المطابقات السابقة والتالية
-    - <kbd>Esc</kbd> يُغلق شريط البحث
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> يُغلق شريط البحث
 - <kbd>Ctrl</kbd> + <kbd>R</kbd> يتيح لك البحث والاستبدال في الملاحظة الحالية
 - <kbd>Ctrl</kbd> + <kbd>D</kbd> يكرر السطر الحالي أو النص المحدد
-    - <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>الأسفل</kbd> يفعل نفس الشيء
+  - <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>الأسفل</kbd> يفعل نفس الشيء
 - <kbd>Alt</kbd> + <kbd>Backspace</kbd> يمسح السطر الحالي
 - <kbd>Ctrl</kbd> + <kbd>Backspace</kbd> يمسح الكلمة الحالية
 - <kbd>Ctrl</kbd> + <kbd>L</kbd> يفتح حوارًا لإضافة رابط نصي (يعمل أيضا على النص المحدد)
@@ -83,18 +82,18 @@
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>S</kbd> يشطب النص المحدد
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>U</kbd> تبديل حالة حروف النص المحدد
 - <kbd>Tab</kbd> يزيد المسافة البادئة للنص المحدد (يعمل أيضا على سطور متعددة)
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> يقلل المسافة البادئة للنص المحدد
-- <kbd>Tab</kbd> بعد محرف قائمة منقوطة يُزيد المسافة البادئة للعنصر
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> بعد محرف قائمة منقوطة يُنقص المسافة البادئة للعنصر
-- <kbd>Enter</kbd> في القوائم ينشئ عنصر قائمة جديد
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> يقلل المسافة البادئة للنص المحدد
+- <kbd>Tab</kbd> after an unordered list character indents the list item
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> after an unordered list character un-indents the list item
+- <kbd>Return</kbd> in lists creates a new list item
 - <kbd>Alt</kbd> + <kbd>Left</kbd> للرجوع في تاريخ الملاحظة
-    - <kbd>Alt</kbd> + <kbd>Right</kbd> للتقدم في تاريخ الملاحظة
+  - <kbd>Alt</kbd> + <kbd>Right</kbd> للتقدم في تاريخ الملاحظة
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>1..9</kbd> يضيف إشارة مرجعية إلى موقع الملاحظة في الفتحة رقم ١..٩ (نفس رقم الزر)
 - <kbd>Ctrl</kbd> + <kbd>1..9</kbd> ينتقل إلى موضع الإشارة المرجعية في الفتحة رقم ١..٩ (نفس رقم الزر)
 - <kbd>Ctrl</kbd> + <kbd>+</kbd> يُزيد حجم خط نص الملاحظة بنقطة واحدة
 - <kbd>Ctrl</kbd> + <kbd>-</kbd> يُنقص حجم خط نص الملاحظة بنقطة واحدة
 - <kbd>Ctrl</kbd> + <kbd>0</kbd> يعيد تعيين حجم خط نص الملاحظة
-- <kbd>Ctrl</kbd> + <kbd>Space</kbd> يحاول حل معادلات بسيطة مثل <code dir="ltr">(4+5)*3=</code> أمام المؤشر، أو يكمل النص تلقائيا، أو يفتح الرابط
+- <kbd>Ctrl</kbd> + <kbd>Space</kbd> يحاول حل معادلات بسيطة مثل <code dir="ltr">(4+5)*3= أمام المؤشر، أو يكمل النص تلقائيا، أو يفتح الرابط
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>H</kbd> يصنع عنوانًا رئيسيًّا من اسم ملف الملاحظة ويضيفه في بدايتها
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>X</kbd> يقسم الملاحظة الحالية إلى ملاحظتين عند موضع المؤشر
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>W</kbd> يبحث في الويب عن النص المحدد
@@ -107,15 +106,14 @@
 ### في لوحة معاينة الملاحظة
 
 - <kbd>Ctrl</kbd> + <kbd>F</kbd> يتيح لك البحث في الملاحظة الحالية
-    - استخدم زرّي الأسهم <kbd>الأعلى</kbd> و<kbd>الأسفل</kbd> أو الأزرار <kbd>F3</kbd> و&nbsp; <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> للانتقال إلى المطابقات السابقة والتالية
-    - <kbd>Esc</kbd> يُغلق شريط البحث
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> يُغلق شريط البحث
 
 ### في قائمة المهام
 
 - <kbd>Ctrl</kbd> + <kbd>S</kbd> يحفظ عنصر قائمة المهام الحالي
 - <kbd>Ctrl</kbd> + <kbd>I</kbd> يحفظ عنصر قائمة المهام الحالي ويضيفه إلى الملاحظة الحالية
 - <kbd>Ctrl</kbd> + <kbd>R</kbd> يزيل عنصر قائمة المهام الحالي
-
 
 ## ماك أو إس
 
@@ -125,7 +123,7 @@
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>N</kbd> يُنشئ ملاحظة جديدة في علامة تبويب جديدة
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>F</kbd> يتيح لك البحث عن الملاحظات (بالاسم والمحتوى)
 - <kbd>⌃ Ctrl</kbd> + <kbd>F</kbd> يتيح لك البحث عن الملاحظات في جميع الوسوم والمجلدات الفرعية
-- <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> ينتقل إلى مساحة العمل السابقة
+- <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> switches to the previous layout
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>E</kbd> يحرر ملاحظة مشفرة
 - <kbd>⌃ Ctrl</kbd> + <kbd>R</kbd> يزيل الملاحظة الحالية
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>U</kbd> يتحقق من وجود تحديثات
@@ -135,14 +133,12 @@
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>F</kbd> يفتح مجلد الملاحظة الحالية في فايندر
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>E</kbd> يُفعّل أو يُعطّل تحرير الملاحظات
 - <kbd>⌃ Ctrl</kbd> + <kbd>الأعلى</kbd> ينتقل إلى الملاحظة الظاهرة السابقة
-    - اختصار بديل هو <kbd>⌘ Cmd</kbd> + <kbd>PageUp</kbd>
 - <kbd>⌃ Ctrl</kbd> + <kbd>الأسفل</kbd> ينتقل إلى الملاحظة الظاهرة التالية
-    - اختصار بديل هو <kbd>⌘ Cmd</kbd> + <kbd>PageDown</kbd>
 - <kbd>⌥ Alt</kbd> + <kbd>Page Up</kbd> ينتقل إلى علامة تبويب الملاحظة السابقة
 - <kbd>⌥ Alt</kbd> + <kbd>Page Down</kbd> ينتقل إلى علامة تبويب الملاحظة التالية
 - <kbd>⌘ Cmd</kbd> + <kbd>W</kbd> يُغلق علامة التبويب الحالية
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>D</kbd> يُبدّل الوضع الخالي من المشوشات
-    - يمكنك أيضا مغادرته بزر <kbd>Esc</kbd>
+  - يمكنك أيضا مغادرته بزر <kbd>Esc</kbd>
 - <kbd>⌘ Cmd</kbd> + <kbd>P</kbd> يطبع نص الملاحظة الحالية
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> يطبع معاينة الملاحظة الحالية
 - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>V</kbd> يلصق ملاحظات أو صور أو HTML من الحافظة
@@ -153,6 +149,7 @@
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>S</kbd> يعيد تحميل محرك البرمجة
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>M</kbd> يُخفي أو يُظهر شريط القوائم الرئيسي
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>A</kbd> يتيح لك البحث عن الإجراءات
+- <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>A</kbd> lets you redo the last action
 - <kbd>⌘ Cmd</kbd> + <kbd>S</kbd> يحفظ يدويًا الملاحظات المعدَّلة
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>I</kbd> يفتح حوار مستودع البُريمِجات
 - <kbd>F4</kbd> ينتقل إلى لوحة تحرير الملاحظات
@@ -167,7 +164,7 @@
 ### في شريط بحث الملاحظات
 
 - <kbd>الأسفل</kbd> أو <kbd>Tab</kbd> ينقل التركيز إلى قائمة الملاحظات
-- <kbd>Enter</kbd> يُنشئ ملاحظة جديدة عنوانها هو النص الذي في شريط البحث
+- <kbd>Return</kbd> creates a new note with the text from the search bar as headline
 
 ### في قائمة الملاحظات
 
@@ -179,11 +176,11 @@
 
 - <kbd>⌘ Cmd</kbd> + <kbd>النقر</kbd> على رابط لفتحه
 - <kbd>⌘ Cmd</kbd> + <kbd>F</kbd> يتيح لك البحث في الملاحظة الحالية
-    - استخدم زرّي الأسهم <kbd>الأعلى</kbd> و<kbd>الأسفل</kbd> أو الأزرار <kbd>F3</kbd> و&nbsp; <kbd>Shift</kbd> + <kbd>F3</kbd> للانتقال إلى المطابقات السابقة والتالية
-    - <kbd>Esc</kbd> يُغلق شريط البحث
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> يُغلق شريط البحث
 - <kbd>⌘ Cmd</kbd> + <kbd>R</kbd> يتيح لك البحث والاستبدال في الملاحظة الحالية
 - <kbd>⌘ Cmd</kbd> + <kbd>D</kbd> يكرر السطر الحالي أو النص المحدد
-    - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>الأسفل</kbd> يفعل نفس الشيء
+  - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>الأسفل</kbd> يفعل نفس الشيء
 - <kbd>⌘ Cmd</kbd> + <kbd>Backspace</kbd> يمسح السطر الحالي
 - <kbd>⌃ Ctrl</kbd> + <kbd>Backspace</kbd> يمسح الكلمة الحالية
 - <kbd>⌘ Cmd</kbd> + <kbd>L</kbd> يفتح حوارًا لإضافة رابط نصي (يعمل أيضا على النص المحدد)
@@ -200,18 +197,18 @@
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>S</kbd> يشطب النص المحدد
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>U</kbd> تبديل حالة حروف النص المحدد
 - <kbd>Tab</kbd> يزيد المسافة البادئة للنص المحدد (يعمل أيضا على سطور متعددة)
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> يقلل المسافة البادئة للنص المحدد
-- <kbd>Tab</kbd> بعد محرف قائمة منقوطة يُزيد المسافة البادئة للعنصر
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> بعد محرف قائمة منقوطة يُنقص المسافة البادئة للعنصر
-- <kbd>Enter</kbd> في القوائم ينشئ عنصر قائمة جديد
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> يقلل المسافة البادئة للنص المحدد
+- <kbd>Tab</kbd> after an unordered list character indents the list item
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> after an unordered list character un-indents the list item
+- <kbd>Return</kbd> in lists creates a new list item
 - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>Left</kbd> للرجوع في تاريخ الملاحظة
-    - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>Right</kbd> للتقدم في تاريخ الملاحظة
+  - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>Right</kbd> للتقدم في تاريخ الملاحظة
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>1..9</kbd> يضيف إشارة مرجعية إلى موقع الملاحظة في الفتحة رقم ١..٩ (نفس رقم الزر)
 - <kbd>⌘ Cmd</kbd> + <kbd>1..9</kbd> ينتقل إلى موضع الإشارة المرجعية في الفتحة رقم ١..٩ (نفس رقم الزر)
 - <kbd>⌘ Cmd</kbd> + <kbd>+</kbd> يُزيد حجم خط نص الملاحظة بنقطة واحدة
 - <kbd>⌘ Cmd</kbd> + <kbd>-</kbd> يُنقص حجم خط نص الملاحظة بنقطة واحدة
 - <kbd>⌘ Cmd</kbd> + <kbd>0</kbd> يعيد تعيين حجم خط نص الملاحظة
-- <kbd>⌘ Cmd</kbd> + <kbd>Space</kbd> يحاول حل معادلات بسيطة مثل <code dir="ltr">(4+5)*3=</code> أمام المؤشر، أو يكمل النص تلقائيا، أو يفتح الرابط
+- <kbd>⌘ Cmd</kbd> + <kbd>Space</kbd> يحاول حل معادلات بسيطة مثل <code dir="ltr">(4+5)*3= أمام المؤشر، أو يكمل النص تلقائيا، أو يفتح الرابط
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>H</kbd> يصنع عنوانًا رئيسيًّا من اسم ملف الملاحظة ويضيفه في بدايتها
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>X</kbd> يقسم الملاحظة الحالية إلى ملاحظتين عند موضع المؤشر
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>W</kbd> يبحث في الويب عن النص المحدد
@@ -224,8 +221,8 @@
 ### في لوحة معاينة الملاحظة
 
 - <kbd>⌘ Cmd</kbd> + <kbd>F</kbd> يتيح لك البحث في الملاحظة الحالية
-    - استخدم زرّي الأسهم <kbd>الأعلى</kbd> و<kbd>الأسفل</kbd> أو الأزرار <kbd>F3</kbd> و&nbsp; <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> للانتقال إلى المطابقات السابقة والتالية
-    - <kbd>Esc</kbd> يُغلق شريط البحث
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> يُغلق شريط البحث
 
 ### في قائمة المهام
 

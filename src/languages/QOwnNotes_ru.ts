@@ -16,6 +16,127 @@
 </message>
 </context>
 <context>
+<name>AiSettingsWidget</name>
+<message>
+<source>To make use of the AI backends, you can either use the scripting command &lt;a href="%1"&gt;aiComplete&lt;/a&gt;, or look in the script repository for already-written scripts.</source>
+<translation>Чтобы использовать бэкенды ИИ, вы можете использовать команду скриптинга &lt;a href="%1"&gt;aiComplete&lt;/a&gt; или найти уже написанные скрипты в репозитории скриптов.</translation>
+</message>
+<message>
+<source>You can use the scripting hook &lt;a href="%1"&gt;openAiBackendsHook&lt;/a&gt; to add more OpenAI API compatible backends.</source>
+<translation>Вы можете использовать хук скриптинга &lt;a href="%1"&gt;openAiBackendsHook&lt;/a&gt; для добавления дополнительных бэкендов, совместимых с OpenAI API.</translation>
+</message>
+<message>
+<source>Alternatively, you can also look in the script repository for already created AI integration scripts.</source>
+<translation>Кроме того, вы можете найти уже созданные скрипты интеграции ИИ в репозитории скриптов.</translation>
+</message>
+<message>
+<source>Search script repository for AI integration scripts</source>
+<translation>Поиск скриптов интеграции ИИ в репозитории</translation>
+</message>
+<message>
+<source>Search script repository</source>
+<translation>Поиск в репозитории скриптов</translation>
+</message>
+<message>
+<source>AI backends added via the scripting engine</source>
+<translation>Бэкенды ИИ, добавленные через движок скриптинга</translation>
+</message>
+<message>
+<source>API keys</source>
+<translation>Ключи API</translation>
+</message>
+<message>
+<source>OpenAI API key:</source>
+<translation>Ключ API OpenAI:</translation>
+</message>
+<message>
+<source>Create Groq API key</source>
+<translation>Создать ключ API Groq</translation>
+</message>
+<message>
+<source>Create OpenAI API key</source>
+<translation>Создать ключ API OpenAI</translation>
+</message>
+<message>
+<source>API key</source>
+<translation>Ключ API</translation>
+</message>
+<message>
+<source>Groq API key:</source>
+<translation>Ключ API Groq:</translation>
+</message>
+<message>
+<source>Test connection</source>
+<comment>"Test" as verb</comment>
+<translation>Проверить соединение</translation>
+</message>
+<message>
+<source>API settings</source>
+<translation>Настройки API</translation>
+</message>
+<message>
+<source>Time the application will wait for a response from the server before timing out and returning an error message.</source>
+<translation>Время ожидания ответа от сервера перед тайм-аутом и возвратом сообщения об ошибке.</translation>
+</message>
+<message>
+<source>Response timeout:</source>
+<translation>Тайм-аут ответа:</translation>
+</message>
+<message>
+<source>sec</source>
+<comment>seconds</comment>
+<translation>сек</translation>
+</message>
+<message>
+<source>API test result for %1 (%2)</source>
+<translation>Результат теста API для %1 (%2)</translation>
+</message>
+<message>
+<source>AI backend: %1</source>
+<translation>Бэкенд ИИ: %1</translation>
+</message>
+<message>
+<source>API base URL</source>
+<translation>Базовый URL API</translation>
+</message>
+<message>
+<source>AI model: %1</source>
+<translation>Модель ИИ: %1</translation>
+</message>
+<message>
+<source>Test</source>
+<comment>verb</comment>
+<translation>Тест</translation>
+</message>
+<message>
+<source>Test connection to %1 (%2)</source>
+<translation>Проверить соединение с %1 (%2)</translation>
+</message>
+</context>
+<context>
+<name>AiToolbarManager</name>
+<message>
+<source>Waiting for answer from AI</source>
+<translation>Ожидание ответа от ИИ</translation>
+</message>
+<message>
+<source>AI backends</source>
+<translation>Бэкенды ИИ</translation>
+</message>
+<message>
+<source>AI models</source>
+<translation>Модели ИИ</translation>
+</message>
+<message>
+<source>AI backend selector</source>
+<translation>Выбор бэкенда ИИ</translation>
+</message>
+<message>
+<source>AI model selector</source>
+<translation>Выбор модели ИИ</translation>
+</message>
+</context>
+<context>
 <name>AttachmentDialog</name>
 <message>
 <source>Insert attachment</source>
@@ -79,6 +200,546 @@
 %1</source>
 <translation>Не получилось сохранить скачанный файл:
 %1</translation>
+</message>
+</context>
+<context>
+<name>BacklinkWidget</name>
+<message>
+<source>Open note and find &lt;code&gt;%1&lt;/code&gt;</source>
+<translation>Открыть заметку и найти &lt;code&gt;%1&lt;/code&gt;</translation>
+</message>
+</context>
+<context>
+<name>CloudService</name>
+<message>
+<source>incorrect</source>
+<translation type="unfinished">incorrect</translation>
+</message>
+<message>
+<source>not connected</source>
+<translation type="unfinished">not connected</translation>
+</message>
+<message>
+<source>Username / password error</source>
+<translation type="unfinished">Username / password error</translation>
+</message>
+<message>
+<source>Your calendar username or password is incorrect!</source>
+<translation type="unfinished">Your calendar username or password is incorrect!</translation>
+</message>
+<message>
+<source>ok</source>
+<translation type="unfinished">ok</translation>
+</message>
+<message>
+<source>not correct</source>
+<translation type="unfinished">not correct</translation>
+</message>
+<message>
+<source>not detected</source>
+<translation type="unfinished">not detected</translation>
+</message>
+<message>
+<source>not found</source>
+<translation type="unfinished">not found</translation>
+</message>
+<message>
+<source>unknown</source>
+<translation type="unfinished">unknown</translation>
+</message>
+<message>
+<source>version %1 too low</source>
+<translation type="unfinished">version %1 too low</translation>
+</message>
+<message>
+<source>not enabled</source>
+<translation type="unfinished">not enabled</translation>
+</message>
+<message>
+<source>API app version too low</source>
+<translation type="unfinished">API app version too low</translation>
+</message>
+<message>
+<source>Please consider updating your QOwnNotesAPI app on your server, your app version %1 is too low and may cause troubles in QOwnNotes.</source>
+<translation type="unfinished">Please consider updating your QOwnNotesAPI app on your server, your app version %1 is too low and may cause troubles in QOwnNotes.</translation>
+</message>
+<message>
+<source>Nextcloud / ownCloud server connection error</source>
+<translation type="unfinished">Nextcloud / ownCloud server connection error</translation>
+</message>
+<message>
+<source>Nextcloud / ownCloud server error: &lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;Please check your Nextcloud / ownCloud configuration.</source>
+<translation type="unfinished">Nextcloud / ownCloud server error: &lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;Please check your Nextcloud / ownCloud configuration.</translation>
+</message>
+<message>
+<source>You need to setup your Nextcloud / ownCloud server!</source>
+<translation type="unfinished">You need to setup your Nextcloud / ownCloud server!</translation>
+</message>
+<message>
+<source>Done with loading note versions</source>
+<translation type="unfinished">Done with loading note versions</translation>
+</message>
+<message>
+<source>No versions found</source>
+<translation type="unfinished">No versions found</translation>
+</message>
+<message>
+<source>There are no versions for this note or the note wasn't found on the server.</source>
+<translation type="unfinished">There are no versions for this note or the note wasn't found on the server.</translation>
+</message>
+<message>
+<source>Done with loading trashed notes</source>
+<translation type="unfinished">Done with loading trashed notes</translation>
+</message>
+<message>
+<source>No trashed notes</source>
+<translation type="unfinished">No trashed notes</translation>
+</message>
+<message>
+<source>No trashed notes were found on the server.</source>
+<translation type="unfinished">No trashed notes were found on the server.</translation>
+</message>
+<message>
+<source>Error while loading todo lists!</source>
+<translation type="unfinished">Error while loading todo lists!</translation>
+</message>
+<message>
+<source>Your CalDAV server didn't reply anything!</source>
+<translation type="unfinished">Your CalDAV server didn't reply anything!</translation>
+</message>
+<message>
+<source>Error message from your CalDAV server: &lt;strong&gt;%1&lt;/strong&gt;</source>
+<translation type="unfinished">Error message from your CalDAV server: &lt;strong&gt;%1&lt;/strong&gt;</translation>
+</message>
+<message>
+<source>No bookmarks</source>
+<translation type="unfinished">No bookmarks</translation>
+</message>
+<message>
+<source>No bookmarks were found on the server.</source>
+<translation type="unfinished">No bookmarks were found on the server.</translation>
+</message>
+</context>
+<context>
+<name>CloudSettingsWidget</name>
+<message>
+<source>cloud support</source>
+<translation type="unfinished">cloud support</translation>
+</message>
+<message>
+<source>Enable cloud support</source>
+<translation type="unfinished">Enable cloud support</translation>
+</message>
+<message>
+<source>You can access your Nextcloud / ownCloud server from inside the application for example to manage trashed notes and note versions or to share notes. This integration doesn't do note file syncing. You still need to install the Nextcloud / ownCloud sync client for syncing the files.</source>
+<translation type="unfinished">You can access your Nextcloud / ownCloud server from inside the application for example to manage trashed notes and note versions or to share notes. This integration doesn't do note file syncing. You still need to install the Nextcloud / ownCloud sync client for syncing the files.</translation>
+</message>
+<message>
+<source>Your Nextcloud / ownCloud server</source>
+<translation type="unfinished">Your Nextcloud / ownCloud server</translation>
+</message>
+<message>
+<source>Please install the latest version of &lt;a href="https://github.com/pbek/qownnotesapi"&gt;&lt;b&gt;QOwnNotesAPI&lt;/b&gt;&lt;/a&gt; (at least version QOWNNOTESAPI_MIN_VERSION) on your Nextcloud / ownCloud server if you want QOwnNotes to be able to access note versions and trashed notes.</source>
+<translation type="unfinished">Please install the latest version of &lt;a href="https://github.com/pbek/qownnotesapi"&gt;&lt;b&gt;QOwnNotesAPI&lt;/b&gt;&lt;/a&gt; (at least version QOWNNOTESAPI_MIN_VERSION) on your Nextcloud / ownCloud server if you want QOwnNotes to be able to access note versions and trashed notes.</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You also need to have the two Nextcloud / ownCloud core apps &lt;b&gt;Versions&lt;/b&gt; and &lt;b&gt;Deleted files&lt;/b&gt; enabled on your Nextcloud / ownCloud server (that should be the default).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You also need to have the two Nextcloud / ownCloud core apps &lt;b&gt;Versions&lt;/b&gt; and &lt;b&gt;Deleted files&lt;/b&gt; enabled on your Nextcloud / ownCloud server (that should be the default).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You will still need the &lt;b&gt;Nextcloud / ownCloud sync client&lt;/b&gt; (or another desktop sync client) to sync your notes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You will still need the &lt;b&gt;Nextcloud / ownCloud sync client&lt;/b&gt; (or another desktop sync client) to sync your notes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Opens your Nextcloud / ownCloud server &lt;span style=" font-weight:600;"&gt;App configuration&lt;/span&gt; page in your webbrowser to install or update QOwnNotesAPI and to enable the core apps &lt;span style=" font-weight:600;"&gt;Versions&lt;/span&gt; and &lt;span style=" font-weight:600;"&gt;Deleted files&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Opens your Nextcloud / ownCloud server &lt;span style=" font-weight:600;"&gt;App configuration&lt;/span&gt; page in your webbrowser to install or update QOwnNotesAPI and to enable the core apps &lt;span style=" font-weight:600;"&gt;Versions&lt;/span&gt; and &lt;span style=" font-weight:600;"&gt;Deleted files&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>Open your NC / oC server &amp;Apps page</source>
+<translation type="unfinished">Open your NC / oC server &amp;Apps page</translation>
+</message>
+<message>
+<source>Opens your Nextcloud / ownCloud server App Password page in your webbrowser to create a new app password for the application</source>
+<translation type="unfinished">Opens your Nextcloud / ownCloud server App Password page in your webbrowser to create a new app password for the application</translation>
+</message>
+<message>
+<source>Open your NC / oC server App Password page</source>
+<translation type="unfinished">Open your NC / oC server App Password page</translation>
+</message>
+<message>
+<source>Error Message</source>
+<translation type="unfinished">Error Message</translation>
+</message>
+<message>
+<source>Select a connection to edit</source>
+<translation type="unfinished">Select a connection to edit</translation>
+</message>
+<message>
+<source>Add connection</source>
+<translation type="unfinished">Add connection</translation>
+</message>
+<message>
+<source>Remove connection</source>
+<translation type="unfinished">Remove connection</translation>
+</message>
+<message>
+<source>Connection name:</source>
+<translation type="unfinished">Connection name:</translation>
+</message>
+<message>
+<source>NC / oC server url:</source>
+<translation type="unfinished">NC / oC server url:</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the URL of your Nextcloud / ownCloud server, for example: &lt;span style=" font-style:italic;"&gt;https://cloud.yourserver.com&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the URL of your Nextcloud / ownCloud server, for example: &lt;span style=" font-style:italic;"&gt;https://cloud.yourserver.com&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>The login flow v2 only works with Nextcloud, not with ownCloud. If you have troubles you need to create an app password by hand.</source>
+<translation type="unfinished">The login flow v2 only works with Nextcloud, not with ownCloud. If you have troubles you need to create an app password by hand.</translation>
+</message>
+<message>
+<source>Login to Nextcloud to grant access</source>
+<translation type="unfinished">Login to Nextcloud to grant access</translation>
+</message>
+<message>
+<source>Cancel Nextcloud login</source>
+<translation type="unfinished">Cancel Nextcloud login</translation>
+</message>
+<message>
+<source>Username:</source>
+<translation type="unfinished">Username:</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the username on your Nextcloud / ownCloud server.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the username on your Nextcloud / ownCloud server.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>Your Nextcloud / ownCloud username</source>
+<translation type="unfinished">Your Nextcloud / ownCloud username</translation>
+</message>
+<message>
+<source>Password:</source>
+<translation type="unfinished">Password:</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the password for your username.&lt;br/&gt;Currently the password will be stored encrypted with the other settings, but is not very secure.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the password for your username.&lt;br/&gt;Currently the password will be stored encrypted with the other settings, but is not very secure.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>Your Nextcloud / ownCloud password</source>
+<translation type="unfinished">Your Nextcloud / ownCloud password</translation>
+</message>
+<message>
+<source>If your password doesn't work, create an app password (button on the right)</source>
+<translation type="unfinished">If your password doesn't work, create an app password (button on the right)</translation>
+</message>
+<message>
+<source>Enable QOwnNotesAPI app support</source>
+<translation type="unfinished">Enable QOwnNotesAPI app support</translation>
+</message>
+<message>
+<source>Enable Nextcloud Deck support</source>
+<translation type="unfinished">Enable Nextcloud Deck support</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click here to test the connection to your Nextcloud / ownCloud server.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click here to test the connection to your Nextcloud / ownCloud server.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>&amp;Connect to NC / oC server</source>
+<translation type="unfinished">&amp;Connect to NC / oC server</translation>
+</message>
+<message>
+<source>Connection status</source>
+<translation type="unfinished">Connection status</translation>
+</message>
+<message>
+<source>unknown</source>
+<translation type="unfinished">unknown</translation>
+</message>
+<message>
+<source>connection to web server</source>
+<translation type="unfinished">connection to web server</translation>
+</message>
+<message>
+<source>Nextcloud / ownCloud server detected</source>
+<translation type="unfinished">Nextcloud / ownCloud server detected</translation>
+</message>
+<message>
+<source>username and password correct</source>
+<translation type="unfinished">username and password correct</translation>
+</message>
+<message>
+<source>connection to QOwnNotesAPI</source>
+<translation type="unfinished">connection to QOwnNotesAPI</translation>
+</message>
+<message>
+<source>versions app enabled on server</source>
+<translation type="unfinished">versions app enabled on server</translation>
+</message>
+<message>
+<source>trash app enabled on server</source>
+<translation type="unfinished">trash app enabled on server</translation>
+</message>
+<message>
+<source>You will find this path in the &lt;i&gt;Nextcloud / ownCloud&lt;/i&gt; settings</source>
+<translation type="unfinished">You will find this path in the &lt;i&gt;Nextcloud / ownCloud&lt;/i&gt; settings</translation>
+</message>
+<message>
+<source>notes path found on server</source>
+<translation type="unfinished">notes path found on server</translation>
+</message>
+<message>
+<source>notes path &lt;b&gt;%1&lt;/b&gt; found on server</source>
+<translation type="unfinished">notes path &lt;b&gt;%1&lt;/b&gt; found on server</translation>
+</message>
+<message>
+<source>Remove cloud connection</source>
+<translation type="unfinished">Remove cloud connection</translation>
+</message>
+<message>
+<source>Do you really want to remove the cloud connection &lt;strong&gt;%1&lt;/strong&gt;?</source>
+<translation type="unfinished">Do you really want to remove the cloud connection &lt;strong&gt;%1&lt;/strong&gt;?</translation>
+</message>
+<message>
+<source>The connection was made successfully!
+Server version: %1
+QOwnNotesAPI version: %2</source>
+<translation type="unfinished">The connection was made successfully!
+Server version: %1
+QOwnNotesAPI version: %2</translation>
+</message>
+<message>
+<source>There was an error connecting to the Nextcloud / ownCloud Server!
+You also need to have the QOwnNotesAPI app installed and enabled!
+
+Connection error message: </source>
+<translation type="unfinished">There was an error connecting to the Nextcloud / ownCloud Server!
+You also need to have the QOwnNotesAPI app installed and enabled!
+
+Connection error message: </translation>
+</message>
+</context>
+<context>
+<name>ColorModeSettingsWidget</name>
+<message>
+<source>Color modes</source>
+<translation>Цветовые режимы</translation>
+</message>
+<message>
+<source>&amp;Add color mode</source>
+<translation>Добавить цветовой режим(&amp;A)</translation>
+</message>
+<message>
+<source>&amp;Remove color mode</source>
+<translation>Удалить цветовой режим(&amp;R)</translation>
+</message>
+<message>
+<source>Name:</source>
+<translation>Имя:</translation>
+</message>
+<message>
+<source>Name of the color mode</source>
+<translation>Название цветового режима</translation>
+</message>
+<message>
+<source>Color mode name</source>
+<translation>Название цветового режима</translation>
+</message>
+<message>
+<source>Use as active color mode</source>
+<translation>Использовать как активный цветовой режим</translation>
+</message>
+<message>
+<source>Dark mode</source>
+<translation>Тёмный режим</translation>
+</message>
+<message>
+<source>This enables the dark mode, interface and icons will be modified. You need to restart the application to let these changes take action.</source>
+<translation>Включает тёмный режим, интерфейс и значки будут изменены. Для применения изменений необходимо перезапустить приложение.</translation>
+</message>
+<message>
+<source>Enable dark mode</source>
+<translation>Включить тёмный режим</translation>
+</message>
+<message>
+<source>Only some colors will be adapted, your desktop theme will control the rest. You need to restart the application to let these changes take action.</source>
+<translation>Будут адаптированы только некоторые цвета, остальное контролируется темой рабочего стола. Для применения изменений необходимо перезапустить приложение.</translation>
+</message>
+<message>
+<source>Optimize preview colors for dark mode desktop themes</source>
+<translation>Оптимизировать цвета предварительного просмотра для тёмных тем рабочего стола</translation>
+</message>
+<message>
+<source>You may need to restart the application to let these changes take effect</source>
+<translation>Для применения изменений может потребоваться перезапуск приложения</translation>
+</message>
+<message>
+<source>Enable dark mode application icon and tray icon</source>
+<translation>Включить значок приложения и значок трея в тёмном режиме</translation>
+</message>
+<message>
+<source>Icons</source>
+<translation>Значки</translation>
+</message>
+<message>
+<source>Use internal icon theme instead of system icon theme</source>
+<translation>Использовать внутреннюю тему значков вместо системной</translation>
+</message>
+<message>
+<source>Enforce system icon theme</source>
+<translation>Принудительно использовать системную тему значков</translation>
+</message>
+<message>
+<source>Enable dark mode icon theme</source>
+<translation>Включить тему значков в тёмном режиме</translation>
+</message>
+<message>
+<source>Editor color schema</source>
+<translation>Цветовая схема редактора</translation>
+</message>
+<message>
+<source>Select the editor color schema for this color mode</source>
+<translation>Выбрать цветовую схему редактора для этого цветового режима</translation>
+</message>
+<message>
+<source>New color mode</source>
+<translation>Новый цветовой режим</translation>
+</message>
+<message>
+<source>Remove color mode</source>
+<translation>Удалить цветовой режим</translation>
+</message>
+<message>
+<source>Remove the color mode &lt;strong&gt;%1&lt;/strong&gt;?</source>
+<translation>Удалить цветовой режим &lt;strong&gt;%1&lt;/strong&gt;?</translation>
+</message>
+<message>
+<source>Color mode</source>
+<translation>Цветовой режим</translation>
+</message>
+</context>
+<context>
+<name>DebugOptionSettingsWidget</name>
+<message>
+<source>Enable logging to file</source>
+<translation>Включить ведение журнала в файл</translation>
+</message>
+<message>
+<source>Clear log file</source>
+<translation>Очистить файл журнала</translation>
+</message>
+<message>
+<source>Fake old version number to trigger update</source>
+<translation>Подделать старый номер версии для запуска обновления</translation>
+</message>
+<message>
+<source>Fake old versions for installed repository scripts to trigger the script update dialog</source>
+<translation type="unfinished">Fake old versions for installed repository scripts to trigger the script update dialog</translation>
+</message>
+<message>
+<source>Fake old script versions to trigger script updates</source>
+<translation type="unfinished">Fake old script versions to trigger script updates</translation>
+</message>
+<message>
+<source>Log file path:</source>
+<translation>Путь к файлу журнала:</translation>
+</message>
+<message>
+<source>Script hook execution time warning threshold (ms):</source>
+<translation type="unfinished">Script hook execution time warning threshold (ms):</translation>
+</message>
+<message>
+<source>Log a warning when a script hook takes longer than this many milliseconds. When debug logging is enabled, all hook times are logged unconditionally.</source>
+<translation type="unfinished">Log a warning when a script hook takes longer than this many milliseconds. When debug logging is enabled, all hook times are logged unconditionally.</translation>
+</message>
+<message>
+<source>Log file cleared</source>
+<translation>Файл журнала очищен</translation>
+</message>
+<message>
+<source>The log file &lt;strong&gt;%1&lt;/strong&gt; was cleared.</source>
+<translation>Файл журнала &lt;strong&gt;%1&lt;/strong&gt; был очищен.</translation>
+</message>
+</context>
+<context>
+<name>DebugSettingsWidget</name>
+<message>
+<source>Debug information</source>
+<translation>Отладочная информация</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You can &lt;span style=" font-weight:600;"&gt;copy and paste&lt;/span&gt; this text (or parts of this text) in an &lt;span style=" font-weight:600;"&gt;issue&lt;/span&gt; on the &lt;a href="https://github.com/pbek/QOwnNotes/issues"&gt;QOwnNotes issues page&lt;/a&gt; if you have &lt;span style=" font-weight:600;"&gt;questions or troubles&lt;/span&gt; with QOwnNotes. Data that is too sensitive is hidden in this information.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Вы можете &lt;span style=" font-weight:600;"&gt;скопировать и вставить&lt;/span&gt; этот текст (или его части) в &lt;span style=" font-weight:600;"&gt;задачу&lt;/span&gt; на &lt;a href="https://github.com/pbek/QOwnNotes/issues"&gt;странице задач QOwnNotes&lt;/a&gt;, если у вас есть &lt;span style=" font-weight:600;"&gt;вопросы или проблемы&lt;/span&gt; с QOwnNotes. Слишком чувствительные данные скрыты.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The best way to post issues is to use the issue assistant by pressing the &lt;span style=" font-weight:600;"&gt;Open issue assistant&lt;/span&gt; button on the bottom.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Лучший способ отправить задачу — использовать помощник по задачам, нажав кнопку &lt;span style=" font-weight:600;"&gt;Открыть помощник задач&lt;/span&gt; внизу.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>GitHub doesn't need two spaces at the end of the line to do a line break</source>
+<translation>GitHub не требует двух пробелов в конце строки для переноса</translation>
+</message>
+<message>
+<source>Use GitHub line breaks</source>
+<translation>Использовать переносы строк в стиле GitHub</translation>
+</message>
+<message>
+<source>Hide usernames in paths and anonymize other personal identifiers in the generated debug information</source>
+<translation>Скрыть имена пользователей в путях и анонимизировать другие личные идентификаторы в сгенерированной отладочной информации</translation>
+</message>
+<message>
+<source>Anonymize personal information</source>
+<translation>Анонимизировать личные данные</translation>
+</message>
+<message>
+<source>This is the best way to open an issue</source>
+<translation>Это лучший способ открыть задачу</translation>
+</message>
+<message>
+<source>Open issue assistant</source>
+<translation>Открыть помощник задач</translation>
+</message>
+<message>
+<source>Please use this in the issue tracker</source>
+<translation>Пожалуйста, используйте это в трекере задач</translation>
+</message>
+<message>
+<source>&amp;Copy debug information to clipboard</source>
+<translation>Копировать отладочную информацию в буфер обмена(&amp;C)</translation>
+</message>
+<message>
+<source>Please don't use this in the issue tracker</source>
+<translation>Пожалуйста, не используйте это в трекере задач</translation>
+</message>
+<message>
+<source>&amp;Save debug information</source>
+<translation>Сохранить отладочную информацию(&amp;S)</translation>
+</message>
+<message>
+<source>Open settings file in external editor</source>
+<translation type="unfinished">Open settings file in external editor</translation>
+</message>
+<message>
+<source>Open settings file</source>
+<translation type="unfinished">Open settings file</translation>
+</message>
+<message>
+<source>Please don't use this in the issue tracker, copy the debug information text directly into the issue.</source>
+<translation>Пожалуйста, не используйте это в трекере задач, скопируйте текст отладочной информации непосредственно в задачу.</translation>
+</message>
+<message>
+<source>Markdown files</source>
+<translation>Файлы Markdown</translation>
+</message>
+<message>
+<source>Save debug information</source>
+<translation>Сохранить отладочную информацию</translation>
+</message>
+<message>
+<source>The debug information was copied to the clipboard.</source>
+<translation>Отладочная информация скопирована в буфер обмена.</translation>
 </message>
 </context>
 <context>
@@ -170,14 +831,6 @@
 <message>
 <source>Gujarati</source>
 <translation>Гуджарати</translation>
-</message>
-<message>
-<source>Portugese (Brazilian)</source>
-<translation>Португальский (бразильский)</translation>
-</message>
-<message>
-<source>Portugese</source>
-<translation>Португальский</translation>
 </message>
 <message>
 <source>Danish</source>
@@ -428,6 +1081,14 @@
 <translation>Персидский</translation>
 </message>
 <message>
+<source>Portuguese (Brazilian)</source>
+<translation>Португальский (бразильский)</translation>
+</message>
+<message>
+<source>Portuguese</source>
+<translation>Португальский</translation>
+</message>
+<message>
 <source>Romanian</source>
 <translation>Румынский</translation>
 </message>
@@ -571,6 +1232,219 @@
 </message>
 </context>
 <context>
+<name>DistractionFreeManager</name>
+<message>
+<source>Leave</source>
+<translation>Оставить</translation>
+</message>
+<message>
+<source>Custom editor width</source>
+<translation>Пользовательская ширина редактора</translation>
+</message>
+<message>
+<source>Characters:</source>
+<translation>Символов:</translation>
+</message>
+</context>
+<context>
+<name>EditorFontColorSettingsWidget</name>
+<message>
+<source>Fonts</source>
+<translation>Шрифты</translation>
+</message>
+<message>
+<source>Default font:</source>
+<translation>Шрифт по умолчанию:</translation>
+</message>
+<message>
+<source>Set a new font</source>
+<translation>Задать новый шрифт</translation>
+</message>
+<message>
+<source>Reset font</source>
+<translation>Сбросить шрифт</translation>
+</message>
+<message>
+<source>Code font:</source>
+<translation>Шрифт кода:</translation>
+</message>
+<message>
+<source>Set a new code font</source>
+<translation>Задать новый шрифт кода</translation>
+</message>
+<message>
+<source>Reset code font</source>
+<translation>Сбросить шрифт кода</translation>
+</message>
+</context>
+<context>
+<name>EditorSettingsWidget</name>
+<message>
+<source>Markdown highlighting</source>
+<translation>Подсветка Markdown</translation>
+</message>
+<message>
+<source>Note that disabling this will also disable the navigation panel!</source>
+<translation>Обратите внимание, что отключение этого параметра также отключит панель навигации!</translation>
+</message>
+<message>
+<source>Enable markdown highlighting</source>
+<translation>Включить подсветку Markdown</translation>
+</message>
+<message>
+<source>Fully highlight blockquotes</source>
+<translation>Полностью выделять блочные цитаты</translation>
+</message>
+<message>
+<source>Editor options</source>
+<translation>Параметры редактора</translation>
+</message>
+<message>
+<source>Enable automatic closing of brackets and markdown formatting characters</source>
+<translation>Включить автоматическое закрытие скобок и символов форматирования Markdown</translation>
+</message>
+<message>
+<source>You have to use the backspace key to remove the opening character</source>
+<translation>Для удаления открывающего символа необходимо использовать клавишу Backspace</translation>
+</message>
+<message>
+<source>Enable automatic removal of matching closing characters</source>
+<translation>Включить автоматическое удаление соответствующих закрывающих символов</translation>
+</message>
+<message>
+<source>Highlight the current line</source>
+<translation>Выделить текущую строку</translation>
+</message>
+<message>
+<source>Only use editor width setting in distraction free mode</source>
+<translation>Использовать настройку ширины редактора только в режиме без отвлечений</translation>
+</message>
+<message>
+<source>Enable Vim mode (some QOwnNotes shortcuts will not work)</source>
+<translation>Включить режим Vim (некоторые горячие клавиши QOwnNotes не будут работать)</translation>
+</message>
+<message>
+<source>Disable cursor blinking</source>
+<translation>Отключить мигание курсора</translation>
+</message>
+<message>
+<source>Note-edit cursor width:</source>
+<translation>Ширина курсора в редакторе заметок:</translation>
+</message>
+<message>
+<source>Reset the cursor width</source>
+<translation>Сбросить ширину курсора</translation>
+</message>
+<message>
+<source>Automatically remove trailing spaces in the note text</source>
+<translation>Автоматически удалять конечные пробелы в тексте заметки</translation>
+</message>
+<message>
+<source>Ensure an empty last line in the note text</source>
+<translation type="unfinished">Ensure an empty last line in the note text</translation>
+</message>
+<message>
+<source>Show line numbers and bookmark markers (1-9)</source>
+<translation>Показывать номера строк и маркеры закладок (1-9)</translation>
+</message>
+<message>
+<source>Show visible markers for spaces and tabs in the note editor</source>
+<translation type="unfinished">Show visible markers for spaces and tabs in the note editor</translation>
+</message>
+<message>
+<source>Show whitespace markers</source>
+<translation type="unfinished">Show whitespace markers</translation>
+</message>
+<message>
+<source>Show visible markers for line endings in the note editor</source>
+<translation type="unfinished">Show visible markers for line endings in the note editor</translation>
+</message>
+<message>
+<source>Show line ending markers</source>
+<translation type="unfinished">Show line ending markers</translation>
+</message>
+<message>
+<source>Show character, word and line count in the status bar</source>
+<translation type="unfinished">Show character, word and line count in the status bar</translation>
+</message>
+<message>
+<source>Show small Markdown preview images in the editor, if there is no text after the image</source>
+<translation>Показывать небольшие изображения предварительного просмотра Markdown в редакторе, если после изображения нет текста</translation>
+</message>
+<message>
+<source>Shows fold buttons for Markdown headings and allows collapsing their contents</source>
+<translation>Показывает кнопки сворачивания для заголовков Markdown и позволяет сворачивать их содержимое</translation>
+</message>
+<message>
+<source>Enable heading folding in the editor</source>
+<translation>Включить сворачивание заголовков в редакторе</translation>
+</message>
+<message>
+<source>Hides markdown formatting syntax (like **, *, #) on lines that are not being edited</source>
+<translation>Скрывает синтаксис форматирования Markdown (например, **, *, #) на строках, которые не редактируются</translation>
+</message>
+<message>
+<source>Hide markdown formatting syntax on inactive lines</source>
+<translation>Скрывать синтаксис форматирования Markdown на неактивных строках</translation>
+</message>
+<message>
+<source>Enable wiki-style link support [[note name]]</source>
+<translation>Включить поддержку ссылок в стиле вики [[название заметки]]</translation>
+</message>
+<message>
+<source>Show the note filename selection when [[ is typed</source>
+<translation>Показывать выбор имени файла заметки при вводе [[</translation>
+</message>
+<message>
+<source>Show note filename selection when [[ is typed</source>
+<translation>Показывать выбор имени файла заметки при вводе [[</translation>
+</message>
+<message>
+<source>Applies to word, wiki-link, equation, script and Markdown LSP completions</source>
+<translation type="unfinished">Applies to word, wiki-link, equation, script and Markdown LSP completions</translation>
+</message>
+<message>
+<source>Insert autocompletion directly if there is only one result</source>
+<translation type="unfinished">Insert autocompletion directly if there is only one result</translation>
+</message>
+<message>
+<source>Tabs and Indents</source>
+<translation>Табуляция и отступы</translation>
+</message>
+<message>
+<source>Use tab character instead of spaces</source>
+<translation>Использовать символ табуляции вместо пробелов</translation>
+</message>
+<message>
+<source>Indent:</source>
+<translation>Отступ:</translation>
+</message>
+<message>
+<source>Enable hanging indentation for Markdown lists</source>
+<translation>Включить висячий отступ для списков Markdown</translation>
+</message>
+<message>
+<source>Here you can set your own time format for inserting the current time into a note.</source>
+<translation>Здесь вы можете задать собственный формат времени для вставки текущего времени в заметку.</translation>
+</message>
+<message>
+<source>Insert current time</source>
+<translation>Вставить текущее время</translation>
+</message>
+<message>
+<source>Time format:</source>
+<translation>Формат времени:</translation>
+</message>
+<message>
+<source>Enter your custom time format, like "dd.MM.yyyy hh:mm"</source>
+<translation>Введите собственный формат времени, например "dd.MM.yyyy hh:mm"</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You might want to take a look at all available &lt;a href="http://docs.qownnotes.org/en/latest/editor/time-formats/"&gt;time formats&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Возможно, вы захотите ознакомиться со всеми доступными &lt;a href="http://docs.qownnotes.org/en/latest/editor/time-formats/"&gt;форматами времени&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+</context>
+<context>
 <name>EvernoteImportDialog</name>
 <message>
 <source>Evernote Import</source>
@@ -585,8 +1459,12 @@
 <translation>Пожалуйста, выберите файл Evernote enex, который вы хотите импортировать:</translation>
 </message>
 <message>
+<source>Import metadata as YAML front matter</source>
+<translation type="unfinished">Import metadata as YAML front matter</translation>
+</message>
+<message>
 <source>Number of imported notes</source>
-<translation type="unfinished">Number of imported notes</translation>
+<translation>Количество импортированных заметок</translation>
 </message>
 <message>
 <source>Select file</source>
@@ -622,11 +1500,11 @@
 </message>
 <message>
 <source>Invalid XML!</source>
-<translation type="unfinished">Invalid XML!</translation>
+<translation>Недопустимый XML!</translation>
 </message>
 <message>
 <source>Invalid XML found in note &lt;b&gt;%1&lt;/b&gt;! The import might be stopped at this point.</source>
-<translation type="unfinished">Invalid XML found in note &lt;b&gt;%1&lt;/b&gt;! The import might be stopped at this point.</translation>
+<translation>В заметке &lt;b&gt;%1&lt;/b&gt; обнаружен недопустимый XML! На данном этапе возможна остановка импорта.</translation>
 </message>
 <message>
 <source>Basic attributes</source>
@@ -710,130 +1588,185 @@
 </message>
 </context>
 <context>
+<name>ExportPrintManager</name>
+<message>
+<source>Print note</source>
+<translation>Печать заметки</translation>
+</message>
+<message>
+<source>Letter</source>
+<translation type="unfinished">Letter</translation>
+</message>
+<message>
+<source>Page size</source>
+<translation>Размер страницы</translation>
+</message>
+<message>
+<source>Page size:</source>
+<translation>Размер страницы:</translation>
+</message>
+<message>
+<source>Portrait</source>
+<translation>Портретная</translation>
+</message>
+<message>
+<source>Landscape</source>
+<translation>Альбомная</translation>
+</message>
+<message>
+<source>Orientation</source>
+<translation>Ориентация</translation>
+</message>
+<message>
+<source>Orientation:</source>
+<translation>Ориентация:</translation>
+</message>
+<message>
+<source>PDF files</source>
+<translation>Файлы PDF</translation>
+</message>
+<message>
+<source>Export current note as PDF</source>
+<translation>Экспорт текущей заметки в PDF</translation>
+</message>
+<message>
+<source>HTML files</source>
+<translation>Файлы HTML</translation>
+</message>
+<message>
+<source>Export current note as HTML file</source>
+<translation>Экспорт текущей заметки в файл HTML</translation>
+</message>
+</context>
+<context>
 <name>FakeVim</name>
 <message>
 <source>Use FakeVim</source>
-<translation type="unfinished">Use FakeVim</translation>
+<translation>Использовать FakeVim</translation>
 </message>
 <message>
 <source>Read .vimrc from location:</source>
-<translation type="unfinished">Read .vimrc from location:</translation>
+<translation>Выполнить чтение .vimrc по следующему адресу:</translation>
 </message>
 <message>
 <source>Show position of text marks</source>
-<translation type="unfinished">Show position of text marks</translation>
+<translation>Показывать положение меток текста</translation>
 </message>
 <message>
 <source>Pass control keys</source>
-<translation type="unfinished">Pass control keys</translation>
+<translation>Передавать нажатия клавиш управления</translation>
 </message>
 <message>
 <source>Pass keys in insert mode</source>
-<translation type="unfinished">Pass keys in insert mode</translation>
+<translation>Передавать нажатия клавиш в режиме вставки</translation>
 </message>
 <message>
 <source>Start of line</source>
-<translation type="unfinished">Start of line</translation>
+<translation>Начало строки</translation>
 </message>
 <message>
 <source>Tabulator size:</source>
-<translation type="unfinished">Tabulator size:</translation>
+<translation>Размер табулятора:</translation>
 </message>
 <message>
 <source>Smart tabulators</source>
-<translation type="unfinished">Smart tabulators</translation>
+<translation>Умные табуляторы</translation>
 </message>
 <message>
 <source>Highlight search results</source>
-<translation type="unfinished">Highlight search results</translation>
+<translation>Выделять результаты поиска</translation>
 </message>
 <message>
 <source>Shift width:</source>
-<translation type="unfinished">Shift width:</translation>
+<translation>Ширина сдвига:</translation>
 </message>
 <message>
 <source>Expand tabulators</source>
-<translation type="unfinished">Expand tabulators</translation>
+<translation>Разворачивать табуляторы</translation>
 </message>
 <message>
 <source>Automatic indentation</source>
-<translation type="unfinished">Automatic indentation</translation>
+<translation>Автоматическая расстановка отступов</translation>
 </message>
 <message>
 <source>Incremental search</source>
-<translation type="unfinished">Incremental search</translation>
+<translation>Поэтапный поиск</translation>
 </message>
 <message>
 <source>Use search dialog</source>
-<translation type="unfinished">Use search dialog</translation>
+<translation>Использовать диалог поиска</translation>
 </message>
 <message>
 <source>Use smartcase</source>
-<translation type="unfinished">Use smartcase</translation>
+<translation>Использовать smartcase</translation>
 </message>
 <message>
 <source>Use ignorecase</source>
-<translation type="unfinished">Use ignorecase</translation>
+<translation>Использовать ignorecase</translation>
 </message>
 <message>
 <source>Use wrapscan</source>
-<translation type="unfinished">Use wrapscan</translation>
+<translation>Использовать wrapscan</translation>
 </message>
 <message>
 <source>Use tildeop</source>
-<translation type="unfinished">Use tildeop</translation>
+<translation>Использовать tildeop</translation>
 </message>
 <message>
 <source>Show partial command</source>
-<translation type="unfinished">Show partial command</translation>
+<translation>Показывать частично введённую команду</translation>
 </message>
 <message>
 <source>Show line numbers relative to cursor</source>
-<translation type="unfinished">Show line numbers relative to cursor</translation>
+<translation>Показывать номера строк относительно курсора</translation>
 </message>
 <message>
 <source>Blinking cursor</source>
-<translation type="unfinished">Blinking cursor</translation>
+<translation>Мигающий курсор</translation>
 </message>
 <message>
 <source>Scroll offset:</source>
-<translation type="unfinished">Scroll offset:</translation>
+<translation>Смещение прокрутки:</translation>
 </message>
 <message>
 <source>Backspace:</source>
-<translation type="unfinished">Backspace:</translation>
+<translation>Backspace:</translation>
 </message>
 <message>
 <source>Keyword characters:</source>
-<translation type="unfinished">Keyword characters:</translation>
+<translation>Символы ключевых слов:</translation>
+</message>
+<message>
+<source/>
+<translation type="unfinished"/>
 </message>
 <message>
 <source>Use Vim-style Editing</source>
-<translation type="unfinished">Use Vim-style Editing</translation>
+<translation>Использовать редактирование в стиле Vim</translation>
 </message>
 <message>
 <source>Displays line numbers relative to the line containing text cursor.</source>
-<translation type="unfinished">Displays line numbers relative to the line containing text cursor.</translation>
+<translation>Отображает номера строк относительно строки, содержащей текстовый курсор.</translation>
 </message>
 <message>
 <source>Does not interpret key sequences like Ctrl-S in FakeVim but handles them as regular shortcuts. This gives easier access to core functionality at the price of losing some features of FakeVim.</source>
-<translation type="unfinished">Does not interpret key sequences like Ctrl-S in FakeVim but handles them as regular shortcuts. This gives easier access to core functionality at the price of losing some features of FakeVim.</translation>
+<translation>Не интерпретирует такие последовательности нажатия клавиш, как Ctrl-S в FakeVim, а обрабатывает их как обычные сочетания клавиш. Это упрощает доступ к основным функциям ценой потери некоторых возможностей FakeVim.</translation>
 </message>
 <message>
 <source>Does not interpret some key presses in insert mode so that code can be properly completed and expanded.</source>
-<translation type="unfinished">Does not interpret some key presses in insert mode so that code can be properly completed and expanded.</translation>
+<translation>Не интерпретирует некоторые нажатия клавиш в режиме вставки, чтобы код можно было надлежащим образом завершить и развернуть.</translation>
 </message>
 <message>
 <source>Vim tabstop option.</source>
-<translation type="unfinished">Vim tabstop option.</translation>
+<translation>Опция tabstop Vim.</translation>
 </message>
 <message>
 <source>Keep empty to use the default path, i.e. %USERPROFILE%\_vimrc on Windows, ~/.vimrc otherwise.</source>
-<translation type="unfinished">Keep empty to use the default path, i.e. %USERPROFILE%\_vimrc on Windows, ~/.vimrc otherwise.</translation>
+<translation>Оставьте пустым, чтобы использовать путь по умолчанию, т.е. %USERPROFILE%\_vimrc в Windows, ~/.vimrc в ином случае.</translation>
 </message>
 <message>
 <source>Default: %1</source>
-<translation type="unfinished">Default: %1</translation>
+<translation>По умолчанию: %1</translation>
 </message>
 <message>
 <source>Unknown option: %1</source>
@@ -865,7 +1798,7 @@
 </message>
 <message>
 <source>Type Meta-Shift-Y, Meta-Shift-Y to quit FakeVim mode.</source>
-<translation type="unfinished">Type Meta-Shift-Y, Meta-Shift-Y to quit FakeVim mode.</translation>
+<translation>Наберите Meta-Shift-Y, Meta-Shift-Y, чтобы выйти из режима FakeVim.</translation>
 </message>
 <message>
 <source>Type Alt-Y, Alt-Y to quit FakeVim mode.</source>
@@ -1005,6 +1938,113 @@
 </message>
 </context>
 <context>
+<name>FileNavigationWidget</name>
+<message>
+<source>Media files</source>
+<translation>Медиафайлы</translation>
+</message>
+<message>
+<source>Attachments</source>
+<translation>Вложения</translation>
+</message>
+<message>
+<source>Invalid file name</source>
+<translation>Недопустимое имя файла</translation>
+</message>
+<message>
+<source>The file name &lt;strong&gt;%1&lt;/strong&gt; is invalid.</source>
+<translation>Имя файла &lt;strong&gt;%1&lt;/strong&gt; недопустимо.</translation>
+</message>
+<message>
+<source>Delete linked files</source>
+<translation>Удалить связанные файлы</translation>
+</message>
+<message numerus="yes">
+<source>Delete &lt;strong&gt;%n&lt;/strong&gt; selected linked file(s)? You can also remove their links from &lt;strong&gt;%1&lt;/strong&gt; note file(s) afterwards.</source>
+<translation>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранный связанный файл? Вы также можете убрать ссылки на него из &lt;strong&gt;%1&lt;/strong&gt; файлов заметок.</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных связанных файла? Вы также можете убрать ссылки на них из &lt;strong&gt;%1&lt;/strong&gt; файлов заметок.</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных связанных файлов? Вы также можете убрать ссылки на них из &lt;strong&gt;%1&lt;/strong&gt; файлов заметок.</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных связанных файлов? Вы также можете убрать ссылки на них из &lt;strong&gt;%1&lt;/strong&gt; файлов заметок.</numerusform>
+</translation>
+</message>
+<message>
+<source>Deleting the file &lt;strong&gt;%1&lt;/strong&gt; failed!</source>
+<translation>Не удалось удалить файл &lt;strong&gt;%1&lt;/strong&gt;!</translation>
+</message>
+<message numerus="yes">
+<source>Deleting &lt;strong&gt;%n&lt;/strong&gt; linked file(s) failed!</source>
+<translation>
+<numerusform>Не удалось удалить &lt;strong&gt;%n&lt;/strong&gt; связанный файл!</numerusform>
+<numerusform>Не удалось удалить &lt;strong&gt;%n&lt;/strong&gt; связанных файла!</numerusform>
+<numerusform>Не удалось удалить &lt;strong&gt;%n&lt;/strong&gt; связанных файлов!</numerusform>
+<numerusform>Не удалось удалить &lt;strong&gt;%n&lt;/strong&gt; связанных файлов!</numerusform>
+</translation>
+</message>
+<message>
+<source>File deleting failed</source>
+<translation>Не удалось удалить файл</translation>
+</message>
+<message>
+<source>Remove linked file references</source>
+<translation>Убрать ссылки на связанные файлы</translation>
+</message>
+<message numerus="yes">
+<source>The deleted file(s) are used in &lt;strong&gt;%n&lt;/strong&gt; note file(s). Would you like to remove those media and attachment links everywhere? This will update &lt;strong&gt;%n&lt;/strong&gt; note file(s).</source>
+<translation>
+<numerusform>Удалённые файлы используются в &lt;strong&gt;%n&lt;/strong&gt; файле заметок. Хотите убрать ссылки на медиафайлы и вложения везде? Это обновит &lt;strong&gt;%n&lt;/strong&gt; файл заметок.</numerusform>
+<numerusform>Удалённые файлы используются в &lt;strong&gt;%n&lt;/strong&gt; файлах заметок. Хотите убрать ссылки на медиафайлы и вложения везде? Это обновит &lt;strong&gt;%n&lt;/strong&gt; файла заметок.</numerusform>
+<numerusform>Удалённые файлы используются в &lt;strong&gt;%n&lt;/strong&gt; файлах заметок. Хотите убрать ссылки на медиафайлы и вложения везде? Это обновит &lt;strong&gt;%n&lt;/strong&gt; файлов заметок.</numerusform>
+<numerusform>Удалённые файлы используются в &lt;strong&gt;%n&lt;/strong&gt; файлах заметок. Хотите убрать ссылки на медиафайлы и вложения везде? Это обновит &lt;strong&gt;%n&lt;/strong&gt; файлов заметок.</numerusform>
+</translation>
+</message>
+<message>
+<source>File doesn't exist</source>
+<translation>Файл не существует</translation>
+</message>
+<message>
+<source>The file &lt;strong&gt;%1&lt;/strong&gt; doesn't exist, you cannot rename it!</source>
+<translation>Файл &lt;strong&gt;%1&lt;/strong&gt; не существует, вы не можете его переименовать!</translation>
+</message>
+<message>
+<source>File exists</source>
+<translation>Файл существует</translation>
+</message>
+<message>
+<source>File &lt;strong&gt;%1&lt;/strong&gt; already exists, you need to remove it before choosing &lt;strong&gt;%2&lt;/strong&gt; as new filename!</source>
+<translation>Файл &lt;strong&gt;%1&lt;/strong&gt; уже существует, вам нужно удалить его, прежде чем выбрать &lt;strong&gt;%2&lt;/strong&gt; в качестве нового имени файла!</translation>
+</message>
+<message>
+<source>File renaming failed</source>
+<translation>Не удалось переименовать файл</translation>
+</message>
+<message>
+<source>Renaming of file &lt;strong&gt;%1&lt;/strong&gt; failed!</source>
+<translation>Не удалось переименовать файл &lt;strong&gt;%1&lt;/strong&gt;!</translation>
+</message>
+<message>
+<source>File name changed</source>
+<translation>Имя файла изменено</translation>
+</message>
+<message numerus="yes">
+<source>The %1 &lt;strong&gt;%2&lt;/strong&gt; is used in &lt;strong&gt;%n&lt;/strong&gt; note file(s). Would you like to refactor that filename everywhere? This will update &lt;strong&gt;%n&lt;/strong&gt; note file(s).</source>
+<translation>
+<numerusform>%1 &lt;strong&gt;%2&lt;/strong&gt; используется в &lt;strong&gt;%n&lt;/strong&gt; файле заметок. Хотите обновить это имя файла везде? Это обновит &lt;strong&gt;%n&lt;/strong&gt; файл заметок.</numerusform>
+<numerusform>%1 &lt;strong&gt;%2&lt;/strong&gt; используется в &lt;strong&gt;%n&lt;/strong&gt; файлах заметок. Хотите обновить это имя файла везде? Это обновит &lt;strong&gt;%n&lt;/strong&gt; файла заметок.</numerusform>
+<numerusform>%1 &lt;strong&gt;%2&lt;/strong&gt; используется в &lt;strong&gt;%n&lt;/strong&gt; файлах заметок. Хотите обновить это имя файла везде? Это обновит &lt;strong&gt;%n&lt;/strong&gt; файлов заметок.</numerusform>
+<numerusform>%1 &lt;strong&gt;%2&lt;/strong&gt; используется в &lt;strong&gt;%n&lt;/strong&gt; файлах заметок. Хотите обновить это имя файла везде? Это обновит &lt;strong&gt;%n&lt;/strong&gt; файлов заметок.</numerusform>
+</translation>
+</message>
+<message>
+<source>&amp;Open file externally</source>
+<translation>&amp;Открыть файл во внешнем приложении</translation>
+</message>
+<message>
+<source>&amp;Delete file</source>
+<translation>&amp;Удалить файл</translation>
+</message>
+</context>
+<context>
 <name>FontColorWidget</name>
 <message>
 <source>Text font</source>
@@ -1060,7 +2100,7 @@
 </message>
 <message>
 <source>Font:</source>
-<translation type="unfinished">Font:</translation>
+<translation>Шрифт:</translation>
 </message>
 <message>
 <source>Share schema</source>
@@ -1112,11 +2152,27 @@
 </message>
 <message>
 <source>Underlined text</source>
-<translation type="unfinished">Underlined text</translation>
+<translation>Подчёркнутый текст</translation>
 </message>
 <message>
 <source>Link</source>
 <translation>Ссылка</translation>
+</message>
+<message>
+<source>Link hover</source>
+<translation type="unfinished">Link hover</translation>
+</message>
+<message>
+<source>Link (internal)</source>
+<translation>Ссылка (внутренняя)</translation>
+</message>
+<message>
+<source>Wiki link</source>
+<translation>Ссылка вики</translation>
+</message>
+<message>
+<source>Wiki link (broken)</source>
+<translation>Ссылка вики (неработающая)</translation>
 </message>
 <message>
 <source>Image</source>
@@ -1234,7 +2290,7 @@
 <message>
 <source>Copy</source>
 <comment>as noun</comment>
-<translation type="unfinished">Copy</translation>
+<translation>Копирование</translation>
 </message>
 <message>
 <source>Remove schema</source>
@@ -1250,18 +2306,745 @@
 </message>
 </context>
 <context>
-<name>HtmlPreviewWidget</name>
+<name>GeneralSettingsWidget</name>
 <message>
-<source>Copy</source>
-<translation type="unfinished">Copy</translation>
+<source>Notes</source>
+<translation>Заметки</translation>
 </message>
 <message>
-<source>Copy link</source>
-<translation type="unfinished">Copy link</translation>
+<source>Check this if you want to accept all external modifications while you are editing the current note.</source>
+<translation>Установите этот флажок, если хотите принимать все внешние изменения при редактировании текущей заметки.</translation>
+</message>
+<message>
+<source>Accept all external modifications of the current note</source>
+<translation>Принимать все внешние изменения текущей заметки</translation>
+</message>
+<message>
+<source>note save interval time [sec]</source>
+<translation>интервал сохранения заметки [сек]</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked you will always be notified about external modifications, even if current note wasn't edited in the last minute. Recommended is &lt;span style=" font-style:italic;"&gt;unchecked&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если установлен, вы всегда будете получать уведомления о внешних изменениях, даже если текущая заметка не редактировалась в последнюю минуту. Рекомендуется &lt;span style=" font-style:italic;"&gt;не устанавливать&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>Notify about all external modifications of the current note</source>
+<translation>Уведомлять обо всех внешних изменениях текущей заметки</translation>
+</message>
+<message>
+<source>By default the headline will generated automatically</source>
+<translation>По умолчанию заголовок генерируется автоматически</translation>
+</message>
+<message>
+<source>The shortcut to create a new note asks for a headline</source>
+<translation>Горячая клавиша создания новой заметки запрашивает заголовок</translation>
+</message>
+<message>
+<source>Do this at your own risk!</source>
+<translation>Делайте это на свой страх и риск!</translation>
+</message>
+<message>
+<source>Ignore all external note folder changes</source>
+<translation>Игнорировать все внешние изменения папки заметок</translation>
+</message>
+<message>
+<source>Maximum width:</source>
+<translation>Максимальная ширина:</translation>
+</message>
+<message>
+<source>Maximum height:</source>
+<translation>Максимальная высота:</translation>
+</message>
+<message>
+<source>You might run into sync troubles with older versions of Nextcloud / ownCloud sync when going far below 10 sec.
+Just test yourself if you get sync conflicts and set a higher value if so.</source>
+<translation type="unfinished">You might run into sync troubles with older versions of Nextcloud / ownCloud sync when going far below 10 sec.
+Just test yourself if you get sync conflicts and set a higher value if so.</translation>
+</message>
+<message>
+<source>Use Setext style headings for generated new note titles instead of ATX style headings</source>
+<translation type="unfinished">Use Setext style headings for generated new note titles instead of ATX style headings</translation>
+</message>
+<message>
+<source>Use Setext headings for new notes</source>
+<translation type="unfinished">Use Setext headings for new notes</translation>
+</message>
+<message>
+<source>You can use this for example under Windows if you have troubles with newlines in the Nextcloud / ownCloud notes app</source>
+<translation type="unfinished">You can use this for example under Windows if you have troubles with newlines in the Nextcloud / ownCloud notes app</translation>
+</message>
+<message>
+<source>Use UNIX newline instead of native newline characters</source>
+<translation>Использовать символы переноса строки UNIX вместо нативных</translation>
+</message>
+<message>
+<source>Check this if you want to ignore all external modifications while you are editing the current note.</source>
+<translation>Установите этот флажок, если хотите игнорировать все внешние изменения при редактировании текущей заметки.</translation>
+</message>
+<message>
+<source>Ignore all external modifications of the current note</source>
+<translation>Игнорировать все внешние изменения текущей заметки</translation>
+</message>
+<message>
+<source>Use legacy way to link to notes, images and attachments</source>
+<translation>Использовать устаревший способ создания ссылок на заметки, изображения и вложения</translation>
+</message>
+<message>
+<source>When the note title starts with an emoji, the emoji will not be stored in the note filename</source>
+<translation type="unfinished">When the note title starts with an emoji, the emoji will not be stored in the note filename</translation>
+</message>
+<message>
+<source>Don't use leading emojis in note filename</source>
+<translation type="unfinished">Don't use leading emojis in note filename</translation>
+</message>
+<message>
+<source>When opening notes the cursor position inside the note will now be restored to the position when the note was last visited in the current session</source>
+<translation>При открытии заметок позиция курсора будет восстановлена до позиции последнего посещения заметки в текущем сеансе</translation>
+</message>
+<message>
+<source>Restore cursor position when opening a note</source>
+<translation>Восстанавливать положение курсора при открытии заметки</translation>
+</message>
+<message>
+<source>Automatically close the note folder database to prevent problems with sync tools</source>
+<translation>Автоматически закрывать базу данных папки заметок во избежание проблем с инструментами синхронизации</translation>
+</message>
+<message>
+<source>Automatically close the note folder database</source>
+<translation>Автоматически закрывать базу данных папки заметок</translation>
+</message>
+<message>
+<source>Scale images down when inserted into notes</source>
+<translation>Уменьшать изображения при вставке в заметки</translation>
+</message>
+<message>
+<source>Disable this if you want to launch the application without opening a note</source>
+<translation>Отключите это, если хотите запускать приложение без открытия заметки</translation>
+</message>
+<message>
+<source>Open last accessed note at application startup</source>
+<translation>Открывать последнюю просмотренную заметку при запуске приложения</translation>
+</message>
+<message>
+<source>Use checksums to detect external modifications to unsaved notes</source>
+<translation>Использовать контрольные суммы для определения внешних изменений несохранённых заметок</translation>
+</message>
+<message>
+<source>Read-only mode</source>
+<translation>Режим только для чтения</translation>
+</message>
+<message>
+<source>Enable or disable the read-only mode feature</source>
+<translation>Включить или отключить функцию режима только для чтения</translation>
+</message>
+<message>
+<source>Enable read-only mode</source>
+<translation>Включить режим только для чтения</translation>
+</message>
+<message>
+<source>Start application in read-only mode</source>
+<translation>Запускать приложение в режиме только для чтения</translation>
+</message>
+<message>
+<source>When inactive, enter read-only mode automatically after:</source>
+<translation>При бездействии автоматически переходить в режим только для чтения через:</translation>
+</message>
+<message>
+<source> sec</source>
+<extracomment>short for seconds</extracomment>
+<translation> сек</translation>
+</message>
+<message>
+<source>App instance</source>
+<translation>Экземпляр приложения</translation>
+</message>
+<message>
+<source>Only allow one app instance at the same time</source>
+<translation>Разрешить только один экземпляр приложения одновременно</translation>
+</message>
+<message>
+<source>Keychain</source>
+<translation type="unfinished">Keychain</translation>
+</message>
+<message>
+<source>Maximum time to wait for the system keychain before falling back to SimpleCrypt legacy encryption</source>
+<translation type="unfinished">Maximum time to wait for the system keychain before falling back to SimpleCrypt legacy encryption</translation>
+</message>
+<message>
+<source>Keychain access timeout:</source>
+<translation type="unfinished">Keychain access timeout:</translation>
+</message>
+<message>
+<source>Update dialog</source>
+<translation>Диалог обновления</translation>
+</message>
+<message>
+<source>Don't show the update dialog automatically</source>
+<translation>Не показывать диалог обновления автоматически</translation>
+</message>
+<message>
+<source>Search engine</source>
+<translation>Поисковая система</translation>
+</message>
+<message>
+<source>Note file extensions</source>
+<translation>Расширения файлов заметок</translation>
+</message>
+<message>
+<source>Files with the listed file extensions will be recognized as notes, the selected file extension will be used for new notes.</source>
+<translation>Файлы с перечисленными расширениями будут распознаваться как заметки, выбранное расширение будет использоваться для новых заметок.</translation>
+</message>
+<message>
+<source>Add a new note file extension</source>
+<translation>Добавить новое расширение файла заметки</translation>
+</message>
+<message>
+<source>Remove selected note file extension</source>
+<translation>Удалить выбранное расширение файла заметки</translation>
+</message>
+<message>
+<source>External tools</source>
+<translation type="unfinished">External tools</translation>
+</message>
+<message>
+<source>Path to external editor, leave empty for default</source>
+<translation type="unfinished">Path to external editor, leave empty for default</translation>
+</message>
+<message>
+<source>Path to external editor:</source>
+<translation>Путь к внешнему редактору:</translation>
+</message>
+<message>
+<source>Dialog preferences</source>
+<translation type="unfinished">Dialog preferences</translation>
+</message>
+<message>
+<source>QOwnNotes remembers answers selected with "Don't ask again" and warnings hidden with "Don't show again". Reset these preferences to show those dialogs again.</source>
+<translation type="unfinished">QOwnNotes remembers answers selected with "Don't ask again" and warnings hidden with "Don't show again". Reset these preferences to show those dialogs again.</translation>
+</message>
+<message>
+<source>Forget all "Don't ask again" and "Don't show again" choices</source>
+<translation type="unfinished">Forget all "Don't ask again" and "Don't show again" choices</translation>
+</message>
+<message>
+<source>Reset dialog preferences</source>
+<translation type="unfinished">Reset dialog preferences</translation>
+</message>
+<message>
+<source>set external editor</source>
+<translation>задать внешний редактор</translation>
+</message>
+<message>
+<source>Path to external diff tool:</source>
+<translation type="unfinished">Path to external diff tool:</translation>
+</message>
+<message>
+<source>Path to external diff tool, leave empty for default</source>
+<translation type="unfinished">Path to external diff tool, leave empty for default</translation>
+</message>
+<message>
+<source>set external diff tool</source>
+<translation type="unfinished">set external diff tool</translation>
+</message>
+<message>
+<source>Clear application data and exit</source>
+<translation>Очистить данные приложения и выйти</translation>
+</message>
+<message>
+<source>This button allows you to clear all settings, remove the local todo database and exit QOwnNotes.</source>
+<translation>Эта кнопка позволяет очистить все настройки, удалить локальную базу данных задач и выйти из QOwnNotes.</translation>
+</message>
+<message>
+<source>Clear app data and exit</source>
+<translation>Очистить данные приложения и выйти</translation>
+</message>
+<message>
+<source>Settings</source>
+<translation>Настройки</translation>
+</message>
+<message>
+<source>Import settings</source>
+<translation>Импортировать настройки</translation>
+</message>
+<message>
+<source>Export settings</source>
+<translation>Экспортировать настройки</translation>
+</message>
+<message>
+<source>Database</source>
+<translation>База данных</translation>
+</message>
+<message>
+<source>Reinitialize Database</source>
+<translation>Повторно инициализировать базу данных</translation>
+</message>
+<message>
+<source>Checks the disk database integrity and fixes problems</source>
+<translation>Проверяет целостность базы данных на диске и исправляет проблемы</translation>
+</message>
+<message>
+<source>Check integrity</source>
+<translation>Проверить целостность</translation>
+</message>
+<message>
+<source>Be warned that reinitializing the database will also remove your cached todo items and configured note folders and scripts!</source>
+<translation>Обратите внимание, что повторная инициализация базы данных также удалит кэшированные элементы задач, настроенные папки заметок и скрипты!</translation>
+</message>
+<message>
+<source>Do you really want to clear the local database? This will also remove your configured note folders and your cached todo items!</source>
+<translation>Вы действительно хотите очистить локальную базу данных? Это также удалит настроенные папки заметок и кэшированные элементы задач!</translation>
+</message>
+<message>
+<source>The Database was reinitialized. Please restart the application now!</source>
+<translation>База данных была повторно инициализирована. Пожалуйста, перезапустите приложение!</translation>
+</message>
+<message>
+<source>The integrity of the disk database is valid.</source>
+<translation>Целостность базы данных на диске в порядке.</translation>
+</message>
+<message>
+<source>The integrity of the disk database is not valid!</source>
+<translation>Целостность базы данных на диске нарушена!</translation>
+</message>
+<message>
+<source>Do you really want to clear all settings, remove the database and exit QOwnNotes?
+
+Your notes will stay intact!</source>
+<translation>Вы действительно хотите очистить все настройки, удалить базу данных и выйти из QOwnNotes?
+
+Ваши заметки останутся нетронутыми!</translation>
+</message>
+<message>
+<source>Select editor application</source>
+<translation>Выбрать приложение редактора</translation>
+</message>
+<message>
+<source>Select diff tool application</source>
+<translation type="unfinished">Select diff tool application</translation>
+</message>
+<message>
+<source>File extension</source>
+<translation>Расширение файла</translation>
+</message>
+<message>
+<source>Please enter a new note file extension:</source>
+<translation>Введите новое расширение файла заметки:</translation>
+</message>
+<message>
+<source>Markdown file</source>
+<translation>Файл Markdown</translation>
+</message>
+<message>
+<source>Plain text file</source>
+<translation>Текстовый файл</translation>
+</message>
+<message>
+<source>Remove note file extension</source>
+<translation>Удалить расширение файла заметки</translation>
+</message>
+<message>
+<source>Do you really want to remove the note file extension &lt;strong&gt;%1&lt;/strong&gt;? You will not see files with this extension in the note list any more!</source>
+<translation>Вы действительно хотите удалить расширение файла заметки &lt;strong&gt;%1&lt;/strong&gt;? Вы больше не увидите файлы с этим расширением в списке заметок!</translation>
+</message>
+<message>
+<source>Do you really want to forget all saved dialog choices and show suppressed dialogs again?</source>
+<translation type="unfinished">Do you really want to forget all saved dialog choices and show suppressed dialogs again?</translation>
+</message>
+<message>
+<source>INI files</source>
+<translation>Файлы INI</translation>
+</message>
+<message>
+<source>Do you really want to import settings? Your current settings will get removed and not every setting may get restored, like the note folder settings and which scripts you were using. You also will need to adjust some settings, especially across platforms, but your notes will stay intact!</source>
+<translation>Вы действительно хотите импортировать настройки? Ваши текущие настройки будут удалены, и не все настройки могут быть восстановлены, например настройки папки заметок и используемые скрипты. Вам также потребуется скорректировать некоторые настройки, особенно при переходе между платформами, но ваши заметки останутся нетронутыми!</translation>
+</message>
+<message>
+<source>The application will be restarted after the import.</source>
+<translation>После импорта приложение будет перезапущено.</translation>
+</message>
+</context>
+<context>
+<name>GitSettingsWidget</name>
+<message>
+<source>Commit interval</source>
+<translation>Интервал коммита</translation>
+</message>
+<message>
+<source>sec</source>
+<extracomment>seconds</extracomment>
+<translation>сек</translation>
+</message>
+<message>
+<source>You might run into sync troubles with older versions of Nextcloud / ownCloud sync when going far below 10 sec.
+Just test yourself if you get sync conflicts and set a higher value if so.</source>
+<translation type="unfinished">You might run into sync troubles with older versions of Nextcloud / ownCloud sync when going far below 10 sec.
+Just test yourself if you get sync conflicts and set a higher value if so.</translation>
+</message>
+<message>
+<source>git commit interval time [sec]</source>
+<translation>интервал коммита git [сек]</translation>
+</message>
+<message>
+<source>External git log command to show the git versions of a note</source>
+<translation>Внешняя команда журнала git для отображения версий git заметки</translation>
+</message>
+<message>
+<source>Enter a command to be used to show a git log (like for example "gitk")</source>
+<extracomment>Please don't translate "%notePath%"</extracomment>
+<translation>Введите команду для отображения журнала git (например, "gitk")</translation>
+</message>
+<message>
+<source>You optionally can use "%notePath%" for the path of the note.</source>
+<extracomment>Please don't translate "%notePath%"</extracomment>
+<translation>При желании вы можете использовать "%notePath%" для пути к заметке.</translation>
+</message>
+<message>
+<source>If you use this setting you will get a new menu entry to show the git versions if you right-click a note.</source>
+<extracomment>Please don't translate "%notePath%"</extracomment>
+<translation>Если использовать эту настройку, при щелчке правой кнопкой мыши по заметке появится новый пункт меню для отображения версий git.</translation>
+</message>
+<message>
+<source>Git client</source>
+<translation>Клиент Git</translation>
+</message>
+<message>
+<source>Path to git client, leave empty for default</source>
+<translation>Путь к клиенту git, оставьте пустым для использования по умолчанию</translation>
+</message>
+<message>
+<source>Path to git executable:</source>
+<translation>Путь к исполняемому файлу git:</translation>
+</message>
+<message>
+<source>Select the path of the git binary</source>
+<translation>Выбрать путь к исполняемому файлу git</translation>
+</message>
+<message>
+<source>Don't forget to enable git support for your note folders and to configure your name and email address for your git client, for example with these terminal commands:</source>
+<translation>Не забудьте включить поддержку git для папок заметок и настроить имя и адрес электронной почты для клиента git, например с помощью следующих команд терминала:</translation>
+</message>
+<message>
+<source>Git library</source>
+<translation>Библиотека Git</translation>
+</message>
+<message>
+<source>Support for the git library libgit2 is activated.</source>
+<translation>Поддержка библиотеки git libgit2 активирована.</translation>
+</message>
+<message>
+<source>Don't forget to enable git support for your note folders.</source>
+<translation>Не забудьте включить поддержку git для папок заметок.</translation>
+</message>
+<message>
+<source>You can download your git client here: &lt;a href="%url"&gt;Git for Windows&lt;/a&gt;</source>
+<translation>Вы можете скачать клиент git здесь: &lt;a href="%url"&gt;Git для Windows&lt;/a&gt;</translation>
+</message>
+<message>
+<source>Executable files</source>
+<translation>Исполняемые файлы</translation>
+</message>
+<message>
+<source>All files</source>
+<translation>Все файлы</translation>
+</message>
+<message>
+<source>Please select the path of your git executable</source>
+<translation>Выберите путь к исполняемому файлу git</translation>
+</message>
+</context>
+<context>
+<name>HarperChecker</name>
+<message>
+<source>Harper is unavailable: %1</source>
+<translation type="unfinished">Harper is unavailable: %1</translation>
+</message>
+</context>
+<context>
+<name>HarperClient</name>
+<message>
+<source>Harper request timed out</source>
+<translation type="unfinished">Harper request timed out</translation>
+</message>
+<message>
+<source>Harper service stopped unexpectedly</source>
+<translation type="unfinished">Harper service stopped unexpectedly</translation>
+</message>
+<message>
+<source>Harper transport is not configured</source>
+<translation type="unfinished">Harper transport is not configured</translation>
+</message>
+<message>
+<source>Waiting before retrying the Harper TCP connection</source>
+<translation type="unfinished">Waiting before retrying the Harper TCP connection</translation>
+</message>
+<message>
+<source>Unsupported Harper request: %1</source>
+<translation type="unfinished">Unsupported Harper request: %1</translation>
+</message>
+<message>
+<source>Harper initialization failed</source>
+<translation type="unfinished">Harper initialization failed</translation>
+</message>
+</context>
+<context>
+<name>HarperSettingsWidget</name>
+<message>
+<source>Harper</source>
+<translation type="unfinished">Harper</translation>
+</message>
+<message>
+<source>Enable offline grammar and style checking with Harper</source>
+<translation type="unfinished">Enable offline grammar and style checking with Harper</translation>
+</message>
+<message>
+<source>Transport:</source>
+<translation type="unfinished">Transport:</translation>
+</message>
+<message>
+<source>Connection:</source>
+<translation type="unfinished">Connection:</translation>
+</message>
+<message>
+<source>Command / binary path:</source>
+<translation type="unfinished">Command / binary path:</translation>
+</message>
+<message>
+<source>Browse</source>
+<translation type="unfinished">Browse</translation>
+</message>
+<message>
+<source>Auto-detect</source>
+<translation type="unfinished">Auto-detect</translation>
+</message>
+<message>
+<source>Server address:</source>
+<translation type="unfinished">Server address:</translation>
+</message>
+<message>
+<source>Port:</source>
+<translation type="unfinished">Port:</translation>
+</message>
+<message>
+<source>Dialect:</source>
+<translation type="unfinished">Dialect:</translation>
+</message>
+<message>
+<source>Check delay:</source>
+<translation type="unfinished">Check delay:</translation>
+</message>
+<message>
+<source> ms</source>
+<translation type="unfinished"> ms</translation>
+</message>
+<message>
+<source>Linters:</source>
+<translation type="unfinished">Linters:</translation>
+</message>
+<message>
+<source>Spell Check</source>
+<translation type="unfinished">Spell Check</translation>
+</message>
+<message>
+<source>Sentence Capitalization</source>
+<translation type="unfinished">Sentence Capitalization</translation>
+</message>
+<message>
+<source>Repeated Words</source>
+<translation type="unfinished">Repeated Words</translation>
+</message>
+<message>
+<source>Long Sentences</source>
+<translation type="unfinished">Long Sentences</translation>
+</message>
+<message>
+<source>An vs A</source>
+<translation type="unfinished">An vs A</translation>
+</message>
+<message>
+<source>Unclosed Quotes</source>
+<translation type="unfinished">Unclosed Quotes</translation>
+</message>
+<message>
+<source>Correct Number Suffix</source>
+<translation type="unfinished">Correct Number Suffix</translation>
+</message>
+<message>
+<source>Spaces</source>
+<translation type="unfinished">Spaces</translation>
+</message>
+<message>
+<source>Quote Spacing</source>
+<translation type="unfinished">Quote Spacing</translation>
+</message>
+<message>
+<source>No French Spaces</source>
+<translation type="unfinished">No French Spaces</translation>
+</message>
+<message>
+<source>Wrong Apostrophe</source>
+<translation type="unfinished">Wrong Apostrophe</translation>
+</message>
+<message>
+<source>Not tested yet.</source>
+<translation type="unfinished">Not tested yet.</translation>
+</message>
+<message>
+<source>Spelled Numbers</source>
+<translation type="unfinished">Spelled Numbers</translation>
+</message>
+<message>
+<source>Ignored:</source>
+<translation type="unfinished">Ignored:</translation>
+</message>
+<message>
+<source>Reset ignored rules</source>
+<translation type="unfinished">Reset ignored rules</translation>
+</message>
+<message>
+<source>Reset ignored words</source>
+<translation type="unfinished">Reset ignored words</translation>
+</message>
+<message>
+<source>Status:</source>
+<translation type="unfinished">Status:</translation>
+</message>
+<message>
+<source>Test Connection</source>
+<translation type="unfinished">Test Connection</translation>
+</message>
+<message>
+<source>Stdio (recommended)</source>
+<translation type="unfinished">Stdio (recommended)</translation>
+</message>
+<message>
+<source>TCP</source>
+<translation type="unfinished">TCP</translation>
+</message>
+<message>
+<source>American</source>
+<translation type="unfinished">American</translation>
+</message>
+<message>
+<source>British</source>
+<translation type="unfinished">British</translation>
+</message>
+<message>
+<source>Australian</source>
+<translation type="unfinished">Australian</translation>
+</message>
+<message>
+<source>Canadian</source>
+<translation type="unfinished">Canadian</translation>
+</message>
+<message>
+<source>Indian</source>
+<translation type="unfinished">Indian</translation>
+</message>
+<message>
+<source>Harper support is not available in this build.</source>
+<translation type="unfinished">Harper support is not available in this build.</translation>
+</message>
+<message>
+<source>harper-ls was not found.</source>
+<translation type="unfinished">harper-ls was not found.</translation>
+</message>
+<message>
+<source>Found Harper at %1</source>
+<translation type="unfinished">Found Harper at %1</translation>
+</message>
+<message>
+<source>Found Harper %1 at %2</source>
+<translation type="unfinished">Found Harper %1 at %2</translation>
+</message>
+<message>
+<source>TCP target %1:%2</source>
+<translation type="unfinished">TCP target %1:%2</translation>
+</message>
+<message>
+<source>Select Harper binary</source>
+<translation type="unfinished">Select Harper binary</translation>
+</message>
+<message>
+<source>Could not find harper-ls in PATH.</source>
+<translation type="unfinished">Could not find harper-ls in PATH.</translation>
+</message>
+<message>
+<source>Harper connection successful.</source>
+<translation type="unfinished">Harper connection successful.</translation>
+</message>
+<message>
+<source>Harper connection failed: %1</source>
+<translation type="unfinished">Harper connection failed: %1</translation>
+</message>
+<message>
+<source>There are no ignored rules to reset.</source>
+<translation type="unfinished">There are no ignored rules to reset.</translation>
+</message>
+<message numerus="yes">
+<source>Reset %n ignored rule(s)?</source>
+<translation type="unfinished">
+<numerusform>Reset %n ignored rule(s)?</numerusform>
+<numerusform>Reset %n ignored rule(s)?</numerusform>
+<numerusform>Reset %n ignored rule(s)?</numerusform>
+<numerusform>Reset %n ignored rule(s)?</numerusform>
+</translation>
+</message>
+<message>
+<source>All ignored rules have been reset.</source>
+<translation type="unfinished">All ignored rules have been reset.</translation>
+</message>
+<message>
+<source>There are no ignored words to reset.</source>
+<translation type="unfinished">There are no ignored words to reset.</translation>
+</message>
+<message numerus="yes">
+<source>Reset %n ignored word(s)?</source>
+<translation type="unfinished">
+<numerusform>Reset %n ignored word(s)?</numerusform>
+<numerusform>Reset %n ignored word(s)?</numerusform>
+<numerusform>Reset %n ignored word(s)?</numerusform>
+<numerusform>Reset %n ignored word(s)?</numerusform>
+</translation>
+</message>
+<message>
+<source>All ignored words have been reset.</source>
+<translation type="unfinished">All ignored words have been reset.</translation>
+</message>
+</context>
+<context>
+<name>HtmlPreviewWidgetInternal</name>
+<message>
+<source>Copy</source>
+<translation>Копировать</translation>
+</message>
+<message>
+<source>Copy image file path</source>
+<translation>Скопировать путь к файлу изображения</translation>
+</message>
+<message>
+<source>Copy image to clipboard</source>
+<translation>Скопировать изображение в буфер обмена</translation>
+</message>
+<message>
+<source>Copy link location</source>
+<translation>Копировать местоположение ссылки</translation>
+</message>
+<message>
+<source>Export generated raw HTML</source>
+<translation>Экспорт сгенерированного исходного HTML-кода</translation>
 </message>
 <message>
 <source>Reset zoom</source>
-<translation type="unfinished">Reset zoom</translation>
+<translation>Сбросить масштаб</translation>
+</message>
+<message>
+<source>HTML files</source>
+<translation>HTML-файлы</translation>
+</message>
+<message>
+<source>Export preview as raw HTML file</source>
+<comment>"Raw" means that actually the html that was fed to the preview will be stored (the QTextBrowser modifies the html that it is showing)</comment>
+<translation>Экспорт предпросмотра в виде исходного HTML-файла</translation>
 </message>
 </context>
 <context>
@@ -1324,6 +3107,401 @@
 </message>
 </context>
 <context>
+<name>InterfaceSettingsWidget</name>
+<message>
+<source>Interface language</source>
+<translation>Язык интерфейса</translation>
+</message>
+<message>
+<source>If you want to help to translate QOwnNotes or update an existing translation please read: &lt;a href="%1"&gt;How can I help to translate QOwnNotes?&lt;/a&gt;</source>
+<translation>Если вы хотите помочь с переводом QOwnNotes или обновить существующий перевод, прочитайте: &lt;a href="%1"&gt;Как я могу помочь с переводом QOwnNotes?&lt;/a&gt;</translation>
+</message>
+<message>
+<source>If you change the language you have to restart the application for the changes to take action.</source>
+<translation>Если вы измените язык, для применения изменений необходимо перезапустить приложение.</translation>
+</message>
+<message>
+<source>Automatic</source>
+<translation>Автоматически</translation>
+</message>
+<message>
+<source>Indonesian</source>
+<translation>Индонезийский</translation>
+</message>
+<message>
+<source>Malay</source>
+<translation>Малайский</translation>
+</message>
+<message>
+<source>Bengali</source>
+<translation>Бенгальский</translation>
+</message>
+<message>
+<source>Bosnian</source>
+<translation>Боснийский</translation>
+</message>
+<message>
+<source>Bulgarian</source>
+<translation>Болгарский</translation>
+</message>
+<message>
+<source>Catalan</source>
+<translation>Каталанский</translation>
+</message>
+<message>
+<source>Cebuano</source>
+<translation>Себуанский</translation>
+</message>
+<message>
+<source>Czech</source>
+<translation>Чешский</translation>
+</message>
+<message>
+<source>Danish</source>
+<translation>Датский</translation>
+</message>
+<message>
+<source>German</source>
+<translation>Немецкий</translation>
+</message>
+<message>
+<source>Basque</source>
+<translation>Баскский</translation>
+</message>
+<message>
+<source>English</source>
+<translation>Английский</translation>
+</message>
+<message>
+<source>English (British)</source>
+<translation>Английский (британский)</translation>
+</message>
+<message>
+<source>Spanish</source>
+<translation>Испанский</translation>
+</message>
+<message>
+<source>Estonian</source>
+<translation>Эстонский</translation>
+</message>
+<message>
+<source>Filipino</source>
+<translation>Филиппинский</translation>
+</message>
+<message>
+<source>Finnish</source>
+<translation>Финский</translation>
+</message>
+<message>
+<source>French</source>
+<translation>Французский</translation>
+</message>
+<message>
+<source>Irish</source>
+<translation>Ирландский</translation>
+</message>
+<message>
+<source>Galician</source>
+<translation>Галисийский</translation>
+</message>
+<message>
+<source>Greek</source>
+<translation>Греческий</translation>
+</message>
+<message>
+<source>Hausa</source>
+<translation>Хауса</translation>
+</message>
+<message>
+<source>Hebrew</source>
+<translation>Иврит</translation>
+</message>
+<message>
+<source>Hindi</source>
+<translation>Хинди</translation>
+</message>
+<message>
+<source>Croatian</source>
+<translation>Хорватский</translation>
+</message>
+<message>
+<source>Hiligaynon</source>
+<translation>Хилигайнон</translation>
+</message>
+<message>
+<source>Icelandic</source>
+<translation>Исландский</translation>
+</message>
+<message>
+<source>Italian</source>
+<translation>Итальянский</translation>
+</message>
+<message>
+<source>Korean</source>
+<translation>Корейский</translation>
+</message>
+<message>
+<source>Kurdish</source>
+<translation>Курдский</translation>
+</message>
+<message>
+<source>Khmer</source>
+<translation>Кхмерский</translation>
+</message>
+<message>
+<source>Latvian</source>
+<translation>Латышский</translation>
+</message>
+<message>
+<source>Lithuanian</source>
+<translation>Литовский</translation>
+</message>
+<message>
+<source>Macedonian</source>
+<translation>Македонский</translation>
+</message>
+<message>
+<source>Māori</source>
+<translation>Маори</translation>
+</message>
+<message>
+<source>Hungarian</source>
+<translation>Венгерский</translation>
+</message>
+<message>
+<source>Norwegian</source>
+<translation>Норвежский</translation>
+</message>
+<message>
+<source>Japanese</source>
+<translation>Японский</translation>
+</message>
+<message>
+<source>Dutch</source>
+<translation>Нидерландский</translation>
+</message>
+<message>
+<source>Persian</source>
+<translation>Персидский</translation>
+</message>
+<message>
+<source>Uzbek</source>
+<translation>Узбекский</translation>
+</message>
+<message>
+<source>Polish</source>
+<translation>Польский</translation>
+</message>
+<message>
+<source>Brazilian Portuguese</source>
+<translation>Бразильский португальский</translation>
+</message>
+<message>
+<source>Portuguese</source>
+<translation>Португальский</translation>
+</message>
+<message>
+<source>Punjabi</source>
+<translation>Панджабский</translation>
+</message>
+<message>
+<source>Romanian</source>
+<translation>Румынский</translation>
+</message>
+<message>
+<source>Russian</source>
+<translation>Русский</translation>
+</message>
+<message>
+<source>Serbian</source>
+<translation>Сербский</translation>
+</message>
+<message>
+<source>Albanian</source>
+<translation>Албанский</translation>
+</message>
+<message>
+<source>Shona</source>
+<translation>Шона</translation>
+</message>
+<message>
+<source>Sinhala</source>
+<translation>Сингальский</translation>
+</message>
+<message>
+<source>Slovak</source>
+<translation>Словацкий</translation>
+</message>
+<message>
+<source>Slovenian</source>
+<translation>Словенский</translation>
+</message>
+<message>
+<source>Swedish</source>
+<translation>Шведский</translation>
+</message>
+<message>
+<source>Tagalog</source>
+<translation>Тагальский</translation>
+</message>
+<message>
+<source>Thai</source>
+<translation>Тайский</translation>
+</message>
+<message>
+<source>Vietnamese</source>
+<translation>Вьетнамский</translation>
+</message>
+<message>
+<source>Turkish</source>
+<translation>Турецкий</translation>
+</message>
+<message>
+<source>Xhosa</source>
+<translation>Коса</translation>
+</message>
+<message>
+<source>Ukrainian</source>
+<translation>Украинский</translation>
+</message>
+<message>
+<source>Urdu</source>
+<translation>Урду</translation>
+</message>
+<message>
+<source>Yiddish</source>
+<translation>Идиш</translation>
+</message>
+<message>
+<source>Zulu</source>
+<translation>Зулу</translation>
+</message>
+<message>
+<source>Chinese Simplified</source>
+<translation>Китайский упрощённый</translation>
+</message>
+<message>
+<source>Chinese Traditional</source>
+<translation>Китайский традиционный</translation>
+</message>
+<message>
+<source>Arabic</source>
+<translation>Арабский</translation>
+</message>
+<message>
+<source>Search for language</source>
+<translation>Поиск языка</translation>
+</message>
+<message>
+<source>System tray</source>
+<translation>Системный лоток</translation>
+</message>
+<message>
+<source>You need to restart the application to let this setting take effect</source>
+<translation>Для применения этой настройки необходимо перезапустить приложение</translation>
+</message>
+<message>
+<source>Show system tray icon</source>
+<translation>Показывать значок в системном лотке</translation>
+</message>
+<message>
+<source>Start application hidden</source>
+<translation>Запускать приложение в скрытом режиме</translation>
+</message>
+<message>
+<source>Interface style</source>
+<translation>Стиль интерфейса</translation>
+</message>
+<message>
+<source>Icons</source>
+<translation>Значки</translation>
+</message>
+<message>
+<source>Hide icons in menus as well as the "Find action" dialog. Requires restart to take effect</source>
+<translation>Скрывать значки в меню и диалоге «Найти действие». Требуется перезапуск</translation>
+</message>
+<message>
+<source>Hide menu icons</source>
+<translation>Скрывать значки меню</translation>
+</message>
+<message>
+<source>Item sizes in the main window</source>
+<translation>Размеры элементов в главном окне</translation>
+</message>
+<message>
+<source>List and tree item height:</source>
+<translation>Высота элементов списка и дерева:</translation>
+</message>
+<message>
+<source>Toolbar icon size:</source>
+<translation>Размер значков панели инструментов:</translation>
+</message>
+<message>
+<source>Reset the icon size</source>
+<translation>Сбросить размер значков</translation>
+</message>
+<message>
+<source>Reset the item height</source>
+<translation>Сбросить высоту элементов</translation>
+</message>
+<message>
+<source>Override interface font size</source>
+<translation>Переопределить размер шрифта интерфейса</translation>
+</message>
+<message>
+<source>Interface font size:</source>
+<translation>Размер шрифта интерфейса:</translation>
+</message>
+<message>
+<source>Override interface scaling factor</source>
+<translation>Переопределить масштаб интерфейса</translation>
+</message>
+<message>
+<source>Interface scaling factor:</source>
+<translation>Масштаб интерфейса:</translation>
+</message>
+<message>
+<source>Status bar</source>
+<translation>Строка состояния</translation>
+</message>
+<message>
+<source>Show note path</source>
+<translation>Показывать путь к заметке</translation>
+</message>
+<message>
+<source>Only show relative note path</source>
+<translation>Показывать только относительный путь к заметке</translation>
+</message>
+<message>
+<source>Distraction free mode</source>
+<translation>Режим без отвлечений</translation>
+</message>
+<message>
+<source>Open distraction free mode in full-screen</source>
+<translation>Открывать режим без отвлечений на весь экран</translation>
+</message>
+<message>
+<source>Hide status bar in distraction free mode</source>
+<translation>Скрывать строку состояния в режиме без отвлечений</translation>
+</message>
+<message>
+<source>Menu bar</source>
+<translation>Строка меню</translation>
+</message>
+<message>
+<source>Show menu bar item</source>
+<translation>Показывать элемент строки меню</translation>
+</message>
+<message>
+<source>Automatic (needs restart)</source>
+<translation>Автоматически (требуется перезапуск)</translation>
+</message>
+<message>
+<source>If you had this setting enabled, you now need to restart the application manually so the previous environment variable that overrides the scale factor is not in your environment again.</source>
+<translation>Если эта настройка была включена, теперь необходимо вручную перезапустить приложение, чтобы предыдущая переменная среды, переопределяющая масштаб, больше не присутствовала в вашей среде.</translation>
+</message>
+</context>
+<context>
 <name>IssueAssistantDialog</name>
 <message>
 <source>Minimum 8 characters</source>
@@ -1338,11 +3516,11 @@
 <name>JoplinImportDialog</name>
 <message>
 <source>Joplin Import</source>
-<translation type="unfinished">Joplin Import</translation>
+<translation>Импорт из Joplin</translation>
 </message>
 <message>
 <source>Import folders</source>
-<translation>Импорт заметок</translation>
+<translation>Импорт из папок</translation>
 </message>
 <message>
 <source>Please select the "RAW - Joplin Export Directory" from which you want to import notes:</source>
@@ -1362,11 +3540,11 @@
 </message>
 <message>
 <source>Import notes</source>
-<translation type="unfinished">Import notes</translation>
+<translation>Импорт заметок</translation>
 </message>
 <message>
 <source>Import tags</source>
-<translation>Импорт тэгов</translation>
+<translation>Импорт тегов</translation>
 </message>
 <message>
 <source>If you just have a "JEX - Joplin Export File" please extract the content of that file to a directory and select that directory.</source>
@@ -1374,109 +3552,388 @@
 </message>
 <message>
 <source>Import metadata</source>
-<translation type="unfinished">Import metadata</translation>
+<translation>Импортировать метаданные</translation>
 </message>
 <message>
 <source>RAW - Joplin Export Directory</source>
-<translation type="unfinished">RAW - Joplin Export Directory</translation>
+<translation>RAW — каталог экспорта Joplin</translation>
 </message>
 <message>
 <source>Import attachments</source>
-<translation type="unfinished">Import attachments</translation>
+<translation>Импортировать вложения</translation>
 </message>
 <message>
 <source>Select 'RAW - Joplin Export Directory' to import</source>
-<translation type="unfinished">Select 'RAW - Joplin Export Directory' to import</translation>
+<translation>Выберите "RAW — каталог экспорта Joplin" для импорта</translation>
 </message>
 </context>
 <context>
-<name>LayoutWidget</name>
+<name>LanguageToolChecker</name>
 <message>
-<source>Use layout</source>
-<translation>Использовать макет</translation>
+<source>LanguageTool is unavailable: %1</source>
+<translation>LanguageTool недоступен: %1</translation>
+</message>
+</context>
+<context>
+<name>LanguageToolClient</name>
+<message>
+<source>Invalid LanguageTool server URL</source>
+<translation>Недопустимый URL сервера LanguageTool</translation>
+</message>
+</context>
+<context>
+<name>LanguageToolSettingsWidget</name>
+<message>
+<source>LanguageTool</source>
+<translation type="unfinished">LanguageTool</translation>
 </message>
 <message>
-<source>Keep in mind that workspaces that demand that there is no central widget will not work properly if the central widget is enabled.</source>
-<translation>
-Имейте в виду, что рабочие пространства, требующие отсутствия центрального виджета, не будут работать должным образом, если центральный виджет включен.</translation>
+<source>Enable grammar and style checking with LanguageTool</source>
+<translation>Включить проверку грамматики и стиля с помощью LanguageTool</translation>
 </message>
 <message>
-<source>Use new layout</source>
-<translation>Использовать новый макет</translation>
+<source>Server URL:</source>
+<translation>URL сервера:</translation>
 </message>
 <message>
-<source>Do you want to use the selected layout?</source>
-<translation>Вы хотите использовать выбранный макет?</translation>
+<source>Test Connection</source>
+<translation>Проверить соединение</translation>
 </message>
 <message>
-<source>The application will be restarted afterward.</source>
-<translation type="unfinished">The application will be restarted afterward.</translation>
+<source>Language:</source>
+<translation>Язык:</translation>
+</message>
+<message>
+<source>API key:</source>
+<translation>Ключ API:</translation>
+</message>
+<message>
+<source>Optional premium or cloud API key</source>
+<translation>Необязательный премиум или облачный ключ API</translation>
+</message>
+<message>
+<source>Check delay:</source>
+<translation>Задержка проверки:</translation>
+</message>
+<message>
+<source> ms</source>
+<translation> мс</translation>
+</message>
+<message>
+<source>Categories:</source>
+<translation>Категории:</translation>
+</message>
+<message>
+<source>Spelling</source>
+<translation>Орфография</translation>
+</message>
+<message>
+<source>Grammar</source>
+<translation>Грамматика</translation>
+</message>
+<message>
+<source>Style</source>
+<translation>Стиль</translation>
+</message>
+<message>
+<source>Punctuation</source>
+<translation>Пунктуация</translation>
+</message>
+<message>
+<source>Typography</source>
+<translation>Типографика</translation>
+</message>
+<message>
+<source>Ignored:</source>
+<translation>Игнорируется:</translation>
+</message>
+<message>
+<source>Reset all ignored LanguageTool rules so they are checked again</source>
+<translation>Сбросить все игнорируемые правила LanguageTool для повторной проверки</translation>
+</message>
+<message>
+<source>Reset ignored rules</source>
+<translation>Сбросить игнорируемые правила</translation>
+</message>
+<message>
+<source>Reset all ignored words so they are checked by LanguageTool again</source>
+<translation>Сбросить все игнорируемые слова для повторной проверки LanguageTool</translation>
+</message>
+<message>
+<source>Reset ignored words</source>
+<translation>Сбросить игнорируемые слова</translation>
+</message>
+<message>
+<source>Auto-detect</source>
+<translation>Автоопределение</translation>
+</message>
+<message>
+<source>LanguageTool connection successful.</source>
+<translation>Соединение с LanguageTool установлено.</translation>
+</message>
+<message>
+<source>LanguageTool connection failed: %1</source>
+<translation>Соединение с LanguageTool не удалось: %1</translation>
+</message>
+<message>
+<source>There are no ignored rules to reset.</source>
+<translation>Нет игнорируемых правил для сброса.</translation>
+</message>
+<message numerus="yes">
+<source>Reset %n ignored rule(s)?</source>
+<translation type="unfinished">
+<numerusform>Сбросить игнорируемое правило?</numerusform>
+<numerusform>Сбросить %n игнорируемых правила?</numerusform>
+<numerusform>Сбросить %n игнорируемых правил?</numerusform>
+<numerusform>Reset %n ignored rule(s)?</numerusform>
+</translation>
+</message>
+<message>
+<source>All ignored rules have been reset.</source>
+<translation>Все игнорируемые правила сброшены.</translation>
+</message>
+<message>
+<source>There are no ignored words to reset.</source>
+<translation>Нет игнорируемых слов для сброса.</translation>
+</message>
+<message numerus="yes">
+<source>Reset %n ignored word(s)?</source>
+<translation type="unfinished">
+<numerusform>Сбросить игнорируемое слово?</numerusform>
+<numerusform>Сбросить %n игнорируемых слова?</numerusform>
+<numerusform>Сбросить %n игнорируемых слов?</numerusform>
+<numerusform>Reset %n ignored word(s)?</numerusform>
+</translation>
+</message>
+<message>
+<source>All ignored words have been reset.</source>
+<translation>Все игнорируемые слова сброшены.</translation>
+</message>
+</context>
+<context>
+<name>LayoutManager</name>
+<message>
+<source>Layouts</source>
+<translation>Макеты</translation>
+</message>
+<message>
+<source>full</source>
+<comment>full layout</comment>
+<translation>полный</translation>
+</message>
+<message>
+<source>minimal</source>
+<comment>minimal layout</comment>
+<translation>минимальный</translation>
+</message>
+<message>
+<source>Create new layout</source>
+<translation>Создать новый макет</translation>
+</message>
+<message>
+<source>Layout name:</source>
+<translation>Название макета:</translation>
+</message>
+<message>
+<source>Remove current layout</source>
+<translation>Удалить текущий макет</translation>
+</message>
+<message>
+<source>Remove the current layout?</source>
+<translation>Удалить текущий макет?</translation>
+</message>
+<message>
+<source>Rename layout</source>
+<translation>Переименовать макет</translation>
+</message>
+</context>
+<context>
+<name>LayoutPresetWidget</name>
+<message>
+<source>Use preset</source>
+<translation>Использовать пресет</translation>
+</message>
+<message>
+<source>Use new layout preset</source>
+<translation>Использовать новый пресет макета</translation>
+</message>
+<message>
+<source>Do you want to use the selected layout preset?</source>
+<translation>Вы хотите использовать выбранный пресет макета?</translation>
 </message>
 <message>
 <source>Minimal</source>
-<comment>Layout name</comment>
+<comment>Layout preset name</comment>
 <translation>Минимальный</translation>
 </message>
 <message>
 <source>Full</source>
-<comment>Layout name</comment>
+<comment>Layout preset name</comment>
 <translation>Полный</translation>
 </message>
 <message>
 <source>Preview only</source>
-<comment>Layout name</comment>
+<comment>Layout preset name</comment>
 <translation>Только предварительный просмотр</translation>
 </message>
 <message>
 <source>Full vertical</source>
-<comment>Layout name</comment>
+<comment>Layout preset name</comment>
 <translation>Полный вертикальный</translation>
 </message>
 <message>
 <source>Single column</source>
-<comment>Layout name</comment>
-<translation>В один столбец</translation>
+<comment>Layout preset name</comment>
+<translation>Один столбец</translation>
 </message>
 <message>
 <source>The note edit panel is the central widget that will be resized automatically.</source>
-<comment>Layout description</comment>
-<translation>Панель редактирования заметки - это центральный виджет, размер которого будет изменён автоматически.</translation>
+<comment>Layout preset description</comment>
+<translation>Панель редактирования заметок является центральным виджетом, размер которого изменяется автоматически.</translation>
 </message>
 <message>
 <source>Because of this there is no central widget that will be resized automatically.</source>
-<comment>Layout description</comment>
-<translation>Из-за этого отсутствует центральный виджет, размер которого будет изменён автоматически.</translation>
+<comment>Layout preset description</comment>
+<translation>Поэтому нет центрального виджета, размер которого изменяется автоматически.</translation>
+</message>
+<message>
+<source>The note preview panel is the central widget that will be resized automatically.</source>
+<comment>Layout preset description</comment>
+<translation type="unfinished">The note preview panel is the central widget that will be resized automatically.</translation>
 </message>
 <message>
 <source>Just the note list on the left and the note edit panel on the right are enabled by default.</source>
-<comment>Layout description</comment>
-<translation>Только список заметок слева и панель редактирования заметок справа включены по умолчанию.</translation>
+<comment>Layout preset description</comment>
+<translation>По умолчанию включены только список заметок слева и панель редактирования заметок справа.</translation>
 </message>
 <message>
 <source>Most of the panels, like the note list on the left, the tagging panels, the note edit panel in the center and the preview panel on the right are enabled by default.</source>
-<comment>Layout description</comment>
-<translation>Большинство панелей, таких как список заметок слева, панели тегов, панель редактирования заметок в центре и панель предварительного просмотра справа, включены по умолчанию.</translation>
+<comment>Layout preset description</comment>
+<translation>По умолчанию большинство панелей включено: список заметок слева, панели тегов, панель редактирования заметок в центре и панель предварительного просмотра справа.</translation>
 </message>
 <message>
-<source>Most of the panels, like the note list on the left, the tagging panels, and only the preview panel on the right are enabled by default. You will need another workspace to actually edit notes!</source>
-<comment>Layout description</comment>
-<translation>Большинство панелей, таких как список заметок слева, панели тегов и панель только предварительного просмотра справа, включены по умолчанию. Вам понадобится другое рабочее пространство для редактирования заметок!</translation>
+<source>Most of the panels, like the note list on the left, the tagging panels, and only the preview panel on the right are enabled by default. You will need another layout to actually edit notes!</source>
+<comment>Layout preset description</comment>
+<translation>По умолчанию включено большинство панелей: список заметок слева, панели тегов и только панель предварительного просмотра справа. Для редактирования заметок потребуется другой макет!</translation>
 </message>
 <message>
 <source>Most of the panels, like the note list on the left, the tagging panels, the note edit panel on the right and the preview panel on top of the note edit panel are enabled by default.</source>
-<comment>Layout description</comment>
-<translation>Большинство панелей, таких как список заметок слева, панели тегов, панель редактирования заметок справа и панель предварительного просмотра сверху над панелью редактирования заметок, включены по умолчанию.</translation>
+<comment>Layout preset description</comment>
+<translation>По умолчанию включено большинство панелей: список заметок слева, панели тегов, панель редактирования заметок справа и панель предварительного просмотра над панелью редактирования заметок.</translation>
 </message>
 <message>
 <source>Tiny one column layout with note search, note list and note edit on top of each other.</source>
-<comment>Layout description</comment>
-<translation>Крошечный макет в виде одной колонки с поиском заметок, списком заметок и редактированием заметок друг над другом.</translation>
+<comment>Layout preset description</comment>
+<translation>Компактный одностолбцовый макет с поиском заметок, списком заметок и редактором заметок, расположенными друг над другом.</translation>
+</message>
+</context>
+<context>
+<name>LayoutsSettingsWidget</name>
+<message>
+<source>Layouts</source>
+<translation type="unfinished">Layouts</translation>
+</message>
+<message>
+<source>Create, rename, remove, and order layouts. Changes on this page are applied immediately.</source>
+<translation type="unfinished">Create, rename, remove, and order layouts. Changes on this page are applied immediately.</translation>
+</message>
+<message>
+<source>Add from current</source>
+<translation type="unfinished">Add from current</translation>
+</message>
+<message>
+<source>Creates a new layout by copying the current panel and toolbar arrangement, panel visibility, and central-widget setting. The new layout becomes active immediately.</source>
+<translation type="unfinished">Creates a new layout by copying the current panel and toolbar arrangement, panel visibility, and central-widget setting. The new layout becomes active immediately.</translation>
+</message>
+<message>
+<source>Add from preset...</source>
+<translation type="unfinished">Add from preset...</translation>
+</message>
+<message>
+<source>Opens the layout preset selector in a new dialog</source>
+<translation type="unfinished">Opens the layout preset selector in a new dialog</translation>
+</message>
+<message>
+<source>Switch to selected</source>
+<translation type="unfinished">Switch to selected</translation>
+</message>
+<message>
+<source>Switches to the selected layout</source>
+<translation type="unfinished">Switches to the selected layout</translation>
+</message>
+<message>
+<source>Remove</source>
+<translation type="unfinished">Remove</translation>
+</message>
+<message>
+<source>Rename</source>
+<translation type="unfinished">Rename</translation>
+</message>
+<message>
+<source>Move up</source>
+<translation type="unfinished">Move up</translation>
+</message>
+<message>
+<source>Move down</source>
+<translation type="unfinished">Move down</translation>
+</message>
+<message>
+<source>Selected layout</source>
+<translation type="unfinished">Selected layout</translation>
+</message>
+<message>
+<source>Create layout from preset</source>
+<translation type="unfinished">Create layout from preset</translation>
+</message>
+<message>
+<source>Create a new layout from a built-in preset. Panel positions can be changed after unlocking panels.</source>
+<translation type="unfinished">Create a new layout from a built-in preset. Panel positions can be changed after unlocking panels.</translation>
+</message>
+<message>
+<source>Add layout</source>
+<translation type="unfinished">Add layout</translation>
+</message>
+<message>
+<source>Central widget:</source>
+<translation type="unfinished">Central widget:</translation>
+</message>
+<message>
+<source>Note edit</source>
+<translation type="unfinished">Note edit</translation>
+</message>
+<message>
+<source>Note preview</source>
+<translation type="unfinished">Note preview</translation>
+</message>
+<message>
+<source>No central widget</source>
+<translation type="unfinished">No central widget</translation>
+</message>
+<message>
+<source>The central widget automatically uses the space left by the surrounding panels</source>
+<translation type="unfinished">The central widget automatically uses the space left by the surrounding panels</translation>
+</message>
+<message>
+<source>Layout name:</source>
+<translation type="unfinished">Layout name:</translation>
+</message>
+<message>
+<source>Remove layout</source>
+<translation type="unfinished">Remove layout</translation>
+</message>
+<message>
+<source>Remove the selected layout?</source>
+<translation type="unfinished">Remove the selected layout?</translation>
+</message>
+<message>
+<source>Rename layout</source>
+<translation type="unfinished">Rename layout</translation>
 </message>
 </context>
 <context>
 <name>LinkDialog</name>
 <message>
-<source>Link an url or note</source>
+<source>Link to a URL or note</source>
 <translation>Ссылка на URL-адрес или заметку</translation>
 </message>
 <message>
@@ -1492,12 +3949,36 @@
 <translation>Выберите локальный файл или каталог для ссылки</translation>
 </message>
 <message>
+<source>Clear link name and fetch title of webpage again</source>
+<translation>Очистить название ссылки и снова получить заголовок веб-страницы</translation>
+</message>
+<message>
 <source>Note</source>
 <translation>Заметка</translation>
 </message>
 <message>
+<source>Folder</source>
+<translation>Папка</translation>
+</message>
+<message>
+<source>Tags</source>
+<translation type="unfinished">Tags</translation>
+</message>
+<message>
+<source>Modified</source>
+<translation>Изменён</translation>
+</message>
+<message>
 <source>Search for a heading to link to</source>
-<translation type="unfinished">Search for a heading to link to</translation>
+<translation>Поиск целевого заголовка для ссылки</translation>
+</message>
+<message>
+<source>Insert the link as a wiki-style link ([[Note Name]]) instead of a Markdown link</source>
+<translation>Вставить ссылку как ссылку в стиле вики ([[Название заметки]]) вместо ссылки Markdown</translation>
+</message>
+<message>
+<source>Create wiki-style link ([[...]])</source>
+<translation>Создать ссылку в стиле вики ([[...]])</translation>
 </message>
 <message>
 <source>Enter the name of the link (optional)</source>
@@ -1526,6 +4007,22 @@
 <message>
 <source>Select directory to link to</source>
 <translation>Выберите каталог для ссылки</translation>
+</message>
+<message>
+<source>Select file to link to (relative)</source>
+<translation>Выбрать файл для ссылки (относительный путь)</translation>
+</message>
+<message>
+<source>Select file to link to (absolute)</source>
+<translation>Выбрать файл для ссылки (абсолютный путь)</translation>
+</message>
+<message>
+<source>Select directory to link to (relative)</source>
+<translation>Выбрать каталог для ссылки (относительный путь)</translation>
+</message>
+<message>
+<source>Select directory to link to (absolute)</source>
+<translation>Выбрать каталог для ссылки (абсолютный путь)</translation>
 </message>
 </context>
 <context>
@@ -1616,6 +4113,52 @@
 </message>
 </context>
 <context>
+<name>LocalTrashSettingsWidget</name>
+<message>
+<source>Trash</source>
+<translation type="unfinished">Trash</translation>
+</message>
+<message>
+<source>Local trash settings</source>
+<translation>Настройки локальной корзины</translation>
+</message>
+<message>
+<source>You might run into sync troubles with older versions of Nextcloud / ownCloud sync when going far below 10 sec.
+Just test yourself if you get sync conflicts and set a higher value if so.</source>
+<translation type="unfinished">You might run into sync troubles with older versions of Nextcloud / ownCloud sync when going far below 10 sec.
+Just test yourself if you get sync conflicts and set a higher value if so.</translation>
+</message>
+<message>
+<source>Remove trashed notes after:</source>
+<translation>Удалять заметки из корзины через:</translation>
+</message>
+<message>
+<source> days</source>
+<extracomment>seconds</extracomment>
+<translation> дней</translation>
+</message>
+<message>
+<source>Automatically remove trashed notes after a certain time</source>
+<translation>Автоматически удалять заметки из корзины через определённое время</translation>
+</message>
+<message>
+<source>No trashing</source>
+<translation type="unfinished">No trashing</translation>
+</message>
+<message>
+<source>System trash</source>
+<translation type="unfinished">System trash</translation>
+</message>
+<message>
+<source>Local trash</source>
+<translation type="unfinished">Local trash</translation>
+</message>
+<message>
+<source>Enable local trash to keep a copy of trashed notes</source>
+<translation>Включить локальную корзину для хранения копий удалённых заметок</translation>
+</message>
+</context>
+<context>
 <name>LogWidget</name>
 <message>
 <source>Logs</source>
@@ -1677,6 +4220,18 @@
 <translation>Найти элемент навигации</translation>
 </message>
 <message>
+<source>Headings</source>
+<translation>Заголовки</translation>
+</message>
+<message>
+<source>Files</source>
+<translation>Файлы</translation>
+</message>
+<message>
+<source>Backlinks</source>
+<translation>Обратные ссылки</translation>
+</message>
+<message>
 <source>Add a tag to the current note</source>
 <translation>Добавить тег к текущей заметке</translation>
 </message>
@@ -1705,6 +4260,14 @@
 <translation>Ширина окна редактора</translation>
 </message>
 <message>
+<source>Layouts</source>
+<translation>Макеты</translation>
+</message>
+<message>
+<source>Layout</source>
+<translation>Макет</translation>
+</message>
+<message>
 <source>Custom actions</source>
 <translation>Пользовательские команды</translation>
 </message>
@@ -1715,10 +4278,6 @@
 <message>
 <source>&amp;Quit</source>
 <translation>&amp;Выход</translation>
-</message>
-<message>
-<source>&amp;Find note</source>
-<translation>&amp;Найти заметку</translation>
 </message>
 <message>
 <source>&amp;Remove current note</source>
@@ -1805,10 +4364,6 @@
 <translation>Найти или создать заметку</translation>
 </message>
 <message>
-<source>Add a tag to the selected notes</source>
-<translation>Добавить тег к выбранным заметкам</translation>
-</message>
-<message>
 <source>New tag</source>
 <translation>Новый тег</translation>
 </message>
@@ -1819,6 +4374,14 @@
 <message>
 <source>Import</source>
 <translation>Импорт</translation>
+</message>
+<message>
+<source>Store note bookmark</source>
+<translation type="unfinished">Store note bookmark</translation>
+</message>
+<message>
+<source>Go to note bookmark</source>
+<translation type="unfinished">Go to note bookmark</translation>
 </message>
 <message>
 <source>Print</source>
@@ -1843,6 +4406,10 @@
 <message>
 <source>Format</source>
 <translation>Форматировать</translation>
+</message>
+<message>
+<source>Select</source>
+<translation type="unfinished">Select</translation>
 </message>
 <message>
 <source>Extra</source>
@@ -1870,7 +4437,19 @@
 </message>
 <message>
 <source>AI model</source>
-<translation type="unfinished">AI model</translation>
+<translation>Модель ИИ</translation>
+</message>
+<message>
+<source>Note text edit</source>
+<translation type="unfinished">Note text edit</translation>
+</message>
+<message>
+<source>List operations</source>
+<translation type="unfinished">List operations</translation>
+</message>
+<message>
+<source>Markdown operations</source>
+<translation type="unfinished">Markdown operations</translation>
 </message>
 <message>
 <source>To&amp;do</source>
@@ -1879,10 +4458,6 @@
 <message>
 <source>&amp;Window</source>
 <translation>&amp;Окно</translation>
-</message>
-<message>
-<source>Workspaces</source>
-<translation>Рабочие области</translation>
 </message>
 <message>
 <source>Panels</source>
@@ -1898,10 +4473,6 @@
 <translation>Показать</translation>
 </message>
 <message>
-<source>Workspace</source>
-<translation>Рабочие области</translation>
-</message>
-<message>
 <source>Jump to</source>
 <translation>Перейти к</translation>
 </message>
@@ -1911,11 +4482,15 @@
 </message>
 <message>
 <source>&amp;Setup note folders / subfolders</source>
-<translation type="unfinished">&amp;Setup note folders / subfolders</translation>
+<translation>&amp;Настройка папок / подпапок заметок</translation>
 </message>
 <message>
 <source>Setup note folders / subfolders</source>
-<translation type="unfinished">Setup note folders / subfolders</translation>
+<translation>Настройка папок / подпапок заметок</translation>
+</message>
+<message>
+<source>&amp;Find text in notes</source>
+<translation>&amp;Найти текст в заметках</translation>
 </message>
 <message>
 <source>About &amp;QOwnNotes…</source>
@@ -1928,6 +4503,14 @@
 <message>
 <source>Show remote trash</source>
 <translation>Показать удаленную корзину</translation>
+</message>
+<message>
+<source>Select enclosed &amp;text</source>
+<translation type="unfinished">Select enclosed &amp;text</translation>
+</message>
+<message>
+<source>Select the innermost text around the current cursor position</source>
+<translation type="unfinished">Select the innermost text around the current cursor position</translation>
 </message>
 <message>
 <source>Insert text &amp;link</source>
@@ -1944,6 +4527,30 @@
 <message>
 <source>Forward in note history</source>
 <translation>Следующая версия заметки</translation>
+</message>
+<message>
+<source>Previous &amp;heading</source>
+<translation>Предыдущий &amp;заголовок</translation>
+</message>
+<message>
+<source>Next heading</source>
+<translation>Следующий заголовок</translation>
+</message>
+<message>
+<source>Fold all headings</source>
+<translation>Свернуть все заголовки</translation>
+</message>
+<message>
+<source>Fold all headings in the current note</source>
+<translation>Свернуть все заголовки в текущей заметке</translation>
+</message>
+<message>
+<source>Unfold all headings</source>
+<translation>Развернуть все заголовки</translation>
+</message>
+<message>
+<source>Unfold all headings in the current note</source>
+<translation>Развернуть все заголовки в текущей заметке</translation>
 </message>
 <message>
 <source>Show shortcuts</source>
@@ -2094,16 +4701,16 @@
 <translation>Откройте  #qownnotes IRC (Kiwi)-канал, вы должны оставаться в сети, чтобы получить ответ. </translation>
 </message>
 <message>
+<source>Use softwrap in note editor</source>
+<translation>Использовать мягкий перенос в редакторе заметок</translation>
+</message>
+<message>
 <source>Cycle text case</source>
 <translation>Переключение регистра текста</translation>
 </message>
 <message>
 <source>Show note list under tag panel</source>
 <translation>Показать список заметок под панелью тегов</translation>
-</message>
-<message>
-<source>Find notes in all tags / subfolders</source>
-<translation>Поиск заметок для всех тегов / вложенных папок</translation>
 </message>
 <message>
 <source>Import notes from text files</source>
@@ -2123,20 +4730,32 @@
 <translation>Разблокировать панель</translation>
 </message>
 <message>
-<source>Remove current workspace</source>
-<translation>Удалить текущую рабочую область</translation>
+<source>Reattach floating panels</source>
+<translation>Переприсоединить плавающие панели</translation>
 </message>
 <message>
-<source>Add new workspace</source>
-<translation>Добавить новую рабочую область</translation>
+<source>Reattaches all floating panels</source>
+<translation>Прикрепляет все плавающие панели</translation>
 </message>
 <message>
-<source>Rename current workspace</source>
-<translation>Переименование текущей рабочей области</translation>
+<source>Remove current layout</source>
+<translation>Удалить текущий макет</translation>
 </message>
 <message>
-<source>Switch to previous workspace</source>
-<translation>Перейти к предыдущей рабочей области</translation>
+<source>Add new layout</source>
+<translation>Добавить новый макет</translation>
+</message>
+<message>
+<source>Rename current layout</source>
+<translation>Переименовать текущий макет</translation>
+</message>
+<message>
+<source>Switch to previous layout</source>
+<translation>Переключиться на предыдущий макет</translation>
+</message>
+<message>
+<source>Manage layouts</source>
+<translation>Управление макетами</translation>
 </message>
 <message>
 <source>Show all panels</source>
@@ -2151,12 +4770,24 @@
 <translation>Найти команду из меню</translation>
 </message>
 <message>
+<source>Redo last action</source>
+<translation>Повторить последнее действие</translation>
+</message>
+<message>
+<source>Redo the last action</source>
+<translation>Повторить последнее действие</translation>
+</message>
+<message>
 <source>Insert table</source>
 <translation>Вставка таблицы</translation>
 </message>
 <message>
 <source>Insert block &amp;quote</source>
 <translation>Вставить блок &amp;цитату</translation>
+</message>
+<message>
+<source>Insert checkbox list item</source>
+<translation type="unfinished">Insert checkbox list item</translation>
 </message>
 <message>
 <source>Search selected text on the web</source>
@@ -2193,6 +4824,10 @@
 <message>
 <source>Show note git versions</source>
 <translation>Показать Git-версии заметки</translation>
+</message>
+<message>
+<source>Show note git versions externally</source>
+<translation>Показать git-версии заметки во внешней программе</translation>
 </message>
 <message>
 <source>Find scripts in script repository</source>
@@ -2263,6 +4898,14 @@
 <translation>Управление словарями</translation>
 </message>
 <message>
+<source>Check grammar with LanguageTool</source>
+<translation>Проверить грамматику с LanguageTool</translation>
+</message>
+<message>
+<source>Check grammar with Harper</source>
+<translation type="unfinished">Check grammar with Harper</translation>
+</message>
+<message>
 <source>Custom</source>
 <translation>Персонализация</translation>
 </message>
@@ -2291,8 +4934,84 @@
 <translation>Новая заметка в новой вкладке</translation>
 </message>
 <message>
-<source>Toggle note stickiness of current tab</source>
-<translation>Переключить прикрепленное примечание в текущей вкладке</translation>
+<source>Toggle note pinning of current tab</source>
+<translation>Переключить закрепление заметки на текущей вкладке</translation>
+</message>
+<message>
+<source>Store bookmark at slot 1</source>
+<translation type="unfinished">Store bookmark at slot 1</translation>
+</message>
+<message>
+<source>Store bookmark at slot 2</source>
+<translation type="unfinished">Store bookmark at slot 2</translation>
+</message>
+<message>
+<source>Store bookmark at slot 3</source>
+<translation type="unfinished">Store bookmark at slot 3</translation>
+</message>
+<message>
+<source>Store bookmark at slot 4</source>
+<translation type="unfinished">Store bookmark at slot 4</translation>
+</message>
+<message>
+<source>Store bookmark at slot 5</source>
+<translation type="unfinished">Store bookmark at slot 5</translation>
+</message>
+<message>
+<source>Store bookmark at slot 6</source>
+<translation type="unfinished">Store bookmark at slot 6</translation>
+</message>
+<message>
+<source>Store bookmark at slot 7</source>
+<translation type="unfinished">Store bookmark at slot 7</translation>
+</message>
+<message>
+<source>Store bookmark at slot 8</source>
+<translation type="unfinished">Store bookmark at slot 8</translation>
+</message>
+<message>
+<source>Store bookmark at slot 9</source>
+<translation type="unfinished">Store bookmark at slot 9</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 1</source>
+<translation type="unfinished">Go to bookmark at slot 1</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 2</source>
+<translation type="unfinished">Go to bookmark at slot 2</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 3</source>
+<translation type="unfinished">Go to bookmark at slot 3</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 4</source>
+<translation type="unfinished">Go to bookmark at slot 4</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 5</source>
+<translation type="unfinished">Go to bookmark at slot 5</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 6</source>
+<translation type="unfinished">Go to bookmark at slot 6</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 7</source>
+<translation type="unfinished">Go to bookmark at slot 7</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 8</source>
+<translation type="unfinished">Go to bookmark at slot 8</translation>
+</message>
+<message>
+<source>Go to bookmark at slot 9</source>
+<translation type="unfinished">Go to bookmark at slot 9</translation>
+</message>
+<message>
+<source>Note bookmarks</source>
+<translation type="unfinished">Note bookmarks</translation>
 </message>
 <message>
 <source>Format text underline</source>
@@ -2316,39 +5035,95 @@
 </message>
 <message>
 <source>Toggle always-on-top mode</source>
-<translation type="unfinished">Toggle always-on-top mode</translation>
+<translation>Переключить режим «всегда поверх остальных окон»</translation>
 </message>
 <message>
 <source>&amp;Load Todo List items</source>
-<translation type="unfinished">&amp;Load Todo List items</translation>
+<translation>&amp;Загрузить пункты списка задач</translation>
 </message>
 <message>
 <source>Insert Nextcloud Deck card link</source>
-<translation type="unfinished">Insert Nextcloud Deck card link</translation>
+<translation>Вставить ссылку на карточку Nextcloud Deck</translation>
 </message>
 <message>
 <source>Copy absolute path of note</source>
-<translation type="unfinished">Copy absolute path of note</translation>
+<translation>Копировать абсолютный путь к заметке</translation>
 </message>
 <message>
 <source>Move up in subfolder list</source>
-<translation type="unfinished">Move up in subfolder list</translation>
+<translation>Вверх по списку подпапок</translation>
 </message>
 <message>
 <source>Move down in subfolder list</source>
-<translation type="unfinished">Move down in subfolder list</translation>
+<translation>Вниз по списку подпапок</translation>
 </message>
 <message>
 <source>Move up in tag list</source>
-<translation type="unfinished">Move up in tag list</translation>
+<translation>Вверх по списку тегов</translation>
 </message>
 <message>
 <source>Move down in tag list</source>
-<translation type="unfinished">Move down in tag list</translation>
+<translation>Вниз по списку тегов</translation>
 </message>
 <message>
 <source>Enable AI support</source>
-<translation type="unfinished">Enable AI support</translation>
+<translation>Включить поддержку ИИ</translation>
+</message>
+<message>
+<source>Manage Nextcloud Deck cards</source>
+<translation>Управление карточками Nextcloud Deck</translation>
+</message>
+<message>
+<source>Ctrl+Alt+D</source>
+<translation>Ctrl+Alt+D</translation>
+</message>
+<message>
+<source>Send clipboard</source>
+<translation>Отправить содержимое буфера обмена</translation>
+</message>
+<message>
+<source>Send clipboard as text</source>
+<translation>Отправить содержимое буфера обмена как текст</translation>
+</message>
+<message>
+<source>Toggle checkbox(es)</source>
+<translation type="unfinished">Toggle checkbox(es)</translation>
+</message>
+<message>
+<source>1. 2. 3. list</source>
+<translation type="unfinished">1. 2. 3. list</translation>
+</message>
+<message>
+<source>a. b. c. list</source>
+<translation type="unfinished">a. b. c. list</translation>
+</message>
+<message>
+<source>- list</source>
+<translation type="unfinished">- list</translation>
+</message>
+<message>
+<source>Create checkbox list</source>
+<translation type="unfinished">Create checkbox list</translation>
+</message>
+<message>
+<source>Clear list formatting</source>
+<translation type="unfinished">Clear list formatting</translation>
+</message>
+<message>
+<source>Order checkboxes</source>
+<translation type="unfinished">Order checkboxes</translation>
+</message>
+<message>
+<source>Increase heading depth</source>
+<translation type="unfinished">Increase heading depth</translation>
+</message>
+<message>
+<source>Decrease heading depth</source>
+<translation type="unfinished">Decrease heading depth</translation>
+</message>
+<message>
+<source>Copy code block</source>
+<translation type="unfinished">Copy code block</translation>
 </message>
 <message>
 <source>Use &amp;vertical preview layout</source>
@@ -2400,7 +5175,7 @@
 </message>
 <message>
 <source>&amp;Export note as Markdown file</source>
-<translation type="unfinished">&amp;Export note as Markdown file</translation>
+<translation>&amp;Экспорт заметки в формат Markdown</translation>
 </message>
 <message>
 <source>Move down in note list</source>
@@ -2413,10 +5188,6 @@
 <message>
 <source>Insert headline from note filename</source>
 <translation>Вставить заголовок из имени файла</translation>
-</message>
-<message>
-<source>Use softwrap in note editor and preview</source>
-<translation>Использовать мягкий перенос в редакторе и режиме просмотра</translation>
 </message>
 <message>
 <source>Show status bar</source>
@@ -2455,18 +5226,12 @@
 <translation>Пожертвования</translation>
 </message>
 <message>
+<source>Find text in notes in all tags / subfolders</source>
+<translation>Поиск текста в заметах для всех тегов / подпапок</translation>
+</message>
+<message>
 <source>Import notes from Evernote</source>
 <translation>Импорт заметок из Evernote</translation>
-</message>
-<message>
-<source>Note was removed externally!</source>
-<translation>Заметка удалена другой программой!</translation>
-</message>
-<message>
-<source>Current note was removed outside of this application!
-Restore current note?</source>
-<translation>Текущая заметка удалена другой программой!
-Восстановить текущую заметку?</translation>
 </message>
 <message>
 <source>&amp;Cancel</source>
@@ -2474,10 +5239,10 @@ Restore current note?</source>
 </message>
 <message numerus="yes">
 <source>stored %n note(s) to disk</source>
-<translation type="unfinished">
+<translation>
 <numerusform>на диск сохранена %n заметка</numerusform>
 <numerusform>на диск сохранены %n заметки</numerusform>
-<numerusform>stored %n note(s) to disk</numerusform>
+<numerusform>на диск сохранены %n заметки</numerusform>
 <numerusform>на диск сохранено %n заметок</numerusform>
 </translation>
 </message>
@@ -2486,85 +5251,12 @@ Restore current note?</source>
 <translation>доступна новая версия: %1</translation>
 </message>
 <message>
-<source>Abort</source>
-<translation>Прервать</translation>
-</message>
-<message>
-<source>Loading notes…</source>
-<translation>Загрузка заметок…</translation>
-</message>
-<message>
-<source>Removed duplicate conflicted database: %1</source>
-<translation>Удалена дублированная конфликтующая база данных: %1</translation>
-</message>
-<message>
-<source>Could not remove duplicate conflicted database: %1</source>
-<translation>Не удалось удалить дублированную конфликтующую базу данных: %1</translation>
-</message>
-<message>
-<source>Removed merged conflicted database: %1</source>
-<translation>Удалена объединенная конфликтующая база данных: %1</translation>
-</message>
-<message>
-<source>Could not remove merged conflicted database: %1</source>
-<translation>Не удалось удалить объединенную конфликтующую базу данных: %1</translation>
-</message>
-<message>
-<source>Delete conflicted database copies</source>
-<translation>Удалить конфликтующие копии базы данных</translation>
-</message>
-<message numerus="yes">
-<source>Removed %n conflicted database copies</source>
-<translation>
-<numerusform>Удалена одна конфликтная копия базы данных</numerusform>
-<numerusform>Удалены %n конфликтные копии базы данных</numerusform>
-<numerusform>Удалено %n конфликтных копий базы данных</numerusform>
-<numerusform>Удалено %n конфликтных копий базы данных</numerusform>
-</translation>
-</message>
-<message>
 <source>Please select the folder where your notes will get stored</source>
 <translation>Пожалуйста, выберите папку для хранения заметок</translation>
 </message>
 <message>
 <source>No folder was selected</source>
 <translation>Каталог не был выбран</translation>
-</message>
-<message>
-<source>You have to select your ownCloud notes folder to make this software work!</source>
-<translation>Необходимо выбрать каталог для заметок ownCloud!</translation>
-</message>
-<message>
-<source>&amp;Retry</source>
-<translation>&amp;Повтор</translation>
-</message>
-<message>
-<source>&amp;Exit</source>
-<translation>&amp;Выход</translation>
-</message>
-<message>
-<source>Remove current note</source>
-<translation>Удалить текущую заметку</translation>
-</message>
-<message>
-<source>Remove current note: &lt;strong&gt;%1&lt;/strong&gt;?</source>
-<translation>Удалить текущую заметку: &lt;strong&gt;%1&lt;/strong&gt;?</translation>
-</message>
-<message>
-<source>Please enter the &lt;strong&gt;password&lt;/strong&gt; of this encrypted note.</source>
-<translation>Введите &lt;strong&gt;пароль&lt;/strong&gt; для зашифрованной заметки.</translation>
-</message>
-<message>
-<source>Note can't be decrypted!</source>
-<translation>Заметку невозможно расшифровать!</translation>
-</message>
-<message>
-<source>It seems that your password is not valid!</source>
-<translation>Пароль не подходит!</translation>
-</message>
-<message>
-<source>Remove selected notes</source>
-<translation>Удалить выделенные заметки</translation>
 </message>
 <message numerus="yes">
 <source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
@@ -2585,23 +5277,6 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 Если на сервере ownCloud/NextCloud включена корзина, то заметки можно будет восстановить из неё.</numerusform>
 </translation>
 </message>
-<message>
-<source>Remove selected tags</source>
-<translation>Удалить выделенные теги</translation>
-</message>
-<message numerus="yes">
-<source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected tag(s)? No notes will be removed in this process.</source>
-<translation>
-<numerusform>Удалить выделенный тег? Заметки удалены не будут.</numerusform>
-<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выделенных тега? Заметки удалены не будут.</numerusform>
-<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выделенных тегов? Заметки удалены не будут.</numerusform>
-<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выделенных тегов? Заметки удалены не будут.</numerusform>
-</translation>
-</message>
-<message>
-<source>Move selected notes</source>
-<translation>Переместить выделенные заметки</translation>
-</message>
 <message numerus="yes">
 <source>Move %n selected note(s) to &lt;strong&gt;%2&lt;/strong&gt;?</source>
 <translation>
@@ -2611,10 +5286,6 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <numerusform>Переместить %n выбранных заметок в &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
 </translation>
 </message>
-<message>
-<source>Copy selected notes</source>
-<translation>Копировать выделенные заметки</translation>
-</message>
 <message numerus="yes">
 <source>Copy %n selected note(s) to &lt;strong&gt;%2&lt;/strong&gt;?</source>
 <translation>
@@ -2623,10 +5294,6 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <numerusform>Копировать %n выбранных заметок в &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
 <numerusform>Копировать %n выбранных заметок в &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
 </translation>
-</message>
-<message>
-<source>Done</source>
-<translation>Готово</translation>
 </message>
 <message numerus="yes">
 <source>%n note(s) were copied to &lt;strong&gt;%2&lt;/strong&gt;.</source>
@@ -2638,33 +5305,12 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 </translation>
 </message>
 <message>
-<source>Tag selected notes</source>
-<translation>Пометить выбранные заметки</translation>
-</message>
-<message numerus="yes">
-<source>Tag %n selected note(s) with &lt;strong&gt;%2&lt;/strong&gt;?</source>
-<translation>
-<numerusform>Пометить выбранную заметку тегом &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-<numerusform>Пометить %n выбранные заметки тегом &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-<numerusform>Пометить %n выбранных заметок тегом &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-<numerusform>Пометить %n выбранных заметок тегом &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-</translation>
-</message>
-<message>
 <source>Restart application</source>
 <translation>Перезапустить приложение</translation>
 </message>
 <message>
 <source>You may need to restart the application to let the changes take effect.</source>
 <translation>Вам может потребоваться перезапустить приложение, чтобы изменения вступили в силу.</translation>
-</message>
-<message>
-<source>Restart</source>
-<translation>Перезагрузка</translation>
-</message>
-<message>
-<source>PDF files</source>
-<translation>PDF-файлы</translation>
 </message>
 <message>
 <source>Todo lists disabled!</source>
@@ -2674,46 +5320,30 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <source>You have disabled the todo lists.&lt;br /&gt;Please check your &lt;strong&gt;Todo&lt;/strong&gt; configuration in the settings!</source>
 <translation>Вы отключили списки todo.&lt;br /&gt;Пожалуйста, проверьте настройки &lt;strong&gt;Todo&lt;/strong&gt; в настройках!</translation>
 </message>
-<message numerus="yes">
-<source>Found &lt;strong&gt;%n&lt;/strong&gt; occurrence(s) of any term of &lt;strong&gt;%1&lt;/strong&gt;</source>
-<translation>
-<numerusform>Обнаружено &lt;strong&gt;%n&lt;/strong&gt; проявление любого условия из &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
-<numerusform>Обнаружено &lt;strong&gt;%n&lt;/strong&gt; проявления любого условия из &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
-<numerusform>Обнаружено &lt;strong&gt;%n&lt;/strong&gt; проявлений любого условия из &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
-<numerusform>Обнаружено &lt;strong&gt;%n&lt;/strong&gt; проявлений любого условия из &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
-</translation>
+<message>
+<source>File extension</source>
+<translation>Расширение файла</translation>
 </message>
 <message>
-<source>Note folders</source>
-<translation>Папки заметок</translation>
+<source>Extension of file attachment:</source>
+<translation>Расширение файла вложения:</translation>
 </message>
 <message>
-<source>Note versions are currently loaded from your ownCloud server</source>
-<translation>Версии заметок в настоящее время загружены с сервера ownCloud</translation>
+<source>File base name</source>
+<translation>Базовое имя файла</translation>
 </message>
 <message>
-<source>Trashed notes are currently loaded from your ownCloud server</source>
-<translation>Удаленные заметки в настоящее время загружены с сервера ownCloud</translation>
+<source>Base name of file attachment:</source>
+<translation>Базовое имя файла вложения:</translation>
+</message>
+<message>
+<source>Leave empty for automatic name</source>
+<comment>Leave the base name empty for automatic name</comment>
+<translation>Оставьте пустым для автоматического имени</translation>
 </message>
 <message>
 <source>Inserted text as text attachment file</source>
-<translation type="unfinished">Inserted text as text attachment file</translation>
-</message>
-<message>
-<source>Your note will be decrypted and stored as plain text again. Keep in mind that the unencrypted note will possibly be synced to your server and sensitive text may be exposed!&lt;br /&gt;Do you want to decrypt your note?</source>
-<translation>Заметка будет расшифрована и сохранена в текстовом виде. Помните, что незашифрованная заметка может быть отправлена на сервер и важная информация может раскрыта!&lt;br /&gt;Расшифровать заметку?</translation>
-</message>
-<message>
-<source>Markdown files</source>
-<translation>Markdown файлы</translation>
-</message>
-<message>
-<source>Export attached files</source>
-<translation>Экспорт прикрепленных файлов</translation>
-</message>
-<message>
-<source>Do you also want to export media files and attachments of the note? Files may be overwritten in the destination folder!</source>
-<translation type="unfinished">Do you also want to export media files and attachments of the note? Files may be overwritten in the destination folder!</translation>
+<translation>Вставить текст как текстовый файл вложения</translation>
 </message>
 <message>
 <source>Bookmarked note position at slot %1</source>
@@ -2722,6 +5352,10 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <message>
 <source>Jumped to bookmark position at slot %1</source>
 <translation>Переход к закладке в ячейке %1</translation>
+</message>
+<message>
+<source>Redo action: %1</source>
+<translation>Повторить действие: %1</translation>
 </message>
 <message>
 <source>Inserting image</source>
@@ -2757,56 +5391,71 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <numerusform>Не удалось скопировать %n заметок (скорее всего они уже существуют)</numerusform>
 </translation>
 </message>
+<message numerus="yes">
+<source>Skipped inserting %n file(s) because the current note is read-only</source>
+<translation type="unfinished">
+<numerusform>Пропущена вставка файла, так как текущая заметка доступна только для чтения</numerusform>
+<numerusform>Пропущена вставка %n файлов, так как текущая заметка доступна только для чтения</numerusform>
+<numerusform>Пропущена вставка %n файлов, так как текущая заметка доступна только для чтения</numerusform>
+<numerusform>Skipped inserting %n file(s) because the current note is read-only</numerusform>
+</translation>
+</message>
 <message>
 <source>Saving temporary image</source>
 <translation>Сохранение временного изображения</translation>
 </message>
 <message>
-<source>Ln %1, Col %2</source>
-<comment>Line / Column</comment>
-<translation type="unfinished">Ln %1, Col %2</translation>
+<source>Note folder does not exist!</source>
+<translation>Папка с заметками больше не существует!</translation>
 </message>
 <message>
-<source>Line %1, Column %2</source>
-<translation type="unfinished">Line %1, Column %2</translation>
+<source>Note folder &lt;b&gt;%1&lt;/b&gt; with path &lt;b&gt;%2&lt;/b&gt; does not exist anymore!</source>
+<translation>Папка с заметками &lt;b&gt;%1&lt;/b&gt; с путём &lt;b&gt;%2&lt;/b&gt; больше не сушествует!</translation>
+</message>
+<message>
+<source>Git support is not enabled for the current note folder, do you want to enable it in the settings?</source>
+<translation>Поддержка Git не включена для текущей папки заметок, хотите включить ее в настройках?</translation>
+</message>
+<message>
+<source>No versions available</source>
+<translation>Нет доступных версий</translation>
+</message>
+<message>
+<source>No versions are available for this note.</source>
+<translation>Для этой заметки нет доступных версий.</translation>
 </message>
 <message numerus="yes">
-<source>%n selected</source>
-<comment>Characters selected</comment>
+<source>%n script update(s) were installed</source>
 <translation type="unfinished">
-<numerusform>%n selected</numerusform>
-<numerusform>%n selected</numerusform>
-<numerusform>%n selected</numerusform>
-<numerusform>%n selected</numerusform>
+<numerusform>%n script update(s) were installed</numerusform>
+<numerusform>%n script update(s) were installed</numerusform>
+<numerusform>%n script update(s) were installed</numerusform>
+<numerusform>%n script update(s) were installed</numerusform>
 </translation>
 </message>
 <message>
-<source>Nextcloud Deck support disabled!</source>
-<translation type="unfinished">Nextcloud Deck support disabled!</translation>
-</message>
-<message>
-<source>Nextcloud Deck support is not enabled or the settings are invalid.&lt;br /&gt;Please check your &lt;strong&gt;Nextcloud&lt;/strong&gt; configuration in the settings!</source>
-<translation type="unfinished">Nextcloud Deck support is not enabled or the settings are invalid.&lt;br /&gt;Please check your &lt;strong&gt;Nextcloud&lt;/strong&gt; configuration in the settings!</translation>
-</message>
-<message>
 <source>Note path '%1' was copied to the clipboard</source>
-<translation type="unfinished">Note path '%1' was copied to the clipboard</translation>
+<translation>Путь к заметке '%1' был скопирован в буфер обмена</translation>
 </message>
 <message>
-<source>AI backends</source>
-<translation type="unfinished">AI backends</translation>
+<source>Note filename '%1' was copied to the clipboard</source>
+<translation>Имя файла заметки «%1» скопировано в буфер обмена</translation>
 </message>
 <message>
-<source>AI models</source>
-<translation type="unfinished">AI models</translation>
+<source>Clipboard sent successfully</source>
+<translation>Буфер обмена успешно отправлен</translation>
 </message>
 <message>
-<source>AI backend selector</source>
-<translation type="unfinished">AI backend selector</translation>
+<source>Failed to send clipboard</source>
+<translation>Не удалось отправить буфер обмена</translation>
 </message>
 <message>
-<source>AI model selector</source>
-<translation type="unfinished">AI model selector</translation>
+<source>Clipboard text sent successfully</source>
+<translation>Текст буфера обмена успешно отправлен</translation>
+</message>
+<message>
+<source>Failed to send clipboard text</source>
+<translation>Не удалось отправить текст буфера обмена</translation>
 </message>
 <message>
 <source>Temporary file can't be opened</source>
@@ -2822,49 +5471,8 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <translation>Размер шрифта сброшен до %1 пунктов</translation>
 </message>
 <message>
-<source>Remove tag '%1' from the current note</source>
-<translation>Удалить тег '%1' у текущей заметки</translation>
-</message>
-<message>
-<source>Remove tag '%1' from the selected notes</source>
-<translation>Удалить тег '%1' у выбранных заметок</translation>
-</message>
-<message>
-<source>Rename tag</source>
-<translation>Переименовать тег</translation>
-</message>
-<message>
-<source>Assign color</source>
-<translation>Назначить цвет</translation>
-</message>
-<message>
-<source>Disable color</source>
-<translation>Отменить цвет</translation>
-</message>
-<message>
-<source>&amp;Move tags to…</source>
-<translation>&amp;Переместить теги в…</translation>
-</message>
-<message>
-<source>Move to the root</source>
-<comment>to move a tag to the current tag in the tag context menu</comment>
-<translation>Перейти в корень</translation>
-</message>
-<message>
 <source>The scripting engine was reloaded</source>
 <translation>Скриптовый движок был перезагружен</translation>
-</message>
-<message>
-<source>HTML files</source>
-<translation>HTML-файлы</translation>
-</message>
-<message>
-<source>Jump to the note's subfolder</source>
-<translation>Перейти к подпапке заметки</translation>
-</message>
-<message>
-<source>Open selected notes in tabs</source>
-<translation type="unfinished">Open selected notes in tabs</translation>
 </message>
 <message>
 <source>A script update was found!</source>
@@ -2883,99 +5491,51 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <translation>Обновления скрипта не найдены</translation>
 </message>
 <message>
-<source>Toggle note stickiness</source>
-<translation>Переключить примечание липкость</translation>
+<source>Layout selector</source>
+<translation>Выбор макета</translation>
 </message>
 <message>
-<source>Close other note tabs</source>
-<translation>Закрыть другие вкладки заметок</translation>
+<source>AI toolbar disabled</source>
+<translation>Панель инструментов ИИ отключена</translation>
 </message>
 <message>
-<source>Rename note</source>
-<translation>Переименовать заметку</translation>
+<source>An AI backend is configured, but the AI toolbar is currently disabled. Do you want to turn it on?</source>
+<translation>Бэкенд ИИ настроен, но панель инструментов ИИ в данный момент отключена. Хотите её включить?</translation>
 </message>
 <message numerus="yes">
 <source>Skipped copying of %n note(s) (no Markdown or text file or not readable)</source>
-<translation type="unfinished">
-<numerusform>Skipped copying of %n note(s) (no Markdown or text file or not readable)</numerusform>
-<numerusform>Skipped copying of %n note(s) (no Markdown or text file or not readable)</numerusform>
-<numerusform>Skipped copying of %n note(s) (no Markdown or text file or not readable)</numerusform>
-<numerusform>Skipped copying of %n note(s) (no Markdown or text file or not readable)</numerusform>
+<translation>
+<numerusform>Пропущено копирование %n заметки(ок) (нет Markdown или текстовый файл нечитаем)</numerusform>
+<numerusform>Пропущено копирование %n заметок (нет Markdown или текстовый файл нечитаемый)</numerusform>
+<numerusform>Пропущено копирование %n заметки (нет Markdown или текстовый файл нечитаемый)</numerusform>
+<numerusform>Пропущено копирование %n заметок (нет Markdown или текстовый файл нечитаемый)</numerusform>
 </translation>
 </message>
 <message>
 <source>Paste &amp;HTML as Markdown</source>
-<translation type="unfinished">Paste &amp;HTML as Markdown</translation>
+<translation>Скопировать &amp;HTML как Markdown</translation>
+</message>
+<message numerus="yes">
+<source>Latest %n note versions are currently gathered from your local git repository</source>
+<translation>
+<numerusform>Последняя %n версия заметки собирается из вашего локального git репозитория</numerusform>
+<numerusform>Последние %n версии заметок собираются из вашего локального git репозитория</numerusform>
+<numerusform>Последние %n версий заметок собираются из вашего локального git репозитория</numerusform>
+<numerusform>Последние %n версий заметок собираются из вашего локального git репозитория</numerusform>
+</translation>
 </message>
 <message>
-<source>Show all notes (%1)</source>
-<translation>Показать все заметки (%1)</translation>
+<source>Done with gathering note versions from git</source>
+<translation>Сбор версий заметок из git завершен</translation>
 </message>
-<message>
-<source>Show all notes tagged with '%1' (%2)</source>
-<translation type="unfinished">Show all notes tagged with '%1' (%2)</translation>
-</message>
-<message>
-<source>Allows you to rename the filename of the note</source>
-<translation>Позволяет переименовать имя файла заметки</translation>
-</message>
-<message>
-<source>&amp;Move notes to…</source>
-<translation>&amp;Переместить заметки в…</translation>
-</message>
-<message>
-<source>&amp;Copy notes to…</source>
-<translation>&amp;Копировать заметки в…</translation>
-</message>
-<message>
-<source>Move notes to subfolder…</source>
-<translation>Переместить заметки в подпапку…</translation>
-</message>
-<message>
-<source>Copy notes to subfolder…</source>
-<translation>Скопировать заметки в подпапку…</translation>
-</message>
-<message>
-<source>&amp;Tag selected notes with…</source>
-<translation>&amp;Пометить выбранные заметки тегом…</translation>
-</message>
-<message>
-<source>&amp;Remove tag from selected notes…</source>
-<translation>&amp;Удалить тег из выделенных заметок…</translation>
-</message>
-<message>
-<source>Name:</source>
-<translation>Имя:</translation>
-</message>
-<message>
-<source>Note renaming not enabled!</source>
-<translation>Переименование заметок не включено!</translation>
-</message>
-<message>
-<source>Create new workspace</source>
-<translation>Создать новую рабочую область</translation>
-</message>
-<message>
-<source>Workspace name:</source>
-<translation>Имя рабочей области:</translation>
-</message>
-<message>
-<source>full</source>
-<comment>full workspace</comment>
-<translation>на весь экран</translation>
-</message>
-<message>
-<source>minimal</source>
-<comment>minimal workspace</comment>
-<translation>минимальный</translation>
-</message>
-<message>
-<source>Remove the current workspace?</source>
-<translation>Удалить текущую рабочую область?</translation>
-</message>
-<message>
-<source>Rename workspace</source>
-<translation>Переименовать рабочую область</translation>
+<message numerus="yes">
+<source>Latest %n git versions of note: %1</source>
+<translation>
+<numerusform>Последняя %n git версия заметки: %1</numerusform>
+<numerusform>Последние %n git версии заметки: %1</numerusform>
+<numerusform>Последние %n git версий заметки: %1</numerusform>
+<numerusform>Последние %n git версий заметки: %1</numerusform>
+</translation>
 </message>
 <message>
 <source>Disallow all note editing</source>
@@ -2983,11 +5543,11 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 </message>
 <message>
 <source>Note editing disabled</source>
-<translation type="unfinished">Note editing disabled</translation>
+<translation>Редактирование заметки отключено</translation>
 </message>
 <message>
 <source>Note editing is currently disabled, do you want to allow it again?</source>
-<translation type="unfinished">Note editing is currently disabled, do you want to allow it again?</translation>
+<translation>Редактирование заметки сейчас отключено, вы хотите разрешетить редактирование?</translation>
 </message>
 <message>
 <source>Select text files to import</source>
@@ -3002,55 +5562,12 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <translation>Заголовок заметки '%1' был скопирован в буфер обмена</translation>
 </message>
 <message>
-<source>Leave full-screen mode</source>
-<translation>Выйти из полноэкранного режима</translation>
-</message>
-<message>
-<source>Custom editor width</source>
-<translation>Пользовательская ширина редактора</translation>
-</message>
-<message>
-<source>Characters:</source>
-<translation>Символы:</translation>
-</message>
-<message numerus="yes">
-<source>%n notes selected</source>
-<translation>
-<numerusform>%n заметка выбрана</numerusform>
-<numerusform>%n заметки выбраны</numerusform>
-<numerusform>%n заметок выбрано</numerusform>
-<numerusform>%n заметок выбрано</numerusform>
-</translation>
-</message>
-<message>
 <source>Allow all note editing</source>
 <translation>Разрешить редактирование заметок</translation>
 </message>
 <message>
 <source>&amp;Tag</source>
 <translation>&amp;Тег</translation>
-</message>
-<message>
-<source>Remove tag from selected notes</source>
-<translation>Удалить тег из выбранных заметок</translation>
-</message>
-<message numerus="yes">
-<source>Remove tag &lt;strong&gt;%1&lt;/strong&gt; from %n selected note(s)?</source>
-<translation>
-<numerusform>Удалить тег &lt;strong&gt;%1&lt;/strong&gt; у выбранной заметки?</numerusform>
-<numerusform>Удалить тег &lt;strong&gt;%1&lt;/strong&gt; у %n выбранных заметок?</numerusform>
-<numerusform>Удалить тег &lt;strong&gt;%1&lt;/strong&gt; у %n выбранных заметок?</numerusform>
-<numerusform>Удалить тег &lt;strong&gt;%1&lt;/strong&gt; у %n выбранных заметок?</numerusform>
-</translation>
-</message>
-<message numerus="yes">
-<source>Tag &lt;strong&gt;%1&lt;/strong&gt; was removed from %n note(s)</source>
-<translation>
-<numerusform>Тег &lt;strong&gt;%1&lt;/strong&gt; был удален из заметки</numerusform>
-<numerusform>Тег &lt;strong&gt;%1&lt;/strong&gt; был удален из %n заметок</numerusform>
-<numerusform>Тег &lt;strong&gt;%1&lt;/strong&gt; был удален из %n заметок</numerusform>
-<numerusform>Тег &lt;strong&gt;%1&lt;/strong&gt; был удален из %n заметок</numerusform>
-</translation>
 </message>
 <message>
 <source>Current notes folder: </source>
@@ -3061,132 +5578,16 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <translation>Выберите каталог с заметками. Текущий каталог:</translation>
 </message>
 <message>
-<source>Print note</source>
-<translation>Печать заметки</translation>
-</message>
-<message>
-<source>Letter</source>
-<translation>Письмо</translation>
-</message>
-<message>
-<source>Portrait</source>
-<translation>Портрет</translation>
-</message>
-<message>
-<source>Landscape</source>
-<translation>Ландшафт</translation>
-</message>
-<message>
-<source>Orientation</source>
-<translation>Ориентация</translation>
-</message>
-<message>
-<source>Orientation:</source>
-<translation>Ориентация:</translation>
-</message>
-<message>
-<source>Export current note as PDF</source>
-<translation>Экспорт текущей заметки в PDF</translation>
-</message>
-<message>
 <source>You have not selected any todo lists.&lt;br /&gt;Please check your &lt;strong&gt;Todo&lt;/strong&gt; configuration in the settings!</source>
 <translation>Нет выбранных todo-листов!&lt;br /&gt;Проверьте настройки &lt;strong&gt;списка задач (todo)&lt;/strong&gt;!</translation>
-</message>
-<message>
-<source>Open QOwnNotes</source>
-<translation>Открыть QOwnNotes</translation>
-</message>
-<message>
-<source>New note</source>
-<translation>Новая заметка</translation>
-</message>
-<message>
-<source>Recent notes</source>
-<translation>Недавние заметки</translation>
-</message>
-<message>
-<source>Show todo lists</source>
-<translation>Показать списки todo</translation>
-</message>
-<message>
-<source>Recent tasks</source>
-<translation>Последние задачи</translation>
-</message>
-<message>
-<source>Quit</source>
-<translation>Выход</translation>
 </message>
 <message>
 <source>Note folder</source>
 <translation>Папка заметок</translation>
 </message>
 <message>
-<source>Copy to note folder</source>
-<translation>Копировать в каталог заметки</translation>
-</message>
-<message>
-<source>Move to note folder</source>
-<translation>Переместить в каталог заметки</translation>
-</message>
-<message>
-<source>Copy to this subfolder</source>
-<translation>Копировать в этот подкаталог</translation>
-</message>
-<message>
-<source>Move to this subfolder</source>
-<translation>Переместить в этот подкаталог</translation>
-</message>
-<message numerus="yes">
-<source>Move %n selected note(s) to note subfolder &lt;strong&gt;%2&lt;/strong&gt;?</source>
-<translation>
-<numerusform>Переместить выбранную заметку в подпапку &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-<numerusform>Переместить %n выбранные заметки в подпапку &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-<numerusform>Переместить %n выбранных заметок в подпапку &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-<numerusform>Переместить %n выбранных заметок в подпапку &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-</translation>
-</message>
-<message>
 <source>Cancel</source>
 <translation>Отмена</translation>
-</message>
-<message numerus="yes">
-<source>%n note(s) were moved to note subfolder "%2"</source>
-<translation>
-<numerusform>заметка перемещена в подпапку «%2»</numerusform>
-<numerusform>%n заметки перемещены в подпапку «%2»</numerusform>
-<numerusform>%n заметок перемещено в подпапку «%2»</numerusform>
-<numerusform>%n заметок перемещено в подпапку «%2»</numerusform>
-</translation>
-</message>
-<message numerus="yes">
-<source>Copy %n selected note(s) to note subfolder &lt;strong&gt;%2&lt;/strong&gt;?</source>
-<translation>
-<numerusform>Копировать выбранную заметку в подпапку &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-<numerusform>Копировать %n выбранные заметки в подпапку &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-<numerusform>Копировать %n выбранных заметок в подпапку &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-<numerusform>Копировать %n выбранных заметок в подпапку &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
-</translation>
-</message>
-<message numerus="yes">
-<source>%n note(s) were copied to note subfolder "%2"</source>
-<translation>
-<numerusform>заметка скопирована в подпапку «%2»</numerusform>
-<numerusform>%n заметки скопированы в подпапку «%2»</numerusform>
-<numerusform>%n заметок скопировано в подпапку «%2»</numerusform>
-<numerusform>%n заметок скопировано в подпапку «%2»</numerusform>
-</translation>
-</message>
-<message>
-<source>Open note in external editor</source>
-<translation>Открыть заметку во внешнем редакторе</translation>
-</message>
-<message>
-<source>Show note in file manager</source>
-<translation>Показать заметку в файловом менеджере</translation>
-</message>
-<message>
-<source>If you want to rename your note you have to enable the option to allow the note filename to be different from the headline.</source>
-<translation>Чтобы переименовать заметку, включите параметр, разрешающий имени файла заметки отличаться от заголовка.</translation>
 </message>
 <message>
 <source>Create a new folder</source>
@@ -3197,28 +5598,8 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <translation>Имя папки:</translation>
 </message>
 <message>
-<source>show all untagged notes (%1)</source>
-<translation>показать все непомеченные заметки (%1)</translation>
-</message>
-<message>
-<source>Untagged notes</source>
-<translation>Заметки без тега</translation>
-</message>
-<message>
-<source>Export current note as HTML file</source>
-<translation>Экспорт текущей заметки в виде HTML-файла</translation>
-</message>
-<message>
-<source>Page size</source>
-<translation>Размер страницы</translation>
-</message>
-<message>
 <source>quit toolbar</source>
 <translation>Панель инструментов выхода</translation>
-</message>
-<message>
-<source>Page size:</source>
-<translation>Размер страницы:</translation>
 </message>
 <message>
 <source>QOwnNotes will track anonymous usage data, that helps to decide what parts of QOwnNotes to improve next and to find and fix bugs. You can disable that behaviour in the settings.</source>
@@ -3229,69 +5610,8 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <translation>&amp;Да</translation>
 </message>
 <message>
-<source>&amp;Remove notes</source>
-<translation>&amp;Удалить заметки</translation>
-</message>
-<message>
 <source>Your tasks are being loaded from your server</source>
 <translation>Ваши задачи загружаются с сервера</translation>
-</message>
-<message>
-<source>Current note was modified externally</source>
-<translation>Текущая заметка была изменена извне</translation>
-</message>
-<message>
-<source>Stored current note to disk</source>
-<translation>Текущая заметка сохранена на диск</translation>
-</message>
-<message>
-<source>Note was modified externally: %1</source>
-<translation>Заметка изменена внешней программой: %1</translation>
-</message>
-<message>
-<source>Notes directory was modified externally</source>
-<translation>Каталог заметок был изменен извне</translation>
-</message>
-<message numerus="yes">
-<source>Stored %n note(s) to disk</source>
-<translation>
-<numerusform>Заметка сохранена на диск</numerusform>
-<numerusform>На диск сохранены %n заметки</numerusform>
-<numerusform>На диск сохранено %n заметок</numerusform>
-<numerusform>На диск сохранено %n заметок</numerusform>
-</translation>
-</message>
-<message>
-<source>All notes</source>
-<translation>Все заметки</translation>
-</message>
-<message>
-<source>&amp;Add tag</source>
-<translation>&amp;Добавить тег</translation>
-</message>
-<message>
-<source>Tag could not be created!</source>
-<translation>Тег не может быть создан!</translation>
-</message>
-<message>
-<source>Move to this tag</source>
-<translation>Перейти к этому тегу</translation>
-</message>
-<message>
-<source>Tag this</source>
-<translation>Пометить тегом</translation>
-</message>
-<message>
-<source>Cannot move tag '%1' to this tag</source>
-<translation>Нельзя переместить тег '%1' в этот тег</translation>
-</message>
-<message>
-<source>Moved tag '%1' to new tag</source>
-<translation>Тег '%1' перенесен в новый тег</translation>
-</message>
-<message>
-<source>&amp;Remove tags</source>
-<translation>&amp;Удалить теги</translation>
 </message>
 <message>
 <source>No selected todo lists!</source>
@@ -3299,7 +5619,7 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 </message>
 <message>
 <source>Action not found!</source>
-<translation>Команда не найдена!</translation>
+<translation>Действие не найдено!</translation>
 </message>
 <message>
 <source>Could not find menu action &lt;code&gt;%1&lt;/code&gt;! Did you spell it correctly?</source>
@@ -3334,6 +5654,10 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <translation>Просмотр заметки</translation>
 </message>
 <message>
+<source>Note relations</source>
+<translation>Связи заметки</translation>
+</message>
+<message>
 <source>Log</source>
 <translation>Журнал</translation>
 </message>
@@ -3355,7 +5679,7 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 </message>
 <message>
 <source>AI toolbar</source>
-<translation type="unfinished">AI toolbar</translation>
+<translation>Меню AI</translation>
 </message>
 <message>
 <source>window toolbar</source>
@@ -3366,10 +5690,6 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <translation>панель пользовательских команд</translation>
 </message>
 <message>
-<source>Workspace selector</source>
-<translation>Выбор рабочей области</translation>
-</message>
-<message>
 <source>Show %1 panel</source>
 <translation>Показать панель %1</translation>
 </message>
@@ -3378,28 +5698,20 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <translation>Показать %1</translation>
 </message>
 <message>
-<source>Leave distraction free mode</source>
-<translation>Выйти из режима без отвлечения внимания</translation>
-</message>
-<message>
 <source>Switch to note folder</source>
 <translation>Переключиться на папку заметок</translation>
 </message>
 <message>
+<source>Could not switch note folder</source>
+<translation type="unfinished">Could not switch note folder</translation>
+</message>
+<message>
+<source>Modified notes could not be written to disk. Please resolve the problem and try switching note folders again.</source>
+<translation type="unfinished">Modified notes could not be written to disk. Please resolve the problem and try switching note folders again.</translation>
+</message>
+<message>
 <source>Toolbar could not be loaded without name</source>
 <translation>Панель инструментов не может быть загружен без имени</translation>
-</message>
-<message>
-<source>Overwriting external changes of: %1</source>
-<translation>Перезаписывание внешних изменений в: %1</translation>
-</message>
-<message>
-<source>Loading external changes from: %1</source>
-<translation>Загрузка внешних изменений из: %1</translation>
-</message>
-<message>
-<source>Current note could not be stored to disk</source>
-<translation>Данная заметка не может быть сохранена на диск</translation>
 </message>
 <message>
 <source>Read-only</source>
@@ -3417,40 +5729,49 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <source>Click here to see what has changed and to be able to update to the latest version</source>
 <translation>Нажмите здесь, чтобы увидеть, что изменилось и быть в состоянии обновить до последней версии</translation>
 </message>
-<message numerus="yes">
-<source>Proceed with automatic deletion of &lt;strong&gt;%n&lt;/strong&gt; conflicted database copies that may block your ownCloud sync process?</source>
-<translation>
-<numerusform>Продолжить автоматическое удаление &lt;strong&gt;%n&lt;/strong&gt; конфликтующей копии базы данных, которая может блокировать процесс синхронизации ownCloud?</numerusform>
-<numerusform>Продолжить автоматическое удаление &lt;strong&gt;%n&lt;/strong&gt; конфликтующих копий базы данных, которые могут блокировать процесс синхронизации ownCloud?</numerusform>
-<numerusform>Продолжить автоматическое удаление &lt;strong&gt;%n&lt;/strong&gt; конфликтующих копий базы данных, которые могут блокировать процесс синхронизации ownCloud?</numerusform>
-<numerusform>Продолжить автоматическое удаление &lt;strong&gt;%n&lt;/strong&gt; конфликтующих копий базы данных, которые могут блокировать процесс синхронизации ownCloud?</numerusform>
-</translation>
-</message>
-<message numerus="yes">
-<source>%n note(s) were tagged with "%2"</source>
-<translation>
-<numerusform>заметка была помечена тегом «%2»</numerusform>
-<numerusform>%n заметки были помечены тегом «%2»</numerusform>
-<numerusform>%n заметок было помечено тегом «%2»</numerusform>
-<numerusform>%n заметок было помечено тегом «%2»</numerusform>
-</translation>
-</message>
-<message numerus="yes">
-<source>Found &lt;strong&gt;%n&lt;/strong&gt; occurrence(s) of &lt;strong&gt;%1&lt;/strong&gt;</source>
-<translation>
-<numerusform>Обнаружено &lt;strong&gt;%n&lt;/strong&gt; проявление из &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
-<numerusform>Обнаружено &lt;strong&gt;%n&lt;/strong&gt; проявления из &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
-<numerusform>Обнаружено &lt;strong&gt;%n&lt;/strong&gt; проявлений из &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
-<numerusform>Обнаружено &lt;strong&gt;%n&lt;/strong&gt; проявлений из &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
-</translation>
+<message>
+<source>Web</source>
+<translation type="unfinished">Web</translation>
 </message>
 <message>
-<source>Note headline</source>
-<translation>Заголовок заметки</translation>
+<source>Web app is connected</source>
+<translation type="unfinished">Web app is connected</translation>
+</message>
+<message>
+<source>Web app is not connected</source>
+<translation type="unfinished">Web app is not connected</translation>
+</message>
+<message>
+<source>Web app connected</source>
+<translation type="unfinished">Web app connected</translation>
+</message>
+<message>
+<source>Web app disconnected</source>
+<translation type="unfinished">Web app disconnected</translation>
+</message>
+<message>
+<source>Connected systems</source>
+<translation type="unfinished">Connected systems</translation>
+</message>
+<message>
+<source>No connected systems</source>
+<translation type="unfinished">No connected systems</translation>
+</message>
+<message>
+<source>You have to select your Nextcloud / ownCloud notes folder to make this software work!</source>
+<translation type="unfinished">You have to select your Nextcloud / ownCloud notes folder to make this software work!</translation>
+</message>
+<message>
+<source>Note versions are currently loaded from your Nextcloud / ownCloud server</source>
+<translation type="unfinished">Note versions are currently loaded from your Nextcloud / ownCloud server</translation>
+</message>
+<message>
+<source>Trashed notes are currently loaded from your Nextcloud / ownCloud server</source>
+<translation type="unfinished">Trashed notes are currently loaded from your Nextcloud / ownCloud server</translation>
 </message>
 <message>
 <source>Paste as &amp;text file attachment</source>
-<translation type="unfinished">Paste as &amp;text file attachment</translation>
+<translation>Вставить как вложение с &amp;текстовым файлом</translation>
 </message>
 <message>
 <source>Downloading images finished</source>
@@ -3460,29 +5781,434 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <source>Open &amp;settings</source>
 <translation>Открыть &amp;настройки</translation>
 </message>
+</context>
+<context>
+<name>MarkdownLspClient</name>
 <message>
-<source>leave</source>
-<translation>покинуть</translation>
+<source>Markdown LSP server command is empty</source>
+<translation>Команда сервера Markdown LSP пуста</translation>
 </message>
 <message>
-<source>Please enter your &lt;strong&gt;password&lt;/strong&gt; to encrypt the note.&lt;br /&gt;Keep in mind that you have to &lt;strong&gt;remember&lt;/strong&gt; your password to read the content of the note&lt;br /&gt; and that you can &lt;strong&gt;only&lt;/strong&gt; do that &lt;strong&gt;in QOwnNotes&lt;/strong&gt;!</source>
-<translation>Введите &lt;strong&gt;пароль&lt;/strong&gt; для шифрования заметки.&lt;br /&gt;Для чтения содержимого заметки нужно &lt;strong&gt;помнить&lt;/strong&gt; пароль&lt;br /&gt; . Чтение зашифрованных заметок возможно &lt;strong&gt;только&lt;/strong&gt; в программе &lt;strong&gt;QOwnNotes&lt;/strong&gt;!</translation>
+<source>Failed to start Markdown LSP server: %1</source>
+<translation>Не удалось запустить сервер Markdown LSP: %1</translation>
+</message>
+</context>
+<context>
+<name>MarkdownLspSettingsWidget</name>
+<message>
+<source>Markdown language server</source>
+<translation type="unfinished">Markdown language server</translation>
 </message>
 <message>
-<source>Decrypt note and store it as plain text</source>
-<translation>Расшифровать заметку и сохранить в текстовом формате</translation>
+<source>Enable Markdown language server (LSP)</source>
+<translation type="unfinished">Enable Markdown language server (LSP)</translation>
 </message>
 <message>
-<source>&amp;Decrypt</source>
-<translation>&amp;Расшифровать</translation>
+<source>Command:</source>
+<translation type="unfinished">Command:</translation>
 </message>
 <message>
-<source>&lt;br /&gt;You will be able to edit your encrypted note.</source>
-<translation>&lt;br /&gt;Можно редактировать зашифрованную заметку.</translation>
+<source>Auto-detect</source>
+<translation type="unfinished">Auto-detect</translation>
 </message>
 <message>
-<source>Export current note as Markdown file</source>
-<translation>Экспортировать текущую заметку в формат Markdown</translation>
+<source>Arguments:</source>
+<translation type="unfinished">Arguments:</translation>
+</message>
+<message>
+<source>Optional arguments separated by spaces.</source>
+<translation type="unfinished">Optional arguments separated by spaces.</translation>
+</message>
+<message>
+<source>Optional arguments</source>
+<translation type="unfinished">Optional arguments</translation>
+</message>
+<message>
+<source>Log all LSP server output (stderr) to the debug log. Useful for troubleshooting LSP server issues.</source>
+<translation type="unfinished">Log all LSP server output (stderr) to the debug log. Useful for troubleshooting LSP server issues.</translation>
+</message>
+<message>
+<source>Show all LSP server log output in debug log</source>
+<translation type="unfinished">Show all LSP server log output in debug log</translation>
+</message>
+<message>
+<source>Ignored:</source>
+<translation type="unfinished">Ignored:</translation>
+</message>
+<message>
+<source>Reset ignored rules</source>
+<translation type="unfinished">Reset ignored rules</translation>
+</message>
+<message>
+<source>Status:</source>
+<translation type="unfinished">Status:</translation>
+</message>
+<message>
+<source>Not tested yet.</source>
+<translation type="unfinished">Not tested yet.</translation>
+</message>
+<message>
+<source>Test Connection</source>
+<translation type="unfinished">Test Connection</translation>
+</message>
+<message>
+<source>No Markdown LSP server configured.</source>
+<translation type="unfinished">No Markdown LSP server configured.</translation>
+</message>
+<message>
+<source>Command: %1</source>
+<translation type="unfinished">Command: %1</translation>
+</message>
+<message>
+<source> | Arguments: %1</source>
+<translation type="unfinished"> | Arguments: %1</translation>
+</message>
+<message>
+<source> | Currently disabled</source>
+<translation type="unfinished"> | Currently disabled</translation>
+</message>
+<message>
+<source>Configured %1 at %2</source>
+<translation type="unfinished">Configured %1 at %2</translation>
+</message>
+<message>
+<source> with arguments: %1</source>
+<translation type="unfinished"> with arguments: %1</translation>
+</message>
+<message>
+<source>Markdown LSP</source>
+<translation type="unfinished">Markdown LSP</translation>
+</message>
+<message>
+<source>Could not find a supported Markdown LSP server in PATH. Checked: marksman, rumdl.</source>
+<translation type="unfinished">Could not find a supported Markdown LSP server in PATH. Checked: marksman, rumdl.</translation>
+</message>
+<message>
+<source>There are no ignored rules to reset.</source>
+<translation type="unfinished">There are no ignored rules to reset.</translation>
+</message>
+<message numerus="yes">
+<source>Reset %n ignored Markdown LSP rule(s)?</source>
+<translation type="unfinished">
+<numerusform>Reset %n ignored Markdown LSP rule(s)?</numerusform>
+<numerusform>Reset %n ignored Markdown LSP rule(s)?</numerusform>
+<numerusform>Reset %n ignored Markdown LSP rule(s)?</numerusform>
+<numerusform>Reset %n ignored Markdown LSP rule(s)?</numerusform>
+</translation>
+</message>
+<message>
+<source>All ignored Markdown LSP rules have been reset.</source>
+<translation type="unfinished">All ignored Markdown LSP rules have been reset.</translation>
+</message>
+<message>
+<source>Please enter a Markdown LSP server command first.</source>
+<translation type="unfinished">Please enter a Markdown LSP server command first.</translation>
+</message>
+<message>
+<source>Timed out waiting for the Markdown LSP server to initialize.</source>
+<translation type="unfinished">Timed out waiting for the Markdown LSP server to initialize.</translation>
+</message>
+<message>
+<source>Failed to start Markdown LSP server: %1</source>
+<translation type="unfinished">Failed to start Markdown LSP server: %1</translation>
+</message>
+<message>
+<source>Markdown LSP connection successful: %1</source>
+<translation type="unfinished">Markdown LSP connection successful: %1</translation>
+</message>
+<message>
+<source>Markdown LSP connection failed.</source>
+<translation type="unfinished">Markdown LSP connection failed.</translation>
+</message>
+</context>
+<context>
+<name>MarkdownTableDialog</name>
+<message>
+<source>Edit Markdown table</source>
+<translation type="unfinished">Edit Markdown table</translation>
+</message>
+<message>
+<source>Row</source>
+<translation type="unfinished">Row</translation>
+</message>
+<message>
+<source>Add row</source>
+<translation type="unfinished">Add row</translation>
+</message>
+<message>
+<source>Remove row</source>
+<translation type="unfinished">Remove row</translation>
+</message>
+<message>
+<source>Column</source>
+<translation type="unfinished">Column</translation>
+</message>
+<message>
+<source>Add column</source>
+<translation type="unfinished">Add column</translation>
+</message>
+<message>
+<source>Remove column</source>
+<translation type="unfinished">Remove column</translation>
+</message>
+<message>
+<source>Alignment:</source>
+<translation type="unfinished">Alignment:</translation>
+</message>
+<message>
+<source>Alignment of the selected column. Click a column header to select it.</source>
+<translation type="unfinished">Alignment of the selected column. Click a column header to select it.</translation>
+</message>
+<message>
+<source>Default (left)</source>
+<translation type="unfinished">Default (left)</translation>
+</message>
+<message>
+<source>Left</source>
+<translation type="unfinished">Left</translation>
+</message>
+<message>
+<source>Center</source>
+<translation type="unfinished">Center</translation>
+</message>
+<message>
+<source>Right</source>
+<translation type="unfinished">Right</translation>
+</message>
+<message>
+<source>Apply alignment</source>
+<translation type="unfinished">Apply alignment</translation>
+</message>
+<message>
+<source>Apply the selected alignment to the currently selected column(s). Click a column header first to select it.</source>
+<translation type="unfinished">Apply the selected alignment to the currently selected column(s). Click a column header first to select it.</translation>
+</message>
+<message>
+<source>Cannot remove header</source>
+<translation type="unfinished">Cannot remove header</translation>
+</message>
+<message>
+<source>The header row cannot be removed.</source>
+<translation type="unfinished">The header row cannot be removed.</translation>
+</message>
+<message>
+<source>Cannot remove row</source>
+<translation type="unfinished">Cannot remove row</translation>
+</message>
+<message>
+<source>The table must have at least one data row.</source>
+<translation type="unfinished">The table must have at least one data row.</translation>
+</message>
+<message>
+<source>Cannot remove column</source>
+<translation type="unfinished">Cannot remove column</translation>
+</message>
+<message>
+<source>The table must have at least one column.</source>
+<translation type="unfinished">The table must have at least one column.</translation>
+</message>
+</context>
+<context>
+<name>McpServerSettingsWidget</name>
+<message>
+<source>MCP server</source>
+<translation>Сервер MCP</translation>
+</message>
+<message>
+<source>Enable MCP server for AI agent access to notes</source>
+<translation>Включить сервер MCP для доступа агента ИИ к заметкам</translation>
+</message>
+<message>
+<source>Server port:</source>
+<translation>Порт сервера:</translation>
+</message>
+<message>
+<source>Reset the MCP server port</source>
+<translation>Сбросить порт сервера MCP</translation>
+</message>
+<message>
+<source>Security token:</source>
+<translation>Токен безопасности:</translation>
+</message>
+<message>
+<source>If this is empty when saved, a new security token will be generated automatically.</source>
+<translation>Если при сохранении это поле пусто, новый токен безопасности будет создан автоматически.</translation>
+</message>
+<message>
+<source>Show security token</source>
+<translation>Показать токен безопасности</translation>
+</message>
+<message>
+<source>Copy security token to clipboard</source>
+<translation>Скопировать токен безопасности в буфер обмена</translation>
+</message>
+<message>
+<source>Generate new security token</source>
+<translation>Создать новый токен безопасности</translation>
+</message>
+</context>
+<context>
+<name>McpService</name>
+<message>
+<source>MCP server listening on port %1</source>
+<translation>Сервер MCP прослушивает порт %1</translation>
+</message>
+</context>
+<context>
+<name>MediaInsertionManager</name>
+<message>
+<source>File extension</source>
+<translation>Расширение файла</translation>
+</message>
+<message>
+<source>Extension of file attachment:</source>
+<translation>Расширение вложенного файла:</translation>
+</message>
+<message>
+<source>File base name</source>
+<translation>Базовое имя файла</translation>
+</message>
+<message>
+<source>Base name of file attachment:</source>
+<translation>Базовое имя вложенного файла:</translation>
+</message>
+<message>
+<source>Leave empty for automatic name</source>
+<comment>Leave the base name empty for automatic name</comment>
+<translation>Оставьте пустым для автоматического имени</translation>
+</message>
+<message>
+<source>Temporary file can't be opened</source>
+<translation>Не удалось открыть временный файл</translation>
+</message>
+<message>
+<source>Inserted text as text attachment file</source>
+<translation>Текст вставлен как текстовый вложенный файл</translation>
+</message>
+<message>
+<source>Inserting image</source>
+<translation>Вставка изображения</translation>
+</message>
+<message>
+<source>Done inserting image</source>
+<translation>Вставка изображения завершена</translation>
+</message>
+<message>
+<source>Inserting attachment</source>
+<translation>Вставка вложения</translation>
+</message>
+<message>
+<source>Done inserting attachment</source>
+<translation>Вставка вложения завершена</translation>
+</message>
+<message numerus="yes">
+<source>Copied %n note(s) to %1</source>
+<translation>
+<numerusform>Скопирована %n заметка в %1</numerusform>
+<numerusform>Скопировано %n заметки в %1</numerusform>
+<numerusform>Скопировано %n заметок в %1</numerusform>
+<numerusform>Скопировано %n заметок в %1</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Failed to copy %n note(s) (most likely already existing)</source>
+<translation>
+<numerusform>Не удалось скопировать %n заметку (скорее всего, уже существует)</numerusform>
+<numerusform>Не удалось скопировать %n заметки (скорее всего, уже существуют)</numerusform>
+<numerusform>Не удалось скопировать %n заметок (скорее всего, уже существуют)</numerusform>
+<numerusform>Не удалось скопировать %n заметок (скорее всего, уже существуют)</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Skipped copying of %n note(s) (no Markdown or text file or not readable)</source>
+<translation>
+<numerusform>Пропущено копирование %n заметки (не Markdown или текстовый файл, или не читается)</numerusform>
+<numerusform>Пропущено копирование %n заметок (не Markdown или текстовые файлы, или не читаются)</numerusform>
+<numerusform>Пропущено копирование %n заметок (не Markdown или текстовые файлы, или не читаются)</numerusform>
+<numerusform>Пропущено копирование %n заметок (не Markdown или текстовые файлы, или не читаются)</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Skipped inserting %n file(s) because the current note is read-only</source>
+<translation type="unfinished">
+<numerusform>Пропущена вставка файла, так как текущая заметка доступна только для чтения</numerusform>
+<numerusform>Пропущена вставка %n файлов, так как текущая заметка доступна только для чтения</numerusform>
+<numerusform>Пропущена вставка %n файлов, так как текущая заметка доступна только для чтения</numerusform>
+<numerusform>Skipped inserting %n file(s) because the current note is read-only</numerusform>
+</translation>
+</message>
+<message>
+<source>Saving temporary image</source>
+<translation>Сохранение временного изображения</translation>
+</message>
+<message>
+<source>Paste &amp;HTML as Markdown</source>
+<translation>Вставить &amp;HTML как Markdown</translation>
+</message>
+<message>
+<source>Paste as &amp;text file attachment</source>
+<translation>Вставить как вложение &amp;текстового файла</translation>
+</message>
+<message>
+<source>Downloading %1</source>
+<translation>Загрузка %1</translation>
+</message>
+<message>
+<source>Downloading images finished</source>
+<translation>Загрузка изображений завершена</translation>
+</message>
+</context>
+<context>
+<name>NavigationManager</name>
+<message>
+<source>Update backlinks</source>
+<translation>Обновить обратные ссылки</translation>
+</message>
+<message numerus="yes">
+<source>The heading "%1" is referenced in %n note(s). Do you want to update the link to use the new heading "%2"?</source>
+<translation>
+<numerusform>Заголовок «%1» используется в %n заметке. Хотите обновить ссылку на новый заголовок «%2»?</numerusform>
+<numerusform>Заголовок «%1» используется в %n заметках. Хотите обновить ссылку на новый заголовок «%2»?</numerusform>
+<numerusform>Заголовок «%1» используется в %n заметках. Хотите обновить ссылку на новый заголовок «%2»?</numerusform>
+<numerusform>Заголовок «%1» используется в %n заметках. Хотите обновить ссылку на новый заголовок «%2»?</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Updated heading links in %n note(s)</source>
+<translation>
+<numerusform>Обновлены ссылки на заголовки в %n заметке</numerusform>
+<numerusform>Обновлены ссылки на заголовки в %n заметках</numerusform>
+<numerusform>Обновлены ссылки на заголовки в %n заметках</numerusform>
+<numerusform>Обновлены ссылки на заголовки в %n заметках</numerusform>
+</translation>
+</message>
+<message>
+<source>Ln %1, Col %2</source>
+<comment>Line / Column</comment>
+<translation>Стр %1, Кол %2</translation>
+</message>
+<message>
+<source>Line %1, Column %2</source>
+<translation>Строка %1, Столбец %2</translation>
+</message>
+<message numerus="yes">
+<source>%n selected</source>
+<comment>Characters selected</comment>
+<translation>
+<numerusform>%n выделен</numerusform>
+<numerusform>%n выделено</numerusform>
+<numerusform>%n выделено</numerusform>
+<numerusform>%n выделено</numerusform>
+</translation>
+</message>
+<message>
+<source>Ch %1, W %2, L %3</source>
+<comment>Characters / Words / Lines</comment>
+<translation type="unfinished">Ch %1, W %2, L %3</translation>
+</message>
+<message>
+<source>Characters %1, Words %2, Lines %3</source>
+<translation type="unfinished">Characters %1, Words %2, Lines %3</translation>
 </message>
 </context>
 <context>
@@ -3491,75 +6217,391 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <source>headline %1</source>
 <translation>заголовок %1</translation>
 </message>
+<message>
+<source>Expand all</source>
+<translation type="unfinished">Expand all</translation>
+</message>
+<message>
+<source>Collapse all</source>
+<translation type="unfinished">Collapse all</translation>
+</message>
+<message>
+<source>&amp;Rename heading</source>
+<translation>&amp;Переименовать заголовок</translation>
+</message>
+</context>
+<context>
+<name>NetworkSettingsWidget</name>
+<message>
+<source>Proxy Settings</source>
+<translation>Настройки прокси</translation>
+</message>
+<message>
+<source>No Proxy</source>
+<translation>Без прокси</translation>
+</message>
+<message>
+<source>Use system proxy</source>
+<translation>Использовать системный прокси</translation>
+</message>
+<message>
+<source>Specify proxy manually as</source>
+<translation>Указать прокси вручную как</translation>
+</message>
+<message>
+<source>Host</source>
+<translation>Хост</translation>
+</message>
+<message>
+<source>Proxy server requires authentication</source>
+<translation>Прокси-сервер требует аутентификации</translation>
+</message>
+<message>
+<source>SSL Settings</source>
+<translation>Настройки SSL</translation>
+</message>
+<message>
+<source>Ignore SSL errors</source>
+<translation>Игнорировать ошибки SSL</translation>
+</message>
+<message>
+<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You might want to consider getting a free SSL certificate from &lt;a href="https://letsencrypt.org/"&gt;Let's encrypt&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Возможно, вы захотите получить бесплатный SSL-сертификат от &lt;a href="https://letsencrypt.org/"&gt;Let's encrypt&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+</message>
+<message>
+<source>App metrics</source>
+<translation>Метрики приложения</translation>
+</message>
+<message>
+<source>Anonymous usage data helps to decide what parts of QOwnNotes to improve next and to find and fix bugs. Please disable it only if you really can't live with it.</source>
+<translation>Анонимные данные об использовании помогают определить, какие части QOwnNotes улучшить в первую очередь, и находить и исправлять ошибки. Отключайте только в крайнем случае.</translation>
+</message>
+<message>
+<source>Disable tracking of usage data</source>
+<translation>Отключить отслеживание данных об использовании</translation>
+</message>
+<message>
+<source>This data includes anonymous information about what features of the app are used.</source>
+<translation>Эти данные содержат анонимную информацию о том, какие функции приложения используются.</translation>
+</message>
+<message>
+<source>Usage tracking is done on a private Piwik server.</source>
+<translation>Отслеживание использования осуществляется на частном сервере Piwik.</translation>
+</message>
+<message>
+<source>App heartbeat</source>
+<translation>Сердцебиение приложения</translation>
+</message>
+<message>
+<source>A small heartbeat request is sent periodically while QOwnNotes is running. Make a developer happy by letting him know that someone is using QOwnNotes.</source>
+<translation>Пока QOwnNotes работает, периодически отправляется небольшой запрос-сердцебиение. Порадуйте разработчика, сообщив ему, что кто-то использует QOwnNotes.</translation>
+</message>
+<message>
+<source>Disable heartbeat</source>
+<translation>Отключить сердцебиение</translation>
+</message>
+<message>
+<source>hostname of proxy server</source>
+<translation>имя хоста прокси-сервера</translation>
+</message>
+<message>
+<source>username for proxy server</source>
+<translation>имя пользователя для прокси-сервера</translation>
+</message>
+<message>
+<source>password for proxy server</source>
+<translation>пароль для прокси-сервера</translation>
+</message>
+<message>
+<source>HTTP(S) proxy</source>
+<translation>HTTP(S) прокси</translation>
+</message>
+<message>
+<source>SOCKS5 proxy</source>
+<translation>SOCKS5 прокси</translation>
+</message>
+<message>
+<source>Disable usage tracking</source>
+<translation>Отключить отслеживание использования</translation>
+</message>
+<message>
+<source>Anonymous usage data helps to decide what parts of QOwnNotes to improve next and to find and fix bugs.&lt;br /&gt;Please disable it only if you really can't live with it.&lt;br /&gt;&lt;br /&gt;Really disable usage tracking?</source>
+<translation>Анонимные данные об использовании помогают определить, какие части QOwnNotes улучшить в первую очередь, и находить и исправлять ошибки.&lt;br /&gt;Отключайте только в крайнем случае.&lt;br /&gt;&lt;br /&gt;Действительно отключить отслеживание?</translation>
+</message>
 </context>
 <context>
 <name>NextcloudDeckDialog</name>
 <message>
 <source>-10min</source>
-<translation type="unfinished">-10min</translation>
+<translation>-10 мин</translation>
 </message>
 <message>
 <source>+10min</source>
-<translation type="unfinished">+10min</translation>
+<translation>+10 мин</translation>
 </message>
 <message>
 <source>+1d</source>
-<translation type="unfinished">+1d</translation>
+<translation>+1 д</translation>
 </message>
 <message>
 <source>-1d</source>
-<translation type="unfinished">-1d</translation>
+<translation>-1 д</translation>
 </message>
 <message>
-<source>Insert Nextcloud Deck card link</source>
-<translation type="unfinished">Insert Nextcloud Deck card link</translation>
+<source>Archive card</source>
+<translation>Архивировать карточку</translation>
+</message>
+<message>
+<source>Archive</source>
+<translation>Архивировать</translation>
+</message>
+<message>
+<source>Delete card</source>
+<translation>Удалить карточку</translation>
+</message>
+<message>
+<source>Delete</source>
+<translation>Удалить</translation>
+</message>
+<message>
+<source>Show archived cards</source>
+<translation>Показать архивные карточки</translation>
+</message>
+<message>
+<source>This doesn't work for sub-items, because they may be hidden by the parent item!</source>
+<translation>Это не работает для подэлементов, потому что они могут быть скрыты родительским элементом!</translation>
+</message>
+<message>
+<source>Show only items due today</source>
+<translation>Показать только элементы на сегодня</translation>
+</message>
+<message>
+<source>Summary</source>
+<translation>Резюме</translation>
+</message>
+<message>
+<source>Reload the card item list from server</source>
+<translation>Перезагрузить список элементов карточек с сервера</translation>
+</message>
+<message>
+<source>Reload…</source>
+<translation>Перезагрузить…</translation>
+</message>
+<message>
+<source>Search or create card</source>
+<translation>Найти или создать карточку</translation>
+</message>
+<message>
+<source>Select the board and stack to work with</source>
+<translation>Выберите доску и стек для работы</translation>
 </message>
 <message>
 <source>Create card and insert link into current note</source>
-<translation type="unfinished">Create card and insert link into current note</translation>
+<translation>Создать карточку и вставить ссылку в текущую заметку</translation>
 </message>
 <message>
 <source>&amp;Save</source>
-<translation type="unfinished">&amp;Save</translation>
+<translation>&amp;Сохранить</translation>
 </message>
 <message>
 <source>+1h</source>
-<translation type="unfinished">+1h</translation>
+<translation>+1 ч</translation>
 </message>
 <message>
 <source>Title</source>
-<translation type="unfinished">Title</translation>
+<translation>Название</translation>
 </message>
 <message>
 <source>-1h</source>
-<translation type="unfinished">-1h</translation>
+<translation>-1 ч</translation>
 </message>
 <message>
 <source>Description:</source>
-<translation type="unfinished">Description:</translation>
+<translation>Описание:</translation>
 </message>
 <message>
 <source>Due date</source>
-<translation type="unfinished">Due date</translation>
+<translation>Дата выполнения</translation>
+</message>
+<message>
+<source>Manage Nextcloud Deck Cards</source>
+<translation>Управление карточками Nextcloud Deck</translation>
+</message>
+<message>
+<source>Save and insert into note</source>
+<translation>Сохранить и вставить в заметку</translation>
+</message>
+<message>
+<source>Save the current card item and insert a link to it into the current note</source>
+<translation>Сохранить текущий элемент карточки и вставить ссылку на него в текущую заметку</translation>
+</message>
+<message>
+<source>Reload from server</source>
+<translation>Перезагрузить с сервера</translation>
+</message>
+<message>
+<source>Reload boards, stacks and cards from server</source>
+<translation>Перезагрузить доски, стеки и карточки с сервера</translation>
+</message>
+<message>
+<source>Do you want to delete the selected Nextcloud Deck card?</source>
+<translation type="unfinished">Do you want to delete the selected Nextcloud Deck card?</translation>
+</message>
+<message numerus="yes">
+<source>Do you want to delete %n Nextcloud Deck card(s)?</source>
+<translation type="unfinished">
+<numerusform>Do you want to delete %n Nextcloud Deck card(s)?</numerusform>
+<numerusform>Do you want to delete %n Nextcloud Deck card(s)?</numerusform>
+<numerusform>Do you want to delete %n Nextcloud Deck card(s)?</numerusform>
+<numerusform>Do you want to delete %n Nextcloud Deck card(s)?</numerusform>
+</translation>
+</message>
+<message>
+<source>Delete card(s)</source>
+<translation type="unfinished">Delete card(s)</translation>
+</message>
+<message>
+<source>%1 / %2</source>
+<translation type="unfinished">%1 / %2</translation>
+</message>
+<message>
+<source>No due date</source>
+<translation>Нет срока выполнения</translation>
+</message>
+<message>
+<source>Do you want to delete the current Nextcloud Deck card?</source>
+<translation>Вы хотите удалить текущую карточку Nextcloud Deck?</translation>
+</message>
+<message>
+<source>Do you want to archive the current Nextcloud Deck card?</source>
+<translation>Вы хотите архивировать текущую карточку Nextcloud Deck?</translation>
+</message>
+<message>
+<source>&amp;Open card in browser</source>
+<translation>&amp;Открыть карточку в браузере</translation>
+</message>
+<message>
+<source>&amp;Add card link to note</source>
+<translation>&amp;Добавить ссылку на карточку в заметку</translation>
+</message>
+<message>
+<source>&amp;Search for card link in notes</source>
+<translation>&amp;Искать ссылку на карточку в заметках</translation>
+</message>
+<message numerus="yes">
+<source>&amp;Delete %n card(s)</source>
+<translation type="unfinished">
+<numerusform/>
+<numerusform/>
+<numerusform/>
+<numerusform/>
+</translation>
 </message>
 </context>
 <context>
 <name>NextcloudDeckService</name>
 <message>
-<source>Error while creating card</source>
-<translation type="unfinished">Error while creating card</translation>
+<source>Error while updating card</source>
+<translation>Ошибка при обновлении карточки</translation>
 </message>
 <message>
-<source>Creating a card failed with status code %1 and message: %2</source>
-<translation type="unfinished">Creating a card failed with status code %1 and message: %2</translation>
+<source>Updating card failed with status code %1 and message: %2</source>
+<translation>Обновление карточки не удалось с кодом состояния %1 и сообщением: %2</translation>
+</message>
+<message>
+<source>Error while creating card</source>
+<translation>Ошибка при создании карточки</translation>
+</message>
+<message>
+<source>Creating card failed with status code %1 and message: %2</source>
+<translation>Создание карточки не удалось с кодом состояния %1 и сообщением: %2</translation>
+</message>
+<message>
+<source>Error while archiving card</source>
+<translation>Ошибка при архивировании карточки</translation>
+</message>
+<message>
+<source>Error while deleting card</source>
+<translation>Ошибка при удалении карточки</translation>
+</message>
+<message>
+<source>Archiving the card failed with status code %1 and message: %2</source>
+<translation>Архивирование карточки не удалось с кодом состояния %1 и сообщением: %2</translation>
+</message>
+<message>
+<source>Deleting the card failed with status code %1 and message: %2</source>
+<translation>Удаление карточки не удалось с кодом состояния %1 и сообщением: %2</translation>
 </message>
 <message>
 <source>Error while loading boards</source>
-<translation type="unfinished">Error while loading boards</translation>
+<translation>Ошибка при загрузке досок</translation>
 </message>
 <message>
 <source>Loading the boards failed with status code %1 and message: %2</source>
-<translation type="unfinished">Loading the boards failed with status code %1 and message: %2</translation>
+<translation>Не удалось загрузить доски, получены код состояния %1 и сообщение: %2</translation>
+</message>
+<message>
+<source>Error while loading cards</source>
+<translation>Ошибка при загрузке карточек</translation>
+</message>
+<message>
+<source>Loading the cards failed with status code %1 and message: %2</source>
+<translation>Загрузка карточек не удалась с кодом состояния %1 и сообщением: %2</translation>
+</message>
+<message>
+<source>Error while loading archived cards</source>
+<translation>Ошибка при загрузке архивных карточек</translation>
+</message>
+<message>
+<source>Loading the archived cards failed with status code %1 and message: %2</source>
+<translation>Загрузка архивных карточек не удалась с кодом статуса %1 и сообщением: %2</translation>
+</message>
+</context>
+<context>
+<name>NoteBookmarkDialog</name>
+<message>
+<source>Note Bookmarks</source>
+<translation type="unfinished">Note Bookmarks</translation>
+</message>
+<message>
+<source>Slot</source>
+<translation type="unfinished">Slot</translation>
+</message>
+<message>
+<source>Note</source>
+<translation type="unfinished">Note</translation>
+</message>
+<message>
+<source>Position</source>
+<translation type="unfinished">Position</translation>
+</message>
+<message>
+<source>Jump to bookmark</source>
+<translation type="unfinished">Jump to bookmark</translation>
+</message>
+<message>
+<source>Jump to the selected bookmark in the main window</source>
+<translation type="unfinished">Jump to the selected bookmark in the main window</translation>
+</message>
+<message>
+<source>Delete bookmark</source>
+<translation type="unfinished">Delete bookmark</translation>
+</message>
+<message>
+<source>Delete the selected bookmark</source>
+<translation type="unfinished">Delete the selected bookmark</translation>
+</message>
+<message>
+<source>Reload</source>
+<translation type="unfinished">Reload</translation>
+</message>
+<message>
+<source>Reload the bookmark list</source>
+<translation type="unfinished">Reload the bookmark list</translation>
+</message>
+<message>
+<source>Are you sure you want to delete the bookmark at slot %1?</source>
+<translation type="unfinished">Are you sure you want to delete the bookmark at slot %1?</translation>
 </message>
 </context>
 <context>
@@ -3575,6 +6617,22 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <message>
 <source>Preview</source>
 <translation>Превью</translation>
+</message>
+<message>
+<source>Reload</source>
+<translation>Перезагрузить</translation>
+</message>
+<message>
+<source>Reload the note text</source>
+<translation>Перезагрузить текст заметки</translation>
+</message>
+<message>
+<source>Jump to note</source>
+<translation>Перейти к заметке</translation>
+</message>
+<message>
+<source>Jump to the note in the main window</source>
+<translation>Перейти к заметке в главном окне</translation>
 </message>
 </context>
 <context>
@@ -3613,26 +6671,631 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 </message>
 </context>
 <context>
+<name>NoteEncryptionManager</name>
+<message>
+<source>Please enter the &lt;strong&gt;password&lt;/strong&gt; of this encrypted note.</source>
+<translation>Пожалуйста, введите &lt;strong&gt;пароль&lt;/strong&gt; этой зашифрованной заметки.</translation>
+</message>
+<message>
+<source>Note can't be decrypted!</source>
+<translation>Заметку невозможно расшифровать!</translation>
+</message>
+<message>
+<source>It seems that your password is not valid!</source>
+<translation>Похоже, что ваш пароль недействителен!</translation>
+</message>
+<message>
+<source>Please enter your &lt;strong&gt;password&lt;/strong&gt; to encrypt the note.&lt;br /&gt;Keep in mind that you have to &lt;strong&gt;remember&lt;/strong&gt; your password to read the content of the note&lt;br /&gt; and that you can &lt;strong&gt;only&lt;/strong&gt; do that &lt;strong&gt;in QOwnNotes&lt;/strong&gt;!</source>
+<translation>Пожалуйста, введите ваш &lt;strong&gt;пароль&lt;/strong&gt; для шифрования заметки.&lt;br /&gt;Имейте в виду, что вы должны &lt;strong&gt;запомнить&lt;/strong&gt; свой пароль, чтобы прочитать содержимое заметки,&lt;br /&gt; и что вы можете сделать это &lt;strong&gt;только&lt;/strong&gt; &lt;strong&gt;в QOwnNotes&lt;/strong&gt;!</translation>
+</message>
+<message>
+<source>Decrypt note and store it as plain text</source>
+<translation>Расшифровать заметку и сохранить как обычный текст</translation>
+</message>
+<message>
+<source>Your note will be decrypted and stored as plain text again. Keep in mind that the unencrypted note will possibly be synced to your server and sensitive text may be exposed!&lt;br /&gt;Do you want to decrypt your note?</source>
+<translation>Ваша заметка будет расшифрована и снова сохранена как обычный текст. Имейте в виду, что незашифрованная заметка может быть синхронизирована на ваш сервер и конфиденциальный текст может быть раскрыт!&lt;br /&gt;Хотите расшифровать заметку?</translation>
+</message>
+<message>
+<source>&amp;Decrypt</source>
+<translation>&amp;Расшифровать</translation>
+</message>
+<message>
+<source>&amp;Cancel</source>
+<translation>&amp;Отмена</translation>
+</message>
+<message>
+<source>&lt;br /&gt;You will be able to edit your encrypted note.</source>
+<translation>&lt;br /&gt;Вы сможете редактировать свою зашифрованную заметку.</translation>
+</message>
+<message>
+<source>Markdown files</source>
+<translation>Файлы Markdown</translation>
+</message>
+<message>
+<source>Export current note as Markdown file</source>
+<translation>Экспорт текущей заметки в файл Markdown</translation>
+</message>
+<message>
+<source>Export attached files</source>
+<translation>Экспортировать вложенные файлы</translation>
+</message>
+<message>
+<source>Do you also want to export media files and attachments of the note? Files may be overwritten in the destination folder!</source>
+<translation>Хотите также экспортировать медиафайлы и вложения заметки? Файлы могут быть перезаписаны в папке назначения!</translation>
+</message>
+</context>
+<context>
 <name>NoteFilePathLabel</name>
 <message>
 <source>Relative path of note, right-click to open context menu</source>
-<translation type="unfinished">Relative path of note, right-click to open context menu</translation>
+<translation>Относительный путь к заметке, щёлкните правой кнопкой для открытия контекстного меню</translation>
 </message>
 <message>
 <source>Absolute path of note, right-click to open context menu</source>
-<translation type="unfinished">Absolute path of note, right-click to open context menu</translation>
+<translation>Абсолютный путь к заметке, щёлкните правой кнопкой для открытия контекстного меню</translation>
 </message>
 <message>
 <source>Copy absolute path of note</source>
-<translation type="unfinished">Copy absolute path of note</translation>
+<translation>Копировать абсолютный путь к заметке</translation>
+</message>
+<message>
+<source>Copy note filename</source>
+<translation>Копировать имя файла заметки</translation>
 </message>
 <message>
 <source>Copy absolute path of note subfolder</source>
-<translation type="unfinished">Copy absolute path of note subfolder</translation>
+<translation>Копировать абсолютный путь к подпапке заметок</translation>
 </message>
 <message>
 <source>Copy absolute path of note folder</source>
-<translation type="unfinished">Copy absolute path of note folder</translation>
+<translation>Копировать абсолютный путь к папке заметок</translation>
+</message>
+</context>
+<context>
+<name>NoteFolderSettingsWidget</name>
+<message>
+<source>Your note folders</source>
+<translation>Ваши папки заметок</translation>
+</message>
+<message>
+<source>&amp;Add folder</source>
+<translation>Добавить папку(&amp;A)</translation>
+</message>
+<message>
+<source>&amp;Remove folder</source>
+<translation>Удалить папку(&amp;R)</translation>
+</message>
+<message>
+<source>Click here to use the selected folder from your server as note folder</source>
+<translation>Нажмите здесь, чтобы использовать выбранную папку с сервера в качестве папки заметок</translation>
+</message>
+<message>
+<source>path</source>
+<translation>путь</translation>
+</message>
+<message>
+<source>Cloud connection:</source>
+<translation>Облачное соединение:</translation>
+</message>
+<message>
+<source>&amp;Use as Nextcloud / ownCloud path</source>
+<translation type="unfinished">&amp;Use as Nextcloud / ownCloud path</translation>
+</message>
+<message>
+<source>Please select your note folder on your Nextcloud / ownCloud server:</source>
+<translation type="unfinished">Please select your note folder on your Nextcloud / ownCloud server:</translation>
+</message>
+<message>
+<source>Select the cloud connection to use for this note folder. Select "None" if this note folder should not be synced to a server. Cloud versioning, trash and sharing will then be disabled for this note folder.</source>
+<translation type="unfinished">Select the cloud connection to use for this note folder. Select "None" if this note folder should not be synced to a server. Cloud versioning, trash and sharing will then be disabled for this note folder.</translation>
+</message>
+<message>
+<source>Path on your Nextcloud / ownCloud server:</source>
+<translation type="unfinished">Path on your Nextcloud / ownCloud server:</translation>
+</message>
+<message>
+<source>Note folder path:</source>
+<translation>Путь к папке заметок:</translation>
+</message>
+<message>
+<source>Subfolder visibility</source>
+<translation>Видимость подпапок</translation>
+</message>
+<message>
+<source>If checked, all subfolders will be shown. If unchecked, you can select which subfolders to show.</source>
+<translation>Если установлен, отображаются все подпапки. Если не установлен, можно выбрать, какие подпапки показывать.</translation>
+</message>
+<message>
+<source>All subfolders</source>
+<translation>Все подпапки</translation>
+</message>
+<message>
+<source>Select which subfolders to show. Unchecked subfolders and their children will be ignored.</source>
+<translation>Выберите, какие подпапки отображать. Неотмеченные подпапки и их содержимое будут игнорироваться.</translation>
+</message>
+<message>
+<source>You need to have git installed to make this work!</source>
+<translation>Для работы этой функции необходимо установить git!</translation>
+</message>
+<message>
+<source>Use git to keep a local history of your notes</source>
+<translation>Использовать git для хранения локальной истории заметок</translation>
+</message>
+<message>
+<source>Use as active note folder</source>
+<translation>Использовать как активную папку заметок</translation>
+</message>
+<message>
+<source>Be aware that the Nextcloud / ownCloud notes app doesn't support subfolders!</source>
+<translation type="unfinished">Be aware that the Nextcloud / ownCloud notes app doesn't support subfolders!</translation>
+</message>
+<message>
+<source>Click here to select your remote note path on your Nextcloud / ownCloud server</source>
+<translation type="unfinished">Click here to select your remote note path on your Nextcloud / ownCloud server</translation>
+</message>
+<message>
+<source>Set the Nextcloud / ownCloud path where the note folder path will be synced to on your Nextcloud / ownCloud server.</source>
+<translation type="unfinished">Set the Nextcloud / ownCloud path where the note folder path will be synced to on your Nextcloud / ownCloud server.</translation>
+</message>
+<message>
+<source>Use note subfolders</source>
+<translation>Использовать подпапки заметок</translation>
+</message>
+<message>
+<source>Path where your notes are stored locally</source>
+<translation>Путь локального хранения заметок</translation>
+</message>
+<message>
+<source>This name will be viewed in all the menus.</source>
+<translation>Это имя будет отображаться во всех меню.</translation>
+</message>
+<message>
+<source>Note folder name</source>
+<translation>Название папки заметок</translation>
+</message>
+<message>
+<source>Name:</source>
+<translation>Имя:</translation>
+</message>
+<message>
+<source>Click here to select your local note path</source>
+<translation>Нажмите здесь, чтобы выбрать локальный путь к заметкам</translation>
+</message>
+<message>
+<source>"Notes" path on your server</source>
+<extracomment>"Notes" should not be translated</extracomment>
+<translation>Путь «Notes» на вашем сервере</translation>
+</message>
+<message>
+<source>This also allows note files to be renamed</source>
+<translation>Это также позволяет переименовывать файлы заметок</translation>
+</message>
+<message>
+<source>Allow note file name to be different from headline</source>
+<translation>Разрешить имя файла заметки отличаться от заголовка</translation>
+</message>
+<message>
+<source>None</source>
+<translation type="unfinished">None</translation>
+</message>
+<message>
+<source>new folder</source>
+<translation>новая папка</translation>
+</message>
+<message>
+<source>Remove note folder</source>
+<translation>Удалить папку заметок</translation>
+</message>
+<message>
+<source>Remove the current note folder &lt;strong&gt;%1&lt;/strong&gt;?</source>
+<translation>Удалить текущую папку заметок &lt;strong&gt;%1&lt;/strong&gt;?</translation>
+</message>
+<message>
+<source>Please select the folder where your notes will get stored to</source>
+<translation>Выберите папку для хранения ваших заметок</translation>
+</message>
+<message>
+<source>Loading folders from server</source>
+<translation>Загрузка папок с сервера</translation>
+</message>
+<message>
+<source>No more folders were found in the current folder</source>
+<translation>В текущей папке больше не найдено папок</translation>
+</message>
+<message>
+<source>Loading folders in '%1' from server</source>
+<translation>Загрузка папок в «%1» с сервера</translation>
+</message>
+</context>
+<context>
+<name>NoteIndexManager</name>
+<message>
+<source>Loading notes…</source>
+<translation>Загрузка заметок…</translation>
+</message>
+<message>
+<source>Abort</source>
+<translation>Прервать</translation>
+</message>
+<message>
+<source>Note folder</source>
+<translation>Папка заметок</translation>
+</message>
+<message>
+<source>Removed duplicate conflicted database: %1</source>
+<translation>Удалена дублирующая конфликтная база данных: %1</translation>
+</message>
+<message>
+<source>Could not remove duplicate conflicted database: %1</source>
+<translation>Не удалось удалить дублирующую конфликтную базу данных: %1</translation>
+</message>
+<message>
+<source>Removed merged conflicted database: %1</source>
+<translation>Удалена объединённая конфликтная база данных: %1</translation>
+</message>
+<message>
+<source>Could not remove merged conflicted database: %1</source>
+<translation>Не удалось удалить объединённую конфликтную базу данных: %1</translation>
+</message>
+<message>
+<source>Delete conflicted database copies</source>
+<translation>Удалить конфликтные копии базы данных</translation>
+</message>
+<message numerus="yes">
+<source>Proceed with automatic deletion of &lt;strong&gt;%n&lt;/strong&gt; conflicted database copies that may block your Nextcloud / ownCloud sync process?</source>
+<translation type="unfinished">
+<numerusform>Proceed with automatic deletion of &lt;strong&gt;%n&lt;/strong&gt; conflicted database copies that may block your Nextcloud / ownCloud sync process?</numerusform>
+<numerusform>Proceed with automatic deletion of &lt;strong&gt;%n&lt;/strong&gt; conflicted database copies that may block your Nextcloud / ownCloud sync process?</numerusform>
+<numerusform>Proceed with automatic deletion of &lt;strong&gt;%n&lt;/strong&gt; conflicted database copies that may block your Nextcloud / ownCloud sync process?</numerusform>
+<numerusform>Proceed with automatic deletion of &lt;strong&gt;%n&lt;/strong&gt; conflicted database copies that may block your Nextcloud / ownCloud sync process?</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Removed %n conflicted database copies</source>
+<translation>
+<numerusform>Удалена %n конфликтная копия базы данных</numerusform>
+<numerusform>Удалено %n конфликтных копии базы данных</numerusform>
+<numerusform>Удалено %n конфликтных копий базы данных</numerusform>
+<numerusform>Удалено %n конфликтных копий базы данных</numerusform>
+</translation>
+</message>
+<message>
+<source>Current note was modified externally</source>
+<translation>Текущая заметка была изменена извне</translation>
+</message>
+<message>
+<source>Overwriting external changes of: %1</source>
+<translation>Перезапись внешних изменений: %1</translation>
+</message>
+<message>
+<source>Loading external changes from: %1</source>
+<translation>Загрузка внешних изменений из: %1</translation>
+</message>
+<message>
+<source>Note was removed externally!</source>
+<translation>Заметка была удалена извне!</translation>
+</message>
+<message>
+<source>Current note was removed outside of this application!
+Restore current note?</source>
+<translation>Текущая заметка была удалена вне этого приложения!
+Восстановить текущую заметку?</translation>
+</message>
+<message>
+<source>Stored current note to disk</source>
+<translation>Текущая заметка сохранена на диск</translation>
+</message>
+<message>
+<source>Current note could not be stored to disk</source>
+<translation>Не удалось сохранить текущую заметку на диск</translation>
+</message>
+<message>
+<source>Note was modified externally: %1</source>
+<translation>Заметка была изменена извне: %1</translation>
+</message>
+<message>
+<source>Notes directory was modified externally</source>
+<translation>Директория заметок была изменена извне</translation>
+</message>
+<message numerus="yes">
+<source>Stored %n note(s) to disk</source>
+<translation>
+<numerusform>Сохранена %n заметка на диск</numerusform>
+<numerusform>Сохранено %n заметки на диск</numerusform>
+<numerusform>Сохранено %n заметок на диск</numerusform>
+<numerusform>Сохранено %n заметок на диск</numerusform>
+</translation>
+</message>
+</context>
+<context>
+<name>NoteOperationsManager</name>
+<message>
+<source>Note has backlinks</source>
+<translation>Заметка имеет обратные ссылки</translation>
+</message>
+<message numerus="yes">
+<source>The note &lt;strong&gt;%1&lt;/strong&gt; is linked from %n other note(s). Deleting it will leave those links broken. Do you still want to remove it?</source>
+<translation type="unfinished">
+<numerusform>Заметка &lt;strong&gt;%1&lt;/strong&gt; связана из другой заметки. Её удаление приведёт к неработающим ссылкам. Всё равно удалить?</numerusform>
+<numerusform>Заметка &lt;strong&gt;%1&lt;/strong&gt; связана из %n других заметок. Её удаление приведёт к неработающим ссылкам. Всё равно удалить?</numerusform>
+<numerusform>Заметка &lt;strong&gt;%1&lt;/strong&gt; связана из %n других заметок. Её удаление приведёт к неработающим ссылкам. Всё равно удалить?</numerusform>
+<numerusform>The note &lt;strong&gt;%1&lt;/strong&gt; is linked from %n other note(s). Deleting it will leave those links broken. Do you still want to remove it?</numerusform>
+</translation>
+</message>
+<message>
+<source>Remove current note</source>
+<translation>Удалить текущую заметку</translation>
+</message>
+<message>
+<source>Remove current note: &lt;strong&gt;%1&lt;/strong&gt;?</source>
+<translation>Удалить текущую заметку: &lt;strong&gt;%1&lt;/strong&gt;?</translation>
+</message>
+<message>
+<source>Notes have backlinks</source>
+<translation>Заметки имеют обратные ссылки</translation>
+</message>
+<message numerus="yes">
+<source>%n of the selected note(s) are linked from other notes (%1 link(s) in total). Deleting them will leave those links broken. Do you still want to remove them?</source>
+<translation type="unfinished">
+<numerusform>%n из выбранных заметок связана из других заметок (всего %1 ссылок). Удаление приведёт к неработающим ссылкам. Всё равно удалить?</numerusform>
+<numerusform>%n из выбранных заметок связаны из других заметок (всего %1 ссылок). Удаление приведёт к неработающим ссылкам. Всё равно удалить?</numerusform>
+<numerusform>%n из выбранных заметок связаны из других заметок (всего %1 ссылок). Удаление приведёт к неработающим ссылкам. Всё равно удалить?</numerusform>
+<numerusform>%n of the selected note(s) are linked from other notes (%1 link(s) in total). Deleting them will leave those links broken. Do you still want to remove them?</numerusform>
+</translation>
+</message>
+<message>
+<source>Remove selected notes and folders</source>
+<translation>Удалить выбранные заметки и папки</translation>
+</message>
+<message>
+<source>Remove selected folders</source>
+<translation>Удалить выбранные папки</translation>
+</message>
+<message numerus="yes">
+<source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected folder(s)?&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!</source>
+<translation>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранную папку?&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;Все файлы и папки в этой папке также будут удалены!</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранные папки?&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;Все файлы и папки в этих папках также будут удалены!</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных папок?&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;Все файлы и папки в этих папках также будут удалены!</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных папок?&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;Все файлы и папки в этих папках также будут удалены!</numerusform>
+</translation>
+</message>
+<message>
+<source>Remove selected notes</source>
+<translation>Удалить выбранные заметки</translation>
+</message>
+<message numerus="yes">
+<source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
+
+If the trash is enabled on your ownCloud server you should be able to restore them from there.</source>
+<translation>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранную заметку?
+
+Если на вашем сервере ownCloud включена корзина, вы сможете восстановить её оттуда.</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранные заметки?
+
+Если на вашем сервере ownCloud включена корзина, вы сможете восстановить их оттуда.</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных заметок?
+
+Если на вашем сервере ownCloud включена корзина, вы сможете восстановить их оттуда.</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных заметок?
+
+Если на вашем сервере ownCloud включена корзина, вы сможете восстановить их оттуда.</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s) and &lt;strong&gt;%1&lt;/strong&gt; folder(s)?&lt;ul&gt;&lt;li&gt;%2&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore the notes from there.</source>
+<translation type="unfinished">
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s) and &lt;strong&gt;%1&lt;/strong&gt; folder(s)?&lt;ul&gt;&lt;li&gt;%2&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore the notes from there.</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s) and &lt;strong&gt;%1&lt;/strong&gt; folder(s)?&lt;ul&gt;&lt;li&gt;%2&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore the notes from there.</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s) and &lt;strong&gt;%1&lt;/strong&gt; folder(s)?&lt;ul&gt;&lt;li&gt;%2&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore the notes from there.</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s) and &lt;strong&gt;%1&lt;/strong&gt; folder(s)?&lt;ul&gt;&lt;li&gt;%2&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore the notes from there.</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore them from there.</source>
+<translation type="unfinished">
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore them from there.</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore them from there.</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore them from there.</numerusform>
+<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected note(s)?
+
+If the trash is enabled on your Nextcloud / ownCloud server you should be able to restore them from there.</numerusform>
+</translation>
+</message>
+<message>
+<source>Removed note subfolder: %1</source>
+<translation>Удалена подпапка заметок: %1</translation>
+</message>
+<message>
+<source>Move selected notes</source>
+<translation>Переместить выбранные заметки</translation>
+</message>
+<message numerus="yes">
+<source>Move %n selected note(s) to &lt;strong&gt;%2&lt;/strong&gt;?</source>
+<translation>
+<numerusform>Переместить %n выбранную заметку в &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Переместить %n выбранные заметки в &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Переместить %n выбранных заметок в &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Переместить %n выбранных заметок в &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+</translation>
+</message>
+<message>
+<source>Copy selected notes</source>
+<translation>Копировать выбранные заметки</translation>
+</message>
+<message numerus="yes">
+<source>Copy %n selected note(s) to &lt;strong&gt;%2&lt;/strong&gt;?</source>
+<translation>
+<numerusform>Копировать %n выбранную заметку в &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Копировать %n выбранные заметки в &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Копировать %n выбранных заметок в &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Копировать %n выбранных заметок в &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+</translation>
+</message>
+<message>
+<source>Done</source>
+<translation>Готово</translation>
+</message>
+<message numerus="yes">
+<source>%n note(s) were copied to &lt;strong&gt;%2&lt;/strong&gt;.</source>
+<translation>
+<numerusform>%n заметка скопирована в &lt;strong&gt;%2&lt;/strong&gt;.</numerusform>
+<numerusform>%n заметки скопированы в &lt;strong&gt;%2&lt;/strong&gt;.</numerusform>
+<numerusform>%n заметок скопировано в &lt;strong&gt;%2&lt;/strong&gt;.</numerusform>
+<numerusform>%n заметок скопировано в &lt;strong&gt;%2&lt;/strong&gt;.</numerusform>
+</translation>
+</message>
+<message>
+<source>Note</source>
+<comment>name for new note</comment>
+<translation>Заметка</translation>
+</message>
+<message numerus="yes">
+<source>Move %n selected note(s) to note subfolder &lt;strong&gt;%2&lt;/strong&gt;?</source>
+<translation>
+<numerusform>Переместить %n выбранную заметку в подпапку заметок &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Переместить %n выбранные заметки в подпапку заметок &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Переместить %n выбранных заметок в подпапку заметок &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Переместить %n выбранных заметок в подпапку заметок &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>%n note(s) were moved to note subfolder "%2"</source>
+<translation>
+<numerusform>%n заметка перемещена в подпапку заметок «%2»</numerusform>
+<numerusform>%n заметки перемещены в подпапку заметок «%2»</numerusform>
+<numerusform>%n заметок перемещено в подпапку заметок «%2»</numerusform>
+<numerusform>%n заметок перемещено в подпапку заметок «%2»</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Copy %n selected note(s) to note subfolder &lt;strong&gt;%2&lt;/strong&gt;?</source>
+<translation>
+<numerusform>Копировать %n выбранную заметку в подпапку заметок &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Копировать %n выбранные заметки в подпапку заметок &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Копировать %n выбранных заметок в подпапку заметок &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+<numerusform>Копировать %n выбранных заметок в подпапку заметок &lt;strong&gt;%2&lt;/strong&gt;?</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>%n note(s) were copied to note subfolder "%2"</source>
+<translation>
+<numerusform>%n заметка скопирована в подпапку заметок «%2»</numerusform>
+<numerusform>%n заметки скопированы в подпапку заметок «%2»</numerusform>
+<numerusform>%n заметок скопировано в подпапку заметок «%2»</numerusform>
+<numerusform>%n заметок скопировано в подпапку заметок «%2»</numerusform>
+</translation>
+</message>
+<message>
+<source>Copy to note folder</source>
+<translation>Копировать в папку заметок</translation>
+</message>
+<message>
+<source>Move to note folder</source>
+<translation>Переместить в папку заметок</translation>
+</message>
+<message>
+<source>Copy to this subfolder</source>
+<translation>Копировать в эту подпапку</translation>
+</message>
+<message>
+<source>Move to this subfolder</source>
+<translation>Переместить в эту подпапку</translation>
+</message>
+<message>
+<source>Split note</source>
+<translation>Разделить заметку</translation>
+</message>
+<message>
+<source>Split note at current cursor position? The text after the cursor will be moved to a new note. The new note will be linked to the old note.</source>
+<translation>Разделить заметку в текущей позиции курсора? Текст после курсора будет перемещён в новую заметку. Новая заметка будет связана со старой.</translation>
+</message>
+<message>
+<source>New note</source>
+<translation>Новая заметка</translation>
+</message>
+<message>
+<source>Note headline</source>
+<translation>Заголовок заметки</translation>
+</message>
+<message>
+<source>The deleted note(s) had &lt;strong&gt;%1 image(s)&lt;/strong&gt; and &lt;strong&gt;%2 attachment(s)&lt;/strong&gt; that are not used in any other note.
+
+Do you want to delete those files as well?</source>
+<translation>Удалённые заметки содержали &lt;strong&gt;%1 изображение(й)&lt;/strong&gt; и &lt;strong&gt;%2 вложение(й)&lt;/strong&gt;, которые не используются в других заметках.
+
+Вы хотите также удалить эти файлы?</translation>
+</message>
+<message numerus="yes">
+<source>The deleted note(s) had &lt;strong&gt;%n image(s)&lt;/strong&gt; that are not used in any other note.
+
+Do you want to delete those files as well?</source>
+<translation type="unfinished">
+<numerusform>Удалённые заметки содержали &lt;strong&gt;%n изображение&lt;/strong&gt;, которое не используется в других заметках.
+
+Удалить эти файлы?</numerusform>
+<numerusform>Удалённые заметки содержали &lt;strong&gt;%n изображения&lt;/strong&gt;, которые не используются в других заметках.
+
+Удалить эти файлы?</numerusform>
+<numerusform>Удалённые заметки содержали &lt;strong&gt;%n изображений&lt;/strong&gt;, которые не используются в других заметках.
+
+Удалить эти файлы?</numerusform>
+<numerusform>The deleted note(s) had &lt;strong&gt;%n image(s)&lt;/strong&gt; that are not used in any other note.
+
+Do you want to delete those files as well?</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>The deleted note(s) had &lt;strong&gt;%n attachment(s)&lt;/strong&gt; that are not used in any other note.
+
+Do you want to delete those files as well?</source>
+<translation type="unfinished">
+<numerusform>Удалённые заметки содержали &lt;strong&gt;%n вложение&lt;/strong&gt;, которое не используется в других заметках.
+
+Удалить эти файлы?</numerusform>
+<numerusform>Удалённые заметки содержали &lt;strong&gt;%n вложения&lt;/strong&gt;, которые не используются в других заметках.
+
+Удалить эти файлы?</numerusform>
+<numerusform>Удалённые заметки содержали &lt;strong&gt;%n вложений&lt;/strong&gt;, которые не используются в других заметках.
+
+Удалить эти файлы?</numerusform>
+<numerusform>The deleted note(s) had &lt;strong&gt;%n attachment(s)&lt;/strong&gt; that are not used in any other note.
+
+Do you want to delete those files as well?</numerusform>
+</translation>
+</message>
+<message>
+<source>Delete orphaned images and attachments</source>
+<translation>Удалить осиротевшие изображения и вложения</translation>
+</message>
+<message numerus="yes">
+<source>Removed %n orphaned file(s)</source>
+<translation type="unfinished">
+<numerusform>Удалён %n осиротевший файл</numerusform>
+<numerusform>Удалено %n осиротевших файла</numerusform>
+<numerusform>Удалено %n осиротевших файлов</numerusform>
+<numerusform>Removed %n orphaned file(s)</numerusform>
+</translation>
 </message>
 </context>
 <context>
@@ -3666,20 +7329,20 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <context>
 <name>NoteSubFolderTree</name>
 <message>
-<source>show notes in folder '%1' (%2)</source>
-<translation type="unfinished">show notes in folder '%1' (%2)</translation>
-</message>
-<message>
 <source>All notes</source>
 <translation>Все заметки</translation>
 </message>
 <message>
 <source>Show notes from all note subfolders (%1)</source>
-<translation type="unfinished">Show notes from all note subfolders (%1)</translation>
+<translation>Показать заметки из всех подпапок заметок (%1)</translation>
+</message>
+<message>
+<source>Show notes in folder '%1' (%2)</source>
+<translation>Показать заметки в папке '%1' (%2)</translation>
 </message>
 <message>
 <source>Show notes in note root folder (%1)</source>
-<translation type="unfinished">Show notes in note root folder (%1)</translation>
+<translation>Показать заметки в корневой папке (%1)</translation>
 </message>
 <message>
 <source>Note folder</source>
@@ -3695,105 +7358,216 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 </message>
 <message>
 <source>Remove selected folders</source>
-<translation type="unfinished">Remove selected folders</translation>
+<translation>Удалить выбранные папки</translation>
+</message>
+<message>
+<source>Move selected folders to...</source>
+<translation>Переместить выбранные папки в...</translation>
+</message>
+<message>
+<source>Move to note folder</source>
+<translation>Переместить в папку заметок</translation>
 </message>
 <message>
 <source>Show folder in file manager</source>
-<translation type="unfinished">Show folder in file manager</translation>
+<translation>Показать папку в файловом менеджере</translation>
+</message>
+<message>
+<source>Move to this subfolder</source>
+<translation>Переместить в эту подпапку</translation>
 </message>
 <message numerus="yes">
 <source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected folder(s)?&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!</source>
-<translation type="unfinished">
-<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected folder(s)?&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!</numerusform>
-<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected folder(s)?&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!</numerusform>
-<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected folder(s)?&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!</numerusform>
-<numerusform>Remove &lt;strong&gt;%n&lt;/strong&gt; selected folder(s)?&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;All files and folders in these folders will be removed as well!</numerusform>
+<translation>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выделенную папку? &lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;Все файлы и подпапки также будут удалены!</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных папок? &lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;Все файлы и подпапки также будут удалены!</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных папок? &lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;Все файлы и подпапки также будут удалены!</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных папок? &lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;Все файлы и подпапки также будут удалены!</numerusform>
 </translation>
 </message>
 <message>
 <source>Removed note subfolder: %1</source>
-<translation type="unfinished">Removed note subfolder: %1</translation>
+<translation>Удалена подпапка заметок: %1</translation>
+</message>
+<message>
+<source>note folder</source>
+<translation>папка заметок</translation>
+</message>
+<message>
+<source>Move selected folders</source>
+<translation>Переместить выбранные папки</translation>
+</message>
+<message numerus="yes">
+<source>Move &lt;strong&gt;%n&lt;/strong&gt; selected folder(s) to &lt;strong&gt;%1&lt;/strong&gt;?</source>
+<translation>
+<numerusform>Переместить &lt;strong&gt;%n&lt;/strong&gt; выбранную папку в &lt;strong&gt;%1&lt;/strong&gt;?</numerusform>
+<numerusform>Переместить &lt;strong&gt;%n&lt;/strong&gt; выбранные папки в &lt;strong&gt;%1&lt;/strong&gt;?</numerusform>
+<numerusform>Переместить &lt;strong&gt;%n&lt;/strong&gt; выбранных папок в &lt;strong&gt;%1&lt;/strong&gt;?</numerusform>
+<numerusform>Переместить &lt;strong&gt;%n&lt;/strong&gt; выбранных папок в &lt;strong&gt;%1&lt;/strong&gt;?</numerusform>
+</translation>
+</message>
+<message>
+<source>Migrate relative links</source>
+<translation>Перенести относительные ссылки</translation>
+</message>
+<message>
+<source>Do you want to migrate relative note links, media file links and attachment links for moved notes?&lt;br /&gt;&lt;br /&gt;If you choose &lt;strong&gt;No&lt;/strong&gt;, those relative links may break after moving the folders.</source>
+<translation>Хотите перенести относительные ссылки на заметки, медиафайлы и вложения для перемещённых заметок?&lt;br /&gt;&lt;br /&gt;Если вы выберете &lt;strong&gt;Нет&lt;/strong&gt;, эти относительные ссылки могут перестать работать после перемещения папок.</translation>
+</message>
+<message numerus="yes">
+<source>Moved &lt;strong&gt;%n&lt;/strong&gt; note subfolder(s) to &lt;strong&gt;%1&lt;/strong&gt;</source>
+<translation>
+<numerusform>Перемещена &lt;strong&gt;%n&lt;/strong&gt; подпапка заметок в &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+<numerusform>Перемещено &lt;strong&gt;%n&lt;/strong&gt; подпапки заметок в &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+<numerusform>Перемещено &lt;strong&gt;%n&lt;/strong&gt; подпапок заметок в &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+<numerusform>Перемещено &lt;strong&gt;%n&lt;/strong&gt; подпапок заметок в &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+</translation>
 </message>
 </context>
 <context>
-<name>OpenAiCompleter</name>
+<name>NoteTabManager</name>
 <message>
-<source>Timeout, while waiting for the AI response</source>
-<translation type="unfinished">Timeout, while waiting for the AI response</translation>
+<source>Toggle note pinning</source>
+<translation>Переключить закрепление заметки</translation>
+</message>
+<message>
+<source>Close other note tabs</source>
+<translation>Закрыть другие вкладки заметок</translation>
+</message>
+<message>
+<source>Close note tab</source>
+<translation>Закрыть вкладку заметки</translation>
 </message>
 </context>
 <context>
-<name>OpenAiService</name>
+<name>NoteTreeManager</name>
 <message>
-<source>AI system is disabled. Please enable it in the main menu or the AI toolbar.</source>
-<translation type="unfinished">AI system is disabled. Please enable it in the main menu or the AI toolbar.</translation>
-</message>
-</context>
-<context>
-<name>OwnCloudService</name>
-<message>
-<source>incorrect</source>
-<translation>неверный</translation>
+<source>External diff tool</source>
+<translation type="unfinished">External diff tool</translation>
 </message>
 <message>
-<source>not connected</source>
-<translation>Не подключен</translation>
+<source>Please select at least two notes to diff.</source>
+<translation type="unfinished">Please select at least two notes to diff.</translation>
 </message>
 <message>
-<source>Username / password error</source>
-<translation>Ошибка авторизации</translation>
+<source>The external diff tool &lt;strong&gt;%1&lt;/strong&gt; could not be started.</source>
+<translation type="unfinished">The external diff tool &lt;strong&gt;%1&lt;/strong&gt; could not be started.</translation>
 </message>
 <message>
-<source>Your calendar username or password is incorrect!</source>
-<translation>Ваше имя пользователя или пароль для календаря ошибочны!</translation>
+<source>New note</source>
+<translation>Новая заметка</translation>
 </message>
 <message>
-<source>ok</source>
-<translation>ОК</translation>
+<source>Rename note</source>
+<translation>Переименовать заметку</translation>
 </message>
 <message>
-<source>not correct</source>
-<translation>неправильно</translation>
+<source>Allows you to rename the filename of the note</source>
+<translation>Позволяет переименовать имя файла заметки</translation>
 </message>
 <message>
-<source>not detected</source>
-<translation>не обнаружен</translation>
+<source>&amp;Remove notes and folders</source>
+<translation>&amp;Удалить заметки и папки</translation>
 </message>
 <message>
-<source>not found</source>
-<translation>не найден</translation>
+<source>&amp;Remove folders</source>
+<translation>&amp;Удалить папки</translation>
 </message>
 <message>
-<source>unknown</source>
-<translation>неизвестно</translation>
+<source>&amp;Remove notes</source>
+<translation>&amp;Удалить заметки</translation>
 </message>
 <message>
-<source>version %1 too low</source>
-<translation>версия %1 слишком низкая</translation>
+<source>&amp;Move notes to…</source>
+<translation>&amp;Переместить заметки в…</translation>
 </message>
 <message>
-<source>not enabled</source>
-<translation>не включено</translation>
+<source>&amp;Copy notes to…</source>
+<translation>&amp;Копировать заметки в…</translation>
 </message>
 <message>
-<source>API app version too low</source>
-<translation>Версия API app слишком старая</translation>
+<source>Jump to the note's subfolder</source>
+<translation>Перейти в подпапку заметки</translation>
 </message>
 <message>
-<source>Please consider updating your QOwnNotesAPI app on your server, your app version %1 is too low and may cause troubles in QOwnNotes.</source>
-<translation>Просьба рассмотреть вопрос об обновлении приложения QOwnNotesAPI на вашем сервере, ваше версия приложения %1 слишком старая и может вызвать проблемы в QOwnNotes.</translation>
+<source>Move notes to subfolder…</source>
+<translation>Переместить заметки в подпапку…</translation>
 </message>
 <message>
-<source>ownCloud server connection error</source>
-<translation>Ошибка связи с сервером ownCloud</translation>
+<source>Copy notes to subfolder…</source>
+<translation>Копировать заметки в подпапку…</translation>
 </message>
 <message>
-<source>ownCloud server error: &lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;Please check your ownCloud configuration.</source>
-<translation>Ошибка связи с сервером ownCloud: &lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;Пожалуйста, проверьте конфигурацию.</translation>
+<source>&amp;Tag selected notes with…</source>
+<translation>&amp;Пометить выбранные заметки тегом…</translation>
 </message>
 <message>
-<source>You need to setup your ownCloud server!</source>
-<translation>Вам нужно настроить ваш сервер ownCloud!</translation>
+<source>&amp;Remove tag from selected notes…</source>
+<translation>&amp;Убрать тег с выбранных заметок…</translation>
+</message>
+<message>
+<source>Open selected notes in tabs</source>
+<translation>Открыть выбранные заметки во вкладках</translation>
+</message>
+<message>
+<source>Diff selected notes</source>
+<translation type="unfinished">Diff selected notes</translation>
+</message>
+<message>
+<source>Open note in external editor</source>
+<translation>Открыть заметку во внешнем редакторе</translation>
+</message>
+<message>
+<source>Open note in different window</source>
+<translation>Открыть заметку в другом окне</translation>
+</message>
+<message>
+<source>Open note in Nextcloud Files</source>
+<translation>Открыть заметку в Nextcloud Files</translation>
+</message>
+<message>
+<source>Open note in Nextcloud Notes</source>
+<translation>Открыть заметку в Nextcloud Notes</translation>
+</message>
+<message>
+<source>Show note in file manager</source>
+<translation>Показать заметку в файловом менеджере</translation>
+</message>
+<message>
+<source>Copy absolute path of note</source>
+<translation>Копировать абсолютный путь к заметке</translation>
+</message>
+<message>
+<source>Copy note filename</source>
+<translation>Копировать имя файла заметки</translation>
+</message>
+<message>
+<source>Show note git versions</source>
+<translation>Показать git-версии заметки</translation>
+</message>
+<message>
+<source>Unmark as favorite</source>
+<translation>Убрать из избранного</translation>
+</message>
+<message>
+<source>Mark as favorite</source>
+<translation>Добавить в избранное</translation>
+</message>
+<message>
+<source>Select &amp;all notes</source>
+<translation>Выбрать &amp;все заметки</translation>
+</message>
+<message>
+<source>Name:</source>
+<translation>Имя:</translation>
+</message>
+<message>
+<source>Note renaming not enabled!</source>
+<translation>Переименование заметок не включено!</translation>
+</message>
+<message>
+<source>If you want to rename your note you have to enable the option to allow the note filename to be different from the headline.</source>
+<translation>Если вы хотите переименовать заметку, нужно включить опцию, позволяющую имени файла заметки отличаться от заголовка.</translation>
 </message>
 <message>
 <source>Open &amp;settings</source>
@@ -3803,49 +7577,194 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <source>&amp;Cancel</source>
 <translation>&amp;Отмена</translation>
 </message>
+</context>
+<context>
+<name>OpenAiCompleter</name>
 <message>
-<source>Done with loading note versions</source>
-<translation>Загрузка версий заметки завершена</translation>
+<source>Timeout, while waiting for the AI response</source>
+<translation>Время ожидания ответа от AI истекло</translation>
+</message>
+</context>
+<context>
+<name>OpenAiService</name>
+<message>
+<source>AI system is disabled. Please enable it in the main menu or the AI toolbar.</source>
+<translation>AI система отключена. Пожалуйста, включите это в главном меню или в меню AI.</translation>
+</message>
+</context>
+<context>
+<name>PanelsSettingsWidget</name>
+<message>
+<source>Note search panel</source>
+<translation>Панель поиска заметок</translation>
 </message>
 <message>
-<source>No versions found</source>
-<translation>Версии не найдены</translation>
+<source>Disable auto-completion of previous searches</source>
+<translation>Отключить автодополнение предыдущих поисков</translation>
 </message>
 <message>
-<source>There are no versions for this note or the note wasn't found on the server.</source>
-<translation>Для этой заметки нет версий или заметка не была найдена на сервере.</translation>
+<source>Show the number of matches in each note</source>
+<translation>Показывать количество совпадений в каждой заметке</translation>
 </message>
 <message>
-<source>Done with loading trashed notes</source>
-<translation>Загрузка удаленных заметок завершена</translation>
+<source>Open newly created notes in a new tab</source>
+<translation>Открывать новые заметки на новой вкладке</translation>
 </message>
 <message>
-<source>No trashed notes</source>
-<translation>Нет удаленных заметок</translation>
+<source>Note folder panel</source>
+<translation>Панель папок заметок</translation>
 </message>
 <message>
-<source>No trashed notes were found on the server.</source>
-<translation>Удаленные заметки на сервере не найдены.</translation>
+<source>Show note folders as buttons instead of in a select box</source>
+<translation>Отображать папки заметок в виде кнопок, а не выпадающего списка</translation>
 </message>
 <message>
-<source>Error while loading todo lists!</source>
-<translation>Ошибка при загрузке списков todo!</translation>
+<source>Note list panel</source>
+<translation>Панель списка заметок</translation>
 </message>
 <message>
-<source>Your CalDAV server didn't reply anything!</source>
-<translation>Ваш сервер CalDAV не ответил ничего!</translation>
+<source>Show all notes in a folder including their subfolders (only works if subfolders are turned on)</source>
+<translation>Показывать все заметки в папке, включая подпапки (работает только при включённых подпапках)</translation>
 </message>
 <message>
-<source>Error message from your CalDAV server: &lt;strong&gt;%1&lt;/strong&gt;</source>
-<translation>Сообщение об ошибке от сервера CalDAV: &lt;strong&gt;%1&lt;/strong&gt;</translation>
+<source>Show all notes of a tag including the notes of their children-tags</source>
+<translation>Показывать все заметки тега, включая заметки дочерних тегов</translation>
 </message>
 <message>
-<source>No bookmarks</source>
-<translation>Нет закладок</translation>
+<source>Instead of a note list use a note tree with all the subfolders (if they are turned on for the note folder)</source>
+<translation>Вместо списка заметок использовать дерево заметок со всеми подпапками (если они включены для папки заметок)</translation>
 </message>
 <message>
-<source>No bookmarks were found on the server.</source>
-<translation>Закладки не найдены на сервере.</translation>
+<source>Show notes in the note list with preview</source>
+<translation>Показывать заметки в списке с предварительным просмотром</translation>
+</message>
+<message>
+<source>Allow empty note files</source>
+<translation>Разрешить пустые файлы заметок</translation>
+</message>
+<message>
+<source>When enabled, a leading emoji in the note title will be used as the icon in the note list instead of the standard document icon</source>
+<translation type="unfinished">When enabled, a leading emoji in the note title will be used as the icon in the note list instead of the standard document icon</translation>
+</message>
+<message>
+<source>Show leading emoji from note title as icon in the note list</source>
+<translation type="unfinished">Show leading emoji from note title as icon in the note list</translation>
+</message>
+<message>
+<source>Notes larger than this will not be shown in the note list</source>
+<translation>Заметки большего размера не будут отображаться в списке заметок</translation>
+</message>
+<message>
+<source>Maximum note file size:</source>
+<translation>Максимальный размер файла заметки:</translation>
+</message>
+<message>
+<source>Regular expressions of note files to ignore, separated by ";"</source>
+<translation>Регулярные выражения для файлов заметок, которые нужно игнорировать, разделённые ";"</translation>
+</message>
+<message>
+<source>Ignored note files</source>
+<translation>Игнорируемые файлы заметок</translation>
+</message>
+<message>
+<source>Sort</source>
+<translation>Сортировка</translation>
+</message>
+<message>
+<source>Alphabetical</source>
+<translation>По алфавиту</translation>
+</message>
+<message>
+<source>By last change</source>
+<translation>По последнему изменению</translation>
+</message>
+<message>
+<source>Order</source>
+<translation>Порядок</translation>
+</message>
+<message>
+<source>Ascending</source>
+<translation>По возрастанию</translation>
+</message>
+<message>
+<source>Descending</source>
+<translation>По убыванию</translation>
+</message>
+<message>
+<source>Note edit panel</source>
+<translation>Панель редактирования заметок</translation>
+</message>
+<message>
+<source>Restore open note tabs at application startup and when note folders are switched</source>
+<translation>Восстанавливать открытые вкладки заметок при запуске приложения и при переключении папок заметок</translation>
+</message>
+<message>
+<source>Hide tab close button</source>
+<translation>Скрыть кнопку закрытия вкладки</translation>
+</message>
+<message>
+<source>Note subfolders panel</source>
+<translation>Панель подпапок заметок</translation>
+</message>
+<message>
+<source>Hide 'Find or create note subfolder' search</source>
+<translation>Скрыть поиск «Найти или создать подпапку заметок»</translation>
+</message>
+<message>
+<source>Display note subfolders as full tree</source>
+<translation>Отображать подпапки заметок в виде полного дерева</translation>
+</message>
+<message>
+<source>Show root folder name</source>
+<translation>Показывать имя корневой папки</translation>
+</message>
+<message>
+<source>Show with full path</source>
+<translation>Показывать полный путь</translation>
+</message>
+<message>
+<source>Clicking a note tab unsets 'All notes' selection</source>
+<translation>Нажатие на вкладку заметки снимает выбор «Все заметки»</translation>
+</message>
+<message>
+<source>Regular expressions of note subfolders to ignore, separated by ";"</source>
+<translation>Регулярные выражения для подпапок заметок, которые нужно игнорировать, разделённые ";"</translation>
+</message>
+<message>
+<source>Ignored subfolders</source>
+<translation>Игнорируемые подпапки</translation>
+</message>
+<message>
+<source>Reset ignored subfolders</source>
+<translation>Сбросить игнорируемые подпапки</translation>
+</message>
+<message>
+<source>Tags panel</source>
+<translation>Панель тегов</translation>
+</message>
+<message>
+<source>Hide 'Find or create tag' search</source>
+<translation>Скрыть поиск «Найти или создать тег»</translation>
+</message>
+<message>
+<source>Hide 'Note count' with tags (increases performance)</source>
+<translation>Скрыть «Количество заметок» у тегов (повышает производительность)</translation>
+</message>
+<message>
+<source>By last change / use</source>
+<translation>По последнему изменению/использованию</translation>
+</message>
+<message>
+<source>Navigation panel</source>
+<translation>Панель навигации</translation>
+</message>
+<message>
+<source>Hide navigation item search bar</source>
+<translation>Скрыть строку поиска элементов навигации</translation>
+</message>
+<message>
+<source>Auto-select items in navigation panel when changing cursor position</source>
+<translation>Автоматически выбирать элементы в панели навигации при изменении положения курсора</translation>
 </message>
 </context>
 <context>
@@ -3875,22 +7794,338 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <name>PasswordLineEdit</name>
 <message>
 <source>Show password</source>
-<translation type="unfinished">Show password</translation>
+<translation>Показать пароль</translation>
 </message>
 <message>
 <source>Hide password</source>
-<translation type="unfinished">Hide password</translation>
+<translation>Спрятать пароль</translation>
+</message>
+</context>
+<context>
+<name>PreviewFontSettingsWidget</name>
+<message>
+<source>Rendering</source>
+<translation>Отрисовка</translation>
+</message>
+<message>
+<source>Time to wait before refreshing the preview after typing:</source>
+<translation>Время ожидания перед обновлением предварительного просмотра после ввода:</translation>
+</message>
+<message>
+<source>Reset the debounce time</source>
+<translation>Сбросить время задержки</translation>
+</message>
+<message>
+<source>0ms means don't wait for the typing to stop</source>
+<translation>0 мс означает не ждать окончания ввода</translation>
+</message>
+<message>
+<source>Use editor highlighting styles also for the preview</source>
+<translation>Использовать стили выделения редактора также для предварительного просмотра</translation>
+</message>
+<message>
+<source>Enable underline rendering</source>
+<translation>Включить отрисовку подчёркивания</translation>
+</message>
+<message>
+<source>View text right to left (RTL)</source>
+<translation>Просматривать текст справа налево (RTL)</translation>
+</message>
+<message>
+<source>Ignore code font size to allow zooming</source>
+<translation>Игнорировать размер шрифта кода для возможности масштабирования</translation>
+</message>
+<message>
+<source>Exporting</source>
+<translation>Экспорт</translation>
+</message>
+<message>
+<source>Use internal export styling for the PDF export and printing of the preview</source>
+<translation>Использовать внутренние стили экспорта для экспорта в PDF и печати предварительного просмотра</translation>
+</message>
+<message>
+<source>Fonts</source>
+<translation>Шрифты</translation>
+</message>
+<message>
+<source>Code font:</source>
+<translation>Шрифт кода:</translation>
+</message>
+<message>
+<source>Set a new font</source>
+<translation>Задать новый шрифт</translation>
+</message>
+<message>
+<source>Reset font</source>
+<translation>Сбросить шрифт</translation>
+</message>
+<message>
+<source>Default font:</source>
+<translation>Шрифт по умолчанию:</translation>
 </message>
 </context>
 <context>
 <name>QHotkey</name>
 <message>
 <source>Failed to register %1. Error: %2</source>
-<translation type="unfinished">Failed to register %1. Error: %2</translation>
+<translation>Неудачная регистрация %1. Ошибка: %2</translation>
 </message>
 <message>
 <source>Failed to unregister %1. Error: %2</source>
-<translation type="unfinished">Failed to unregister %1. Error: %2</translation>
+<translation>Неудачная отмена регистрации %1. Ошибка: %2</translation>
+</message>
+</context>
+<context>
+<name>QKeychain::DeletePasswordJobPrivate</name>
+<message>
+<source>Could not open keystore</source>
+<translation type="unfinished">Could not open keystore</translation>
+</message>
+<message>
+<source>Could not remove private key from keystore</source>
+<translation type="unfinished">Could not remove private key from keystore</translation>
+</message>
+<message>
+<source>Unknown error</source>
+<translation type="unfinished">Unknown error</translation>
+</message>
+<message>
+<source>Could not open wallet: %1; %2</source>
+<translation type="unfinished">Could not open wallet: %1; %2</translation>
+</message>
+<message>
+<source>Password entry not found</source>
+<translation type="unfinished">Password entry not found</translation>
+</message>
+<message>
+<source>Could not delete password</source>
+<translation type="unfinished">Could not delete password</translation>
+</message>
+</context>
+<context>
+<name>QKeychain::Job</name>
+<message>
+<source>Both service name and key are empty</source>
+<translation type="unfinished">Both service name and key are empty</translation>
+</message>
+</context>
+<context>
+<name>QKeychain::JobPrivate</name>
+<message>
+<source>Unknown error</source>
+<translation type="unfinished">Unknown error</translation>
+</message>
+<message>
+<source>Access to keychain denied</source>
+<translation type="unfinished">Access to keychain denied</translation>
+</message>
+</context>
+<context>
+<name>QKeychain::PlainTextStore</name>
+<message>
+<source>Could not store data in settings: access error</source>
+<translation type="unfinished">Could not store data in settings: access error</translation>
+</message>
+<message>
+<source>Could not store data in settings: format error</source>
+<translation type="unfinished">Could not store data in settings: format error</translation>
+</message>
+<message>
+<source>Could not delete data from settings: access error</source>
+<translation type="unfinished">Could not delete data from settings: access error</translation>
+</message>
+<message>
+<source>Could not delete data from settings: format error</source>
+<translation type="unfinished">Could not delete data from settings: format error</translation>
+</message>
+<message>
+<source>Entry not found</source>
+<translation type="unfinished">Entry not found</translation>
+</message>
+</context>
+<context>
+<name>QKeychain::ReadPasswordJobPrivate</name>
+<message>
+<source>Entry not found</source>
+<translation type="unfinished">Entry not found</translation>
+</message>
+<message>
+<source>Could not open keystore</source>
+<translation type="unfinished">Could not open keystore</translation>
+</message>
+<message>
+<source>Could not retrieve private key from keystore</source>
+<translation type="unfinished">Could not retrieve private key from keystore</translation>
+</message>
+<message>
+<source>Encrypted data is too short</source>
+<translation type="unfinished">Encrypted data is too short</translation>
+</message>
+<message>
+<source>Could not create RSA decryption cipher</source>
+<translation type="unfinished">Could not create RSA decryption cipher</translation>
+</message>
+<message>
+<source>Could not decrypt AES key: %1</source>
+<translation type="unfinished">Could not decrypt AES key: %1</translation>
+</message>
+<message>
+<source>Could not create AES decryption cipher</source>
+<translation type="unfinished">Could not create AES decryption cipher</translation>
+</message>
+<message>
+<source>Could not create decryption cipher</source>
+<translation type="unfinished">Could not create decryption cipher</translation>
+</message>
+<message>
+<source>D-Bus is not running</source>
+<translation type="unfinished">D-Bus is not running</translation>
+</message>
+<message>
+<source>Unknown error</source>
+<translation type="unfinished">Unknown error</translation>
+</message>
+<message>
+<source>No keychain service available</source>
+<translation type="unfinished">No keychain service available</translation>
+</message>
+<message>
+<source>Could not open wallet: %1; %2</source>
+<translation type="unfinished">Could not open wallet: %1; %2</translation>
+</message>
+<message>
+<source>Access to keychain denied</source>
+<translation type="unfinished">Access to keychain denied</translation>
+</message>
+<message>
+<source>Could not determine data type: %1; %2</source>
+<translation type="unfinished">Could not determine data type: %1; %2</translation>
+</message>
+<message>
+<source>Unknown kwallet entry type '%1'</source>
+<translation type="unfinished">Unknown kwallet entry type '%1'</translation>
+</message>
+<message>
+<source>Password entry not found</source>
+<translation type="unfinished">Password entry not found</translation>
+</message>
+<message>
+<source>Could not decrypt data</source>
+<translation type="unfinished">Could not decrypt data</translation>
+</message>
+<message>
+<source>Could not decrypt data: %1</source>
+<translation type="unfinished">Could not decrypt data: %1</translation>
+</message>
+</context>
+<context>
+<name>QKeychain::WritePasswordJobPrivate</name>
+<message>
+<source>Could not open keystore</source>
+<translation type="unfinished">Could not open keystore</translation>
+</message>
+<message>
+<source>Could not create private key generator</source>
+<translation type="unfinished">Could not create private key generator</translation>
+</message>
+<message>
+<source>Could not generate new private key</source>
+<translation type="unfinished">Could not generate new private key</translation>
+</message>
+<message>
+<source>Could not retrieve private key from keystore</source>
+<translation type="unfinished">Could not retrieve private key from keystore</translation>
+</message>
+<message>
+<source>Could not generate AES key</source>
+<translation type="unfinished">Could not generate AES key</translation>
+</message>
+<message>
+<source>Could not generate IV</source>
+<translation type="unfinished">Could not generate IV</translation>
+</message>
+<message>
+<source>Could not create AES encryption cipher</source>
+<translation type="unfinished">Could not create AES encryption cipher</translation>
+</message>
+<message>
+<source>Could not encrypt data: %1</source>
+<translation type="unfinished">Could not encrypt data: %1</translation>
+</message>
+<message>
+<source>Could not create RSA encryption cipher</source>
+<translation type="unfinished">Could not create RSA encryption cipher</translation>
+</message>
+<message>
+<source>Could not encrypt AES key: %1</source>
+<translation type="unfinished">Could not encrypt AES key: %1</translation>
+</message>
+<message>
+<source>D-Bus is not running</source>
+<translation type="unfinished">D-Bus is not running</translation>
+</message>
+<message>
+<source>Unknown error</source>
+<translation type="unfinished">Unknown error</translation>
+</message>
+<message>
+<source>Could not open wallet: %1; %2</source>
+<translation type="unfinished">Could not open wallet: %1; %2</translation>
+</message>
+<message>
+<source>Encryption failed: %1</source>
+<translation type="unfinished">Encryption failed: %1</translation>
+</message>
+<message>
+<source>Credential size exceeds maximum size of %1: %2</source>
+<translation type="unfinished">Credential size exceeds maximum size of %1: %2</translation>
+</message>
+<message>
+<source>Credential key exceeds maximum size of %1</source>
+<translation type="unfinished">Credential key exceeds maximum size of %1</translation>
+</message>
+<message>
+<source>Writing credentials failed: %1</source>
+<translation type="unfinished">Writing credentials failed: %1</translation>
+</message>
+</context>
+<context>
+<name>QLiteHtmlSearchWidget</name>
+<message>
+<source>Close search</source>
+<translation>Закрыть поиск</translation>
+</message>
+<message>
+<source>Find:</source>
+<translation>Найти:</translation>
+</message>
+<message>
+<source>Find in text</source>
+<translation>Найти в тексте</translation>
+</message>
+<message>
+<source>Search forward</source>
+<translation>Искать далее</translation>
+</message>
+<message>
+<source>Search backward</source>
+<translation>Искать назад</translation>
+</message>
+<message>
+<source>Plain text</source>
+<translation>Обычный текст</translation>
+</message>
+<message>
+<source>Whole words</source>
+<translation>Слова целиком</translation>
+</message>
+<message>
+<source>Regular expression</source>
+<translation>Регулярное выражение</translation>
+</message>
+<message>
+<source>Match case sensitive</source>
+<translation>С учётом регистра</translation>
 </message>
 </context>
 <context>
@@ -3898,6 +8133,24 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <message>
 <source>default</source>
 <translation>по умолчанию</translation>
+</message>
+<message>
+<source>Note file was modified externally</source>
+<translation>Файл заметки был изменен извне</translation>
+</message>
+<message>
+<source>The note file '%1' was modified externally while you had unsaved changes.
+
+The editor below shows YOUR version. The differences view shows changes between the external file (in red) and your version (in green).
+
+Click 'OK' to save YOUR version and overwrite the external changes.
+Click 'Cancel' to discard your changes and keep the external version.</source>
+<translation>Файл заметки '%1' был изменен извне, пока у вас были несохраненные изменения.
+
+Редактор ниже показывает ВАШУ версию. Представление различий показывает изменения между внешним файлом (красным) и вашей версией (зеленым).
+
+Нажмите 'OK', чтобы сохранить ВАШУ версию и перезаписать внешние изменения.
+Нажмите 'Отмена', чтобы отменить ваши изменения и сохранить внешнюю версию.</translation>
 </message>
 <message>
 <source>Could not store note file: %1 - Error message: %2</source>
@@ -3932,13 +8185,35 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <numerusform>Обнаружено изменение пути до файла заметки. Хотите заменить все вхождения &lt;strong&gt;%1&lt;/strong&gt; ссылок с &lt;strong&gt;%2&lt;/strong&gt; и ссылок с именем файла &lt;strong&gt;%3&lt;/strong&gt; как &lt;strong&gt;%4&lt;/strong&gt; в &lt;strong&gt;%n&lt;/strong&gt; файлах заметок?</numerusform>
 </translation>
 </message>
+<message numerus="yes">
+<source>A change of the note path was detected. Would you like to replace all outgoing links to &lt;strong&gt;%n&lt;/strong&gt; note file(s)?</source>
+<translation>
+<numerusform>Обнаружено изменение пути заметки. Хотите заменить все исходящие ссылки на &lt;strong&gt;%n&lt;/strong&gt; файл заметки?</numerusform>
+<numerusform>Обнаружено изменение пути заметки. Хотите заменить все исходящие ссылки на &lt;strong&gt;%n&lt;/strong&gt; файла заметок?</numerusform>
+<numerusform>Обнаружено изменение пути заметки. Хотите заменить все исходящие ссылки на &lt;strong&gt;%n&lt;/strong&gt; файлов заметок?</numerusform>
+<numerusform>Обнаружено изменение пути заметки. Хотите заменить все исходящие ссылки на &lt;strong&gt;%n&lt;/strong&gt; файлов заметок?</numerusform>
+</translation>
+</message>
+<message>
+<source>Subfolder path changed</source>
+<translation>Путь подпапки изменён</translation>
+</message>
+<message numerus="yes">
+<source>The subfolder was renamed from &lt;strong&gt;%1&lt;/strong&gt; to &lt;strong&gt;%2&lt;/strong&gt;. Would you like to update all relative Markdown links that point into this subfolder in &lt;strong&gt;%n&lt;/strong&gt; note file(s)?</source>
+<translation type="unfinished">
+<numerusform>Подпапка переименована с &lt;strong&gt;%1&lt;/strong&gt; на &lt;strong&gt;%2&lt;/strong&gt;. Обновить все относительные ссылки Markdown, указывающие на эту подпапку, в &lt;strong&gt;%n&lt;/strong&gt; файле заметки?</numerusform>
+<numerusform>Подпапка переименована с &lt;strong&gt;%1&lt;/strong&gt; на &lt;strong&gt;%2&lt;/strong&gt;. Обновить все относительные ссылки Markdown, указывающие на эту подпапку, в &lt;strong&gt;%n&lt;/strong&gt; файлах заметок?</numerusform>
+<numerusform>Подпапка переименована с &lt;strong&gt;%1&lt;/strong&gt; на &lt;strong&gt;%2&lt;/strong&gt;. Обновить все относительные ссылки Markdown, указывающие на эту подпапку, в &lt;strong&gt;%n&lt;/strong&gt; файлах заметок?</numerusform>
+<numerusform>The subfolder was renamed from &lt;strong&gt;%1&lt;/strong&gt; to &lt;strong&gt;%2&lt;/strong&gt;. Would you like to update all relative Markdown links that point into this subfolder in &lt;strong&gt;%n&lt;/strong&gt; note file(s)?</numerusform>
+</translation>
+</message>
 <message>
 <source>Image file exists</source>
-<translation type="unfinished">Image file exists</translation>
+<translation>Файл изображения уже существует</translation>
 </message>
 <message>
 <source>Image file already exists in the media folder, do you want to use the existing one instead of creating a new file?</source>
-<translation type="unfinished">Image file already exists in the media folder, do you want to use the existing one instead of creating a new file?</translation>
+<translation>Файл изображения уже существует в медиа папке, вы хотите использовать существующую или создать новый файл?</translation>
 </message>
 <message numerus="yes">
 <source>…and %n more note(s)</source>
@@ -3954,8 +8229,8 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <translation>Неизвестное действие %1</translation>
 </message>
 <message>
-<source>Workspace selector</source>
-<translation>Выбор рабочей области</translation>
+<source>Layout selector</source>
+<translation>Выбор макета</translation>
 </message>
 <message>
 <source>Don't ask again!</source>
@@ -3966,16 +8241,8 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <translation>Не показывать снова!</translation>
 </message>
 <message>
-<source>Double-click to unstick note from tab</source>
-<translation>Дважды щелкните, чтобы открепить заметку от вкладки</translation>
-</message>
-<message>
-<source>Double-click to stick note to tab</source>
-<translation>Дважды щелкните, чтобы прикрепить заметку к вкладке</translation>
-</message>
-<message>
-<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %2</source>
-<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br/&gt; дата последнего изменения: %2</translation>
+<source>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;last modified: %3&lt;br /&gt;created: %2&lt;br /&gt;file size: %4</source>
+<translation>&lt;strong&gt;%1&lt;/strong&gt;&lt;br /&gt;последнее изменение: %3&lt;br /&gt;создан: %2&lt;br /&gt;размер файла: %4</translation>
 </message>
 <message>
 <source>&lt;br /&gt;path: %1</source>
@@ -3983,35 +8250,67 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 </message>
 <message>
 <source>Dark mode detected</source>
-<translation type="unfinished">Dark mode detected</translation>
+<translation>Тёмная тема обнаружена</translation>
 </message>
 <message>
 <source>Your Windows system seems to be in dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
-<translation type="unfinished">Your Windows system seems to be in dark mode. Do you also want to turn on dark mode in QOwnNotes?</translation>
+<translation>Похоже, что ваша Windows работает в тёмной теме. Вы хотите переключиться на тёмную тему в QOwnNotes?</translation>
 </message>
 <message>
 <source>Your Windows system seems to be in light mode. Do you also want to turn off dark mode in QOwnNotes?</source>
-<translation type="unfinished">Your Windows system seems to be in light mode. Do you also want to turn off dark mode in QOwnNotes?</translation>
+<translation>Похоже, что ваша Windows работает в светлой теме. Вы хотите переключиться на светлую тему в QOwnNotes?</translation>
 </message>
 <message>
 <source>Light mode detected</source>
-<translation type="unfinished">Light mode detected</translation>
+<translation>Светлая тема обнаружена</translation>
+</message>
+<message>
+<source>Your system switched to dark mode. Do you also want to turn on dark mode in QOwnNotes?
+
+Updating the interface takes a short while.</source>
+<translation type="unfinished">Your system switched to dark mode. Do you also want to turn on dark mode in QOwnNotes?
+
+Updating the interface takes a short while.</translation>
+</message>
+<message>
+<source>Your system seems to be in dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
+<translation type="unfinished">Your system seems to be in dark mode. Do you also want to turn on dark mode in QOwnNotes?</translation>
+</message>
+<message>
+<source>Your system switched to light mode. Do you also want to turn off dark mode in QOwnNotes?
+
+Updating the interface takes a short while.</source>
+<translation type="unfinished">Your system switched to light mode. Do you also want to turn off dark mode in QOwnNotes?
+
+Updating the interface takes a short while.</translation>
+</message>
+<message>
+<source>Your system seems to be in light mode. Do you also want to turn off dark mode in QOwnNotes?</source>
+<translation type="unfinished">Your system seems to be in light mode. Do you also want to turn off dark mode in QOwnNotes?</translation>
+</message>
+<message>
+<source>Double-click to unpin note from tab</source>
+<translation>Двойной щелчок для открепления заметки от вкладки</translation>
+</message>
+<message>
+<source>Double-click to pin note to tab</source>
+<translation>Двойной щелчок для закрепления заметки на вкладке</translation>
 </message>
 <message>
 <source>Your Linux system seems to use the dark mode. Do you also want to turn on dark mode in QOwnNotes?</source>
-<translation type="unfinished">Your Linux system seems to use the dark mode. Do you also want to turn on dark mode in QOwnNotes?</translation>
+<translation>Похоже, что ваша Linux работает в тёмной теме. Вы хотите переключиться на тёмную тему в QOwnNotes?</translation>
 </message>
 <message>
 <source>Your Linux system seems to use the light mode. Do you also want to turn off dark mode in QOwnNotes?</source>
-<translation type="unfinished">Your Linux system seems to use the light mode. Do you also want to turn off dark mode in QOwnNotes?</translation>
+<translation>Похоже, что ваша Linux работает в светлой теме. Вы хотите переключиться на светлую тему в QOwnNotes?</translation>
 </message>
 <message>
 <source>Panel disabled</source>
-<translation type="unfinished">Panel disabled</translation>
+<translation>Панель отключена</translation>
 </message>
 <message>
 <source>Panel &lt;strong&gt;%1&lt;/strong&gt; is currently disabled, do you want to turn it on again for this action to work?</source>
-<translation type="unfinished">Panel &lt;strong&gt;%1&lt;/strong&gt; is currently disabled, do you want to turn it on again for this action to work?</translation>
+<translation>Панель &lt;strong&gt;%1&lt;/strong&gt; сейчас отключена, вы хотите включить её обратно, что бы это действие заработало?</translation>
 </message>
 <message>
 <source>Command failed!</source>
@@ -4027,11 +8326,11 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 </message>
 <message>
 <source>Login flow succeeded</source>
-<translation type="unfinished">Login flow succeeded</translation>
+<translation>Процесс входа в систему завершен удачно</translation>
 </message>
 <message>
 <source>Username and password were set successfully!</source>
-<translation type="unfinished">Username and password were set successfully!</translation>
+<translation>Имя пользователя и пароль были успешно установлены!</translation>
 </message>
 <message>
 <source>Default</source>
@@ -4043,7 +8342,7 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 </message>
 <message>
 <source>Your note folder &lt;b&gt;%1&lt;/b&gt; was not found any more! Do you want to select a new one?</source>
-<translation type="unfinished">Your note folder &lt;b&gt;%1&lt;/b&gt; was not found any more! Do you want to select a new one?</translation>
+<translation>Ваша папка для заметок &lt;b&gt;%1&lt;/b&gt; не найдена! Вы хотите выбрать новую?</translation>
 </message>
 <message>
 <source>Please select the folder where your notes will get stored to</source>
@@ -4068,7 +8367,7 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <message numerus="yes">
 <source>%n note(s) are using this attachment. Would you also like to rename those attachments in the note(s)?</source>
 <translation>
-<numerusform>Заметка использует это вложение. Переименовать также это вложение в заметке?</numerusform>
+<numerusform>%n заметка использует это вложение. Переименовать также это вложение в заметке?</numerusform>
 <numerusform>%n заметки используют это вложение. Переименовать также эти вложения в заметках?</numerusform>
 <numerusform>%n заметок используют это вложение. Переименовать также эти вложения в заметках?</numerusform>
 <numerusform>%n заметок используют это вложение. Переименовать также эти вложения в заметках?</numerusform>
@@ -4076,128 +8375,264 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 </message>
 <message numerus="yes">
 <source>%n note(s) are using this image. Would you also like to rename those images in the note(s)?</source>
-<translation type="unfinished">
-<numerusform>%n note(s) are using this image. Would you also like to rename those images in the note(s)?</numerusform>
-<numerusform>%n note(s) are using this image. Would you also like to rename those images in the note(s)?</numerusform>
-<numerusform>%n note(s) are using this image. Would you also like to rename those images in the note(s)?</numerusform>
-<numerusform>%n note(s) are using this image. Would you also like to rename those images in the note(s)?</numerusform>
+<translation>
+<numerusform>%n заметка используют это изображение. Вы хотите также переименовать изображение в заметке?</numerusform>
+<numerusform>%n заметки используют это изображение. Вы хотите также переименовать изображение в заметках?</numerusform>
+<numerusform>%n заметок используют это изображение. Вы хотите также переименовать изображение в заметках?</numerusform>
+<numerusform>%n заметок используют это изображение. Вы хотите также переименовать изображение в заметках?</numerusform>
 </translation>
 </message>
 <message>
 <source>Turned on note subfolders for the current note folder to be able to import folders.</source>
-<translation type="unfinished">Turned on note subfolders for the current note folder to be able to import folders.</translation>
+<translation>Включить подпапки заметок в текущей папке заметок для импорта папок.</translation>
 </message>
 <message>
 <source>Login flow failed</source>
-<translation type="unfinished">Login flow failed</translation>
+<translation>Процесс входа в систему провалился</translation>
 </message>
 <message>
 <source>Nextcloud login flow v2 could not be initiated. Make sure the server url is correct and you are using a Nextcloud server!&lt;br /&gt;&lt;br /&gt;If your are still having issues please create an app password by hand on your server's admin page.</source>
-<translation type="unfinished">Nextcloud login flow v2 could not be initiated. Make sure the server url is correct and you are using a Nextcloud server!&lt;br /&gt;&lt;br /&gt;If your are still having issues please create an app password by hand on your server's admin page.</translation>
+<translation>Nextcloud login flow v2 не может быть инициализирован. Убедитесь что Url сервера указан верно и вы используете Nextcloude сервер! &lt;br /&gt;&lt;br /&gt;Если у вас ещё сохраняются проблемы, пожалуйста, создайте пароль приложения вручную на вашей панели администратора сервера.</translation>
 </message>
 <message>
 <source>Could not parse login url!</source>
-<translation type="unfinished">Could not parse login url!</translation>
+<translation>Невозможно провести синтаксический анализ для входа в систему по Url!</translation>
 </message>
 <message>
 <source>You are using the single app instance mode, that prevents the application be be started a second time. For the next launch of the application the single app instance mode will be disabled, so that the application can be restarted before quitting this instance.</source>
-<translation type="unfinished">You are using the single app instance mode, that prevents the application be be started a second time. For the next launch of the application the single app instance mode will be disabled, so that the application can be restarted before quitting this instance.</translation>
+<translation>Вы используете режим одиночного экземпляра приложения, который предотвращает повторный запуск приложения. При следующем запуске приложения режим одиночного экземпляра приложения будет отключен, чтобы приложение можно было перезапустить перед выходом из этого экземпляра.</translation>
+</message>
+<message>
+<source>Note '%1' does not exist. Create it?</source>
+<translation>Заметка «%1» не существует. Создать её?</translation>
+</message>
+<message>
+<source>Note '%1' does not exist in '%2'. Create it?</source>
+<translation>Заметка «%1» не существует в «%2». Создать её?</translation>
 </message>
 <message>
 <source>Note was not found</source>
-<translation type="unfinished">Note was not found</translation>
+<translation>Заметка не найдена</translation>
 </message>
 <message>
 <source>Could not find note.&lt;br /&gt;Unable to automatically create note at location, because subfolders are disabled for the current note folder.</source>
-<translation type="unfinished">Could not find note.&lt;br /&gt;Unable to automatically create note at location, because subfolders are disabled for the current note folder.</translation>
+<translation>Невозможно найти заметку.&lt;br /&gt;Невозможно автоматически создать заметку в локации, потому что подпапки отключены в текущей папке с заметками.</translation>
 </message>
 <message>
 <source>Note was not found, create new note &lt;strong&gt;%1&lt;/strong&gt;?</source>
-<translation type="unfinished">Note was not found, create new note &lt;strong&gt;%1&lt;/strong&gt;?</translation>
+<translation>Заметка не найдена, создать новую заметку &lt;strong&gt;%1&lt;/strong&gt;?</translation>
 </message>
 <message>
 <source>Note was not found, create new note &lt;strong&gt;%1&lt;/strong&gt; at path &lt;strong&gt;%2&lt;/strong&gt;?</source>
-<translation type="unfinished">Note was not found, create new note &lt;strong&gt;%1&lt;/strong&gt; at path &lt;strong&gt;%2&lt;/strong&gt;?</translation>
+<translation>Заметка не найдена, создать новую заметку &lt;strong&gt;%1&lt;/strong&gt; по пути &lt;strong&gt;%2&lt;/strong&gt;?</translation>
 </message>
 <message>
 <source>Failed to create note</source>
-<translation type="unfinished">Failed to create note</translation>
+<translation>Не удалось создать заметку</translation>
 </message>
 <message>
 <source>Note creation failed</source>
-<translation type="unfinished">Note creation failed</translation>
+<translation>Создание заметки не удалось</translation>
+</message>
+<message>
+<source>Double-click to open note</source>
+<translation>Дважды щелкните, чтобы открыть заметку</translation>
+</message>
+<message>
+<source>Nextcloud Deck support disabled!</source>
+<translation>Поддержка Nextcloud Deck отключена!</translation>
+</message>
+<message>
+<source>Nextcloud Deck support is not enabled or the settings are invalid.&lt;br /&gt;Please check your &lt;strong&gt;Nextcloud&lt;/strong&gt; configuration in the settings!</source>
+<translation>Поддержка Nextcloud Deck не включена или настройки недействительны.&lt;br /&gt;Пожалуйста, проверьте вашу конфигурацию &lt;strong&gt;Nextcloud&lt;/strong&gt; в настройках!</translation>
+</message>
+<message>
+<source>media file</source>
+<translation>медиафайл</translation>
+</message>
+<message>
+<source>attachment</source>
+<translation>вложение</translation>
+</message>
+<message>
+<source>System</source>
+<translation type="unfinished">System</translation>
+</message>
+<message>
+<source>Dark</source>
+<translation>Тёмный</translation>
+</message>
+<message>
+<source>Harper command is empty</source>
+<translation type="unfinished">Harper command is empty</translation>
+</message>
+<message>
+<source>Failed to start Harper command: %1</source>
+<translation type="unfinished">Failed to start Harper command: %1</translation>
+</message>
+<message>
+<source>Failed to connect to Harper at %1:%2</source>
+<translation type="unfinished">Failed to connect to Harper at %1:%2</translation>
+</message>
+<message>
+<source>Access to keychain denied</source>
+<translation type="unfinished">Access to keychain denied</translation>
+</message>
+<message>
+<source>No keyring daemon</source>
+<translation type="unfinished">No keyring daemon</translation>
+</message>
+<message>
+<source>Already unlocked</source>
+<translation type="unfinished">Already unlocked</translation>
+</message>
+<message>
+<source>No such keyring</source>
+<translation type="unfinished">No such keyring</translation>
+</message>
+<message>
+<source>Bad arguments</source>
+<translation type="unfinished">Bad arguments</translation>
+</message>
+<message>
+<source>I/O error</source>
+<translation type="unfinished">I/O error</translation>
+</message>
+<message>
+<source>Cancelled</source>
+<translation type="unfinished">Cancelled</translation>
+</message>
+<message>
+<source>Keyring already exists</source>
+<translation type="unfinished">Keyring already exists</translation>
+</message>
+<message>
+<source>No match</source>
+<translation type="unfinished">No match</translation>
+</message>
+<message>
+<source>Unknown error</source>
+<translation type="unfinished">Unknown error</translation>
+</message>
+<message>
+<source>Entry not found</source>
+<translation type="unfinished">Entry not found</translation>
 </message>
 </context>
 <context>
 <name>QOwnNotesMarkdownTextEdit</name>
 <message>
 <source>Increased font size to %1 pt</source>
-<translation type="unfinished">Increased font size to %1 pt</translation>
+<translation>Размер шрифта увеличен до %1 пунктов</translation>
 </message>
 <message>
 <source>Decreased font size to %1 pt</source>
-<translation type="unfinished">Decreased font size to %1 pt</translation>
+<translation>Размер шрифта уменьшен до %1 пунктов</translation>
 </message>
 <message>
 <source>An url was opened at the current cursor position</source>
-<translation type="unfinished">An url was opened at the current cursor position</translation>
+<translation>Url будет открыто в текущей позиции курсора</translation>
 </message>
 <message>
 <source>No equation was found in front of the cursor</source>
-<translation type="unfinished">No equation was found in front of the cursor</translation>
+<translation>Уравнение под курсором не обнаружено</translation>
 </message>
 <message>
 <source>Result for equation: %1 = %2</source>
-<translation type="unfinished">Result for equation: %1 = %2</translation>
+<translation>Результат уравнения: %1 = %2</translation>
 </message>
 <message>
 <source>&amp;Link selected text</source>
-<translation type="unfinished">&amp;Link selected text</translation>
+<translation>Сделать выделенный текст ссы&amp;лкой</translation>
 </message>
 <message>
 <source>Insert &amp;link</source>
-<translation type="unfinished">Insert &amp;link</translation>
+<translation>Вставить ссы&amp;лку</translation>
 </message>
 <message>
 <source>Block &amp;quote selected text</source>
 <comment>Action to apply a block quote formatting to the selected text</comment>
-<translation type="unfinished">Block &amp;quote selected text</translation>
+<translation>Сделать выделенный текст как &amp;цитату</translation>
 </message>
 <message>
 <source>Insert block &amp;quote</source>
-<translation type="unfinished">Insert block &amp;quote</translation>
+<translation>Вставить блок &amp;цитаты</translation>
+</message>
+<message>
+<source>List operations</source>
+<translation>Операции со списками</translation>
+</message>
+<message>
+<source>Markdown operations</source>
+<translation type="unfinished">Markdown operations</translation>
 </message>
 <message>
 <source>Copy code block</source>
-<translation type="unfinished">Copy code block</translation>
+<translation>Скопировать блок кода</translation>
+</message>
+<message>
+<source>Markdown LSP</source>
+<translation type="unfinished">Markdown LSP</translation>
+</message>
+<message>
+<source>Format document</source>
+<translation>Форматировать документ</translation>
+</message>
+<message>
+<source>Format selection</source>
+<translation>Форматировать выделение</translation>
+</message>
+<message>
+<source>Add table column left</source>
+<translation>Добавить столбец таблицы слева</translation>
+</message>
+<message>
+<source>Add table column right</source>
+<translation>Добавить столбец таблицы справа</translation>
+</message>
+<message>
+<source>Add table row above</source>
+<translation>Добавить строку таблицы выше</translation>
+</message>
+<message>
+<source>Add table row below</source>
+<translation>Добавить строку таблицы ниже</translation>
+</message>
+<message>
+<source>Edit table</source>
+<translation type="unfinished">Edit table</translation>
 </message>
 <message>
 <source>Print</source>
-<translation type="unfinished">Print</translation>
+<translation>Печать</translation>
 </message>
 <message>
 <source>Print selected text</source>
-<translation type="unfinished">Print selected text</translation>
+<translation>Печать выбранного текста</translation>
 </message>
 <message>
 <source>Print selected text (preview)</source>
-<translation type="unfinished">Print selected text (preview)</translation>
+<translation>Печать выбранного текста (предпросмотр)</translation>
 </message>
 <message>
 <source>Export</source>
-<translation type="unfinished">Export</translation>
+<translation>Экспорт</translation>
 </message>
 <message>
 <source>Export selected text as PDF</source>
-<translation type="unfinished">Export selected text as PDF</translation>
+<translation>Экспорт выделенного текста в PDF</translation>
 </message>
 <message>
 <source>Export selected text as PDF (preview)</source>
-<translation type="unfinished">Export selected text as PDF (preview)</translation>
+<translation>Экспорт выделенного текста в PDF (предпросмотр)</translation>
+</message>
+<message>
+<source>Select</source>
+<translation type="unfinished">Select</translation>
 </message>
 <message>
 <source>Custom actions</source>
-<translation type="unfinished">Custom actions</translation>
+<translation>Пользовательские действия</translation>
 </message>
 <message>
 <source>No suggestions for %1</source>
@@ -4213,7 +8648,47 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 </message>
 <message>
 <source>Spelling</source>
-<translation type="unfinished">Spelling</translation>
+<translation>Написание</translation>
+</message>
+<message>
+<source>Ignore this rule globally</source>
+<translation type="unfinished">Ignore this rule globally</translation>
+</message>
+<message>
+<source>Ignore rule %1 globally</source>
+<translation type="unfinished">Ignore rule %1 globally</translation>
+</message>
+<message>
+<source>LanguageTool</source>
+<translation type="unfinished">LanguageTool</translation>
+</message>
+<message>
+<source>No suggestions</source>
+<translation>Нет предложений</translation>
+</message>
+<message>
+<source>More info...</source>
+<translation>Подробнее...</translation>
+</message>
+<message>
+<source>Ignore this rule</source>
+<translation>Игнорировать это правило</translation>
+</message>
+<message>
+<source>Ignore word "%1"</source>
+<translation>Игнорировать слово «%1»</translation>
+</message>
+<message>
+<source>Harper</source>
+<translation type="unfinished">Harper</translation>
+</message>
+<message>
+<source>Markdown LSP server connected</source>
+<translation>Сервер Markdown LSP подключён</translation>
+</message>
+<message>
+<source>Filter completions</source>
+<translation>Фильтр дополнений</translation>
 </message>
 </context>
 <context>
@@ -4249,6 +8724,10 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <message>
 <source>Replace:</source>
 <translation>Заменить:</translation>
+</message>
+<message>
+<source>Search in the selection only</source>
+<translation type="unfinished">Search in the selection only</translation>
 </message>
 <message>
 <source>Plain text</source>
@@ -4290,32 +8769,32 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 <context>
 <name>QTextEditSearchWidget</name>
 <message>
-<source>replace text</source>
-<translation>заменить текст</translation>
-</message>
-<message>
 <source>Find:</source>
 <translation>Найти:</translation>
 </message>
 <message>
-<source>close search</source>
-<translation>закрыть поиск</translation>
+<source>Replace text</source>
+<translation>Заменить текст</translation>
 </message>
 <message>
-<source>find in text</source>
-<translation>найти в тексте</translation>
+<source>Close search</source>
+<translation>Закрыть поиск</translation>
 </message>
 <message>
-<source>search forward</source>
-<translation>искать в следующих</translation>
+<source>Find in text</source>
+<translation>Найти в тексте</translation>
 </message>
 <message>
-<source>search backward</source>
-<translation>искать в предыдущих</translation>
+<source>Search forward</source>
+<translation>Искать далее</translation>
 </message>
 <message>
-<source>replace with</source>
-<translation>заменить на</translation>
+<source>Search backward</source>
+<translation>Искать в предыдущих</translation>
+</message>
+<message>
+<source>Replace with</source>
+<translation>Заменить на</translation>
 </message>
 <message>
 <source>Replace:</source>
@@ -4366,8 +8845,15 @@ If the trash is enabled on your ownCloud server you should be able to restore th
 </message>
 <message>
 <source>Unable to establish a database connection with file '%1'.
-Are the folder and the file writeable?</source>
-<translation>Не удается установить подключение к базе данных в файле «%1». Папка и файл доступны для записи?</translation>
+Are the folder and the file writable?</source>
+<translation>Не удалось установить соединение с базой данных с файлом '%1'.
+Доступны ли папка и файл для записи?</translation>
+</message>
+<message>
+<source>Unable to establish a database connection with note folder database to merge '%1'.
+Are the folder and the file writable?</source>
+<translation>Не удалось установить соединение с базой данных папки заметок для слияния '%1'.
+Доступны ли папка и файл для записи?</translation>
 </message>
 <message>
 <source>Cannot open note folder database</source>
@@ -4376,12 +8862,6 @@ Are the folder and the file writeable?</source>
 <message>
 <source>Cannot open database</source>
 <translation>Не удается открыть базу данных</translation>
-</message>
-<message>
-<source>Unable to establish a database connection with note folder database to merge '%1'.
-Are the folder and the file writeable?</source>
-<translation>Невозможно установить соединение с базой данных с папкой для заметок для объединения '%1'.
-Папка и файл доступны для записи?</translation>
 </message>
 </context>
 <context>
@@ -4395,12 +8875,32 @@ Are the folder and the file writeable?</source>
 <translation>Установленная версия:</translation>
 </message>
 <message>
+<source>Changelog:</source>
+<translation type="unfinished">Changelog:</translation>
+</message>
+<message>
 <source>Installs the script</source>
 <translation>Устанавливает сценарий</translation>
 </message>
 <message>
 <source>Install</source>
 <translation>Установить</translation>
+</message>
+<message>
+<source>Updates all scripts that have updates</source>
+<translation type="unfinished">Updates all scripts that have updates</translation>
+</message>
+<message>
+<source>Update all</source>
+<translation type="unfinished">Update all</translation>
+</message>
+<message>
+<source>Automatically install available updates for scripts installed from the script repository during the startup update check</source>
+<translation type="unfinished">Automatically install available updates for scripts installed from the script repository during the startup update check</translation>
+</message>
+<message>
+<source>Automatically update scripts</source>
+<translation type="unfinished">Automatically update scripts</translation>
 </message>
 <message>
 <source>Version:</source>
@@ -4412,7 +8912,7 @@ Are the folder and the file writeable?</source>
 </message>
 <message>
 <source>To search for a script please enter your query text.</source>
-<translation type="unfinished">To search for a script please enter your query text.</translation>
+<translation>Для поиска в сценарии, пожалуйста, введите текст вашего запроса.</translation>
 </message>
 <message>
 <source>Minimum app version:</source>
@@ -4475,6 +8975,14 @@ Are the folder and the file writeable?</source>
 <translation>Переустанавливает сценарий</translation>
 </message>
 <message>
+<source>Open changelog</source>
+<translation type="unfinished">Open changelog</translation>
+</message>
+<message>
+<source>Changes from version %1 to %2:</source>
+<translation type="unfinished">Changes from version %1 to %2:</translation>
+</message>
+<message>
 <source>Platform not supported!</source>
 <translation>Платформа не поддерживается!</translation>
 </message>
@@ -4482,10 +8990,6 @@ Are the folder and the file writeable?</source>
 <source>Your platform is not supported by this script!
 Do you want to install it anyway?</source>
 <translation>Ваша платформа не поддерживается этим сценарием! Вы хотите установить его в любом случае?</translation>
-</message>
-<message>
-<source>Cancel</source>
-<translation>Отмена</translation>
 </message>
 <message>
 <source>Update app</source>
@@ -4511,6 +9015,15 @@ Do you want to install it anyway?</source>
 <source>The script could not be downloaded!</source>
 <translation>Не удается загрузить сценарий!</translation>
 </message>
+<message numerus="yes">
+<source>%n script update(s) were installed.</source>
+<translation type="unfinished">
+<numerusform>%n script update(s) were installed.</numerusform>
+<numerusform>%n script update(s) were installed.</numerusform>
+<numerusform>%n script update(s) were installed.</numerusform>
+<numerusform>%n script update(s) were installed.</numerusform>
+</translation>
+</message>
 </context>
 <context>
 <name>ScriptSettingWidget</name>
@@ -4520,7 +9033,7 @@ Do you want to install it anyway?</source>
 </message>
 <message>
 <source>Please select a directory</source>
-<translation type="unfinished">Please select a directory</translation>
+<translation>Пожалуйста, выберите директорию</translation>
 </message>
 <message>
 <source>Please select a file</source>
@@ -4532,6 +9045,168 @@ Do you want to install it anyway?</source>
 <message>
 <source>file doesn't exist</source>
 <translation>файл не существует</translation>
+</message>
+</context>
+<context>
+<name>ScriptingSettingsWidget</name>
+<message>
+<source>Your scripts</source>
+<translation>Ваши скрипты</translation>
+</message>
+<message>
+<source>&amp;Add script…</source>
+<translation>Добавить скрипт(&amp;A)…</translation>
+</message>
+<message>
+<source>&amp;Remove script</source>
+<translation>Удалить скрипт(&amp;R)</translation>
+</message>
+<message>
+<source>Search scripts</source>
+<translation>Поиск скриптов</translation>
+</message>
+<message>
+<source>Description:</source>
+<translation>Описание:</translation>
+</message>
+<message>
+<source>Author(s):</source>
+<translation>Автор(ы):</translation>
+</message>
+<message>
+<source>Repository:</source>
+<translation>Репозиторий:</translation>
+</message>
+<message>
+<source>Version:</source>
+<translation>Версия:</translation>
+</message>
+<message>
+<source>Name:</source>
+<translation>Имя:</translation>
+</message>
+<message>
+<source>Script name</source>
+<translation>Название скрипта</translation>
+</message>
+<message>
+<source>Script path:</source>
+<translation>Путь к скрипту:</translation>
+</message>
+<message>
+<source>Validate script</source>
+<translation>Проверить скрипт</translation>
+</message>
+<message>
+<source>You need to reload the scripting engine if you modify a script file</source>
+<translation>Необходимо перезагрузить движок скриптинга при изменении файла скрипта</translation>
+</message>
+<message>
+<source>Reload scripting engine</source>
+<translation>Перезагрузить движок скриптинга</translation>
+</message>
+<message>
+<source>Click here to select your QML script</source>
+<translation>Нажмите здесь, чтобы выбрать QML-скрипт</translation>
+</message>
+<message>
+<source>Path to your QML file</source>
+<translation>Путь к вашему QML-файлу</translation>
+</message>
+<message>
+<source>The name</source>
+<translation>Имя</translation>
+</message>
+<message>
+<source>New script</source>
+<translation>Новый скрипт</translation>
+</message>
+<message>
+<source>Take a look at the &lt;a href="%1"&gt;Scripting documentation&lt;/a&gt; to get started fast.</source>
+<translation>Ознакомьтесь с &lt;a href="%1"&gt;документацией по скриптингу&lt;/a&gt; для быстрого старта.</translation>
+</message>
+<message>
+<source>If you need access to a certain functionality in QOwnNotes please open an issue on the &lt;a href="%1"&gt; QOwnNotes issue page&lt;/a&gt;.</source>
+<translation>Если вам нужен доступ к определённой функциональности QOwnNotes, откройте задачу на &lt;a href="%1"&gt; странице задач QOwnNotes&lt;/a&gt;.</translation>
+</message>
+<message>
+<source>Search script repository</source>
+<translation>Поиск в репозитории скриптов</translation>
+</message>
+<message>
+<source>Find a script in the script repository</source>
+<translation>Найти скрипт в репозитории скриптов</translation>
+</message>
+<message>
+<source>Check for script updates</source>
+<translation>Проверить обновления скриптов</translation>
+</message>
+<message>
+<source>Add local script</source>
+<translation>Добавить локальный скрипт</translation>
+</message>
+<message>
+<source>Add an existing, local script</source>
+<translation>Добавить существующий локальный скрипт</translation>
+</message>
+<message>
+<source>Remove script</source>
+<translation>Удалить скрипт</translation>
+</message>
+<message>
+<source>Remove the current script &lt;strong&gt;%1&lt;/strong&gt;?</source>
+<translation>Удалить текущий скрипт &lt;strong&gt;%1&lt;/strong&gt;?</translation>
+</message>
+<message>
+<source>QML files</source>
+<translation>QML-файлы</translation>
+</message>
+<message>
+<source>Please select your QML file</source>
+<translation>Выберите ваш QML-файл</translation>
+</message>
+<message>
+<source>Open repository</source>
+<translation>Открыть репозиторий</translation>
+</message>
+<message>
+<source>Your script seems to be valid</source>
+<translation>Ваш скрипт, похоже, корректен</translation>
+</message>
+<message>
+<source>There were script errors:
+%1</source>
+<translation>Обнаружены ошибки скрипта:
+%1</translation>
+</message>
+</context>
+<context>
+<name>SearchFilterManager</name>
+<message numerus="yes">
+<source>Found &lt;strong&gt;%n&lt;/strong&gt; occurrence(s) of &lt;strong&gt;%1&lt;/strong&gt;</source>
+<translation>
+<numerusform>Найдено &lt;strong&gt;%n&lt;/strong&gt; совпадение для &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+<numerusform>Найдено &lt;strong&gt;%n&lt;/strong&gt; совпадения для &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+<numerusform>Найдено &lt;strong&gt;%n&lt;/strong&gt; совпадений для &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+<numerusform>Найдено &lt;strong&gt;%n&lt;/strong&gt; совпадений для &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Found &lt;strong&gt;%n&lt;/strong&gt; occurrence(s) of any term of &lt;strong&gt;%1&lt;/strong&gt;</source>
+<translation>
+<numerusform>Найдено &lt;strong&gt;%n&lt;/strong&gt; совпадение для любого из терминов &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+<numerusform>Найдено &lt;strong&gt;%n&lt;/strong&gt; совпадения для любого из терминов &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+<numerusform>Найдено &lt;strong&gt;%n&lt;/strong&gt; совпадений для любого из терминов &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+<numerusform>Найдено &lt;strong&gt;%n&lt;/strong&gt; совпадений для любого из терминов &lt;strong&gt;%1&lt;/strong&gt;</numerusform>
+</translation>
+</message>
+<message>
+<source>Stored current note to disk</source>
+<translation>Текущая заметка сохранена на диск</translation>
+</message>
+<message>
+<source>Current note could not be stored to disk</source>
+<translation>Не удалось сохранить текущую заметку на диск</translation>
 </message>
 </context>
 <context>
@@ -4565,418 +9240,56 @@ Do you want to install it anyway?</source>
 <translation>Папки заметок</translation>
 </message>
 <message>
-<source>Your note folders</source>
-<translation>Ваши папки заметок</translation>
-</message>
-<message>
-<source>&amp;Add folder</source>
-<translation>&amp;Добавить папку</translation>
-</message>
-<message>
-<source>&amp;Remove folder</source>
-<translation>&amp;Удалить папку</translation>
-</message>
-<message>
-<source>This name will be viewed in all the menus.</source>
-<translation>Это имя будет отображаться во всех меню.</translation>
-</message>
-<message>
-<source>Set the ownCloud path where the note folder path will be synced to on your ownCloud server.</source>
-<translation>Установите путь до папки на сервере ownCloud, где будут синхронизироваться заметки.</translation>
-</message>
-<message>
-<source>Use as active note folder</source>
-<translation>Использовать как активную папку заметок</translation>
-</message>
-<message>
-<source>Your ownCloud server</source>
-<translation>Сервер OwnCloud</translation>
-</message>
-<message>
-<source>ownCloud server url:</source>
-<translation>Адрес сервера ownCloud:</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the URL of your ownCloud server, for example: &lt;span style=" font-style:italic;"&gt;https://cloud.yourserver.com&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Введите адрес своего сервера ownCloud, например: &lt;span style=" font-style:italic;"&gt;https://cloud.yourserver.com&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the username on your ownCloud server.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Введите имя пользователя на сервере ownCloud.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter the password for your username.&lt;br/&gt;Currently the password will be stored encrypted with the other settings, but is not very secure.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Введите пароль.&lt;br/&gt;Пароль хранится зашифрованным с остальными настройками, хотя это и не совсем безопасно.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>connection to web server</source>
-<translation>подключение к веб-серверу</translation>
-</message>
-<message>
-<source>ownCloud server detected</source>
-<translation>обнаружен сервер ownCloud</translation>
-</message>
-<message>
-<source>connection to QOwnNotesAPI</source>
-<translation>подключение к QOwnNotesAPI</translation>
-</message>
-<message>
-<source>username and password correct</source>
-<translation>имя пользователя и пароль верны</translation>
-</message>
-<message>
-<source>unknown</source>
-<translation>неизвестно</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click here to test the connection to your ownCloud server.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Нажните для проверки подключения к серверу ownCloud.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>versions app enabled on server</source>
-<translation>приложение Versions доступно на сервере</translation>
-</message>
-<message>
-<source>trash app enabled on server</source>
-<translation>приложение Deleted files доступно на сервере</translation>
-</message>
-<message>
-<source>notes path found on server</source>
-<translation>путь к заметкам на сервере найден</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Opens your ownCloud server &lt;span style=" font-weight:600;"&gt;App configuration&lt;/span&gt; page in your webbrowser to install or update QOwnNotesAPI and to enable the core apps &lt;span style=" font-weight:600;"&gt;Versions&lt;/span&gt; and &lt;span style=" font-weight:600;"&gt;Deleted files&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Открыть в браузере страницу &lt;span style=" font-weight:600;"&gt;Приложения&lt;/span&gt; на сервере ownCloud, чтобы установить или обновить QOwnNotesAPI и включить стандартные приложения &lt;span style=" font-weight:600;"&gt;Versions&lt;/span&gt; и &lt;span style=" font-weight:600;"&gt;Deleted files&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>path</source>
-<translation>путь</translation>
-</message>
-<message>
-<source>Click here to select your local note path</source>
-<translation>Нажмите для выбора локального пути к заметке</translation>
-</message>
-<message>
-<source>Click here to select your remote note path on your ownCloud server</source>
-<translation>Нажмите для выбора пути к заметке на сервере ownCloud</translation>
-</message>
-<message>
-<source>Click here to use the selected folder from your server as note folder</source>
-<translation>Нажмите, чтобы использовать выбранную папку с сервера ownCloud, как папку для ваших заметок</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You also need to have the two ownCloud core apps &lt;span style=" font-weight:600;"&gt;Versions&lt;/span&gt; and &lt;span style=" font-weight:600;"&gt;Deleted files&lt;/span&gt; enabled on your ownCloud server (that should be the default).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Вам также необходимо запустить 2 основных приложения на сервере ownCloud: &lt;span style=" font-weight:600;"&gt;Versions&lt;/span&gt; и &lt;span style=" font-weight:600;"&gt;Deleted files&lt;/span&gt; (они по умолчанию должны быть включены, проверьте).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>Error Message</source>
-<translation>Сообщение об ошибке</translation>
-</message>
-<message>
 <source>Network</source>
 <translation>Сеть</translation>
-</message>
-<message>
-<source>Proxy Settings</source>
-<translation>Параметры прокси</translation>
-</message>
-<message>
-<source>No Proxy</source>
-<translation>Без прокси</translation>
-</message>
-<message>
-<source>Use system proxy</source>
-<translation>Использовать системное прокси</translation>
-</message>
-<message>
-<source>Specify proxy manually as</source>
-<translation>Указать прокси вручную</translation>
-</message>
-<message>
-<source>Host</source>
-<translation>Хост</translation>
-</message>
-<message>
-<source>Proxy server requires authentication</source>
-<translation>Прокси-сервер требует аутентификации</translation>
-</message>
-<message>
-<source>SSL Settings</source>
-<translation>Настройки SSL</translation>
-</message>
-<message>
-<source>Ignore SSL errors</source>
-<translation>Игнорировать ошибки SSL</translation>
 </message>
 <message>
 <source>Todo</source>
 <translation>Список задач</translation>
 </message>
 <message>
-<source>Default ownCloud calendar</source>
-<translation>Стандартный календарь ownCloud</translation>
-</message>
-<message>
 <source>Interface</source>
 <translation>Интерфейс</translation>
 </message>
 <message>
-<source>Other CalDAV server</source>
-<translation>Другой сервер CalDAV</translation>
+<source>Layouts</source>
+<translation type="unfinished">Layouts</translation>
 </message>
 <message>
-<source>Only some colors will be adapted, your desktop theme will control the rest. You need to restart the application to let these changes take action.</source>
-<translation>Только некоторые цвета будут адаптированы, темы рабочего стола будет контролировать остальные. Необходимо перезапустить приложение, чтобы эти изменения вступили в действие.</translation>
+<source>Harper</source>
+<translation type="unfinished">Harper</translation>
 </message>
 <message>
-<source>Optimize preview colors for dark mode desktop themes</source>
-<translation>Оптимизация цветов просмотра для "темной" темы рабочего стола</translation>
-</message>
-<message>
-<source>This enables the dark mode, interface and icons will be modified. You need to restart the application to let these changes take action.</source>
-<translation>Это включает "темный режим", интерфейс и значки будут изменены. Необходимо перезапустить приложение, чтобы эти изменения вступили в действие.</translation>
-</message>
-<message>
-<source>Enable dark mode</source>
-<translation>Включить "темный режим"</translation>
-</message>
-<message>
-<source>You need to restart the application to let this setting take effect</source>
-<translation>Необходимо перезапустить приложение, чтобы изменения вступили в силу</translation>
-</message>
-<message>
-<source>Item sizes in the main window</source>
-<translation>Размеры элементов в главном окне</translation>
-</message>
-<message>
-<source>Markdown highlighting</source>
-<translation>Подсветка markdown</translation>
-</message>
-<message>
-<source>Enable markdown highlighting</source>
-<translation>Включить подсветку markdown</translation>
-</message>
-<message>
-<source>Interface language</source>
-<translation>Язык интерфейса</translation>
-</message>
-<message>
-<source>Automatic</source>
-<translation>По умолчанию</translation>
-</message>
-<message>
-<source>English</source>
-<translation>English (Английский)</translation>
+<source>Markdown LSP</source>
+<translation type="unfinished">Markdown LSP</translation>
 </message>
 <message>
 <source>Shortcuts</source>
 <translation>Горячие клавиши</translation>
 </message>
 <message>
-<source>Default font:</source>
-<translation>Шрифт по умолчанию:</translation>
+<source>Trash</source>
+<translation type="unfinished">Trash</translation>
 </message>
 <message>
-<source>Code font:</source>
-<translation>Шрифт кода:</translation>
+<source>Loading shortcuts: %v / %m</source>
+<translation type="unfinished">Loading shortcuts: %v / %m</translation>
 </message>
 <message>
 <source>Main window shortcuts</source>
 <translation>Горячие клавиши для главного окна</translation>
 </message>
 <message>
-<source>Do this at your own risk!</source>
-<translation>Делайте это на свой страх и риск!</translation>
-</message>
-<message>
-<source>Ignore all external note folder changes</source>
-<translation>Игнорировать все изменения внешних папок заметок</translation>
-</message>
-<message>
-<source>Use GitHub line breaks</source>
-<translation>Использовать GitHub разрывы строки</translation>
-</message>
-<message>
-<source>German</source>
-<translation>Deutsch (Немецкий)</translation>
-</message>
-<message>
-<source>French</source>
-<translation>Français (Французский)</translation>
-</message>
-<message>
-<source>Polish</source>
-<translation>Polski (Польский)</translation>
-</message>
-<message>
-<source>Portuguese</source>
-<translation>Português (Португальский)</translation>
-</message>
-<message>
-<source>Dutch</source>
-<translation>Голландский</translation>
-</message>
-<message>
-<source>Hungarian</source>
-<translation>Венгерский</translation>
-</message>
-<message>
-<source>Spanish</source>
-<translation>Испанский</translation>
-</message>
-<message>
-<source>Dark mode</source>
-<translation>Темный режим</translation>
-</message>
-<message>
-<source>Disable tracking of usage data</source>
-<translation>Запретить сбор данных об использовании</translation>
-</message>
-<message>
-<source>Usage tracking is done on a private Piwik server.</source>
-<translation>Использование отслеживания организовано на приватном сервере Piwik.</translation>
-</message>
-<message>
-<source>Disable heartbeat</source>
-<translation>Запретить контрольные пакеты</translation>
-</message>
-<message>
-<source>Russian</source>
-<translation>Русский</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You might want to consider getting a free SSL certificate from &lt;a href="https://letsencrypt.org/"&gt;Let's encrypt&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt; &lt;body&gt;&lt;p&gt;Вы можете воспользоваться возможностью получения бесплатного SSL-сертификата от проекта &lt;a href="https://letsencrypt.org/"&gt; Let's encrypt&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>If you change the language you have to restart the application for the changes to take action.</source>
-<translation>Для замены языка интерфейса нужно перезагрузить программу.</translation>
-</message>
-<message>
-<source>You need to reload the scripting engine if you modify a script file</source>
-<translation>Требуется перезагрузить скриптовый движок, если файл сценария изменился</translation>
-</message>
-<message>
-<source>Reload scripting engine</source>
-<translation>Перезагрузить скриптовый движок</translation>
-</message>
-<message>
-<source>Validate script</source>
-<translation>Проверка сценария</translation>
-</message>
-<message>
 <source>General</source>
 <translation>Общее</translation>
-</message>
-<message>
-<source>Notes</source>
-<translation>Заметки</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked you will always be notified about external modifications, even if current note wasn't edited in the last minute. Recommended is &lt;span style=" font-style:italic;"&gt;unchecked&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если выбрано, то уведомления об изменениях внешними программами будут появляться, даже если текущая заметка не будет отредактирована. Рекомендуемое значение: &lt;span style=" font-style:italic;"&gt;отключить&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>You might run into sync troubles with older versions of ownCloud sync when going far below 10 sec.
-Just test yourself if you get sync conflicts and set a higher value if so.</source>
-<translation>В более старых версиях ownCloud sync могут появиться проблемы синхронизации, если установить значение меньше 10 секунд.
-Подберите значение интервала, при котором не будут возникать конфликты.</translation>
-</message>
-<message>
-<source>Japanese</source>
-<translation>Японский</translation>
-</message>
-<message>
-<source>note save interval time [sec]</source>
-<translation>период сохранения заметок (секунды)</translation>
-</message>
-<message>
-<source>Notify about all external modifications of the current note</source>
-<translation>Уведомлять обо всех внешних изменениях текущей заметки</translation>
-</message>
-<message>
-<source>Database</source>
-<translation>База данных</translation>
-</message>
-<message>
-<source>Reinitialize Database</source>
-<translation>Инициализация базы данных</translation>
-</message>
-<message>
-<source>Clear application data and exit</source>
-<translation>Удалить данные приложения и выйти</translation>
-</message>
-<message>
-<source>This button allows you to clear all settings, remove the local todo database and exit QOwnNotes.</source>
-<translation>Нажатие этой кнопки приведёт к удалению всех настроек, локальной базы данных списка задач и выходу из QOwnNotes.</translation>
-</message>
-<message>
-<source>Clear app data and exit</source>
-<translation>Удалить данные приложения и выйти</translation>
-</message>
-<message>
-<source>Update dialog</source>
-<translation>Диалог обновления</translation>
-</message>
-<message>
-<source>External editor</source>
-<translation>Внешний редактор</translation>
-</message>
-<message>
-<source>path to external editor, leave empty for default</source>
-<translation>путь ко внешнему редактору, по умолчанию пусто</translation>
-</message>
-<message>
-<source>set external editor</source>
-<translation>выбрать внешний редактор</translation>
-</message>
-<message>
-<source>App metrics</source>
-<translation>Метрики приложения</translation>
-</message>
-<message>
-<source>Anonymous usage data helps to decide what parts of QOwnNotes to improve next and to find and fix bugs. Please disable it only if you really can't live with it.</source>
-<translation>QOwnNotes собирает обезличенные данные об использовании, чтобы определить какие части программы нуждаются в улучшении и исправлении ошибок. Пожалуйста, отключайте только при необходимости.</translation>
-</message>
-<message>
-<source>This data includes anonymous information about what features of the app are used.</source>
-<translation>Данные содержать анонимную информацию об используемых частях приложения.</translation>
-</message>
-<message>
-<source>App heartbeat</source>
-<translation>Контрольный пакет</translation>
-</message>
-<message>
-<source>A small heartbeat request is sent periodically while QOwnNotes is running. Make a developer happy by letting him know that someone is using QOwnNotes.</source>
-<translation>Во время работы QOwnNotes периодически отправляется небольшой контрольный пакет. Разработчику приятно осознавать, что кто-то использует QOwnNotes.</translation>
-</message>
-<message>
-<source>Italian</source>
-<translation>Итальянский</translation>
 </message>
 <message>
 <source>Scripting</source>
 <translation>Создание сценариев</translation>
 </message>
 <message>
-<source>Your scripts</source>
-<translation>Ваши сценарии</translation>
-</message>
-<message>
-<source>&amp;Remove script</source>
-<translation>&amp;Удалить сценарий</translation>
-</message>
-<message>
-<source>Click here to select your QML script</source>
-<translation>Нажмите здесь, чтобы выбрать ваш QML-сценарий</translation>
-</message>
-<message>
 <source>Find setting</source>
 <translation>Поиск настройки</translation>
-</message>
-<message>
-<source>Layout</source>
-<translation>Макет</translation>
 </message>
 <message>
 <source>Editor</source>
@@ -5003,449 +9316,20 @@ Just test yourself if you get sync conflicts and set a higher value if so.</sour
 <translation>Git версии</translation>
 </message>
 <message>
-<source>Local trash</source>
-<translation>Локальная корзина</translation>
-</message>
-<message>
 <source>Debug options</source>
 <translation>Опции отладки</translation>
 </message>
 <message>
-<source>Path where your notes are stored locally</source>
-<translation>Путь, где ваши заметки хранятся локально</translation>
+<source>Color modes</source>
+<translation>Цветовые режимы</translation>
 </message>
 <message>
-<source>"Notes" path on your server</source>
-<extracomment>"Notes" should not be translated</extracomment>
-<translation>Путь к папке с заметками на вашем сервере</translation>
-</message>
-<message>
-<source>&amp;Use as ownCloud path</source>
-<translation>&amp;Использовать как путь к серверу ownCloud</translation>
-</message>
-<message>
-<source>Please select your note folder on your ownCloud server:</source>
-<translation>Пожалуйста, выберите вашу папку заметок на сервере ownCloud:</translation>
-</message>
-<message>
-<source>Path on your ownCloud server:</source>
-<translation>Путь до сервера ownCloud:</translation>
-</message>
-<message>
-<source>Name:</source>
-<translation>Имя:</translation>
-</message>
-<message>
-<source>Note folder path:</source>
-<translation>Путь к папке с заметками:</translation>
-</message>
-<message>
-<source>You need to have git installed to make this work!</source>
-<translation>Для выполнения этой задачи вам необходимо установить git!</translation>
-</message>
-<message>
-<source>Use git to keep a local history of your notes</source>
-<translation>Использовать git для сохранения локальной истории ваших заметок</translation>
-</message>
-<message>
-<source>ownCloud support</source>
-<translation>Поддержка ownCloud</translation>
-</message>
-<message>
-<source>Enable ownCloud support</source>
-<translation>Включить поддержку ownCloud</translation>
-</message>
-<message>
-<source>Please install the latest version of &lt;a href="https://github.com/pbek/qownnotesapi"&gt;&lt;span style=" font-weight:600;"&gt;QOwnNotesAPI&lt;/span&gt;&lt;/a&gt; (at least version QOWNNOTESAPI_MIN_VERSION) on your ownCloud server if you want QOwnNotes to be able to access note versions and trashed notes.</source>
-<translation>Установите последнюю версию &lt;a href="https://github.com/pbek/qownnotesapi"&gt;&lt;span style=" font-weight:600;"&gt;QOwnNotesAPI&lt;/span&gt;&lt;/a&gt; (по крайней мере, версию QOWNNOTESAPI_MIN_VERSION) на вашем сервере ownCloud, если вы хотите, чтобы QOwnNotes имел доступ к версиям и удаленным заметкам.</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You will still need the &lt;a href="https://owncloud.org/"&gt;&lt;span style=" font-weight:600"&gt;ownCloud sync client&lt;/span&gt;&lt;/a&gt; (or another desktop sync client) to sync your notes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Вам также необходим &lt;a href="https://owncloud.org/"&gt;&lt;span style=" font-weight:600"&gt;клиент синхронизации ownCloud&lt;/span&gt;&lt;/a&gt; (или другой идентичный) для синхронизации заметок!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>Select a connection to edit</source>
-<translation>Выберете соединение для редактирования</translation>
-</message>
-<message>
-<source>Add connection</source>
-<translation>Добавить соединение</translation>
-</message>
-<message>
-<source>Remove connection</source>
-<translation>Удалить соединение</translation>
-</message>
-<message>
-<source>Username:</source>
-<translation>Имя пользователя:</translation>
-</message>
-<message>
-<source>Your ownCloud username</source>
-<translation>Ваше имя пользователя ownCloud</translation>
-</message>
-<message>
-<source>Password:</source>
-<translation>Пароль:</translation>
-</message>
-<message>
-<source>Your ownCloud password</source>
-<translation>Ваш пароль ownCloud</translation>
-</message>
-<message>
-<source>&amp;Connect to ownCloud server</source>
-<translation>&amp;Подключиться к серверу ownCloud</translation>
-</message>
-<message>
-<source>Connection status</source>
-<translation>Состояние подключения</translation>
-</message>
-<message>
-<source>Connection name:</source>
-<translation>Название соединения:</translation>
-</message>
-<message>
-<source>Be aware that the ownCloud notes app doesn't support subfolders!</source>
-<translation>Помните, что приложение ownCloud notes не поддерживает подпапки!</translation>
-</message>
-<message>
-<source>Use note subfolders</source>
-<translation>Использовать подпапки заметок</translation>
-</message>
-<message>
-<source>The login flow v2 only works with Nextcloud, not with ownCloud. If you have troubles you need to create an app password by hand.</source>
-<translation type="unfinished">The login flow v2 only works with Nextcloud, not with ownCloud. If you have troubles you need to create an app password by hand.</translation>
-</message>
-<message>
-<source>Login to Nextcloud to grant access</source>
-<translation type="unfinished">Login to Nextcloud to grant access</translation>
-</message>
-<message>
-<source>Stack:</source>
-<translation type="unfinished">Stack:</translation>
-</message>
-<message>
-<source>Todo settings</source>
-<translation>Настройки Todo</translation>
-</message>
-<message>
-<source>Enable todo calendar support</source>
-<translation>Включить поддержку календаря todo</translation>
-</message>
-<message>
-<source>Which cloud connection do you want to use?</source>
-<translation>Какое облачное подключение вы хотите использовать?</translation>
-</message>
-<message>
-<source>Select the calendars you want to use for the Todo list</source>
-<translation>Выберите календари для работы со списком задач</translation>
-</message>
-<message>
-<source>Todo list settings</source>
-<translation>Настройки списка задач</translation>
-</message>
-<message>
-<source>Saving an item also closes the Todo list</source>
-<translation>Сохранение задачи также закрывает список задач</translation>
-</message>
-<message>
-<source>Indonesian</source>
-<translation>Индонезийский</translation>
-</message>
-<message>
-<source>Bengali</source>
-<translation>Бенгальский</translation>
-</message>
-<message>
-<source>Bosnian</source>
-<translation>Боснийский</translation>
-</message>
-<message>
-<source>Bulgarian</source>
-<translation>Болгарский</translation>
-</message>
-<message>
-<source>Catalan</source>
-<translation>Каталанский</translation>
-</message>
-<message>
-<source>Cebuano</source>
-<translation>Себуанский</translation>
-</message>
-<message>
-<source>Danish</source>
-<translation>Датский</translation>
-</message>
-<message>
-<source>Basque</source>
-<translation>Баскский</translation>
-</message>
-<message>
-<source>Estonian</source>
-<translation>Эстонский</translation>
-</message>
-<message>
-<source>Filipino</source>
-<translation>Филипинский</translation>
-</message>
-<message>
-<source>Finnish</source>
-<translation>Финский</translation>
-</message>
-<message>
-<source>Irish</source>
-<translation>Ирландский</translation>
-</message>
-<message>
-<source>Galician</source>
-<translation>Галицийский</translation>
-</message>
-<message>
-<source>Greek</source>
-<translation>Греческий</translation>
-</message>
-<message>
-<source>Hausa</source>
-<translation>Хауса</translation>
-</message>
-<message>
-<source>Hebrew</source>
-<translation>Иврит</translation>
-</message>
-<message>
-<source>Hindi</source>
-<translation>Хинди</translation>
-</message>
-<message>
-<source>Hiligaynon</source>
-<translation>Хилигайнон</translation>
-</message>
-<message>
-<source>Icelandic</source>
-<translation>Исландский</translation>
-</message>
-<message>
-<source>Korean</source>
-<translation>Корейский</translation>
-</message>
-<message>
-<source>Kurdish</source>
-<translation>Курдский</translation>
-</message>
-<message>
-<source>Latvian</source>
-<translation>Латышский</translation>
-</message>
-<message>
-<source>Lithuanian</source>
-<translation>Литовский</translation>
-</message>
-<message>
-<source>Macedonian</source>
-<translation>Македонский</translation>
-</message>
-<message>
-<source>Norwegian</source>
-<translation>Норвежский</translation>
-</message>
-<message>
-<source>Uzbek</source>
-<translation>Узбекский</translation>
-</message>
-<message>
-<source>Punjabi</source>
-<translation>Панджаби</translation>
-</message>
-<message>
-<source>Persian</source>
-<translation>Персидский</translation>
-</message>
-<message>
-<source>Romanian</source>
-<translation>Румынский</translation>
-</message>
-<message>
-<source>Serbian</source>
-<translation>Сербский</translation>
-</message>
-<message>
-<source>Albanian</source>
-<translation>Албанский</translation>
-</message>
-<message>
-<source>Slovak</source>
-<translation>Словацкий</translation>
-</message>
-<message>
-<source>Slovenian</source>
-<translation>Словенский</translation>
-</message>
-<message>
-<source>Swedish</source>
-<translation>Шведский</translation>
-</message>
-<message>
-<source>Tagalog</source>
-<translation>Тагальский</translation>
-</message>
-<message>
-<source>Turkish</source>
-<translation>Турецкий</translation>
-</message>
-<message>
-<source>Urdu</source>
-<translation>Урду</translation>
-</message>
-<message>
-<source>Chinese Simplified</source>
-<translation>Китайский упрощенный</translation>
-</message>
-<message>
-<source>Chinese Traditional</source>
-<translation>Китайский традиционный</translation>
-</message>
-<message>
-<source>Enable dark mode application icon and tray icon</source>
-<translation>Включить "темный режим" значков приложения и трея</translation>
-</message>
-<message>
-<source>You might also want to choose another editor color schema in the editor settings in dark mode.</source>
-<translation>Возможно, вам захочется выбрать другую цветовую палитру в настройках редактора в "темном режиме".</translation>
-</message>
-<message>
-<source>Enable dark mode icon theme</source>
-<translation>Включить тёмную тему значков</translation>
-</message>
-<message>
-<source>System tray</source>
-<translation>Системный трей</translation>
-</message>
-<message>
-<source>Show system tray icon</source>
-<translation>Показывать иконку в трее</translation>
-</message>
-<message>
-<source>Start application hidden</source>
-<translation>Запускать программу скрытно</translation>
-</message>
-<message>
-<source>Interface style</source>
-<translation>Стиль интерфейса</translation>
-</message>
-<message>
-<source>Enforce system icon theme</source>
-<translation>Использовать системную тему значков</translation>
-</message>
-<message>
-<source>Override interface font size</source>
-<translation>Изменить размер шрифта интерфейса</translation>
-</message>
-<message>
-<source>Interface font size:</source>
-<translation>Размер шрифта интерфейса:</translation>
-</message>
-<message>
-<source>&amp;Add script…</source>
-<translation>&amp;Добавить скрипт…</translation>
-</message>
-<message>
-<source>Use legacy way to link to notes, images and attachments</source>
-<translation>Использовать старый способ ссылки на заметки, изображения и вложения</translation>
-</message>
-<message>
-<source>When opening notes the cursor position inside the note will now be restored to the position when the note was last visited in the current session</source>
-<translation>При открытии заметки позиция курсора будет соответствовать позиции, в которой его оставили при предыдущем открытии заметки в текущем сеансе</translation>
-</message>
-<message>
-<source>By default the headline will generated automatically</source>
-<translation>По умолчанию заголовок создается автоматически</translation>
-</message>
-<message>
-<source>The shortcut to create a new note asks for a headline</source>
-<translation>При создании новой заметки необходимо ввести заголовок</translation>
-</message>
-<message>
-<source>Automatically close the note folder database to prevent problems with sync tools</source>
-<translation>Автоматически закрывать папку базы заметок для предотвращения проблем с инструментами синхронизации</translation>
-</message>
-<message>
-<source>Automatically close the note folder database</source>
-<translation>Автоматически закрывать папку базы заметок</translation>
-</message>
-<message>
-<source>Search engine</source>
-<translation>Поисковый движок</translation>
-</message>
-<message>
-<source>Message boxes</source>
-<translation>Окна сообщений</translation>
-</message>
-<message>
-<source>Reset message boxes</source>
-<translation>Сброс окон сообщений</translation>
-</message>
-<message>
-<source>Import settings</source>
-<translation>Импорт настроек</translation>
-</message>
-<message>
-<source>Export settings</source>
-<translation>Экспорт настроек</translation>
-</message>
-<message>
-<source>Open issue assistant</source>
-<translation>Открыть помощника по проблемам</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The best way to post issues is to use the issue assistant by pressing the &lt;span style=" font-weight:600;"&gt;Open issue assistant&lt;/span&gt; button on the bottom.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Вопросы лучше задавать через помощника по проблемам, нажав &lt;span style=" font-weight:600;"&gt;Открыть помощника по проблемам&lt;/span&gt; кнопку снизу.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>Ignore code font size to allow zooming</source>
-<translation>Игнорировать размер шрифта кода для масштабирования</translation>
-</message>
-<message>
-<source>Rendering</source>
-<translation>Рендеринг</translation>
-</message>
-<message>
-<source>Enable underline rendering</source>
-<translation>Включить рендеринг подчеркивания</translation>
-</message>
-<message>
-<source>Fully highlight blockquotes</source>
-<translation>Полностью выделять блоки цитат</translation>
-</message>
-<message>
-<source>Note-edit cursor width:</source>
-<translation>Ширина курсора в редакторе:</translation>
-</message>
-<message>
-<source>Enable Vim mode (some QOwnNotes shortcuts will not work)</source>
-<translation>Включить режим Vim (некоторые сочетания клавиш QOwnNotes не будут работать)</translation>
-</message>
-<message>
-<source>Cloud connection:</source>
-<translation>Облачное соединение:</translation>
-</message>
-<message>
-<source>Opens your ownCloud server App Password page in your webbrowser to create a new app password for the application</source>
-<translation>Открывает страницу App Password на сервере ownCloud в вашем веб-браузере, чтобы создать новый пароль для приложения</translation>
-</message>
-<message>
-<source>Open your ownCloud server App Password page</source>
-<translation>Открыть страницу App Password вашего сервера ownCloud</translation>
-</message>
-<message>
-<source>Māori</source>
-<translation>Маори</translation>
-</message>
-<message>
-<source>Malay</source>
-<translation>Малайский</translation>
+<source>MCP server</source>
+<translation>Сервер MCP</translation>
 </message>
 <message>
 <source>Browser extension / command snippets</source>
-<translation type="unfinished">Browser extension / command snippets</translation>
+<translation>Расширение браузера / фрагменты команд</translation>
 </message>
 <message>
 <source>Web application</source>
@@ -5453,95 +9337,11 @@ Just test yourself if you get sync conflicts and set a higher value if so.</sour
 </message>
 <message>
 <source>AI</source>
-<translation type="unfinished">AI</translation>
+<translation>AI</translation>
 </message>
 <message>
 <source>Experimental</source>
-<translation type="unfinished">Experimental</translation>
-</message>
-<message>
-<source>This also allows note files to be renamed</source>
-<translation type="unfinished">This also allows note files to be renamed</translation>
-</message>
-<message>
-<source>You can access your ownCloud server from inside the application for example to manage trashed notes and note versions or to share notes. This integration doesn't do note file syncing. You still need to install the ownCloud sync client for syncing the files.</source>
-<translation type="unfinished">You can access your ownCloud server from inside the application for example to manage trashed notes and note versions or to share notes. This integration doesn't do note file syncing. You still need to install the ownCloud sync client for syncing the files.</translation>
-</message>
-<message>
-<source>You will find this path in the &lt;i&gt;Nextcloud / ownCloud&lt;/i&gt; settings</source>
-<translation type="unfinished">You will find this path in the &lt;i&gt;Nextcloud / ownCloud&lt;/i&gt; settings</translation>
-</message>
-<message>
-<source>Enable QOwnNotesAPI app support</source>
-<translation type="unfinished">Enable QOwnNotesAPI app support</translation>
-</message>
-<message>
-<source>If your password doesn't work, create an app password (button on the right)</source>
-<translation>Если ваш пароль не работает, создайте пароль приложения (кнопка справа)</translation>
-</message>
-<message>
-<source>Cancel Nextcloud login</source>
-<translation type="unfinished">Cancel Nextcloud login</translation>
-</message>
-<message>
-<source>Enable Nextcloud Deck support</source>
-<translation type="unfinished">Enable Nextcloud Deck support</translation>
-</message>
-<message>
-<source>You can access your ownCloud server or a generic CalDAV server to manage your todo lists.</source>
-<translation type="unfinished">You can access your ownCloud server or a generic CalDAV server to manage your todo lists.</translation>
-</message>
-<message>
-<source>If you want to help to translate QOwnNotes or update an existing translation please read: &lt;a href="%1"&gt;How can I help to translate QOwnNotes?&lt;/a&gt;</source>
-<translation>Если вы хотите помочь с переводом QOwnNotes или обновить существующий перевод, прочтите: &lt;a href="%1"&gt;Как я могу помочь с переводом QOwnNotes?&lt;/a&gt;</translation>
-</message>
-<message>
-<source>Khmer</source>
-<translation>Кхмерский</translation>
-</message>
-<message>
-<source>Shona</source>
-<translation>Шона</translation>
-</message>
-<message>
-<source>Sinhala</source>
-<translation>Сингальский</translation>
-</message>
-<message>
-<source>Thai</source>
-<translation>Тайский</translation>
-</message>
-<message>
-<source>Vietnamese</source>
-<translation>Вьетнамский</translation>
-</message>
-<message>
-<source>Xhosa</source>
-<translation>Коса</translation>
-</message>
-<message>
-<source>Yiddish</source>
-<translation>Идиш</translation>
-</message>
-<message>
-<source>Zulu</source>
-<translation>Зулу</translation>
-</message>
-<message>
-<source>Search for language</source>
-<translation>Поиск по языку</translation>
-</message>
-<message>
-<source>Status bar</source>
-<translation type="unfinished">Status bar</translation>
-</message>
-<message>
-<source>Show note path</source>
-<translation type="unfinished">Show note path</translation>
-</message>
-<message>
-<source>Only show relative note path</source>
-<translation type="unfinished">Only show relative note path</translation>
+<translation>Экспериментально</translation>
 </message>
 <message>
 <source>Action name</source>
@@ -5556,687 +9356,24 @@ Just test yourself if you get sync conflicts and set a higher value if so.</sour
 <translation>Глобальный ярлык</translation>
 </message>
 <message>
-<source>Disable this if you want to launch the application without opening a note</source>
-<translation>Отключите это, если вы хотите запустить приложение без открытия заметки</translation>
+<source>LanguageTool</source>
+<translation type="unfinished">LanguageTool</translation>
 </message>
 <message>
-<source>Open last accessed note at application startup</source>
-<translation>Открыть последнюю доступную заметку при запуске приложения</translation>
+<source>AI autocomplete</source>
+<translation>Автозаполнение ИИ</translation>
 </message>
 <message>
-<source>Start application in read-only mode</source>
-<translation type="unfinished">Start application in read-only mode</translation>
+<source>Enable AI-powered text autocomplete suggestions in the note editor. Suggestions can be accepted with Tab or dismissed with Escape.</source>
+<translation>Включить предложения автозаполнения текста на основе ИИ в редакторе заметок. Предложения можно принять с помощью Tab или отклонить с помощью Escape.</translation>
 </message>
 <message>
-<source>When inactive, enter read-only mode automatically after:</source>
-<translation type="unfinished">When inactive, enter read-only mode automatically after:</translation>
-</message>
-<message>
-<source> sec</source>
-<extracomment>short for seconds</extracomment>
-<translation type="unfinished"> sec</translation>
-</message>
-<message>
-<source>Forget all "Don't ask again" choices in message boxes</source>
-<translation type="unfinished">Forget all "Don't ask again" choices in message boxes</translation>
-</message>
-<message>
-<source>Note file extensions</source>
-<translation type="unfinished">Note file extensions</translation>
-</message>
-<message>
-<source>Files with the listed file extensions will be recognized as notes, the selected file extension will be used for new notes.</source>
-<translation type="unfinished">Files with the listed file extensions will be recognized as notes, the selected file extension will be used for new notes.</translation>
-</message>
-<message>
-<source>Add a new note file extension</source>
-<translation type="unfinished">Add a new note file extension</translation>
-</message>
-<message>
-<source>Remove selected note file extension</source>
-<translation type="unfinished">Remove selected note file extension</translation>
-</message>
-<message>
-<source>Checks the disk database integrity and fixes problems</source>
-<translation>Проверяет целостность дисковой базы данных и исправляет проблемы</translation>
-</message>
-<message>
-<source>Check integrity</source>
-<translation>Проверить целостность</translation>
-</message>
-<message>
-<source>Be warned that reinitializing the database will also remove your cached todo items and configured note folders and scripts!</source>
-<translation>Имейте в виду, что переинициализация базы данных также удалит ваши кэшированные TODO предметы и конфигурированные папки заметок и скриптов!</translation>
-</message>
-<message>
-<source>GitHub doesn't need two spaces at the end of the line to do a line break</source>
-<translation>GitHub не требует двух пробелов в конце строки, чтобы сделать разрыв строки</translation>
-</message>
-<message>
-<source>This is the best way to open an issue</source>
-<translation>Это лучший способ открыть issue</translation>
-</message>
-<message>
-<source>Please use this in the issue tracker</source>
-<translation>Пожалуйста, используйте это в системе отслеживания ошибок</translation>
-</message>
-<message>
-<source>&amp;Copy debug information to clipboard</source>
-<translation>&amp;Копировать отладочную информацию в буфер обмена</translation>
-</message>
-<message>
-<source>Please don't use this in the issue tracker</source>
-<translation>Пожалуйста, не используйте это в системе отслеживания ошибок</translation>
-</message>
-<message>
-<source>Time to wait before refreshing the preview after typing:</source>
-<translation type="unfinished">Time to wait before refreshing the preview after typing:</translation>
-</message>
-<message>
-<source>Reset the debounce time</source>
-<translation type="unfinished">Reset the debounce time</translation>
-</message>
-<message>
-<source>0ms means don't wait for the typing to stop</source>
-<translation type="unfinished">0ms means don't wait for the typing to stop</translation>
-</message>
-<message>
-<source>Use editor highlighting styles also for the preview</source>
-<translation>Используйте стили подсветки редактора также для предварительного просмотра</translation>
-</message>
-<message>
-<source>Exporting</source>
-<translation>Экспорт</translation>
-</message>
-<message>
-<source>Use internal export styling for the PDF export and printing of the preview</source>
-<translation>Использовать внутренний стиль экспорта для экспорта в PDF и печати предварительного просмотра</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You might want to take a look at all available &lt;a href="http://docs.qownnotes.org/en/latest/editor/time-formats/"&gt;time formats&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Возможно, вы захотите взглянуть на все доступные &lt;a href="http://docs.qownnotes.org/en/latest/editor/time-formats/"&gt;форматы времени&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>Note that disabling this will also disable the navigation panel!</source>
-<translation type="unfinished">Note that disabling this will also disable the navigation panel!</translation>
-</message>
-<message>
-<source>Disable cursor blinking</source>
-<translation>Отключить мигание курсора</translation>
-</message>
-<message>
-<source>Automatically remove trailing spaces in the note text</source>
-<translation>Автоматически удалять завершающие пробелы в тексте заметки</translation>
-</message>
-<message>
-<source>Search script repository for AI integration scripts</source>
-<translation type="unfinished">Search script repository for AI integration scripts</translation>
-</message>
-<message>
-<source>API keys</source>
-<translation type="unfinished">API keys</translation>
-</message>
-<message>
-<source>OpenAI API key:</source>
-<translation type="unfinished">OpenAI API key:</translation>
-</message>
-<message>
-<source>Create Groq API key</source>
-<translation type="unfinished">Create Groq API key</translation>
-</message>
-<message>
-<source>Create OpenAI API key</source>
-<translation type="unfinished">Create OpenAI API key</translation>
-</message>
-<message>
-<source>Test connection</source>
-<comment>"Test" as verb</comment>
-<translation type="unfinished">Test connection</translation>
-</message>
-<message>
-<source>AI backends added via the scripting engine</source>
-<translation type="unfinished">AI backends added via the scripting engine</translation>
-</message>
-<message>
-<source>To make use of the AI backends, you can either use the scripting command &lt;a href="%1"&gt;aiComplete&lt;/a&gt;, or look in the script repository for already-written scripts.</source>
-<translation>Чтобы использовать серверные функции искусственного интеллекта, вы можете использовать команду создания сценариев &lt;a href="%1"&gt;aiComplete&lt;/a&gt; или поискать в репозитории сценариев уже написанные сценарии.</translation>
-</message>
-<message>
-<source>You can use the scripting hook &lt;a href="%1"&gt;openAiBackendsHook&lt;/a&gt; to add more OpenAI API compatible backends.</source>
-<translation type="unfinished">You can use the scripting hook &lt;a href="%1"&gt;openAiBackendsHook&lt;/a&gt; to add more OpenAI API compatible backends.</translation>
-</message>
-<message>
-<source>Alternatively, you can also look in the script repository for already created AI integration scripts.</source>
-<translation type="unfinished">Alternatively, you can also look in the script repository for already created AI integration scripts.</translation>
-</message>
-<message>
-<source>Groq API key:</source>
-<translation type="unfinished">Groq API key:</translation>
-</message>
-<message>
-<source>API key</source>
-<translation type="unfinished">API key</translation>
-</message>
-<message>
-<source>Show line numbers</source>
-<translation>Показывать номера строк</translation>
-</message>
-<message>
-<source>Tabs and Indents</source>
-<translation>Табуляция и отступы</translation>
-</message>
-<message>
-<source>Use tab character instead of spaces</source>
-<translation>Использовать символ табуляции вместо пробелов</translation>
-</message>
-<message>
-<source>Indent:</source>
-<translation>Отступ:</translation>
-</message>
-<message>
-<source>Regular expressions of note subfolders to ignore, separated by ";"</source>
-<translation>Регулярные выражения подпапок для заметок, которые следует игнорировать, разделенные с помощью ";"</translation>
-</message>
-<message>
-<source>Ignored note files</source>
-<translation type="unfinished">Ignored note files</translation>
-</message>
-<message>
-<source>Select the path of the git binary</source>
-<translation type="unfinished">Select the path of the git binary</translation>
-</message>
-<message>
-<source>Regular expressions of note files to ignore, separated by ";"</source>
-<translation type="unfinished">Regular expressions of note files to ignore, separated by ";"</translation>
-</message>
-<message>
-<source>Ignored subfolders</source>
-<translation>Игнорируемые подпапки</translation>
-</message>
-<message>
-<source>Reset ignored subfolders</source>
-<translation>Сброс игнорируемых подпапок</translation>
-</message>
-<message>
-<source>Clicking a note tab unsets 'All notes' selection</source>
-<translation type="unfinished">Clicking a note tab unsets 'All notes' selection</translation>
-</message>
-<message>
-<source>Restore open note tabs at application startup and when note folders are switched</source>
-<translation>Восстановление открытых вкладок заметок при запуске приложения и при переключении папок заметок</translation>
-</message>
-<message>
-<source>Auto-select items in navigation panel when changing cursor position</source>
-<translation type="unfinished">Auto-select items in navigation panel when changing cursor position</translation>
-</message>
-<message>
-<source>Hide 'Note count' with tags (increases performance)</source>
-<translation>Скрыть 'Счетчик заметок' с помощью тегов (увеличивает производительность)</translation>
-</message>
-<message>
-<source>Show the number of matches in each note</source>
-<translation>Показать количество совпадений в каждой заметке</translation>
-</message>
-<message>
-<source>Command snippets</source>
-<translation type="unfinished">Command snippets</translation>
-</message>
-<message>
-<source>Tag name for commands notes</source>
-<translation type="unfinished">Tag name for commands notes</translation>
-</message>
-<message>
-<source>Commands tag:</source>
-<translation type="unfinished">Commands tag:</translation>
-</message>
-<message>
-<source>Commands note name:</source>
-<translation type="unfinished">Commands note name:</translation>
-</message>
-<message>
-<source>Note name for adding new commands</source>
-<translation type="unfinished">Note name for adding new commands</translation>
-</message>
-<message>
-<source>You can use the &lt;a href="%1"&gt;QOwnNotes Web App&lt;/a&gt; to be able to insert photos into QOwnNotes on your desktop from your mobile phone over the internet.</source>
-<translation type="unfinished">You can use the &lt;a href="%1"&gt;QOwnNotes Web App&lt;/a&gt; to be able to insert photos into QOwnNotes on your desktop from your mobile phone over the internet.</translation>
-</message>
-<message>
-<source>QOwnNotes web application</source>
-<translation>QOwnNotes веб-приложение</translation>
-</message>
-<message>
-<source>A web socket connection to this server will be opened to act as bridge between the QOwnNotes web application and the QOwnNotes desktop application.</source>
-<translation type="unfinished">A web socket connection to this server will be opened to act as bridge between the QOwnNotes web application and the QOwnNotes desktop application.</translation>
-</message>
-<message>
-<source>Server URL:</source>
-<translation>URL-адрес сервера:</translation>
-</message>
-<message>
-<source>Show QR code</source>
-<translation>Показать QR-код</translation>
-</message>
-<message>
-<source>Security token:</source>
-<translation>Токен безопасности:</translation>
-</message>
-<message>
-<source>Install the &lt;a href="%1"&gt;Web Companion browser extension&lt;/a&gt; from the &lt;a href="%2"&gt;Chrome Web Store&lt;/a&gt; or &lt;a href="%3"&gt;Firefox Add-ons page&lt;/a&gt; to use QOwnNotes as web clipper or for bookmark management.</source>
-<translation type="unfinished">Install the &lt;a href="%1"&gt;Web Companion browser extension&lt;/a&gt; from the &lt;a href="%2"&gt;Chrome Web Store&lt;/a&gt; or &lt;a href="%3"&gt;Firefox Add-ons page&lt;/a&gt; to use QOwnNotes as web clipper or for bookmark management.</translation>
-</message>
-<message>
-<source>Download the &lt;a href="%1"&gt;Command-line snippet manager&lt;/a&gt; to execute command snippets stored in notes in QOwnNotes from the command line.</source>
-<translation type="unfinished">Download the &lt;a href="%1"&gt;Command-line snippet manager&lt;/a&gt; to execute command snippets stored in notes in QOwnNotes from the command line.</translation>
-</message>
-<message>
-<source>You can use notes with a special tag to store command snippets, which you can execute from the command-line snippet manager. For more information about the command snippet syntax click &lt;a href="%1"&gt;here&lt;/a&gt;.</source>
-<translation type="unfinished">You can use notes with a special tag to store command snippets, which you can execute from the command-line snippet manager. For more information about the command snippet syntax click &lt;a href="%1"&gt;here&lt;/a&gt;.</translation>
-</message>
-<message>
-<source>You need to enter this token in the QOwnNotes web application to be able to talk to your QOwnNotes desktop application.</source>
-<translation>Вам необходимо ввести этот токен в веб-приложение QOwnNotes, чтобы иметь возможность общаться с вашим настольным приложением QOwnNotes.</translation>
-</message>
-<message>
-<source>Copy security token to clipboard</source>
-<translation>Скопируйте токен безопасности в буфер обмена</translation>
-</message>
-<message>
-<source>Generate new security token</source>
-<translation>Создать новый токен безопасности</translation>
-</message>
-<message>
-<source>Reset the URL to default</source>
-<translation>Сбросить URL-адрес по умолчанию</translation>
-</message>
-<message>
-<source>QOwnNotes web application support</source>
-<translation>Поддержка веб-приложений QOwnNotes</translation>
-</message>
-<message>
-<source>Enable web application support</source>
-<translation>Включить поддержку веб-приложений</translation>
-</message>
-<message>
-<source>Note list panel</source>
-<translation>Панель Список заметок</translation>
-</message>
-<message>
-<source>Show notes in the note list with preview</source>
-<translation>Показать заметки в списке заметок с предпросмотром</translation>
-</message>
-<message>
-<source>Instead of a note list use a note tree with all the subfolders (if they are turned on for the note folder)</source>
-<translation>Вместо списка заметок используйте дерево заметок со всеми подпапками (если они включены для папки заметок)</translation>
-</message>
-<message>
-<source>Note folder panel</source>
-<translation>Панель папок для заметок</translation>
-</message>
-<message>
-<source>Show note folders as buttons instead of in a select box</source>
-<translation>Показывать папки заметок в виде кнопок, а не в поле выбора</translation>
-</message>
-<message>
-<source>Enable local trash to keep a copy of trashed notes</source>
-<translation type="unfinished">Enable local trash to keep a copy of trashed notes</translation>
-</message>
-<message>
-<source>Panels can be turned on and off in the &lt;i&gt;Window / Panels&lt;/i&gt; main menu and you can also configure different &lt;i&gt;Workspaces&lt;/i&gt; for different panel configurations.</source>
-<translation>Панели можно включать и выключать в главном меню &lt;i&gt;Window / Panels&lt;/i&gt;, а также можно настраивать различные &lt;i&gt; Workspaces&lt;/i&gt; для разных конфигураций панелей.</translation>
-</message>
-<message>
-<source>Bookmarks</source>
-<translation>Закладки</translation>
-</message>
-<message>
-<source>Notes with this tag will be used for fetching bookmarks</source>
-<translation>Заметки с этим тегом будут использоваться для получения закладок</translation>
-</message>
-<message>
-<source>Tag name for bookmarks notes</source>
-<translation>Имя тега для заметок с закладками</translation>
-</message>
-<message>
-<source>Bookmarks tag:</source>
-<translation>Тег закладок:</translation>
-</message>
-<message>
-<source>By default the browser extension will show all links of the current note. You can also make it show special bookmark links of notes with a certain tag. For more information about the bookmark link syntax click &lt;a href="%1"&gt;here&lt;/a&gt;.</source>
-<translation>По умолчанию расширение браузера покажет все ссылки из текущей заметки. Вы также можете заставить показывать специальные ссылки закладки заметок с определенным тегом. Для получения дополнительных сведений о синтаксисе ссылок закладки нажмите &lt;a href="%1"&gt;здесь&lt;/a&gt;.</translation>
-</message>
-<message>
-<source>Bookmarks note name:</source>
-<translation>Имя заметки с закладками:</translation>
-</message>
-<message>
-<source>This note will be used for adding new bookmarks from the browser extension</source>
-<translation>Эта заметка будет использоваться для добавления новых закладок из браузерного расширения</translation>
-</message>
-<message>
-<source>Note name for adding new bookmarks</source>
-<translation>Имя заметки для добавления новых закладок</translation>
-</message>
-<message>
-<source>Web socket server</source>
-<translation>Веб-сокет сервер</translation>
-</message>
-<message>
-<source>Socket server port:</source>
-<translation>Порт сокет-сервера:</translation>
-</message>
-<message>
-<source>Reset the socket server port</source>
-<translation>Сбросить порт сервера сокетов</translation>
-</message>
-<message>
-<source>Show security token</source>
-<translation>Показать токен безопасности</translation>
-</message>
-<message>
-<source>Web socket server support</source>
-<translation>Поддержка веб-сокет сервера</translation>
-</message>
-<message>
-<source>Enable socket server</source>
-<translation>Включить сокет-сервер</translation>
-</message>
-<message>
-<source>Note edit panel</source>
-<translation>Панель Редактирование заметки</translation>
-</message>
-<message>
-<source>If this is disabled you are able to create more complex panel layouts, but all panels will be resized if the window is resized</source>
-<translation>Если это отключено, можно создавать более сложные макеты панелей, но все панели будут изменяться при изменении размера окна</translation>
-</message>
-<message>
-<source>Use the note edit panel as fixed central widget to be resized if the window or other panels are resized</source>
-<translation>Использовать панель редактирования заметок как фиксированную центральную панель при изменении ее размеров, когда изменяются размеры окна приложения или других панелей</translation>
-</message>
-<message>
-<source>Note search panel</source>
-<translation>Панель поиска заметок</translation>
-</message>
-<message>
-<source>Disable auto-completion of previous searches</source>
-<translation>Отключить автоматическое дополнение от предыдущих поисков</translation>
-</message>
-<message>
-<source>Navigation panel</source>
-<translation>Панель навигации</translation>
-</message>
-<message>
-<source>Hide navigation item search bar</source>
-<translation>Скрыть панель поиска элементов навигации</translation>
-</message>
-<message>
-<source>Local trash settings</source>
-<translation>Параметры локальной корзины</translation>
-</message>
-<message>
-<source>Remove trashed notes after:</source>
-<translation>Удалять заметки из корзины через:</translation>
-</message>
-<message>
-<source> days</source>
-<extracomment>seconds</extracomment>
-<translation> дней</translation>
-</message>
-<message>
-<source>Automatically remove trashed notes after a certain time</source>
-<translation>Автоматически удалять заметки из корзины через определенное время</translation>
-</message>
-<message>
-<source>Local trash support</source>
-<translation>Поддержка локальной корзины</translation>
-</message>
-<message>
-<source>Layout selector</source>
-<translation>Выбор макета</translation>
-</message>
-<message>
-<source>You can set a new layout here. Keep in mind that you always can modify the position of the panels with the &lt;i&gt;Unlock panels&lt;/i&gt; button.</source>
-<translation>Здесь можно задать новый макет. Имейте в виду, что всегда можно изменить положение панелей кнопкой &lt;i&gt;Разблокировать панели&lt;/i&gt;.</translation>
-</message>
-<message>
-<source>Reset the cursor width</source>
-<translation>Сбросить ширину курсора</translation>
-</message>
-<message>
-<source>External git log command to show the git versions of a note</source>
-<translation>Внешняя команда git log, чтобы показать git-версии заметки</translation>
-</message>
-<message>
-<source>Enter a command to be used to show a git log (like for example "gitk")</source>
-<extracomment>Please don't translate "%notePath%"</extracomment>
-<translation>Введите команду, которая будет использоваться для отображения журнала git (например "gitk")</translation>
-</message>
-<message>
-<source>If you use this setting you will get a new menu entry to show the git versions if you right-click a note.</source>
-<extracomment>Please don't translate "%notePath%"</extracomment>
-<translation>Если использовать эту настройку, то появится новый пункт меню, показывающий git-версии по правому клику на заметке.</translation>
-</message>
-<message>
-<source>Show all notes of a tag including the notes of their children-tags</source>
-<translation>Показывать все заметки, помеченные тегом, включая заметки из его дочерних тегов</translation>
-</message>
-<message>
-<source>Show all notes in a folder including their subfolders (only works if subfolders are turned on)</source>
-<translation>Показывать все заметки в папке, включая ее подпапки (работает только если включены вложенные папки)</translation>
-</message>
-<message>
-<source>Highlight the current line</source>
-<translation>Выделить текущую строку</translation>
-</message>
-<message>
-<source>Don't forget to enable git support for your note folders and to configure your name and email address for your git client, for example with these terminal commands:</source>
-<translation>Не забудьте включить поддержку git для ваших папок с заметками и настроить имя и адрес электронной почты в git клиенте, например, с помощью этих команд терминала:</translation>
-</message>
-<message>
-<source>Tags panel</source>
-<translation>Панель тегов</translation>
-</message>
-<message>
-<source>Order</source>
-<translation>Порядок</translation>
-</message>
-<message>
-<source>Ascending</source>
-<translation>По возрастанию</translation>
-</message>
-<message>
-<source>Descending</source>
-<translation>По убыванию</translation>
-</message>
-<message>
-<source>Sort</source>
-<translation>Сортировка</translation>
-</message>
-<message>
-<source>Only use editor width setting in distraction free mode</source>
-<translation>Использовать параметр ширины редактора только в неустановленном, свободном режиме</translation>
-</message>
-<message>
-<source>Alphabetical</source>
-<translation>В алфавитном порядке</translation>
-</message>
-<message>
-<source>By last change / use</source>
-<translation>По последнему изменению / использованию</translation>
-</message>
-<message>
-<source>Hide 'Find or create tag' search</source>
-<translation>Скрыть поле «Найти или создать тег»</translation>
-</message>
-<message>
-<source>Note subfolders panel</source>
-<translation>Панель вложенных папок</translation>
-</message>
-<message>
-<source>Show with full path</source>
-<translation>Показать полный путь</translation>
-</message>
-<message>
-<source>By last change</source>
-<translation>По последнему изменению</translation>
-</message>
-<message>
-<source>Show root folder name</source>
-<translation>Показать имя папки заметок</translation>
-</message>
-<message>
-<source>Hide 'Find or create note subfolder' search</source>
-<translation>Скрыть поле «Найти или создать подпапку»</translation>
-</message>
-<message>
-<source>Display note subfolders as full tree</source>
-<translation>Показывать вложенные папки в виде полного дерева</translation>
-</message>
-<message>
-<source>Search script repository</source>
-<translation>Искать в репозитории сценариев</translation>
-</message>
-<message>
-<source>You optionally can use "%notePath%" for the path of the note.</source>
-<extracomment>Please don't translate "%notePath%"</extracomment>
-<translation>При необходимости можно использовать "%notePath%" для пути до заметки.</translation>
-</message>
-<message>
-<source>Git client</source>
-<translation>Git клиент</translation>
-</message>
-<message>
-<source>Path to git executable:</source>
-<translation>Путь к исполняемому файлу git:</translation>
-</message>
-<message>
-<source>Path to git client, leave empty for default</source>
-<translation>Путь до клиента git, оставьте пустым для умолчания</translation>
-</message>
-<message>
-<source>Commit interval</source>
-<translation>Интервал коммита</translation>
-</message>
-<message>
-<source>sec</source>
-<extracomment>seconds</extracomment>
-<translation>сек</translation>
-</message>
-<message>
-<source>git commit interval time [sec]</source>
-<translation>время интервала git коммита [sec]</translation>
-</message>
-<message>
-<source>Open your ownCloud server &amp;Apps page</source>
-<translation>Открыть страницу &amp;Приложения на сервере ownCloud</translation>
+<source>Enable AI autocomplete in note editor</source>
+<translation>Включить автозаполнение ИИ в редакторе заметок</translation>
 </message>
 <message>
 <source>Preview</source>
 <translation>Предварительный просмотр</translation>
-</message>
-<message>
-<source>Which calendar backend do you want to use?</source>
-<translation>Какой бэкэнд календаря вы хотите использовать?</translation>
-</message>
-<message>
-<source>For most current ownCloud and Nextcloud installations</source>
-<translation>Для самых последних ownCloud и Nextcloud установок</translation>
-</message>
-<message>
-<source>For older versions of ownCloud where the default setting doesn't work</source>
-<translation>Для более старых версий ownCloud, где не работает по умолчанию</translation>
-</message>
-<message>
-<source>Legacy ownCloud calendar</source>
-<translation>Стандартный календарь ownCloud</translation>
-</message>
-<message>
-<source>CalDAV server settings</source>
-<translation>Настройки сервера CalDAV</translation>
-</message>
-<message>
-<source>Calendar base url:</source>
-<translation>Базовый URL-адрес календаря:</translation>
-</message>
-<message>
-<source>Please enter the CalDAV base url to your calendar.</source>
-<translation>Пожалуйста, введите базовый Url-адрес календаря CalDAV.</translation>
-</message>
-<message>
-<source>Please enter the password for your CalDAV username.&lt;br/&gt;Currently the password will be stored encrypted with the other settings, but is not very secure.</source>
-<translation>Пожалуйста, введите пароль для вашего имени пользователя CalDAV. &lt;br/&gt; В настоящее время пароль будет храниться зашифрованы с другими параметрами, но не очень безопасно.</translation>
-</message>
-<message>
-<source>Czech</source>
-<translation>Чешский</translation>
-</message>
-<message>
-<source>Brazilian Portuguese</source>
-<translation>Бразильский португальский</translation>
-</message>
-<message>
-<source>Ukrainian</source>
-<translation>Украинский</translation>
-</message>
-<message>
-<source>The name</source>
-<translation>Имя</translation>
-</message>
-<message>
-<source>Maximum height:</source>
-<translation>Максимальная высота:</translation>
-</message>
-<message>
-<source>Maximum width:</source>
-<translation>Максимальная ширина:</translation>
-</message>
-<message>
-<source>Scale images down when inserted into notes</source>
-<translation>Уменьшить изображение при вставке в заметку</translation>
-</message>
-<message>
-<source>Croatian</source>
-<translation>Хорватский</translation>
-</message>
-<message>
-<source>Path to your QML file</source>
-<translation>Путь к вашему QML-файлу</translation>
-</message>
-<message>
-<source>Script name</source>
-<translation>Имя сценария</translation>
-</message>
-<message>
-<source>Description:</source>
-<translation>Описание:</translation>
-</message>
-<message>
-<source>Version:</source>
-<translation>Версия:</translation>
-</message>
-<message>
-<source>Repository:</source>
-<translation>Репозиторий:</translation>
-</message>
-<message>
-<source>Author(s):</source>
-<translation>Автор(ы):</translation>
-</message>
-<message>
-<source>Check this if you want to accept all external modifications while you are editing the current note.</source>
-<translation>Отметьте, если вы хотите принимать все внешние изменения при редактировании текущей заметки.</translation>
-</message>
-<message>
-<source>Accept all external modifications of the current note</source>
-<translation>Принимать все внешние изменения текущей заметки</translation>
-</message>
-<message>
-<source>Use UNIX newline instead of native newline characters</source>
-<translation>Использование символов разрыва строки, как в UNIX, вместо системных</translation>
-</message>
-<message>
-<source>Restore cursor position when opening a note</source>
-<translation>Восстановить позицию курсора при открытии заметки</translation>
 </message>
 <message>
 <source>Apply toolbar configuration</source>
@@ -6247,399 +9384,16 @@ Just test yourself if you get sync conflicts and set a higher value if so.</sour
 <translation>Сброс панели инструментов</translation>
 </message>
 <message>
-<source>Enable logging to file</source>
-<translation>Разрешить журналирование в файл</translation>
-</message>
-<message>
-<source>Clear log file</source>
-<translation>Очистить файл журнала</translation>
-</message>
-<message>
-<source>Fake old version number to trigger update</source>
-<translation>Назначить поддельный старый номер версии, чтобы запустить обновление</translation>
-</message>
-<message>
-<source>Log file path:</source>
-<translation>Путь к файлу журнала:</translation>
-</message>
-<message>
-<source>Here you can set your own time format for inserting the current time into a note.</source>
-<translation>Здесь вы можете установить свой собственный формат времени для вставки текущего времени в заметку.</translation>
-</message>
-<message>
-<source>Insert current time</source>
-<translation>Вставка текущего времени</translation>
-</message>
-<message>
-<source>Time format:</source>
-<translation>Формат времени:</translation>
-</message>
-<message>
-<source>Enter your custom time format, like "dd.MM.yyyy hh:mm"</source>
-<translation>Введите ваш пользовательский формат времени, типа "dd.MM.yyyy hh:mm"</translation>
-</message>
-<message>
-<source>Editor options</source>
-<translation>Параметры редактора</translation>
-</message>
-<message>
-<source>Enable automatic closing of brackets and markdown formatting characters</source>
-<translation>Включить автоматическое закрытие скобок и символов форматирования markdown</translation>
-</message>
-<message>
-<source>You have to use the backspace key to remove the opening character</source>
-<translation>Вы должны использовать клавишу backspace для удаления символа открытия</translation>
-</message>
-<message>
-<source>Enable automatic removal of matching closing characters</source>
-<translation>Включить автоматическое удаление соответствующих символов закрытия</translation>
-</message>
-<message>
-<source>Your CalDAV calendar base url</source>
-<translation>Базовый URL-адрес календаря CalDAV</translation>
-</message>
-<message>
-<source>Please enter the username of your CalDAV server.</source>
-<translation>Пожалуйста, введите имя пользователя на сервере CalDAV.</translation>
-</message>
-<message>
-<source>Your CalDAV username</source>
-<translation>Ваше имя пользователя CalDAV</translation>
-</message>
-<message>
-<source>Your CalDAV password</source>
-<translation>Ваш пароль CalDAV</translation>
-</message>
-<message>
-<source>This causes all todo list items to be reloaded from your server the next time you open your todo dialog.</source>
-<translation>Это перезагрузит все элементы списка todo с вашего сервера, когда в следующий раз вы открываете диалоговое окно todo.</translation>
-</message>
-<message>
-<source>Empty calendar item cache</source>
-<translation>Очистить кэш элемента календаря</translation>
-</message>
-<message>
-<source>Click here to reload the list of calendars from your calendar server.</source>
-<translation>Нажмите здесь, чтобы перезагрузить список календарей из календаря сервера.</translation>
-</message>
-<message>
-<source>&amp;Reload calendar list</source>
-<translation>&amp;Перезагрузить список календаря</translation>
-</message>
-<message>
-<source>You may need to restart the application to let these changes take effect</source>
-<translation>Может потребоваться перезапустить приложение, чтобы изменения вступили в силу</translation>
-</message>
-<message>
-<source>Toolbar icon size:</source>
-<translation>Размер значка панели инструментов:</translation>
-</message>
-<message>
-<source>List and tree item height:</source>
-<translation>Высота элемента списка и дерева:</translation>
-</message>
-<message>
-<source>Reset the icon size</source>
-<translation>Сбросить размер значка</translation>
-</message>
-<message>
-<source>Reset the item height</source>
-<translation>Сброс высоты элемента</translation>
-</message>
-<message>
-<source>View text right to left (RTL)</source>
-<translation>Просмотр текста справа налево (RTL)</translation>
-</message>
-<message>
 <source>Search for shortcut</source>
 <translation>Поиск ярлыка</translation>
-</message>
-<message>
-<source>Ignore calendars that don't support todo items</source>
-<translation>Игнорировать календари, которые не поддерживают элементы todo</translation>
-</message>
-<message>
-<source>Arabic</source>
-<translation>Арабский</translation>
-</message>
-<message>
-<source>Icons</source>
-<translation>Значки</translation>
-</message>
-<message>
-<source>Use internal icon theme instead of system icon theme</source>
-<translation>Использовать внутреннюю тему значков вместо системной</translation>
-</message>
-<message>
-<source>Script path:</source>
-<translation>Путь к сценарию:</translation>
-</message>
-<message>
-<source>Note folder name</source>
-<translation>Имя папки</translation>
-</message>
-<message>
-<source>Allow note file name to be different from headline</source>
-<translation>Разрешить имени файла заметки отличаться от заголовка</translation>
-</message>
-<message>
-<source>Check this if you want to ignore all external modifications while you are editing the current note.</source>
-<translation>Отметьте, если вы хотите игнорировать все внешние изменения при редактировании текущей заметки.</translation>
-</message>
-<message>
-<source>Ignore all external modifications of the current note</source>
-<translation>Игнорировать все внешние изменения текущей заметки</translation>
-</message>
-<message>
-<source>You can use this for example under Windows if you have troubles with newlines in the ownCloud / Nextcloud notes app</source>
-<translation>Вы можете использовать это, например, в Windows, если у вас есть проблемы с переводом строки в приложениях для заметок ownCloud / Nextcloud</translation>
-</message>
-<message>
-<source>App instance</source>
-<translation>Экземпляр приложения</translation>
-</message>
-<message>
-<source>Only allow one app instance at the same time</source>
-<translation>Разрешить только один экземпляр приложения одновременно</translation>
-</message>
-<message>
-<source>Path to external editor:</source>
-<translation>Путь ко внешнему редактору:</translation>
-</message>
-<message>
-<source>Don't show the update dialog automatically</source>
-<translation>Не показывать диалоговое окно обновления автоматически</translation>
-</message>
-<message>
-<source>Fonts</source>
-<translation>Шрифты</translation>
-</message>
-<message>
-<source>Set a new font</source>
-<translation>Выбрать новый шрифт</translation>
-</message>
-<message>
-<source>Reset font</source>
-<translation>Сброс шрифта</translation>
 </message>
 <message>
 <source>Debug</source>
 <translation>Отладка</translation>
 </message>
 <message>
-<source>Debug information</source>
-<translation>Отладочная информация</translation>
-</message>
-<message>
-<source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You can &lt;span style=" font-weight:600;"&gt;copy and paste&lt;/span&gt; this text (or parts of this text) in an &lt;span style=" font-weight:600;"&gt;issue&lt;/span&gt; on the &lt;a href="https://github.com/pbek/QOwnNotes/issues"&gt;QOwnNotes issues page&lt;/a&gt; if you have &lt;span style=" font-weight:600;"&gt;questions or troubles&lt;/span&gt; with QOwnNotes. Data that is too sensitive is hidden in this information.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-<translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Можно &lt;span style=" font-weight:600;"&gt;скопировать и вставить&lt;/span&gt; этот текст (или его части) в &lt;span style=" font-weight:600;"&gt;сообщение о проблеме&lt;/span&gt; на &lt;a href="https://github.com/pbek/QOwnNotes/issues"&gt;странице проблем QOwnNotes&lt;/a&gt;, если у вас есть &lt;span style=" font-weight:600;"&gt;вопросы или проблемы&lt;/span&gt; с QOwnNotes. Важные данные не выводятся в это информационное поле.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-</message>
-<message>
-<source>&amp;Save debug information</source>
-<translation>&amp;Сохранить отладочную информацию</translation>
-</message>
-<message>
-<source>hostname of proxy server</source>
-<translation>имя хоста прокси-сервера</translation>
-</message>
-<message>
-<source>username for proxy server</source>
-<translation>имя пользователя для прокси-сервера</translation>
-</message>
-<message>
-<source>password for proxy server</source>
-<translation>пароль для прокси-сервера</translation>
-</message>
-<message>
-<source>HTTP(S) proxy</source>
-<translation>HTTP(S) прокси</translation>
-</message>
-<message>
-<source>SOCKS5 proxy</source>
-<translation>SOCKS5 прокси</translation>
-</message>
-<message>
-<source>notes path &lt;b&gt;%1&lt;/b&gt; found on server</source>
-<translation type="unfinished">notes path &lt;b&gt;%1&lt;/b&gt; found on server</translation>
-</message>
-<message>
-<source>Automatic (needs restart)</source>
-<translation>Автоматически (необходимо перезапустить)</translation>
-</message>
-<message>
 <source>Shortcut already assigned</source>
 <translation>Сочетание клавиш уже используется</translation>
-</message>
-<message>
-<source>The connection was made successfully!
-Server version: %1
-QOwnNotesAPI version: %2</source>
-<translation>Соединение установлено!
-Версия сервера: %1
-Версия QOwnNotesAPI: %2</translation>
-</message>
-<message>
-<source>There was an error connecting to the ownCloud Server!
-You also need to have the QOwnNotesAPI app installed and enabled!
-
-Connection error message: </source>
-<translation>Ошибка при подключении к серверу ownCloud!
-Нужно установить и включить приложение QOwnNotesAPI!
-
-Сообщение об ошибке:</translation>
-</message>
-<message>
-<source>The Database was reinitialized. Please restart the application now!</source>
-<translation type="unfinished">The Database was reinitialized. Please restart the application now!</translation>
-</message>
-<message>
-<source>Please don't use this in the issue tracker, copy the debug information text directly into the issue.</source>
-<translation>Пожалуйста, не используйте это в системе отслеживания ошибок, скопируйте текст отладочной информации непосредственно в issue.</translation>
-</message>
-<message>
-<source>Markdown files</source>
-<translation>Markdown файлы</translation>
-</message>
-<message>
-<source>Disable usage tracking</source>
-<translation>Отключить слежение</translation>
-</message>
-<message>
-<source>Anonymous usage data helps to decide what parts of QOwnNotes to improve next and to find and fix bugs.&lt;br /&gt;Please disable it only if you really can't live with it.&lt;br /&gt;&lt;br /&gt;Really disable usage tracking?</source>
-<translation>Анонимное отслеживание данных помогает решить, какие улучшить QOwnNotes и исправлять ошибки.&lt;br/&gt;Пожалуйста, отключите его, только если вы действительно не можете это терпеть. &lt;br/&gt;&lt;br/&gt;Отключить отслеживание?</translation>
-</message>
-<message>
-<source>new folder</source>
-<translation>новая папка</translation>
-</message>
-<message>
-<source>Remove note folder</source>
-<translation>Удалить папку заметок</translation>
-</message>
-<message>
-<source>Remove the current note folder &lt;strong&gt;%1&lt;/strong&gt;?</source>
-<translation>Удалить текущую папку заметок: &lt;strong&gt;%1&lt;/strong&gt;?</translation>
-</message>
-<message>
-<source>Please select the folder where your notes will get stored to</source>
-<translation>Пожалуйста, выберите папку для хранения заметок</translation>
-</message>
-<message>
-<source>Loading folders from server</source>
-<translation>Загрузка папок с сервера</translation>
-</message>
-<message>
-<source>No more folders were found in the current folder</source>
-<translation>Нет больше папок в текущей папке</translation>
-</message>
-<message>
-<source>Loading folders in '%1' from server</source>
-<translation>Загрузка папок с сервера в '%1'</translation>
-</message>
-<message>
-<source>Take a look at the &lt;a href="%1"&gt;Scripting documentation&lt;/a&gt; to get started fast.</source>
-<translation>Взгляните на &lt;a href="%1"&gt; сценарии документации&lt;/a&gt;, для быстрого старта.</translation>
-</message>
-<message>
-<source>If you need access to a certain functionality in QOwnNotes please open an issue on the &lt;a href="%1"&gt; QOwnNotes issue page&lt;/a&gt;.</source>
-<translation>Если вам нужен доступ к определенным функциям в QOwnNotes, пожалуйста, откройте запрос на &lt;a href="%1"&gt; QOwnNotes странице запросов&lt;/a&gt;.</translation>
-</message>
-<message>
-<source>Check for script updates</source>
-<translation>Проверить обновления скриптов</translation>
-</message>
-<message>
-<source>Add local script</source>
-<translation>Добавить локальный сценарий</translation>
-</message>
-<message>
-<source>Add an existing, local script</source>
-<translation>Добавить существующий локально сохраненный сценарий</translation>
-</message>
-<message>
-<source>Please enter a new note file extension:</source>
-<translation type="unfinished">Please enter a new note file extension:</translation>
-</message>
-<message>
-<source>Markdown file</source>
-<translation type="unfinished">Markdown file</translation>
-</message>
-<message>
-<source>Plain text file</source>
-<translation type="unfinished">Plain text file</translation>
-</message>
-<message>
-<source>Remove note file extension</source>
-<translation type="unfinished">Remove note file extension</translation>
-</message>
-<message>
-<source>INI files</source>
-<translation>INI-файлы</translation>
-</message>
-<message>
-<source>Do you really want to import settings? Your current settings will get removed and not every setting may get restored, like the note folder settings and which scripts you were using. You also will need to adjust some settings, especially across platforms, but your notes will stay intact!</source>
-<translation>Вы действительно хотите импортировать параметры? Текущие настройки будут удалены и не каждый параметр может быть восстановлен, например, настройки папки заметок и используемый вами скрипт. Вам также будет нужно настроить некоторые параметры, особенно кроссплатформенные, но ваши заметки останутся нетронутыми!</translation>
-</message>
-<message>
-<source>The application will be restarted after the import.</source>
-<translation>Приложение будет перезапущено после импортирования.</translation>
-</message>
-<message>
-<source>The debug information was copied to the clipboard.</source>
-<translation>Отладочная информация была скопирована в буфер обмена.</translation>
-</message>
-<message>
-<source>The integrity of the disk database is valid.</source>
-<translation>Целостность дисковой базы данных действительна.</translation>
-</message>
-<message>
-<source>The integrity of the disk database is not valid!</source>
-<translation>Целостность дисковой базы данных недействительна!</translation>
-</message>
-<message>
-<source>Board Id: %1</source>
-<translation type="unfinished">Board Id: %1</translation>
-</message>
-<message>
-<source>Stack Id: %1</source>
-<translation type="unfinished">Stack Id: %1</translation>
-</message>
-<message>
-<source>API test result for %1 (%2)</source>
-<translation type="unfinished">API test result for %1 (%2)</translation>
-</message>
-<message>
-<source>AI backend: %1</source>
-<translation type="unfinished">AI backend: %1</translation>
-</message>
-<message>
-<source>API base URL</source>
-<translation type="unfinished">API base URL</translation>
-</message>
-<message>
-<source>AI model: %1</source>
-<translation type="unfinished">AI model: %1</translation>
-</message>
-<message>
-<source>Test</source>
-<comment>verb</comment>
-<translation type="unfinished">Test</translation>
-</message>
-<message>
-<source>Test connection to %1 (%2)</source>
-<translation type="unfinished">Test connection to %1 (%2)</translation>
-</message>
-<message>
-<source>Find a script in the script repository</source>
-<translation>Найдите сценарий в репозитории сценариев</translation>
-</message>
-<message>
-<source>Menu bar</source>
-<translation>Панель меню</translation>
-</message>
-<message>
-<source>Show menu bar item</source>
-<translation>Показать элемент меню</translation>
 </message>
 <message>
 <source>Undefined shortcut</source>
@@ -6662,93 +9416,12 @@ Connection error message: </source>
 <translation>Сочетание клавиш &lt;strong&gt;%1&lt;/strong&gt; уже назначено &lt;strong&gt;%2&lt;/strong&gt;! Переключиться на сочетание клавиш?</translation>
 </message>
 <message>
-<source>Remove script</source>
-<translation>Удалить сценарий</translation>
-</message>
-<message>
-<source>Remove the current script &lt;strong&gt;%1&lt;/strong&gt;?</source>
-<translation>Удалить текущий сценарий &lt;strong&gt;%1&lt;/strong&gt;?</translation>
-</message>
-<message>
-<source>QML files</source>
-<translation>QML-файлы</translation>
-</message>
-<message>
-<source>Please select your QML file</source>
-<translation>Пожалуйста, выберите ваш файл QML</translation>
-</message>
-<message>
-<source>Open repository</source>
-<translation>Открыть репозиторий</translation>
-</message>
-<message>
-<source>Your script seems to be valid</source>
-<translation>Ваш сценарий выглядит работоспособным</translation>
-</message>
-<message>
-<source>There were script errors:
-%1</source>
-<translation>Ошибки сценария: %1</translation>
-</message>
-<message>
-<source>File extension</source>
-<translation>Расширение файла</translation>
-</message>
-<message>
-<source>Do you really want to remove the note file extension &lt;strong&gt;%1&lt;/strong&gt;? You will not see files with this extension in the note list any more!</source>
-<translation type="unfinished">Do you really want to remove the note file extension &lt;strong&gt;%1&lt;/strong&gt;? You will not see files with this extension in the note list any more!</translation>
-</message>
-<message>
-<source>Calendar cache emptied</source>
-<translation>Кэш календаря очищен</translation>
-</message>
-<message>
-<source>Your calendar cache was emptied.</source>
-<translation>Кэш календаря был очищен.</translation>
-</message>
-<message>
 <source>Reset toolbars and exit</source>
 <translation>Сброс панелей инструментов и выход</translation>
 </message>
 <message>
 <source>Do you really want to reset all toolbars? The application will be closed in the process, the default toolbars will be restored when you start it again.</source>
 <translation>Вы действительно хотите сбросить все панели инструментов? Приложение будет закрыто в процессе, при повторном запуске будут восстановлены панели инструментов по умолчанию.</translation>
-</message>
-<message>
-<source>Reset and &amp;exit</source>
-<translation>Сброс и вы&amp;ход</translation>
-</message>
-<message>
-<source>Log file cleared</source>
-<translation>Файл журнала очищен</translation>
-</message>
-<message>
-<source>The log file &lt;strong&gt;%1&lt;/strong&gt; was cleared.</source>
-<translation>Файл журнала &lt;strong&gt;%1&lt;/strong&gt; был очищен.</translation>
-</message>
-<message>
-<source>Executable files</source>
-<translation>Исполняемые файлы</translation>
-</message>
-<message>
-<source>All files</source>
-<translation>Все файлы</translation>
-</message>
-<message>
-<source>Please select the path of your git executable</source>
-<translation>Пожалуйста укажите путь к вашему исполняемому файлу git</translation>
-</message>
-<message>
-<source>Do you really want to reset the overrides of all message boxes?</source>
-<translation>Вы действительно хотите сбросить переопределения всех окон сообщений?</translation>
-</message>
-<message>
-<source>New script</source>
-<translation>Новый сценарий</translation>
-</message>
-<message>
-<source>You can download your git client here: &lt;a href="%url"&gt;Git for Windows&lt;/a&gt;</source>
-<translation>Вы можете скачать ваш клиент git здесь: &lt;a href="%url"&gt;Git для Windows&lt;/a&gt;</translation>
 </message>
 <message>
 <source>enabled</source>
@@ -6783,40 +9456,8 @@ Connection error message: </source>
 <translation>будет активирована, если вы запустите QOwnNotes с параметром &lt;code&gt;--portable&lt;/code&gt;.</translation>
 </message>
 <message>
-<source>Save debug information</source>
-<translation>Сохранить отладочную информацию</translation>
-</message>
-<message>
-<source>Do you really want to clear all settings, remove the database and exit QOwnNotes?
-
-Your notes will stay intact!</source>
-<translation>Вы хотите удалить все настройки, локальную базу данных списка задач и выйти из QOwnNotes?
-
-Заметки останутся в неизменном состоянии!</translation>
-</message>
-<message>
-<source>Clear and &amp;exit</source>
-<translation>Очистить и &amp;выйти</translation>
-</message>
-<message>
-<source>&amp;Cancel</source>
-<translation>&amp;Отмена</translation>
-</message>
-<message>
 <source>You will find a &lt;code&gt;QOwnNotesPortable.bat&lt;/code&gt; in your release path to start QOwnNotes in portable mode.</source>
 <translation>Вы найдете &lt;code&gt;QOwnNotesPortable.bat&lt;/code&gt; в вашем релизе для запуска QOwnNotes в портативном режиме.</translation>
-</message>
-<message>
-<source>Do you really want to clear the local database? This will also remove your configured note folders and your cached todo items!</source>
-<translation>Вы действительно хотите очистить локальную базу данных? Это также удалит ваши настроенные папки заметок и сохраненные элементы списков задач!</translation>
-</message>
-<message>
-<source>Clear &amp;database</source>
-<translation>Очистить &amp;базу данных</translation>
-</message>
-<message>
-<source>Select editor application</source>
-<translation>Выбор внешнего редактора</translation>
 </message>
 </context>
 <context>
@@ -6826,8 +9467,12 @@ Your notes will stay intact!</source>
 <translation>Поделиться заметкой</translation>
 </message>
 <message>
-<source>Share note on ownCloud</source>
-<translation>Поделиться заметкой на ownCloud</translation>
+<source>Share note on Nextcloud / ownCloud</source>
+<translation type="unfinished">Share note on Nextcloud / ownCloud</translation>
+</message>
+<message>
+<source>Publicly share the current note file on your Nextcloud / ownCloud server. You can send the generated link to others so they can view or download the file.</source>
+<translation type="unfinished">Publicly share the current note file on your Nextcloud / ownCloud server. You can send the generated link to others so they can view or download the file.</translation>
 </message>
 <message>
 <source>Allow note editing</source>
@@ -6838,12 +9483,8 @@ Your notes will stay intact!</source>
 <translation>Общедоступный URL-адрес заметки</translation>
 </message>
 <message>
-<source>Publicly share the current note file on your ownCloud server. You can send the generated link to others so they can view or download the file.</source>
-<translation>Сделать публично доступным текущий файл заметки на вашем сервере ownCloud. Вы можете отправить сгенерированную ссылку другим, так что они могут посмотреть или скачать файл.</translation>
-</message>
-<message>
-<source>Keep in mind that you still have to sync your notes with your server by using the ownCloud desktop sync tool to be able to share notes with others!</source>
-<translation>Имейте в виду, что вам всё ещё необходимо синхронизировать заметки с вашим сервером, используя приложение синхронизации ownCloud/NextCloud, чтобы иметь возможность совместно использовать заметки с другими!</translation>
+<source>Keep in mind that you still have to sync your notes with your server by using the Nextcloud / ownCloud desktop sync tool to be able to share notes with others!</source>
+<translation type="unfinished">Keep in mind that you still have to sync your notes with your server by using the Nextcloud / ownCloud desktop sync tool to be able to share notes with others!</translation>
 </message>
 </context>
 <context>
@@ -6966,7 +9607,14 @@ Your notes will stay intact!</source>
 <message>
 <source>%1 (%2)</source>
 <comment>dictionary name; %1 = language name, %2 = language variant name</comment>
-<translation type="unfinished">%1 (%2)</translation>
+<translation>%1 (%2)</translation>
+</message>
+</context>
+<context>
+<name>SpellCheckManager</name>
+<message>
+<source>Automatically detect</source>
+<translation>Определять автоматически</translation>
 </message>
 </context>
 <context>
@@ -6985,7 +9633,7 @@ Your notes will stay intact!</source>
 </message>
 <message>
 <source>Used in notes:</source>
-<translation>Используется в примечаниях:</translation>
+<translation>Используется в заметках:</translation>
 </message>
 <message>
 <source>Find attachment</source>
@@ -6993,11 +9641,19 @@ Your notes will stay intact!</source>
 </message>
 <message>
 <source>Only show attachments that are not used in notes</source>
-<translation type="unfinished">Only show attachments that are not used in notes</translation>
+<translation>Показывать только вложения, которые не используются в заметках</translation>
 </message>
 <message>
 <source>Only show orphaned attachments</source>
 <translation>Показывать только осиротевшие вложения</translation>
+</message>
+<message>
+<source>Only show attachments that are used in the current note</source>
+<translation>Показывать только вложения которые уже используются в текущей заметке</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation>Показывать только из текущей заметки</translation>
 </message>
 <message>
 <source>Add selected attachments to the current note</source>
@@ -7050,7 +9706,7 @@ Your notes will stay intact!</source>
 <message numerus="yes">
 <source>Delete &lt;strong&gt;%n&lt;/strong&gt; selected file(s)?</source>
 <translation>
-<numerusform>Удалить выбранный файл?</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранный файл?</numerusform>
 <numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных файла?</numerusform>
 <numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных файлов?</numerusform>
 <numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных файлов?</numerusform>
@@ -7117,7 +9773,7 @@ Your notes will stay intact!</source>
 </message>
 <message>
 <source>Open the media folder</source>
-<translation>Откройте папку мультимедиа</translation>
+<translation>Открыть медиа папку</translation>
 </message>
 <message>
 <source>Open &amp;folder</source>
@@ -7148,16 +9804,24 @@ Your notes will stay intact!</source>
 <translation>Обновить</translation>
 </message>
 <message>
+<source>Only show images that are used in the current note</source>
+<translation>Показывать только изображения которые уже используются в текущей заметке</translation>
+</message>
+<message>
+<source>Only show from current note</source>
+<translation>Показывать только из текущей заметки</translation>
+</message>
+<message>
 <source>Used in notes:</source>
-<translation>Используется в примечаниях:</translation>
+<translation>Используется в заметках:</translation>
 </message>
 <message>
 <source>Only show images that are not used in notes</source>
-<translation>Показывать только nt изображения, которые не используются в заметках</translation>
+<translation>Показывать только те изображения, которые не используются в заметках</translation>
 </message>
 <message>
 <source>Only show orphaned images</source>
-<translation>Показывать только потерянные изображения</translation>
+<translation>Показывать только осиротевшие изображения</translation>
 </message>
 <message>
 <source>Last modified at %1</source>
@@ -7174,10 +9838,10 @@ Your notes will stay intact!</source>
 <message numerus="yes">
 <source>Delete &lt;strong&gt;%n&lt;/strong&gt; selected file(s)?</source>
 <translation>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранный файл?</numerusform>
 <numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных файлов?</numerusform>
-<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранныйх файлов?</numerusform>
-<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранныйх файлов?</numerusform>
-<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранныйх файлов?</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных файлов?</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных файлов?</numerusform>
 </translation>
 </message>
 <message>
@@ -7223,6 +9887,37 @@ Your notes will stay intact!</source>
 <message>
 <source>&amp;Open note</source>
 <translation>&amp;Открыть заметку</translation>
+</message>
+</context>
+<context>
+<name>SystemTrayManager</name>
+<message>
+<source>Open QOwnNotes</source>
+<translation>Открыть QOwnNotes</translation>
+</message>
+<message>
+<source>Note folders</source>
+<translation>Папки заметок</translation>
+</message>
+<message>
+<source>New note</source>
+<translation>Новая заметка</translation>
+</message>
+<message>
+<source>Recent notes</source>
+<translation>Последние заметки</translation>
+</message>
+<message>
+<source>Show todo lists</source>
+<translation>Показать списки задач</translation>
+</message>
+<message>
+<source>Recent tasks</source>
+<translation>Последние задачи</translation>
+</message>
+<message>
+<source>Quit</source>
+<translation>Выход</translation>
 </message>
 </context>
 <context>
@@ -7328,6 +10023,205 @@ Your notes will stay intact!</source>
 </message>
 </context>
 <context>
+<name>TagManager</name>
+<message>
+<source>Show all notes (%1)</source>
+<translation>Показать все заметки (%1)</translation>
+</message>
+<message>
+<source>All notes</source>
+<translation>Все заметки</translation>
+</message>
+<message>
+<source>show all untagged notes (%1)</source>
+<translation>показать все заметки без тегов (%1)</translation>
+</message>
+<message>
+<source>Untagged notes</source>
+<translation>Заметки без тегов</translation>
+</message>
+<message>
+<source>Show all notes tagged with '%1' (%2)</source>
+<translation>Показать все заметки с тегом «%1» (%2)</translation>
+</message>
+<message>
+<source>Add a tag to the current note</source>
+<translation>Добавить тег к текущей заметке</translation>
+</message>
+<message>
+<source>Add a tag to the selected notes</source>
+<translation>Добавить тег к выбранным заметкам</translation>
+</message>
+<message>
+<source>%1 and %2</source>
+<translation>%1 и %2</translation>
+</message>
+<message numerus="yes">
+<source>%n note(s) selected</source>
+<translation>
+<numerusform>Выбрана %n заметка</numerusform>
+<numerusform>Выбрано %n заметки</numerusform>
+<numerusform>Выбрано %n заметок</numerusform>
+<numerusform>Выбрано %n заметок</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>%n folder(s) selected</source>
+<translation>
+<numerusform>Выбрана %n папка</numerusform>
+<numerusform>Выбрано %n папки</numerusform>
+<numerusform>Выбрано %n папок</numerusform>
+<numerusform>Выбрано %n папок</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>%n notes selected</source>
+<translation>
+<numerusform>%n заметка выбрана</numerusform>
+<numerusform>%n заметки выбрано</numerusform>
+<numerusform>%n заметок выбрано</numerusform>
+<numerusform>%n заметок выбрано</numerusform>
+</translation>
+</message>
+<message>
+<source>Remove tag '%1' from the current note</source>
+<translation>Убрать тег «%1» с текущей заметки</translation>
+</message>
+<message>
+<source>Remove tag '%1' from the selected notes</source>
+<translation>Убрать тег «%1» с выбранных заметок</translation>
+</message>
+<message>
+<source>&amp;Add tag</source>
+<translation>&amp;Добавить тег</translation>
+</message>
+<message>
+<source>Rename tag</source>
+<translation>Переименовать тег</translation>
+</message>
+<message>
+<source>Assign color</source>
+<translation>Назначить цвет</translation>
+</message>
+<message>
+<source>Disable color</source>
+<translation>Отключить цвет</translation>
+</message>
+<message>
+<source>&amp;Remove tags</source>
+<translation>&amp;Удалить теги</translation>
+</message>
+<message>
+<source>&amp;Move tags to…</source>
+<translation>&amp;Переместить теги в…</translation>
+</message>
+<message>
+<source>Tag could not be created!</source>
+<translation>Не удалось создать тег!</translation>
+</message>
+<message>
+<source>Move to the root</source>
+<comment>to move a tag to the current tag in the tag context menu</comment>
+<translation>Переместить в корень</translation>
+</message>
+<message>
+<source>Move to this tag</source>
+<translation>Переместить в этот тег</translation>
+</message>
+<message>
+<source>Tag this</source>
+<translation>Присвоить тег</translation>
+</message>
+<message>
+<source>Cannot move tag '%1' to this tag</source>
+<translation>Невозможно переместить тег «%1» в этот тег</translation>
+</message>
+<message>
+<source>Moved tag '%1' to new tag</source>
+<translation>Тег «%1» перемещён в новый тег</translation>
+</message>
+<message>
+<source>Tag selected notes</source>
+<translation>Присвоить тег выбранным заметкам</translation>
+</message>
+<message numerus="yes">
+<source>Tag %n selected note(s) with &lt;strong&gt;%2&lt;/strong&gt;?</source>
+<translation>
+<numerusform>Присвоить тег &lt;strong&gt;%2&lt;/strong&gt; %n выбранной заметке?</numerusform>
+<numerusform>Присвоить тег &lt;strong&gt;%2&lt;/strong&gt; %n выбранным заметкам?</numerusform>
+<numerusform>Присвоить тег &lt;strong&gt;%2&lt;/strong&gt; %n выбранным заметкам?</numerusform>
+<numerusform>Присвоить тег &lt;strong&gt;%2&lt;/strong&gt; %n выбранным заметкам?</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>%n note(s) were tagged with "%2"</source>
+<translation>
+<numerusform>%n заметке присвоен тег «%2»</numerusform>
+<numerusform>%n заметкам присвоен тег «%2»</numerusform>
+<numerusform>%n заметкам присвоен тег «%2»</numerusform>
+<numerusform>%n заметкам присвоен тег «%2»</numerusform>
+</translation>
+</message>
+<message>
+<source>Remove tag from selected notes</source>
+<translation>Убрать тег с выбранных заметок</translation>
+</message>
+<message numerus="yes">
+<source>Remove tag &lt;strong&gt;%1&lt;/strong&gt; from %n selected note(s)?</source>
+<translation>
+<numerusform>Убрать тег &lt;strong&gt;%1&lt;/strong&gt; с %n выбранной заметки?</numerusform>
+<numerusform>Убрать тег &lt;strong&gt;%1&lt;/strong&gt; с %n выбранных заметок?</numerusform>
+<numerusform>Убрать тег &lt;strong&gt;%1&lt;/strong&gt; с %n выбранных заметок?</numerusform>
+<numerusform>Убрать тег &lt;strong&gt;%1&lt;/strong&gt; с %n выбранных заметок?</numerusform>
+</translation>
+</message>
+<message>
+<source>Done</source>
+<translation>Готово</translation>
+</message>
+<message numerus="yes">
+<source>Tag &lt;strong&gt;%1&lt;/strong&gt; was removed from %n note(s)</source>
+<translation>
+<numerusform>Тег &lt;strong&gt;%1&lt;/strong&gt; убран с %n заметки</numerusform>
+<numerusform>Тег &lt;strong&gt;%1&lt;/strong&gt; убран с %n заметок</numerusform>
+<numerusform>Тег &lt;strong&gt;%1&lt;/strong&gt; убран с %n заметок</numerusform>
+<numerusform>Тег &lt;strong&gt;%1&lt;/strong&gt; убран с %n заметок</numerusform>
+</translation>
+</message>
+<message>
+<source>Remove selected tags</source>
+<translation>Удалить выбранные теги</translation>
+</message>
+<message numerus="yes">
+<source>Remove &lt;strong&gt;%n&lt;/strong&gt; selected tag(s)? No notes will be removed in this process.</source>
+<translation>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранный тег? Заметки при этом не будут удалены.</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных тега? Заметки при этом не будут удалены.</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных тегов? Заметки при этом не будут удалены.</numerusform>
+<numerusform>Удалить &lt;strong&gt;%n&lt;/strong&gt; выбранных тегов? Заметки при этом не будут удалены.</numerusform>
+</translation>
+</message>
+</context>
+<context>
+<name>TextDiffDialog</name>
+<message>
+<source>Text difference</source>
+<translation>Различия в тексте</translation>
+</message>
+<message>
+<source>Differences:</source>
+<translation>Различия:</translation>
+</message>
+<message>
+<source>Don't show dialog again</source>
+<translation>Не показывать диалог снова</translation>
+</message>
+<message>
+<source>Accept change?</source>
+<translation>Применить изменения?</translation>
+</message>
+</context>
+<context>
 <name>TodoDialog</name>
 <message>
 <source>Todo</source>
@@ -7355,11 +10249,11 @@ Your notes will stay intact!</source>
 </message>
 <message>
 <source>This doesn't work for sub-items, because they may be hidden by the parent item!</source>
-<translation type="unfinished">This doesn't work for sub-items, because they may be hidden by the parent item!</translation>
+<translation>Это не работает для подпунктов, поскольку они могут быть скрыты родительским элементом!</translation>
 </message>
 <message>
 <source>Show only items due today</source>
-<translation type="unfinished">Show only items due today</translation>
+<translation>Сегодня должны быть показаны только предметы</translation>
 </message>
 <message>
 <source>Save and insert into note</source>
@@ -7387,15 +10281,15 @@ Your notes will stay intact!</source>
 </message>
 <message>
 <source>Tags</source>
-<translation type="unfinished">Tags</translation>
+<translation>Теги</translation>
 </message>
 <message>
 <source>Add new tag</source>
-<translation type="unfinished">Add new tag</translation>
+<translation>Добавить новый тег</translation>
 </message>
 <message>
 <source>Due date</source>
-<translation type="unfinished">Due date</translation>
+<translation>Дата выполнения</translation>
 </message>
 <message>
 <source>select your todo list</source>
@@ -7466,6 +10360,129 @@ This cannot be undone!</source>
 <message>
 <source>New sub-task</source>
 <translation>Новая подзадача</translation>
+</message>
+</context>
+<context>
+<name>TodoSettingsWidget</name>
+<message>
+<source>Todo settings</source>
+<translation>Настройки задач</translation>
+</message>
+<message>
+<source>Enable todo calendar support</source>
+<translation>Включить поддержку календаря задач</translation>
+</message>
+<message>
+<source>Which calendar backend do you want to use?</source>
+<translation>Какой бэкенд календаря вы хотите использовать?</translation>
+</message>
+<message>
+<source>Other CalDAV server</source>
+<translation>Другой сервер CalDAV</translation>
+</message>
+<message>
+<source>For older versions of ownCloud where the default setting doesn't work</source>
+<translation>Для старых версий ownCloud, где настройки по умолчанию не работают</translation>
+</message>
+<message>
+<source>Legacy ownCloud calendar</source>
+<translation>Устаревший календарь ownCloud</translation>
+</message>
+<message>
+<source>You can access your Nextcloud / ownCloud server or a generic CalDAV server to manage your todo lists.</source>
+<translation type="unfinished">You can access your Nextcloud / ownCloud server or a generic CalDAV server to manage your todo lists.</translation>
+</message>
+<message>
+<source>For most current Nextcloud / ownCloud installations</source>
+<translation type="unfinished">For most current Nextcloud / ownCloud installations</translation>
+</message>
+<message>
+<source>Default Nextcloud / ownCloud calendar</source>
+<translation type="unfinished">Default Nextcloud / ownCloud calendar</translation>
+</message>
+<message>
+<source>CalDAV server settings</source>
+<translation>Настройки сервера CalDAV</translation>
+</message>
+<message>
+<source>Calendar base url:</source>
+<translation>Базовый URL календаря:</translation>
+</message>
+<message>
+<source>Please enter the CalDAV base url to your calendar.</source>
+<translation>Введите базовый URL CalDAV вашего календаря.</translation>
+</message>
+<message>
+<source>Your CalDAV calendar base url</source>
+<translation>Базовый URL вашего календаря CalDAV</translation>
+</message>
+<message>
+<source>Username:</source>
+<translation>Имя пользователя:</translation>
+</message>
+<message>
+<source>Please enter the username of your CalDAV server.</source>
+<translation>Введите имя пользователя вашего сервера CalDAV.</translation>
+</message>
+<message>
+<source>Your CalDAV username</source>
+<translation>Ваше имя пользователя CalDAV</translation>
+</message>
+<message>
+<source>Password:</source>
+<translation>Пароль:</translation>
+</message>
+<message>
+<source>Please enter the password for your CalDAV username.&lt;br/&gt;Currently the password will be stored encrypted with the other settings, but is not very secure.</source>
+<translation>Введите пароль для вашего имени пользователя CalDAV.&lt;br/&gt;В настоящее время пароль хранится зашифрованным вместе с другими настройками, но это не очень надёжно.</translation>
+</message>
+<message>
+<source>Your CalDAV password</source>
+<translation>Ваш пароль CalDAV</translation>
+</message>
+<message>
+<source>Which cloud connection do you want to use?</source>
+<translation>Какое облачное соединение вы хотите использовать?</translation>
+</message>
+<message>
+<source>Select the calendars you want to use for the Todo list</source>
+<translation>Выберите календари для использования в списке задач</translation>
+</message>
+<message>
+<source>This causes all todo list items to be reloaded from your server the next time you open your todo dialog.</source>
+<translation>При следующем открытии диалога задач все элементы списка будут перезагружены с сервера.</translation>
+</message>
+<message>
+<source>Empty calendar item cache</source>
+<translation>Очистить кэш элементов календаря</translation>
+</message>
+<message>
+<source>Click here to reload the list of calendars from your calendar server.</source>
+<translation>Нажмите здесь, чтобы перезагрузить список календарей с вашего сервера.</translation>
+</message>
+<message>
+<source>&amp;Reload calendar list</source>
+<translation>Перезагрузить список календарей(&amp;R)</translation>
+</message>
+<message>
+<source>Ignore calendars that don't support todo items</source>
+<translation>Игнорировать календари, не поддерживающие задачи</translation>
+</message>
+<message>
+<source>Todo list settings</source>
+<translation>Настройки списка задач</translation>
+</message>
+<message>
+<source>Saving an item also closes the Todo list</source>
+<translation>Сохранение элемента также закрывает список задач</translation>
+</message>
+<message>
+<source>Calendar cache emptied</source>
+<translation>Кэш календаря очищен</translation>
+</message>
+<message>
+<source>Your calendar cache was emptied.</source>
+<translation>Кэш вашего календаря очищен.</translation>
 </message>
 </context>
 <context>
@@ -7590,16 +10607,16 @@ This cannot be undone!</source>
 <translation>&amp;Восстановить текущую заметку на сервере</translation>
 </message>
 <message>
-<source>&lt;h3&gt;Slower, but with note versions&lt;/h3&gt;&lt;p&gt;The note will be restored on your ownCloud server with all versions.&lt;/p&gt;&lt;p&gt;You will have to wait until it is synced to QOwnNotes by ownCloud sync.&lt;/p&gt;</source>
-<translation>&lt;h3&gt;Медленнее, но с поддержкой версий&lt;/h3&gt;&lt;p&gt;Все версии заметки будут восстановлены на сервере ownCloud.&lt;/p&gt;&lt;p&gt;Нужно подождать окончания синхронизации в QOwnNotes.&lt;/p&gt;</translation>
-</message>
-<message>
 <source>&amp;Download selected note</source>
 <translation>&amp;Загрузить выделенную заметку</translation>
 </message>
 <message>
-<source>&lt;h3&gt;Faster, but without versions&lt;/h3&gt;&lt;p&gt;The note will be created with the text from the preview.&lt;/p&gt;&lt;p&gt;The note versions on your ownCloud server will not be restored and the note will remain in the trash.&lt;/p&gt;&lt;p&gt;You can always restore the note and its versions later.&lt;/p&gt;</source>
-<translation>&lt;h3&gt;Быстро, но без поддержки версий&lt;/h3&gt;&lt;p&gt;Заметка будет создана с текстом из предпросмотра.&lt;/p&gt;&lt;p&gt;Версии заметки на сервере ownCloud не будут восстановлены и заметка останется в корзине.&lt;/p&gt;&lt;p&gt;Разные версии этой заметки можно будет восстановить позже.&lt;/p&gt;</translation>
+<source>&lt;h3&gt;Slower, but with note versions&lt;/h3&gt;&lt;p&gt;The note will be restored on your Nextcloud / ownCloud server with all versions.&lt;/p&gt;&lt;p&gt;You will have to wait until it is synced to QOwnNotes by Nextcloud / ownCloud sync.&lt;/p&gt;</source>
+<translation type="unfinished">&lt;h3&gt;Slower, but with note versions&lt;/h3&gt;&lt;p&gt;The note will be restored on your Nextcloud / ownCloud server with all versions.&lt;/p&gt;&lt;p&gt;You will have to wait until it is synced to QOwnNotes by Nextcloud / ownCloud sync.&lt;/p&gt;</translation>
+</message>
+<message>
+<source>&lt;h3&gt;Faster, but without versions&lt;/h3&gt;&lt;p&gt;The note will be created with the text from the preview.&lt;/p&gt;&lt;p&gt;The note versions on your Nextcloud / ownCloud server will not be restored and the note will remain in the trash.&lt;/p&gt;&lt;p&gt;You can always restore the note and its versions later.&lt;/p&gt;</source>
+<translation type="unfinished">&lt;h3&gt;Faster, but without versions&lt;/h3&gt;&lt;p&gt;The note will be created with the text from the preview.&lt;/p&gt;&lt;p&gt;The note versions on your Nextcloud / ownCloud server will not be restored and the note will remain in the trash.&lt;/p&gt;&lt;p&gt;You can always restore the note and its versions later.&lt;/p&gt;</translation>
 </message>
 <message>
 <source>&amp;Delete</source>
@@ -7670,7 +10687,7 @@ This cannot be undone!</source>
 </message>
 <message>
 <source>&amp;Download latest</source>
-<translation type="unfinished">&amp;Download latest</translation>
+<translation>&amp;Загрузить последнее</translation>
 </message>
 <message>
 <source>&amp;Skip version</source>
@@ -7737,16 +10754,12 @@ This cannot be undone!</source>
 <translation>Недостаточно прав доступа</translation>
 </message>
 <message>
-<source>Your QOwnNotes executable '%1' is not writeable! It must be writeable by the current user in order to be updated.</source>
-<translation type="unfinished">Your QOwnNotes executable '%1' is not writeable! It must be writeable by the current user in order to be updated.</translation>
-</message>
-<message>
 <source>The temporary file '%1' could not be made executable! You need to replace '%2' yourself.</source>
-<translation type="unfinished">The temporary file '%1' could not be made executable! You need to replace '%2' yourself.</translation>
+<translation>Временный файл '%1' не может быть исполняемым! Вам необходимо заменить '%2' самостоятельно.</translation>
 </message>
 <message>
 <source>Your old QOwnNotes executable '%1' could not be removed! You need to replace it yourself with '%2'.</source>
-<translation type="unfinished">Your old QOwnNotes executable '%1' could not be removed! You need to replace it yourself with '%2'.</translation>
+<translation>Ваш старый исполняемый файл QOwnNotes '%1' не может быть удалён! Вам необходимо заменить его '%2' самостоятельно.</translation>
 </message>
 <message>
 <source>Restart application</source>
@@ -7755,14 +10768,6 @@ This cannot be undone!</source>
 <message>
 <source>You now can restart the application to complete the update process.</source>
 <translation>Вам может потребоваться перезапустить приложение вручную, чтобы изменения вступили в силу.</translation>
-</message>
-<message>
-<source>Restart</source>
-<translation>Перезагрузка</translation>
-</message>
-<message>
-<source>Cancel</source>
-<translation>Отмена</translation>
 </message>
 <message>
 <source>Updater script '%1' doesn't exist!</source>
@@ -7789,12 +10794,16 @@ This cannot be undone!</source>
 <translation>Продолжить обновление</translation>
 </message>
 <message>
+<source>Your QOwnNotes executable '%1' is not writable! It must be writable by the current user in order to be updated.</source>
+<translation>Ваш исполняемый файл QOwnNotes '%1' не доступен для записи! Он должен быть доступен для записи текущим пользователем, чтобы его можно было обновить.</translation>
+</message>
+<message>
 <source>Your old QOwnNotes executable '%1' could not be replaced by the new file '%2'! You need to replace it yourself.</source>
-<translation type="unfinished">Your old QOwnNotes executable '%1' could not be replaced by the new file '%2'! You need to replace it yourself.</translation>
+<translation>Ваш старый исполняемый файл QOwnNotes '%1' не может быть заменён новым файлом '%2'! Вам нужно заменить его самостоятельно.</translation>
 </message>
 <message>
 <source>The app file '%1' could not be made executable! You need to make it executable yourself.</source>
-<translation type="unfinished">The app file '%1' could not be made executable! You need to make it executable yourself.</translation>
+<translation>Файл приложения '%1' не может быть исполняемым! Вам необходимо сделать его исполняемым самостоятельно.</translation>
 </message>
 <message>
 <source>The download is now finished. Do you want to update and restart QOwnNotes?</source>
@@ -7829,10 +10838,21 @@ This cannot be undone!</source>
 </message>
 </context>
 <context>
+<name>Utils::Misc</name>
+<message>
+<source>Open folder in file manager</source>
+<translation>Открыть папку в файловом менеджере</translation>
+</message>
+<message>
+<source>Do you want to show this item in your file manager?</source>
+<translation>Вы хотите показать этот элемент в файловом менеджере?</translation>
+</message>
+</context>
+<context>
 <name>VersionDialog</name>
 <message>
-<source>Note versions on your ownCloud server</source>
-<translation>Версии заметки на вашем сервере ownCloud</translation>
+<source>Note versions on your Nextcloud / ownCloud server</source>
+<translation type="unfinished">Note versions on your Nextcloud / ownCloud server</translation>
 </message>
 <message>
 <source>Diff</source>
@@ -7862,16 +10882,242 @@ This cannot be undone!</source>
 <translation>QOwnNotes теперь отключен от веб-сокета на %1</translation>
 </message>
 <message>
-<source>Web app warning</source>
-<translation>Предупреждение веб-приложения</translation>
-</message>
-<message>
 <source>Image received</source>
 <translation>Изображение получено</translation>
 </message>
 <message>
 <source>Insert image received from QOwnNotes web application?</source>
 <translation>Вставить изображение, полученное из веб-приложения QOwnNotes?</translation>
+</message>
+<message>
+<source>Text received from web app and copied to clipboard</source>
+<translation>Текст получен из веб-приложения и скопирован в буфер обмена</translation>
+</message>
+<message>
+<source>HTML received from web app and copied to clipboard</source>
+<translation>HTML получен из веб-приложения и скопирован в буфер обмена</translation>
+</message>
+<message>
+<source>Image received from web app and copied to clipboard</source>
+<translation>Изображение получено из веб-приложения и скопировано в буфер обмена</translation>
+</message>
+</context>
+<context>
+<name>WebApplicationSettingsWidget</name>
+<message>
+<source>QOwnNotes web application support</source>
+<translation>Поддержка веб-приложения QOwnNotes</translation>
+</message>
+<message>
+<source>Enable web application support</source>
+<translation>Включить поддержку веб-приложения</translation>
+</message>
+<message>
+<source>You can use the &lt;a href="%1"&gt;QOwnNotes Web App&lt;/a&gt; to be able to insert photos into QOwnNotes on your desktop from your mobile phone over the internet.</source>
+<translation>Вы можете использовать &lt;a href="%1"&gt;веб-приложение QOwnNotes&lt;/a&gt; для вставки фотографий с мобильного телефона в QOwnNotes на рабочем столе через интернет.</translation>
+</message>
+<message>
+<source>QOwnNotes web application</source>
+<translation>Веб-приложение QOwnNotes</translation>
+</message>
+<message>
+<source>Test the connection to the server</source>
+<translation type="unfinished">Test the connection to the server</translation>
+</message>
+<message>
+<source>Test connection</source>
+<translation type="unfinished">Test connection</translation>
+</message>
+<message>
+<source>A web socket connection to this server will be opened to act as bridge between the QOwnNotes web application and the QOwnNotes desktop application.</source>
+<translation>Будет открыто соединение через веб-сокет с этим сервером в качестве моста между веб-приложением QOwnNotes и настольным приложением QOwnNotes.</translation>
+</message>
+<message>
+<source>Connection name:</source>
+<translation type="unfinished">Connection name:</translation>
+</message>
+<message>
+<source>The name used to identify this QOwnNotes instance to other connected devices</source>
+<translation type="unfinished">The name used to identify this QOwnNotes instance to other connected devices</translation>
+</message>
+<message>
+<source>Reset to default connection name</source>
+<translation type="unfinished">Reset to default connection name</translation>
+</message>
+<message>
+<source>Security token:</source>
+<translation>Токен безопасности:</translation>
+</message>
+<message>
+<source>Show security token</source>
+<translation>Показать токен безопасности</translation>
+</message>
+<message>
+<source>Generate new security token</source>
+<translation>Создать новый токен безопасности</translation>
+</message>
+<message>
+<source>Connected devices</source>
+<translation type="unfinished">Connected devices</translation>
+</message>
+<message>
+<source>Refresh</source>
+<translation type="unfinished">Refresh</translation>
+</message>
+<message>
+<source>Server URL:</source>
+<translation>URL сервера:</translation>
+</message>
+<message>
+<source>You need to enter this token in the QOwnNotes web application to be able to talk to your QOwnNotes desktop application.</source>
+<translation>Необходимо ввести этот токен в веб-приложение QOwnNotes для связи с настольным приложением QOwnNotes.</translation>
+</message>
+<message>
+<source>Copy security token to clipboard</source>
+<translation>Скопировать токен безопасности в буфер обмена</translation>
+</message>
+<message>
+<source>Reset the URL to default</source>
+<translation>Сбросить URL до значения по умолчанию</translation>
+</message>
+<message>
+<source>Show QR code</source>
+<translation>Показать QR-код</translation>
+</message>
+<message>
+<source>Connection test</source>
+<translation type="unfinished">Connection test</translation>
+</message>
+<message>
+<source>Successfully connected to the web application server.</source>
+<translation type="unfinished">Successfully connected to the web application server.</translation>
+</message>
+<message>
+<source>Not connected to the web application server. Please check the server URL and your network connection.</source>
+<translation type="unfinished">Not connected to the web application server. Please check the server URL and your network connection.</translation>
+</message>
+</context>
+<context>
+<name>WebCompanionSettingsWidget</name>
+<message>
+<source>Command snippets</source>
+<translation>Фрагменты команд</translation>
+</message>
+<message>
+<source>Notes with this tag will be used for fetching bookmarks</source>
+<translation>Заметки с этим тегом будут использоваться для получения закладок</translation>
+</message>
+<message>
+<source>Tag name for commands notes</source>
+<translation>Название тега для заметок с командами</translation>
+</message>
+<message>
+<source>Commands tag:</source>
+<translation>Тег команд:</translation>
+</message>
+<message>
+<source>You can use notes with a special tag to store command snippets, which you can execute from the command-line snippet manager. For more information about the command snippet syntax click &lt;a href="%1"&gt;here&lt;/a&gt;.</source>
+<translation>Вы можете использовать заметки со специальным тегом для хранения фрагментов команд, которые можно выполнять из менеджера фрагментов командной строки. Дополнительные сведения о синтаксисе фрагментов команд см. по &lt;a href="%1"&gt;ссылке&lt;/a&gt;.</translation>
+</message>
+<message>
+<source>Commands note name:</source>
+<translation>Название заметки с командами:</translation>
+</message>
+<message>
+<source>This note will be used for adding new bookmarks from the browser extension</source>
+<translation>Эта заметка будет использоваться для добавления новых закладок из расширения браузера</translation>
+</message>
+<message>
+<source>Note name for adding new commands</source>
+<translation>Название заметки для добавления новых команд</translation>
+</message>
+<message>
+<source>Web socket server</source>
+<translation>Сервер веб-сокетов</translation>
+</message>
+<message>
+<source>Socket server port:</source>
+<translation>Порт сервера сокетов:</translation>
+</message>
+<message>
+<source>Reset the socket server port</source>
+<translation>Сбросить порт сервера сокетов</translation>
+</message>
+<message>
+<source>Show security token</source>
+<translation>Показать токен безопасности</translation>
+</message>
+<message>
+<source>Bookmarks</source>
+<translation>Закладки</translation>
+</message>
+<message>
+<source>Bookmarks tag:</source>
+<translation>Тег закладок:</translation>
+</message>
+<message>
+<source>Tag name for bookmarks notes</source>
+<translation>Название тега для заметок с закладками</translation>
+</message>
+<message>
+<source>Bookmarks note name:</source>
+<translation>Название заметки с закладками:</translation>
+</message>
+<message>
+<source>Note name for adding new bookmarks</source>
+<translation>Название заметки для добавления новых закладок</translation>
+</message>
+<message>
+<source>By default the browser extension will show all links of the current note. You can also make it show special bookmark links of notes with a certain tag. For more information about the bookmark link syntax click &lt;a href="%1"&gt;here&lt;/a&gt;.</source>
+<translation>По умолчанию расширение браузера отображает все ссылки текущей заметки. Можно также настроить отображение специальных ссылок-закладок из заметок с определённым тегом. Дополнительные сведения о синтаксисе ссылок-закладок см. по &lt;a href="%1"&gt;ссылке&lt;/a&gt;.</translation>
+</message>
+<message>
+<source>Bookmark suggestion API</source>
+<translation>API предложений закладок</translation>
+</message>
+<message>
+<source>Enable Homepage-compatible bookmark suggestions API</source>
+<translation>Включить API предложений закладок, совместимый с Homepage</translation>
+</message>
+<message>
+<source>Suggestion API port:</source>
+<translation>Порт API предложений:</translation>
+</message>
+<message>
+<source>Reset the suggestion API port</source>
+<translation>Сбросить порт API предложений</translation>
+</message>
+<message>
+<source>Security token:</source>
+<translation>Токен безопасности:</translation>
+</message>
+<message>
+<source>If this is empty when saved, a new security token will be generated automatically.</source>
+<translation>Если при сохранении это поле пусто, новый токен безопасности будет создан автоматически.</translation>
+</message>
+<message>
+<source>Copy security token to clipboard</source>
+<translation>Скопировать токен безопасности в буфер обмена</translation>
+</message>
+<message>
+<source>Generate new security token</source>
+<translation>Создать новый токен безопасности</translation>
+</message>
+<message>
+<source>Web socket server support</source>
+<translation>Поддержка сервера веб-сокетов</translation>
+</message>
+<message>
+<source>Enable socket server</source>
+<translation>Включить сервер сокетов</translation>
+</message>
+<message>
+<source>Install the &lt;a href="%1"&gt;Web Companion browser extension&lt;/a&gt; from the &lt;a href="%2"&gt;Chrome Web Store&lt;/a&gt; or &lt;a href="%3"&gt;Firefox Add-ons page&lt;/a&gt; to use QOwnNotes as web clipper or for bookmark management.</source>
+<translation>Установите &lt;a href="%1"&gt;расширение Web Companion&lt;/a&gt; из &lt;a href="%2"&gt;Интернет-магазина Chrome&lt;/a&gt; или &lt;a href="%3"&gt;страницы дополнений Firefox&lt;/a&gt; для использования QOwnNotes как веб-клиппера или для управления закладками.</translation>
+</message>
+<message>
+<source>Download the &lt;a href="%1"&gt;Command-line snippet manager&lt;/a&gt; to execute command snippets stored in notes in QOwnNotes from the command line.</source>
+<translation>Загрузите &lt;a href="%1"&gt;менеджер фрагментов командной строки&lt;/a&gt; для выполнения фрагментов команд, хранящихся в заметках QOwnNotes, из командной строки.</translation>
 </message>
 </context>
 <context>
@@ -7883,6 +11129,30 @@ This cannot be undone!</source>
 <message>
 <source>Could not start QOwnNotes server on port %1!</source>
 <translation>Не удается запустить сервер QOwnNotes на порту %1!</translation>
+</message>
+<message>
+<source>Could not start bookmark suggestion API on port %1!</source>
+<translation>Не удалось запустить API предложений закладок на порту %1!</translation>
+</message>
+<message>
+<source>Please check if the port is already in use.</source>
+<translation>Проверьте, не занят ли порт другим приложением.</translation>
+</message>
+<message>
+<source>Bookmark suggestion API listening on port %1</source>
+<translation>API предложений закладок прослушивает порт %1</translation>
+</message>
+<message>
+<source>Bookmark suggestion API received malformed HTTP request line.</source>
+<translation>API предложений закладок получил некорректную строку HTTP-запроса.</translation>
+</message>
+<message>
+<source>Bookmark suggestion API request from %1:%2</source>
+<translation>Запрос к API предложений закладок от %1:%2</translation>
+</message>
+<message>
+<source>Bookmark suggestion API couldn't load suggestions because no main window instance is available.</source>
+<translation>API предложений закладок не смог загрузить предложения, так как экземпляр главного окна недоступен.</translation>
 </message>
 <message>
 <source>%1 connected to QOwnNotes server!</source>
@@ -7899,11 +11169,20 @@ This cannot be undone!</source>
 </message>
 <message numerus="yes">
 <source>Bookmark deleted from %n note(s)</source>
-<translation type="unfinished">
-<numerusform>Bookmark deleted from %n note(s)</numerusform>
-<numerusform>Bookmark deleted from %n note(s)</numerusform>
-<numerusform>Bookmark deleted from %n note(s)</numerusform>
-<numerusform>Bookmark deleted from %n note(s)</numerusform>
+<translation>
+<numerusform>Закладка удалена из %n заметки</numerusform>
+<numerusform>Закладка удалена из %n заметок</numerusform>
+<numerusform>Закладка удалена из %n заметок</numerusform>
+<numerusform>Закладка удалена из %n заметок</numerusform>
+</translation>
+</message>
+<message numerus="yes">
+<source>Bookmark edited in %n note(s)</source>
+<translation>
+<numerusform>Закладка изменена в %n заметке</numerusform>
+<numerusform>Закладка изменена в %n заметках</numerusform>
+<numerusform>Закладка изменена в %n заметках</numerusform>
+<numerusform>Закладка изменена в %n заметках</numerusform>
 </translation>
 </message>
 <message>
@@ -7935,6 +11214,10 @@ This cannot be undone!</source>
 <message>
 <source>Welcome to QOwnNotes</source>
 <translation>Добро пожаловать в QOwnNotes</translation>
+</message>
+<message>
+<source>Plain-text file Markdown note-taking with Nextcloud / ownCloud integration</source>
+<translation type="unfinished">Plain-text file Markdown note-taking with Nextcloud / ownCloud integration</translation>
 </message>
 <message>
 <source>&amp;Back</source>
@@ -7969,12 +11252,16 @@ This cannot be undone!</source>
 <translation>Выберите папку</translation>
 </message>
 <message>
-<source>Panel layout</source>
-<translation>Макет панели</translation>
+<source>If you want to be able to access your note versions and your trashed notes on your Nextcloud / ownCloud server, you can configure QOwnNotes for it now. You can also do it at a later time.</source>
+<translation type="unfinished">If you want to be able to access your note versions and your trashed notes on your Nextcloud / ownCloud server, you can configure QOwnNotes for it now. You can also do it at a later time.</translation>
 </message>
 <message>
-<source>Open ownCloud settings</source>
-<translation>Откройте настройки ownCloud</translation>
+<source>Open cloud settings</source>
+<translation type="unfinished">Open cloud settings</translation>
+</message>
+<message>
+<source>In any case, you need the Nextcloud / ownCloud sync client (or any other sync client) to sync your notes with your Nextcloud / ownCloud server.</source>
+<translation type="unfinished">In any case, you need the Nextcloud / ownCloud sync client (or any other sync client) to sync your notes with your Nextcloud / ownCloud server.</translation>
 </message>
 <message>
 <source>Open network settings</source>
@@ -7985,20 +11272,12 @@ This cannot be undone!</source>
 <translation>Пожалуйста выберите, где вы хотите хранить ваши заметки:</translation>
 </message>
 <message>
-<source>Plain-text file Markdown note-taking with ownCloud integration</source>
-<translation type="unfinished">Plain-text file Markdown note-taking with ownCloud integration</translation>
-</message>
-<message>
 <source>Show subfolders</source>
 <translation>Показать подпапки</translation>
 </message>
 <message>
-<source>If you want to be able to access your note versions and your trashed notes on your ownCloud server, you can configure QOwnNotes for it now. You can also do it at a later time.</source>
-<translation>Если вы хотите иметь возможность доступа к версиям вашей заметки и вашим удаленным заметкам на вашем сервере ownCloud/NextCloud, QOwnNotes можно настроить для этого сейчас. Вы также можете сделать позже.</translation>
-</message>
-<message>
-<source>In any case, you need the ownCloud sync client (or any other sync client) to sync your notes with your ownCloud server.</source>
-<translation>В любом случае вам нужен клиент синхронизации ownCloud (или любой другой) для синхронизации заметок с вашим сервером ownCloud.</translation>
+<source>Layout preset</source>
+<translation>Пресет макета</translation>
 </message>
 <message>
 <source>QOwnNotes will track anonymous usage data, that helps to decide what parts of QOwnNotes to improve next and to find and fix bugs. You can disable that behaviour in the settings.</source>
@@ -8028,6 +11307,10 @@ This cannot be undone!</source>
 <context>
 <name>main</name>
 <message>
+<source>Displays help on commandline options.</source>
+<translation>Отображает справку по параметрам командной строки.</translation>
+</message>
+<message>
 <source>Runs the application in portable mode.</source>
 <translation>Запускает приложение в портативном режиме.</translation>
 </message>
@@ -8037,7 +11320,7 @@ This cannot be undone!</source>
 </message>
 <message>
 <source>Prints out the version number.</source>
-<translation type="unfinished">Prints out the version number.</translation>
+<translation>Выводит номер версии.</translation>
 </message>
 <message>
 <source>Allows multiple instances of QOwnNotes to be started even if disallowed in the settings.</source>
@@ -8057,7 +11340,15 @@ This cannot be undone!</source>
 </message>
 <message>
 <source>Generate shell completion code. Supports `fish`, `bash`.</source>
-<translation type="unfinished">Generate shell completion code. Supports `fish`, `bash`.</translation>
+<translation>Генерирует код завершения оболочки. Поддерживает `fish`, `bash`.</translation>
+</message>
+<message>
+<source>Prints the decrypted text of an encrypted note file.</source>
+<translation type="unfinished">Prints the decrypted text of an encrypted note file.</translation>
+</message>
+<message>
+<source>Password for --decrypt-note.</source>
+<translation type="unfinished">Password for --decrypt-note.</translation>
 </message>
 <message>
 <source>Single application mode is not supported on your system!</source>

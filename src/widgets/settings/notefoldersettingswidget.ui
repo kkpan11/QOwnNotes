@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>NoteFolderSettingsWidget</class>
+ <widget class="QWidget" name="NoteFolderSettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_19">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox_13">
+     <property name="title">
+      <string>Your note folders</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_21">
+      <item row="0" column="0">
+       <widget class="QFrame" name="noteFolderSelectFrame">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>2</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Shape::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Shadow::Raised</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_20">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <property name="spacing">
+          <number>9</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="NoteFolderListWidget" name="noteFolderListWidget">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>2</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="dragEnabled">
+            <bool>true</bool>
+           </property>
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::DragDropMode::InternalMove</enum>
+           </property>
+           <property name="defaultDropAction">
+            <enum>Qt::DropAction::TargetMoveAction</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QFrame" name="frame">
+           <property name="frameShape">
+            <enum>QFrame::Shape::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Plain</enum>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_23">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="0" column="1">
+             <widget class="QPushButton" name="noteFolderAddButton">
+              <property name="text">
+               <string>&amp;Add folder</string>
+              </property>
+              <property name="icon">
+               <iconset theme="folder-new" resource="../../breeze-qownnotes.qrc">
+                <normaloff>:/icons/breeze-qownnotes/16x16/folder-new.svg</normaloff>:/icons/breeze-qownnotes/16x16/folder-new.svg</iconset>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Orientation::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="2">
+             <widget class="QPushButton" name="noteFolderRemoveButton">
+              <property name="text">
+               <string>&amp;Remove folder</string>
+              </property>
+              <property name="icon">
+               <iconset theme="edit-delete" resource="../../breeze-qownnotes.qrc">
+                <normaloff>:/icons/breeze-qownnotes/16x16/edit-delete.svg</normaloff>:/icons/breeze-qownnotes/16x16/edit-delete.svg</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QFrame" name="noteFolderEditFrame">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>3</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Shape::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Shadow::Raised</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_22">
+         <item row="13" column="0" colspan="2">
+          <widget class="QFrame" name="noteFolderRemotePathTreeWidgetFrame">
+           <property name="frameShape">
+            <enum>QFrame::Shape::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Raised</enum>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_25">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="2" column="0">
+             <widget class="QFrame" name="frame_3">
+              <property name="frameShape">
+               <enum>QFrame::Shape::NoFrame</enum>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_26">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item row="0" column="1">
+                <widget class="QPushButton" name="useCloudPathButton">
+                 <property name="toolTip">
+                  <string>Click here to use the selected folder from your server as note folder</string>
+                 </property>
+                 <property name="text">
+                   <string>&amp;Use as Nextcloud / ownCloud path</string>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="document-open" resource="../../breeze-qownnotes.qrc">
+                   <normaloff>:/icons/breeze-qownnotes/16x16/document-open.svg</normaloff>:/icons/breeze-qownnotes/16x16/document-open.svg</iconset>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QTreeWidget" name="noteFolderRemotePathTreeWidget">
+              <attribute name="headerVisible">
+               <bool>false</bool>
+              </attribute>
+              <column>
+               <property name="text">
+                <string>path</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="noteFolderRemotePathListLabel">
+              <property name="text">
+                <string>Please select your note folder on your Nextcloud / ownCloud server:</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="9" column="0" colspan="2">
+          <widget class="QLabel" name="noteFolderCloudConnectionLabel">
+           <property name="text">
+            <string>Cloud connection:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="0" colspan="2">
+          <widget class="QComboBox" name="noteFolderCloudConnectionComboBox">
+           <property name="toolTip">
+            <string>Select the cloud connection to use for this note folder. Select "None" if this note folder should not be synced to a server. Cloud versioning, trash and sharing will then be disabled for this note folder.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="0" colspan="2">
+          <widget class="QLabel" name="noteFolderRemotePathLabel">
+           <property name="text">
+             <string>Path on your Nextcloud / ownCloud server:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="14" column="0">
+          <widget class="QFrame" name="noteFolderVerticalSpacerFrame">
+           <property name="frameShape">
+            <enum>QFrame::Shape::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Raised</enum>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_27">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="0" column="0">
+             <spacer name="noteFolderVerticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Policy::Expanding</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>5</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="3" column="0" colspan="2">
+          <widget class="QLabel" name="label_13">
+           <property name="text">
+            <string>Note folder path:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0" colspan="2">
+          <widget class="QGroupBox" name="noteFolderSubfolderSettingsFrame">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="title">
+            <string>Subfolder visibility</string>
+           </property>
+           <layout class="QVBoxLayout" name="subfolderSettingsLayout">
+            <item>
+             <widget class="QCheckBox" name="noteFolderAllSubfoldersCheckBox">
+              <property name="toolTip">
+               <string>If checked, all subfolders will be shown. If unchecked, you can select which subfolders to show.</string>
+              </property>
+              <property name="text">
+               <string>All subfolders</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTreeWidget" name="noteFolderSubfolderTreeWidget">
+              <property name="toolTip">
+               <string>Select which subfolders to show. Unchecked subfolders and their children will be ignored.</string>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>200</height>
+               </size>
+              </property>
+              <property name="headerHidden">
+               <bool>true</bool>
+              </property>
+              <column>
+               <property name="text">
+                <string notr="true">1</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="7" column="0" colspan="2">
+          <widget class="QCheckBox" name="noteFolderGitCommitCheckBox">
+           <property name="toolTip">
+            <string>You need to have git installed to make this work!</string>
+           </property>
+           <property name="text">
+            <string>Use git to keep a local history of your notes</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="2">
+          <widget class="QCheckBox" name="noteFolderActiveCheckBox">
+           <property name="text">
+            <string>Use as active note folder</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0" colspan="2">
+          <widget class="QCheckBox" name="noteFolderShowSubfoldersCheckBox">
+           <property name="toolTip">
+             <string>Be aware that the Nextcloud / ownCloud notes app doesn't support subfolders!</string>
+           </property>
+           <property name="text">
+            <string>Use note subfolders</string>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="1">
+          <widget class="QPushButton" name="noteFolderRemotePathButton">
+           <property name="toolTip">
+             <string>Click here to select your remote note path on your Nextcloud / ownCloud server</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset theme="document-open" resource="../../breeze-qownnotes.qrc">
+             <normaloff>:/icons/breeze-qownnotes/16x16/document-open.svg</normaloff>:/icons/breeze-qownnotes/16x16/document-open.svg</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLineEdit" name="noteFolderLocalPathLineEdit">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string>Path where your notes are stored locally</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" colspan="2">
+          <widget class="QLineEdit" name="noteFolderNameLineEdit">
+           <property name="toolTip">
+            <string>This name will be viewed in all the menus.</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="placeholderText">
+            <string>Note folder name</string>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" colspan="2">
+          <widget class="QLabel" name="label_12">
+           <property name="text">
+            <string>Name:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QPushButton" name="noteFolderLocalPathButton">
+           <property name="toolTip">
+            <string>Click here to select your local note path</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset theme="document-open" resource="../../breeze-qownnotes.qrc">
+             <normaloff>:/icons/breeze-qownnotes/16x16/document-open.svg</normaloff>:/icons/breeze-qownnotes/16x16/document-open.svg</iconset>
+            </property>
+          </widget>
+         </item>
+         <item row="12" column="0">
+          <widget class="QLineEdit" name="noteFolderRemotePathLineEdit">
+           <property name="toolTip">
+             <string>Set the Nextcloud / ownCloud path where the note folder path will be synced to on your Nextcloud / ownCloud server.</string>
+           </property>
+           <property name="placeholderText">
+            <string extracomment="&quot;Notes&quot; should not be translated">&quot;Notes&quot; path on your server</string>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="0" colspan="2">
+          <widget class="QCheckBox" name="allowDifferentNoteFileNameCheckBox">
+           <property name="toolTip">
+            <string>This also allows note files to be renamed</string>
+           </property>
+           <property name="text">
+            <string>Allow note file name to be different from headline</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>NoteFolderListWidget</class>
+   <extends>QListWidget</extends>
+   <header location="global">widgets/notefolderlistwidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../breeze-qownnotes.qrc"/>
+ </resources>
+ <connections/>
+</ui>

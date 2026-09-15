@@ -9,6 +9,7 @@
 #include <QJsonDocument>
 #include <QRegularExpression>
 #include <QRegularExpressionMatchIterator>
+#include <QStringList>
 #include <utility>
 
 #include "notefolder.h"
@@ -62,7 +63,7 @@ QVector<Bookmark> Bookmark::parseBookmarks(const QString &text, bool withBasicUr
 
     // parse bookmark links like `- [name](http://link) #tag1 #tag2 the
     // description text` with optional tags and description
-    i = QRegularExpression(QStringLiteral(R"([-*]\s+\[(.+?)\]\(([\w-]+://.+?)\)(.*)$)"),
+    i = QRegularExpression(QStringLiteral(R"([-*]\s+\[([^\[\]]+?)\]\(([\w-]+://.+?)\)(.*)$)"),
                            QRegularExpression::MultilineOption)
             .globalMatch(text);
 
@@ -102,7 +103,8 @@ QVector<Bookmark> Bookmark::parseBookmarks(const QString &text, bool withBasicUr
 
     if (withBasicUrls) {
         // parse named links like [name](http://my.site.com)
-        i = QRegularExpression(QStringLiteral(R"(\[(.+?)\]\(([\w-]+://.+?)\))")).globalMatch(text);
+        i = QRegularExpression(QStringLiteral(R"(\[([^\[\]]+?)\]\(([\w-]+://.+?)\))"))
+                .globalMatch(text);
 
         while (i.hasNext()) {
             QRegularExpressionMatch match = i.next();
@@ -168,6 +170,177 @@ QString Bookmark::parsedBookmarksWebServiceJsonText(const QString &text, bool wi
     return bookmarksWebServiceJsonText(parseBookmarks(text, withBasicUrls));
 }
 
+QStringList Bookmark::suggestionStrings(const QVector<Bookmark> &bookmarks, const QString &query,
+                                        int limit) {
+    const QString normalizedQuery = query.simplified();
+
+    if (normalizedQuery.isEmpty()) {
+        return {};
+    }
+
+    if (limit < 1) {
+        limit = 1;
+    } else if (limit > 50) {
+        limit = 50;
+    }
+
+    const QString queryLower = normalizedQuery.toLower();
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
+    const QStringList queryTokens = queryLower.split(QLatin1Char(' '), QString::SkipEmptyParts);
+#else
+    const QStringList queryTokens = queryLower.split(QLatin1Char(' '), Qt::SkipEmptyParts);
+#endif
+
+    if (queryTokens.isEmpty()) {
+        return {};
+    }
+
+    struct BookmarkMatch {
+        const Bookmark *bookmark;
+        bool nameMatches;
+        bool urlMatches;
+        bool metadataMatches;
+    };
+
+    QVector<BookmarkMatch> prefixBookmarkMatches;
+    QVector<BookmarkMatch> substringBookmarkMatches;
+
+    QStringList prefixMatches;
+    QStringList substringMatches;
+    QStringList seen;
+
+    auto containsAllTokens = [&queryTokens](const QString &candidateLower) {
+        for (const QString &token : queryTokens) {
+            if (!candidateLower.contains(token)) {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    auto isPrefixMatch = [&queryLower, &queryTokens](const QString &candidateLower) {
+        if (candidateLower.startsWith(queryLower)) {
+            return true;
+        }
+
+        for (const QString &token : queryTokens) {
+            if (candidateLower.startsWith(token)) {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
+    auto appendSuggestionString = [&prefixMatches, &seen, &substringMatches, limit](
+                                      const QString &candidate, QStringList &target) {
+        if ((prefixMatches.count() + substringMatches.count()) >= limit) {
+            return;
+        }
+
+        const QString trimmed = candidate.trimmed();
+
+        if (trimmed.isEmpty()) {
+            return;
+        }
+
+        const QString dedupeKey = trimmed.toCaseFolded();
+        if (seen.contains(dedupeKey)) {
+            return;
+        }
+
+        seen.append(dedupeKey);
+        target.append(trimmed);
+    };
+
+    for (const Bookmark &bookmark : bookmarks) {
+        const QString nameLower = bookmark.name.trimmed().toLower();
+        const QString urlLower = bookmark.url.trimmed().toLower();
+        const QString metadataLower = QStringList{bookmark.tags.join(QLatin1Char(' ')),
+                                                  bookmark.description, bookmark.markdown}
+                                          .join(QLatin1Char(' '))
+                                          .simplified()
+                                          .toLower();
+
+        const bool nameMatches = !nameLower.isEmpty() && containsAllTokens(nameLower);
+        const bool urlMatches = !urlLower.isEmpty() && containsAllTokens(urlLower);
+        const bool metadataMatches = !metadataLower.isEmpty() && containsAllTokens(metadataLower);
+
+        if (!nameMatches && !urlMatches && !metadataMatches) {
+            continue;
+        }
+
+        const bool isPrefix = (nameMatches && isPrefixMatch(nameLower)) ||
+                              (urlMatches && isPrefixMatch(urlLower)) ||
+                              (metadataMatches && isPrefixMatch(metadataLower));
+
+        BookmarkMatch match{&bookmark, nameMatches, urlMatches, metadataMatches};
+        if (isPrefix) {
+            prefixBookmarkMatches.append(match);
+        } else {
+            substringBookmarkMatches.append(match);
+        }
+    }
+
+    auto appendBookmarkSuggestions = [&appendSuggestionString, &prefixMatches, &substringMatches,
+                                      limit](const BookmarkMatch &match, QStringList &target) {
+        if ((prefixMatches.count() + substringMatches.count()) >= limit) {
+            return;
+        }
+
+        const QString name = match.bookmark->name.trimmed();
+        const QString url = match.bookmark->url.trimmed();
+
+        if ((match.nameMatches || match.urlMatches || match.metadataMatches) && !name.isEmpty()) {
+            appendSuggestionString(name, target);
+        }
+
+        if ((match.urlMatches || match.metadataMatches) && !url.isEmpty()) {
+            appendSuggestionString(url, target);
+        }
+    };
+
+    for (const BookmarkMatch &match : prefixBookmarkMatches) {
+        appendBookmarkSuggestions(match, prefixMatches);
+        if ((prefixMatches.count() + substringMatches.count()) >= limit) {
+            break;
+        }
+    }
+
+    if ((prefixMatches.count() + substringMatches.count()) < limit) {
+        for (const BookmarkMatch &match : substringBookmarkMatches) {
+            appendBookmarkSuggestions(match, substringMatches);
+            if ((prefixMatches.count() + substringMatches.count()) >= limit) {
+                break;
+            }
+        }
+    }
+
+    QStringList result = prefixMatches;
+    result.append(substringMatches);
+
+    if (result.count() > limit) {
+        result = result.mid(0, limit);
+    }
+
+    return result;
+}
+
+QJsonDocument Bookmark::homepageSuggestionResponseJson(const QString &query,
+                                                       const QStringList &suggestions) {
+    QJsonArray response;
+    response.push_back(query);
+
+    QJsonArray suggestionList;
+    for (const QString &suggestion : suggestions) {
+        suggestionList.push_back(suggestion);
+    }
+
+    response.push_back(suggestionList);
+    return QJsonDocument(response);
+}
+
 /**
  * Merges the current bookmark into a list of bookmarks
  */
@@ -200,7 +373,7 @@ void Bookmark::merge(Bookmark &bookmark) {
     tags.removeDuplicates();
     tags.sort();
 
-    if (name.isEmpty()) {
+    if (name.isEmpty() || (!bookmark.name.isEmpty() && bookmark.name.length() > name.length())) {
         name = bookmark.name;
     }
 

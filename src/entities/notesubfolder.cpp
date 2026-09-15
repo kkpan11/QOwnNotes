@@ -8,13 +8,13 @@
 
 #include <QDebug>
 #include <QDir>
-#include <QSettings>
 #include <QSqlError>
 #include <QSqlRecord>
 #include <utility>
 
 #include "note.h"
 #include "notefolder.h"
+#include "services/settingsservice.h"
 #include "tag.h"
 
 NoteSubFolder::NoteSubFolder() : _id{0}, _parentId{0}, _name{QLatin1String("")} {}
@@ -23,7 +23,9 @@ int NoteSubFolder::getId() const { return _id; }
 
 int NoteSubFolder::getParentId() const { return _parentId; }
 
-NoteSubFolder NoteSubFolder::getParent() const { return NoteSubFolder::fetch(_parentId); }
+NoteSubFolder NoteSubFolder::getParent(const QString& connectionName) const {
+    return NoteSubFolder::fetch(_parentId, connectionName);
+}
 
 QString NoteSubFolder::getName() const { return _name; }
 
@@ -37,26 +39,30 @@ void NoteSubFolder::setParentId(int parentId) { _parentId = parentId; }
 
 bool NoteSubFolder::isFetched() const { return (_id > 0); }
 
-NoteSubFolder NoteSubFolder::fetch(int id) {
-    const QSqlDatabase db = QSqlDatabase::database(QStringLiteral("memory"));
+NoteSubFolder NoteSubFolder::fetch(int id, const QString& connectionName) {
+    const QSqlDatabase db = QSqlDatabase::database(connectionName);
     QSqlQuery query(db);
-
     query.prepare(QStringLiteral("SELECT * FROM noteSubFolder WHERE id = :id"));
     query.bindValue(QStringLiteral(":id"), id);
+
+    auto noteSubFolder = NoteSubFolder();
 
     if (!query.exec()) {
         qWarning() << __func__ << ": " << query.lastError();
     } else {
         if (query.first()) {
-            return noteSubFolderFromQuery(query);
+            noteSubFolder = noteSubFolderFromQuery(query);
         }
     }
 
-    return NoteSubFolder();
+    query.finish();
+
+    return noteSubFolder;
 }
 
-NoteSubFolder NoteSubFolder::fetchByNameAndParentId(const QString& name, int parentId) {
-    const QSqlDatabase db = QSqlDatabase::database(QStringLiteral("memory"));
+NoteSubFolder NoteSubFolder::fetchByNameAndParentId(const QString& name, int parentId,
+                                                    const QString& connectionName) {
+    const QSqlDatabase db = QSqlDatabase::database(connectionName);
     QSqlQuery query(db);
 
     query.prepare(
@@ -79,8 +85,10 @@ NoteSubFolder NoteSubFolder::fetchByNameAndParentId(const QString& name, int par
 /**
  * Gets the relative path name of the note sub folder
  */
-QString NoteSubFolder::relativePath(char separator) const {
-    return _parentId == 0 ? _name : getParent().relativePath(separator) + separator + _name;
+QString NoteSubFolder::relativePath(char separator, const QString& connectionName) const {
+    return _parentId == 0 ? _name
+                          : getParent(connectionName).relativePath(separator, connectionName) +
+                                separator + _name;
 }
 
 /**
@@ -106,15 +114,17 @@ QString NoteSubFolder::pathData() const {
 /**
  * Fetches a note sub folder by its path data
  */
-NoteSubFolder NoteSubFolder::fetchByPathData(QString pathData, const QString& separator) {
+NoteSubFolder NoteSubFolder::fetchByPathData(QString pathData, const QString& separator,
+                                             const QString& connectionName) {
     if (pathData.isEmpty()) return NoteSubFolder();
 
     pathData = Utils::Misc::removeIfStartsWith(std::move(pathData), separator);
     const QStringList pathList = pathData.split(separator);
     NoteSubFolder noteSubFolder;
-    // loop through all names to fetch the deepest note sub folder
+    // Loop through all names to fetch the deepest note sub folder
     for (const auto& name : pathList) {
-        noteSubFolder = NoteSubFolder::fetchByNameAndParentId(name, noteSubFolder.getId());
+        noteSubFolder =
+            NoteSubFolder::fetchByNameAndParentId(name, noteSubFolder.getId(), connectionName);
         if (!noteSubFolder.isFetched()) return NoteSubFolder();
     }
     return noteSubFolder;
@@ -165,6 +175,15 @@ bool NoteSubFolder::rename(const QString& newName) {
         // (needs to be done before the folder rename because folder renaming
         // will cause a reload which would trigger the removal of the tag links)
         Tag::renameNoteSubFolderPathsOfLinks(oldRelativePath, newRelativePath);
+        Note::updateQualifiedWikiLinksForSubfolderRename(oldRelativePath, newRelativePath);
+        Note::updateRelativeMarkdownLinksForSubfolderRename(oldRelativePath, newRelativePath);
+
+        // Persist the new name to the database so that the re-index triggered
+        // by the folder rename below can locate the existing row by its new
+        // name and reuse it (instead of deleting the old row and creating a
+        // fresh one with a new id, which would cause note rows to be
+        // recreated and tag links to be temporarily unresolvable).
+        store();
 
         // rename the note subfolder
         const bool ret = QDir().rename(oldPath, newPath);
@@ -196,9 +215,13 @@ NoteSubFolder NoteSubFolder::fillFromQuery(const QSqlQuery& query) {
 
 QVector<NoteSubFolder> NoteSubFolder::fetchAll(int limit) {
     const QSqlDatabase db = QSqlDatabase::database(QStringLiteral("memory"));
-    QSqlQuery query(db);
-
     QVector<NoteSubFolder> noteSubFolderList;
+
+    if (!db.tables().contains(QStringLiteral("noteSubFolder"), Qt::CaseInsensitive)) {
+        return noteSubFolderList;
+    }
+
+    QSqlQuery query(db);
     QString sql = QStringLiteral(
         "SELECT * FROM noteSubFolder "
         "ORDER BY file_last_modified DESC");
@@ -246,8 +269,9 @@ QVector<int> NoteSubFolder::fetchAllIds() {
     return idList;
 }
 
-QVector<NoteSubFolder> NoteSubFolder::fetchAllByParentId(int parentId, const QString& sortBy) {
-    const QSqlDatabase db = QSqlDatabase::database(QStringLiteral("memory"));
+QVector<NoteSubFolder> NoteSubFolder::fetchAllByParentId(int parentId, const QString& sortBy,
+                                                         const QString& connectionName) {
+    const QSqlDatabase db = QSqlDatabase::database(connectionName);
     QSqlQuery query(db);
 
     QVector<NoteSubFolder> noteSubFolderList;
@@ -452,7 +476,7 @@ NoteSubFolder NoteSubFolder::activeNoteSubFolder() {
  * Saves the expand status of the item
  */
 void NoteSubFolder::saveTreeWidgetExpandState(bool expanded) const {
-    QSettings settings;
+    SettingsService settings;
     const QString settingsKey = treeWidgetExpandStateSettingsKey();
 
     // load the settings
@@ -475,7 +499,7 @@ void NoteSubFolder::saveTreeWidgetExpandState(bool expanded) const {
  * Fetches the expand status of the item
  */
 bool NoteSubFolder::treeWidgetExpandState() const {
-    const QSettings settings;
+    const SettingsService settings;
     const QString settingsKey = treeWidgetExpandStateSettingsKey();
 
     // load the settings
@@ -489,7 +513,9 @@ bool NoteSubFolder::treeWidgetExpandState() const {
  * Checks if noteSubfoldersPanelShowNotesRecursively is set
  */
 bool NoteSubFolder::isNoteSubfoldersPanelShowNotesRecursively() {
-    return QSettings().value(QStringLiteral("noteSubfoldersPanelShowNotesRecursively")).toBool();
+    return SettingsService()
+        .value(QStringLiteral("noteSubfoldersPanelShowNotesRecursively"))
+        .toBool();
 }
 
 /**
@@ -540,7 +566,7 @@ bool NoteSubFolder::willFolderBeIgnored(const QString& folderName, bool showWarn
         return true;
     }
 
-    const QSettings settings;
+    const SettingsService settings;
     const QStringList ignoredFolderRegExpList =
         settings.value(QStringLiteral("ignoreNoteSubFolders"), IGNORED_NOTE_SUBFOLDERS_DEFAULT)
             .toString()

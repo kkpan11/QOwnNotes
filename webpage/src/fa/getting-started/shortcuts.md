@@ -8,7 +8,7 @@
 - <kbd>N</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Ctrl</kbd> یک یادداشت جدید در یک زبانه جدید ایجاد می کند
 - <kbd>F</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Ctrl</kbd> به شما اجازه می دهد تا یادداشت ها را (براساس نام یادداشت و محتوای آن) جستجو کنید
 - <kbd>F</kbd> + <kbd>Alt</kbd> به شما امکان می دهد یادداشت ها را در همه زبانه ها یا زیر پوشه ها جستجو کنید
-- <kbd>P</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Alt</kbd> به فضای کاری قبلی تغییر می کند
+- <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> switches to the previous layout
 - <kbd>E</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Ctrl</kbd> یک یادداشت رمزگذاری شده را ویرایش می کند
 - <kbd>R</kbd> + <kbd>Alt</kbd> یادداشت کنونی را حذف می کند
 - <kbd>U</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Alt</kbd> برای بروز رسانی بررسی انجام می دهد
@@ -17,15 +17,13 @@
 - <kbd>O</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Alt</kbd> یادداشت کنونی را در یک نما باز می کند
 - <kbd>F</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Alt</kbd> یادداشت کنونی را در مدیر پرونده نشان می دهد
 - <kbd>E</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Alt</kbd> ویرایش کردن یادداشت ها را فعال یا غیر فعال می سازد
-- <kbd>Alt</kbd> + <kbd>بالا</kbd> به یادداشت قابل مشاهده قبلی پرش می کند
-    - میانبر جایگزین <kbd>Page Up</kbd> + <kbd>Ctrl</kbd> است
+- <kbd>Alt</kbd> + <kbd>Up</kbd> jumps to the previous visible note
 - <kbd>Alt</kbd> + <kbd>پایین</kbd> به یادداشت قابل مشاهده بعدی پرش می کند
-    - میانبر جایگزین <kbd>Page Down</kbd> + <kbd>Ctrl</kbd> است
 - <kbd>Page Up</kbd> + <kbd>Alt</kbd> به زبانه یادداشت قبلی پرش می کند
 - <kbd>Page Down</kbd> + <kbd>Alt</kbd> به زبانه یادداشت بعدی پرش می کند
 - <kbd>W</kbd> + <kbd>Ctrl</kbd> زبانه یادداشت کنونی را می بندد
 - <kbd>D</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Ctrl</kbd> به حالت بدون مزاحمت تغییر وضعیت می دهد
-    - همچنین می توانید آن را با <kbd>Esc</kbd> ببندید
+  - همچنین می توانید آن را با <kbd>Esc</kbd> ببندید
 - <kbd>P</kbd> + <kbd>Ctrl</kbd> یادداشت کنونی را به صورت متنی چاپ می کند
 - <kbd>P</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Ctrl</kbd> یادداشت کنونی را به صورت مارک داون چاپ می کند
 - <kbd>V</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Ctrl</kbd> یادداشت ها، تصاویر و html را از تخته برش می چسباند
@@ -36,6 +34,7 @@
 - <kbd>S</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Ctrl</kbd> موتور اسکریپت نویسی را مجدداً بارگذاری می کند
 - <kbd>M</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Ctrl</kbd> نوار منوی اصلی را مخفی کرده یا نشان می دهد
 - <kbd>A</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Ctrl</kbd> امکان جستجوی فعالیت ها را به شما می دهد
+- <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>A</kbd> lets you redo the last action
 - <kbd>S</kbd> + <kbd>Ctrl</kbd> یادداشت های اصلاح شده را به طور دستی ذخیره می کند
 - <kbd>I</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Alt</kbd> کادر گفتگوی مخزن اسکریپت را باز می کند
 - <kbd>F4</kbd> به پنل ویرایش یادداشت پرش می کند
@@ -50,7 +49,7 @@
 ### در نوار جستجوی یادداشت
 
 - <kbd>پایین</kbd> یا <kbd>Tab</kbd> بر روی لیست یادداشت متمرکز می شود
-- <kbd>Return</kbd> یادداشت جدیدی را با متنی از نوار جستجو به صورت سرخط ایجاد می کند
+- <kbd>Return</kbd> creates a new note with the text from the search bar as headline
 
 ### در لیست یادداشت
 
@@ -62,11 +61,11 @@
 
 - <kbd>Ctrl</kbd> + <kbd>کلیک</kbd> روی یک پیوند برای باز کردن آن
 - <kbd>Ctrl</kbd> یا <kbd>ّF</kbd> به شما این امکان را می دهد که در یادداشت کنونی جستجو کنید
-    - جهت پرش به روگرفت های قبلی و بعدی از کلیدهای <kbd>بالا</kbd> و <kbd>پایین</kbd> یا کلیدهای <kbd>F3</kbd> و <kbd>F3</kbd> + <kbd>⇧ Shift</kbd> استفاده کنید
-    - <kbd>Esc</kbd> نوار جستجو را می بندد
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> نوار جستجو را می بندد
 - <kbd>Ctrl</kbd> یا <kbd>ّR</kbd> به شما این امکان را می دهد که در یادداشت کنونی جستجو و جایگزینی انجام دهید
 - <kbd>D</kbd> + <kbd>Ctrl</kbd> از خط کنونی یا متن منتخب رونوشت بر می دارد
-    - <kbd>Alt</kbd> + <kbd>Ctrl</kbd> + <kbd>پایین</kbd> همین کار را انجام می دهد
+  - <kbd>Alt</kbd> + <kbd>Ctrl</kbd> + <kbd>پایین</kbd> همین کار را انجام می دهد
 - <kbd>Backspace</kbd> + <kbd>Alt</kbd> خط کنونی را حذف می کند
 - <kbd>Backspace</kbd> + <kbd>Ctrl</kbd> کلمه کنونی را حذف می کند
 - <kbd>L</kbd> + <kbd>Ctrl</kbd> برای افزودن پیوند متنی، کادر گفتگو باز می کند (در متن منتخب نیز کار می کند)
@@ -83,12 +82,12 @@
 - <kbd>S</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Alt</kbd> متن منتخب را حذف می کند
 - <kbd>U</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Ctrl</kbd> از میان منابع متن منتخب می چرخد
 - <kbd>Tab</kbd> متن منتخب را برجسته می سازد (در چندین خط نیز کار می کند)
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> متن منتخب را از حالت برجسته خارج می کند
-- <kbd>Tab</kbd> پس از یک نویسه لیست مرتب نشده مورد لیست را برجسته می سازد
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> پس از یک نویسه لیست مرتب نشده مورد لیست را از حالت برجسته خارج می کند
-- <kbd>Return</kbd> در لیست ها مورد لیست جدیدی ایجاد می کند
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> متن منتخب را از حالت برجسته خارج می کند
+- <kbd>Tab</kbd> after an unordered list character indents the list item
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> after an unordered list character un-indents the list item
+- <kbd>Return</kbd> in lists creates a new list item
 - <kbd>Alt</kbd> + <kbd>چپ</kbd> در تاریخچه یادداشت پرش به عقب می کند
-    - <kbd>Alt</kbd> + <kbd>راست</kbd> در تاریخچه یادداشت پرش به جلو می کند
+  - <kbd>Alt</kbd> + <kbd>راست</kbd> در تاریخچه یادداشت پرش به جلو می کند
 - <kbd>1..9</kbd> + <kbd>⇧ Shift</kbd> + <kbd>Ctrl</kbd> نشانک یادداشت را در شکاف نشانک 1..9 تنظیم می کند
 - <kbd>9..1</kbd> + <kbd>Ctrl</kbd> به نشانک یادداشت در شکاف نشانک 9..1 پرش می کند
 - <kbd>Ctrl</kbd> + <kbd>+</kbd> اندازه فونت متن یادداشت را به صورت تک نقطه ای افزایش می دهد
@@ -107,15 +106,14 @@
 ### در پنل پیش نمایش یادداشت
 
 - <kbd>Ctrl</kbd> یا <kbd>ّF</kbd> به شما این امکان را می دهد که در یادداشت کنونی جستجو انجام دهید
-    - جهت پرش به روگرفت های قبلی و بعدی از کلیدهای <kbd>بالا</kbd> و <kbd>پایین</kbd> یا کلیدهای <kbd>F3</kbd> و <kbd>F3</kbd> + <kbd>⇧ Shift</kbd> استفاده کنید
-    - <kbd>Esc</kbd> نوار جستجو را می بندد
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> نوار جستجو را می بندد
 
 ### در لیست انجام دادنی
 
 - <kbd>S</kbd> + <kbd>Ctrl</kbd> مورد انجام دادنی کنونی را ذخیره می کند
 - <kbd>I</kbd> + <kbd>Ctrl</kbd> مورد انجام دادنی کنونی را ذخیره کرده و در یادداشت کنونی درج می کند
 - <kbd>R</kbd> + <kbd>Ctrl</kbd> مورد انجام دادنی کنونی را حذف می کند
-
 
 ## سیستم عامل مکینتاش
 
@@ -125,7 +123,7 @@
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>N</kbd> یادداشت جدیدی در یک زبانه جدید ایجاد می کند
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>F</kbd> به شما اجازه می دهد تا یادداشت ها را (براساس نام یادداشت و محتوای آن) جستجو کنید
 - <kbd>F</kbd> + <kbd>⌃ Ctrl</kbd> به شما امکان می دهد یادداشت ها را در همه زبانه ها یا زیر پوشه ها جستجو کنید
-- <kbd>P</kbd> + <kbd>⇧ Shift</kbd> + <kbd>⌃ Ctrl</kbd> به فضای کاری قبلی تغییر می کند
+- <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> switches to the previous layout
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>E</kbd> یک یادداشت رمزگذاری شده را ویرایش می کند
 - <kbd>R</kbd> + <kbd>⌃ Ctrl</kbd> یادداشت کنونی را حذف می کند
 - <kbd>U</kbd> + <kbd>⇧ Shift</kbd> + <kbd>⌃ Ctrl</kbd> برای بروز رسانی بررسی انجام می دهد
@@ -135,14 +133,12 @@
 - <kbd>F</kbd> + <kbd>⇧ Shift</kbd> + <kbd>⌃ Ctrl</kbd> پوشه یادداشت کنونی را در یابنده باز می کند
 - <kbd>E</kbd> + <kbd>⇧ Shift</kbd> + <kbd>⌃ Ctrl</kbd> ویرایش کردن یادداشت ها را فعال یا غیر فعال می سازد
 - <kbd>⌃ Ctrl</kbd> + <kbd>بالا</kbd> به یادداشت قابل مشاهده قبلی پرش می کند
-    - میانبر جایگزین <kbd>Page Up</kbd> + <kbd>⌘ Cmd</kbd> است
 - <kbd>⌃ Ctrl</kbd> + <kbd>پایین</kbd> به یادداشت قابل مشاهده بعدی پرش می کند
-    - میانبر جایگزین <kbd>Page Down</kbd> + <kbd>⌘ Cmd</kbd> است
 - <kbd>Page Up</kbd> + <kbd>⌥ Alt</kbd> به زبانه یادداشت قبلی پرش می کند
 - <kbd>Page Down</kbd> + <kbd>⌥ Alt</kbd> به زبانه یادداشت بعدی پرش می کند
 - <kbd>⌘ Cmd</kbd> + <kbd>W</kbd> زبانه یادداشت کنونی را می بندد
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>D</kbd> toggles the distraction free mode
-    - می توانید آن را با <kbd>Esc</kbd> نیز ببندید
+  - می توانید آن را با <kbd>Esc</kbd> نیز ببندید
 - <kbd>⌘ Cmd</kbd> + <kbd>P</kbd> prints the current note as text
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> prints the current note as markdown
 - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>V</kbd> pastes notes, images and html from the clipboard
@@ -153,6 +149,7 @@
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>S</kbd> reloads the scripting engine
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>M</kbd> hides or shows the main menu bar
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>A</kbd> lets you search for actions
+- <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>A</kbd> lets you redo the last action
 - <kbd>⌘ Cmd</kbd> + <kbd>S</kbd> manually saves modified notes
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>I</kbd> opens the Script repository dialog
 - <kbd>F4</kbd> به پنل ویرایش یادداشت پرش می کند
@@ -167,7 +164,7 @@
 ### در نوار جستجوی یادداشت
 
 - <kbd>پایین</kbd> یا <kbd>Tab</kbd> بر روی لیست یادداشت متمرکز می شود
-- <kbd>Return</kbd> یادداشت جدیدی را با متنی از نوار جستجو به صورت سرخط ایجاد می کند
+- <kbd>Return</kbd> creates a new note with the text from the search bar as headline
 
 ### در لیست یادداشت
 
@@ -179,11 +176,11 @@
 
 - <kbd>⌘ Cmd</kbd> + <kbd>Click</kbd> on a link to open it
 - <kbd>⌘ Cmd</kbd> + <kbd>F</kbd> lets you search in the current note
-    - جهت پرش به روگرفت های قبلی و بعدی از کلیدهای <kbd>بالا</kbd> و <kbd>پایین</kbd> یا کلیدهای <kbd>F3</kbd> و <kbd>F3</kbd> + <kbd>⇧ Shift</kbd> استفاده کنید
-    - <kbd>Esc</kbd> نوار جستجو را می بندد
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> نوار جستجو را می بندد
 - <kbd>⌘ Cmd</kbd> + <kbd>R</kbd> lets you search and replace in the current note
 - <kbd>⌘ Cmd</kbd> + <kbd>D</kbd> duplicates the current line or the selected text
-    - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>Down</kbd> does the same
+  - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>Down</kbd> does the same
 - <kbd>⌘ Cmd</kbd> + <kbd>Backspace</kbd> deletes the current line
 - <kbd>⌃ Ctrl</kbd> + <kbd>Backspace</kbd> deletes the current word
 - <kbd>⌘ Cmd</kbd> + <kbd>L</kbd> opens a dialog to add a text link (also works on selected text)
@@ -200,12 +197,12 @@
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>S</kbd> strikes out the selected text
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>U</kbd> cycles through the cases of the selected text
 - <kbd>Tab</kbd> متن منتخب را برجسته می سازد (در چندین خط نیز کار می کند)
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> متن منتخب را از حالت برجسته خارج می کند
-- <kbd>Tab</kbd> پس از یک نویسه لیست مرتب نشده مورد لیست را برجسته می سازد
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> پس از یک نویسه لیست مرتب نشده مورد لیست را از حالت برجسته خارج می کند
-- <kbd>Return</kbd> در لیست ها مورد لیست جدیدی ایجاد می کند
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> متن منتخب را از حالت برجسته خارج می کند
+- <kbd>Tab</kbd> after an unordered list character indents the list item
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> after an unordered list character un-indents the list item
+- <kbd>Return</kbd> in lists creates a new list item
 - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>Left</kbd> jumps back in the note history
-    - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>Right</kbd> jumps forward in the note history
+  - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>Right</kbd> jumps forward in the note history
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>1..9</kbd> sets a note bookmark on bookmark slot 1..9
 - <kbd>9..1</kbd> + <kbd>⌘ Cmd</kbd> به نشانک یادداشت در شکاف نشانک 9..1 پرش می کند
 - <kbd>⌘ Cmd</kbd> + <kbd>+</kbd> increases the note text font size by one point
@@ -224,8 +221,8 @@
 ### در پنل پیش نمایش یادداشت
 
 - <kbd>⌘ Cmd</kbd> + <kbd>F</kbd> lets you search in the current note
-    - جهت پرش به روگرفت های قبلی و بعدی از کلیدهای <kbd>بالا</kbd> و <kbd>پایین</kbd> یا کلیدهای <kbd>F3</kbd> و <kbd>F3</kbd> + <kbd>⇧ Shift</kbd> استفاده کنید
-    - <kbd>Esc</kbd> نوار جستجو را می بندد
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> نوار جستجو را می بندد
 
 ### در لیست انجام دادنی
 

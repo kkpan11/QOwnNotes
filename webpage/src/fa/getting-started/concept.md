@@ -1,5 +1,15 @@
 # مفاهیم
 
+<style>
+  /* Remove max-width for content so there is enough space for the Mermaid diagram */
+  /* This targets the VuePress content container on this page only using :has() */
+  body:has(.concept-page-marker) main.vp-page > div {
+    max-width: none !important;
+  }
+</style>
+
+<div class="concept-page-marker" style="display: none;"></div>
+
 ```mermaid
 graph TB
     subgraph Your computer
@@ -7,6 +17,8 @@ graph TB
         sync("Nextcloud Sync")-->md
         qon-comp("Browser extension")-->qon
         qc("Command-line snippet manager")-->qon
+        tui("QOwnNotes TUI")-->md
+        homepage("Homepage dashboard")-->qon
     end
     subgraph Your Nextcloud server
         qon-api("QOwnNotesApi")-->ncs[("Nextcloud server")]
@@ -14,12 +26,15 @@ graph TB
         nc-deck-app("Nextcloud Deck")-->ncs
     end
 
-    nc-notes-mob("Nextcloud Notes mobile app")-->nc-notes-app
+    qon-mob("QOwnNotes Android")-->nc-notes-app
+    qon-mob-->qon-api
     qon-web-app("QOwnNotes web application")-->qon
     qon-->qon-api
     qon-->ncs
     qon-->nc-deck-app
     sync-->ncs
+    qon-.->lt("LanguageTool service")
+    qon-.->harper("Harper service")
     qon-.->qon-web-api("api.qownnotes.org")
     qon-web-api-->github("GitHub")
 
@@ -28,13 +43,17 @@ graph TB
     click md "/getting-started/concept.html#markdown-note-files" "Markdown, media and attachment files in your note folder"
     click qon-comp "/getting-started/concept.html#qownnotes-browser-extension" "QOwnNotes browser extension for managing bookmarks in markdown files and as web clipper"
     click qc "/getting-started/concept.html#qownnotes-command-line-snippet-manager" "QOwnNotes command-line snippet manager"
+    click tui "/getting-started/concept.html#qownnotes-tui" "QOwnNotes TUI, a keyboard-first terminal browser and editor for your Markdown note folders"
+    click homepage "/getting-started/concept.html#homepage-dashboard" "Homepage dashboard using QOwnNotes bookmark suggestions"
     click sync "/getting-started/concept.html#nextcloud-desktop-sync-client" "Nextcloud desktop sync client to sync your notes to your server"
     click ncs "/getting-started/concept.html#nextcloud-server" "Nextcloud server to host your notes and other files"
     click qon-api "/getting-started/concept.html#qownnotesapi-nextcloud-app" "QOwnNotesAPI Nextcloud app to access your server-side trash and note versions"
     click nc-notes-app "/getting-started/concept.html#nextcloud-notes-server-app" "Nextcloud Notes server app to manage your notes in the web"
-    click nc-notes-mob "/getting-started/concept.html#nextcloud-notes-mobile-app" "Nextcloud Notes mobile app to manage your notes on your mobile phone"
+    click qon-mob "/getting-started/concept.html#qownnotes-android" "QOwnNotes Android, an offline-capable Markdown notes app for Android"
     click nc-deck-app "/getting-started/concept.html#nextcloud-deck-server-app" "Nextcloud Deck server app to manage reminders and todo lists in the web"
     click qon-web-app "/getting-started/concept.html#qownnotes-web-app" "QOwnNotes Web App to send photos from your mobile phone"
+    click lt "/editor/languagetool.html" "Optional LanguageTool server for grammar and style checking"
+    click harper "/editor/harper.html" "Optional Harper service for offline grammar and style checking"
     click qon-web-api "/getting-started/concept.html#api-qownnotes-org"
 ```
 
@@ -45,8 +64,7 @@ graph TB
 - علاوه بر این، می توانید به **تاریخچه یادداشت و سطل زباله خود** در سرور نکست کلود یا اون کلود تان از طریق [برنامه QOwnNotesApi Nextcloud](#qownnotesapi-nextcloud-app) دسترسی داشته باشید
 - لیست های انجام دادنی در سرور نکست کلود یا اون کلود تان از QOwnNotes قابل دسترسی هستند
 - **QOwnNotes یادداشت های شما** و پرونده های رسانه یا پیوست را همگام سازی نمی کند!
-    - همگام سازی پرونده یک فعل پیچیده است و در حال حاضر به غیر از آن راه حل های همگام سازی پرونده بهتری در دسترس قرار دارند ([مشتری همگام سازی دسکتاپ نکست کلود](#nextcloud-desktop-sync-client) را ملاحظه کنید)
-
+  - همگام سازی پرونده یک فعل پیچیده است و در حال حاضر به غیر از آن راه حل های همگام سازی پرونده بهتری در دسترس قرار دارند ([مشتری همگام سازی دسکتاپ نکست کلود](#nextcloud-desktop-sync-client) را ملاحظه کنید)
 
 ## پرونده های یادداشت مارک داون
 
@@ -55,13 +73,43 @@ graph TB
 - برای مشاهده یا ویرایش پرونده‌های یادداشت تان، می توانید از هر ویرایشگر متنی که دوست دارید در کنار QOwnNotes استفاده کنید
 - **یادداشت های** خود را با سایر ابزارها (رومیزی و تلفن همراه) و با مشتری همگام سازی ن[نکست کلود ](https://nextcloud.com/)یا [اون کلود](https://owncloud.org/) به سرورتان همگام سازی کنید
 
-
 ## افزونه مرورگر QOwnNotes
 
 می‌توانید **نشانک های مرورگر** خود را با QOwnNotes مدیریت کرده یا از آن به صورت یک **وب کلیپر** استفاده کنید.
 
+The same bookmark parsing and indexing can also power a local suggestion API for [Homepage](https://github.com/gethomepage/homepage).
+
 ::: tip
 افزونه های مرورگر به صورت **آفلاین** و بدون نیاز به اتصال اینترنت اجرا می شوند. برای اطلاعات بیشتر لطفاً نگاهی به [افزونه مرورگر همراه وب QOwnNotes](browser-extension.md) بیندازید.
+:::
+
+## Homepage dashboard
+
+QOwnNotes can expose a local HTTP endpoint for [Homepage](https://github.com/gethomepage/homepage) `suggestionUrl` support, backed by the same bookmark parsing and indexing used by the Web Companion data source.
+
+- Enable it in `Settings -> Browser extension / command snippets`
+- Turn on `Enable socket server`
+- In `Bookmark suggestion API`, enable `Enable Homepage-compatible bookmark suggestions API`
+- Set a port for the local endpoint
+- Optionally set a security token if you want Homepage requests to authenticate
+- The service binds to `127.0.0.1` only
+
+The endpoint is available as `GET /suggest?q=home` and supports an optional `limit` parameter (default `10`, maximum `50`) and an optional `token` parameter.
+
+If you use the custom Homepage assets from `docs/homepage/custom.js`, set `QON_TOKEN` to the same security token configured in QOwnNotes.
+
+Example Homepage configuration:
+
+```yaml
+search:
+  provider: custom
+  url: https://example.com/search?q=
+  suggestionUrl: http://127.0.0.1:22224/suggest?q=
+  showSearchSuggestions: true
+```
+
+::: tip
+Please visit [Homepage suggestion API](homepage-suggestion-api.md) for more information, including which Homepage settings file to edit and how to use the custom assets from `docs/homepage`.
 :::
 
 ## مدیر تکه کد خط فرمان QOwnNotes
@@ -70,6 +118,40 @@ graph TB
 
 ::: tip
 لطفاً برای اطلاعات بیشتر [مدیر تکه کد خط فرمان QOwnNotes](command-line-snippet-manager.md) را ملاحظه کنید.
+:::
+
+## QOwnNotes TUI
+
+You can **browse and edit your notes in the terminal** with the keyboard-first [QOwnNotes TUI](https://github.com/qownnotes/qownnotes-tui). It works directly on your local Markdown note files and **uses the note folders configured in QOwnNotes**, following its note sorting settings.
+
+::: tip
+Please visit [QOwnNotes TUI](qownnotes-tui.md) for more information.
+:::
+
+## LanguageTool service
+
+QOwnNotes can use a local or remote [LanguageTool](https://languagetool.org/) server for **grammar and style checking** in the editor.
+
+- It is **optional** and works alongside the existing spell checker support
+- Enable it in `Settings -> Editor`, then configure your **server URL**, **language**, optional **API key**, and the categories you want to check
+- You can also toggle it quickly from the **Spelling** menu with `Check grammar with LanguageTool`
+- Suggestions and actions are available from the editor context menu for detected issues
+
+::: tip
+Please visit [LanguageTool](../editor/languagetool.md) for more information.
+:::
+
+## Harper service
+
+QOwnNotes can use a local [Harper](https://writewithharper.com/) service for **offline grammar and style checking** in the editor.
+
+- It is **optional** and works alongside the existing spell checker support
+- Enable it in `Settings -> Editor -> Harper`, then configure the **transport**, `harper-ls` command or TCP target, **dialect**, and the linters you want to use
+- You can also toggle it quickly from the **Edit** menu with `Check grammar with Harper`
+- Suggestions and ignore actions are available from the editor context menu for detected issues
+
+::: tip
+Please visit [Harper](../editor/harper.md) for more information.
 :::
 
 ## مشتری همگام سازی رومیزی نکست کلود
@@ -116,17 +198,29 @@ graph TB
 
 You can use QOwnNotes to quickly create **cards** in [**Nextcloud Deck**](https://github.com/nextcloud/deck).
 
-## Nextcloud Notes mobile app
+## QOwnNotes Android
 
-To access your Nextcloud / ownCloud notes from your **mobile device** you can use different apps.
+[QOwnNotes for Android](https://github.com/qownnotes/qownnotes-android) is the recommended app to access your Nextcloud / ownCloud notes from your **mobile device**.
 
-### اندروید
+It is an **offline-capable Markdown notes app** for Android that synchronizes with your Nextcloud server through the **Nextcloud Notes API** and the **QOwnNotesAPI** app.
 
-- [Nextcloud Notes برای اندروید](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes) (شخص ثالث)
+- It uses **Room** as the local source of truth, with edits cached immediately and synchronized when the server is reachable
+- It talks to **Nextcloud Notes** and **QOwnNotesAPI** on your server, giving you access to **note version history** and the **server-side trash bin**
+- Supports **Single Sign-On** import from the Nextcloud Files Android app
+- Renders **CommonMark and GitHub Flavored Markdown**, checkbox lists with three states (open, done, partial), wiki links, tables, fenced code, and remote images
+- Provides a **Markdown editor** with formatting actions, undo/redo, cursor preservation, and local draft persistence
+- Lets you **favorite notes** with offline toggling and favorites-first ordering
+- Create notes from **text shared by other Android apps**
+- Offers **light and dark themes** on Android 9+
 
 ::: tip
-You could also use any sync-tool like *Synchronize Ultimate* or *FolderSync* to sync your note files and use software like *neutriNotes* to edit your notes.
+Please visit [QOwnNotes Android](qownnotes-android.md) for more information.
 :::
+
+### Other Android apps
+
+- [Nextcloud Notes برای اندروید](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes) (شخص ثالث)
+- You could also use any sync-tool like _Synchronize Ultimate_ or _FolderSync_ to sync your note files and use software like _neutriNotes_ or [**Markor**](https://f-droid.org/packages/net.gsantner.markor/) to edit your notes
 
 ### iOS
 

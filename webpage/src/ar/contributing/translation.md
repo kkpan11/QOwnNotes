@@ -4,6 +4,10 @@
 
 كيف يمكنني المساعدة في ترجمة QOwnNotes؟
 
+::: warning
+Please don't attempt to edit the translation files in `src/languages` directly. They are all generated automatically via [Crowdin](https://crowdin.com/project/qownnotes).
+:::
+
 ## انضم إلينا على Crowdin لترجمة QOwnNotes
 
 ![crowdin](/img/crowdin.png)
@@ -82,7 +86,7 @@
 
 ### الحاويات المخصصة
 
-السلاسل النصية مثل <code dir="ltr">::: tip</code> و <code dir="ltr">::: warning</code> و <code dir="ltr">::: info</code> في التوثيق هي علامات [الحاويات المخصصة](https://vuepress.vuejs.org/guide/markdown.html#custom-containers) في VuePress ويجب ألا تترجم.
+السلاسل النصية مثل <code dir="ltr">::: tip و <code dir="ltr">::: warning و <code dir="ltr">::: info في التوثيق هي علامات [الحاويات المخصصة](https://vuepress.vuejs.org/guide/markdown.html#custom-containers) في VuePress ويجب ألا تترجم.
 
 ### سلاسل نصية أخرى يجب ألا تترجم
 

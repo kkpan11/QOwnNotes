@@ -1,11 +1,14 @@
 ---
-title: QOwnNotes
 description: یادداشت برداری مارک داون متن باز به کار رفته برای لینوکس، مکینتاش و ویندوز که باهم با یادداشت‌های نکست کلود کار می کنند
 home: true
 heroImage: /screenshots/screenshot.png
+heroText: QOwnNotes
 tagline: یادداشت برداری مارک داون پرونده با متن ساده و به صورت متن باز و رایگان که به انضمام نکست کلود یا اون کلود بکار می رود
-actionText: شروع سریع⬅
-actionLink: getting-started/overview
+actions:
+  - 
+    text: Quick Start →
+    link: /getting-started/overview
+    type: primary
 features:
   - 
     title: یادداشت های خود را داشته باشید
@@ -19,13 +22,6 @@ features:
 footer: ارائه شده توسط پاتریزیو بکرله همراه با ❤️
 ---
 
-<div class="rss-block">
-    <v-chip outlined><v-icon left>mdi-rss</v-icon> <a href="https://feeds.feedburner.com/QOwnNotesBlog">وبلاگ RSS</a></v-chip>
-    <v-chip outlined><v-icon left>mdi-rss</v-icon> <a href="https://feeds.feedburner.com/QOwnNotesReleases">RSS انتشارها</a></v-chip>
-</div>
+<RssBlock />
 
 <Poll />
-
-<style>
-    .rss-block { text-align: center; margin-bottom: 20px; }
-</style>

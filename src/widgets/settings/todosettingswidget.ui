@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TodoSettingsWidget</class>
+ <widget class="QWidget" name="TodoSettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_main">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QGroupBox" name="groupBox_35">
+     <property name="title">
+      <string>Todo settings</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_28">
+      <item>
+       <widget class="QCheckBox" name="todoCalendarSupportCheckBox">
+        <property name="text">
+         <string>Enable todo calendar support</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="todoInfoLabel">
+        <property name="text">
+          <string>You can access your Nextcloud / ownCloud server or a generic CalDAV server to manage your todo lists.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="textInteractionFlags">
+         <set>Qt::TextInteractionFlag::LinksAccessibleByMouse|Qt::TextInteractionFlag::TextSelectableByMouse</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="calendarBackendGroupBox">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>150</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Which calendar backend do you want to use?</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_40">
+      <item row="3" column="0">
+       <widget class="QRadioButton" name="calDavCalendarRadioButton">
+        <property name="text">
+         <string>Other CalDAV server</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+        <widget class="QRadioButton" name="legacyOwnCloudCalendarRadioButton">
+        <property name="toolTip">
+          <string>For older versions of ownCloud where the default setting doesn't work</string>
+        </property>
+        <property name="text">
+          <string>Legacy ownCloud calendar</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QRadioButton" name="calendarPlusRadioButton">
+        <property name="text">
+         <string notr="true">Calendar Plus</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="defaultCloudCalendarRadioButton">
+        <property name="toolTip">
+          <string>For most current Nextcloud / ownCloud installations</string>
+        </property>
+        <property name="text">
+          <string>Default Nextcloud / ownCloud calendar</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="calDavCalendarGroupBox">
+     <property name="title">
+      <string>CalDAV server settings</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::FieldGrowthPolicy::ExpandingFieldsGrow</enum>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_19">
+        <property name="text">
+         <string>Calendar base url:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="calDavServerUrlEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Please enter the CalDAV base url to your calendar.</string>
+        </property>
+        <property name="placeholderText">
+         <string>Your CalDAV calendar base url</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_15">
+        <property name="text">
+         <string>Username:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="calDavUsernameEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Please enter the username of your CalDAV server.</string>
+        </property>
+        <property name="placeholderText">
+         <string>Your CalDAV username</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_16">
+        <property name="text">
+         <string>Password:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="PasswordLineEdit" name="calDavPasswordEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Please enter the password for your CalDAV username.&lt;br/&gt;Currently the password will be stored encrypted with the other settings, but is not very secure.</string>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::EchoMode::Password</enum>
+        </property>
+        <property name="placeholderText">
+         <string>Your CalDAV password</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="calendarCloudConnectionGroupBox">
+     <property name="title">
+      <string>Which cloud connection do you want to use?</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_27">
+      <item>
+       <widget class="QComboBox" name="calendarCloudConnectionComboBox"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="todoCalendarGroupBox">
+     <property name="title">
+      <string>Select the calendars you want to use for the Todo list</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_7">
+      <item row="2" column="3">
+       <spacer name="horizontalSpacer_8">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="0" colspan="4">
+       <widget class="QListWidget" name="todoCalendarListWidget"/>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="emptyCalendarCachePushButton">
+        <property name="toolTip">
+         <string>This causes all todo list items to be reloaded from your server the next time you open your todo dialog.</string>
+        </property>
+        <property name="text">
+         <string>Empty calendar item cache</string>
+        </property>
+        <property name="icon">
+         <iconset theme="trash-empty" resource="../../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/trash-empty.svg</normaloff>:/icons/breeze-qownnotes/16x16/trash-empty.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="reloadCalendarListButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Click here to reload the list of calendars from your calendar server.</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>&amp;Reload calendar list</string>
+        </property>
+        <property name="icon">
+         <iconset theme="network-connect" resource="../../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/network-connect.svg</normaloff>:/icons/breeze-qownnotes/16x16/network-connect.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="4">
+       <widget class="QCheckBox" name="ignoreNonTodoCalendarsCheckBox">
+        <property name="text">
+         <string>Ignore calendars that don't support todo items</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="todoListSettingsGroupBox">
+     <property name="title">
+      <string>Todo list settings</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_60">
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="closeTodoListAfterSaveCheckBox">
+        <property name="text">
+         <string>Saving an item also closes the Todo list</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer_7">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>5</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PasswordLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">widgets/passwordlineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../breeze-qownnotes.qrc"/>
+ </resources>
+</ui>

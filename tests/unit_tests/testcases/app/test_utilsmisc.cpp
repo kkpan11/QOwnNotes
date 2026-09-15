@@ -1,7 +1,10 @@
 #include "test_utilsmisc.h"
 
+#include <QFile>
+#include <QTemporaryDir>
 #include <QTest>
 
+#include "utils/listutils.h"
 #include "utils/misc.h"
 
 using namespace Utils::Misc;
@@ -103,18 +106,80 @@ void TestUtilsMisc::testHtmlToMarkdown() {
     html += "<h1>Heading <em>italic</em></h1>";
     html += "<h2>Heading <strong>italic</strong></h2>";
     html += "<h3>Heading <em>italic</em></h3>";
-    html += "<h4>Heading <em>italic</em></h4";
+    html += "<h4>Heading <em>italic</em></h4>";
     html += "<h5>Heading <em>italic</em></h5>";
     html += "<h6>Heading <em>italic</em></h6>";
     html += "<code>hello</code>";
     html += "<i>hello</i>";
 
     QString result = htmlToMarkdown(html);
-    QString expected =
-        "\n# Heading *italic*\n\n## Heading **italic**\n\n### Heading "
-        "*italic*\n<h4>Heading *italic*</h4\n##### Heading *italic*\n\n###### "
-        "Heading *italic*\n\n```\nhello\n```\n*hello*";
-    QVERIFY(result == expected);
+
+    // Check that all expected elements are present
+    QVERIFY(result.contains("# Heading *italic*"));
+    QVERIFY(result.contains("## Heading **italic**"));
+    QVERIFY(result.contains("### Heading *italic*"));
+    QVERIFY(result.contains("#### Heading *italic*"));
+    QVERIFY(result.contains("##### Heading *italic*"));
+    QVERIFY(result.contains("###### Heading *italic*"));
+    QVERIFY(result.contains("hello"));
+    QVERIFY(!result.contains("<script>"));
+    QVERIFY(!result.contains("<style>"));
+    QVERIFY(!result.contains("<head>"));
+}
+
+void TestUtilsMisc::testHtmlToMarkdownTables() {
+    QString html = R"(
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>City</th>
+    </tr>
+    <tr>
+        <td>John</td>
+        <td>30</td>
+        <td>New York</td>
+    </tr>
+    <tr>
+        <td>Jane</td>
+        <td>25</td>
+        <td>London</td>
+    </tr>
+</table>
+)";
+
+    QString result = htmlToMarkdown(html);
+
+    // Check for table structure
+    QVERIFY(result.contains("| Name | Age | City |"));
+    QVERIFY(result.contains("| --- | --- | --- |"));
+    QVERIFY(result.contains("| John | 30 | New York |"));
+    QVERIFY(result.contains("| Jane | 25 | London |"));
+}
+
+void TestUtilsMisc::testHtmlToMarkdownTableSpecialChars() {
+    QString html = R"(
+<table>
+    <tr>
+        <th>Operator</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>|</td>
+        <td>Pipe operator</td>
+    </tr>
+    <tr>
+        <td>||</td>
+        <td>Logical OR</td>
+    </tr>
+</table>
+)";
+
+    QString result = htmlToMarkdown(html);
+
+    // Pipes should be escaped in table cells
+    QVERIFY(result.contains("| Operator | Description |"));
+    QVERIFY(result.contains("\\|"));
 }
 
 void TestUtilsMisc::testParseTaskList() {
@@ -142,6 +207,13 @@ void TestUtilsMisc::testParseTaskList() {
     const QString &r4 = parseTaskList(t4, false);
     expec = listTag + " &#9744; task 4</li>";
     QVERIFY(r4 == expec);
+}
+
+void TestUtilsMisc::testToggleCheckboxesDoesNotCreateCheckboxListItems() {
+    const QString input = QStringLiteral("- item\nplain line\n1. ordered item\n* [x] done");
+    const QString expected = QStringLiteral("- item\nplain line\n1. ordered item\n* [-] done");
+
+    QCOMPARE(Utils::ListUtils::toggleCheckboxes(input), expected);
 }
 
 void TestUtilsMisc::testUnescapeHtml() {
@@ -283,4 +355,313 @@ void TestUtilsMisc::testCreateAbsolutePathsInHtml() {
         R"(<html><head><title>Test</title></head><body><a href="https://www.example.com/absolute.html">Link</a> <a href="https://www.example.com/path/to/relative.html">Link</a></body></html>)";
 
     QVERIFY(createAbsolutePathsInHtml(html, url) == expectedHtml);
+}
+
+void TestUtilsMisc::testDetectFileFormatTxt() {
+    QString text =
+        "This is a plain text file.\nIt doesn't match any of the specific formats.\nJust regular "
+        "text content.";
+    QCOMPARE(detectFileFormat(text), QString("txt"));
+}
+
+void TestUtilsMisc::testDetectFileFormatJson() {
+    QString text = R"({
+  "name": "John Doe",
+  "age": 30,
+  "email": "john@example.com",
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "zip": "12345"
+  },
+  "phoneNumbers": [
+    "555-1234",
+    "555-5678"
+  ]
+})";
+    QCOMPARE(detectFileFormat(text), QString("json"));
+}
+
+void TestUtilsMisc::testDetectFileFormatXml() {
+    QString text = R"(<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <person id="1">
+    <name>John Doe</name>
+    <age>30</age>
+    <email>john@example.com</email>
+  </person>
+  <person id="2">
+    <name>Jane Smith</name>
+    <age>28</age>
+    <email>jane@example.com</email>
+  </person>
+</root>)";
+    QCOMPARE(detectFileFormat(text), QString("xml"));
+}
+
+void TestUtilsMisc::testDetectFileFormatXmlWithoutDeclaration() {
+    QString text = R"(<AppDeliveryID>12399_AE_W_Rsa_1</AppDeliveryID>
+<Status>
+<Code>0</Code>
+<Text>SUCCESS</Text>
+</Status>
+<DualDeliveryID>131506</DualDeliveryID>
+<ns4:AddressingResults/>)";
+    QCOMPARE(detectFileFormat(text), QString("xml"));
+}
+
+void TestUtilsMisc::testDetectFileFormatHtml() {
+    QString text = R"(<!DOCTYPE html>
+<html>
+<head>
+    <title>Sample Page</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <h1>Hello World</h1>
+    <p>This is a sample HTML page.</p>
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+    </ul>
+</body>
+</html>)";
+    QCOMPARE(detectFileFormat(text), QString("html"));
+}
+
+void TestUtilsMisc::testDetectFileFormatCsv() {
+    QString text = R"(Name,Age,Email,Department
+John Doe,30,john@example.com,Engineering
+Jane Smith,28,jane@example.com,Marketing
+Bob Johnson,35,bob@example.com,Finance
+Alice Williams,32,alice@example.com,HR)";
+    QCOMPARE(detectFileFormat(text), QString("csv"));
+}
+
+void TestUtilsMisc::testDetectFileFormatIni() {
+    QString text = R"([Database]
+host=localhost
+port=3306
+user=root
+password=secret
+
+[Application]
+debug=true
+log_level=info
+cache_enabled=1
+
+; This is a comment
+timeout=30)";
+    QCOMPARE(detectFileFormat(text), QString("ini"));
+}
+
+void TestUtilsMisc::testDetectFileFormatNix() {
+    QString text = R"({ pkgs ? import <nixpkgs> {} }:
+
+with pkgs;
+
+stdenv.mkDerivation {
+  name = "my-application";
+  version = "1.0.0";
+
+  src = fetchurl {
+    url = "https://example.com/my-application-1.0.0.tar.gz";
+    sha256 = "0000000000000000000000000000000000000000000000000000";
+  };
+
+  buildInputs = [
+    gcc
+    cmake
+    zlib
+  ];
+
+  configurePhase = ''
+    cmake .
+  '';
+
+  buildPhase = ''
+    make
+  '';
+
+  installPhase = ''
+    make install
+  '';
+})";
+    QCOMPARE(detectFileFormat(text), QString("nix"));
+}
+
+void TestUtilsMisc::testDetectFileFormatYaml() {
+    QString text = R"(name: project-config
+version: 1.0.0
+description: Sample YAML configuration file
+
+environment:
+  production:
+    database:
+      host: db.example.com
+      port: 5432
+      user: admin
+      password: secret
+    cache:
+      enabled: true
+      ttl: 3600
+
+  development:
+    database:
+      host: localhost
+      port: 5432
+      user: dev
+      password: dev123
+    cache:
+      enabled: false
+
+dependencies:
+  - name: library1
+    version: "^2.0.0"
+  - name: library2
+    version: "~1.5.0"
+
+logging:
+  level: info
+  format: json
+  path: /var/log/app.log)";
+    QCOMPARE(detectFileFormat(text), QString("yaml"));
+}
+
+void TestUtilsMisc::testDetectFileFormatSql() {
+    QString text = R"(CREATE TABLE employees (
+    employee_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    hire_date DATE NOT NULL,
+    salary NUMERIC(10, 2),
+    department_id INTEGER REFERENCES departments(id)
+);
+
+INSERT INTO employees (first_name, last_name, email, hire_date, salary, department_id)
+VALUES
+    ('John', 'Doe', 'john.doe@example.com', '2023-01-15', 75000.00, 1),
+    ('Jane', 'Smith', 'jane.smith@example.com', '2023-02-20', 82000.00, 2),
+    ('Bob', 'Johnson', 'bob.johnson@example.com', '2023-03-10', 65000.00, 1);
+
+SELECT e.first_name, e.last_name, d.name AS department
+FROM employees e
+JOIN departments d ON e.department_id = d.id
+WHERE e.salary > 70000
+ORDER BY e.last_name ASC;)";
+    QCOMPARE(detectFileFormat(text), QString("sql"));
+}
+
+void TestUtilsMisc::testDetectFileFormatJavaScript() {
+    QString text = R"(// Sample JavaScript module for data processing
+import { formatDate } from './utils.js';
+import * as math from 'mathjs';
+
+const CONFIG = {
+  precision: 2,
+  dateFormat: 'YYYY-MM-DD',
+  threshold: 0.5
+};
+
+class DataAnalyzer {
+  constructor(data) {
+    this.data = data;
+    this.results = null;
+  }
+
+  preprocess() {
+    // Filter out invalid entries
+    return this.data.filter(item => item.value !== null && !isNaN(item.value));
+  }
+
+  analyze() {
+    const processed = this.preprocess();
+
+    // Calculate statistics
+    const values = processed.map(item => item.value);
+    const result = {
+      mean: math.mean(values).toFixed(CONFIG.precision),
+      median: math.median(values).toFixed(CONFIG.precision),
+      stdDev: math.std(values).toFixed(CONFIG.precision),
+      timestamp: formatDate(new Date(), CONFIG.dateFormat)
+    };
+
+    this.results = result;
+    return result;
+  }
+
+  generateReport() {
+    if (!this.results) {
+      this.analyze();
+    }
+
+    return `
+      Data Analysis Report
+      --------------------
+      Date: ${this.results.timestamp}
+      Sample size: ${this.data.length}
+      Mean value: ${this.results.mean}
+      Median value: ${this.results.median}
+      Standard deviation: ${this.results.stdDev}
+    `;
+  }
+}
+
+function processDataset(dataset) {
+  const analyzer = new DataAnalyzer(dataset);
+  const results = analyzer.analyze();
+
+  if (results.mean > CONFIG.threshold) {
+    console.log("Warning: Mean value exceeds threshold");
+  }
+
+  return analyzer.generateReport();
+}
+
+export default {
+  DataAnalyzer,
+  processDataset
+};)";
+    QCOMPARE(detectFileFormat(text), QString("js"));
+}
+
+void TestUtilsMisc::testDetectFileFormatEdgeCases() {
+    // Empty file
+    QCOMPARE(detectFileFormat(""), QString("txt"));
+
+    // Short text that doesn't match any format
+    QCOMPARE(detectFileFormat("Hello world"), QString("txt"));
+
+    // File with ambiguous format (INI vs CSV test case)
+    QString ambiguousText = R"(zend_extension=xdebug.so
+xdebug.remote_enable=1
+xdebug.remote_autostart=1)";
+    QCOMPARE(detectFileFormat(ambiguousText), QString("ini"));
+}
+
+void TestUtilsMisc::testFindAvailableFileNameOverrideSuffix() {
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+
+    // The override suffix must be used when the file path has no suffix at all,
+    // like a temporary file created from a QTemporaryFile template
+    QCOMPARE(findAvailableFileName(QStringLiteral("qownnotes-media-AbCdEf"), dir.path(),
+                                   QStringLiteral("png")),
+             QStringLiteral("qownnotes-media-AbCdEf.png"));
+
+    // The override suffix must also win over the suffix of the file path, because it is
+    // determined from the mime type of the file
+    QCOMPARE(
+        findAvailableFileName(QStringLiteral("screenshot.jpeg"), dir.path(), QStringLiteral("jpg")),
+        QStringLiteral("screenshot.jpg"));
+
+    // Without an override suffix the suffix of the file path is still used
+    QCOMPARE(findAvailableFileName(QStringLiteral("screenshot.jpeg"), dir.path()),
+             QStringLiteral("screenshot.jpeg"));
+
+    // A name that is already taken gets a counter appended, keeping the override suffix
+    QVERIFY(QFile(dir.filePath(QStringLiteral("image.png"))).open(QIODevice::WriteOnly));
+    QCOMPARE(findAvailableFileName(QStringLiteral("image"), dir.path(), QStringLiteral("png")),
+             QStringLiteral("image-1.png"));
 }

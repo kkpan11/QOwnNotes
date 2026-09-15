@@ -1,82 +1,109 @@
-{ lib
-, stdenv
-, fetchurl
-, cmake
-, qttools
-, qtbase
-, qtdeclarative
-, qtsvg
-, qtwayland
-, qtwebsockets
-, makeWrapper
-, wrapQtAppsHook
-, botan2
-, pkg-config
-, xvfb-run
-, installShellFiles
+{
+  lib,
+  stdenv,
+  qt6Packages,
+  cmake,
+  makeWrapper,
+  botan3,
+  libgit2,
+  libsecret,
+  pkg-config,
+  xvfb-run,
+  installShellFiles,
+  aspell,
+  useQlitehtml ? false,
 }:
 
 let
   pname = "qownnotes";
   appname = "QOwnNotes";
-#  version = builtins.head (builtins.match "#define VERSION \"([0-9.]+)\"" (builtins.readFile ./src/version.h));
-  version = "local-build";
+  versionMatch = builtins.match ".*#define VERSION \"([0-9.]+)\".*" (
+    builtins.readFile ./src/version.h
+  );
+  version = if versionMatch != null then builtins.head versionMatch else "unknown";
 in
-stdenv.mkDerivation {
+stdenv.mkDerivation (finalAttrs: {
   inherit pname appname version;
 
-  src = builtins.path { path = ./src; name = "qownnotes"; };
+  src = builtins.path {
+    path = ./src;
+    name = "qownnotes";
+  };
 
   nativeBuildInputs = [
     cmake
-    qttools
-    wrapQtAppsHook
+    qt6Packages.qttools
+    qt6Packages.wrapQtAppsHook
     pkg-config
     installShellFiles
-    xvfb-run
-  ] ++ lib.optionals stdenv.isDarwin [ makeWrapper ];
+  ]
+  ++ lib.optionals stdenv.hostPlatform.isLinux [ xvfb-run ]
+  ++ lib.optionals stdenv.hostPlatform.isDarwin [ makeWrapper ];
 
   buildInputs = [
-    qtbase
-    qtdeclarative
-    qtsvg
-    qtwebsockets
-    botan2
-  ] ++ lib.optionals stdenv.isLinux [ qtwayland ];
+    qt6Packages.qtbase
+    qt6Packages.qtdeclarative
+    qt6Packages.qtsvg
+    qt6Packages.qtwebsockets
+    botan3
+    libgit2
+    aspell
+  ]
+  ++ lib.optionals stdenv.hostPlatform.isLinux [
+    libsecret
+    qt6Packages.qtwayland
+  ];
 
   cmakeFlags = [
     "-DQON_QT6_BUILD=ON"
-    "-DUSE_SYSTEM_BOTAN=1"
     "-DBUILD_WITH_SYSTEM_BOTAN=ON"
-    "-DQT_TRANSLATIONS_DIR=./translations"
+    "-DBUILD_WITH_LIBGIT2=ON"
+    "-DBUILD_WITH_ASPELL=ON"
+  ]
+  ++ lib.optionals useQlitehtml [
+    "-DUSE_QLITEHTML=ON"
+    "-DQLITEHTML_LIBRARY_TYPE=STATIC"
   ];
 
-  postInstall = ''
-    installShellCompletion --cmd ${appname} \
-      --bash <(xvfb-run $out/bin/${appname} --completion bash) \
-      --fish <(xvfb-run $out/bin/${appname} --completion fish)
-    installShellCompletion --cmd ${pname} \
-      --bash <(xvfb-run $out/bin/${appname} --completion bash) \
-      --fish <(xvfb-run $out/bin/${appname} --completion fish)
-  ''
-  # Create a lowercase symlink for Linux
-  + lib.optionalString stdenv.isLinux ''
-    ln -s $out/bin/${appname} $out/bin/${pname}
-  ''
-  # Wrap application for macOS as lowercase binary
-  + lib.optionalString stdenv.isDarwin ''
-    mkdir -p $out/Applications
-    mv $out/bin/${appname}.app $out/Applications
-    makeWrapper $out/Applications/${appname}.app/Contents/MacOS/${appname} $out/bin/${pname}
-  '';
+  # Install shell completion on Linux (with xvfb-run)
+  postInstall =
+    lib.optionalString stdenv.hostPlatform.isLinux ''
+      installShellCompletion --cmd ${finalAttrs.appname} \
+        --bash <(xvfb-run $out/bin/${finalAttrs.appname} --completion bash) \
+        --fish <(xvfb-run $out/bin/${finalAttrs.appname} --completion fish)
+      installShellCompletion --cmd ${finalAttrs.pname} \
+        --bash <(xvfb-run $out/bin/${finalAttrs.appname} --completion bash) \
+        --fish <(xvfb-run $out/bin/${finalAttrs.appname} --completion fish)
+    ''
+    # Install shell completion on macOS
+    + lib.optionalString stdenv.hostPlatform.isDarwin ''
+      installShellCompletion --cmd ${finalAttrs.pname} \
+        --bash <($out/bin/${finalAttrs.appname} --completion bash) \
+        --fish <($out/bin/${finalAttrs.appname} --completion fish)
+    ''
+    # Create a lowercase symlink for Linux
+    + lib.optionalString stdenv.hostPlatform.isLinux ''
+      ln -s $out/bin/${finalAttrs.appname} $out/bin/${finalAttrs.pname}
+    ''
+    # Rename application for macOS as lowercase binary
+    + lib.optionalString stdenv.hostPlatform.isDarwin ''
+      # Prevent "same file" error
+      mv $out/bin/${finalAttrs.appname} $out/bin/${finalAttrs.pname}.bin
+      mv $out/bin/${finalAttrs.pname}.bin $out/bin/${finalAttrs.pname}
+    '';
 
-  meta = with lib; {
-    description = "Plain-text file notepad and todo-list manager with Markdown support and Nextcloud/ownCloud integration";
+  meta = {
+    description = "Plain-text file notepad and todo-list manager with markdown support and Nextcloud/ownCloud integration";
     homepage = "https://www.qownnotes.org/";
     changelog = "https://www.qownnotes.org/changelog.html";
-    downloadPage = "https://github.com/pbek/QOwnNotes/releases/tag/v${version}";
-    license = licenses.gpl2Only;
-    maintainers = with maintainers; [ pbek totoroot ];
-    platforms = platforms.unix;
+    downloadPage = "https://github.com/pbek/QOwnNotes/releases/tag/v${finalAttrs.version}";
+    license = lib.licenses.gpl2Only;
+    maintainers = with lib.maintainers; [
+      pbek
+      totoroot
+      matthiasbeyer
+    ];
+    platforms = lib.platforms.unix;
+    mainProgram = "qownnotes";
   };
-}
+})

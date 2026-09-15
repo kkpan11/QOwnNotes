@@ -11,4 +11,16 @@ flatpak install flathub org.qownnotes.QOwnNotes
 
 그런 다음 `flatpak run org.qownnotes.QOwnNotes` 명령으로 QOwnNotes를 실행할 수 있어야 합니다.
 
-::: 팁 정보 [QOwnNotes Flatpak Issues](https://github.com/flathub/org.qownnotes.QOwnNotes/issues)에서 Flatpak 패키지 관련 이슈를 열어주세요. :::
+::: tip
+정보 [QOwnNotes Flatpak Issues](https://github.com/flathub/org.qownnotes.QOwnNotes/issues)에서 Flatpak 패키지 관련 이슈를 열어주세요.
+:::
+
+::: tip
+If QOwnNotes logs `Could not write secret to keychain`, install the missing Secret Service packages on the host system and restart your desktop session.
+
+For GNOME and other Secret Service based desktops, install `gnome-keyring`, `libsecret` and `seahorse`.
+
+For KDE Plasma, install KWallet support such as `kwalletmanager`.
+
+QOwnNotes will fall back to legacy encryption if the desktop keychain is unavailable.
+:::

@@ -2,13 +2,13 @@
 
 QOwnNotes ne génère aucun revenu (projet à but non lucratif).
 
-Si vous aimez QOwnNotes et que vous souhaitez **faire un don** au projet pour vous aider à payer l'hébergement, le domaine, etc., n'hésitez pas à le faire.
+Si vous aimez QOwnNotes et que vous souhaitez **faire un don** au projet pour nous aider à payer l'hébergement, le domaine, etc., n’hésitez pas à le faire.
 
 ## PayPal
 
-Vous pouvez **faire un don via PayPal** à [pbek PayPal](https://paypal.me/pbek) :
+Vous pouvez **faire un don via PayPal** sur le [PayPal de pbek](https://paypal.me/pbek) :
 
-Pour programmer un don mensuel utilisez ce bouton (PayPal touche une commission sur le don) :
+Pour programmer un don mensuel utilisez ce bouton (PayPal touche une commission sur le don) :
 
 <form id="paypal-donate" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
     <input type="hidden" name="cmd" value="_s-xclick">
@@ -26,7 +26,7 @@ Vous pouvez nous **soutenir sur GitHub Sponsors** via [pbek GitHub Sponsors](htt
 
 Vous pouvez **faire un don via Liberapay** en cliquant sur ce bouton :
 
-<a href="https://liberapay.com/pbek/donate"><img alt="Faire un don avec Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+<a href="https://liberapay.com/pbek/donate"><img alt="Faire un don avec Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a>
 
 ## Bitcoin
 
@@ -36,7 +36,7 @@ Vous pouvez **faire un don Bitcoin BTC** à cette adresse Bitcoin BTC :
 395NiU7QKpNiayWgRrUEGZDn8Z1ebMx8CH
 ```
 
-Vous pouvez **faire un don Bitcoin Cash** à cette adresse Bitcoin Cash :
+Vous pouvez **faire un don Bitcoin Cash** à cette adresse Bitcoin Cash :
 
 ```
 qpk3m6putywwad9sycz9hny5azs7dz67x5jrqmcelq
@@ -50,7 +50,7 @@ Vous pouvez **faire un don d'Ethereum ETH** à cette adresse Ethereum ETH :
 0x992aD2066640C5bF175c7c5649a41827dF6f87C9
 ```
 
-Vous pouvez **faire un don d'Ethereum ETC** à cette adresse Ethereum ETC :
+Vous pouvez **faire un don d’Ethereum ETC** à cette adresse Ethereum ETC :
 
 ```
 0xcC809a58637372EaC340E53767649cdc5C53cA0D

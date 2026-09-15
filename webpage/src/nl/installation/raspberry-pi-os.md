@@ -59,8 +59,7 @@ sudo apt-get install qownnotes
 Voer de volgende shell-opdrachten uit om de repository te vertrouwen.
 
 ```bash
-wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Raspbian_9.0/Release.key
--O - | sudo apt-key add -
+wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Raspbian_9.0/Release.key -O - | sudo apt-key add -
 ```
 
 Voer de volgende shell-opdrachten uit om de repository toe te voegen en vanaf daar QOwnNotes te installeren.
@@ -72,3 +71,21 @@ sudo apt-get install qownnotes
 ```
 
 [Directe download](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Raspbian_9.0)
+
+::: tip
+If QOwnNotes logs `Could not write secret to keychain`, install the missing Secret Service packages and restart your desktop session.
+
+For GNOME and other Secret Service based desktops:
+
+```bash
+sudo apt install gnome-keyring libsecret-1-0 seahorse
+```
+
+For KDE Plasma:
+
+```bash
+sudo apt install kwalletmanager
+```
+
+QOwnNotes will fall back to legacy encryption if the desktop keychain is unavailable.
+:::

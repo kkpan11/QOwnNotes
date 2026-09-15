@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2024 Patrizio Bekerle -- <patrizio@bekerle.com>
+ * Copyright (c) 2014-2026 Patrizio Bekerle -- <patrizio@bekerle.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,6 +37,8 @@ class NotePreviewWidget : public QTextBrowser {
     QString _html;
 
     void resizeEvent(QResizeEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void leaveEvent(QEvent *event) override;
     bool eventFilter(QObject *obj, QEvent *event) override;
 
     QStringList extractGifUrls(const QString &text) const;
@@ -64,4 +66,7 @@ class NotePreviewWidget : public QTextBrowser {
         QPixmap pixmap;
     };
     std::vector<LargePixmap> _largePixmapCache;
+    int _hoveredLinkStart = -1;
+    int _hoveredLinkEnd = -1;
+    void clearHoveredLink();
 };

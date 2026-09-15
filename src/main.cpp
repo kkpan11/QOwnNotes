@@ -1,25 +1,41 @@
+#include <services/cryptoservice.h>
 #include <services/databaseservice.h>
 #include <services/metricsservice.h>
+#include <services/settingsservice.h>
 #include <utils/cli.h>
 #include <utils/gui.h>
 #include <utils/misc.h>
 #include <utils/schema.h>
 
 #include <QApplication>
+#include <QFile>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QSettings>
 #include <QStyleFactory>
 #include <QTranslator>
+#include <QtCore/QTimer>
+#include <QtGui/QStyleHints>
 #include <QtGui>
+#include <cstdio>
 #include <iostream>
 
 #include "dialogs/welcomedialog.h"
+#include "entities/note.h"
 #include "entities/notefolder.h"
+#include "helpers/nomenuiconstyle.h"
 #include "libraries/singleapplication/singleapplication.h"
 #include "mainwindow.h"
 #include "release.h"
 #include "version.h"
+
+#ifdef Q_OS_WIN
+#include <conio.h>
+#include <windows.h>
+#else
+#include <termios.h>
+#include <unistd.h>
+#endif
 
 // define the base class for SingleApplication
 #define QAPPLICATION_CLASS QApplication
@@ -43,7 +59,11 @@ void loadTranslations(QTranslator *translator, const QString &locale) {
     //    loadTranslation(translator[0], "qt_" + QLocale::system().name(),
     //                       QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     loadTranslation(translator[1], "qt_" + locale,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                    QLibraryInfo::path(QLibraryInfo::TranslationsPath));
+#else
                     QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#endif
     QString appPath = QCoreApplication::applicationDirPath();
     loadTranslation(translator[2], "qt_" + locale, appPath + "/translations");
     loadTranslation(translator[3], appPath + "/../src/languages/QOwnNotes_" + locale);
@@ -59,13 +79,31 @@ void loadTranslations(QTranslator *translator, const QString &locale) {
     loadTranslation(translator[9], appPath + "/../share/qt5/translations/QOwnNotes_" + locale);
 #endif
     loadTranslation(translator[10], "QOwnNotes_" + locale);
+    loadTranslation(translator[11], "../share/QOwnNotes/translations/QOwnNotes_" + locale);
+    loadTranslation(translator[12],
+                    appPath + "/../share/QOwnNotes/translations/QOwnNotes_" + locale);
 }
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+void setupSystemDarkModeChangeCheck(QObject *context) {
+    QObject::connect(QGuiApplication::styleHints(), &QStyleHints::colorSchemeChanged, context,
+                     [context](Qt::ColorScheme colorScheme) {
+                         if (colorScheme == Qt::ColorScheme::Unknown) {
+                             return;
+                         }
+
+                         QTimer::singleShot(0, context,
+                                            [] { Utils::Gui::doSystemDarkModeCheck(true); });
+                     });
+}
+#endif
 
 /**
  * Function for loading the release translations
  */
-inline void loadReleaseTranslations(QTranslator &translatorRelease, const QString &locale) {
-    loadTranslation(translatorRelease,
+inline void loadReleaseTranslations(QTranslator *translatorsRelease, const QString &locale) {
+    // The qt5/qt6 paths qre needed by the Fedora and openSUSE builds on OBS
+    loadTranslation(translatorsRelease[0],
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
                     "/usr/share/qt6/translations/"
 #else
@@ -73,10 +111,107 @@ inline void loadReleaseTranslations(QTranslator &translatorRelease, const QStrin
 #endif
                     "QOwnNotes_" +
                         locale);
+    // Debian and Ubuntu don't work with qt5/qt6 paths with cmake and Qt6
+    loadTranslation(translatorsRelease[1], "/usr/share/QOwnNotes/translations/QOwnNotes_" + locale);
+}
+
+static int printDecryptedNoteFile(const QString &fileName, QString password) {
+    if (fileName.isEmpty()) {
+        std::cerr << "Missing note file path for --decrypt-note." << std::endl;
+        return 1;
+    }
+
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        std::cerr << "Could not open note file: " << fileName.toLocal8Bit().constData()
+                  << std::endl;
+        return 1;
+    }
+
+    Note note;
+    note.setNoteText(QString::fromUtf8(file.readAll()));
+
+    if (!note.hasEncryptedNoteText()) {
+        std::cerr << "Note file is not encrypted: " << fileName.toLocal8Bit().constData()
+                  << std::endl;
+        return 1;
+    }
+
+    if (password.isEmpty()) {
+        std::cerr << "Password: " << std::flush;
+        std::string passwordInput;
+#ifdef Q_OS_WIN
+        // On Windows read character-by-character using _getch() so we can print
+        // an asterisk for each key press without echoing the actual character
+        while (true) {
+            int ch = _getch();
+            if (ch == '\r' || ch == '\n') {
+                std::cerr << std::endl;
+                break;
+            } else if (ch == '\b') {
+                // Handle backspace
+                if (!passwordInput.empty()) {
+                    passwordInput.pop_back();
+                    std::cerr << "\b \b" << std::flush;
+                }
+            } else {
+                passwordInput.push_back(static_cast<char>(ch));
+                std::cerr << '*' << std::flush;
+            }
+        }
+#else
+        // On POSIX disable echo, read character-by-character to print asterisks
+        termios oldt{};
+        tcgetattr(STDIN_FILENO, &oldt);
+        termios newt = oldt;
+        newt.c_lflag &= ~(tcflag_t)(ECHO | ICANON);
+        newt.c_cc[VMIN] = 1;
+        newt.c_cc[VTIME] = 0;
+        tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+
+        while (true) {
+            char ch = '\0';
+            if (read(STDIN_FILENO, &ch, 1) != 1) break;
+            if (ch == '\n' || ch == '\r') {
+                std::cerr << std::endl;
+                break;
+            } else if (ch == 127 || ch == '\b') {
+                // Handle backspace / delete
+                if (!passwordInput.empty()) {
+                    passwordInput.pop_back();
+                    std::cerr << "\b \b" << std::flush;
+                }
+            } else {
+                passwordInput.push_back(ch);
+                std::cerr << '*' << std::flush;
+            }
+        }
+
+        tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+#endif
+        password = QString::fromLocal8Bit(passwordInput.c_str());
+    }
+
+    if (password.isEmpty()) {
+        std::cerr << "No password provided." << std::endl;
+        return 1;
+    }
+
+    note.setCryptoPassword(password);
+    if (!note.canDecryptNoteText()) {
+        std::cerr << "Note file could not be decrypted. The password may be wrong." << std::endl;
+        return 1;
+    }
+
+    const QByteArray decryptedNoteText = note.fetchDecryptedNoteText().toUtf8();
+    fwrite(decryptedNoteText.constData(), 1, static_cast<size_t>(decryptedNoteText.size()), stdout);
+    fflush(stdout);
+
+    return 0;
 }
 
 /**
- * Function for loading the translations on OS X
+ * Function for loading the translations on macOS
  */
 inline void loadMacTranslations(QTranslator &translatorOSX, QTranslator &translatorOSX2,
                                 QTranslator &translatorOSX3, QTranslator &translatorOSX4,
@@ -96,7 +231,13 @@ int mainStartupMisc(const QStringList &arguments) {
     QList<QCommandLineOption> allOptions;
 
     parser.setApplicationDescription("QOwnNotes " + QString(VERSION));
-    const QCommandLineOption helpOption = parser.addHelpOption();
+
+    // We don't use parser.addHelpOption(), because it added a --help-all option that didn't work
+    const QCommandLineOption helpOption(
+        QStringList() << "h" << "help",
+        QCoreApplication::translate("main", "Displays help on commandline options."));
+    parser.addOption(helpOption);
+
     const QCommandLineOption portableOption(
         QStringLiteral("portable"), QCoreApplication::translate("main",
                                                                 "Runs the "
@@ -148,9 +289,21 @@ int mainStartupMisc(const QStringList &arguments) {
         "shell");
     parser.addOption(completionOption);
 
+    const QCommandLineOption decryptNoteOption(
+        QStringLiteral("decrypt-note"),
+        QCoreApplication::translate("main", "Prints the decrypted text of an encrypted note file."),
+        "file");
+    parser.addOption(decryptNoteOption);
+
+    const QCommandLineOption decryptNotePasswordOption(
+        QStringLiteral("decrypt-note-password"),
+        QCoreApplication::translate("main", "Password for --decrypt-note."), "password");
+    parser.addOption(decryptNotePasswordOption);
+
     allOptions << helpOption << portableOption << dumpSettingsOption << versionOption
                << allowMultipleInstancesOption << clearSettingsOption << sessionOption
-               << actionOption << completionOption;
+               << actionOption << completionOption << decryptNoteOption
+               << decryptNotePasswordOption;
 
     // just parse the arguments, we want no error handling
     parser.parse(arguments);
@@ -178,22 +331,17 @@ int mainStartupMisc(const QStringList &arguments) {
         return 0;    // Exit after generating the completion script
     }
 
-    QSettings settings;
-    QString interfaceStyle = settings.value(QStringLiteral("interfaceStyle")).toString();
-
-    // restore the interface style
-    if (!interfaceStyle.isEmpty()) {
-        QApplication::setStyle(interfaceStyle);
+    if (parser.isSet(decryptNoteOption)) {
+        return printDecryptedNoteFile(parser.value(decryptNoteOption),
+                                      parser.value(decryptNotePasswordOption));
     }
 
-#ifdef Q_OS_WIN32
-    Utils::Gui::doWindowsDarkModeCheck();
-#endif
+    Utils::Gui::applyInterfaceStyle();
+    Utils::Gui::doSystemDarkModeCheck();
 
-#ifdef Q_OS_LINUX
-    Utils::Gui::doLinuxDarkModeCheck();
-#endif
+    qApp->setProperty("systemIconThemeName", QIcon::themeName());
 
+    SettingsService settings;
     bool systemIconTheme = settings.value(QStringLiteral("systemIconTheme")).toBool();
 
     if (!systemIconTheme) {
@@ -286,11 +434,30 @@ int mainStartupMisc(const QStringList &arguments) {
         notesPath = Utils::Misc::prependPortableDataPathIfNeeded(notesPath);
     }
 
+    DatabaseService::createConnection();
+    DatabaseService::setupTables();
     QDir dir(notesPath);
+    bool existingNotesPathNotFound = !notesPath.isEmpty() && !dir.exists();
 
-    // if this isn't the first run but the note folder doesn't exist any more
-    // let the user select another one
-    if (!notesPath.isEmpty() && !dir.exists()) {
+    // If this isn't the first run and the note folder doesn't exist anymore look for another one
+    if (existingNotesPathNotFound) {
+        notesPath = QString();
+
+        // Loop through all note folders and select the first existing one
+        auto noteFolders = NoteFolder::fetchAll();
+        for (const auto &noteFolder : noteFolders) {
+            dir = QDir(noteFolder.getLocalPath());
+            if (dir.exists()) {
+                notesPath = noteFolder.getLocalPath();
+                noteFolder.setAsCurrent();
+                existingNotesPathNotFound = false;
+                break;
+            }
+        }
+    }
+
+    // If there still was no existing note folder found let the user select another one
+    if (existingNotesPathNotFound) {
         if (QMessageBox::question(nullptr, QObject::tr("Note folder not found!"),
                                   QObject::tr("Your note folder <b>%1</b> was not found any more! "
                                               "Do you want to select a new one?")
@@ -314,9 +481,6 @@ int mainStartupMisc(const QStringList &arguments) {
         notesPath = Utils::Misc::prependPortableDataPathIfNeeded(notesPath);
         dir = QDir(notesPath);
     }
-
-    DatabaseService::createConnection();
-    DatabaseService::setupTables();
 
     // if the notes path is empty or doesn't exist open the welcome dialog
     if (notesPath.isEmpty() || !dir.exists()) {
@@ -369,6 +533,16 @@ int mainStartupMisc(const QStringList &arguments) {
  * Temporary log output until LogWidget::logMessageOutput takes over
  */
 void tempLogMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg) {
+    // Suppress harmless portal registration warning on Qt 6.10+ in AppImage/non-Flatpak
+    // environments where no matching .desktop file is installed system-wide
+    if (type == QtWarningMsg &&
+        msg.contains(QStringLiteral("Failed to register with host portal"))) {
+        return;
+    }
+
+    const bool appSettingsInitialized = !QCoreApplication::organizationName().isEmpty() &&
+                                        !QCoreApplication::applicationName().isEmpty();
+
     QByteArray localMsg = msg.toLocal8Bit();
     auto typeText = Utils::Misc::logMsgTypeText(type);
     auto message = QStringLiteral("%1 (%2:%3, %4)")
@@ -377,32 +551,40 @@ void tempLogMessageOutput(QtMsgType type, const QMessageLogContext &context, con
 
     switch (type) {
         case QtDebugMsg:
-            if (QSettings().value(QStringLiteral("Debug/fileLogging")).toBool()) {
+            if (appSettingsInitialized &&
+                SettingsService().value(QStringLiteral("Debug/fileLogging")).toBool()) {
                 fprintf(stderr, "Debug: %s\n", localMsg.constData());
             }
-            Utils::Misc::logToFileIfAllowed(type, msg);
+            if (appSettingsInitialized) {
+                Utils::Misc::logToFileIfAllowed(type, msg);
+            }
             break;
         case QtInfoMsg:
             fprintf(stderr, "%s", messageWithType.toLocal8Bit().constData());
-            Utils::Misc::logToFileIfAllowed(type, message);
+            if (appSettingsInitialized) {
+                Utils::Misc::logToFileIfAllowed(type, message);
+            }
             break;
         case QtWarningMsg:
         case QtCriticalMsg:
         case QtFatalMsg:
             fprintf(stderr, "%s", messageWithType.toLocal8Bit().constData());
-            Utils::Misc::logToFileIfAllowed(type, message);
+            if (appSettingsInitialized) {
+                Utils::Misc::logToFileIfAllowed(type, message);
+            }
     }
 }
 
 inline void setAppProperties(QCoreApplication &app, const QString &release,
                              const QStringList &arguments, bool singleApp, bool snap, bool portable,
-                             const QString &action) {
+                             const QString &action, const QString &session) {
     app.setProperty("release", release);
     app.setProperty("portable", portable);
     if (singleApp) app.setProperty("singleApplication", true);
     app.setProperty("snap", snap);
     app.setProperty("arguments", arguments);
     app.setProperty("startupAction", action);
+    app.setProperty("session", session);
 }
 
 int main(int argc, char *argv[]) {
@@ -430,10 +612,12 @@ int main(int argc, char *argv[]) {
     bool clearSettings = false;
     bool snap = false;
     bool allowOnlyOneAppInstance = true;
+    bool cliMode = false;
     QStringList arguments;
     QString appNameAdd = QString();
     QString session = QString();
     QString action = QString();
+    QStringList clearSettingsKeychainReferences;
 
 #ifdef QT_DEBUG
     appNameAdd = QStringLiteral("Debug");
@@ -451,10 +635,14 @@ int main(int argc, char *argv[]) {
             portable = true;
         } else if (arg == QStringLiteral("--clear-settings")) {
             clearSettings = true;
+        } else if (arg == QStringLiteral("--allow-multiple-instances")) {
+            allowOnlyOneAppInstance = false;
         } else if (arg == QStringLiteral("--help") || arg == QStringLiteral("--dump-settings") ||
                    arg == QStringLiteral("--completion") || arg == QStringLiteral("-h") ||
-                   arg == QStringLiteral("--allow-multiple-instances")) {
+                   arg == QStringLiteral("--decrypt-note") ||
+                   arg.startsWith(QStringLiteral("--decrypt-note="))) {
             allowOnlyOneAppInstance = false;
+            cliMode = true;
         } else if (arg == QStringLiteral("--after-update")) {
             qWarning() << __func__ << " - 'arg': " << arg;
 #if not defined(Q_OS_WIN)
@@ -495,7 +683,7 @@ int main(int argc, char *argv[]) {
         qputenv("QML_DISABLE_DISK_CACHE", "true");
     }
 
-    // don't log SSL warnings in releases on OS X
+    // don't log SSL warnings in releases on macOS
 #if defined(QT_NO_DEBUG) && defined(Q_OS_MAC)
     qputenv("QT_LOGGING_RULES", "qt.network.ssl.warning=false");
 #endif
@@ -531,10 +719,12 @@ int main(int argc, char *argv[]) {
 
     // set the settings format to ini format and the settings path inside the
     // path of the application in portable mode
+    // Note: QApplication is not yet constructed here, so portableDataPath() needs
+    // argv[0] as a fallback for non-AppImage portables (see issue #3542)
     if (portable) {
         QSettings::setDefaultFormat(QSettings::IniFormat);
         QSettings::setPath(QSettings::IniFormat, QSettings::UserScope,
-                           Utils::Misc::portableDataPath());
+                           Utils::Misc::portableDataPath(arguments.value(0)));
         QSettings settings;
         qDebug() << "settings fileName: " << settings.fileName();
     }
@@ -542,16 +732,35 @@ int main(int argc, char *argv[]) {
     // clear the settings if a --clear-settings parameter was provided
     if (clearSettings) {
         QSettings settings;
+        clearSettingsKeychainReferences = CryptoService::keychainReferencesFromSettings(settings);
         settings.clear();
-
-        if (!portable) {
-            DatabaseService::removeDiskDatabase();
-        }
 
         qWarning("Your settings are now cleared!");
     }
 
-    QSettings settings;
+    SettingsService::loadOverrideSettings();
+
+    auto clearDiskSettings = [&clearSettingsKeychainReferences, clearSettings, portable]() {
+        if (!clearSettings || portable) {
+            return;
+        }
+
+        clearSettingsKeychainReferences.append(CryptoService::keychainReferencesFromDiskDatabase());
+        clearSettingsKeychainReferences.removeDuplicates();
+        DatabaseService::removeDiskDatabase();
+    };
+
+    SettingsService settings;
+
+    // Override the interface scale factor if the setting is enabled
+    if (settings.value(QStringLiteral("overrideInterfaceScalingFactor")).toBool()) {
+        qputenv("QT_SCALE_FACTOR",
+                QString::number(
+                    settings.value(QStringLiteral("interfaceScalingFactor"), 100).toDouble() / 100,
+                    'f', 1)
+                    .toUtf8());
+    }
+
     QString locale = settings.value(QStringLiteral("interfaceLanguage")).toString();
 
     if (locale.isEmpty()) {
@@ -563,9 +772,9 @@ int main(int argc, char *argv[]) {
     Utils::Schema::schemaSettings = new Utils::Schema::Settings();
 
 #ifndef QT_DEBUG
-    QTranslator translatorRelease;
+    QTranslator translatorsRelease[2];
 #endif
-    QTranslator translators[11];
+    QTranslator translators[13];
 #ifdef Q_OS_MAC
     QTranslator translatorOSX;
     QTranslator translatorOSX2;
@@ -597,6 +806,12 @@ int main(int argc, char *argv[]) {
         SingleApplication app(
             argc, argv, true,
             SingleApplication::Mode::User | SingleApplication::Mode::SecondaryNotification);
+        setAppProperties(app, release, arguments, true, snap, portable, action, session);
+        clearDiskSettings();
+
+        if (!clearSettingsKeychainReferences.isEmpty()) {
+            CryptoService::instance()->deleteSecrets(clearSettingsKeychainReferences);
+        }
 
         // quit app if it was already started
         if (app.isSecondary()) {
@@ -608,7 +823,7 @@ int main(int argc, char *argv[]) {
 
             // send message if an action was set
             if (!action.isEmpty()) {
-                app.sendMessage(QString("startupAction:" + action).toUtf8());
+                app.sendMessage(QStringLiteral("startupAction:%1").arg(action).toUtf8());
             }
 
             app.exit(0);
@@ -616,9 +831,8 @@ int main(int argc, char *argv[]) {
             return 0;
         }
 
-        setAppProperties(app, release, arguments, true, snap, portable, action);
 #ifndef QT_DEBUG
-        loadReleaseTranslations(translatorRelease, locale);
+        loadReleaseTranslations(translatorsRelease, locale);
 #endif
 
         loadTranslations(translators, locale);
@@ -634,6 +848,10 @@ int main(int argc, char *argv[]) {
 
         MainWindow w;
         w.show();
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+        setupSystemDarkModeChangeCheck(&app);
+#endif
 
         // receive messages from the primary app
         QObject::connect(&app, &SingleApplication::receivedMessage,
@@ -670,13 +888,19 @@ int main(int argc, char *argv[]) {
 
         return app.exec();
     } else {
-        // use a normal QApplication if multiple instances of the app are
-        // allowed
-        QApplication app(argc, argv);
-        setAppProperties(app, release, arguments, false, snap, portable, action);
+        // Use QCoreApplication for CLI-only modes (no graphical environment needed),
+        // otherwise use QApplication for the full GUI
+        QScopedPointer<QCoreApplication> app(cliMode ? new QCoreApplication(argc, argv)
+                                                     : new QApplication(argc, argv));
+        setAppProperties(*app, release, arguments, false, snap, portable, action, session);
+        clearDiskSettings();
+
+        if (!clearSettingsKeychainReferences.isEmpty()) {
+            CryptoService::instance()->deleteSecrets(clearSettingsKeychainReferences);
+        }
 
 #ifndef QT_DEBUG
-        loadReleaseTranslations(translatorRelease, locale);
+        loadReleaseTranslations(translatorsRelease, locale);
 #endif
 
         loadTranslations(translators, locale);
@@ -694,6 +918,10 @@ int main(int argc, char *argv[]) {
         MainWindow w;
         w.show();
 
-        return app.exec();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+        setupSystemDarkModeChangeCheck(app.get());
+#endif
+
+        return app->exec();
     }
 }

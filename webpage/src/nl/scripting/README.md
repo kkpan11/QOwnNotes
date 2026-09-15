@@ -7,12 +7,12 @@ import QtQml 2.0
 import QOwnNotesTypes 1.0
 
 Script {
-     /**
-         * Wordt uitgevoerd wanneer de script-engine wordt geïnitialiseerd
-         */
-     functie init () {
-         script.log ("Hallo wereld!");
-     }
+    /**
+     * Will be run when the scripting engine initializes
+     */
+    function init() {
+        script.log("Hello world!");
+    }
 }
 ```
 
@@ -33,5 +33,5 @@ Als u een script voor de **Script repository** wilt voorstellen, volg dan de ins
 Als u toegang nodig heeft tot een bepaalde functionaliteit in QOwnNotes of als u vragen of ideeën heeft, open dan een probleem op de [QOwnNotes issue page](https://github.com/pbek/QOwnNotes/issues).
 
 ::: tip
-Voor logboekregistratie kunt u het `script.log()` commando gebruiken om in te loggen op de log widget.
+For logging, you can use the `script.log()` command to log to the _Log panel_, which you can turn on in the _Window / Panels_ menu.
 :::

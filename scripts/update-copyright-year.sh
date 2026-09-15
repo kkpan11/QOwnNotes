@@ -20,7 +20,6 @@ fi
 echo "Previous year: $1"
 echo "New year: $2"
 
-
 echo
 echo Updating QOwnNotes...
 echo
@@ -39,14 +38,14 @@ echo
 echo Updating qmarkdowntextedit...
 echo
 pushd src/libraries/qmarkdowntextedit || exit 1
-git checkout develop || exit 2
+git checkout main || exit 2
 git pull
 popd || exit 3
 
 echo
 echo Updating year "$1" to "$2"...
 echo
-sed -E "s/$1 Patrizio/$2 Patrizio/" -i $(find src -name '*.c' -o -name '*.cpp' -o -name '*.h' -o -name 'copyright' -o -name 'LICENSE')
+find src \( -name '*.c' -o -name '*.cpp' -o -name '*.h' -o -name 'copyright' -o -name 'LICENSE' \) -exec sed -E "s/$1 Patrizio/$2 Patrizio/" -i {} +
 
 echo
 echo "Are there any $1 entries left? (should return nothing)"

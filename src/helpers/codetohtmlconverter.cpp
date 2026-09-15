@@ -19,31 +19,53 @@ void CodeToHtmlConverter::initCodeLangs() Q_DECL_NOTHROW {
     if (!_langStringToEnum.isEmpty()) return;
     _langStringToEnum = QHash<QString, CodeToHtmlConverter::Lang>{
         {QStringLiteral("bash"), CodeToHtmlConverter::CodeBash},
+        {QStringLiteral("zsh"), CodeToHtmlConverter::CodeBash},
         {QStringLiteral("c"), CodeToHtmlConverter::CodeC},
+        {QStringLiteral("h"), CodeToHtmlConverter::CodeC},
+        {QStringLiteral("console"), CodeToHtmlConverter::CodeConsole},
+        {QStringLiteral("terminal"), CodeToHtmlConverter::CodeConsole},
+        {QStringLiteral("shell"), CodeToHtmlConverter::CodeBash},
         {QStringLiteral("cpp"), CodeToHtmlConverter::CodeCpp},
+        {QStringLiteral("cc"), CodeToHtmlConverter::CodeCpp},
         {QStringLiteral("cxx"), CodeToHtmlConverter::CodeCpp},
         {QStringLiteral("c++"), CodeToHtmlConverter::CodeCpp},
+        {QStringLiteral("hpp"), CodeToHtmlConverter::CodeCpp},
+        {QStringLiteral("hxx"), CodeToHtmlConverter::CodeCpp},
         {QStringLiteral("c#"), CodeToHtmlConverter::CodeCSharp},
+        {QStringLiteral("cs"), CodeToHtmlConverter::CodeCSharp},
         {QStringLiteral("cmake"), CodeToHtmlConverter::CodeCMake},
         {QStringLiteral("csharp"), CodeToHtmlConverter::CodeCSharp},
         {QStringLiteral("css"), CodeToHtmlConverter::CodeCSS},
         {QStringLiteral("go"), CodeToHtmlConverter::CodeGo},
+        {QStringLiteral("golang"), CodeToHtmlConverter::CodeGo},
         {QStringLiteral("html"), CodeToHtmlConverter::CodeXML},
+        {QStringLiteral("xhtml"), CodeToHtmlConverter::CodeXML},
+        {QStringLiteral("svg"), CodeToHtmlConverter::CodeXML},
         {QStringLiteral("ini"), CodeToHtmlConverter::CodeINI},
+        {QStringLiteral("cfg"), CodeToHtmlConverter::CodeINI},
         {QStringLiteral("java"), CodeToHtmlConverter::CodeJava},
         {QStringLiteral("javascript"), CodeToHtmlConverter::CodeJs},
         {QStringLiteral("js"), CodeToHtmlConverter::CodeJs},
+        {QStringLiteral("jsx"), CodeToHtmlConverter::CodeJs},
+        {QStringLiteral("node"), CodeToHtmlConverter::CodeJs},
         {QStringLiteral("json"), CodeToHtmlConverter::CodeJSON},
+        {QStringLiteral("jsonc"), CodeToHtmlConverter::CodeJSON},
         {QStringLiteral("make"), CodeToHtmlConverter::CodeMake},
+        {QStringLiteral("makefile"), CodeToHtmlConverter::CodeMake},
         {QLatin1String("nix"), CodeToHtmlConverter::CodeNix},
         {QStringLiteral("php"), CodeToHtmlConverter::CodePHP},
         {QStringLiteral("py"), CodeToHtmlConverter::CodePython},
         {QStringLiteral("python"), CodeToHtmlConverter::CodePython},
+        {QStringLiteral("python3"), CodeToHtmlConverter::CodePython},
         {QStringLiteral("qml"), CodeToHtmlConverter::CodeQML},
+        {QStringLiteral("r"), CodeToHtmlConverter::CodeR},
         {QStringLiteral("rust"), CodeToHtmlConverter::CodeRust},
+        {QStringLiteral("rs"), CodeToHtmlConverter::CodeRust},
         {QStringLiteral("sh"), CodeToHtmlConverter::CodeBash},
+        {QStringLiteral("shell-session"), CodeToHtmlConverter::CodeConsole},
         {QStringLiteral("sql"), CodeToHtmlConverter::CodeSQL},
         {QStringLiteral("ts"), CodeToHtmlConverter::CodeTypeScript},
+        {QStringLiteral("tsx"), CodeToHtmlConverter::CodeTypeScript},
         {QStringLiteral("typescript"), CodeToHtmlConverter::CodeTypeScript},
         {QStringLiteral("v"), CodeToHtmlConverter::CodeV},
         {QStringLiteral("vex"), CodeToHtmlConverter::CodeVex},
@@ -51,11 +73,13 @@ void CodeToHtmlConverter::initCodeLangs() Q_DECL_NOTHROW {
         {QStringLiteral("yml"), CodeToHtmlConverter::CodeYAML},
         {QStringLiteral("yaml"), CodeToHtmlConverter::CodeYAML},
         {QStringLiteral("forth"), CodeToHtmlConverter::CodeForth},
-        {QStringLiteral("systemverilog"), CodeToHtmlConverter::CodeSystemVerilog}};
+        {QStringLiteral("systemverilog"), CodeToHtmlConverter::CodeSystemVerilog},
+        {QStringLiteral("sv"), CodeToHtmlConverter::CodeSystemVerilog},
+        {QStringLiteral("gdscript"), CodeToHtmlConverter::CodeGDScript}};
 }
 
 QString CodeToHtmlConverter::process(const QString &input) const {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 2)
     qDebug() << "Going to highlight input:" << StringView(input).mid(0, 12)
              << ", with lang:" << _currentLang;
     return process(StringView(input));
@@ -94,6 +118,8 @@ QString CodeToHtmlConverter::process(StringView input) const {
             loadShellData(types, keywords, builtin, literals, others);
             comment = QLatin1Char('#');
             break;
+        case CodeConsole:
+            return consoleHighlighter(input);
         case CodePHP:
             loadPHPData(types, keywords, builtin, literals, others);
             break;
@@ -102,6 +128,10 @@ QString CodeToHtmlConverter::process(StringView input) const {
             break;
         case CodePython:
             loadPythonData(types, keywords, builtin, literals, others);
+            comment = QLatin1Char('#');
+            break;
+        case CodeR:
+            loadRData(types, keywords, builtin, literals, others);
             comment = QLatin1Char('#');
             break;
         case CodeRust:
@@ -156,10 +186,13 @@ QString CodeToHtmlConverter::process(StringView input) const {
         case CodeForth:
             loadForthData(types, keywords, builtin, literals, others);
             comment = QLatin1Char('\\');
-            ;
             break;
         case CodeSystemVerilog:
             loadSystemVerilogData(types, keywords, builtin, literals, others);
+            break;
+        case CodeGDScript:
+            loadGDScriptData(types, keywords, builtin, literals, others);
+            comment = QLatin1Char('#');
             break;
         default:
             output += escapeString(input);
@@ -529,9 +562,11 @@ QString CodeToHtmlConverter::xmlHighlighter(StringView input) const {
     QString output = QLatin1String("");
 
     for (int i = 0; i < textLen; ++i) {
-        if (input.at(i) == QLatin1Char('<') && input.at(i + 1) != QLatin1Char('!')) {
+        if (input.at(i) == QLatin1Char('<') && (i + 1 < textLen) &&
+            input.at(i + 1) != QLatin1Char('!')) {
             const int found = input.indexOf(QLatin1Char('>'), i);
             if (found > 0) {
+                // Escape the opening '<'
                 output += escape(input.at(i));
                 ++i;
                 if (input.at(i) == QLatin1Char('/')) {
@@ -542,11 +577,28 @@ QString CodeToHtmlConverter::xmlHighlighter(StringView input) const {
                 StringView tag = input.mid(i, found - i);
 
                 static const QRegularExpression re(R"(([a-zA-Z0-9]+(\s*=\s*"[^"]*")?))");
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+                // Qt 6.5+: use globalMatchView with StringView
+                QRegularExpressionMatchIterator matchIt = re.globalMatchView(tag);
+#else
+                // Qt 5.x and Qt 6.0-6.4: use globalMatch with QString
                 QRegularExpressionMatchIterator matchIt = re.globalMatch(TO_QSTRING(tag));
+#endif
 
+                // Track position within the tag to preserve characters
+                // between regex matches (e.g. '?' in '<?xml ... ?>')
+                int lastMatchEnd = 0;
                 while (matchIt.hasNext()) {
                     QRegularExpressionMatch match = matchIt.next();
+                    int matchStart = match.capturedStart(0);
                     QString captured = match.captured(0);
+
+                    // Escape any characters between the previous match
+                    // and this one (e.g. '?' before 'xml' in '<?xml')
+                    for (int j = lastMatchEnd; j < matchStart; ++j) {
+                        output += escape(tag.at(j));
+                    }
+                    lastMatchEnd = matchStart + match.capturedLength(0);
 
                     if (!captured.contains(QLatin1Char('='))) {
                         output += setFormat(captured, Format::Builtin);
@@ -556,13 +608,16 @@ QString CodeToHtmlConverter::xmlHighlighter(StringView input) const {
                                   setFormat(captured.mid(eqPos + 1, captured.length() - eqPos - 1),
                                             Format::String);
                     }
-
-                    if (matchIt.hasNext()) {
-                        output += " ";
-                    }
                 }
 
-                output += (tag.endsWith(QLatin1Char('/')) ? " />" : ">");
+                // Escape any trailing characters after the last match
+                // (e.g. '?' before '>' in '<?xml ...?>')
+                for (int j = lastMatchEnd; j < tag.length(); ++j) {
+                    output += escape(tag.at(j));
+                }
+
+                // Escape the closing '>'
+                output += QStringLiteral("&gt;");
 
                 i = found;
             }
@@ -588,6 +643,47 @@ QString CodeToHtmlConverter::xmlHighlighter(StringView input) const {
             output += escape(input.at(i));
         }
     }
+    return output;
+}
+
+QString CodeToHtmlConverter::consoleHighlighter(StringView input) const {
+    QString output;
+    const QString source = input.toString();
+    output.reserve(source.size() + 100);
+
+    const CodeToHtmlConverter shellConverter(QStringLiteral("bash"));
+    static const QRegularExpression promptRe(QStringLiteral(
+        R"(^((?:[A-Za-z]:[^\n>]*>|(?:\[[^\]\n]+\]\s*)?(?:(?:[\w.-]+@[\w.-]+(?::[^\n$#>]*)?)\s*)?[$#>])\s*)(.*)$)"));
+
+    int pos = 0;
+    while (pos < source.length()) {
+        const int newline = source.indexOf(QChar('\n'), pos);
+        const bool hasNewline = newline != -1;
+        const QString line = source.mid(pos, hasNewline ? newline - pos : source.length() - pos);
+        const QRegularExpressionMatch match = promptRe.match(line);
+
+        if (match.hasMatch()) {
+            output += setFormat(match.captured(1), Format::ConsolePrompt);
+            const QString command = match.captured(2);
+            static const QRegularExpression commandRe(QStringLiteral(R"(^(\s*)(\S+)(.*)$)"));
+            const QRegularExpressionMatch commandMatch = commandRe.match(command);
+            if (commandMatch.hasMatch()) {
+                output += escapeString(commandMatch.captured(1));
+                output += setFormat(commandMatch.captured(2), Format::Builtin);
+                output += shellConverter.process(commandMatch.captured(3));
+            } else {
+                output += shellConverter.process(command);
+            }
+        } else {
+            output += escapeString(line);
+        }
+
+        if (!hasNewline) break;
+        output += QLatin1Char('\n');
+        pos = newline + 1;
+    }
+
+    output.squeeze();
     return output;
 }
 
@@ -803,6 +899,14 @@ QString CodeToHtmlConverter::escapeString(StringView s) {
     return ret;
 }
 
+QString CodeToHtmlConverter::escapeString(const QString &s) {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 2)
+    return escapeString(StringView(s));
+#else
+    return escapeString(StringView(&s));
+#endif
+}
+
 QString CodeToHtmlConverter::setFormat(StringView str, CodeToHtmlConverter::Format format) {
     switch (format) {
         case Type:
@@ -823,6 +927,9 @@ QString CodeToHtmlConverter::setFormat(StringView str, CodeToHtmlConverter::Form
         case Other:
             return QStringLiteral("<span class=\"code-other\">") % escapeString(str) %
                    QStringLiteral("</span>");
+        case ConsolePrompt:
+            return QStringLiteral("<span class=\"code-console-prompt code-type\">") %
+                   escapeString(str) % QStringLiteral("</span>");
         case Comment:
             return QStringLiteral("<span class=\"code-comment\">") % escapeString(str) %
                    QStringLiteral("</span>");
@@ -832,7 +939,7 @@ QString CodeToHtmlConverter::setFormat(StringView str, CodeToHtmlConverter::Form
 }
 
 QString CodeToHtmlConverter::setFormat(const QString &str, CodeToHtmlConverter::Format format) {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 2)
     return setFormat(StringView(str), format);
 #else
     return setFormat(StringView(&str), format);

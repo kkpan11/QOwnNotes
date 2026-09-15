@@ -18,10 +18,6 @@ If you want to speed up build time you may want to read [CCACHE and AUR](https:/
 
 ## pacman
 
-::: warning
-[OBS](https://build.opensuse.org/package/show/home:pbek:QOwnNotes/desktop) currently seems to have build issues on Arch Linux. Best use the AUR or the [AppImage](./appimage.md) for now.
-:::
-
 Add the following lines to your `/etc/pacman.conf` with `sudo nano /etc/pacman.conf`:
 
 ```ini
@@ -37,7 +33,7 @@ wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Arch_Extra/
 sudo pacman-key --lsign-key F2205FB121DF142B31450865A3BA514562A835DB
 ```
 
-If the command `sudo pacman-key --lsign-key F2205FB121DF142B31450865A3BA514562A835DB` fails with a message like: `ERROR: FFC43FC94539B8B0 could not be locally signed.`, you could first find out the actual *keyid* of the downloaded key, i.e. with the command (and output):
+If the command `sudo pacman-key --lsign-key F2205FB121DF142B31450865A3BA514562A835DB` fails with a message like: `ERROR: FFC43FC94539B8B0 could not be locally signed.`, you could first find out the actual _keyid_ of the downloaded key, i.e. with the command (and output):
 
 ```bash
 gpg /path/to/downloaded/home_pbek_QOwnNotes_Arch_Extra.key
@@ -57,4 +53,22 @@ sudo pacman -Syy qownnotes
 
 ::: tip
 Of course you can also use this repository with other Arch Linux based distributions, like Manjaro.
+:::
+
+::: tip
+If QOwnNotes logs `Could not write secret to keychain`, install the missing Secret Service packages and restart your desktop session.
+
+For GNOME and other Secret Service based desktops:
+
+```bash
+sudo pacman -S gnome-keyring libsecret seahorse
+```
+
+For KDE Plasma:
+
+```bash
+sudo pacman -S kwalletmanager kwallet
+```
+
+QOwnNotes will fall back to legacy encryption if the desktop keychain is unavailable.
 :::

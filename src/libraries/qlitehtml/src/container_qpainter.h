@@ -39,6 +39,7 @@
 #include <QTextDocument>
 #include <QUrl>
 #include <QVector>
+#include <QtCore/Qt>
 
 #include <functional>
 #include <memory>
@@ -82,7 +83,8 @@ public: // outside API
     // these return areas to redraw in document space
     QVector<QRect> mousePressEvent(const QPoint &documentPos,
                                    const QPoint &viewportPos,
-                                   Qt::MouseButton button);
+                                   Qt::MouseButton button,
+                                   Qt::KeyboardModifiers modifiers);
     QVector<QRect> mouseMoveEvent(const QPoint &documentPos, const QPoint &viewportPos);
     QVector<QRect> mouseReleaseEvent(const QPoint &documentPos,
                                      const QPoint &viewportPos,
@@ -93,9 +95,11 @@ public: // outside API
     QVector<QRect> leaveEvent();
 
     QUrl linkAt(const QPoint &documentPos, const QPoint &viewportPos);
+    QUrl imageAt(const QPoint &documentPos, const QPoint &viewportPos);
 
     QString caption() const;
     QString selectedText() const;
+    QString selectedHtml() const;
 
     void findText(const QString &text,
                   QTextDocument::FindFlags flags,

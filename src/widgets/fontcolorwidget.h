@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2024 Patrizio Bekerle -- <patrizio@bekerle.com>
+ * Copyright (c) 2014-2026 Patrizio Bekerle -- <patrizio@bekerle.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,10 +31,15 @@ class FontColorWidget : public QFrame {
 
     void updateAllTextItems();
 
+   Q_SIGNALS:
+    void schemaChanged();
+
    public slots:
     bool selectFirstLightSchema();
 
     bool selectFirstDarkSchema();
+
+    void setWikiLinkItemsVisible(bool visible);
 
    private slots:
     void on_foregroundColorButton_clicked();
@@ -108,4 +113,6 @@ class FontColorWidget : public QFrame {
     void selectLastSchema();
 
     void initFontSelectors();
+
+    void applySchemaByIndex(int index);
 };

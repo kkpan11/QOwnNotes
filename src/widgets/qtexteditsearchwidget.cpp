@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2024 Patrizio Bekerle -- <patrizio@bekerle.com>
+ * Copyright (c) 2014-2026 Patrizio Bekerle -- <patrizio@bekerle.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,13 +17,72 @@
 #include <QDebug>
 #include <QEvent>
 #include <QKeyEvent>
+#include <QScrollBar>
+#include <QTextBoundaryFinder>
 
 #include "ui_qtexteditsearchwidget.h"
 
+namespace {
+bool isEmojiCodePoint(unsigned int codePoint) {
+    return codePoint == 0x20E3 || codePoint == 0x00A9 || codePoint == 0x00AE ||
+           codePoint == 0x203C || codePoint == 0x2049 || codePoint == 0x2122 ||
+           codePoint == 0x2139 || (codePoint >= 0x2194 && codePoint <= 0x21AA) ||
+           (codePoint >= 0x231A && codePoint <= 0x2328) || codePoint == 0x23CF ||
+           (codePoint >= 0x23E9 && codePoint <= 0x23FA) || codePoint == 0x24C2 ||
+           (codePoint >= 0x25AA && codePoint <= 0x25AB) || codePoint == 0x25B6 ||
+           codePoint == 0x25C0 || (codePoint >= 0x25FB && codePoint <= 0x25FE) ||
+           (codePoint >= 0x2600 && codePoint <= 0x27BF) ||
+           (codePoint >= 0x2934 && codePoint <= 0x2935) ||
+           (codePoint >= 0x2B05 && codePoint <= 0x2B55) || codePoint == 0x3030 ||
+           codePoint == 0x303D || codePoint == 0x3297 || codePoint == 0x3299 ||
+           (codePoint >= 0x1F000 && codePoint <= 0x1FAFF);
+}
+
+int graphemeCount(const QString &text, int maxCount) {
+    if (text.isEmpty()) {
+        return 0;
+    }
+
+    QTextBoundaryFinder finder(QTextBoundaryFinder::Grapheme, text);
+    finder.toStart();
+
+    int count = 0;
+    while (finder.toNextBoundary() != -1) {
+        ++count;
+
+        if (count >= maxCount) {
+            break;
+        }
+    }
+
+    return count;
+}
+
+bool shouldStartSearch(const QString &text) {
+    const int minimumSearchLength = 2;
+    const int count = graphemeCount(text, minimumSearchLength);
+    if (count >= minimumSearchLength) {
+        return true;
+    }
+
+    if (count != 1) {
+        return false;
+    }
+
+    const auto codePoints = text.toUcs4();
+    for (unsigned int codePoint : codePoints) {
+        if (isEmojiCodePoint(codePoint)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+}    // namespace
+
 QTextEditSearchWidget::QTextEditSearchWidget(QTextEdit *parent)
-    : QWidget(parent), ui(new Ui::QTextEditSearchWidget) {
+    : QWidget(parent), ui(new Ui::QTextEditSearchWidget), _textEdit(parent), _darkMode(false) {
     ui->setupUi(this);
-    _textEdit = parent;
     hide();
 
     QObject::connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(deactivate()));
@@ -36,16 +95,22 @@ QTextEditSearchWidget::QTextEditSearchWidget(QTextEdit *parent)
     QObject::connect(ui->replaceButton, SIGNAL(clicked()), this, SLOT(doReplace()));
     QObject::connect(ui->replaceAllButton, SIGNAL(clicked()), this, SLOT(doReplaceAll()));
 
+    // Set up debounce timer so the search is delayed while the user is still
+    // typing
+    _debounceTimer.setSingleShot(true);
+    _debounceTimer.setInterval(300);
+    QObject::connect(&_debounceTimer, &QTimer::timeout, this, &QTextEditSearchWidget::doSearchDown);
+
     installEventFilter(this);
     ui->searchLineEdit->installEventFilter(this);
     ui->replaceLineEdit->installEventFilter(this);
 
 #ifdef Q_OS_MAC
-    // set the spacing to 8 for OS X
+    // set the spacing to 8 for macOS
     layout()->setSpacing(8);
     ui->buttonFrame->layout()->setSpacing(9);
 
-    // set the margin to 0 for the top buttons for OS X
+    // set the margin to 0 for the top buttons for macOS
     QString buttonStyle = "QPushButton {margin: 0}";
     ui->closeButton->setStyleSheet(buttonStyle);
     ui->searchDownButton->setStyleSheet(buttonStyle);
@@ -65,16 +130,36 @@ void QTextEditSearchWidget::activate() {
     setReplaceMode(false);
     show();
 
-    // preset the selected text as search text if there is any and there is no
-    // other search text
-    QString selectedText = _textEdit->textCursor().selectedText();
-    if (!selectedText.isEmpty() && ui->searchLineEdit->text().isEmpty()) {
+    const int verticalScrollBarValue = _textEdit->verticalScrollBar()->value();
+    const int horizontalScrollBarValue = _textEdit->horizontalScrollBar()->value();
+
+    // Preset the selected text as search text if there is any, replacing any
+    // existing search text. Position the cursor one character before the
+    // selection start so that doSearchDown() (which searches strictly after the
+    // cursor) lands on the originally selected occurrence rather than the next
+    // one, keeping the view at the user's current position (for #3541).
+    const QTextCursor originalCursor = _textEdit->textCursor();
+    const QString selectedText = originalCursor.selectedText();
+    if (!selectedText.isEmpty()) {
         ui->searchLineEdit->setText(selectedText);
+
+        // QTextEdit::find() starts searching strictly after the cursor position,
+        // so place the cursor one character before the selection start to ensure
+        // the first hit is the originally selected word itself.
+        // (setText above may have already triggered an intermediate search via
+        // the textChanged signal, so we always reset the position here.)
+        QTextCursor cursor = originalCursor;
+        const int pos = originalCursor.selectionStart();
+        cursor.setPosition(pos > 0 ? pos - 1 : 0);
+        _textEdit->setTextCursor(cursor);
     }
 
     ui->searchLineEdit->setFocus();
     ui->searchLineEdit->selectAll();
     doSearchDown();
+
+    _textEdit->verticalScrollBar()->setValue(verticalScrollBarValue);
+    _textEdit->horizontalScrollBar()->setValue(horizontalScrollBarValue);
 }
 
 void QTextEditSearchWidget::activateReplace() {
@@ -136,8 +221,16 @@ bool QTextEditSearchWidget::eventFilter(QObject *obj, QEvent *event) {
 }
 
 void QTextEditSearchWidget::searchLineEditTextChanged(const QString &arg1) {
-    Q_UNUSED(arg1);
-    doSearchDown();
+    // If the search term is too short, just clear the style without jumping to
+    // the top of the document
+    if (!shouldStartSearch(arg1)) {
+        _debounceTimer.stop();
+        ui->searchLineEdit->setStyleSheet(QString());
+        return;
+    }
+
+    // Debounce: delay the search while the user is still typing
+    _debounceTimer.start();
 }
 
 void QTextEditSearchWidget::doSearchUp() { doSearch(false); }
@@ -197,7 +290,7 @@ void QTextEditSearchWidget::doReplaceAll() {
 bool QTextEditSearchWidget::doSearch(bool searchDown, bool allowRestartAtTop) {
     QString text = ui->searchLineEdit->text();
 
-    if (text.isEmpty()) {
+    if (!shouldStartSearch(text)) {
         ui->searchLineEdit->setStyleSheet(QString());
         return false;
     }
@@ -231,15 +324,17 @@ bool QTextEditSearchWidget::doSearch(bool searchDown, bool allowRestartAtTop) {
         found = _textEdit->find(text, options);
     }
 
-    QRect rect = _textEdit->cursorRect();
-    QMargins margins = _textEdit->layout()->contentsMargins();
-    int searchWidgetHotArea = _textEdit->height() - this->height();
-    int marginBottom = (rect.y() > searchWidgetHotArea) ? (this->height() + 10) : 0;
+    if (_textEdit->layout() != nullptr) {
+        QRect rect = _textEdit->cursorRect();
+        QMargins margins = _textEdit->layout()->contentsMargins();
+        int searchWidgetHotArea = _textEdit->height() - this->height();
+        int marginBottom = (rect.y() > searchWidgetHotArea) ? (this->height() + 10) : 0;
 
-    // move the search box a bit up if we would block the search result
-    if (margins.bottom() != marginBottom) {
-        margins.setBottom(marginBottom);
-        _textEdit->layout()->setContentsMargins(margins);
+        // move the search box a bit up if we would block the search result
+        if (margins.bottom() != marginBottom) {
+            margins.setBottom(marginBottom);
+            _textEdit->layout()->setContentsMargins(margins);
+        }
     }
 
     // add a background color according if we found the text or not

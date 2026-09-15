@@ -4,6 +4,7 @@
 #include <utils/misc.h>
 
 #include <QDateTime>
+#include <QSet>
 
 class Bookmark;
 class CommandSnippet;
@@ -13,8 +14,41 @@ class QFile;
 class QUrl;
 class QSqlQuery;
 
+struct LinkHit {
+    explicit LinkHit(QString markdown = "", QString text = "") noexcept
+        : markdown(std::move(markdown)), text(std::move(text)) {}
+
+    bool isEmpty() const noexcept { return markdown.isEmpty() && text.isEmpty(); }
+
+    // Add operator== for comparison
+    bool operator==(const LinkHit &other) const {
+        return markdown == other.markdown && text == other.text;
+    }
+
+    friend QDebug operator<<(QDebug dbg, const LinkHit &hit);
+
+    QString markdown;
+    QString text;
+};
+
+struct NoteSearchTerm {
+    QString text;
+    QString namePrefix;
+    QString wordPrefix;
+    bool nameOnly = false;
+    bool wholeWord = false;
+};
+
+// Add hash function for LinkHit
+inline uint qHash(const LinkHit &hit, uint seed = 0) {
+    return qHash(hit.markdown, seed) ^ qHash(hit.text, seed);
+}
+
 #define NOTE_TEXT_ENCRYPTION_PRE_STRING "<!-- BEGIN ENCRYPTED TEXT --"
 #define NOTE_TEXT_ENCRYPTION_POST_STRING "-- END ENCRYPTED TEXT -->"
+#define NOTE_TEXT_ENCRYPTION_WARNING_COMMENT                                              \
+    "<!-- This note is encrypted. Do not edit the text between the BEGIN ENCRYPTED TEXT " \
+    "and END ENCRYPTED TEXT markers manually, or the note will not be decryptable anymore. -->"
 #define BOTAN_SALT "Gj3%36/SmPoe12$snNAs-A-_.),?faQ1@!f32"
 
 class Note {
@@ -24,6 +58,16 @@ class Note {
     int getId() const;
 
     QString getName() const;
+
+    QString getLeadingEmoji() const;
+
+    QString getNameWithoutLeadingEmoji() const;
+
+    static QString extractLeadingEmoji(const QString &text);
+
+    bool isConflictedCopy() const;
+
+    static QString conflictedCopyEmoji();
 
     QString getFileName() const;
 
@@ -41,26 +85,40 @@ class Note {
 
     QString getCryptoPassword() const;
 
+    QString getFileChecksum() const;
+
     void setCryptoKey(const qint64 cryptoKey);
+
+    void setFileChecksum(const QString &checksum);
 
     static bool addNote(const QString &name, const QString &fileName, const QString &text);
 
-    static Note fetch(int id);
+    static Note fetch(int id, const QString &connectionName = QStringLiteral("memory"));
 
     static Note fetchByName(const QRegularExpression &regExp, int noteSubFolderId = -1);
 
-    static Note fetchByFileName(const QString &fileName, int noteSubFolderId = -1);
+    static Note fetchByFileName(const QString &fileName, int noteSubFolderId = -1,
+                                int excludeNoteId = -1);
 
     static Note fetchByFileName(const QString &fileName, const QString &noteSubFolderPathData);
 
     static Note fetchByName(const QString &name, int noteSubFolderId = -1);
+
+    static QVector<Note> fetchAllByName(const QString &name,
+                                        const QString &connectionName = QStringLiteral("memory"));
+
+    static bool isWikiLinkSupportEnabled();
+
+    static Note resolveWikiLink(const QString &target, int currentNoteSubFolderId = -1,
+                                const QString &connectionName = QStringLiteral("memory"));
 
     static Note fetchByName(const QString &name, const QString &noteSubFolderPathData,
                             const QString &pathDataSeparator = QStringLiteral("\n"));
 
     static int fetchNoteIdByName(const QString &name, int noteSubFolderId = -1);
 
-    static QVector<Note> fetchAll(int limit = -1);
+    static QVector<Note> fetchAll(int limit = -1,
+                                  const QString &connectionName = QStringLiteral("memory"));
 
     static QVector<int> fetchAllNotTaggedIds();
 
@@ -85,7 +143,8 @@ class Note {
 
     bool storeNewText(QString text);
 
-    bool storeNoteTextFileToDisk(bool &currentNoteTextChanged);
+    bool storeNoteTextFileToDisk(bool &currentNoteTextChanged,
+                                 bool *wasCancelledDueToExternalModification = nullptr);
     bool storeNoteTextFileToDisk();
 
     static QString defaultNoteFileExtension();
@@ -94,11 +153,15 @@ class Note {
 
     static QString getFullFilePathForFile(const QString &fileName);
 
-    QString getFilePathRelativeToNote(const Note &note) const;
+    QString getFilePathRelativeToNote(const Note &note,
+                                      const QString &connectionName = QStringLiteral("memory"),
+                                      bool resolveFileSystemPaths = true) const;
 
     static int storeDirtyNotesToDisk(Note &currentNote, bool *currentNoteChanged = nullptr,
                                      bool *noteWasRenamed = nullptr,
                                      bool *currentNoteTextChanged = nullptr);
+
+    static bool hasDirtyNotes();
 
     bool updateNoteTextFromDisk();
 
@@ -122,7 +185,7 @@ class Note {
 
     Note fillFromQuery(const QSqlQuery &query);
 
-    bool fillByFileName(const QString &fileName, int noteSubFolderId = -1);
+    bool fillByFileName(const QString &fileName, int noteSubFolderId = -1, int excludeNoteId = -1);
 
     bool removeNoteFile();
 
@@ -143,7 +206,13 @@ class Note {
 
     static qint64 qint64Hash(const QString &str);
 
-    QString encryptNoteText();
+    static QString calculateChecksum(const QString &text);
+
+    static void getChecksumStats(qint64 &totalTime, int &callCount);
+
+    static void resetChecksumStats();
+
+    QString encryptNoteText(bool persist = true);
 
     QString fetchDecryptedNoteText() const;
 
@@ -159,7 +228,7 @@ class Note {
 
     QUrl fullNoteFileUrl() const;
 
-    QString fullNoteFilePath() const;
+    QString fullNoteFilePath(const QString &connectionName = QStringLiteral("memory")) const;
 
     QString fullNoteFileDirPath() const;
 
@@ -167,7 +236,9 @@ class Note {
 
     void setDecryptedNoteText(QString text);
 
-    bool storeNewDecryptedText(QString text);
+    bool storeNewDecryptedText(QString text, bool persistDecryptedText = true);
+
+    bool storeDirtyStateOnly();
 
     void setDecryptedText(QString text);
 
@@ -188,9 +259,15 @@ class Note {
     bool modifyNoteTextFileNameFromQMLHook();
 
     static QVector<int> searchInNotes(QString query, bool ignoreNoteSubFolder = false,
-                                      int noteSubFolderId = -1);
+                                      int noteSubFolderId = -1,
+                                      const QString &connectionName = QStringLiteral("memory"));
 
     int countSearchTextInNote(const QString &search) const;
+    int countSearchTextInNote(const NoteSearchTerm &searchTerm) const;
+
+    static QVector<NoteSearchTerm> buildSearchTermList(QString searchString);
+    static QString searchTermRegularExpression(const NoteSearchTerm &searchTerm);
+    static bool textMatchesSearchTerm(const QString &text, const NoteSearchTerm &searchTerm);
 
     static QStringList buildQueryStringList(QString searchString,
                                             bool escapeForRegularExpression = false,
@@ -198,13 +275,14 @@ class Note {
 
     QString fileBaseName(bool withFullName = false);
 
-    NoteSubFolder getNoteSubFolder() const;
+    NoteSubFolder getNoteSubFolder(const QString &connectionName = QStringLiteral("memory")) const;
 
     void setNoteSubFolder(const NoteSubFolder &noteSubFolder);
 
     void setNoteSubFolderId(int id);
 
-    static QVector<Note> fetchAllByNoteSubFolderId(int noteSubFolderId);
+    static QVector<Note> fetchAllByNoteSubFolderId(
+        int noteSubFolderId, const QString &connectionName = QStringLiteral("memory"));
 
     static QVector<int> fetchAllIdsByNoteSubFolderId(int noteSubFolderId);
 
@@ -216,7 +294,8 @@ class Note {
 
     bool isInCurrentNoteSubFolder() const;
 
-    QString relativeNoteFilePath(QString separator = QString()) const;
+    QString relativeNoteFilePath(QString separator = QString(),
+                                 const QString &connectionName = QStringLiteral("memory")) const;
 
     QString relativeNoteSubFolderPath() const;
 
@@ -245,13 +324,17 @@ class Note {
     int getFileSize() const;
 
     static Note updateOrCreateFromFile(QFile &file, const NoteSubFolder &noteSubFolder,
-                                       bool withNoteNameHook = false);
+                                       bool withNoteNameHook = false, bool *wasUpdated = nullptr);
 
     static QVector<int> fetchAllIds(int limit = -1, int offset = -1);
 
-    QVector<int> findLinkedNoteIds() const;
+    QVector<int> findBacklinkedNoteIds(
+        const QString &connectionName = QStringLiteral("memory")) const;
 
-    bool handleNoteMoving(const Note &oldNote);
+    static QVector<int> findNotesWithWikiLinkTo(
+        const QString &noteName, const QString &connectionName = QStringLiteral("memory"));
+
+    bool handleNoteMoving(Note oldNote);
 
     static QString createNoteHeader(const QString &name);
 
@@ -260,7 +343,7 @@ class Note {
 
     QString getInsertAttachmentMarkdown(QFile *file, QString title = QString(),
                                         bool returnUrlOnly = false,
-                                        QString fileBaseName = QString()) const;
+                                        QString fileName = QString()) const;
 
     static bool scaleDownImageFileIfNeeded(QFile &file);
 
@@ -279,7 +362,7 @@ class Note {
     QString textToMarkdownHtml(QString str, const QString &notesPath, int maxImageWidth = 980,
                                bool forExport = false, bool base64Images = false);
 
-    QStringList getMediaFileList();
+    QStringList getMediaFileList() const;
 
     bool hasMediaFiles();
 
@@ -342,13 +425,23 @@ class Note {
 
     static Utils::Misc::ExternalImageHash *externalImageHash();
 
-    static QString urlEncodeNoteUrl(const QString &url);
+    static QString urlEncodeNoteUrl(const QString &url, bool escapeSlashes = false);
 
     static QString urlDecodeNoteUrl(QString url);
+
+    static bool updateQualifiedWikiLinksForSubfolderRename(const QString &oldRelativePath,
+                                                           const QString &newRelativePath);
+
+    static bool updateRelativeMarkdownLinksForSubfolderRename(const QString &oldRelativePath,
+                                                              const QString &newRelativePath);
 
     QStringList getNoteTextLines() const;
 
     bool stripTrailingSpaces(int skipLine = -1);
+
+    bool ensureEmptyLastLine();
+
+    static bool ensureEmptyLastLine(QString &text);
 
     QString detectNewlineCharacters();
 
@@ -356,9 +449,39 @@ class Note {
 
     static QString removeNameSearchPrefix(QString searchTerm);
 
-    QStringList getHeadingList();
-
     static bool applyIgnoredNotesSetting(QStringList &fileNames);
+
+    QSet<Note> findBacklinks() const;
+
+    QHash<Note, QSet<LinkHit>> findLinkedNotes(
+        QVector<Note> noteList = QVector<Note>(),
+        const QString &connectionName = QStringLiteral("memory"));
+
+    QHash<Note, QSet<LinkHit>> findReverseLinkNotes(
+        const QString &connectionName = QStringLiteral("memory"));
+
+    [[nodiscard]] QString getDecryptedNoteText(const QString &encryptedNoteText) const;
+    [[nodiscard]] QString decryptEncryptedNoteText(const QString &encryptedNoteText) const;
+
+    static QString parseEncryptedNoteText(const QString &noteText);
+    static bool isEncryptedTextBegin(const QString &text);
+    static bool isEncryptedTextEnd(const QString &text);
+
+    QString getNextcloudFileLink() const;
+
+    QString getNextcloudNotesLink() const;
+
+    bool isFavorite() const;
+
+    bool toggleFavorite();
+
+    static QStringList getFavoriteNoteIdentifiers();
+
+    QString getFavoriteIdentifier() const;
+
+    void migrateFavoriteIdentifier(const QString &oldIdentifier);
+
+    static void cleanupFavoriteNotes();
 
    protected:
     int _id;
@@ -371,6 +494,7 @@ class Note {
     QString _decryptedNoteText;
     QString _cryptoPassword;
     QString _shareUrl;
+    QString _fileChecksum;
     QDateTime _fileCreated;
     QDateTime _fileLastModified;
     QDateTime _created;
@@ -380,16 +504,33 @@ class Note {
     int _shareId;
     unsigned int _sharePermissions;
     bool _hasDirtyData;
+    QHash<Note, QSet<LinkHit>> _backlinkNoteHash;
+    QHash<Note, QSet<LinkHit>> _linkedNoteHash;
 
     static QRegularExpression getEncryptedNoteTextRegularExpression();
     QString getEncryptedNoteText() const;
 
-    static const QString getNoteURL(const QString &baseName);
+    static QString getNoteURL(const QString &baseName);
 
     static const QString getNoteURLFromFileName(const QString &fileName);
 
     void restoreCreatedDate();
+
+    static LinkHit findAndReturnLinkHit(const QString &text, const QString &pattern);
+    static QSet<LinkHit> findAndReturnLinkHits(const QString &text,
+                                               const QRegularExpression &regex);
+
+    void addTextToBacklinkNoteHashIfFound(const Note &note, const QString &pattern);
+    void addTextToLinkedNoteHashIfFound(const Note &note, const QString &noteText,
+                                        const QString &pattern);
+    void addTextToBacklinkNoteHashIfFound(const Note &note, const QRegularExpression &pattern);
+    void addTextToLinkedNoteHashIfFound(const Note &note, const QString &noteText,
+                                        const QRegularExpression &pattern);
+    bool handleLinkedNotesAfterMoving(const QHash<Note, QSet<LinkHit>> &linkedNoteHits);
+    bool handleBacklinkedNotesAfterMoving(const Note &oldNote, const QVector<int> &noteIdList);
 };
+
+inline uint qHash(const Note &note, uint seed) { return qHash(note.getId(), seed); }
 
 Q_DECLARE_TYPEINFO(Note, Q_MOVABLE_TYPE);
 

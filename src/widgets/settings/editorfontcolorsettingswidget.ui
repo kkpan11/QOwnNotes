@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditorFontColorSettingsWidget</class>
+ <widget class="QWidget" name="EditorFontColorSettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QGroupBox" name="groupBox_18">
+     <property name="title">
+      <string>Fonts</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_39">
+      <item row="0" column="0">
+       <widget class="QLabel" name="noteTextEditFontHeadlineLabel">
+        <property name="text">
+         <string>Default font:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="noteTextEditFontLabel">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QToolButton" name="noteTextEditButton">
+        <property name="toolTip">
+         <string>Set a new font</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset theme="preferences-desktop-font" resource="../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/preferences-desktop-font.svg</normaloff>:/icons/breeze-qownnotes/16x16/preferences-desktop-font.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QToolButton" name="noteTextEditResetButton">
+        <property name="toolTip">
+         <string>Reset font</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset theme="edit-undo" resource="../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/edit-undo.svg</normaloff>:/icons/breeze-qownnotes/16x16/edit-undo.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="noteTextEditCodeFontHeadlineLabel">
+        <property name="text">
+         <string>Code font:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="noteTextEditCodeFontLabel">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QToolButton" name="noteTextEditCodeButton">
+        <property name="toolTip">
+         <string>Set a new code font</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset theme="preferences-desktop-font" resource="../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/preferences-desktop-font.svg</normaloff>:/icons/breeze-qownnotes/16x16/preferences-desktop-font.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QToolButton" name="noteTextEditCodeResetButton">
+        <property name="toolTip">
+         <string>Reset code font</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset theme="edit-undo" resource="../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/edit-undo.svg</normaloff>:/icons/breeze-qownnotes/16x16/edit-undo.svg</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="FontColorWidget" name="editorFontColorWidget">
+     <property name="frameShape">
+      <enum>QFrame::Shape::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>FontColorWidget</class>
+   <extends>QFrame</extends>
+   <header location="global">widgets/fontcolorwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../breeze-qownnotes.qrc"/>
+ </resources>
+</ui>

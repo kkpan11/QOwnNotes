@@ -8,7 +8,7 @@
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>N</kbd> crea una nuova nota in una nuova scheda
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>F</kbd> ti permette di cercare note (nel nome della nota e nel suo contenuto)
 - <kbd>Alt</kbd> + <kbd>F</kbd> ti consente di cercare note in tutte le etichette / sottocartelle
-- <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> passa all'area di lavoro precedente
+- <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> switches to the previous layout
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>E</kbd> modifica una nota crittografata
 - <kbd>Alt</kbd> + <kbd>R</kbd> rimuove la nota corrente
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>U</kbd> controlla gli aggiornamenti
@@ -17,15 +17,13 @@
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>O</kbd> apre la nota corrente in una vista
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>F</kbd> mostra la nota corrente nel gestore file
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>E</kbd> abilita o disabilita la modifica delle note
-- <kbd>Alt</kbd> + <kbd>↑</kbd> salta alla nota visibile precedente
-    - la scorciatoia alternativa è <kbd>Ctrl</kbd> + <kbd>Pag↑</kbd>
+- <kbd>Alt</kbd> + <kbd>Up</kbd> jumps to the previous visible note
 - <kbd>Alt</kbd> + <kbd>↓</kbd> passa alla successiva nota visibile
-    - la scorciatoia alternativa è <kbd>Ctrl</kbd> + <kbd>Pag↓</kbd>
 - <kbd>Alt</kbd> + <kbd>Pag↑</kbd> salta alla scheda note precedente
 - <kbd>Alt</kbd> + <kbd>Pag↓</kbd> passa alla scheda note successiva
 - <kbd>Ctrl</kbd> + <kbd>W</kbd> chiude la scheda note corrente
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>D</kbd> alterna la modalità senza distrazioni
-    - puoi anche chiuderla con <kbd>Esc</kbd>
+  - puoi anche chiuderla con <kbd>Esc</kbd>
 - <kbd>Ctrl</kbd> + <kbd>P</kbd> stampa la nota corrente come testo
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> stampa la nota corrente come markdown
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>V</kbd> incolla note, immagini e html dagli appunti
@@ -36,6 +34,7 @@
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>S</kbd> ricarica il motore di scripting
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>M</kbd> nasconde o mostra la barra del menu principale
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>A</kbd> consente di cercare azioni
+- <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>A</kbd> lets you redo the last action
 - <kbd>Ctrl</kbd> + <kbd>S</kbd> salva manualmente le note modificate
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>I</kbd> apre la finestra di dialogo dell'archivio degli script
 - <kbd>F4</kbd> passa al pannello di modifica delle note
@@ -50,7 +49,7 @@
 ### Nella barra di ricerca delle note
 
 - <kbd>↓</kbd> or <kbd>Tab</kbd> imposta lo stato attivo sull'elenco delle note
-- <kbd>Invio</kbd> crea una nuova nota con il testo della barra di ricerca come titolo
+- <kbd>Return</kbd> creates a new note with the text from the search bar as headline
 
 ### Nell'elenco delle note
 
@@ -62,11 +61,11 @@
 
 - <kbd>Ctrl</kbd> + <kbd>clic</kbd> su un collegamento per aprirlo
 - <kbd>Ctrl</kbd> + <kbd>F</kbd> ti permette di cercare nella nota corrente
-    - usa i tasti <kbd>↑</kbd> e <kbd>↓</kbd> o <kbd>F3</kbd> e <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> per passare alla corrispondenza precedente e successiva
-    - <kbd>Esc</kbd> chiude la barra di ricerca
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> chiude la barra di ricerca
 - <kbd>Ctrl</kbd> + <kbd>R</kbd> consente di cercare e sostituire nella nota corrente
 - <kbd>Ctrl</kbd> + <kbd>D</kbd> duplica la riga corrente o il testo selezionato
-    - <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Down</kbd> fa lo stesso
+  - <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Down</kbd> fa lo stesso
 - <kbd>Alt</kbd> + <kbd>Backspace</kbd> cancella la riga corrente
 - <kbd>Ctrl</kbd> + <kbd>Backspace</kbd> cancella la parola corrente
 - <kbd>Ctrl</kbd> + <kbd>L</kbd> apre una finestra di dialogo per aggiungere un collegamento di testo (funziona anche sul testo selezionato)
@@ -83,12 +82,12 @@
 - <kbd>Alt</kbd> + <kbd>⇧ Shift</kbd> + <kbd>S</kbd> cancella il testo selezionato
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>U</kbd> scorre le occorrenze di testo selezionato
 - <kbd>Tab</kbd> fa rientrare il testo selezionato (funziona anche su più righe)
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> annulla il rientro del testo selezionato
-- <kbd>Tab</kbd> dopo un carattere di elenco non ordinato fa rientrare l'elemento dell'elenco
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> dopo un carattere di elenco non ordinato annulla il rientro della voce dell'elenco
-- <kbd>Invio</kbd> negli elenchi crea un nuovo elemento dell'elenco
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> annulla il rientro del testo selezionato
+- <kbd>Tab</kbd> after an unordered list character indents the list item
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> after an unordered list character un-indents the list item
+- <kbd>Return</kbd> in lists creates a new list item
 - <kbd>Alt</kbd> + <kbd>Sinistra</kbd> torna indietro nella cronologia delle note
-    - <kbd>Alt</kbd> + <kbd>Right</kbd> salta in avanti nella cronologia delle note
+  - <kbd>Alt</kbd> + <kbd>Right</kbd> salta in avanti nella cronologia delle note
 - <kbd>Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>1..9</kbd> imposta un segnalibro nota nell'indice segnalibro 1..9
 - <kbd>Ctrl</kbd> + <kbd>0..9</kbd> salta al segnalibro della nota nell'indice del segnalibro 0..9
 - <kbd>Ctrl</kbd> + <kbd>+</kbd> aumenta la dimensione del carattere del testo della nota di un punto
@@ -107,15 +106,14 @@
 ### Nel pannello di anteprima della nota
 
 - <kbd>Ctrl</kbd> + <kbd>F</kbd> ti permette di cercare nella nota corrente
-    - usa i tasti <kbd>↑</kbd> e <kbd>↓</kbd> o <kbd>F3</kbd> e <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> per passare alla corrispondenza precedente e successiva
-    - <kbd>Esc</kbd> chiude la barra di ricerca
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> chiude la barra di ricerca
 
 ### Nell'elenco delle Todo
 
 - <kbd>Ctrl</kbd> + <kbd>S</kbd> salva l'elemento attività corrente
 - <kbd>Ctrl</kbd> + <kbd>I</kbd> salva l'elemento attività corrente e lo inserisce nella nota corrente
 - <kbd>Ctrl</kbd> + <kbd>R</kbd> rimuove l'elemento da fare corrente
-
 
 ## macOS
 
@@ -125,7 +123,7 @@
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>N</kbd> crea una nuova nota in una nuova scheda
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>F</kbd> ti permette di cercare note (nel nome della nota e nel suo contenuto)
 - <kbd>^ Ctrl</kbd> + <kbd>F</kbd> ti consente di cercare note in tutte le etichette / sottocartelle
-- <kbd>^ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> passa all'area di lavoro precedente
+- <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> switches to the previous layout
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>E</kbd> modifica una nota crittografata
 - <kbd>^ Ctrl</kbd> + <kbd>R</kbd> rimuove la nota corrente
 - <kbd>^ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>U</kbd> controlla gli aggiornamenti
@@ -135,14 +133,12 @@
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>F</kbd> apre la cartella della nota corrente nel Finder
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>E</kbd> abilita o disabilita la modifica delle note
 - <kbd>⌃ Ctrl</kbd> + <kbd>Up</kbd> salta alla nota visibile precedente
-    - la scorciatoia alternativa è <kbd>⌘ Cmd</kbd> + <kbd>Page Up</kbd>
 - <kbd>⌃ Ctrl</kbd> + <kbd>Down</kbd> passa alla nota vista successivamente
-    - la scorciatoia alternativa è <kbd>⌘ Cmd</kbd> + <kbd>Page Down</kbd>
 - <kbd>⌥ Alt</kbd> + <kbd>Pag↑</kbd> salta alla scheda note precedente
 - <kbd>⌥ Alt</kbd> + <kbd>Pag↓</kbd> passa alla scheda note successiva
 - <kbd>⌘ Cmd</kbd> + <kbd>W</kbd> chiude la scheda della nota corrente
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>D</kbd> attiva o disattiva la modalità senza distrazioni
-    - puoi anche chiudere con <kbd>Esc</kbd>
+  - puoi anche chiudere con <kbd>Esc</kbd>
 - <kbd>⌘ Cmd</kbd> + <kbd>P</kbd> stampa la nota corrente come testo
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>P</kbd> stampa la nota corrente come markdown
 - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>V</kbd> incolla note, immagini e html dagli appunti
@@ -153,6 +149,7 @@
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>S</kbd> ricarica il motore di scripting
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>M</kbd> nasconde o mostra la barra del menu principale
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>A</kbd> ti consente di cercare azioni
+- <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>A</kbd> lets you redo the last action
 - <kbd>⌘ Cmd</kbd> + <kbd>S</kbd> salva manualmente le note modificate
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>I</kbd> apre la finestra di dialogo Repository di script
 - <kbd>F4</kbd> passa al pannello di modifica delle note
@@ -167,7 +164,7 @@
 ### Nella barra di ricerca delle note
 
 - <kbd>⇩</kbd> or <kbd>Tab</kbd> imposta lo stato attivo sull'elenco delle note
-- <kbd>Invio</kbd> crea una nuova nota con il testo della barra di ricerca come titolo
+- <kbd>Return</kbd> creates a new note with the text from the search bar as headline
 
 ### Nell'elenco delle note
 
@@ -179,11 +176,11 @@
 
 - <kbd>⌘ Cmd</kbd> + <kbd>Click</kbd> su un link per aprirlo
 - <kbd>⌘ Cmd</kbd> + <kbd>F</kbd> consente di cercare nella nota corrente
-    - usa i tasti <kbd>↑</kbd> e <kbd>↓</kbd> o <kbd>F3</kbd> e <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> per passare alla corrispondenza precedente e successiva
-    - <kbd>Esc</kbd> chiude la barra di ricerca
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> chiude la barra di ricerca
 - <kbd>⌘ Cmd</kbd> + <kbd>R</kbd> consente di cercare e sostituire nella nota corrente
 - <kbd>⌘ Cmd</kbd> + <kbd>D</kbd> duplica la riga corrente o il testo selezionato
-    - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>Down</kbd> fa lo stesso
+  - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>Down</kbd> fa lo stesso
 - <kbd>⌘ Cmd</kbd> + <kbd>Backspace</kbd> cancella la riga corrente
 - <kbd>⌃ Ctrl</kbd> + <kbd>Backspace</kbd> cancella la parola corrente
 - <kbd>⌘ Cmd</kbd> + <kbd>L</kbd> apre una finestra di dialogo per aggiungere un collegamento di testo (funziona anche sul testo selezionato)
@@ -200,12 +197,12 @@
 - <kbd>⌃ Ctrl</kbd> + <kbd>⇧ Shift</kbd> + <kbd>S</kbd> cancella il testo selezionato
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>U</kbd> scorre le occorrenze di testo selezionato
 - <kbd>Tab</kbd> fa rientrare il testo selezionato (funziona anche su più righe)
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> annulla il rientro del testo selezionato
-- <kbd>Tab</kbd> dopo un carattere di elenco non ordinato fa rientrare l'elemento dell'elenco
-    - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> dopo un carattere di elenco non ordinato annulla il rientro della voce dell'elenco
-- <kbd>Invio</kbd> negli elenchi crea un nuovo elemento dell'elenco
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> annulla il rientro del testo selezionato
+- <kbd>Tab</kbd> after an unordered list character indents the list item
+  - <kbd>⇧ Shift</kbd> + <kbd>Tab</kbd> after an unordered list character un-indents the list item
+- <kbd>Return</kbd> in lists creates a new list item
 - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>Left</kbd> salta indietro nella cronologia delle note
-    - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>Right</kbd> salta in avanti nella cronologia delle note
+  - <kbd>⌘ Cmd</kbd> + <kbd>⌃ Ctrl</kbd> + <kbd>Right</kbd> salta in avanti nella cronologia delle note
 - <kbd>⌘ Cmd</kbd> + <kbd>⇧ Shift</kbd> + <kbd>1..9</kbd> imposta un segnalibro nota nell'indice segnalibro 1..9
 - <kbd>⌘ Cmd</kbd> + <kbd>1..9</kbd> salta al segnalibro della nota nell'indice del segnalibro 0..9
 - <kbd>⌘ Cmd</kbd> + <kbd>+</kbd> aumenta la dimensione del carattere del testo della nota di un punto
@@ -224,8 +221,8 @@
 ### Nel pannello di anteprima della nota
 
 - <kbd>⌘ Cmd</kbd> + <kbd>F</kbd> consente di cercare nella nota corrente
-    - usa i tasti <kbd>↑</kbd> e <kbd>↓</kbd> o <kbd>F3</kbd> e <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> per passare alla corrispondenza precedente e successiva
-    - <kbd>Esc</kbd> chiude la barra di ricerca
+  - use the <kbd>Up</kbd> and <kbd>Down</kbd> keys or <kbd>F3</kbd> and <kbd>⇧ Shift</kbd> + <kbd>F3</kbd> keys to jump to the previous and next matches
+  - <kbd>Esc</kbd> chiude la barra di ricerca
 
 ### Nell'elenco delle Todo
 

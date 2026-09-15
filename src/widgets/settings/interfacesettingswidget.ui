@@ -1,0 +1,1184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>InterfaceSettingsWidget</class>
+ <widget class="QWidget" name="InterfaceSettingsWidget">
+  <layout class="QGridLayout" name="gridLayout_outer">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout_29">
+     <item row="1" column="0">
+      <widget class="QFrame" name="frame_4">
+       <property name="frameShape">
+        <enum>QFrame::Shape::NoFrame</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_11">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QGroupBox" name="groupBox_7">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>Interface language</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_10">
+           <item row="3" column="0">
+            <widget class="Label" name="helpTranslateLabel">
+             <property name="text">
+              <string>If you want to help to translate QOwnNotes or update an existing translation please read: &lt;a href=&quot;%1&quot;&gt;How can I help to translate QOwnNotes?&lt;/a&gt;</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+             <property name="openExternalLinks">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>If you change the language you have to restart the application for the changes to take action.</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QListWidget" name="languageListWidget">
+             <item>
+              <property name="text">
+               <string>Automatic</string>
+              </property>
+              <property name="toolTip">
+               <string notr="true">Automatic</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true"/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Bahasa Indonesia</string>
+              </property>
+              <property name="toolTip">
+               <string>Indonesian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">id</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Bahasa Melayu</string>
+              </property>
+              <property name="toolTip">
+               <string>Malay</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">ms</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">বাংলা ভাষা</string>
+              </property>
+              <property name="toolTip">
+               <string>Bengali</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">bn</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">босански</string>
+              </property>
+              <property name="toolTip">
+               <string>Bosnian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">bs</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">български</string>
+              </property>
+              <property name="toolTip">
+               <string>Bulgarian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">bg</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Català</string>
+              </property>
+              <property name="toolTip">
+               <string>Catalan</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">ca</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Cebuano</string>
+              </property>
+              <property name="toolTip">
+               <string>Cebuano</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">ceb</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Čeština</string>
+              </property>
+              <property name="toolTip">
+               <string>Czech</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">cs</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Dansk</string>
+              </property>
+              <property name="toolTip">
+               <string>Danish</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">da</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Deutsch</string>
+              </property>
+              <property name="toolTip">
+               <string>German</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">de</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Euskara</string>
+              </property>
+              <property name="toolTip">
+               <string>Basque</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">eu</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">English</string>
+              </property>
+              <property name="toolTip">
+               <string>English</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">en</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">English (British)</string>
+              </property>
+              <property name="toolTip">
+               <string>English (British)</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">en_GB</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Español</string>
+              </property>
+              <property name="toolTip">
+               <string>Spanish</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">es</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Eesti keel</string>
+              </property>
+              <property name="toolTip">
+               <string>Estonian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">et</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Filipino</string>
+              </property>
+              <property name="toolTip">
+               <string>Filipino</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">fil</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Suomen</string>
+              </property>
+              <property name="toolTip">
+               <string>Finnish</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">fi</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Français</string>
+              </property>
+              <property name="toolTip">
+               <string>French</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">fr</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Gaeilge</string>
+              </property>
+              <property name="toolTip">
+               <string>Irish</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">ga</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Galego</string>
+              </property>
+              <property name="toolTip">
+               <string>Galician</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">gl</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">ελληνικά</string>
+              </property>
+              <property name="toolTip">
+               <string>Greek</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">el</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Halshen Hausa</string>
+              </property>
+              <property name="toolTip">
+               <string>Hausa</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">ha</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">עברית</string>
+              </property>
+              <property name="toolTip">
+               <string>Hebrew</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">he</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">हिन्दी</string>
+              </property>
+              <property name="toolTip">
+               <string>Hindi</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">hi</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Hrvatski</string>
+              </property>
+              <property name="toolTip">
+               <string>Croatian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">hr</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Ilonggo</string>
+              </property>
+              <property name="toolTip">
+               <string>Hiligaynon</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">hil</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Islenska</string>
+              </property>
+              <property name="toolTip">
+               <string>Icelandic</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">is</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Italiano</string>
+              </property>
+              <property name="toolTip">
+               <string>Italian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">it</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">한국어</string>
+              </property>
+              <property name="toolTip">
+               <string>Korean</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">ko</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Kurdî</string>
+              </property>
+              <property name="toolTip">
+               <string>Kurdish</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">ku</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">ភាសាខ្មែរ</string>
+              </property>
+              <property name="toolTip">
+               <string>Khmer</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">km</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">latviešu valoda</string>
+              </property>
+              <property name="toolTip">
+               <string>Latvian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">lv</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">lietuvių kalba</string>
+              </property>
+              <property name="toolTip">
+               <string>Lithuanian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">lt</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">македонски јазик</string>
+              </property>
+              <property name="toolTip">
+               <string>Macedonian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">mk</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Māori</string>
+              </property>
+              <property name="toolTip">
+               <string>Māori</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">mi</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Magyar</string>
+              </property>
+              <property name="toolTip">
+               <string>Hungarian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">hu</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Norsk</string>
+              </property>
+              <property name="toolTip">
+               <string>Norwegian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">no</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">日本語</string>
+              </property>
+              <property name="toolTip">
+               <string>Japanese</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">ja</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Nederlands</string>
+              </property>
+              <property name="toolTip">
+               <string>Dutch</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">nl</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">فارسی</string>
+              </property>
+              <property name="toolTip">
+               <string>Persian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">fa</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">ózbekça</string>
+              </property>
+              <property name="toolTip">
+               <string>Uzbek</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">uz</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Polski</string>
+              </property>
+              <property name="toolTip">
+               <string>Polish</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">pl</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Português do Brasil</string>
+              </property>
+              <property name="toolTip">
+               <string>Brazilian Portuguese</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">pt_BR</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Português</string>
+              </property>
+              <property name="toolTip">
+               <string>Portuguese</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">pt_PT</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">ਪੰਜਾਬੀ پن٘جابی</string>
+              </property>
+              <property name="toolTip">
+               <string>Punjabi</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">pa</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Limba română</string>
+              </property>
+              <property name="toolTip">
+               <string>Romanian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">ro</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">русский</string>
+              </property>
+              <property name="toolTip">
+               <string>Russian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">ru</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Cрпски</string>
+              </property>
+              <property name="toolTip">
+               <string>Serbian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">sr</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Shqip</string>
+              </property>
+              <property name="toolTip">
+               <string>Albanian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">sq</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">chiShona</string>
+              </property>
+              <property name="toolTip">
+               <string>Shona</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">sn</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">සිංහල</string>
+              </property>
+              <property name="toolTip">
+               <string>Sinhala</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">si</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Slovenčina</string>
+              </property>
+              <property name="toolTip">
+               <string>Slovak</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">sk</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Slovenščina</string>
+              </property>
+              <property name="toolTip">
+               <string>Slovenian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">sl</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Svenska</string>
+              </property>
+              <property name="toolTip">
+               <string>Swedish</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">sv</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Tagalog</string>
+              </property>
+              <property name="toolTip">
+               <string>Tagalog</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">tl</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">ภาษาไทย</string>
+              </property>
+              <property name="toolTip">
+               <string>Thai</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">th</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Tiếng Việt</string>
+              </property>
+              <property name="toolTip">
+               <string>Vietnamese</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">vi</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Türkçe</string>
+              </property>
+              <property name="toolTip">
+               <string>Turkish</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">tr</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">isiXhosa</string>
+              </property>
+              <property name="toolTip">
+               <string>Xhosa</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">xh</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">Українська мова</string>
+              </property>
+              <property name="toolTip">
+               <string>Ukrainian</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">uk</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">اُردُو‬</string>
+              </property>
+              <property name="toolTip">
+               <string>Urdu</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">ur</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">ייִדיש‎</string>
+              </property>
+              <property name="toolTip">
+               <string>Yiddish</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">yi</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">isiZulu</string>
+              </property>
+              <property name="toolTip">
+               <string>Zulu</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">zu</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">简化字</string>
+              </property>
+              <property name="toolTip">
+               <string>Chinese Simplified</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">zh_CN</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">正體字</string>
+              </property>
+              <property name="toolTip">
+               <string>Chinese Traditional</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">zh_TW</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">العَرَبِيَّة</string>
+              </property>
+              <property name="toolTip">
+               <string>Arabic</string>
+              </property>
+              <property name="whatsThis">
+               <string notr="true">ar</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLineEdit" name="languageSearchLineEdit">
+             <property name="styleSheet">
+              <string notr="true">QLineEdit {
+        /* the background image doesn't work without the border definition */
+	border: none;
+	padding: 2px 5px 2px 27px;
+	background-image: url(:/images/search-notes.svg);
+	background-repeat: no-repeat;
+	background-position: center left;
+	margin-right: 0px;
+}
+</string>
+             </property>
+             <property name="placeholderText">
+              <string>Search for language</string>
+             </property>
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="1" column="1" rowspan="3">
+      <widget class="QFrame" name="frame_2">
+       <property name="frameShape">
+        <enum>QFrame::Shape::NoFrame</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QGroupBox" name="systemTrayGroupBox">
+          <property name="title">
+           <string>System tray</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_62">
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="showSystemTrayCheckBox">
+             <property name="toolTip">
+              <string>You need to restart the application to let this setting take effect</string>
+             </property>
+             <property name="text">
+              <string>Show system tray icon</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="startHiddenCheckBox">
+             <property name="toolTip">
+              <string>You need to restart the application to let this setting take effect</string>
+             </property>
+             <property name="text">
+              <string>Start application hidden</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_24">
+          <property name="title">
+           <string>Interface style</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_58">
+           <item row="0" column="0">
+            <widget class="QComboBox" name="interfaceStyleComboBox"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_19">
+          <property name="title">
+           <string>Icons</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_43">
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="hideIconsInMenusCheckBox">
+             <property name="toolTip">
+              <string>Hide icons in menus as well as the &quot;Find action&quot; dialog. Requires restart to take effect</string>
+             </property>
+             <property name="text">
+              <string>Hide menu icons</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_6">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>90</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>Item sizes in the main window</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_13">
+           <item row="1" column="1">
+            <widget class="QLabel" name="itemHeightLabel">
+             <property name="text">
+              <string>List and tree item height:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="toolbarIconSizeLabel">
+             <property name="text">
+              <string>Toolbar icon size:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="4">
+            <spacer name="horizontalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="0" column="3">
+            <widget class="QToolButton" name="toolbarIconSizeResetButton">
+             <property name="toolTip">
+              <string>Reset the icon size</string>
+             </property>
+             <property name="text">
+              <string notr="true">…</string>
+             </property>
+             <property name="icon">
+              <iconset theme="edit-clear" resource="../../breeze-qownnotes.qrc">
+               <normaloff>:/icons/breeze-qownnotes/16x16/edit-clear.svg</normaloff>:/icons/breeze-qownnotes/16x16/edit-clear.svg</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QToolButton" name="itemHeightResetButton">
+             <property name="toolTip">
+              <string>Reset the item height</string>
+             </property>
+             <property name="text">
+              <string notr="true">…</string>
+             </property>
+             <property name="icon">
+              <iconset theme="edit-clear" resource="../../breeze-qownnotes.qrc">
+               <normaloff>:/icons/breeze-qownnotes/16x16/edit-clear.svg</normaloff>:/icons/breeze-qownnotes/16x16/edit-clear.svg</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QSpinBox" name="toolbarIconSizeSpinBox"/>
+           </item>
+           <item row="1" column="2">
+            <widget class="QSpinBox" name="itemHeightSpinBox">
+             <property name="suffix">
+              <string notr="true">px</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="overrideInterfaceFontSizeGroupBox">
+          <property name="title">
+           <string>Override interface font size</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_11">
+           <item>
+            <widget class="QLabel" name="interfaceFontSizeSpinBoxLabel">
+             <property name="text">
+              <string>Interface font size:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="interfaceFontSizeSpinBox">
+             <property name="suffix">
+              <string notr="true">px</string>
+             </property>
+             <property name="minimum">
+              <number>4</number>
+             </property>
+             <property name="value">
+              <number>11</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_15">
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="overrideInterfaceScalingFactorGroupBox">
+          <property name="title">
+           <string>Override interface scaling factor</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_18">
+           <item>
+            <widget class="QLabel" name="interfaceScalingFactorSpinBoxLabel">
+             <property name="text">
+              <string>Interface scaling factor:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="interfaceScalingFactorSpinBox">
+             <property name="suffix">
+              <string notr="true">%</string>
+             </property>
+             <property name="minimum">
+              <number>10</number>
+             </property>
+             <property name="maximum">
+              <number>100000</number>
+             </property>
+             <property name="singleStep">
+              <number>10</number>
+             </property>
+             <property name="value">
+              <number>100</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_23">
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="statusBarGroupBox">
+          <property name="title">
+           <string>Status bar</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_86">
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="showStatusBarNotePathCheckBox">
+             <property name="text">
+              <string>Show note path</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="showStatusBarRelativeNotePathCheckBox">
+             <property name="text">
+              <string>Only show relative note path</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="distractionFreeModeGroupBox">
+          <property name="title">
+           <string>Distraction free mode</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_147">
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="openDistractionFreeModeInFullScreenCheckBox">
+             <property name="text">
+              <string>Open distraction free mode in full-screen</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="hideStatusBarInDistractionFreeModeCheckBox">
+             <property name="text">
+              <string>Hide status bar in distraction free mode</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>5</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Label</class>
+   <extends>QLabel</extends>
+   <header location="global">widgets/label.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../breeze-qownnotes.qrc"/>
+ </resources>
+</ui>

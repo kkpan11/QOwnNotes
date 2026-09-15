@@ -4,7 +4,7 @@
 #include <utils/misc.h>
 
 #include <QDebug>
-#include <QSettings>
+#include <QHash>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
@@ -15,6 +15,142 @@
 #include "note.h"
 #include "notefolder.h"
 #include "notesubfolder.h"
+#include "services/settingsservice.h"
+
+namespace {
+struct MergeTagData {
+    int id = 0;
+    QString name;
+    int parentId = 0;
+    int priority = 0;
+    QString color;
+    QString darkColor;
+};
+
+struct MergeNoteTagLinkData {
+    int sourceTagId = 0;
+    QString noteFileName;
+    QString noteSubFolderPath;
+};
+
+bool fetchMergeTags(QSqlDatabase &db, QHash<int, MergeTagData> &tagDataById) {
+    QSqlQuery query(db);
+    query.prepare(
+        QStringLiteral("SELECT id, name, parent_id, priority, color, dark_color FROM tag"));
+
+    if (!query.exec()) {
+        qWarning() << __func__ << ":" << query.lastError();
+        return false;
+    }
+
+    while (query.next()) {
+        MergeTagData tagData;
+        tagData.id = query.value(QStringLiteral("id")).toInt();
+        tagData.name = query.value(QStringLiteral("name")).toString();
+        tagData.parentId = query.value(QStringLiteral("parent_id")).toInt();
+        tagData.priority = query.value(QStringLiteral("priority")).toInt();
+        tagData.color = query.value(QStringLiteral("color")).toString();
+        tagData.darkColor = query.value(QStringLiteral("dark_color")).toString();
+        tagDataById.insert(tagData.id, tagData);
+    }
+
+    return true;
+}
+
+bool fetchMergeNoteTagLinks(QSqlDatabase &db, QVector<MergeNoteTagLinkData> &noteTagLinks) {
+    QSqlQuery query(db);
+    query.prepare(
+        QStringLiteral("SELECT tag_id, note_file_name, note_sub_folder_path FROM noteTagLink"));
+
+    if (!query.exec()) {
+        qWarning() << __func__ << ":" << query.lastError();
+        return false;
+    }
+
+    while (query.next()) {
+        MergeNoteTagLinkData noteTagLinkData;
+        noteTagLinkData.sourceTagId = query.value(QStringLiteral("tag_id")).toInt();
+        noteTagLinkData.noteFileName = query.value(QStringLiteral("note_file_name")).toString();
+        noteTagLinkData.noteSubFolderPath =
+            query.value(QStringLiteral("note_sub_folder_path")).toString();
+        noteTagLinks.append(noteTagLinkData);
+    }
+
+    return true;
+}
+
+int fetchMergedTagId(QSqlDatabase &db, const QString &name, int parentId) {
+    QSqlQuery query(db);
+    query.prepare(
+        QStringLiteral("SELECT id FROM tag WHERE name = :name AND parent_id = :parentId"));
+    query.bindValue(QStringLiteral(":name"), name);
+    query.bindValue(QStringLiteral(":parentId"), parentId);
+
+    if (!query.exec()) {
+        qWarning() << __func__ << ":" << query.lastError();
+        return -1;
+    }
+
+    return query.first() ? query.value(QStringLiteral("id")).toInt() : 0;
+}
+
+int insertMergedTag(QSqlDatabase &db, const MergeTagData &tagData, int targetParentId) {
+    QSqlQuery query(db);
+    query.prepare(
+        QStringLiteral("INSERT INTO tag (name, priority, parent_id, color, dark_color) "
+                       "VALUES (:name, :priority, :parentId, :color, :darkColor)"));
+    query.bindValue(QStringLiteral(":name"), tagData.name);
+    query.bindValue(QStringLiteral(":priority"), tagData.priority);
+    query.bindValue(QStringLiteral(":parentId"), targetParentId);
+    query.bindValue(QStringLiteral(":color"), tagData.color);
+    query.bindValue(QStringLiteral(":darkColor"), tagData.darkColor);
+
+    if (!query.exec()) {
+        qWarning() << __func__ << ":" << query.lastError();
+        return -1;
+    }
+
+    return query.lastInsertId().toInt();
+}
+
+int ensureMergedTagId(QSqlDatabase &targetDb, const QHash<int, MergeTagData> &sourceTagDataById,
+                      QHash<int, int> &tagIdMap, int sourceTagId) {
+    if (tagIdMap.contains(sourceTagId)) {
+        return tagIdMap.value(sourceTagId);
+    }
+
+    const auto it = sourceTagDataById.constFind(sourceTagId);
+    if (it == sourceTagDataById.constEnd()) {
+        qWarning() << __func__ << ": missing tag for id" << sourceTagId;
+        return -1;
+    }
+
+    const MergeTagData &tagData = it.value();
+    int targetParentId = 0;
+
+    if (tagData.parentId > 0) {
+        targetParentId = ensureMergedTagId(targetDb, sourceTagDataById, tagIdMap, tagData.parentId);
+        if (targetParentId < 0) {
+            return -1;
+        }
+    }
+
+    int targetTagId = fetchMergedTagId(targetDb, tagData.name, targetParentId);
+    if (targetTagId < 0) {
+        return -1;
+    }
+
+    if (targetTagId == 0) {
+        targetTagId = insertMergedTag(targetDb, tagData, targetParentId);
+        if (targetTagId < 0) {
+            return -1;
+        }
+    }
+
+    tagIdMap.insert(sourceTagId, targetTagId);
+    return targetTagId;
+}
+}    // namespace
 
 Tag::Tag() noexcept : _parentId(0), _priority(0) {}
 
@@ -182,9 +318,13 @@ Tag Tag::fillFromQuery(const QSqlQuery &query) {
 
 QVector<Tag> Tag::fetchAll() {
     QSqlDatabase db = DatabaseService::getNoteFolderDatabase();
-    QSqlQuery query(db);
-
     QVector<Tag> tagList;
+
+    if (!db.isValid() || !db.tables().contains(QStringLiteral("tag"), Qt::CaseInsensitive)) {
+        return tagList;
+    }
+
+    QSqlQuery query(db);
 
     // query.prepare("SELECT * FROM tag ORDER BY priority ASC, name ASC");
     /*
@@ -370,7 +510,7 @@ QStringList Tag::getParentTagNames() {
  * Checks if taggingShowNotesRecursively is set
  */
 bool Tag::isTaggingShowNotesRecursively() {
-    return QSettings().value(QStringLiteral("taggingShowNotesRecursively")).toBool();
+    return SettingsService().value(QStringLiteral("taggingShowNotesRecursively")).toBool();
 }
 
 int Tag::countAllParentId(const int parentId) {
@@ -488,6 +628,34 @@ QStringList Tag::fetchAllNamesOfNote(const Note &note) {
     DatabaseService::closeDatabaseConnection(db, query);
 
     return tagNameList;
+}
+
+QHash<QString, QStringList> Tag::fetchAllNamesByNoteFilePath() {
+    QSqlDatabase db = DatabaseService::getNoteFolderDatabase();
+    QSqlQuery query(db);
+    QHash<QString, QStringList> tagNamesByNoteFilePath;
+
+    query.prepare(
+        QStringLiteral("SELECT l.note_file_name, l.note_sub_folder_path, t.name FROM tag t "
+                       "JOIN noteTagLink l ON t.id = l.tag_id "
+                       "ORDER BY l.note_sub_folder_path ASC, l.note_file_name ASC, "
+                       "t.priority ASC, t.name ASC"));
+
+    if (!query.exec()) {
+        qWarning() << __func__ << ": " << query.lastError();
+    } else {
+        while (query.next()) {
+            const QString noteFileName = query.value(QStringLiteral("note_file_name")).toString();
+            const QString noteSubFolderPath =
+                query.value(QStringLiteral("note_sub_folder_path")).toString();
+            const QString key = noteSubFolderPath + QStringLiteral("/") + noteFileName;
+            tagNamesByNoteFilePath[key] << query.value(QStringLiteral("name")).toString();
+        }
+    }
+
+    DatabaseService::closeDatabaseConnection(db, query);
+
+    return tagNamesByNoteFilePath;
 }
 
 /**
@@ -986,8 +1154,9 @@ bool Tag::store() {
  * @return
  */
 QString Tag::colorFieldName() const {
-    return QSettings().value(QStringLiteral("darkMode")).toBool() ? QStringLiteral("dark_color")
-                                                                  : QStringLiteral("color");
+    return SettingsService().value(QStringLiteral("darkMode")).toBool()
+               ? QStringLiteral("dark_color")
+               : QStringLiteral("color");
 }
 
 /**
@@ -1287,17 +1456,27 @@ bool Tag::renameNoteFileNamesOfLinks(const QString &oldFileName, const QString &
 
 /**
  * Renames the note sub folder paths of note links
+ *
+ * Uses prefix-only substitution to avoid accidentally modifying sibling paths
+ * that share the same prefix (e.g. renaming "work" must not affect "workplace"),
+ * and to prevent the global replace() from corrupting paths that contain the
+ * old folder name in a deeper component (e.g. "A/A/note" when renaming "A").
  */
 bool Tag::renameNoteSubFolderPathsOfLinks(const QString &oldPath, const QString &newPath) {
     QSqlDatabase db = DatabaseService::getNoteFolderDatabase();
     QSqlQuery query(db);
+    // Replace only the prefix: match the exact path or direct/deep children
+    // (separated by "/"), then concatenate newPath with the remainder of the
+    // original string so that inner occurrences of the old name are untouched.
     query.prepare(
         QStringLiteral("UPDATE noteTagLink SET note_sub_folder_path = "
-                       "replace(note_sub_folder_path, :oldPath, :newPath) WHERE "
-                       "note_sub_folder_path LIKE :oldPathLike"));
+                       ":newPath || substr(note_sub_folder_path, length(:oldPath2) + 1) "
+                       "WHERE note_sub_folder_path = :oldPath "
+                       "OR note_sub_folder_path LIKE :oldPathChildLike"));
 
     query.bindValue(QStringLiteral(":oldPath"), oldPath);
-    query.bindValue(QStringLiteral(":oldPathLike"), oldPath + "%");
+    query.bindValue(QStringLiteral(":oldPath2"), oldPath);
+    query.bindValue(QStringLiteral(":oldPathChildLike"), oldPath + "/%");
     query.bindValue(QStringLiteral(":newPath"), newPath);
 
     if (!query.exec()) {
@@ -1350,31 +1529,44 @@ Tag Tag::activeTag() { return Tag::fetch(activeTagId()); }
  * Sets the non-darkMode colors as darkMode colors for all tags
  */
 void Tag::migrateDarkColors() {
-    QSettings settings;
-    const bool darkMode = settings.value(QStringLiteral("darkMode")).toBool();
+    QSqlDatabase db = DatabaseService::getNoteFolderDatabase();
+    QSqlQuery query(db);
 
-    // disable dark mode to get the light color
-    settings.setValue(QStringLiteral("darkMode"), false);
+    // This migration runs before the tag table has the `updated` column, so don't use
+    // Tag::fetchAll() / Tag::store() here. Those helpers already expect the final schema.
+    query.prepare(QStringLiteral("SELECT id, color FROM tag"));
 
-    // fetch all tags with non-dark mode colors
-    const QVector<Tag> tags = fetchAll();
-
-    // enable dark mode to later set the dark color
-    settings.setValue(QStringLiteral("darkMode"), true);
-
-    for (Tag tag : tags) {
-        // get the non-dark mode color (because the fetch was made while
-        // "darkMode" was off)
-        const QColor color = tag.getColor();
-
-        // set the non-dark mode color as dark mode color (because now
-        // "darkMode" is enabled)
-        tag.setColor(color);
-        tag.store();
+    if (!query.exec()) {
+        qWarning() << __func__ << ": " << query.lastError();
+        DatabaseService::closeDatabaseConnection(db, query);
+        return;
     }
 
-    // set the dark mode to the old value
-    settings.setValue(QStringLiteral("darkMode"), darkMode);
+    QVector<QPair<int, QString>> tagColors;
+    while (query.next()) {
+        const QString colorName = query.value(QStringLiteral("color")).toString();
+        const QColor color = colorName.isEmpty() ? QColor() : QColor(colorName);
+        tagColors.append({query.value(QStringLiteral("id")).toInt(),
+                          color.isValid() ? color.name() : QLatin1String("")});
+    }
+
+    query.finish();
+    query.clear();
+
+    QSqlQuery updateQuery(db);
+    updateQuery.prepare(QStringLiteral("UPDATE tag SET dark_color = :color WHERE id = :id"));
+
+    for (const auto &tagColor : Utils::asConst(tagColors)) {
+        updateQuery.bindValue(QStringLiteral(":id"), tagColor.first);
+        updateQuery.bindValue(QStringLiteral(":color"), tagColor.second);
+
+        if (!updateQuery.exec()) {
+            qWarning() << __func__ << ": " << updateQuery.lastError();
+            break;
+        }
+    }
+
+    DatabaseService::closeDatabaseConnection(db, updateQuery);
 }
 
 bool Tag::mergeFromDatabase(QSqlDatabase &db) {
@@ -1396,9 +1588,60 @@ bool Tag::mergeFromDatabase(QSqlDatabase &db) {
         return true;
     }
 
-    // TODO: try to merge
+    QHash<int, MergeTagData> sourceTagDataById;
+    QVector<MergeNoteTagLinkData> noteTagLinks;
 
-    return false;
+    if (!fetchMergeTags(db, sourceTagDataById) || !fetchMergeNoteTagLinks(db, noteTagLinks)) {
+        return false;
+    }
+
+    if (!noteFolderDB.transaction()) {
+        qWarning() << __func__ << ":" << noteFolderDB.lastError();
+        return false;
+    }
+
+    QHash<int, int> tagIdMap;
+
+    for (auto it = sourceTagDataById.constBegin(); it != sourceTagDataById.constEnd(); ++it) {
+        if (ensureMergedTagId(noteFolderDB, sourceTagDataById, tagIdMap, it.key()) < 0) {
+            noteFolderDB.rollback();
+            return false;
+        }
+    }
+
+    QSqlQuery linkInsertQuery(noteFolderDB);
+    linkInsertQuery.prepare(
+        QStringLiteral("INSERT OR IGNORE INTO noteTagLink (tag_id, note_file_name, "
+                       "note_sub_folder_path) VALUES (:tagId, :noteFileName, "
+                       ":noteSubFolderPath)"));
+
+    for (const MergeNoteTagLinkData &noteTagLink : noteTagLinks) {
+        const int targetTagId =
+            ensureMergedTagId(noteFolderDB, sourceTagDataById, tagIdMap, noteTagLink.sourceTagId);
+        if (targetTagId < 0) {
+            noteFolderDB.rollback();
+            return false;
+        }
+
+        linkInsertQuery.bindValue(QStringLiteral(":tagId"), targetTagId);
+        linkInsertQuery.bindValue(QStringLiteral(":noteFileName"), noteTagLink.noteFileName);
+        linkInsertQuery.bindValue(QStringLiteral(":noteSubFolderPath"),
+                                  noteTagLink.noteSubFolderPath);
+
+        if (!linkInsertQuery.exec()) {
+            qWarning() << __func__ << ":" << linkInsertQuery.lastError();
+            noteFolderDB.rollback();
+            return false;
+        }
+    }
+
+    if (!noteFolderDB.commit()) {
+        qWarning() << __func__ << ":" << noteFolderDB.lastError();
+        noteFolderDB.rollback();
+        return false;
+    }
+
+    return true;
 }
 
 /**

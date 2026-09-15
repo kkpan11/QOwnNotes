@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2024 Patrizio Bekerle -- <patrizio@bekerle.com>
+ * Copyright (c) 2014-2026 Patrizio Bekerle -- <patrizio@bekerle.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,11 +25,11 @@
 #include <QInputDialog>
 #include <QKeyEvent>
 #include <QMessageBox>
-#include <QSettings>
 #include <QTextEdit>
 #include <QTreeWidgetItem>
 #include <QUuid>
 
+#include "services/settingsservice.h"
 #include "ui_fontcolorwidget.h"
 #include "utils/schema.h"
 
@@ -60,18 +60,7 @@ FontColorWidget::FontColorWidget(QWidget* parent) : QFrame(parent), ui(new Ui::F
     // initialize the font selectors
     //    initFontSelectors();
 
-    // declare that we need to restart the application if certain settings
-    // are changed
-    connect(ui->colorSchemeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(needRestart()));
-    connect(ui->fontCheckBox, SIGNAL(toggled(bool)), this, SLOT(needRestart()));
-    connect(ui->foregroundColorCheckBox, SIGNAL(toggled(bool)), this, SLOT(needRestart()));
-    connect(ui->backgroundColorCheckBox, SIGNAL(toggled(bool)), this, SLOT(needRestart()));
-    connect(ui->boldCheckBox, SIGNAL(toggled(bool)), this, SLOT(needRestart()));
-    connect(ui->italicCheckBox, SIGNAL(toggled(bool)), this, SLOT(needRestart()));
-    connect(ui->underlineCheckBox, SIGNAL(toggled(bool)), this, SLOT(needRestart()));
-    connect(ui->foregroundColorButton, SIGNAL(clicked()), this, SLOT(needRestart()));
-    connect(ui->backgroundColorButton, SIGNAL(clicked()), this, SLOT(needRestart()));
-    connect(ui->fontComboBox, SIGNAL(currentFontChanged(QFont)), this, SLOT(needRestart()));
+    // Schema changes are applied live via the schemaChanged() signal
 }
 
 /**
@@ -108,7 +97,7 @@ void FontColorWidget::initSchemaSelector() {
         defaultSchemaNameKeys.insert(name, schemaKey);
     }
 
-    QSettings settings;
+    SettingsService settings;
     QString currentSchemaKey =
         settings
             .value(QStringLiteral("Editor/CurrentSchemaKey"),
@@ -159,9 +148,11 @@ void FontColorWidget::on_foregroundColorButton_clicked() {
     QColor color = Utils::Schema::schemaSettings->getForegroundColor(index);
     QColor newColor = QColorDialog::getColor(color);
 
-    if (newColor.isValid()) {
-        color = newColor;
+    if (!newColor.isValid() || newColor == color) {
+        return;
     }
+
+    color = newColor;
 
     ui->foregroundColorButton->setStyleSheet(
         QStringLiteral("* {background: %1; border: none}").arg(color.name()));
@@ -170,6 +161,9 @@ void FontColorWidget::on_foregroundColorButton_clicked() {
 
     // update the current or all text items, depending on the index
     updateTextItems(index);
+
+    // Notify listeners that the schema has changed so they can apply it live
+    Q_EMIT schemaChanged();
 }
 
 /**
@@ -180,9 +174,11 @@ void FontColorWidget::on_backgroundColorButton_clicked() {
     QColor color = Utils::Schema::schemaSettings->getBackgroundColor(index);
     QColor newColor = QColorDialog::getColor(color);
 
-    if (newColor.isValid()) {
-        color = newColor;
+    if (!newColor.isValid() || newColor == color) {
+        return;
     }
+
+    color = newColor;
 
     ui->backgroundColorButton->setStyleSheet(
         QStringLiteral("* {background: %1; border: none}").arg(color.name()));
@@ -191,6 +187,9 @@ void FontColorWidget::on_backgroundColorButton_clicked() {
 
     // update the current or all text items, depending on the index
     updateTextItems(index);
+
+    // Notify listeners that the schema has changed so they can apply it live
+    Q_EMIT schemaChanged();
 }
 
 /**
@@ -199,7 +198,7 @@ void FontColorWidget::on_backgroundColorButton_clicked() {
  * @param index
  */
 void FontColorWidget::updateTextItems(int index) {
-    if (index < 0) {
+    if (index == Utils::Schema::TextPresetIndex) {
         // update all text items
         updateAllTextItems();
     } else {
@@ -217,6 +216,10 @@ void FontColorWidget::initTextTreeWidgetItems() {
     addTextTreeWidgetItem(tr("Underlined text"), MarkdownHighlighter::StUnderline);
     addTextTreeWidgetItem(tr("Strong text"), MarkdownHighlighter::Bold);
     addTextTreeWidgetItem(tr("Link"), MarkdownHighlighter::Link);
+    addTextTreeWidgetItem(tr("Link hover"), Utils::Schema::LinkHoverPresetIndex);
+    addTextTreeWidgetItem(tr("Link (internal)"), MarkdownHighlighter::LinkInternal);
+    addTextTreeWidgetItem(tr("Wiki link"), MarkdownHighlighter::WikiLink);
+    addTextTreeWidgetItem(tr("Wiki link (broken)"), MarkdownHighlighter::WikiLinkBroken);
     addTextTreeWidgetItem(tr("Image"), MarkdownHighlighter::Image);
     addTextTreeWidgetItem(tr("Code (block)"), MarkdownHighlighter::CodeBlock);
     addTextTreeWidgetItem(tr("Code (inline)"), MarkdownHighlighter::InlineCodeBlock);
@@ -238,7 +241,7 @@ void FontColorWidget::initTextTreeWidgetItems() {
     addTextTreeWidgetItem(tr("Header, level 4"), MarkdownHighlighter::H4);
     addTextTreeWidgetItem(tr("Header, level 5"), MarkdownHighlighter::H5);
     addTextTreeWidgetItem(tr("Header, level 6"), MarkdownHighlighter::H6);
-    addTextTreeWidgetItem(tr("Horizontal rule"), MarkdownHighlighter::HorizontalRuler);
+    addTextTreeWidgetItem(tr("Horizontal rule"), MarkdownHighlighter::HorizontalRule);
     addTextTreeWidgetItem(tr("Block quote"), MarkdownHighlighter::BlockQuote);
     addTextTreeWidgetItem(tr("Table"), MarkdownHighlighter::Table);
     addTextTreeWidgetItem(tr("(HTML) Comment"), MarkdownHighlighter::Comment);
@@ -250,6 +253,7 @@ void FontColorWidget::initTextTreeWidgetItems() {
                           MarkdownHighlighter::CurrentLineBackgroundColor);
     addTextTreeWidgetItem(tr("Broken link"), MarkdownHighlighter::BrokenLink);
     addTextTreeWidgetItem(tr("Trailing space"), MarkdownHighlighter::TrailingSpace);
+    addTextTreeWidgetItem(tr("Whitespace marker"), MarkdownHighlighter::Whitespace);
 
     // jump to the top of the list so that an item is selected
     auto* event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Home, Qt::NoModifier);
@@ -269,6 +273,28 @@ void FontColorWidget::addTextTreeWidgetItem(const QString& text, int index) {
     updateTextItem(item);
 
     ui->textTreeWidget->addTopLevelItem(item);
+}
+
+/**
+ * Shows or hides the wiki link highlighter state items in the text tree widget
+ */
+void FontColorWidget::setWikiLinkItemsVisible(bool visible) {
+    const int count = ui->textTreeWidget->topLevelItemCount();
+
+    for (int i = 0; i < count; i++) {
+        QTreeWidgetItem* item = ui->textTreeWidget->topLevelItem(i);
+
+        if (item == nullptr) {
+            continue;
+        }
+
+        const int index = item->data(0, Qt::UserRole).toInt();
+
+        if (index == MarkdownHighlighter::WikiLink ||
+            index == MarkdownHighlighter::WikiLinkBroken) {
+            item->setHidden(!visible);
+        }
+    }
 }
 
 /**
@@ -313,17 +339,22 @@ void FontColorWidget::updateSchemeEditFrame() {
 
     bool isCurrentLineBackgroundColorIndex =
         index == MarkdownHighlighter::HighlighterState::CurrentLineBackgroundColor;
+    const bool isLinkHoverIndex = index == Utils::Schema::LinkHoverPresetIndex;
+    const bool isWhitespaceIndex = index == MarkdownHighlighter::Whitespace;
 
-    ui->boldCheckBox->setVisible(index >= 0 && !isCurrentLineBackgroundColorIndex);
-    ui->italicCheckBox->setVisible(index >= 0 && !isCurrentLineBackgroundColorIndex);
-    ui->underlineCheckBox->setVisible(index >= 0 && !isCurrentLineBackgroundColorIndex);
-    ui->fontSizeAdaptionSpinBox->setVisible(index >= 0 && !isCurrentLineBackgroundColorIndex);
-    ui->fontCheckBox->setVisible(index >= 0 && !isCurrentLineBackgroundColorIndex);
-    ui->fontComboBox->setVisible(index >= 0 && !isCurrentLineBackgroundColorIndex);
+    const bool showTextFormatControls =
+        index >= 0 && !isCurrentLineBackgroundColorIndex && !isWhitespaceIndex;
+    ui->boldCheckBox->setVisible(showTextFormatControls);
+    ui->italicCheckBox->setVisible(showTextFormatControls);
+    ui->underlineCheckBox->setVisible(showTextFormatControls);
+    ui->fontSizeAdaptionSpinBox->setVisible(showTextFormatControls);
+    ui->fontCheckBox->setVisible(showTextFormatControls);
+    ui->fontComboBox->setVisible(showTextFormatControls);
     ui->foregroundColorCheckBox->setVisible(!isCurrentLineBackgroundColorIndex);
     ui->foregroundColorButton->setVisible(!isCurrentLineBackgroundColorIndex);
-    ui->label->setVisible(!isCurrentLineBackgroundColorIndex);
-    ui->fontSizeAdaptionSpinBox->setVisible(!isCurrentLineBackgroundColorIndex);
+    ui->backgroundColorCheckBox->setVisible(!isLinkHoverIndex && !isWhitespaceIndex);
+    ui->backgroundColorButton->setVisible(!isLinkHoverIndex && !isWhitespaceIndex);
+    ui->label->setVisible(showTextFormatControls);
 
     if (index >= 0) {
         const QSignalBlocker blocker(ui->boldCheckBox);
@@ -405,9 +436,32 @@ void FontColorWidget::setSchemaValue(const QString& key, const QVariant& value, 
         schemaKey = _currentSchemaKey;
     }
 
-    QSettings settings;
+    SettingsService settings;
     settings.beginGroup(schemaKey);
     return settings.setValue(key, value);
+}
+
+/**
+ * Applies the schema at the given combo box index: updates internal state,
+ * persists the key to settings, and refreshes the widget preview.
+ * Does NOT emit schemaChanged() — callers decide whether to emit it.
+ *
+ * @param index
+ */
+void FontColorWidget::applySchemaByIndex(int index) {
+    _currentSchemaKey = ui->colorSchemeComboBox->itemData(index).toString();
+    _currentSchemaIsDefault = _defaultSchemaKeys.contains(_currentSchemaKey);
+
+    ui->deleteSchemeButton->setEnabled(!_currentSchemaIsDefault);
+    ui->schemeEditFrame->setEnabled(!_currentSchemaIsDefault);
+
+    SettingsService settings;
+    settings.setValue(QStringLiteral("Editor/CurrentSchemaKey"), _currentSchemaKey);
+
+    updateSchemeEditFrame();
+
+    // Update all text items in the widget preview
+    updateAllTextItems();
 }
 
 /**
@@ -416,19 +470,10 @@ void FontColorWidget::setSchemaValue(const QString& key, const QVariant& value, 
  * @param index
  */
 void FontColorWidget::on_colorSchemeComboBox_currentIndexChanged(int index) {
-    _currentSchemaKey = ui->colorSchemeComboBox->itemData(index).toString();
-    _currentSchemaIsDefault = _defaultSchemaKeys.contains(_currentSchemaKey);
+    applySchemaByIndex(index);
 
-    ui->deleteSchemeButton->setEnabled(!_currentSchemaIsDefault);
-    ui->schemeEditFrame->setEnabled(!_currentSchemaIsDefault);
-
-    QSettings settings;
-    settings.setValue(QStringLiteral("Editor/CurrentSchemaKey"), _currentSchemaKey);
-
-    updateSchemeEditFrame();
-
-    // update all text items
-    updateAllTextItems();
+    // Notify listeners that the schema has changed so they can apply it live
+    Q_EMIT schemaChanged();
 }
 
 /**
@@ -444,7 +489,15 @@ void FontColorWidget::updateAllTextItems() {
 
 bool FontColorWidget::selectFirstLightSchema() {
     if (ui->colorSchemeComboBox->count() >= 1) {
+        // Block signals to prevent the slot from being triggered via the
+        // signal; we call applySchemaByIndex() directly below instead
+        const QSignalBlocker blocker(ui->colorSchemeComboBox);
+        Q_UNUSED(blocker)
         ui->colorSchemeComboBox->setCurrentIndex(0);
+
+        // Apply the schema (write to settings, refresh preview) without
+        // emitting schemaChanged() — the caller handles the live apply
+        applySchemaByIndex(0);
         return true;
     }
 
@@ -453,7 +506,15 @@ bool FontColorWidget::selectFirstLightSchema() {
 
 bool FontColorWidget::selectFirstDarkSchema() {
     if (ui->colorSchemeComboBox->count() >= 2) {
+        // Block signals to prevent the slot from being triggered via the
+        // signal; we call applySchemaByIndex() directly below instead
+        const QSignalBlocker blocker(ui->colorSchemeComboBox);
+        Q_UNUSED(blocker)
         ui->colorSchemeComboBox->setCurrentIndex(1);
+
+        // Apply the schema (write to settings, refresh preview) without
+        // emitting schemaChanged() — the caller handles the live apply
+        applySchemaByIndex(1);
         return true;
     }
 
@@ -547,7 +608,7 @@ void FontColorWidget::on_copySchemeButton_clicked() {
     }
 
     // add the new color schema to the color schemes list in the settings
-    QSettings settings;
+    SettingsService settings;
     QStringList schemes = settings.value("Editor/ColorSchemes").toStringList();
     schemes << _currentSchemaKey;
     settings.setValue("Editor/ColorSchemes", schemes);
@@ -565,7 +626,7 @@ void FontColorWidget::selectLastSchema() {
     initSchemaSelector();
 
 #ifdef Q_OS_MAC
-    // under OS X we have to use a workaround to select the newly created schema
+    // under macOS we have to use a workaround to select the newly created schema
     QKeyEvent* event = new QKeyEvent(QEvent::KeyPress, Qt::Key_End, Qt::NoModifier);
     QApplication::postEvent(ui->colorSchemeComboBox, event);
 #else
@@ -587,6 +648,9 @@ void FontColorWidget::on_foregroundColorCheckBox_toggled(bool checked) {
 
     // update the scheme edit frame
     updateSchemeEditFrame();
+
+    // Notify listeners that the schema has changed so they can apply it live
+    Q_EMIT schemaChanged();
 }
 
 void FontColorWidget::updateForegroundColorCheckBox(bool checked, bool store) {
@@ -617,6 +681,9 @@ void FontColorWidget::on_backgroundColorCheckBox_toggled(bool checked) {
 
     // update the scheme edit frame
     updateSchemeEditFrame();
+
+    // Notify listeners that the schema has changed so they can apply it live
+    Q_EMIT schemaChanged();
 }
 
 void FontColorWidget::updateBackgroundColorCheckBox(bool checked, bool store) {
@@ -648,7 +715,7 @@ void FontColorWidget::on_deleteSchemeButton_clicked() {
         return;
     }
 
-    QSettings settings;
+    SettingsService settings;
     settings.beginGroup(_currentSchemaKey);
     // remove the group and all its keys
     settings.remove("");
@@ -671,14 +738,25 @@ void FontColorWidget::storeCheckBoxState(const QString& name, bool checked) {
     updateTextItem();
 }
 
-void FontColorWidget::on_boldCheckBox_toggled(bool checked) { storeCheckBoxState("Bold", checked); }
+void FontColorWidget::on_boldCheckBox_toggled(bool checked) {
+    storeCheckBoxState("Bold", checked);
+
+    // Notify listeners that the schema has changed so they can apply it live
+    Q_EMIT schemaChanged();
+}
 
 void FontColorWidget::on_italicCheckBox_toggled(bool checked) {
     storeCheckBoxState("Italic", checked);
+
+    // Notify listeners that the schema has changed so they can apply it live
+    Q_EMIT schemaChanged();
 }
 
 void FontColorWidget::on_underlineCheckBox_toggled(bool checked) {
     storeCheckBoxState("Underline", checked);
+
+    // Notify listeners that the schema has changed so they can apply it live
+    Q_EMIT schemaChanged();
 }
 
 /**
@@ -719,7 +797,8 @@ void FontColorWidget::on_exportSchemeButton_clicked() {
                 exportSettings.setValue(key, value);
             }
 
-            Utils::Misc::openFolderSelect(fileName);
+            Utils::Misc::openFolderSelect(
+                fileName, QStringLiteral("show-exported-color-schema-in-file-manager"));
         }
     }
 }
@@ -739,31 +818,35 @@ void FontColorWidget::on_importSchemeButton_clicked() {
         QStringList fileNames = dialog.selectedFiles();
         if (fileNames.count() > 0) {
             Q_FOREACH (QString fileName, fileNames) {
-                auto* settings = new QSettings();
-                auto* importSettings = new QSettings(fileName, QSettings::IniFormat);
-                QString schemaKey = importSettings->value("Export/SchemaKey").toString();
+                SettingsService settings;
+                QSettings importSettings(fileName, QSettings::IniFormat);
+                QString schemaKey = importSettings.value("Export/SchemaKey").toString();
 
                 // create a new schema key for the import
                 QString uuid = Utils::Misc::createUuidString();
                 _currentSchemaKey = "EditorColorSchema-" + uuid;
 
-                QStringList schemes = settings->value("Editor/ColorSchemes").toStringList();
+                QStringList schemes = settings.value("Editor/ColorSchemes").toStringList();
                 schemes << _currentSchemaKey;
-                settings->setValue("Editor/ColorSchemes", schemes);
-                settings->setValue("Editor/CurrentSchemaKey", _currentSchemaKey);
+                settings.setValue("Editor/ColorSchemes", schemes);
+                settings.setValue("Editor/CurrentSchemaKey", _currentSchemaKey);
 
-                settings->beginGroup(_currentSchemaKey);
-                importSettings->beginGroup(schemaKey);
-                QStringList keys = importSettings->allKeys();
+                settings.beginGroup(_currentSchemaKey);
+                importSettings.beginGroup(schemaKey);
+                QStringList keys = importSettings.allKeys();
 
                 // store the color schema data to the settings
                 Q_FOREACH (QString key, keys) {
-                    QVariant value = importSettings->value(key);
-                    settings->setValue(key, value);
+                    QVariant value = importSettings.value(key);
+                    settings.setValue(key, value);
                 }
 
                 // select the last schema
                 selectLastSchema();
+
+                // just to make sure
+                settings.endGroup();
+                importSettings.endGroup();
             }
         }
     }
@@ -775,7 +858,7 @@ void FontColorWidget::on_importSchemeButton_clicked() {
 void FontColorWidget::initFontSelectors() {
     QTextEdit textEdit;
     QFont font = textEdit.font();
-    QSettings settings;
+    SettingsService settings;
     QString fontString = settings.value("MainWindow/noteTextEdit.font").toString();
 
     if (!fontString.isEmpty()) {
@@ -803,6 +886,9 @@ void FontColorWidget::on_fontSizeAdaptionSpinBox_valueChanged(int value) {
 
     // update the styling of the current text tree widget item
     updateTextItem();
+
+    // Notify listeners that the schema has changed so they can apply it live
+    Q_EMIT schemaChanged();
 }
 
 /**
@@ -825,6 +911,9 @@ void FontColorWidget::on_fontCheckBox_toggled(bool checked) {
 
     // update the scheme edit frame
     updateSchemeEditFrame();
+
+    // Notify listeners that the schema has changed so they can apply it live
+    Q_EMIT schemaChanged();
 }
 
 void FontColorWidget::updateFontCheckBox(bool checked, bool store) {
@@ -847,4 +936,7 @@ void FontColorWidget::on_fontComboBox_currentFontChanged(const QFont& f) {
 
     // update the styling of the current text tree widget item
     updateTextItem();
+
+    // Notify listeners that the schema has changed so they can apply it live
+    Q_EMIT schemaChanged();
 }

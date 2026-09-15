@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DebugOptionSettingsWidget</class>
+ <widget class="QWidget" name="DebugOptionSettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_46">
+   <item row="1" column="2">
+    <spacer name="horizontalSpacer_12">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="0">
+    <widget class="QCheckBox" name="fileLoggingCheckBox">
+     <property name="text">
+      <string>Enable logging to file</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QPushButton" name="clearLogFileButton">
+     <property name="text">
+      <string>Clear log file</string>
+     </property>
+     <property name="icon">
+      <iconset theme="list-remove" resource="../breeze-qownnotes.qrc">
+       <normaloff>:/icons/breeze-qownnotes/16x16/list-remove.svg</normaloff>:/icons/breeze-qownnotes/16x16/list-remove.svg</iconset>
+     </property>
+    </widget>
+   </item>
+    <item row="0" column="0" colspan="4">
+     <widget class="QCheckBox" name="oldVersionNumberCheckBox">
+      <property name="text">
+       <string>Fake old version number to trigger update</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0" colspan="4">
+     <widget class="QCheckBox" name="oldScriptVersionsCheckBox">
+      <property name="toolTip">
+       <string>Fake old versions for installed repository scripts to trigger the script update dialog</string>
+      </property>
+      <property name="text">
+       <string>Fake old script versions to trigger script updates</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="4">
+     <widget class="QFrame" name="logFileFrame">
+     <property name="frameShape">
+      <enum>QFrame::Shape::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label_22">
+        <property name="text">
+         <string>Log file path:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="logFileLabel">
+        <property name="text">
+         <string notr="true">&lt;log file&gt;</string>
+        </property>
+        <property name="textInteractionFlags">
+         <set>Qt::TextInteractionFlag::LinksAccessibleByMouse|Qt::TextInteractionFlag::TextSelectableByKeyboard|Qt::TextInteractionFlag::TextSelectableByMouse</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_11">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+     <item row="4" column="0" colspan="4">
+      <widget class="QFrame" name="scriptProfilingFrame">
+       <property name="frameShape">
+        <enum>QFrame::Shape::NoFrame</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_scriptProfiling">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="scriptProfilingThresholdLabel">
+          <property name="text">
+           <string>Script hook execution time warning threshold (ms):</string>
+          </property>
+          <property name="toolTip">
+           <string>Log a warning when a script hook takes longer than this many milliseconds. When debug logging is enabled, all hook times are logged unconditionally.</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="scriptProfilingThresholdSpinBox">
+          <property name="toolTip">
+           <string>Log a warning when a script hook takes longer than this many milliseconds. When debug logging is enabled, all hook times are logged unconditionally.</string>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>100000</number>
+          </property>
+          <property name="value">
+           <number>500</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_scriptProfiling">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="5" column="0" colspan="4">
+      <spacer name="verticalSpacer_11">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
+ </widget>
+ <resources>
+  <include location="../breeze-qownnotes.qrc"/>
+ </resources>
+</ui>

@@ -4,12 +4,21 @@
 #include <QFile>
 #include <QSqlQuery>
 #include <QUrl>
+#include <QtGlobal>
 
 class Note;
 class NoteSubFolder;
 
 class TrashItem {
    public:
+    enum class TrashMode {
+        NoTrashing = 0,
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+        SystemTrash = 1,
+#endif
+        LocalTrash = 2,
+    };
+
     explicit TrashItem();
 
     int getId();
@@ -80,7 +89,11 @@ class TrashItem {
 
     QString restorationFilePath();
 
+    static TrashMode trashMode();
+
     static bool isLocalTrashEnabled();
+
+    static bool isSystemTrashEnabled();
 
     static bool expireItems();
 

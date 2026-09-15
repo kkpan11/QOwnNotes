@@ -15,7 +15,10 @@ class TestUtilsMisc : public QObject {
     void testShorten();
     void testCycleTextCase();
     void testHtmlToMarkdown();
+    void testHtmlToMarkdownTables();
+    void testHtmlToMarkdownTableSpecialChars();
     void testParseTaskList();
+    void testToggleCheckboxesDoesNotCreateCheckboxListItems();
     void testUnescapeHtml();
     void testHtmlSpecialChars();
     void testToHumanReadableByteSize();
@@ -25,6 +28,19 @@ class TestUtilsMisc : public QObject {
     void testTransformEvernoteImportHyperlinks();
     void testGetBaseUrlFromUrlString();
     void testCreateAbsolutePathsInHtml();
+    void testDetectFileFormatTxt();
+    void testDetectFileFormatJson();
+    void testDetectFileFormatXml();
+    void testDetectFileFormatXmlWithoutDeclaration();
+    void testDetectFileFormatHtml();
+    void testDetectFileFormatCsv();
+    void testDetectFileFormatIni();
+    void testDetectFileFormatNix();
+    void testDetectFileFormatYaml();
+    void testDetectFileFormatSql();
+    void testDetectFileFormatJavaScript();
+    void testDetectFileFormatEdgeCases();
+    void testFindAvailableFileNameOverrideSuffix();
 };
 
 #endif    // TESTUTILSMISC_H

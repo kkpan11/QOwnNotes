@@ -2,24 +2,27 @@
 
 يمكنك استخدام هذه المعاملات في واجهة سطر الأوامر (CLI) للتحكم في سلوك التطبيق:
 
-| المُعامِل                      | الوصف                                                                                         |
-| ------------------------------ | --------------------------------------------------------------------------------------------- |
-| `‪--help`                      | يُظهر شاشة المساعدة                                                                           |
-| `‪--version`                   | يعرض رقم نسخة التطبيق                                                                         |
-| `‪--portable`                  | يشغل التطبيق في الوضع المحمول                                                                 |
-| `‪--clear-settings`            | يمسح الإعدادات ويشغل التطبيق                                                                  |
-| `‪--dump-settings`             | يطبع تفريغ الإعدادات ومعلومات أخرى عن التطبيق والبيئة، بصيغة ماركداون GitHub ويخرج من التطبيق |
-| `‪--session <اسم>`       | يشغل التطبيق في سياق مختلف للإعدادات والملفات الداخلية                                        |
-| `‪--allow-multiple-instances`  | يسمح بتشغيل عدة نسخ من تطبيق QOwnNotes حتى في حالة منع ذلك في الإعدادات                       |
-| `‪--action <اسم>`        | ينفذ إجراء قائمة بعد تشغيل التطبيق (انظر بالأسفل)                                             |
-| `‪--completion <الصدفة>` | يولّد أوامر الإكمال الملائمة للصَدفة. يقبل `fish` و&nbsp;`bash`.                              |
+| المُعامِل                                  | الوصف                                                                                         |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| `‪--help`                                  | يُظهر شاشة المساعدة                                                                           |
+| `‪--version`                               | يعرض رقم نسخة التطبيق                                                                         |
+| `‪--portable`                              | يشغل التطبيق في الوضع المحمول                                                                 |
+| `‪--clear-settings`                        | يمسح الإعدادات ويشغل التطبيق                                                                  |
+| `‪--dump-settings`                         | يطبع تفريغ الإعدادات ومعلومات أخرى عن التطبيق والبيئة، بصيغة ماركداون GitHub ويخرج من التطبيق |
+| `‪--session <اسم>`                   | يشغل التطبيق في سياق مختلف للإعدادات والملفات الداخلية                                        |
+| `‪--allow-multiple-instances`              | يسمح بتشغيل عدة نسخ من تطبيق QOwnNotes حتى في حالة منع ذلك في الإعدادات                       |
+| `‪--action <اسم>`                    | ينفذ إجراء قائمة بعد تشغيل التطبيق (انظر بالأسفل)                                             |
+| `‪--completion <الصدفة>`             | يولّد أوامر الإكمال الملائمة للصَدفة. يقبل `fish` و&nbsp;`bash`.                              |
+| `--decrypt-note <file>`              | Prints the decrypted text of an encrypted note file to the command line and exits             |
+| `--decrypt-note-password <password>` | Provides the password for `--decrypt-note` instead of prompting for it                        |
 
 ::: tip
-إذا كنت تواجه مشاكل مع QOwnNotes المثبت لديك، ربما تود أن تشغّل التطبيق بإعدادات جديدة بغير أن تفقد إعداداتك الحالية، باستخدام المُعامل <code dir="ltr">--session</code>.
+إذا كنت تواجه مشاكل مع QOwnNotes المثبت لديك، ربما تود أن تشغّل التطبيق بإعدادات جديدة بغير أن تفقد إعداداتك الحالية، باستخدام المُعامل <code dir="ltr">--session.
 
 ```bash
 QOwnNotes --session test
 ```
+
 :::
 
 قد تحتاج إلى تشغيل التطبيق من واجهة سطر الأوامر بطرق مختلفة على أنظمة التشغيل المختلفة:
@@ -46,11 +49,31 @@ QOwnNotes --dump-settings | pbcopy
 # انسخ تفريغ الإعدادات إلى الحافظة على ويندوز باستخدام clip
 QOwnNotes --dump-settings | clip
 ```
+
+:::
+
+## Print decrypted encrypted note text
+
+With the parameter `--decrypt-note <file>` you can print the decrypted text of an encrypted note file to the command line. If no password is provided, QOwnNotes will ask for it on the command line.
+
+```bash
+QOwnNotes --decrypt-note secret.md
+```
+
+You can also provide the password directly with `--decrypt-note-password`:
+
+```bash
+QOwnNotes --decrypt-note secret.md --decrypt-note-password "my password"
+```
+
+::: warning
+Providing passwords as command line parameters can expose them in your shell
+history or process list. Prefer the password prompt if this is a concern.
 :::
 
 ## تنفيذ إجراءات قائمة بعد التشغيل
 
-باستخدام المُعامِل <code dir="ltr">--action &lt;اسم&gt;</code>، يمكنك تنفيذ إجراءات قائمة بعد تشغيل التطبيق.
+باستخدام المُعامِل <code dir="ltr">--action &lt;اسم&gt;، يمكنك تنفيذ إجراءات قائمة بعد تشغيل التطبيق.
 
 مثلا لإظهار حوار قائمة المهام بعد التشغيل، استخدم:
 
@@ -62,7 +85,7 @@ QOwnNotes --action actionShow_Todo_List
 يمكنك الحصول على أسماء كائنات إجراءات القائمة من [mainwindow.ui](https://github.com/pbek/QOwnNotes/blob/main/src/mainwindow.ui). فقط ابحث بالعنوان الإنجليزي للقائمة. لاحظ أن هذه النصوص قد تتغير بمرور الوقت.
 :::
 
-لتنفيذ [إجراء برمجي](../scripting/methods-and-objects.md#registering-a-custom-action)، استخدم <code dir="ltr">customAction_</code> متبوعًا باسم الإجراء المخصص. اسم الإجراء المخصص هو المُعامل الأول في نداء `script.registerCustomAction` في البُريمج.
+لتنفيذ [إجراء برمجي](../scripting/methods-and-objects.md#registering-a-custom-action)، استخدم <code dir="ltr">customAction_ متبوعًا باسم الإجراء المخصص. اسم الإجراء المخصص هو المُعامل الأول في نداء `script.registerCustomAction` في البُريمج.
 
 مثلا لتنفيذ الإجراء المخصص `myAction`، شغّل QOwnNotes هكذا:
 

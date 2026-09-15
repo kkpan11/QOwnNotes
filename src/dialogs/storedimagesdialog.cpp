@@ -39,11 +39,26 @@ void StoredImagesDialog::refreshMediaFiles() {
         return;
     }
 
-    QStringList mediaFiles =
-        mediaDir.entryList(QStringList(QStringLiteral("*")), QDir::Files, QDir::Time);
-    mediaFiles.removeDuplicates();
+    QStringList mediaFiles;
+    QVector<Note> noteList;
 
-    QVector<Note> noteList = Note::fetchAll();
+    if (_currentNoteOnly) {
+        MainWindow *mainWindow = MainWindow::instance();
+        if (mainWindow == nullptr) {
+            return;
+        }
+
+        const auto note = mainWindow->getCurrentNote();
+        if (note.isFetched()) {
+            mediaFiles = note.getMediaFileList();
+            noteList = {note};
+        }
+    } else {
+        mediaFiles = mediaDir.entryList(QStringList(QStringLiteral("*")), QDir::Files, QDir::Time);
+        noteList = Note::fetchAll();
+    }
+
+    mediaFiles.removeDuplicates();
     int noteListCount = noteList.count();
     _fileNoteList.clear();
 
@@ -96,6 +111,9 @@ void StoredImagesDialog::refreshMediaFiles() {
     if (mediaFiles.count() > 0) {
         auto *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Home, Qt::NoModifier);
         QApplication::postEvent(ui->fileTreeWidget, event);
+    } else {
+        // Clear the image preview when the list is empty
+        loadCurrentFileDetails();
     }
 }
 
@@ -116,6 +134,9 @@ void StoredImagesDialog::loadCurrentFileDetails() {
     QTreeWidgetItem *current = ui->fileTreeWidget->currentItem();
 
     if (current == nullptr) {
+        // Clear the graphics view when no item is selected or list is empty
+        auto *emptyScene = new QGraphicsScene(this);
+        ui->graphicsView->setScene(emptyScene);
         ui->notesFrame->hide();
 
         return;
@@ -249,11 +270,6 @@ void StoredImagesDialog::on_insertButton_clicked() {
         textEdit->insertPlainText(imageLink);
     }
 
-    refreshMediaFiles();
-}
-
-void StoredImagesDialog::on_checkBox_toggled(bool checked) {
-    _orphanedImagesOnly = checked;
     refreshMediaFiles();
 }
 
@@ -398,10 +414,8 @@ void StoredImagesDialog::refreshAndJumpToFileName(const QString &fileName) {
     // look for the item to jump back to
     auto item = Utils::Gui::getTreeWidgetItemWithUserData(ui->fileTreeWidget, fileName);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
     // set the previous item with a timer (didn't work without timer)
     QTimer::singleShot(0, this, [this, item]() { ui->fileTreeWidget->setCurrentItem(item); });
-#endif
 }
 
 void StoredImagesDialog::on_fileTreeWidget_customContextMenuRequested(const QPoint &pos) {
@@ -485,5 +499,27 @@ void StoredImagesDialog::on_openFolderButton_clicked() {
     }
 
     QString filePath = getFilePath(item);
-    Utils::Misc::openFolderSelect(filePath);
+    Utils::Misc::openFolderSelect(filePath, QStringLiteral("show-stored-image-in-file-manager"));
+}
+
+void StoredImagesDialog::on_orphanedCheckBox_toggled(bool checked) {
+    if (checked) {
+        const QSignalBlocker blocker(ui->fileTreeWidget);
+        Q_UNUSED(blocker)
+        ui->currentNoteCheckBox->setChecked(false);
+    }
+
+    _orphanedImagesOnly = checked;
+    refreshMediaFiles();
+}
+
+void StoredImagesDialog::on_currentNoteCheckBox_toggled(bool checked) {
+    if (checked) {
+        const QSignalBlocker blocker(ui->fileTreeWidget);
+        Q_UNUSED(blocker)
+        ui->orphanedCheckBox->setChecked(false);
+    }
+
+    _currentNoteOnly = checked;
+    refreshMediaFiles();
 }

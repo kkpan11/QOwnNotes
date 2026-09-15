@@ -1,32 +1,37 @@
-# ماركداون (Markdown)
+# Markdown Cheatsheet
 
-المراد من هذه الورقة أن تكون مرجعا سريعا وأن تُظهر صياغة ماركداون في QOwnNotes.
+This Markdown cheatsheet is intended as a quick reference and showcase of the Markdown syntax in QOwnNotes.
 
-## العناوين
+## Headings
 
-استخدم العنوان لتنظيم نصوصك.
+Use ATX headings to structure your texts.
 
 ```markdown
-# عنوان مستوى أول
-## عنوان مستوى ثان
-### عنوان مستوى ثالث
-#### عنوان مستوى رابع
-##### عنوان مستوى خامس
-###### عنوان مستوى سادس
+# H1
+
+## H2
+
+### H3
+
+#### H4
+
+##### H5
+
+###### H6
 ```
 
 ::: tip
 **لوحة التنقل** تُظهر هيكل عناوينك.
 :::
 
-كبديل، للعناوين من المستويين الأول والثاني، يمكن تسطيرهم هكذا:
+Alternatively, for H1 and H2, you can also use Setext headings:
 
 ```markdown
-شكل بديل لعناوين المستوى الأول
-==================================
+Alt-H1
+======
 
-شكل بديل لعناوين المستوى الثاني
-------------------------------------
+Alt-H2
+------
 ```
 
 ::: tip
@@ -36,9 +41,11 @@
 ## التوكيد
 
 ```markdown
-التوكيد البسيط، أو الخط المائل، يكون *بنجمة واحدة على كل جانب*.
+Emphasis, aka italics, with *asterisks* or _underscores_.
 
-التوكيد القوي، أو الخط العريض، يكون **بنجمتين اثنتين على كل جانب**.
+Strong emphasis, aka bold, with **asterisks** or __underscores__.
+
+Combined emphasis with **asterisks and _underscores_**.
 ```
 
 ::: tip
@@ -47,7 +54,7 @@
 
 ## التسطير
 
-يوجد كذلك إعداد اختياري لتفعيل عرض التسطير في *إعدادات المعاينة*.
+There also is an optional setting to enable underline rendering in the _Preview settings_.
 
 ```markdown
 _مسطر_
@@ -73,15 +80,18 @@ _مسطر_
 
 ```markdown
 1. العنصر الأول في قائمة مرقمة
-2. عنصر آخر
-  * قائمة منقوطة فرعية.
-1. الرقم الفعلي غير مهم؛ المهم أنه رقم
-  1. قائمة مرقمة فرعية (تعمل فقط في المحرر، ولا تعمل في المعاينة)
-4. وعنصر آخر.
+2. Another item
 
-* القوائم المنقوطة قد تستخدم النجوم
-- أو الشرطات
-+ أو علامات الجمع
+- Unordered sub-list.
+
+1. Actual numbers don't matter, just that it's a number
+1. And another item.
+
+* Unordered list can use asterisks
+
+- Or minuses
+
++ Or pluses
 ```
 
 ::: tip
@@ -101,13 +111,15 @@ _مسطر_
 
 [يمكنك استخدام الأرقام لتعريف الروابط بأسلوب المراجع][1]
 
-الروابط المجردة والروابط المحاطة بأقواس زاويّة ستُحوّل آليًا إلى روابط في المعاينة. 
+الروابط المجردة والروابط المحاطة بأقواس زاويّة ستُحوّل آليًا إلى روابط في المعاينة.
 http://www.example.com أو <http://www.example.com>
 
 [1]: https://www.qownnotes.org
 ```
 
 ### الروابط الداخلية
+
+You can link to other notes or attachments like this:
 
 ```markdown
 [هذا رابط لملف ملاحظة اسمه Journal.md](Journal.md)
@@ -122,6 +134,31 @@ http://www.example.com أو <http://www.example.com>
 
 يمكنك ضغط <kbd>Ctrl + Space</kbd> والمؤشر على رابط في محرر الملاحظات لفتحه.
 :::
+
+::: warning
+Info Internal links with a title are not supported:
+
+```markdown
+[I link to the Journal.md note](Journal.md "Title not supported")
+```
+
+:::
+
+### Footnotes
+
+You can add numeric or named footnotes to link to another position in the same note:
+
+```markdown
+Here is some text with a footnote.[^1]
+
+[^1]: This is the footnote text.
+
+This is a statement with a named footnote.[^source]
+
+[^source]: The source or additional explanation.
+```
+
+Footnote references and definitions are shown as links. Hold <kbd>Ctrl</kbd> and click a footnote in the note editor to jump between its reference and definition. You can also click footnotes in the preview.
 
 ### الإشارات المرجعية
 
@@ -139,12 +176,34 @@ http://www.example.com أو <http://www.example.com>
 ![نص بديل](media/my-image.jpg)
 ```
 
+### Image dimensions
+
+You can optionally specify a `width` and/or `height` for an image using curly-brace attribute syntax right after the closing parenthesis:
+
+```markdown
+![alt text](media/my-image.jpg){ width=300 }
+
+![alt text](media/my-image.jpg){ height=200 }
+
+![alt text](media/my-image.jpg){ width=300 height=200 }
+```
+
+The dimension attributes are displayed with masked (grayed-out) syntax in the editor and are applied in the preview, where they take precedence over the automatic image width sizing.
+
 ::: tip
 استخدم [الاختصار](./shortcuts.md) <kbd>Ctrl + Shift + I</kbd> لإدراج صورة في الملاحظة. يمكن أن تكون الصورة أيضا في الحافظة؛ سيكتشفها الحوار ويظهر معاينة لها.
 
 يمكنك أيضا لصق الصورة من الحافظة مباشرةً في الملاحظة بالاختصار <kbd>Ctrl + Shift + V</kbd>.
 :::
 
+::: warning
+Info Image links with a title are not supported:
+
+```markdown
+![alt text](media/my-image.jpg "Title not supported")
+```
+
+:::
 
 ## الأكواد المضمّنة وكتل الأكواد
 
@@ -170,92 +229,99 @@ http://www.example.com أو <http://www.example.com>
 ### سور الفاصلات العليا المائلة
 
 يمكنك أيضا استخدام ثلاث فاصلات عليا مائلة لإنشاء كتلة كود.
-~~~markdown
+````markdown
 ```
 الكود يأتي هنا
 الكود يأتي هنا
 ```
-~~~
+````
 
 ::: tip
 يمكنك استخدام [الاختصار](./shortcuts.md) <kbd>Ctrl + Shift + C</kbd> على
-عدد من السطور المحددة أو في سطر فارغ لإنشاء كتلة كود. 
+عدد من السطور المحددة أو في سطر فارغ لإنشاء كتلة كود.
 :::
 
 ### سور الفاصلات مع تلوين الأكواد
 
 يوجد كذلك شيء من التلوين النحوي لكتل الأكواد في QOwnNotes.
 
-<div dir="ltr">
-~~~markdown
+````markdown
 ```bash
-# أنا تعليق
+# I am a comment
 cd Notes
-</div>
-```
-~~~
+````
+````
 
-اللغات المدعومة حاليا (ومعرِّفات كتل الأكواد) هي:
+Currently, supported languages (and code block identifiers) are:
 
-* BASh scripting, `bash`
-* C, `c`
-* C++, `cpp`
-* C++, `cxx`
-* C++, `c++`
-* C#, `c#`
-* CMake, `cmake`
-* C#, `csharp`
-* CSS, `css`
-* Go, `go`
-* HTML, `html`
-* INI, `ini`
-* Java, `java`
-* JavaScript, `javascript`
-* JavaScript, `js`
-* JSON, `json`
-* Makefile, `make`
-* PHP, `php`
-* Python, `py`
-* Python, `python`
-* QML, `qml`
-* Rust, `rust`
-* Shell scripting, `sh`
-* SQL, `sql`
-* TypeScript, `ts`
-* TypeScript, `typescript`
-* V, `v`
-* Vex, `vex`
-* XML, `xml`
-* YAML, `yml`
-* YAML, `yaml`
+- BASh scripting, `bash`
+- C, `c`
+- C++, `cpp`
+- C++, `cxx`
+- C++, `c++`
+- C#, `c#`
+- CMake, `cmake`
+- C#, `csharp`
+- Console, `console`
+- CSS, `css`
+- Forth, `forth`
+- GDScript, `gdscript`
+- Go, `go`
+- HTML, `html`
+- INI, `ini`
+- Java, `java`
+- JavaScript, `javascript`
+- JavaScript, `js`
+- JSON, `json`
+- Makefile, `make`
+- Nix, `nix`
+- PHP, `php`
+- Python, `py`
+- Python, `python`
+- QML, `qml`
+- R, `r`
+- Rust, `rust`
+- Shell scripting, `sh`
+- Shell session, `shell-session`
+- SQL, `sql`
+- SystemVerilog, `systemverilog`
+- TaggerScript, `taggerscript`
+- TOML, `toml`
+- TypeScript, `ts`
+- TypeScript, `typescript`
+- V, `v`
+- Vex, `vex`
+- XML, `xml`
+- YAML, `yml`
+- YAML, `yaml`
 
-## الجداول
+## Tables
 
-الجداول ليست جزءًا من جوهر مواصفات ماركداون، لكن معاينة QOwnNotes تدعمها. 
+Tables aren't part of the core Markdown spec, but the QOwnNotes preview supports them.
 
 ```markdown
-يمكن استخدام النقطتين الرأسيتين لمحاذاة الأعمدة.
+Colons can be used to align columns.
 
-| الجداول        | رائعة           | حقا  |
-| ------------- |:-------------:| -----:|
-| العمود الثالث      | محاذى لليمين | $1600 |
-| العمود الثاني      | ممركز      |   $12 |
-| خطوط الحمار الوحشي | جميلة وأنيقة      |    $1 |
+| Tables        |      Are      |  Cool |
+| ------------- | :-----------: | ----: |
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      |   centered    |   $12 |
+| zebra stripes |   are neat    |    $1 |
 
-يجب فصل كل خلية ترويسة بثلاث شرطات على الأقل.
+There must be at least 3 dashes separating each header cell.
 
 يمكنك أيضا استخدام ماركداون داخل خلايا الجداول.
 
-| ماركداون | أقل | جمالا |
-| --- | --- | --- |
-| *ما زال* | `يُعرض` | **بإتقان** |
-| 1 | 2 | 3 |
-~~~
+| Markdown | Less      | Pretty     |
+| -------- | --------- | ---------- |
+| _Still_  | `renders` | **nicely** |
+| 1        | 2         | 3          |
+````
 
 ::: tip
 اضغط <kbd>Alt + Shift + T</kbd> لإظهار حوار يساعدك في إنشاء الجداول. يمكنك حتى استيراد ملفات CSV في ذلك الحوار.
 
-استخدم <kbd>Ctrl + Space</kbd> داخل جدول ماركداون لتنسيقه آليًا.
+Use <kbd>Ctrl + Space</kbd> inside a Markdown table to automatically format it.
 :::
 
 ## كتل الاقتباس
@@ -266,11 +332,11 @@ cd Notes
 
 كسر الاقتباس.
 
-> هذا سطر طويل جدا ولكنه سيُنسّق بشكل سليم كاقتباس عندما يلف إلى السطر التالي. ياه يا فتى، لنستمر في الكتابة حتى نضمن أن هذا بالطول الكافي لكي يلف فعلا عند الجميع. آه، يمكنك *وضع* **ماركداون** داخل كتلة اقتباس. 
+> هذا سطر طويل جدا ولكنه سيُنسّق بشكل سليم كاقتباس عندما يلف إلى السطر التالي. ياه يا فتى، لنستمر في الكتابة حتى نضمن أن هذا بالطول الكافي لكي يلف فعلا عند الجميع. Oh, you can _put_ **Markdown** into a blockquote.
 ```
 
 ::: tip
-يمكنك إخبار QOwnNotes أن يظلّل كتل الاقتباس بكاملها أو أن يظلّل حرف الاقتباس فقط، في *إعدادات المحرر*
+You can tell QOwnNotes to fully highlight blockquotes or just the blockquote character in the _Editor settings_
 
 يمكنك استخدام [الاختصار](./shortcuts.md) <kbd>Ctrl + Shift + B</kbd> لجعل النص المحدد كتلة اقتباس.
 :::
@@ -282,17 +348,17 @@ cd Notes
 ```markdown
 ثلاث أو أكثر...
 
-شرطات
+Hyphens
 
 ---
 
-شرطات سفلية
-
-___
-
-نجوم
+Asterisks
 
 ***
+
+Underscores
+
+___
 ```
 
 ## فصل السطور
@@ -308,10 +374,10 @@ ___
 ```markdown
 إليك سطر لنبدأ به.
 
-هذا السطر مفصول عن سابقه بسطرين جديدين، لذا فإنه يكون *فقرة منفصلة*.
+This line is separated from the one above by two newlines, so it will be a _separate paragraph_.
 
-وأيضا هذا السطر يبدأ فقرة منفصلة، لكن...  
-هذا السطر مفصول فقط بمسافتين وسطر جديد واحد، لذا فإنه سطر منفصل في *نفس الفقرة*.
+This line also begins a separate paragraph, but...  
+This line is only separated by two trailing spaces and a single newline, so it's a separate line in the _same paragraph_.
 ```
 
 ::: tip
@@ -323,9 +389,9 @@ ___
 لا تظهر التعليقات في المعاينة.
 
 ```markdown
-[comment]: # (لن يظهر هذا التعليق في المعاينة)
+[comment]: # "This comment will not appear in the preview"
 
-<!-- تعليقات هتمل مخفية أيضا -->
+<!-- HTML comments are also hidden -->
 ```
 
 ::: tip

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2024 Patrizio Bekerle -- <patrizio@bekerle.com>
+ * Copyright (c) 2014-2026 Patrizio Bekerle -- <patrizio@bekerle.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,9 +21,9 @@
 #include <QClipboard>
 #include <QDebug>
 #include <QMenu>
-#include <QSettings>
 
 #include "mainwindow.h"
+#include "services/settingsservice.h"
 
 NoteFilePathLabel::NoteFilePathLabel(QWidget *parent) : QLabel(parent) {
     // Empty the text
@@ -47,7 +47,7 @@ void NoteFilePathLabel::updateText() {
     const auto note = mainWindow->getCurrentNote();
     const auto separator = Utils::Misc::dirSeparator();
     QString notePath = Utils::Misc::htmlspecialchars(note.getFileName());
-    const bool darkModeColors = QSettings().value(QStringLiteral("darkModeColors")).toBool();
+    const bool darkModeColors = SettingsService().value(QStringLiteral("darkModeColors")).toBool();
     const auto subFolderColor =
         darkModeColors ? QStringLiteral("#999999") : QStringLiteral("#696969");
     const auto noteFolderColor =
@@ -55,14 +55,14 @@ void NoteFilePathLabel::updateText() {
 
     const NoteSubFolder noteSubFolder = note.getNoteSubFolder();
     if (noteSubFolder.isFetched()) {
-        notePath.prepend(QString("<span style='color: %1;'>%2</span>%3")
+        notePath.prepend(QStringLiteral("<span style='color: %1;'>%2</span>%3")
                              .arg(subFolderColor,
                                   Utils::Misc::htmlspecialchars(noteSubFolder.relativePath()),
                                   QString(separator)));
     }
 
     bool showRelativeNotePath =
-        QSettings().value(QStringLiteral("showStatusBarRelativeNotePath")).toBool();
+        SettingsService().value(QStringLiteral("showStatusBarRelativeNotePath")).toBool();
     if (!showRelativeNotePath) {
         auto noteFolderPath = NoteFolder::currentLocalPath();
 
@@ -73,7 +73,7 @@ void NoteFilePathLabel::updateText() {
         }
 #endif
 
-        notePath.prepend(QString("<span style='color: %1;'>%2</span>%3")
+        notePath.prepend(QStringLiteral("<span style='color: %1;'>%2</span>%3")
                              .arg(noteFolderColor, Utils::Misc::htmlspecialchars(noteFolderPath),
                                   QString(separator)));
     }
@@ -99,6 +99,10 @@ void NoteFilePathLabel::contextMenuEvent(QContextMenuEvent *event) {
     const QString notePath = mainWindow->getCurrentNote().fullNoteFilePath();
     copyFullPathAction->setToolTip(notePath);
 
+    QAction *copyFileNameAction = contextMenu.addAction(tr("Copy note filename"));
+    const QString fileName = mainWindow->getCurrentNote().getFileName();
+    copyFileNameAction->setToolTip(fileName);
+
     QAction *copySubFolderPathAction = nullptr;
     QString subFolderPath;
     if (NoteFolder::isCurrentHasSubfolders()) {
@@ -115,6 +119,8 @@ void NoteFilePathLabel::contextMenuEvent(QContextMenuEvent *event) {
     QAction *selectedAction = contextMenu.exec(event->globalPos());
     if (selectedAction == copyFullPathAction) {
         clipboard->setText(notePath);
+    } else if (selectedAction == copyFileNameAction) {
+        clipboard->setText(fileName);
     } else if (selectedAction == copySubFolderPathAction) {
         clipboard->setText(subFolderPath);
     } else if (selectedAction == copyNoteFolderPathAction) {

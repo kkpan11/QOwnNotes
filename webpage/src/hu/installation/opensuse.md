@@ -4,7 +4,6 @@
 
 <!-- <Content :page-key="getPageKey($site.pages, '/installation/ubuntu.md')" /> -->
 
-
 ## Minden openSUSE verzión
 
 A QOwnNotes az [OBS Package Installer](https://github.com/openSUSE/opi) eszközzel telepíthető.
@@ -31,9 +30,21 @@ Ellenőrizze azt is, hogy a kiválasztott repo a hivatalos `home:pbek:QOwnNotes`
 A frissítések megszerzéséhez ki kell választania az adattár telepítés utáni megőrzését.
 :::
 
-## openSUSE Leap 15.6
+## openSUSE Leap 16.0
 
 Futtassa rootként a következő shell parancsokat az adattár hozzáadásához és a QOwnNotes onnan való telepítéséhez.
+
+```bash
+zypper addrepo -f http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/16.0/home:pbek:QOwnNotes.repo
+zypper refresh
+zypper install qownnotes
+```
+
+[Direct Download](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/16.0)
+
+## openSUSE Leap 15.6
+
+Run the following shell commands as root to add the repository and install QOwnNotes from there.
 
 ```bash
 zypper addrepo -f http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/15.6/home:pbek:QOwnNotes.repo
@@ -103,27 +114,20 @@ zypper install qownnotes
 
 [Direct Download](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/openSUSE_Tumbleweed)
 
+::: tip
+If QOwnNotes logs `Could not write secret to keychain`, install the missing Secret Service packages and restart your desktop session.
 
-## SLE 12 SP3 Backports
-
-Run the following shell commands as root to add the repository and install QOwnNotes from there.
-
-```bash
-zypper addrepo -f http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/SLE_12_SP3_Backports/home:pbek:QOwnNotes.repo
-zypper refresh
-zypper install qownnotes
-```
-
-[Direct Download](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/SLE_12_SP3_Backports)
-
-## SLE 15
-
-Run the following shell commands as root to add the repository and install QOwnNotes from there.
+For GNOME and other Secret Service based desktops:
 
 ```bash
-zypper addrepo -f http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/SLE_15/home:pbek:QOwnNotes.repo
-zypper refresh
-zypper install qownnotes
+sudo zypper install gnome-keyring libsecret-1-0 seahorse
 ```
 
-[Direct Download](https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/SLE_15)
+For KDE Plasma:
+
+```bash
+sudo zypper install kwalletmanager
+```
+
+QOwnNotes will fall back to legacy encryption if the desktop keychain is unavailable.
+:::

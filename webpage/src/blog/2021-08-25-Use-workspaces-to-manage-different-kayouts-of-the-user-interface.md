@@ -1,7 +1,7 @@
 ---
 title: Use workspaces to manage different layouts of the user interface
 description: You can use workspaces to manage different user interfaces in QOwnNotes.
-image: /assets/img/qownnotes-media-hUmrsr.png
+image: /assets/qownnotes-media-hUmrsr.png
 date: 2021-08-25
 order: 20210825000001
 ---
@@ -16,11 +16,11 @@ If you for example want a view where you can edit notes and one where you just c
 
 ![qownnotes-media-hUmrsr](./media/qownnotes-media-hUmrsr.png)
 
-Then you can **turn off the panels you don't want** in the *Window / Panels* menu.
+Then you can **turn off the panels you don't want** in the _Window / Panels_ menu.
 
 ![qownnotes-media-KheFEk](./media/qownnotes-media-KheFEk.png)
 
-You can also **drag panels around** by enabling *Unlock panels* in the *Window* menu.
+You can also **drag panels around** by enabling _Unlock panels_ in the _Window_ menu.
 
 ![qownnotes-media-NfiQOu](./media/qownnotes-media-NfiQOu.png)
 

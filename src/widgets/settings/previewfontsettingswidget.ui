@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PreviewFontSettingsWidget</class>
+ <widget class="QWidget" name="PreviewFontSettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_42">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="4" column="0">
+    <spacer name="verticalSpacer_10">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="groupBox_34">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Rendering</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_82">
+      <item row="4" column="0">
+       <widget class="QLabel" name="cursorWidthLabel_2">
+        <property name="text">
+         <string>Time to wait before refreshing the preview after typing:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QToolButton" name="noteTextViewRefreshDebounceTimeResetButton">
+        <property name="toolTip">
+         <string>Reset the debounce time</string>
+        </property>
+        <property name="text">
+         <string notr="true">…</string>
+        </property>
+        <property name="icon">
+         <iconset theme="edit-clear" resource="../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/edit-clear.svg</normaloff>:/icons/breeze-qownnotes/16x16/edit-clear.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="noteTextViewRefreshDebounceTimeSpinBox">
+        <property name="toolTip">
+         <string>0ms means don't wait for the typing to stop</string>
+        </property>
+        <property name="suffix">
+         <string notr="true">ms</string>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>10000</number>
+        </property>
+        <property name="value">
+         <number>600</number>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="3">
+       <spacer name="horizontalSpacer_17">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="3" column="0" colspan="4">
+       <widget class="QCheckBox" name="noteTextViewUseEditorStylesCheckBox">
+        <property name="text">
+         <string>Use editor highlighting styles also for the preview</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <widget class="QCheckBox" name="noteTextViewUnderlineCheckBox">
+        <property name="text">
+         <string>Enable underline rendering</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QCheckBox" name="noteTextViewRTLCheckBox">
+        <property name="text">
+         <string>View text right to left (RTL)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QCheckBox" name="noteTextViewIgnoreCodeFontSizeCheckBox">
+        <property name="text">
+         <string>Ignore code font size to allow zooming</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QGroupBox" name="groupBox_26">
+     <property name="title">
+      <string>Exporting</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_29">
+      <item>
+       <widget class="QCheckBox" name="useInternalExportStylingCheckBox">
+        <property name="text">
+         <string>Use internal export styling for the PDF export and printing of the preview</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QGroupBox" name="previewFontsGroupBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Fonts</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_6">
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="noteTextViewFontLabel">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="noteTextViewCodeFontHeadlineLabel">
+        <property name="text">
+         <string>Code font:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QToolButton" name="noteTextViewCodeButton">
+        <property name="toolTip">
+         <string>Set a new font</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset theme="gtk-select-font" resource="../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/gtk-select-font.svg</normaloff>:/icons/breeze-qownnotes/16x16/gtk-select-font.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QToolButton" name="noteTextViewCodeResetButton">
+        <property name="toolTip">
+         <string>Reset font</string>
+        </property>
+        <property name="text">
+         <string notr="true">…</string>
+        </property>
+        <property name="icon">
+         <iconset theme="edit-clear" resource="../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/edit-clear.svg</normaloff>:/icons/breeze-qownnotes/16x16/edit-clear.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QToolButton" name="noteTextViewButton">
+        <property name="toolTip">
+         <string>Set a new font</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset theme="gtk-select-font" resource="../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/gtk-select-font.svg</normaloff>:/icons/breeze-qownnotes/16x16/gtk-select-font.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="noteTextViewCodeFontLabel">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="noteTextViewFontHeadlineLabel">
+        <property name="text">
+         <string>Default font:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QToolButton" name="noteTextViewResetButton">
+        <property name="toolTip">
+         <string>Reset font</string>
+        </property>
+        <property name="text">
+         <string notr="true">…</string>
+        </property>
+        <property name="icon">
+         <iconset theme="edit-clear" resource="../breeze-qownnotes.qrc">
+          <normaloff>:/icons/breeze-qownnotes/16x16/edit-clear.svg</normaloff>:/icons/breeze-qownnotes/16x16/edit-clear.svg</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../breeze-qownnotes.qrc"/>
+ </resources>
+ <connections/>
+</ui>

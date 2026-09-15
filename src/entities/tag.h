@@ -2,6 +2,7 @@
 
 #include <QColor>
 #include <QDateTime>
+#include <QHash>
 #include <QSqlQuery>
 #include <QVector>
 
@@ -146,6 +147,8 @@ class Tag : protected TagHeader {
     static void removeBrokenLinks();
 
     static QStringList fetchAllNamesOfNote(const Note &note);
+
+    static QHash<QString, QStringList> fetchAllNamesByNoteFilePath();
 
     static QSet<int> fetchAllIdsByNote(const Note &note);
 

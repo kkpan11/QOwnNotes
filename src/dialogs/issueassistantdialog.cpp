@@ -6,11 +6,11 @@
 #include <QClipboard>
 #include <QDesktopServices>
 #include <QFileDialog>
-#include <QSettings>
 
 #include "QDebug"
 #include "mainwindow.h"
 #include "services/metricsservice.h"
+#include "services/settingsservice.h"
 #include "settingsdialog.h"
 #include "ui_issueassistantdialog.h"
 
@@ -18,8 +18,12 @@ IssueAssistantDialog::IssueAssistantDialog(QWidget *parent)
     : MasterDialog(parent), ui(new Ui::IssueAssistantDialog) {
     ui->setupUi(this);
     afterSetupUI();
+    const SettingsService settings;
+
     ui->backButton->setEnabled(false);
     ui->nextButton->setEnabled(false);
+    ui->debugInfoAnonymizeCheckBox->setChecked(
+        settings.value(QStringLiteral("debugInfoAnonymize")).toBool());
 
     ui->stackedWidget->setCurrentIndex(IssueAssistantPages::IssuePage);
     on_issueTypeComboBox_currentIndexChanged(ProblemIssueType);
@@ -112,8 +116,7 @@ void IssueAssistantDialog::refreshPage(int index) const {
             break;
         case DebugSettingsPage:
             if (ui->debugOutputPlainTextEdit->toPlainText().isEmpty()) {
-                ui->debugOutputPlainTextEdit->setPlainText(
-                    Utils::Misc::generateDebugInformation(true));
+                refreshDebugOutput();
             }
             break;
         case SubmitPage:
@@ -133,6 +136,11 @@ void IssueAssistantDialog::refreshLogOutput() const {
 
     mainWindow->turnOnDebugLogging();
     ui->logOutputPlainTextEdit->setPlainText(mainWindow->getLogText());
+}
+
+void IssueAssistantDialog::refreshDebugOutput() const {
+    ui->debugOutputPlainTextEdit->setPlainText(
+        Utils::Misc::generateDebugInformation(true, ui->debugInfoAnonymizeCheckBox->isChecked()));
 }
 
 void IssueAssistantDialog::generateSubmitPageContent() const {
@@ -271,4 +279,10 @@ void IssueAssistantDialog::on_newIssueButton_clicked() {
     ui->nextButton->setEnabled(false);
     ui->stackedWidget->setCurrentIndex(IssueAssistantPages::IssuePage);
     ui->issueTypeComboBox->setCurrentIndex(QuestionIssueType);
+}
+
+void IssueAssistantDialog::on_debugInfoAnonymizeCheckBox_toggled(bool checked) {
+    SettingsService settings;
+    settings.setValue(QStringLiteral("debugInfoAnonymize"), checked);
+    refreshDebugOutput();
 }

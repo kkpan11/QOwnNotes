@@ -1,9 +1,9 @@
 # الخطاطيف
 
-onNoteStored (خطاف حفظ الملاحظة)
-------------
+## onNoteStored (خطاف حفظ الملاحظة)
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * تُنادى هذه الدالة عندما تخزن ملاحظة على قرص التخزين
@@ -18,10 +18,10 @@ function onNoteStored(note);
 
 ربما تحب أن تلقي نظرة على المثال [on-note-opened.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/on-note-opened.qml).
 
-noteOpenedHook (خطاف فتح ملاحظة)
---------------
+## noteOpenedHook (خطاف فتح ملاحظة)
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * تُنادى هذه الدالة عند فتح ملاحظة
@@ -34,10 +34,10 @@ function noteOpenedHook(note);
 
 ربما تحب أن تلقي نظرة على المثال [on-note-opened.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/on-note-opened.qml).
 
-noteDoubleClickedHook (خطاف النقر المزدوج على ملاحظة)
----------------------
+## noteDoubleClickedHook (خطاف النقر المزدوج على ملاحظة)
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * تُنادى هذه الدالة عند النقر المزدوج على ملاحظة
@@ -50,14 +50,14 @@ function noteDoubleClickedHook(note);
 
 ربما تحب أن تلقي نظرة على المثال [external-note-open.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/external-note-open.qml).
 
-insertMediaHook (خطاف إضافة وسائط)
----------------
+## insertMediaHook (خطاف إضافة وسائط)
 
 تُنادى هذه الدالة عندما يُضاف ملف وسائط إلى الملاحظة الحالية.
 
 إذا كانت هذه الدالة مُعرَّفة في أكثر من بُريمج، فإن أول بُريمج يُعيد سلسلة نصية غير فارغة يفوز.
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * @param fileName
@@ -73,14 +73,14 @@ function insertMediaHook(fileName, markdownText);
 
 ربما تحب أن تلقي نظرة على المثال [example.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/example.qml).
 
-insertAttachmentHook (خطاف إضافة مرفق)
---------------------
+## insertAttachmentHook (خطاف إضافة مرفق)
 
 تُنادى هذه الدالة عندما يُضاف ملف مرفق إلى الملاحظة الحالية.
 
 إذا كانت هذه الدالة مُعرَّفة في أكثر من بُريمج، فإن أول بُريمج يُعيد سلسلة نصية غير فارغة يفوز.
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * @param fileName
@@ -96,10 +96,28 @@ function insertAttachmentHook(fileName, markdownText);
 
 ربما تحب أن تلقي نظرة على المثال [example.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/example.qml).
 
-insertingFromMimeDataHook (خطاف إلصاق هتمل أو وسائط)
--------------------------
+## fetchUrlTitleHook
+
+This function is called in the link dialog before QOwnNotes tries to fetch a webpage title from a URL.
+
+If this function is defined in multiple scripts, then the first script that returns a non-empty string wins.
 
 ### نداء الدالة ومُعامِلاتها
+
+```js
+/**
+ * @param url string the URL whose title should be fetched
+ * @return string the title for the URL, or an empty string to let QOwnNotes fetch it
+ */
+function fetchUrlTitleHook(url);
+```
+
+You may want to take a look at the example [fetch-url-title-with-kanboard-cli.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/fetch-url-title-with-kanboard-cli.qml).
+
+## insertingFromMimeDataHook (خطاف إلصاق هتمل أو وسائط)
+
+### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * تُنادى هذه الدالة عندما يتم لصق هتمل أو ملف وسائط بضغط
@@ -117,10 +135,10 @@ function insertingFromMimeDataHook(text, html);
 
 ربما تحب أن تلقي نظرة على الأمثلة [example.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/example.qml) أو [insert-headline-with-link-from-github-url.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/insert-headline-with-link-from-github-url.qml) أو [note-text-from-5pm-mail.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/note-text-from-5pm-mail.qml).
 
-handleNoteTextFileNameHook (خطاف التعامل مع اسم ملف الملاحظة)
---------------------------
+## handleNoteTextFileNameHook (خطاف التعامل مع اسم ملف الملاحظة)
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * تُنادى هذه الدالة عندما تخزن ملاحظة على قرص التخزين إذا كان
@@ -142,10 +160,10 @@ function handleNoteTextFileNameHook(note);
 
 ربما تحب أن تلقي نظرة على المثالين [example.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/example.qml) أو [use-tag-names-in-filename.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/use-tag-names-in-filename.qml).
 
-handleNoteNameHook (خطاف التعامل مع اسم الملاحظة)
-------------------
+## handleNoteNameHook (خطاف التعامل مع اسم الملاحظة)
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * تُنادى هذه الدالة عندما يتحدد اسم الملاحظة
@@ -162,14 +180,16 @@ handleNoteNameHook (خطاف التعامل مع اسم الملاحظة)
 function handleNoteNameHook(note);
 ```
 
+The note name is mainly used when showing the note in the lists.
+
 ربما تحب أن تلقي نظرة على المثال [example.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/example.qml).
 
 ليس مستحسنا استخدام هذا الخطاف إذا فعّل المستخدم خيار السماح لاسم الملف أن يختلف عن اسم الملاحظة.
 
-handleNewNoteHeadlineHook (خطاف التعامل مع عنوان الملاحظة الجديدة)
--------------------------
+## handleNewNoteHeadlineHook (خطاف التعامل مع عنوان الملاحظة الجديدة)
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * تُنادى هذه الدالة قبل إنشاء ملاحظة
@@ -190,10 +210,10 @@ function handleNewNoteHeadlineHook(headline);
 
 ربما تحب أن تلقي نظرة على المثال [custom-new-note-headline.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/custom-new-note-headline.qml).
 
-preNoteToMarkdownHtmlHook (خطاف ما قبل تحويل الملاحظة من ماركداون إلى HTML)
--------------------------
+## preNoteToMarkdownHtmlHook (خطاف ما قبل تحويل الملاحظة من ماركداون إلى HTML)
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * This function is called before the markdown html of a note is generated
@@ -215,10 +235,10 @@ function preNoteToMarkdownHtmlHook(note, markdown, forExport);
 
 ربما تحب أن تلقي نظرة على المثال [preview-styling.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/preview-styling.qml).
 
-noteToMarkdownHtmlHook (خطاف تحويل الملاحظة من ماركداون إلى HTML)
-----------------------
+## noteToMarkdownHtmlHook (خطاف تحويل الملاحظة من ماركداون إلى HTML)
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * This function is called when the markdown html of a note is generated
@@ -240,10 +260,10 @@ function noteToMarkdownHtmlHook(note, html, forExport);
 
 برجاء الاطلاع على توثيق [الجزء المدعوم من HTML](http://doc.qt.io/qt-5/richtext-html-subset.html) لقائمة بجميع خصائص CSS المدعومة.
 
-encryptionHook (خطاف التعمية)
---------------
+## encryptionHook (خطاف التعمية)
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * تُنادى هذه الدالة عند الاحتياج إلى تعمية نص أو فك تعميته
@@ -262,12 +282,12 @@ function encryptionHook(text, password, decrypt);
 
 ربما تحب أن تلقي نظرة على الأمثلة [encryption-keybase.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/encryption-keybase.qml) أو [encryption-pgp.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/encryption-pgp.qml) أو [encryption-rot13.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/encryption-rot13.qml).
 
-noteTaggingHook (خطاف وسم الملاحظات)
----------------
+## noteTaggingHook (خطاف وسم الملاحظات)
 
 يمكنك تنفيذ آلية وسم خاصة بك، مثلا باستخدام نص بصيغة خاصة في ملاحظاتك، مثل `@tag1` و&nbsp;`@tag2` و&nbsp;`@tag3`.
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * Handles note tagging for a note
@@ -284,28 +304,29 @@ noteTaggingHook (خطاف وسم الملاحظات)
 function noteTaggingHook(note, action, tagName, newTagName);
 ```
 
--   as soon as a script is activated that implements the new function `noteTaggingHook` note tagging will be handled by that function
--   ستعمل الخصائص التالية من خلال واجهة مستخدم QOwnNotes
-    -   initially importing tags like `@tag` from your notes and overwriting your current tag assignment
-        -   you will not lose your tags tree, just the former assignment to notes
-        -   ستظل قادرًا على نقل الوسوم إلى وسوم أخرى
-        -   if more than one tag has the same name in your tag tree the first hit will be assigned
-    -   إضافة وسم إلى ملاحظة سيضيف الوسم إلى نص الملاحظة
-    -   إزالة وسم من ملاحظة سيزيل الوسم من نص الملاحظة
-    -   إزالة وسوم من قائمة الوسوم سيزيل هذه الوسوم من ملاحظاتك
-    -   إعادة تسمية وسوم في قائمة الوسوم سيعيد تسمية هذه الوسوم في ملاحظاتك
-    -   وسم كمية من الملاحظات في قائمة الملاحظات سيضيف هذه الوسوم إلى ملاحظاتك
-    -   إزالة كمية من الوسوم من الملاحظات في قائمة الملاحظات سيزيل هذه الوسوم من ملاحظاتك
-    -   إذا تم نقل وسوم في لوحة الوسوم، فسينفذ التطبيق سلسلة من إجراءات الإضافة (`add`) والإزالة (`remove`) لجميع الوسوم المحددة ووسومها الفرعية في جميع الملاحظات
+- as soon as a script is activated that implements the new function `noteTaggingHook` note tagging will be handled by that function
+- ستعمل الخصائص التالية من خلال واجهة مستخدم QOwnNotes
+  - initially importing tags like `@tag` from your notes and overwriting your current tag assignment
+    - you will not lose your tags tree, just the former assignment to notes
+    - ستظل قادرًا على نقل الوسوم إلى وسوم أخرى
+    - if more than one tag has the same name in your tag tree the first hit will be assigned
+  - إضافة وسم إلى ملاحظة سيضيف الوسم إلى نص الملاحظة
+  - إزالة وسم من ملاحظة سيزيل الوسم من نص الملاحظة
+  - removing of tags in the tag list will remove those tags from your notes
+  - renaming of tags in the tag list will rename those tags in your notes
+  - bulk tagging of notes in the note list will add those tags to your notes
+  - bulk removing of tags from notes in the note list will remove those tags from your notes
+  - the application will trigger a series of `add` and `remove` actions for all selected tags and their children on all notes if tags are moved in the tag panel
 
 ربما تحب أن تلقي نظرة على المثال [note-tagging.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/note-tagging.qml) لتنفيذ آلية وسم خاصة بك.
 
 ::: warning
-اجعل إجراء السرد، `list`، الخاص بك سريعا جدا، لأنه سينفذ لكل ملاحظة كل مرة يُعاد فيها تحميل مجلدها!
+Make sure your `list` action is really fast, because it will be executed for every note every time the note folder or the tag tree is reloaded!
+
+That is every time you find `reloadTagTree` in [mainwindow.cpp](https://github.com/pbek/QOwnNotes/blob/main/src/mainwindow.cpp).
 :::
 
-noteTaggingByObjectHook (خطاف وسم الملاحظات الكائني)
-----------------------
+## noteTaggingByObjectHook (خطاف وسم الملاحظات الكائني)
 
 مثل [خطاف وسم الملاحظات (noteTaggingHook)](#notetagginghook)، يمكنك تنفيذ آلية وسم خاصة بك، لكنك لست مربوطًا بأسماء وسوم في جذر شجرة الوسوم. يمكنك بهذه الطريقة استخدام شجرة الوسوم كلها بدلا من قائمة وسوم فقط.
 
@@ -314,6 +335,7 @@ noteTaggingByObjectHook (خطاف وسم الملاحظات الكائني)
 يعني هذا أيضا أن عليك إنشاء الوسوم المفقودة بنفسك حتى تتمكن من توفير قائمة بمُعرِّفات الوسوم الموجودة بالفعل من أجل إجراء السرد.
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * Handles note tagging for a note
@@ -332,12 +354,12 @@ function noteTaggingByObjectHook(note, action, tag, newTagName);
 
 ربما تحب أن تلقي نظرة على المثال [note-tagging-by-object.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/note-tagging-by-object.qml) لتنفيذ آلية وسم خاصة بك.
 
-autocompletionHook (خطاف الإكمال التلقائي)
-------------------
+## autocompletionHook (خطاف الإكمال التلقائي)
 
 يمكنك إرجاع قائمة سلاسل نصية لإضافتها إلى قائمة الإكمال التلقائي عندما يُستدعى الإكمال التلقائي (مثلا بضغط <kbd>Ctrl</kbd> + <kbd>Space</kbd>).
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * Calls the autocompletionHook function for all script components
@@ -350,12 +372,12 @@ function callAutocompletionHook();
 
 ربما تحب أن تلقي نظرة على المثال [autocompletion.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/autocompletion.qml).
 
-websocketRawDataHook (خطاف البيانات الخام من مقبس الويب)
---------------------
+## websocketRawDataHook (خطاف البيانات الخام من مقبس الويب)
 
 يُنادى هذا الخطاف عندما تُرسل بيانات من إضافة متصفح رفيقة ويب QOwnNotes من خلال قائمة سياق المتصفح.
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * @param requestType can be "page" or "selection"
@@ -368,14 +390,14 @@ websocketRawDataHook (خطاف البيانات الخام من مقبس الو�
 function callHandleWebsocketRawDataHook(requestType, pageUrl, pageTitle, rawData, screenshotDataUrl);
 ```
 
-ربما تحب أن تلقي نظرة على المثالين [websocket-raw-data-new-note.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/websocket-raw-data-new-note.qml) و&nbsp;[websocket-raw-data-selection-in-note.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/websocket-raw-data-selection-in-note.qml).
+You may want to take a look at the examples [layouts.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/layouts.qml) and [websocket-raw-data-selection-in-note.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/websocket-raw-data-selection-in-note.qml).
 
-onDetachedProcessCallback (عند رد عملية منفصلة)
--------------------------
+## onDetachedProcessCallback (عند رد عملية منفصلة)
 
 يُنادى هذا الخطاف عندما ينتهي تنفيذ عملية منفصلة بدأها بُريمج في خيط تنفيذ بالدالة [startDetachedProcess](methods-and-objects.html#starting-an-external-program-in-the-background).
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * This function is called when a script thread is done executing.
@@ -391,10 +413,10 @@ function onDetachedProcessCallback(callbackIdentifier, resultSet, cmd, thread);
 
 ربما تحب أن تلقي نظرة على المثال [callback-example.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/callback.qml).
 
-windowStateChangedHook (خطاف تغيّر حالة النافذة)
---------------
+## windowStateChangedHook (خطاف تغيّر حالة النافذة)
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
  * تُنادى هذه الدالة عند حدث تغيير حالة النافذة
@@ -408,56 +430,54 @@ function windowStateChangedHook(windowState);
 
 ربما تحب أن تلقي نظرة على المثال [window-state-changed.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/window-state-changed.qml).
 
-workspaceSwitchedHook (خطاف تبديل مساحة العمل)
-----------------------
+## layoutSwitchedHook
 
-يُنادى هذا الخطاف عند تبديل مساحة العمل.
+This hook is called when layouts are switched.
 
 ### نداء الدالة ومُعامِلاتها
+
 ```js
 /**
- * تُنادى هذه الدالة عند تبديل مساحات العمل
+ * This function is called when layouts are switched
  *
- * @param oldUuid
- *       المعرف العالمي الفريد لمساحة العمل القديمة
- * @param newUuid
- *       المعرف العالمي الفريد لمساحة العمل الجديدة
+ * @param oldUuid old uuid of layout
+ * @param newUuid new uuid of layout
  */
-function workspaceSwitchedHook(oldUuid, newUuid);
+function layoutSwitchedHook(oldUuid, newUuid);
 ```
 
-ربما تحب أن تلقي نظرة على المثال [websocket-raw-data-new-note.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/workspaces.qml).
+You may want to take a look at the example [layouts.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/layouts.qml).
 
-openAiBackendsHook (خطاف خدمات الذكاء المصطنع)
-------------------
+## openAiBackendsHook (خطاف خدمات الذكاء المصطنع)
 
 يُنادى هذا الخطاف عند إعادة تحميل تهيئة خدمات OpenAI. يحدث هذا مثلا عند إعادة تحميل محرك البرمجة.
 
-يمكنك استعماله لتهيئة خدمات OpenAI مخصصة، مثل نماذج LLM خاصة بك (على أن تكون متوافقة مع OpenAI API).
+You can use it to provide config for custom OpenAI backends, like your own OpenAI API compatible LLMs, for example ChatGPT, Claude or systems like Ollama.
 
-### نداء الدالة ومُعامِلاتها
+### Method call and parameters
+
 ```js
 /**
  * This function is called when the OpenAI service config is reloaded
  * It returns a list of objects with config parameters for new OpenAI backends
  */
 function openAiBackendsHook() {
-    return [
-        {
-            "id": "my-custom-ai",
-            "name": "My Custom AI",
-            "baseUrl": "http://localhost:5000",
-            "apiKey": "kDFJkjk3asdm",
-            "models": ["gpt-3.5-turbo", "gpt-4.0-turbo"],
-        },
-        {
-            "id": "my-custom-ai2",
-            "name": "My Custom AI 2",
-            "baseUrl": "http://localhost:5001",
-            "apiKey": "lOikf7eNdb9",
-            "models": ["gpt-3.5-turbo2", "gpt-4.0-turbo2"],
-        },
-    ];
+  return [
+    {
+      id: "my-custom-ai",
+      name: "My Custom AI",
+      baseUrl: "http://localhost:5000",
+      apiKey: "kDFJkjk3asdm",
+      models: ["gpt-3.5-turbo", "gpt-4.0-turbo"],
+    },
+    {
+      id: "my-custom-ai2",
+      name: "My Custom AI 2",
+      baseUrl: "http://localhost:5001",
+      apiKey: "lOikf7eNdb9",
+      models: ["gpt-3.5-turbo2", "gpt-4.0-turbo2"],
+    },
+  ];
 }
 ```
 
@@ -466,3 +486,54 @@ function openAiBackendsHook() {
 :::
 
 ربما تحب أن تلقي نظرة على المثال [custom-openai-backends.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/custom-openai-backends.qml).
+
+## highlightingHook
+
+This hook is called for each text block in the editor during syntax highlighting. It allows you to add dynamic, context-aware highlighting that goes beyond static regex rules registered with `addHighlightingRule`.
+
+::: warning
+This hook is called very frequently (for every visible text block on every keystroke), so keep your implementation fast. If you only need static regex-based highlighting, prefer using [`addHighlightingRule`](methods-and-objects.md#adding-a-highlighting-rule-for-the-editor) or [`addHighlightingRule` with custom colors](methods-and-objects.md#adding-a-highlighting-rule-with-custom-colors-and-styles) instead.
+:::
+
+### Method call and parameters
+
+```js
+/**
+ * This function is called for each text block during syntax highlighting.
+ * It allows context-aware, dynamic highlighting.
+ *
+ * @param text {QString} the text of the current block being highlighted
+ * @param previousBlockState {int} the highlighter state of the previous block
+ *     (-1 if this is the first block)
+ * @return {Array} an array of highlight range objects, each with:
+ *     start {int} - start position in the text
+ *     length {int} - number of characters to highlight
+ *     state {int} - the HighlighterState to use (optional, -1 for custom only)
+ *     foregroundColor {string} - foreground color name or hex (optional)
+ *     backgroundColor {string} - background color name or hex (optional)
+ *     bold {bool} - bold font weight (optional)
+ *     italic {bool} - italic font style (optional)
+ *     underline {bool} - underline the text (optional)
+ *     fontSize {int} - font point size (optional)
+ */
+function highlightingHook(text, previousBlockState) {
+  var highlights = [];
+
+  // Example: highlight all occurrences of "FIXME" with red bold underline
+  var re = /FIXME/g;
+  var match;
+  while ((match = re.exec(text)) !== null) {
+    highlights.push({
+      start: match.index,
+      length: match[0].length,
+      foregroundColor: "#ff0000",
+      underline: true,
+      bold: true,
+    });
+  }
+
+  return highlights;
+}
+```
+
+You may want to take a look at the examples [highlighting.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/highlighting.qml) and [custom-highlighting.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/custom-highlighting.qml).

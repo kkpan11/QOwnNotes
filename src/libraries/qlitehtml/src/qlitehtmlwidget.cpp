@@ -30,11 +30,16 @@
 
 #include "container_qpainter.h"
 
+#include <QClipboard>
 #include <QDebug>
+#include <QGuiApplication>
+#include <QMimeData>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QRegion>
 #include <QScrollBar>
 #include <QStyle>
+#include <QTimer>
 
 const int kScrollBarStep = 40;
 
@@ -376,6 +381,8 @@ public:
     DocumentContainer documentContainer;
     qreal zoomFactor = 1;
     QUrl lastHighlightedLink;
+    QTimer selectionScrollTimer;
+    QPoint selectionDragPosition;
 };
 
 QLiteHtmlWidget::QLiteHtmlWidget(QWidget *parent)
@@ -395,10 +402,12 @@ QLiteHtmlWidget::QLiteHtmlWidget(QWidget *parent)
             fullUrl.setFragment(url.fragment(QUrl::FullyEncoded));
         }
         // delay because document may not be changed directly during this callback
-        QMetaObject::invokeMethod(this, [this, fullUrl] { emit linkClicked(fullUrl); },
-                 Qt::QueuedConnection);
+        QMetaObject::invokeMethod(
+            this, [this, fullUrl] { emit linkClicked(fullUrl); }, Qt::QueuedConnection);
     });
     d->documentContainer.setClipboardCallback([this](bool yes) { emit copyAvailable(yes); });
+    d->selectionScrollTimer.setInterval(30);
+    connect(&d->selectionScrollTimer, &QTimer::timeout, this, &QLiteHtmlWidget::scrollSelection);
 
     // TODO adapt mastercss to palette (default text & background color)
     d->context.setMasterStyleSheet(mastercss);
@@ -419,8 +428,7 @@ void QLiteHtmlWidget::setUrl(const QUrl &url)
     const QString basePath = lastSlash >= 0 ? path.left(lastSlash) : QString();
     baseUrl.setPath(basePath);
     d->documentContainer.setBaseUrl(baseUrl.toString(QUrl::FullyEncoded));
-    QMetaObject::invokeMethod(this, [this] { updateHightlightedLink(); },
-             Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, [this] { updateHightlightedLink(); }, Qt::QueuedConnection);
 }
 
 QUrl QLiteHtmlWidget::url() const
@@ -436,8 +444,7 @@ void QLiteHtmlWidget::setHtml(const QString &content)
     verticalScrollBar()->setValue(0);
     horizontalScrollBar()->setValue(0);
     render();
-    QMetaObject::invokeMethod(this, [this] { updateHightlightedLink(); },
-             Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, [this] { updateHightlightedLink(); }, Qt::QueuedConnection);
 }
 
 QString QLiteHtmlWidget::html() const
@@ -474,7 +481,7 @@ bool QLiteHtmlWidget::findText(const QString &text,
         .findText(text, flags, incremental, wrapped, &success, &oldSelection, &newSelection);
     // scroll to search result position and/or redraw as necessary
     QRect newSelectionCombined;
-    for (const QRect &r : qAsConst(newSelection))
+    for (const QRect &r : std::as_const(newSelection))
         newSelectionCombined = newSelectionCombined.united(r);
     QScrollBar *vBar = verticalScrollBar();
     const int top = newSelectionCombined.top();
@@ -485,7 +492,7 @@ bool QLiteHtmlWidget::findText(const QString &text,
         vBar->setValue(bottom);
     } else {
         viewport()->update(fromVirtual(newSelectionCombined.translated(-scrollPosition())));
-        for (const QRect &r : qAsConst(oldSelection))
+        for (const QRect &r : std::as_const(oldSelection))
             viewport()->update(fromVirtual(r.translated(-scrollPosition())));
     }
     return success;
@@ -528,6 +535,11 @@ QString QLiteHtmlWidget::selectedText() const
     return d->documentContainer.selectedText();
 }
 
+QString QLiteHtmlWidget::selectedHtml() const
+{
+    return d->documentContainer.selectedHtml();
+}
+
 void QLiteHtmlWidget::paintEvent(QPaintEvent *event)
 {
     if (!d->documentContainer.hasDocument())
@@ -550,12 +562,15 @@ void QLiteHtmlWidget::resizeEvent(QResizeEvent *event)
 
 void QLiteHtmlWidget::mouseMoveEvent(QMouseEvent *event)
 {
-    QPoint viewportPos;
-    QPoint pos;
-    htmlPos(event->pos(), &viewportPos, &pos);
-    const QVector<QRect> areas = d->documentContainer.mouseMoveEvent(pos, viewportPos);
-    for (const QRect &r : areas)
-        viewport()->update(fromVirtual(r.translated(-scrollPosition())));
+    d->selectionDragPosition = event->pos();
+    const bool scrollSelection = event->buttons().testFlag(Qt::LeftButton)
+                                 && !viewport()->geometry().contains(event->pos());
+    if (scrollSelection && !d->selectionScrollTimer.isActive())
+        d->selectionScrollTimer.start();
+    else if (!scrollSelection)
+        d->selectionScrollTimer.stop();
+
+    updateSelection(event->pos());
 
     updateHightlightedLink();
 }
@@ -565,17 +580,23 @@ void QLiteHtmlWidget::mousePressEvent(QMouseEvent *event)
     QPoint viewportPos;
     QPoint pos;
     htmlPos(event->pos(), &viewportPos, &pos);
-    const QVector<QRect> areas = d->documentContainer.mousePressEvent(pos, viewportPos, event->button());
+    const QVector<QRect> areas = d->documentContainer.mousePressEvent(pos,
+                                                                      viewportPos,
+                                                                      event->button(),
+                                                                      event->modifiers());
     for (const QRect &r : areas)
         viewport()->update(fromVirtual(r.translated(-scrollPosition())));
 }
 
 void QLiteHtmlWidget::mouseReleaseEvent(QMouseEvent *event)
 {
+    d->selectionScrollTimer.stop();
     QPoint viewportPos;
     QPoint pos;
     htmlPos(event->pos(), &viewportPos, &pos);
-    const QVector<QRect> areas = d->documentContainer.mouseReleaseEvent(pos, viewportPos, event->button());
+    const QVector<QRect> areas = d->documentContainer.mouseReleaseEvent(pos,
+                                                                        viewportPos,
+                                                                        event->button());
     for (const QRect &r : areas)
         viewport()->update(fromVirtual(r.translated(-scrollPosition())));
 }
@@ -585,7 +606,9 @@ void QLiteHtmlWidget::mouseDoubleClickEvent(QMouseEvent *event)
     QPoint viewportPos;
     QPoint pos;
     htmlPos(event->pos(), &viewportPos, &pos);
-    const QVector<QRect> areas = d->documentContainer.mouseDoubleClickEvent(pos, viewportPos, event->button());
+    const QVector<QRect> areas = d->documentContainer.mouseDoubleClickEvent(pos,
+                                                                            viewportPos,
+                                                                            event->button());
     for (const QRect &r : areas) {
         viewport()->update(fromVirtual(r.translated(-scrollPosition())));
     }
@@ -605,7 +628,9 @@ void QLiteHtmlWidget::contextMenuEvent(QContextMenuEvent *event)
     QPoint viewportPos;
     QPoint pos;
     htmlPos(event->pos(), &viewportPos, &pos);
-    emit contextMenuRequested(event->pos(), d->documentContainer.linkAt(pos, viewportPos));
+    emit contextMenuRequested(event->pos(),
+                              d->documentContainer.linkAt(pos, viewportPos),
+                              d->documentContainer.imageAt(pos, viewportPos));
 }
 
 static QAbstractSlider::SliderAction getSliderAction(int key)
@@ -629,6 +654,21 @@ void QLiteHtmlWidget::keyPressEvent(QKeyEvent *event)
             verticalScrollBar()->triggerAction(sliderAction);
             event->accept();
         }
+    } else if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_C) {
+        // Copy selected text to clipboard when Ctrl+C is pressed
+        const QString text = selectedText();
+        if (!text.isEmpty()) {
+            auto *mimeData = new QMimeData();
+            mimeData->setText(text);
+            // Also copy HTML if available
+            const QString html = selectedHtml();
+
+            if (!html.isEmpty()) {
+                mimeData->setHtml(html);
+            }
+            QGuiApplication::clipboard()->setMimeData(mimeData);
+        }
+        event->accept();
     }
 
     QAbstractScrollArea::keyPressEvent(event);
@@ -648,6 +688,45 @@ void QLiteHtmlWidget::setHightlightedLink(const QUrl &url)
         return;
     d->lastHighlightedLink = url;
     emit linkHighlighted(d->lastHighlightedLink);
+}
+
+void QLiteHtmlWidget::updateSelection(const QPoint &position)
+{
+    QPoint viewportPos;
+    QPoint documentPos;
+    htmlPos(position, &viewportPos, &documentPos);
+    const QVector<QRect> areas = d->documentContainer.mouseMoveEvent(documentPos, viewportPos);
+    QRegion dirtyRegion;
+    for (const QRect &area : areas)
+        dirtyRegion += fromVirtual(area.translated(-scrollPosition()));
+    if (!dirtyRegion.isEmpty())
+        viewport()->update(dirtyRegion);
+}
+
+void QLiteHtmlWidget::scrollSelection()
+{
+    const QRect viewportRect = viewport()->geometry();
+    const QPoint position = d->selectionDragPosition;
+    const auto scrollBar = [](QScrollBar *bar, int distance) {
+        const int delta = qBound(-kScrollBarStep, distance, kScrollBarStep);
+        bar->setValue(bar->value() + delta);
+    };
+
+    const int horizontalDistance = position.x() < viewportRect.left()
+                                       ? position.x() - viewportRect.left()
+                                   : position.x() > viewportRect.right()
+                                       ? position.x() - viewportRect.right()
+                                       : 0;
+    const int verticalDistance = position.y() < viewportRect.top()
+                                     ? position.y() - viewportRect.top()
+                                 : position.y() > viewportRect.bottom()
+                                     ? position.y() - viewportRect.bottom()
+                                     : 0;
+    scrollBar(horizontalScrollBar(), horizontalDistance);
+    scrollBar(verticalScrollBar(), verticalDistance);
+
+    updateSelection({qBound(viewportRect.left(), position.x(), viewportRect.right()),
+                     qBound(viewportRect.top(), position.y(), viewportRect.bottom())});
 }
 
 void QLiteHtmlWidget::withFixedTextPosition(const std::function<void()> &action)

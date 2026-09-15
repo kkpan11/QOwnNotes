@@ -1,24 +1,21 @@
 # Instalar en Arch Linux
 
-## Repositorio para Usuarios de Arch (AUR)
+## Arch User Repository (AUR)
 
-Alternativamente, también hay un paquete oficial para QOwnNotes en AUR, se llama `qownnotes`.
+Alternativamente, también hay un paquete oficial para QOwnNotes en el AUR. Se llama `qownnotes`.
 
-Lo encontrarás aquí:[QOwnNotes on AUR](https://aur.archlinux.org/packages/qownnotes)
+Lo encontrará aquí: [QOwnNotes en el AUR](https://aur.archlinux.org/packages/qownnotes)
 
-Sincroniza tu base de datos de paquetes e instala el paquete con `yay`:
+Sincronice su base de datos de paquetes e instale el paquete con `yay`:
 
 ```bash
 yay -S qownnotes
 ```
 
-:: tip Si deseas acelerar el tiempo de construcción, es posible que desee leer [CCACHE y AUR](https://www.reddit.com/r/archlinux/comments/6vez44/a_small_tip_if_you_compile_from_aur/).
+:: tip Si desea acelerar el tiempo de construcción, es posible que desee leer [CCACHE y AUR](https://www.reddit.com/r/archlinux/comments/6vez44/a_small_tip_if_you_compile_from_aur/).
 :::
 
 ## pacman
-
-::: advertencia [OBS](https://build.opensuse.org/package/show/home:pbek:QOwnNotes/desktop) actualmente, parece tener problemas de compilación en Arch Linux. Mejor utilizar el AUR o la [AppImage](./appimage.md) por ahora.
-:::
 
 Agregue las siguientes líneas a su `/etc/pacman.conf ` con `sudo nano /etc/pacman.conf`:
 
@@ -28,14 +25,14 @@ SigLevel = Optional TrustAll
 Server = http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Arch_Extra/$arch
 ```
 
-Ejecute los siguientes comandos de shell para confiar en el repositorio:
+Ejecute los comandos de consola siguientes para marcar el repositorio como de fiar:
 
 ```bash
 wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Arch_Extra/x86_64/home_pbek_QOwnNotes_Arch_Extra.key -O - | sudo pacman-key --add -
 sudo pacman-key --lsign-key F2205FB121DF142B31450865A3BA514562A835DB
 ```
 
-Si el comando `sudo pacman-key --lsign-key F2205FB121DF142B31450865A3BA514562A835DB` falla con un mensaje como: `ERROR: FFC43FC94539B8B0 no se pudo firmar localmente.`, primero puede averiguar el *keyid* real de la clave descargada, por ejemplo, con el comando (y salida):
+Si el comando `sudo pacman-key --lsign-key F2205FB121DF142B31450865A3BA514562A835DB` falla con un mensaje como: `ERROR: FFC43FC94539B8B0 no se pudo firmar localmente.`, primero puede averiguar el _keyid_ real de la clave descargada, por ejemplo, con el comando (y salida):
 
 ```bash
 gpg /path/to/downloaded/home_pbek_QOwnNotes_Arch_Extra.key
@@ -55,4 +52,22 @@ sudo pacman -Syy qownnotes
 
 ::: tip
 Por supuesto, también puede utilizar este repositorio con otras distribuciones basadas en Arch Linux, como Manjaro.
+:::
+
+::: tip
+Si QOwnNotes registra el mensaje `Could not write secret to keychain`, instale los paquetes de Secret Service que falten y reinicie su sesión de escritorio.
+
+Para GNOME y otros ordenadores de escritorio basados en Servicio Secreto:
+
+```bash
+sudo pacman -S gnome-keyring libsecret seahorse
+```
+
+Para KDE Plasma:
+
+```bash
+sudo pacman -S kwalletmanager kwallet
+```
+
+QOwnNotes recurrirá al cifrado heredado si el llavero del escritorio no está disponible.
 :::

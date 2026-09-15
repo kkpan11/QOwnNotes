@@ -19,9 +19,9 @@
      <property name="title">
       <string>Metadata to import</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QTreeWidget" name="metaDataTreeWidget">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QTreeWidget" name="metaDataTreeWidget">
         <property name="selectionMode">
          <enum>QAbstractItemView::NoSelection</enum>
         </property>
@@ -38,12 +38,19 @@
          <property name="text">
           <string notr="true">1</string>
          </property>
-        </column>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
+         </column>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="metaDataAsFrontmatterCheckBox">
+         <property name="text">
+          <string>Import metadata as YAML front matter</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
    <item row="1" column="0">
     <widget class="QLineEdit" name="fileLineEdit">
      <property name="readOnly">

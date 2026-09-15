@@ -1,7 +1,18 @@
 #ifndef LANGUAGECACHE_H
 #define LANGUAGECACHE_H
 
+#include <QMap>
+#include <QPair>
+#include <QString>
 #include <QTextBlockUserData>
+#include <QVector>
+
+#ifdef LANGUAGETOOL_ENABLED
+#include "services/languagetooltypes.h"
+#endif
+#ifdef HARPER_ENABLED
+#include "services/harpertypes.h"
+#endif
 // LanguageCache class
 // * Copyright (C)  2004  Zack Rusin <zack@kde.org>
 // * Copyright (C)  2006  Laurent Montel <montel@kde.org>
@@ -37,6 +48,40 @@ class LanguageCache : public QTextBlockUserData {
         }
         return QString();
     }
+
+#ifdef LANGUAGETOOL_ENABLED
+    QVector<LanguageToolMatch> languageToolMatches;
+
+    void setLanguageToolMatches(const QVector<LanguageToolMatch> &matches) {
+        languageToolMatches = matches;
+    }
+
+    LanguageToolMatch languageToolMatchAtPos(int pos) const {
+        for (const LanguageToolMatch &match : languageToolMatches) {
+            if (match.containsPosition(pos)) {
+                return match;
+            }
+        }
+
+        return {};
+    }
+#endif
+
+#ifdef HARPER_ENABLED
+    QVector<HarperMatch> harperMatches;
+
+    void setHarperMatches(const QVector<HarperMatch> &matches) { harperMatches = matches; }
+
+    HarperMatch harperMatchAtPos(int pos) const {
+        for (const HarperMatch &match : harperMatches) {
+            if (match.containsPosition(pos)) {
+                return match;
+            }
+        }
+
+        return {};
+    }
+#endif
 };
 
 #endif    // LANGUAGECACHE_H

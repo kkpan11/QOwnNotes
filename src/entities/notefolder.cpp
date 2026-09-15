@@ -1,12 +1,11 @@
 #include "notefolder.h"
 
-#include <services/owncloudservice.h>
+#include <services/cloudservice.h>
 #include <utils/misc.h>
 
 #include <QDebug>
 #include <QDir>
 #include <QJsonObject>
-#include <QSettings>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
@@ -14,7 +13,9 @@
 #include <QtCore/QJsonArray>
 #include <QtCore/QJsonDocument>
 
+#include "cloudconnection.h"
 #include "notesubfolder.h"
+#include "services/settingsservice.h"
 
 NoteFolder::NoteFolder()
     : name(QLatin1String("")), localPath(QLatin1String("")), remotePath(QLatin1String("")) {
@@ -31,6 +32,21 @@ int NoteFolder::getId() const { return this->id; }
 QString NoteFolder::getLocalPath() const { return this->localPath; }
 
 int NoteFolder::getCloudConnectionId() const { return this->cloudConnectionId; }
+
+/**
+ * Returns true if the note folder uses a cloud connection
+ * (and not the special "None" cloud connection)
+ */
+bool NoteFolder::isCloudConnectionSet() const {
+    return cloudConnectionId != CloudConnection::NoneCloudConnectionId;
+}
+
+/**
+ * Returns true if the current note folder uses a cloud connection
+ */
+bool NoteFolder::isCurrentCloudConnectionSet() {
+    return currentNoteFolder().isCloudConnectionSet();
+}
 
 QString NoteFolder::getName() const { return this->name; }
 
@@ -137,7 +153,7 @@ bool NoteFolder::remove() {
         return false;
     } else {
         // remove the settings of the note folder
-        QSettings settings;
+        SettingsService settings;
         settings.remove(QStringLiteral("NoteHistory-") + QString::number(this->id));
         settings.remove(QStringLiteral("NoteHistoryCurrentIndex-") + QString::number(this->id));
         settings.remove(QStringLiteral("NoteFolder-") + QString::number(this->id));
@@ -172,9 +188,13 @@ bool NoteFolder::fillFromQuery(const QSqlQuery &query) {
 
 QList<NoteFolder> NoteFolder::fetchAll() {
     const QSqlDatabase db = QSqlDatabase::database(QStringLiteral("disk"));
-    QSqlQuery query(db);
-
     QList<NoteFolder> noteFolderList;
+
+    if (!db.tables().contains(QStringLiteral("noteFolder"), Qt::CaseInsensitive)) {
+        return noteFolderList;
+    }
+
+    QSqlQuery query(db);
 
     query.prepare(QStringLiteral("SELECT * FROM noteFolder ORDER BY priority ASC, id ASC"));
     if (!query.exec()) {
@@ -249,7 +269,7 @@ bool NoteFolder::exists() const { return NoteFolder::fetch(this->id).id > 0; }
 bool NoteFolder::isFetched() const { return (this->id > 0); }
 
 void NoteFolder::setAsCurrent() const {
-    QSettings settings;
+    SettingsService settings;
     settings.setValue(QStringLiteral("currentNoteFolderId"), id);
 
     // make the path relative to the portable data path if we are in
@@ -258,7 +278,7 @@ void NoteFolder::setAsCurrent() const {
                       Utils::Misc::makePathRelativeToPortableDataPathIfNeeded(localPath));
 
     // we need to reset the instance
-    OwnCloudService::instance(true);
+    CloudService::instance(true);
 }
 
 /**
@@ -270,7 +290,7 @@ bool NoteFolder::isCurrent() const { return currentNoteFolderId() == id; }
  * Returns the id of the current note folder in the settings
  */
 int NoteFolder::currentNoteFolderId() {
-    const QSettings settings;
+    const SettingsService settings;
     return settings.value(QStringLiteral("currentNoteFolderId")).toInt();
 }
 
@@ -327,7 +347,7 @@ QString NoteFolder::currentLocalPath() {
 
     // load notesPath as fallback
     if (path.isEmpty()) {
-        const QSettings settings;
+        const SettingsService settings;
 
         // prepend the portable data path if we are in portable mode
         path = Utils::Misc::prependPortableDataPathIfNeeded(
@@ -336,8 +356,6 @@ QString NoteFolder::currentLocalPath() {
 
     path = Utils::Misc::removeIfEndsWith(std::move(path), QDir::separator());
     path = Utils::Misc::removeIfEndsWith(std::move(path), QString{Utils::Misc::dirSeparator()});
-
-    qDebug() << __func__ << " - 'currentLocalPath': " << path;
 
     return path;
 }
@@ -399,7 +417,7 @@ bool NoteFolder::isCurrentNoteTreeEnabled() {
  * Suggests a remote path from an old localOwnCloudPath
  */
 QString NoteFolder::suggestRemotePath() {
-    const QSettings settings;
+    const SettingsService settings;
     const QString localOwnCloudPath =
         settings.value(QStringLiteral("ownCloud/localOwnCloudPath")).toString();
 
@@ -428,7 +446,7 @@ QString NoteFolder::fixRemotePath() {
  * Migrate the notesPath and the recentNoteFolders to NoteFolder objects
  */
 bool NoteFolder::migrateToNoteFolders() {
-    QSettings settings;
+    SettingsService settings;
 
     // prepend the portable data path if we are in portable mode
     const QString notesPath = Utils::Misc::prependPortableDataPathIfNeeded(
@@ -529,13 +547,81 @@ bool NoteFolder::isPathNoteFolder(const QString &path) {
 }
 
 void NoteFolder::setSettingsValue(const QString &key, const QVariant &value) {
-    QSettings settings;
-    settings.setValue(QString("NoteFolder-%1/%2").arg(QString::number(id), key), value);
+    SettingsService settings;
+    settings.setValue(QStringLiteral("NoteFolder-%1/%2").arg(id).arg(key), value);
 }
 
 QVariant NoteFolder::settingsValue(const QString &key, const QVariant &defaultValue) const {
-    const QSettings settings;
-    return settings.value(QString("NoteFolder-%1/%2").arg(QString::number(id), key), defaultValue);
+    const SettingsService settings;
+    return settings.value(QStringLiteral("NoteFolder-%1/%2").arg(id).arg(key), defaultValue);
+}
+
+/**
+ * Returns whether all subfolders should be shown (no filtering)
+ */
+bool NoteFolder::isAllSubfolders() const {
+    const SettingsService settings;
+    return settings.value(QStringLiteral("NoteFolder-%1/allSubfolders").arg(id), true).toBool();
+}
+
+/**
+ * Sets whether all subfolders should be shown
+ */
+void NoteFolder::setAllSubfolders(bool value) {
+    SettingsService settings;
+    settings.setValue(QStringLiteral("NoteFolder-%1/allSubfolders").arg(id), value);
+}
+
+/**
+ * Returns the list of excluded subfolder relative paths
+ */
+QStringList NoteFolder::excludedSubfolderPaths() const {
+    const SettingsService settings;
+    return settings.value(QStringLiteral("NoteFolder-%1/excludedSubfolderPaths").arg(id))
+        .toStringList();
+}
+
+/**
+ * Sets the list of excluded subfolder relative paths
+ */
+void NoteFolder::setExcludedSubfolderPaths(const QStringList &paths) {
+    SettingsService settings;
+    settings.setValue(QStringLiteral("NoteFolder-%1/excludedSubfolderPaths").arg(id), paths);
+}
+
+/**
+ * Checks if a subfolder relative path is excluded (also checks parent paths)
+ */
+bool NoteFolder::isSubfolderPathExcluded(const QString &relativePath) const {
+    if (!showSubfolders || isAllSubfolders()) {
+        return false;
+    }
+
+    const QStringList excluded = excludedSubfolderPaths();
+    if (excluded.isEmpty()) {
+        return false;
+    }
+
+    // Check if this path or any parent path is excluded
+    for (const QString &excludedPath : excluded) {
+        if (relativePath == excludedPath ||
+            relativePath.startsWith(excludedPath + QLatin1Char('/'))) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Static helper to check if a subfolder path is excluded for the current note folder
+ */
+bool NoteFolder::isCurrentSubfolderPathExcluded(const QString &relativePath) {
+    const NoteFolder noteFolder = currentNoteFolder();
+    if (!noteFolder.isFetched()) {
+        return false;
+    }
+    return noteFolder.isSubfolderPathExcluded(relativePath);
 }
 
 QDebug operator<<(QDebug dbg, const NoteFolder &noteFolder) {

@@ -9,13 +9,13 @@
 APP=QOwnNotes
 # this directory name will also be shown in the title when the DMG is mounted
 TEMPDIR=$APP
-SIGNATURE="Patrizio Bekerle"
-NAME=`uname`
+# SIGNATURE="Patrizio Bekerle"
+NAME=$(uname)
 PLIST=$APP.app/Contents/Info.plist
 
 if [ "$NAME" != "Darwin" ]; then
-    echo "This is not a Mac"
-    exit 1
+  echo "This is not a Mac"
+  exit 1
 fi
 
 echo "Changing bundle identifier"
@@ -43,7 +43,7 @@ echo "Adding keys"
 security create-keychain -p travis osx-build.keychain
 security import ../travis/osx/apple.cer -k ~/Library/Keychains/osx-build.keychain -T /usr/bin/codesign
 security import ../travis/osx/dist.cer -k ~/Library/Keychains/osx-build.keychain -T /usr/bin/codesign
-security import ../travis/osx/dist.p12 -k ~/Library/Keychains/osx-build.keychain -P $KEY_PASSWORD -T /usr/bin/codesign
+security import ../travis/osx/dist.p12 -k ~/Library/Keychains/osx-build.keychain -P "$KEY_PASSWORD" -T /usr/bin/codesign
 security default-keychain -s osx-build.keychain
 security unlock-keychain -p travis osx-build.keychain
 
@@ -51,12 +51,11 @@ security unlock-keychain -p travis osx-build.keychain
 #echo "Calling macdeployqt and code signing application"
 #$QTDIR/bin/macdeployqt ./$APP.app -codesign="$DEVELOPER_NAME"
 echo "Calling macdeployqt"
-$QTDIR/bin/macdeployqt ./$APP.app
-if [ "$?" -ne "0" ]; then
-    echo "Failed to run macdeployqt"
-    # remove keys
-    security delete-keychain osx-build.keychain 
-    exit 1
+if ! "$QTDIR/bin/macdeployqt" ./$APP.app; then
+  echo "Failed to run macdeployqt"
+  # remove keys
+  security delete-keychain osx-build.keychain
+  exit 1
 fi
 
 # trying to fix the macdeployqt problem with making the binary use the Qt
@@ -74,26 +73,23 @@ spctl --assess --verbose=4 --raw ./$APP.app
 
 echo "Create $TEMPDIR"
 #Create a temporary directory if one doesn't exist
-mkdir -p $TEMPDIR
-if [ "$?" -ne "0" ]; then
-    echo "Failed to create temporary folder"
-    exit 1
+if ! mkdir -p $TEMPDIR; then
+  echo "Failed to create temporary folder"
+  exit 1
 fi
 
 echo "Clean $TEMPDIR"
 #Delete the contents of any previous builds
-rm -Rf ./$TEMPDIR/*
-if [ "$?" -ne "0" ]; then
-    echo "Failed to clean temporary folder"
-    exit 1
+if ! rm -Rf ./$TEMPDIR/*; then
+  echo "Failed to clean temporary folder"
+  exit 1
 fi
 
 echo "Move application bundle"
 #Move the application to the temporary directory
-mv ./$APP.app ./$TEMPDIR
-if [ "$?" -ne "0" ]; then
-    echo "Failed to move application bundle"
-    exit 1
+if ! mv ./$APP.app ./$TEMPDIR; then
+  echo "Failed to move application bundle"
+  exit 1
 fi
 
 #echo "Sign the code"
@@ -107,19 +103,17 @@ fi
 
 echo "Create symbolic link"
 #Create a symbolic link to the applications folder
-ln -s /Applications ./$TEMPDIR/Applications
-if [ "$?" -ne "0" ]; then
-    echo "Failed to create link to /Applications"
-    exit 1
+if ! ln -s /Applications ./$TEMPDIR/Applications; then
+  echo "Failed to create link to /Applications"
+  exit 1
 fi
 
 echo "Create new disk image"
 #Create the disk image
 rm -f ./$APP.dmg
-hdiutil create -srcfolder ./$TEMPDIR -ov -format UDBZ -fs HFS+ ./$APP.dmg
-if [ "$?" -ne "0" ]; then
-    echo "Failed to create disk image"
-    exit 1
+if ! hdiutil create -srcfolder ./$TEMPDIR -ov -format UDBZ -fs HFS+ ./$APP.dmg; then
+  echo "Failed to create disk image"
+  exit 1
 fi
 
 #echo "Code signing disk image"
@@ -130,17 +124,16 @@ codesign --verify --verbose=4 ./$APP.dmg
 spctl --assess --verbose=4 --raw ./$APP.dmg
 
 echo "moving $APP.dmg to $APP-$VERSION_NUMBER.dmg"
-mv $APP.dmg $APP-$VERSION_NUMBER.dmg
+mv $APP.dmg "$APP-$VERSION_NUMBER.dmg"
 
 echo "Removing keys"
 # remove keys
-security delete-keychain osx-build.keychain 
+security delete-keychain osx-build.keychain
 
 # delete the temporary directory
-rm -Rf ./$TEMPDIR/*
-if [ "$?" -ne "0" ]; then
-    echo "Failed to clean temporary folder"
-    exit 1
+if ! rm -Rf ./$TEMPDIR/*; then
+  echo "Failed to clean temporary folder"
+  exit 1
 fi
 
 exit 0

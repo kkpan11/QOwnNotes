@@ -1,17 +1,22 @@
-# مارک داون
+# Markdown Cheatsheet
 
-برگه تقلب مارک داون به صورت یک مرجع سریع و ویترینی از چیدمان مارک داون در QOwnNotes در نظر گرفته شده است.
+This Markdown cheatsheet is intended as a quick reference and showcase of the Markdown syntax in QOwnNotes.
 
-## سربرگ ها
+## Headings
 
-برای سر و شکل دادن به متن خود از سرفصل ها استفاده کنید.
+Use ATX headings to structure your texts.
 
 ```markdown
 # H1
+
 ## H2
+
 ### H3
+
 #### H4
+
 ##### H5
+
 ###### H6
 ```
 
@@ -19,7 +24,7 @@
 **پنل جهت یابی** ساختار سرفصل های شما را نشان می دهد.
 :::
 
-از سوی دیگر، برای H1 و H2، یک سبک زیرخط دار:
+Alternatively, for H1 and H2, you can also use Setext headings:
 
 ```markdown
 Alt-H1
@@ -36,9 +41,11 @@ Alt-H2
 ## تکیه
 
 ```markdown
-تکیه (که با نام ایتالیک نیز شناخته می شود) با علامت *ستاره*.
+Emphasis, aka italics, with *asterisks* or _underscores_.
 
-تکیه مؤکد (که به صورت پررنگ نیز شناخته می شود) با علامت **ستاره**.
+Strong emphasis, aka bold, with **asterisks** or __underscores__.
+
+Combined emphasis with **asterisks and _underscores_**.
 ```
 
 ::: tip
@@ -47,7 +54,7 @@ Alt-H2
 
 ## خط زیرین
 
-علاوه بر این، یک گزینه اختیاری در تنظیمات برای فعال کردن خط زیرین وجود دارد که در * تنظیمات پیش نمایش* قابل اجرا می باشد.
+There also is an optional setting to enable underline rendering in the _Preview settings_.
 
 ```markdown
 _خط زیرین_
@@ -73,15 +80,18 @@ _خط زیرین_
 
 ```markdown
 1. نخستین مورد لیست مرتب شده
-2. مورد بعدی
-  *زیر فهرست مرتب نشده.
-1. اعداد حقیقی اهمیتی ندارند بلکه فقط عدد هستند
-  1. زیرفهرست مرتب شده (تنها در ویرایشگر کار می کند نه در پیش نمایش)
-4. و موردی دیگر.
+2. Another item
 
-* برای لیست مرتب نشده می توان از ستاره
-- یا منها
-+ یا بعلاوه استفاده کرد
+- Unordered sub-list.
+
+1. Actual numbers don't matter, just that it's a number
+1. And another item.
+
+* Unordered list can use asterisks
+
+- Or minuses
+
++ Or pluses
 ```
 
 ::: tip
@@ -101,13 +111,15 @@ Two of the simpler uses for links are pointing to webpages or other notes. There
 
 [You can use numbers for reference-style link definitions][1]
 
-Plain URLs and URLs in angle brackets will automatically get turned into links in the preview. 
+Plain URLs and URLs in angle brackets will automatically get turned into links in the preview.
 http://www.example.com or <http://www.example.com>
 
 [1]: https://www.qownnotes.org
 ```
 
 ### Internal links
+
+You can link to other notes or attachments like this:
 
 ```markdown
 [I link to the Journal.md note](Journal.md)
@@ -122,6 +134,31 @@ http://www.example.com or <http://www.example.com>
 
 می توانید با فشار دادن <kbd>Ctrl + Space</kbd> و در حالی که مکان نما را بر روی پیوند در ویرایش یادداشت نگه داشته اید، پیوند را دنبال کنید.
 :::
+
+::: warning
+Info Internal links with a title are not supported:
+
+```markdown
+[I link to the Journal.md note](Journal.md "Title not supported")
+```
+
+:::
+
+### Footnotes
+
+You can add numeric or named footnotes to link to another position in the same note:
+
+```markdown
+Here is some text with a footnote.[^1]
+
+[^1]: This is the footnote text.
+
+This is a statement with a named footnote.[^source]
+
+[^source]: The source or additional explanation.
+```
+
+Footnote references and definitions are shown as links. Hold <kbd>Ctrl</kbd> and click a footnote in the note editor to jump between its reference and definition. You can also click footnotes in the preview.
 
 ### Bookmarks
 
@@ -139,12 +176,34 @@ http://www.example.com or <http://www.example.com>
 ![alt text](media/my-image.jpg)
 ```
 
+### Image dimensions
+
+You can optionally specify a `width` and/or `height` for an image using curly-brace attribute syntax right after the closing parenthesis:
+
+```markdown
+![alt text](media/my-image.jpg){ width=300 }
+
+![alt text](media/my-image.jpg){ height=200 }
+
+![alt text](media/my-image.jpg){ width=300 height=200 }
+```
+
+The dimension attributes are displayed with masked (grayed-out) syntax in the editor and are applied in the preview, where they take precedence over the automatic image width sizing.
+
 ::: tip
 می توانید از [میانبر](./shortcuts.md) <kbd>Ctrl + Shift + I</kbd> برای درج تصویر در یادداشت استفاده کنید. همچنین تصاویر می‌توانند در کلیپ بورد قرار بگیرند؛ به طوری که کادر گفتگو آن را شناسایی کرده و یک پیش نمایش نشان می دهد.
 
 علاوه بر این، می‌توانید با <kbd>Ctrl + Shift + V</kbd> یک تصویر را مستقیماً از کلیپ بورد به یادداشت خود بچسبانید.
 :::
 
+::: warning
+Info Image links with a title are not supported:
+
+```markdown
+![alt text](media/my-image.jpg "Title not supported")
+```
+
+:::
 
 ## کد توکار و کد بلاک ها
 
@@ -170,90 +229,99 @@ Blocks of code are either fenced by lines with three backticks, or are indented 
 ### Backtick fence
 
 علاوه بر این می توانید از سه بک تیک برای ایجاد یک کد پلاک استفاده کنید.
-~~~مارک داون
+````markdown
 ```
 Code goes here
 Code goes here
 ```
-~~~
+````
 
 ::: tip
 You can use the [shortcut](./shortcuts.md) <kbd>Ctrl + Shift + C</kbd> on
-multiple selected lines of text or in an empty line to create a code block. 
+multiple selected lines of text or in an empty line to create a code block.
 :::
 
 ### Backtick fence with code highlighting
 
 There also is some syntax highlighting with code blocks in QOwnNotes.
 
-~~~markdown
+````markdown
 ```bash
 # I am a comment
 cd Notes
-```
-~~~
+````
+````
 
 Currently, supported languages (and code block identifiers) are:
 
-* BASh scripting, `bash`
-* C, `c`
-* C++, `cpp`
-* C++, `cxx`
-* C++, `c++`
-* C#, `c#`
-* CMake, `cmake`
-* C#, `csharp`
-* CSS, `css`
-* Go, `go`
-* HTML, `html`
-* INI, `ini`
-* Java, `java`
-* JavaScript, `javascript`
-* JavaScript, `js`
-* JSON, `json`
-* Makefile, `make`
-* PHP, `php`
-* Python, `py`
-* Python, `python`
-* QML, `qml`
-* Rust, `rust`
-* Shell scripting, `sh`
-* SQL, `sql`
-* TypeScript, `ts`
-* TypeScript, `typescript`
-* V, `v`
-* Vex, `vex`
-* XML, `xml`
-* YAML, `yml`
-* YAML, `yaml`
+- BASh scripting, `bash`
+- C, `c`
+- C++, `cpp`
+- C++, `cxx`
+- C++, `c++`
+- C#, `c#`
+- CMake, `cmake`
+- C#, `csharp`
+- Console, `console`
+- CSS, `css`
+- Forth, `forth`
+- GDScript, `gdscript`
+- Go, `go`
+- HTML, `html`
+- INI, `ini`
+- Java, `java`
+- JavaScript, `javascript`
+- JavaScript, `js`
+- JSON, `json`
+- Makefile, `make`
+- Nix, `nix`
+- PHP, `php`
+- Python, `py`
+- Python, `python`
+- QML, `qml`
+- R, `r`
+- Rust, `rust`
+- Shell scripting, `sh`
+- Shell session, `shell-session`
+- SQL, `sql`
+- SystemVerilog, `systemverilog`
+- TaggerScript, `taggerscript`
+- TOML, `toml`
+- TypeScript, `ts`
+- TypeScript, `typescript`
+- V, `v`
+- Vex, `vex`
+- XML, `xml`
+- YAML, `yml`
+- YAML, `yaml`
 
 ## Tables
 
-Tables aren't part of the core Markdown spec, but the QOwnNotes preview supports them. 
+Tables aren't part of the core Markdown spec, but the QOwnNotes preview supports them.
 
-~~~markdown
+```markdown
 Colons can be used to align columns.
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
+| Tables        |      Are      |  Cool |
+| ------------- | :-----------: | ----: |
 | col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| col 2 is      |   centered    |   $12 |
+| zebra stripes |   are neat    |    $1 |
 
 There must be at least 3 dashes separating each header cell.
 
 You can also use inline Markdown.
 
-| Markdown | Less | Pretty |
-| --- | --- | --- |
-| *Still* | `renders` | **nicely** |
-| 1 | 2 | 3 |
-~~~
+| Markdown | Less      | Pretty     |
+| -------- | --------- | ---------- |
+| _Still_  | `renders` | **nicely** |
+| 1        | 2         | 3          |
+````
 
 ::: tip
 <kbd>Alt + Shift + T</kbd> را فشار دهید تا یک کادر گفتگو فعال شود که می تواند به شما در ایجاد جداول کمک کند. حتی می توانید پرونده های CSV را در آن کادر گفتگو وارد کنید.
 
-به منظور قالب بندی خودکار یک جدول مارک داون از <kbd>Ctrl + Space</kbd> در داخل آن استفاده کنید.
+Use <kbd>Ctrl + Space</kbd> inside a Markdown table to automatically format it.
 :::
 
 ## نقل قول های بلند
@@ -264,11 +332,11 @@ You can also use inline Markdown.
 
 Quote break.
 
-> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can *put* **Markdown** into a blockquote. 
+> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can _put_ **Markdown** into a blockquote.
 ```
 
 ::: tip
-می توانید به QOwnNotes بگویید که نقل قول های بلند یا فقط نویسه نقل قول را به طور کامل در * تنظیمات ویرایشگر* برجسته کند
+You can tell QOwnNotes to fully highlight blockquotes or just the blockquote character in the _Editor settings_
 
 می توانید از [میانبر](./shortcuts.md) <kbd>Ctrl + Shift + B</kbd> برای علامت گذاری متن به صورت نقل قول بلند استفاده کنید.
 :::
@@ -306,10 +374,10 @@ ___
 ```markdown
 Here's a line for us to start with.
 
-This line is separated from the one above by two newlines, so it will be a *separate paragraph*.
+This line is separated from the one above by two newlines, so it will be a _separate paragraph_.
 
-This line is also begins a separate paragraph, but...  
-This line is only separated by two trailing spaces and a single newline, so it's a separate line in the *same paragraph*.
+This line also begins a separate paragraph, but...  
+This line is only separated by two trailing spaces and a single newline, so it's a separate line in the _same paragraph_.
 ```
 
 ::: tip
@@ -321,7 +389,7 @@ This line is only separated by two trailing spaces and a single newline, so it's
 توضیحات در پیش نمایش نشان داده نمی شود.
 
 ```markdown
-[comment]: # (This comment will not appear in the preview)
+[comment]: # "This comment will not appear in the preview"
 
 <!-- HTML comments are also hidden -->
 ```

@@ -2,11 +2,11 @@
 
 ## Arch User Repository (AUR)
 
-Il existe également un paquet officiel pour QOwnNotes sur AUR, appelé `qownnotes`.
+Il existe un paquet officiel pour QOwnNotes sur AUR, appelé `qownnotes`.
 
-Il est disponible ici : [QOwnNotes sur AUR](https://aur.archlinux.org/packages/qownnotes)
+Il est disponible ici : [QOwnNotes sur AUR](https://aur.archlinux.org/packages/qownnotes)
 
-Synchronisez votre base de données de paquets et installez le paquet avec `yay` :
+Synchronisez votre base de données de paquets et installez le paquet avec `yay` :
 
 ```bash
 yay -S qownnotes
@@ -18,10 +18,6 @@ Si vous voulez accélérer le processus de construction, référrez-vous à [CCA
 
 ## pacman
 
-::: warning
-[OBS](https://build.opensuse.org/package/show/home:pbek:QOwnNotes/desktop) semble actuellement avoir des soucis de construction sous Arch Linux. Pour le moment, utilisez de préférence le paquet AUR ou l'[AppImage](./appimage.md).
-:::
-
 Ajoutez les lignes suivantes à votre `/etc/pacman.conf` avec `sudo nano /etc/pacman.conf` :
 
 ```ini
@@ -30,14 +26,14 @@ SigLevel = Optional TrustAll
 Server = http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Arch_Extra/$arch
 ```
 
-Exécutez les commandes shell suivantes pour approuver le dépôt :
+Exécutez les commandes shell suivantes pour approuver le dépôt :
 
 ```bash
 wget http://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/Arch_Extra/x86_64/home_pbek_QOwnNotes_Arch_Extra.key -O - | sudo pacman-key --add -
 sudo pacman-key --lsign-key F2205FB121DF142B31450865A3BA514562A835DB
 ```
 
-Si la commande `sudo pacman-key --lsign-key F2205FB121DF142B31450865A3BA514562A835DB` échoue avec un message du type : `ERROR: FFC43FC94539B8B0 could not be locally signed.`, vous pourriez en premier lieu trouver le *keyid* de la clé téléchargée, par exemple avec la commande (et la sortie) :
+Si la commande `sudo pacman-key --lsign-key F2205FB121DF142B31450865A3BA514562A835DB` échoue avec un message du style : `ERROR : FFC43FC94539B8B0 could not be locally signed (ERREUR : FFC43FC94539B8B0 n’a pas pu être signée localement)`, vous pouvez d’abord trouver le _keyid_ actuel de la clé téléchargée, i.e. avec la commande (et la sortie) :
 
 ```bash
 gpg /path/to/downloaded/home_pbek_QOwnNotes_Arch_Extra.key
@@ -47,7 +43,7 @@ pub   rsa2048 2019-07-31 [SC] [expires: 2021-10-10]
 uid           home:pbek OBS Project <home:pbek@build.opensuse.org>
 ```
 
-Vous pouvez maintenant synchroniser votre base de données de paquets et installer le paquet avec `pacman` :
+Vous pouvez maintenant synchroniser votre base de données de paquets et installer le paquet avec `pacman` :
 
 ```bash
 sudo pacman -Syy qownnotes
@@ -57,4 +53,22 @@ sudo pacman -Syy qownnotes
 
 ::: tip
 Vous pouvez également utiliser ce dépôt avec d'autres distributions basées sur Arch Linux, comme Manjaro.
+:::
+
+::: tip
+Si QOwnNotes affiche `Could not write secret to keychain`, installez les paquets Secret Service manquants et redémarrez votre session de bureau.
+
+Pour GNOME et les autres environnements reposant sur Secret Service :
+
+```bash
+sudo pacman -S gnome-keyring libsecret seahorse
+```
+
+Pour KDE Plasma :
+
+```bash
+sudo pacman -S kwalletmanager kwallet
+```
+
+QOwnNotes repassera sur le chiffrement obsolète si le porte-clés de l’environnement n’est pas disponible.
 :::

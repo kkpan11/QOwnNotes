@@ -1,9 +1,9 @@
 # Clases expuestas
 
-Nota
-----
+## Nota
 
 ### Propiedades y métodos
+
 ```cpp
 class NoteApi {
     Q_PROPERTY(int id)
@@ -26,27 +26,30 @@ class NoteApi {
     Q_INVOKABLE QString toMarkdownHtml(bool forExport = true)
     Q_INVOKABLE QString getFileURLFromFileName(QString localFileName)
     Q_INVOKABLE bool allowDifferentFileName()
+    // Devuelve la URL de la nota de Markdown para vincular a la nota con noteId
+    Q_INVOKABLE QString getNoteUrlForLinkingToNoteId(int noteId)
 };
 ```
 
 Puede utilizar los métodos de [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) para trabajar con `fileCreated` o `fileLastModified`.
 
 ### Ejemplo
-```js
-script.log (note.fileCreated.toISOString ());
-script.log (note.fileLastModified.getFullYear ());
 
-// cambia el nombre de una nota a "new name.md"
-note.renameNoteFile ("nuevo nombre");
+```js
+script.log(note.fileCreated.toISOString());
+script.log(note.fileLastModified.getFullYear());
+
+// renombra una nota a "nuevo nombre.md"
+note.renameNoteFile("nuevo nombre");
 
 // verifica si está permitido tener un nombre de archivo de nota diferente al del título
-script.log (note.allowDifferentFileName ());
+script.log(note.allowDifferentFileName());
 ```
 
-NoteSubFolder
-----
+## NoteSubFolder
 
 ### Propiedades y métodos
+
 ```cpp
 class NoteSubFolderApi {
     Q_PROPERTY(int id)
@@ -61,34 +64,41 @@ class NoteSubFolderApi {
 ```
 
 ### Ejemplo
+
 ```js
-var noteSubFolderQmlObj = Qt.createQmlObject("import QOwnNotesTypes 1.0; NoteSubFolder{}", mainWindow, "noteSubFolder");
+var noteSubFolderQmlObj = Qt.createQmlObject(
+  "import QOwnNotesTypes 1.0; NoteSubFolder{}",
+  mainWindow,
+  "noteSubFolder",
+);
 
-// print all subfolder names
-noteSubFolderQmlObj.fetchNoteSubFoldersByParentId(parentId).forEach(function(nsf) {
+// imprimir todos los nombres de las subcarpetas
+noteSubFolderQmlObj
+  .fetchNoteSubFoldersByParentId(parentId)
+  .forEach(function (nsf) {
     script.log(nsf.name);
-});
+  });
 
-// get the active note subfolder
+// obtener la subcarpeta de la nota activa
 var noteSubFolder = noteSubFolderQmlObj.activeNoteSubFolder();
 
-// print the full and relative path of the active note subfolder
+// imprimir la ruta completa y relativa de la subcarpeta de la nota activa
 script.log(noteSubFolder.fullPath());
 script.log(noteSubFolder.relativePath());
 
 script.log(noteSubFolder.id);
 script.log(noteSubFolder.name);
 
-// iterate through notes in note subfolder
+// iterar a través de las notas en la subcarpeta de la nota
 for (var idx in noteSubFolder.notes) {
-    var note = noteSubFolder.notes[idx];
+  var nota = noteSubFolder.notes[idx];
 }
 ```
 
-Etiqueta
----
+## Etiqueta
 
 ### Propiedades y métodos
+
 ```cpp
 class TagApi {
     Q_PROPERTY(int id)
@@ -101,83 +111,85 @@ class TagApi {
 ```
 
 ### Ejemplo
+
 ```js
-// ¡No te olvides de usar “import QOwnNotesTypes 1.0” en la parte superior de tu script!
+// ¡No olvide usar “import QOwnNotesTypes 1.0” en la parte superior de su script!
 
-// Fetch tag "home"
-var tag = script.getTagByNameBreadcrumbList(["home"]);
-// Fetch all notes tagged with the tag
-var notes = tag.notes;
+// Obtener etiqueta "home"
+var etiqueta = script.getTagByNameBreadcrumbList(["home"]);
+// Obtener todas las notas etiquetadas con la etiqueta
+var notas = etiqueta.notes;
 
-// Iterate through notes of the tag
-for (var idx in notes) {
-    var note = notes[idx];
-    script.log(note.name);
+// Iterar a través de las notas de la etiqueta
+for (var idx in notas) {
+  var nota = notas[idx];
+  script.log(nota.name);
 }
 ```
 
-Puedes encontrar mas ejemplos donde se usa TagApi en [note-tagging-by-object.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/note-tagging-by-object.qml).
+Puede encontrar mas ejemplos donde se usa TagApi en [note-tagging-by-object.qml](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/note-tagging-by-object.qml).
 
-Ventana Principal
-----------
+## MainWindow
 
 ### Propiedades y métodos
+
 ```cpp
-class MainWindow {
+clase MainWindow {
     Q_INVOKABLE void reloadTagTree();
     Q_INVOKABLE void reloadNoteSubFolderTree();
     Q_INVOKABLE void buildNotesIndexAndLoadNoteDirectoryList(
-            bool forceBuild = false, bool forceLoad = false);
+        bool forceBuild = false, bool forceLoad = false);
     Q_INVOKABLE void focusNoteTextEdit();
-    // Creates a new note subfolder in the current subfolder
+    // Crea una nueva subcarpeta de notas en la subcarpeta actual
     Q_INVOKABLE bool createNewNoteSubFolder(QString folderName = "");
-    // Inserts html in the current note as markdown
-    // This method also downloads remote images and transforms "data:image"
-    // urls to local images stored in the media directory
+    // Inserta HTML en la nota actual como Markdown
+    // Este método también descarga imágenes remotas y transforma las URL "data:image"
+    // en imágenes locales almacenadas en el directorio de medios
     Q_INVOKABLE void insertHtmlAsMarkdownIntoCurrentNote(QString html);
-    // Reloads the current note by id
-    // This is useful when the path or filename of the current note changed
+    // Recarga la nota actual por su ID
+    // Esto es útil cuando cambia la ruta o el nombre del archivo de la nota actual
     Q_INVOKABLE void reloadCurrentNoteByNoteId();
-    // Returns the list of workspace UUIDs
-    Q_INVOKABLE QStringList getWorkspaceUuidList();
-    // Returns the UUID of a workspace, passing in the workspace name
-    Q_INVOKABLE QString getWorkspaceUuid(const QString &workspaceName);
-    // Sets the current workspace by UUID
-    Q_INVOKABLE void setCurrentWorkspace(const QString &uuid);
-    // Closes a note tab on a specific index (returns true if successful)
+    // Devuelve la lista de UUIDs de diseño
+    Q_INVOKABLE QStringList getLayoutUuidList();
+    // Devuelve el UUID de un diseño, pasando el nombre del diseño
+    Q_INVOKABLE QString getLayoutUuid(const QString &layoutName);
+    // Establece el diseño actual por su UUID
+    Q_INVOKABLE void setCurrentLayout(const QString &uuid);
+    // Cierra una pestaña de nota en un índice específico (devuelve verdadero si se realiza correctamente)
     Q_INVOKABLE bool removeNoteTab(int index);
-    // Returns a list of note ids that are opened in tabs
+    // Devuelve una lista de los IDs de las notas abiertas en pestañas
     Q_INVOKABLE QList<int> getNoteTabNoteIdList();
-    // Jumps to a tag in the tag tree
+    // Accede a una etiqueta en el árbol de etiquetas
     Q_INVOKABLE bool jumpToTag(int tagId);
 };
 ```
 
 ### Ejemplo
+
 ```js
-// Forzar una recarga de la lista de notas
+// Force a reload of the note list
 mainWindow.buildNotesIndexAndLoadNoteDirectoryList(true, true);
 
-// Crea una nueva subcarpeta de notas "My fancy folder" en la sub carpeta actual
+// Creates a new note subfolder "My fancy folder" in the current subfolder
 mainWindow.createNewNoteSubFolder("My fancy folder");
 
-// Inserta html en la nota actual como markdown
-mainWindow.insertHtmlAsMarkdownIntoCurrentNote("<h2>my headline</h2>some text");
+// Inserts html in the current note as markdown
+mainWindow.insertHtmlAsMarkdownIntoCurrentNote("<h2>my headline
+some text");
 
-// Set 'Edit' workspace as current workspace
-mainWindow.setCurrentWorkspace(mainWindow.getWorkspaceUuid("Edit"));
+// Set 'Edit' layout as current layout
+mainWindow.setCurrentLayout(mainWindow.getLayoutUuid("Edit"));
 
-// Salta a la etiqueta "test" en el árbol de etiquetas
-// Hay un ejemplo en 
-https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/custom-actions.qml
+// Jump to the tag "test" in the tag tree
+// There is an example in https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples/custom-actions.qml
 var tag = script.getTagByNameBreadcrumbList(["test"]);
 mainWindow.jumpToTag(tag.id);
 
-// Obtener todas las notas de las pestañs que están abiertas 
+// Get all notes that are opened in tabs
 var noteIds = mainWindow.getNoteTabNoteIdList();
-noteIds.forEach(function (noteId){
-    var note = script.fetchNoteById(noteId);
-    // Haz algo con la nota
-});
+noteIds.forEach(function (noteId) {
+  var note = script.fetchNoteById(noteId);
 
+  // do something with the note
+});
 ```

@@ -1,7 +1,7 @@
 ---
 title: AI support was added to QOwnNotes
 description: QOwnNotes now has AI support, currently for Groq and OpenAI!
-image: /assets/img/robot-taking-notes.jpg
+image: /assets/robot-taking-notes.jpg
 date: 2024-05-17
 order: 20240517000000
 ---
@@ -18,7 +18,7 @@ This way you can do whatever you want and experiment with it.
 
 - There is a new **AI toolbar** and a section in the **Edit main menu**, where can turn
   the service on, and you can select the AI backend and model
-- You can add an [OpenAI](https://openai.com/) and [Groq](https://groq.com/) API key in the new *AI settings*
+- You can add an [OpenAI](https://openai.com/) and [Groq](https://groq.com/) API key in the new _AI settings_
 - Use the new `script.aiComplete(prompt)` scripting command to your own imagination
   - For more information please take a look at the
     [Scripting documentation](https://www.qownnotes.org/scripting/methods-and-objects.html#use-a-completion-prompt-on-the-currently-selected-ai-model)

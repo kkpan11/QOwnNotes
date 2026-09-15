@@ -8,15 +8,15 @@ import QOwnNotesTypes 1.0
 
 Script {
     /**
-        * سيعمل عندما يتهيأ محرك البرمجة
-        */
+     * Will be run when the scripting engine initializes
+     */
     function init() {
         script.log("Hello world!");
     }
 }
 ```
 
-يمكنك وضع ملفات QML هذه في أي مكان تحبه، ثم **تضيفهم في QOwnNotes** بإضافتهم في **إعدادات البرمجة** (يوجد زر `أضف بُريمِجًا` &gt; `أضف بُريمِجًا محليًا`).
+يمكنك وضع ملفات QML هذه في أي مكان تحبه، ثم **تضيفهم في QOwnNotes** بإضافتهم في **إعدادات البرمجة** (يوجد زر `أضف بُريمِجًا` > `أضف بُريمِجًا محليًا`).
 
 ::: tip
 ألقِ نظرة على [أمثلة البُريمِجات](https://github.com/pbek/QOwnNotes/blob/main/docs/scripting/examples) للبدء بسرعة.
@@ -33,5 +33,5 @@ Script {
 إذا كنت بحاجة إلى الوصول إلى وظيفة معينة في QOwnNotes أو لديك أسئلة أو أفكار، فيرجى فتح مسألة على [صفحة مسائل QOwnNotes](https://github.com/pbek/QOwnNotes/issues).
 
 ::: tip
-For logging you can use the `script.log()` command to log to the log widget.
+For logging, you can use the `script.log()` command to log to the _Log panel_, which you can turn on in the _Window / Panels_ menu.
 :::
